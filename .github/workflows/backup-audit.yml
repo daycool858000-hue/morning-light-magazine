@@ -70,3 +70,5 @@ jobs:
           retention-days: 30
           if-no-files-found: error
           compression-level: 0
+
+# 2026-10-15：重跑含 WebKit 窄螢幕修正、最新驗收紀錄的完整歷史備份；此 workflow 不部署網站。

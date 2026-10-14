@@ -60,3 +60,13 @@
 ## 2026-10-15 批次資料核准後續進度（覆蓋上文尚未取得資料核准的舊狀態）
 
 網站發起人已授權 16 筆基本官方入口、110／119／113／1925 四支專線及警政署 SMS 入口、九張原有 AI 圖片供未來正式版使用。對照紀錄見 `docs/RELEASE-APPROVAL-2026-10-15.md`，精確核准版本與程式門檻見 `content/release-approvals.json`、`scripts/lib/release.mjs`。**原本人工查核 `status`／`checkedAt` 不變，AI 查核與作者發布授權各自紀錄。** 特定服務申辦細節、兩筆尚受阻入口、110 視訊 App、可選封面仍不公開。這次只在開發分支試作，未合併 main、未部署 Pages。仍待商標官方近似查詢、真實手機操作及最新備份驗證；以前段「尚未核准」記載為當時的歷史狀態。
+
+## 2026-10-15 最新續接驗收：備份、WebKit Safari 與 GitHub 安全狀態
+
+1. **已獲准資料與圖片**：維持 16 筆 AI 官方入口（只有基本介紹）、110／119／113／1925 四支專線、一個警政署 SMS 入口及九張現有 AI 圖片的整批發布核准；額外兩筆受阻入口、視訊 App 及文章選用封面不屬此批。保留來源證據、版本快照與作者發布核准分離；未更動人工查核欄位。未合併 main，也未部署 Pages。
+2. **原有 Chromium 測試**：開發分支 commit `5fdd340163f6fea038dc01fa62f46d6e01c22327`，GitHub Actions [38646434128](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38646434128)，43／43 通過；發布核准與資料／圖片防漏回歸測試通過。
+3. **新增 WebKit（Safari 核心）模擬**：同次 Actions 12／12 通過。11 個主要頁面於 320／390／768px 沒有水平溢出，檢查手機選單、搜尋、縣市與 16 筆全國資源、4 支專線及 SMS 官方入口、110 直接撥號連結與 Google 切換畫面。測試曾發現支援頁「AI 協助核對」徽章在窄螢幕不換行，已局部修正。此結果**不等於真實 iPhone Safari 或 Android Chrome 實機操作測試**。
+4. **備份**：GitHub Actions [38645223684](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38645223684) 已成功產生、驗證並實際還原 `98dd5fb` 的完整 Git bundle，影像產物及正式版建置逐檔一致；備份工件到期 2026-11-13，仍需下載到 GitHub 外另存。隨本次文件修改重新觸發一次 `backup-audit.yml`，供最新含 Safari 修正版本再驗證；須看實際 Actions 執行結果，**不能預先標示該次為成功**。
+5. **GitHub 權限**：2026-10-15 透過 GitHub API 讀得儲存庫公開、`has_pages: false`、`main` 目前 `protected: false`，分支規則集為 0。現有 GitHub 工具無權在此視窗操作管理設定；建議由儲存庫擁有人在正式公開前啟用 main 的分支保護，阻止強制推送及刪除，視需要規定 PR 與通過測試；2FA 狀態目前無法經由已連結 GitHub 工具驗證，不應猜測。
+6. **臺灣商標檢索**：已開啟智慧財產局 [新版正式商標檢索](https://cloud.tipo.gov.tw/S282/S282WV1/) 與 [官方操作說明](https://www.tipo.gov.tw/tw/tipo1/834-1255.html)，確認提供簡易、文字近似、進階搜尋。但工具目前無法取得六個名稱的正式個案近似查詢結果，因此仍為**未完成**，不可解讀為無相近商標，也不因外國書名立即更名。待檢索：由己、SELF-AUTHORED、讀利專欄、THE CONSIDERED PAGE、向光、TOWARD OPEN SKIES，並審酌近似文字及與網站服務相關的商品／服務。
+7. **仍需完成**：正式商標近似檢索、真實 iPhone／Android 裝置驗收、main 分支保護及必要的 GitHub 2FA／部署權限核對、最終部署前確認。資料核准**不代表網站部署核准**；不得自行合併 main、啟用 GitHub Pages 或執行發布。
