@@ -44,7 +44,7 @@
 | `由己` | 有中國大陸商標相關第三方資料，例：2017 年網路科技類第 42 類 https://www.newton.com.tw/wiki/%E7%94%B1%E5%B7%B1 ，及中國大陸第 3 類化妝品 https://tm.aliyun.com/detail/a1f1_15016754_3 。 | **不能據此認定在臺灣受到相同權利保護或形成侵權**；作為名稱已非全球獨一的提示 |
 | `SELF-AUTHORED` | 一般網路搜尋未找到可核實的同名出版／網站品牌及對應臺灣商標號。 | 無法推論「零風險」；官方商標查詢待做 |
 | `讀利專欄` | 一般網路搜尋未找到明確同名網站品牌。 | 仍需查「讀利」「讀力」等近似及第 41 類相關服務 |
-| `QUIET POWER` | 2016 年 Susan Cain 《Quiet Power》已由 Penguin 出版，官方：https://susancain.net/book/quiet-power/ ；第三方美國商標資料顯示 `QUIET POWER` 曾在美國註冊為「領導與主管訓練印刷教材」（國際第 16 類），https://trademarks.justia.com/860/34/quiet-86034516.html 。 | **三組中最值得仔細處理的英文字**，因為本站目錄亦與閱讀／出版相關；不代表使用為欄目名稱必然侵權，但正式公開前宜核對台灣第 16、41 類及第 35、45 類可能的近似權利 |
+| `QUIET POWER` | Susan Cain《Quiet Power》官方書籍介紹：https://susancain.net/book/quiet-power/ ；第三方美國商標資料：序號 86034516，註冊號 4520836，指定「領導與主管訓練印刷教材」（國際第 16 類），https://trademarks.justia.com/860/34/quiet-86034516.html ；另有 Quiet Power, Inc. 以該名稱從事銷售教育與訓練（美國序號 74588427），https://trademarks.justia.com/owners/quiet-power-inc-703484/ 。 | **三組中最值得仔細處理的英文字**，因本站目錄和閱讀／教育內容有接近性；美國註冊紀錄及同名書名均不能直接證明台灣的使用會侵權，正式公開前優先檢索台灣第 16、41 類及其他相關類別 |
 | `向光` | 「向光」是一般中文詞；一般網路檢索未能確認第 41／45 類是否有相同標誌。 | 不能宣稱可獨占使用；保留正式檢索待辦 |
 | `TOWARD DAYLIGHT` | 已有 Tracy Lee Karner 2012 年出版書籍《Toward Daylight》，Apple Books：https://books.apple.com/us/book/toward-daylight/id861415884 。 | 修正舊報告「搜尋未找到同名書籍」的不準確說法；同名**書名**本身不代表臺灣註冊商標，也不代表本目錄名稱必然侵權 |
 
