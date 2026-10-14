@@ -37,7 +37,7 @@ const resourceData = await readJson('content/resources.json');
 const hotlineData = await readJson('content/hotlines.json');
 const eventData = await readJson('content/events.json');
 const release = await readJson('content/release-approvals.json');
-const approvals = release.approvals;
+const approvals = release;
 
 async function readMarkdownDir(dir) {
   const full = path.join(ROOT, dir);
@@ -889,7 +889,7 @@ ${renderMarkdown(a.body, { link: linkResolver(prefix) })}
 for (const r of resources) {
   const cat = catById[r.categories[0]];
   const url = cat && cat.id !== 'city' ? `${cat.slug}#res-${r.id}` : r.categories.length ? `city.html#res-${r.id}` : 'support.html';
-  addIndex('機構與資源', r.name, r.summary, url, [r.serviceTypes.join(' '), regionLabel(r.regions), r.audience, r.phones.map((p) => p.number).join(' ')].join(' '));
+  addIndex('機構與資源', r.name, r.summary, url, IS_PREVIEW ? [r.serviceTypes.join(' '), regionLabel(r.regions), r.audience, r.phones.map((p) => p.number).join(' ')].join(' ') : [r.serviceTypes.join(' '), regionLabel(r.regions)].join(' '));
 }
 for (const c of counties) {
   addIndex('縣市資源', `${c.name}的生活資源`, `依縣市查詢${c.name}可使用的正式服務據點。`, `city.html#county=${c.id}`, c.area);

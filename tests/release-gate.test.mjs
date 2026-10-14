@@ -8,7 +8,7 @@ import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from '../scripts/li
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const readJson=async p=>JSON.parse(await readFile(path.join(root,p),'utf8'));
-const approvals=(await readJson('content/release-approvals.json')).approvals;
+const approvals=await readJson('content/release-approvals.json');
 const r=(await readJson('content/resources.json')).items;
 const h=await readJson('content/hotlines.json');
 const p=(await readJson('content/photos.json')).items;
@@ -56,6 +56,8 @@ const html=await readFile(path.join(dist,'city.html'),'utf8');
 check((html.match(/ data-res /g)||[]).length===16,'正式城市目錄應有 16 筆');
 check(!html.includes('最後查核：尚未查核'),'核准入口不能顯示尚未查核');
 check(!html.includes('對象</dt>'),'僅基本入口不得公開未核准的對象細節');
+const index=await readFile(path.join(dist,'assets/data/search-index.js'),'utf8');
+check(!index.includes('求職者、轉職者與想參加職業訓練的民眾'),'正式搜尋索引不能洩漏未納入基本入口核准的適用對象');
 const support=await readFile(path.join(dist,'support.html'),'utf8');
 for(const n of ['110','119','113','1925'])check(support.includes('tel:'+n),'支援頁缺少專線 '+n);
 check(support.includes('前往警政署簡訊報案號碼表'),'缺少官方 SMS 入口');
