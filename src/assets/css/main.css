@@ -97,11 +97,11 @@ p { margin: 0 0 1em; }
 .dir-link:hover { border-color: var(--terracotta); color: var(--ink); }
 .dir-link[aria-current="page"] { border-color: var(--terracotta); background: var(--terracotta-soft); }
 .dir-zh { font-family: var(--serif); font-weight: 700; font-size: 0.98rem; letter-spacing: 0.1em; white-space: nowrap; }
-.dir-en { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em; color: var(--amber); white-space: nowrap; margin-top: 2px; }
+.dir-en { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; color: var(--amber); white-space: normal; overflow-wrap: break-word; line-height: 1.25; max-width: 100%; margin-top: 2px; }
 @media (max-width: 1099px) {
   .header-top { grid-template-columns: 1fr auto; grid-template-areas: "brand actions" "dirs dirs"; min-height: 0; padding-top: 6px; padding-bottom: 8px; row-gap: 6px; }
-  .dir-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .dir-link { min-height: 48px; padding: 4px 6px; }
+  .dir-nav { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+  .dir-link { min-height: 48px; min-width: 0; padding: 4px 6px; }
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); min-width: 0; }
 .brand:hover { color: var(--ink); }
