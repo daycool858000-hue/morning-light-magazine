@@ -174,6 +174,33 @@ try {
   const backUrl = page.url();
   check('切換畫面：在原分頁前往 Google，且使用 replace（不新增歷史紀錄）', after === before && !backUrl.endsWith('law.html'), `history ${before}→${after}，返回後網址 ${backUrl}`);
 
+  // 切換畫面在手機各頁捲動到中段、底部，以及選單開啟時，都不需滑回頁首即可點擊
+  {
+    const problems = [];
+    for (const pg of ['index.html', 'life-family.html', 'career.html', 'health.html', 'law.html', 'city.html', 'learning.html', 'support.html']) {
+      await page.goto(`${ORIGIN}${BASE}${pg}`);
+      for (const frac of [0, 0.5, 1]) {
+        await page.evaluate((f) => window.scrollTo(0, (document.body.scrollHeight - window.innerHeight) * f), frac);
+        await page.waitForTimeout(100);
+        const ok = await page.evaluate(() => {
+          const el = document.querySelector('[data-switch-screen]');
+          if (!el) return false;
+          const r = el.getBoundingClientRect();
+          const hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+          return r.top >= 0 && r.bottom <= window.innerHeight && r.height >= 44 && !!hit && (hit === el || el.contains(hit));
+        });
+        if (!ok) problems.push(`${pg} 捲動 ${frac * 100}%`);
+      }
+    }
+    await page.goto(`${ORIGIN}${BASE}index.html`);
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2));
+    await page.tap('.menu-toggle');
+    const visibleWithMenu = await page.isVisible('[data-switch-screen]');
+    await page.tap('[data-switch-screen]');
+    await page.waitForURL('https://www.google.com/**');
+    check('切換畫面：手機版首頁、六大分類頁與求助頁在頂端／中段／底部及選單開啟時皆可直接點擊（高度 ≥ 44px）', problems.length === 0 && visibleWithMenu, problems.join('、'));
+  }
+
   // 手機選單
   await page.goto(`${ORIGIN}${BASE}index.html`);
   const hiddenBefore = await page.isHidden('#site-nav');
