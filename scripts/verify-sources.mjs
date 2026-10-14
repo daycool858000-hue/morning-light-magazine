@@ -37,8 +37,19 @@ const HOTLINE_EXTRA = [
   'https://www.1980.org.tw/',
 ];
 // 第二輪：從第一輪頁面連結找到、需要讀原文的頁面（群組 urls 未指定網址時使用）
-const FOLLOWUP = [];
-const HOTLINE_LINKS = /1925|安心專線|113|保護專線|110|119|視訊報案|簡訊報案|警政服務|報案|緊急救護|心理健康支持|青壯|諮商/;
+const FOLLOWUP = [
+  'https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950',
+  'https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2',
+  'https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=18753&serno=04f72711-214c-4f29-881d-5764aa3cf10a',
+  'https://www.npa.gov.tw/ch/app/faq/view?module=faq&id=2144&serno=A1084128',
+  'https://dep.mohw.gov.tw/DOMHAOH/lp-4917-107.html',
+  'https://dep.mohw.gov.tw/DOMHAOH/cp-7168-80425-107.html',
+  'https://www.1980.org.tw/',
+  'https://www.119.gov.taipei/',
+  'https://www.sfaa.gov.tw/',
+  'https://sps.mohw.gov.tw/mhs',
+];
+const HOTLINE_LINKS = /輔導專線|服務時間|1925|安心專線|113|保護專線|110|119|視訊報案|簡訊報案|警政服務|報案|緊急救護|心理健康支持|青壯|諮商/;
 
 const COUNTY_HOME = {
   keelung: 'https://www.klcg.gov.tw/', taipei: 'https://www.gov.taipei/', 'new-taipei': 'https://www.ntpc.gov.tw/',
@@ -88,15 +99,24 @@ async function fetchPage(url) {
   return { res, html };
 }
 
-async function report(url, label, linkPattern) {
+async function report(url, label, linkPattern, full = false) {
   console.log(`\n==== ${label} ====\nURL: ${url}`);
   try {
     const { res, html } = await fetchPage(url);
     console.log(`狀態: ${res.status}${res.url !== url ? `｜最終網址: ${res.url}` : ''}`);
-    console.log(`標題: ${toText(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? '（無）')}`);
+    const title = toText(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? '');
+    console.log(`標題: ${title || '（無）'}`);
     const text = toText(html.match(/<body[\s\S]*<\/body>/i)?.[0] ?? html);
     console.log(`正文長度: ${text.length} 字`);
     console.log(`正文開頭: ${text.slice(0, 600)}`);
+    if (full) {
+      // 主要內容：從頁面標題（去掉網站名稱）在正文中第二次出現處（通常是內文標題）開始
+      const stem = title.split(/[-｜|]/)[0].trim();
+      const hits = [];
+      for (let i = text.indexOf(stem); stem && i !== -1; i = text.indexOf(stem, i + 1)) hits.push(i);
+      const start = hits[1] ?? hits[0] ?? 0;
+      console.log(`主要內容: ${text.slice(start, start + 3500)}`);
+    }
     for (const k of KEYWORDS) {
       const hits = [];
       let i = text.indexOf(k);
@@ -127,7 +147,7 @@ if (group === 'hotlines') {
 } else if (group === 'resources') {
   const res = await read('content/resources.json');
   for (const r of res.items) {
-    await report(r.url, `資源 ${r.id}｜${r.title}`, HOTLINE_LINKS);
+    await report(r.url, `資源 ${r.id}｜${r.name}`, HOTLINE_LINKS);
     for (const s of r.sources) if (s.url !== r.url) await report(s.url, `資源 ${r.id} 來源`, null);
   }
 } else if (group === 'counties') {
@@ -140,7 +160,7 @@ if (group === 'hotlines') {
 } else if (group === 'urls') {
   const list = rest.join(' ').split(/\s+/).filter(Boolean);
   if (!list.length) console.log('未指定網址，使用 FOLLOWUP 清單（' + FOLLOWUP.length + ' 筆）');
-  for (const u of list.length ? list : FOLLOWUP) await report(u, '指定網址', HOTLINE_LINKS);
+  for (const u of list.length ? list : FOLLOWUP) await report(u, '指定網址', HOTLINE_LINKS, true);
 } else {
   console.error(`未知群組：${group}`);
   process.exit(1);

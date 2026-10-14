@@ -3,7 +3,7 @@
 name: 官方來源內容擷取（人工查核輔助）
 
 on:
-  # GitHub 只允許從預設分支手動觸發，開發分支改由「修改本工具本身」時執行一次
+  # GitHub 只允許從預設分支手動觸發；在開發分支修改本工具時，只自動擷取 FOLLOWUP 清單（群組 urls）
   push:
     branches: [claude/morning-light-visual-v2]
     paths:
@@ -33,15 +33,15 @@ jobs:
         group: [hotlines, resources, counties, urls]
     steps:
       - uses: actions/checkout@v4
-        if: github.event_name == 'push' || inputs.group == 'all' || inputs.group == matrix.group
+        if: github.event_name == 'push' && matrix.group == 'urls' || inputs.group == 'all' || inputs.group == matrix.group
         with:
           persist-credentials: false
       - uses: actions/setup-node@v4
-        if: github.event_name == 'push' || inputs.group == 'all' || inputs.group == matrix.group
+        if: github.event_name == 'push' && matrix.group == 'urls' || inputs.group == 'all' || inputs.group == matrix.group
         with:
           node-version: 22
       - name: 擷取官方頁面內容
-        if: github.event_name == 'push' || inputs.group == 'all' || inputs.group == matrix.group
+        if: github.event_name == 'push' && matrix.group == 'urls' || inputs.group == 'all' || inputs.group == matrix.group
         env:
           EXTRA_URLS: ${{ inputs.urls }}
         run: |
