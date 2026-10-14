@@ -567,6 +567,8 @@ main { display: block; }
 .hotline p { margin: 0 0 4px; font-size: 0.95rem; color: var(--muted); }
 .hotline-meta { font-size: 0.875rem !important; }
 .hotline .meta { margin-top: 6px; }
+.support .hotline .badge { max-width: 100%; min-width: 0; white-space: normal; text-align: center; overflow-wrap: anywhere; }
+.support .hotline .meta { min-width: 0; }
 .hotline .call {
   grid-column: 1 / -1; margin-top: 10px;
   display: flex; align-items: center; justify-content: center; min-height: 50px;
