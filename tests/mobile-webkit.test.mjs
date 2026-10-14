@@ -49,7 +49,10 @@ try{
       const response=await page.goto(`${origin}${base}${file}`,{waitUntil:'load'});
       if(response?.status()!==200)bad.push(file+' status='+response?.status());
       const stats=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-window.innerWidth,main:!!document.querySelector('main#main'),brand:document.title.includes('由己 SELF-AUTHORED')}));
-      if(stats.overflow>1||!stats.main||!stats.brand)bad.push(file+' '+JSON.stringify(stats));
+      if(stats.overflow>1||!stats.main||!stats.brand){
+        const detail=stats.overflow>1 ? await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.right>innerWidth+2&&r.width>3&&!['hidden','collapse'].includes(getComputedStyle(el).visibility);}).slice(0,8).map(el=>({tag:el.tagName,cls:el.className?.baseVal||el.className,text:(el.textContent||'').trim().slice(0,28),right:Math.round(el.getBoundingClientRect().right)}))) : [];
+        bad.push(file+' '+JSON.stringify({stats,overflowElements:detail}));
+      }
     }
     check(`WebKit ${width}px 11 個主要頁面正常、無水平溢位`,bad.length===0,bad.slice(0,4).join('; '));
     check(`WebKit ${width}px 無 JS 例外及第三方請求`,jsErrors.length===0 && external.length===0,[...jsErrors,...external].slice(0,4).join('; '));
@@ -69,7 +72,9 @@ try{
   const cityStatus=await page.locator('#finder-status').innerText();
   check('WebKit 縣市選擇可更新篩選說明',cityStatus.includes('在地 0 筆')&&cityStatus.includes('全國性 16 筆'),cityStatus);
   await page.goto(`${origin}${base}support.html`);
-  check('WebKit 支援頁具 4 支專線及 SMS 官方入口', (await page.locator('.hotline-grid a.call').count())===4 && (await page.getByText('前往警政署簡訊報案號碼表')).count()>0);
+  const hotlineButtons=await page.locator('.hotline-grid a.call').count();
+  const smsLinks=await page.locator('a[href*="serno=d08673f4"]').count();
+  check('WebKit 支援頁具 4 支專線及 SMS 官方入口',hotlineButtons===4&&smsLinks>0,'專線按鈕 '+hotlineButtons+'；SMS 官方連結 '+smsLinks);
   await page.goto(`${origin}${base}index.html`);
   check('WebKit 緊急入口仍僅直接撥打 110',await page.locator('a[href="tel:110"]').count()>0 && (await page.locator('a[href="tel:110"]').first().getAttribute('href'))==='tel:110');
   check('WebKit 切換畫面保留 Google 入口',await page.locator('[data-switch-screen]').first().getAttribute('href')==='https://www.google.com/');
