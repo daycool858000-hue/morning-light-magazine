@@ -15,7 +15,7 @@
 2. 在輸入框填入 `確認公開`，按下 Run。
 3. 完成後網址為：`https://daycool858000-hue.github.io/morning-light-magazine/`
 
-部署只會發布查核狀態為「已確認」的資料（production 模式），不會出現「預覽版本」提示，也不需要登入 GitHub 或 Claude 即可瀏覽。
+正式版（production 模式）只顯示符合 AI 來源查核證據、網站發起人發布核准及核准版本比對的機構入口、專線與圖片；文章、活動仍依原有查核及公開規則。正式版不會出現「預覽版本」提示，也不需要登入 GitHub 或 Claude 即可瀏覽。
 
 ### 部署後檢查清單
 
