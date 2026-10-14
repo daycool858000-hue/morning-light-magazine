@@ -136,7 +136,7 @@
 
 - 本機：`npm test` **43 項全部通過**（原有 40 項全部保留，未放寬門檻）。
 - 新增 3 項：停用 JavaScript 時城市頁「在地服務」有說明文字；無障礙基本檢查（每頁 lang、恰好一個 h1、圖片 alt、表單標籤、跳到主要內容）；鍵盤操作（第一個 Tab 是可見的「跳到主要內容」、Enter 後焦點到主要內容、之後的焦點有可見外框）。
-- GitHub Actions：見文末「線上測試結果」。
+- GitHub Actions：`bec4489` 線上 43／43 通過（見文末「線上測試結果」）。
 - 環境限制：測試使用 Chromium，不代表 Safari／iPhone 或 Android 實機結果；未使用螢幕閱讀器實測；有急事只驗證連結與行為，**未實際撥打 110**。
 
 ## 備份結果
@@ -177,4 +177,6 @@
 
 ## 線上測試結果
 
-（推送後填入）
+- commit `bec4489`：GitHub Actions「檢查與測試」[run 38610741342](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38610741342) **成功，43／43 通過**。
+- 官方來源擷取工作流程（只擷取、不改資料）：[38608177067](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38608177067)、[38608659630](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38608659630)、[38608984132](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38608984132) 皆執行成功（個別網站連線失敗已記錄在查核紀錄）。
+- 本報告補上此段後的 commit 另有一次 CI，結果請見 GitHub Actions 頁面。
