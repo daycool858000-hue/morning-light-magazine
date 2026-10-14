@@ -1,0 +1,63 @@
+{
+  "_說明": "緊急求助頁使用的電話與管道。hours 與 purpose 必須依官方來源查核；未查核前請保持「待查核」。不可設定 sms:110，簡訊報案須使用警政署公布的各縣市專用號碼。",
+  "items": [
+    {
+      "id": "110",
+      "number": "110",
+      "title": "警察緊急報案",
+      "purpose": "遇到刑案、交通事故或需要警察立即處理的危險情況。",
+      "hours": "待查核",
+      "tel": "110",
+      "source": { "title": "內政部警政署", "url": "https://www.npa.gov.tw/" },
+      "status": "待確認"
+    },
+    {
+      "id": "119",
+      "number": "119",
+      "title": "消防與緊急救護",
+      "purpose": "火災、意外受傷、急病等需要消防或救護車的情況。",
+      "hours": "待查核",
+      "tel": "119",
+      "source": null,
+      "status": "待確認"
+    },
+    {
+      "id": "113",
+      "number": "113",
+      "title": "保護專線",
+      "purpose": "家庭暴力、性侵害、兒少及老人保護等相關求助與諮詢。",
+      "hours": "待查核",
+      "tel": "113",
+      "source": { "title": "衛生福利部 113 保護專線", "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html" },
+      "status": "待確認"
+    },
+    {
+      "id": "1925",
+      "number": "1925",
+      "title": "安心專線",
+      "purpose": "心情低落、壓力過大或需要心理支持時的專線。",
+      "hours": "待查核",
+      "tel": "1925",
+      "source": { "title": "衛生福利部心理健康司", "url": "https://dep.mohw.gov.tw/DOMHAOH/" },
+      "status": "待確認"
+    }
+  ],
+  "channels": [
+    {
+      "id": "sms-110",
+      "title": "110 簡訊報案",
+      "text": "不方便說話時，可使用警政署公布的各縣市簡訊報案專用號碼。請注意：簡訊不是直接傳到 110，而是依所在縣市使用不同號碼。各縣市號碼將於查核後列出，目前請以警政署官方頁面為準。",
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+      "linkLabel": "前往警政署簡訊報案說明",
+      "status": "待確認"
+    },
+    {
+      "id": "video-110",
+      "title": "110 視訊報案 App",
+      "text": "警政署提供的視訊報案 App 官方下載與使用說明入口待查核，查核完成前請以警政署官方網站公告為準。",
+      "url": "https://www.npa.gov.tw/",
+      "linkLabel": "前往內政部警政署",
+      "status": "待確認"
+    }
+  ]
+}

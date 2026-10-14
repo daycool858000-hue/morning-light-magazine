@@ -1,0 +1,20 @@
+{
+  "name": "晨光生活誌",
+  "englishName": "Morning Light Magazine",
+  "tagline": "女性權益、生活知識與在地資源導航",
+  "description": "晨光生活誌是免費、非營利的台灣女性生活資訊導航網站，整理官方制度、專業機構、生活服務、學習活動與求助管道的公開入口。",
+  "lang": "zh-Hant-TW",
+  "basePath": "/morning-light-magazine/",
+  "productionUrl": "https://daycool858000-hue.github.io/morning-light-magazine/",
+  "switchScreenUrl": "https://www.google.com/",
+  "maintenanceNotice": "",
+  "nav": [
+    { "label": "首頁", "href": "index.html", "id": "home" },
+    { "label": "生活與家庭", "href": "life-family.html", "id": "life-family" },
+    { "label": "職涯與創業", "href": "career.html", "id": "career" },
+    { "label": "身心健康", "href": "health.html", "id": "health" },
+    { "label": "法律與權益", "href": "law.html", "id": "law" },
+    { "label": "城市與福利", "href": "city.html", "id": "city" },
+    { "label": "學習與活動", "href": "learning.html", "id": "learning" }
+  ]
+}

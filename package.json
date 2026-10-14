@@ -1,0 +1,16 @@
+{
+  "name": "morning-light-magazine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "晨光生活誌：免費、非營利的台灣女性生活資訊導航靜態網站",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "node scripts/build.mjs --mode=preview",
+    "build:production": "node scripts/build.mjs --mode=production --out=dist-production",
+    "preview": "node scripts/build.mjs --mode=preview && node scripts/serve.mjs",
+    "test": "node scripts/build.mjs --mode=preview && node scripts/build.mjs --mode=production --out=dist-production && node tests/site.test.mjs",
+    "check-links": "node scripts/check-links.mjs"
+  }
+}
