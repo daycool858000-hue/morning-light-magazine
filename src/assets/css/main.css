@@ -650,3 +650,12 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .support-entry-text strong { font-size: 1.05rem; color: #4E6148; }
 .support-entry-text small { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
 .about-hub { margin-top: 4px; }
+
+/* 320–359px：再收緊頁首間距，讓品牌文字與選單、切換畫面之間保留足夠空間（不同字型寬度也不重疊） */
+@media (max-width: 359px) {
+  .brand { column-gap: 6px; }
+  .brand-mark { width: 26px; height: 26px; }
+  .brand-en { letter-spacing: 0.1em; }
+  .header-actions { gap: 2px; }
+  .hdr-btn { padding: 0 7px; gap: 4px; }
+}
