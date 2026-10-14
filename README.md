@@ -72,6 +72,7 @@ docs/                   維護、部署、備份、授權與驗收文件
 - [V3.2 內容查核、素材安全與公開前品質整備報告](docs/ACCEPTANCE-V3.2.md)
 - [V3.2 官方資源與專線查核紀錄](docs/VERIFICATION-LOG-V3.2.md)
 - [V3.2 查核對照表與可核准清單](docs/REVIEW-TABLE-V3.2.md)
+- [2026-10-15 正式公開前最新驗收清單](docs/PRELAUNCH-READINESS-2026-10-15.md)
 - [品牌識別](docs/BRAND.md)
 - [內容更新操作教學](docs/CONTENT-GUIDE.md)
 - [GitHub Pages 部署、暫停與關站](docs/DEPLOYMENT.md)
