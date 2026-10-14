@@ -16,9 +16,9 @@
       "number": "119",
       "title": "消防與緊急救護",
       "purpose": "火災、意外受傷、急病等需要消防或救護車的情況。",
-      "hours": "待查核（官方來源已補上，服務時間尚待人工核對）",
+      "hours": "24 小時（依內政部消防署『119、112』官方說明）",
       "tel": "119",
-      "source": { "title": "內政部消防署｜119 報案要領", "url": "https://www.nfa.gov.tw/cht/?code=list&ids=68" },
+      "source": { "title": "內政部消防署｜119、112", "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=66" },
       "status": "待確認"
     },
     {
