@@ -38,16 +38,11 @@ const HOTLINE_EXTRA = [
 ];
 // 第二輪：從第一輪頁面連結找到、需要讀原文的頁面（群組 urls 未指定網址時使用）
 const FOLLOWUP = [
-  'https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950',
-  'https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2',
-  'https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=18753&serno=04f72711-214c-4f29-881d-5764aa3cf10a',
-  'https://www.npa.gov.tw/ch/app/faq/view?module=faq&id=2144&serno=A1084128',
-  'https://dep.mohw.gov.tw/DOMHAOH/lp-4917-107.html',
-  'https://dep.mohw.gov.tw/DOMHAOH/cp-7168-80425-107.html',
-  'https://www.1980.org.tw/',
-  'https://www.119.gov.taipei/',
-  'https://www.sfaa.gov.tw/',
-  'https://sps.mohw.gov.tw/mhs',
+  'https://dep.mohw.gov.tw/DOMHAOH/np-4906-107.html',
+  'https://dep.mohw.gov.tw/DOMHAOH/np-7168-107.html',
+  'https://www.1980.org.tw/service_item_show.php?service_item_id=1',
+  'https://www.119.gov.taipei/Content_List.aspx?n=23B7A61EACF198E2',
+  'https://www.119.gov.taipei/News_Content.aspx?n=37B67E7640165BF9&sms=9FE100ABBC7FAE50&s=EE501C7C1D9BE5A2',
 ];
 const HOTLINE_LINKS = /輔導專線|服務時間|1925|安心專線|113|保護專線|110|119|視訊報案|簡訊報案|警政服務|報案|緊急救護|心理健康支持|青壯|諮商/;
 
