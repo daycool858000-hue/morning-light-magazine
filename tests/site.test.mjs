@@ -260,8 +260,8 @@ try {
   // ---------- V3.1：頁首雙目錄、支援資源入口、首頁精簡、快捷入口、有急事 ----------
   {
     const DIRS = [
-      { href: 'quiet-power.html', zh: '讀利專欄', en: 'QUIET POWER' },
-      { href: 'toward-light.html', zh: '向光', en: 'TOWARD DAYLIGHT' },
+      { href: 'quiet-power.html', zh: '讀利專欄', en: 'THE CONSIDERED PAGE' },
+      { href: 'toward-light.html', zh: '向光', en: 'TOWARD OPEN SKIES' },
     ];
     // 1、2、11：手機頁首直接看到兩個目錄（中英文正確），且頁首元素不重疊、無水平溢位
     const headerProblems = [];
@@ -317,7 +317,7 @@ try {
       }
       await c.close();
     }
-    check('頁首：手機 320／375／390px 不開選單即可看到「讀利專欄 QUIET POWER」「向光 TOWARD DAYLIGHT」與切換畫面；品牌文字、選單、切換畫面、兩個目錄互不重疊、不超出畫面、點擊區 ≥ 44px、無水平溢位（含捲動後與選單開啟時）', headerProblems.length === 0, headerProblems.slice(0, 6).join('；'));
+    check('頁首：手機 320／375／390px 不開選單即可看到「讀利專欄 THE CONSIDERED PAGE」「向光 TOWARD OPEN SKIES」與切換畫面；品牌文字、選單、切換畫面、兩個目錄互不重疊、不超出畫面、點擊區 ≥ 44px、無水平溢位（含捲動後與選單開啟時）', headerProblems.length === 0, headerProblems.slice(0, 6).join('；'));
 
     // 3、4：點擊兩個目錄前往正確頁面；兩個目錄頁都在前段提供同一個支援資源頁入口
     const dirProblems = [];
@@ -396,9 +396,9 @@ try {
     const quick = [...home.matchAll(/<a class="quick[^"]*" href="([^"]+)">([\s\S]*?)<\/a>/g)].map((m) => ({ href: m[1], zh: (/<span class="quick-zh">([^<]+)<\/span>/.exec(m[2]) || [])[1], en: (/<span class="quick-en">([^<]+)<\/span>/.exec(m[2]) || [])[1], inner: m[2] }));
     const quickOk = quick.length === 4
       && quick.map((q) => q.zh).join('|') === '有急事|讀利專欄|向光|關於由己'
-      && quick[1].en === 'QUIET POWER' && quick[2].en === 'TOWARD DAYLIGHT'
+      && quick[1].en === 'THE CONSIDERED PAGE' && quick[2].en === 'TOWARD OPEN SKIES'
       && quick.map((q) => q.href).join('|') === 'tel:110|quiet-power.html|toward-light.html|about.html';
-    check('首頁快捷入口恰好 4 個，依序為：有急事、讀利專欄 QUIET POWER、向光 TOWARD DAYLIGHT、關於由己', quickOk, quick.map((q) => `${q.zh}→${q.href}`).join('、'));
+    check('首頁快捷入口恰好 4 個，依序為：有急事、讀利專欄 THE CONSIDERED PAGE、向光 TOWARD OPEN SKIES、關於由己', quickOk, quick.map((q) => `${q.zh}→${q.href}`).join('、'));
 
     // 8、9：有急事只有手電筒圖示；為單一 tel:110 連結，不經過網站自製頁面或彈窗，畫面上不顯示電話號碼
     const urgent = quick[0] || { inner: '' };

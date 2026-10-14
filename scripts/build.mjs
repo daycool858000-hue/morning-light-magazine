@@ -470,7 +470,7 @@ function dirHead(d) {
 </section>`;
 }
 
-// ---------- 讀利專欄｜QUIET POWER（文章、常見需求、各主題閱讀方向） ----------
+// ---------- 讀利專欄｜THE CONSIDERED PAGE（文章、常見需求、各主題閱讀方向） ----------
 {
   const d = dirById['quiet-power'];
   const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
@@ -505,7 +505,7 @@ ${dirHead(d)}
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
 }
 
-// ---------- 向光｜TOWARD DAYLIGHT（學習、活動、生活探索與官方資源） ----------
+// ---------- 向光｜TOWARD OPEN SKIES（學習、活動、生活探索與官方資源） ----------
 {
   const d = dirById['toward-light'];
   const learning = catById.learning;
