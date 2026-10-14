@@ -256,6 +256,170 @@ try {
   const homeCleared = await page.locator('.hero [data-search-results] li').count();
   check('首頁主視覺搜尋：顯示結果（最多 6 筆）、Esc 清除、不改變網址', homeHits > 0 && homeHits <= 6 && !!homeFirst && homeCleared === 0 && page.url() === `${ORIGIN}${BASE}index.html`, `心理 ${homeHits} 筆`);
 
+  // ---------- V3.1：頁首雙目錄、支援資源入口、首頁精簡、快捷入口、有急事 ----------
+  {
+    const DIRS = [
+      { href: 'quiet-power.html', zh: '讀利專欄', en: 'QUIET POWER' },
+      { href: 'toward-light.html', zh: '向光', en: 'TOWARD THE LIGHT' },
+    ];
+    // 1、2、11：手機頁首直接看到兩個目錄（中英文正確），且頁首元素不重疊、無水平溢位
+    const headerProblems = [];
+    for (const w of [320, 375, 390]) {
+      const c = await browser.newContext({ viewport: { width: w, height: 760 }, isMobile: true, hasTouch: true });
+      const pg = await c.newPage();
+      for (const file of ['index.html', 'law.html', 'support.html', 'quiet-power.html']) {
+        await pg.goto(`${ORIGIN}${BASE}${file}`);
+        for (const scrollFrac of [0, 0.6, 'menu']) {
+          if (scrollFrac === 'menu') { await pg.evaluate(() => window.scrollTo(0, 0)); await pg.tap('.menu-toggle'); }
+          else await pg.evaluate((f) => window.scrollTo(0, (document.body.scrollHeight - innerHeight) * f), scrollFrac);
+          await pg.waitForTimeout(80);
+          const r = await pg.evaluate((dirs) => {
+            // 以文字實際範圍（Range）量測，文字溢出元素框時也能偵測到重疊
+            const box = (el) => {
+              const rg = document.createRange();
+              rg.selectNodeContents(el);
+              const rects = [el.getBoundingClientRect(), rg.getBoundingClientRect()].filter((x) => x.width > 0);
+              return { l: Math.min(...rects.map((x) => x.left)), r: Math.max(...rects.map((x) => x.right)), t: Math.min(...rects.map((x) => x.top)), b: Math.max(...rects.map((x) => x.bottom)) };
+            };
+            const els = {
+              mark: document.querySelector('.site-header .brand-mark'),
+              brand: document.querySelector('.site-header .brand-name'),
+              brandEn: document.querySelector('.site-header .brand-en'),
+              menu: document.querySelector('.menu-toggle'),
+              sw: document.querySelector('[data-switch-screen]'),
+              d0: document.querySelector(`.dir-nav a[href$="${dirs[0].href}"]`),
+              d1: document.querySelector(`.dir-nav a[href$="${dirs[1].href}"]`),
+            };
+            const out = { missing: Object.keys(els).filter((k) => !els[k]) };
+            if (out.missing.length) return out;
+            const b = Object.fromEntries(Object.entries(els).map(([k, el]) => [k, box(el)]));
+            const keys = Object.keys(b);
+            out.overlaps = [];
+            for (let i = 0; i < keys.length; i++) for (let j = i + 1; j < keys.length; j++) {
+              const A = b[keys[i]], B = b[keys[j]];
+              if (A.l < B.r - 0.5 && B.l < A.r - 0.5 && A.t < B.b - 0.5 && B.t < A.b - 0.5) out.overlaps.push(`${keys[i]}×${keys[j]}`);
+            }
+            out.offscreen = keys.filter((k) => b[k].l < 0 || b[k].r > innerWidth || b[k].t < 0 || b[k].b > innerHeight);
+            out.small = ['menu', 'sw', 'd0', 'd1'].filter((k) => b[k].b - b[k].t < 44);
+            out.text = [0, 1].map((i) => [els[`d${i}`].querySelector('.dir-zh')?.textContent, els[`d${i}`].querySelector('.dir-en')?.textContent]);
+            out.overflow = document.documentElement.scrollWidth - innerWidth;
+            return out;
+          }, DIRS);
+          const where = `${w}px ${file}${scrollFrac === 'menu' ? ' 選單開啟' : scrollFrac ? ' 捲動後' : ''}`;
+          if (r.missing?.length) { headerProblems.push(`${where} 缺少 ${r.missing.join('、')}`); continue; }
+          if (r.overlaps.length) headerProblems.push(`${where} 重疊 ${r.overlaps.join('、')}`);
+          if (r.offscreen.length) headerProblems.push(`${where} 超出畫面 ${r.offscreen.join('、')}`);
+          if (r.small.length) headerProblems.push(`${where} 點擊區域不足 44px：${r.small.join('、')}`);
+          if (r.overflow > 0) headerProblems.push(`${where} 水平溢位 ${r.overflow}px`);
+          DIRS.forEach((d, i) => { if (r.text[i][0] !== d.zh || r.text[i][1] !== d.en) headerProblems.push(`${where} 目錄文字錯誤：${r.text[i].join(' ')}`); });
+        }
+      }
+      await c.close();
+    }
+    check('頁首：手機 320／375／390px 不開選單即可看到「讀利專欄 QUIET POWER」「向光 TOWARD THE LIGHT」與切換畫面；品牌文字、選單、切換畫面、兩個目錄互不重疊、不超出畫面、點擊區 ≥ 44px、無水平溢位（含捲動後與選單開啟時）', headerProblems.length === 0, headerProblems.slice(0, 6).join('；'));
+
+    // 3、4：點擊兩個目錄前往正確頁面；兩個目錄頁都在前段提供同一個支援資源頁入口
+    const dirProblems = [];
+    for (const d of DIRS) {
+      await page.goto(`${ORIGIN}${BASE}index.html`);
+      await page.tap(`.dir-nav a[href="${d.href}"]`);
+      await page.waitForURL(`**/${d.href}`);
+      const info = await page.evaluate(() => {
+        const h1 = document.querySelector('h1');
+        const entry = document.querySelector('.dir-head .support-entry');
+        const firstSection = document.querySelector('main > .section');
+        return {
+          zh: h1?.querySelector('.dir-title-zh')?.textContent, en: h1?.querySelector('.dir-title-en')?.textContent,
+          entryHref: entry?.getAttribute('href'), entryText: entry?.querySelector('strong')?.textContent,
+          entryBeforeContent: !!entry && !!firstSection && (entry.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING) > 0,
+          entryTop: entry ? entry.getBoundingClientRect().top + window.scrollY : Infinity,
+          current: document.querySelector('.dir-nav [aria-current="page"]')?.getAttribute('href'),
+        };
+      });
+      if (info.zh !== d.zh || info.en !== d.en) dirProblems.push(`${d.href} 標題 ${info.zh} ${info.en}`);
+      if (info.entryHref !== 'support.html' || info.entryText !== '支援資源' || !info.entryBeforeContent) dirProblems.push(`${d.href} 支援資源入口不在頁面前段`);
+      if (info.entryTop > 844 * 1.5) dirProblems.push(`${d.href} 支援資源入口位置過低（${Math.round(info.entryTop)}px）`);
+      if (info.current !== d.href) dirProblems.push(`${d.href} 頁首未標示目前目錄`);
+      await page.tap('.dir-head .support-entry');
+      await page.waitForURL('**/support.html');
+    }
+    const supportPages = [];
+    for (const f of pages) {
+      const html = await readFile(path.join(DIST, f), 'utf8');
+      if (/<h1[^>]*>支援資源/.test(html)) supportPages.push(f);
+    }
+    check('讀利專欄、向光：點擊頁首目錄前往正確頁面；兩頁前段都有「支援資源」入口，連往同一個既有支援資源頁（全站只有一個支援資源頁）', dirProblems.length === 0 && supportPages.length === 1 && supportPages[0] === 'support.html', [...dirProblems, `支援資源頁：${supportPages.join('、')}`].join('；'));
+
+    // 手機選單中「支援資源」排在第一項
+    await page.goto(`${ORIGIN}${BASE}index.html`);
+    await page.tap('.menu-toggle');
+    const firstMenu = await page.evaluate(() => { const a = document.querySelector('#site-nav li a'); return [a?.getAttribute('href'), a?.textContent.trim()]; });
+    check('手機選單：「支援資源」排在第一項', firstMenu[0] === 'support.html' && firstMenu[1] === '支援資源', firstMenu.join(' '));
+
+    // 5：原首頁移出的內容仍可從相關內頁抵達
+    const movedProblems = [];
+    const qp = await readFile(path.join(DIST, 'quiet-power.html'), 'utf8');
+    const tl = await readFile(path.join(DIST, 'toward-light.html'), 'utf8');
+    const about = await readFile(path.join(DIST, 'about.html'), 'utf8');
+    for (const a of ['articles/how-to-use.html', 'articles/status-labels.html']) if (!qp.includes(`href="${a}"`)) movedProblems.push(`讀利缺少文章 ${a}`);
+    if ((qp.match(/class="need-list"/g) || []).length !== 1 || (qp.match(/class="need-no"/g) || []).length < 8) movedProblems.push('讀利缺少常見需求');
+    if ((tl.match(/class="county-chip" href="city\.html#county=/g) || []).length !== 22) movedProblems.push('向光缺少 22 縣市入口');
+    for (const name of ['台灣就業通', '衛生福利部社會及家庭署', '財團法人法律扶助基金會', '衛生福利部心理健康司']) if (!tl.includes(`<h3>${name}</h3>`)) movedProblems.push(`向光缺少官方資源 ${name}`);
+    if (!tl.includes('href="learning.html"') || !tl.includes('href="learning.html#events-title"')) movedProblems.push('向光缺少學習與活動入口');
+    for (const f of ['disclaimer.html', 'privacy.html', 'verification.html']) if (!about.includes(`href="${f}"`)) movedProblems.push(`關於由己缺少 ${f}`);
+    check('原首頁內容仍可抵達：編輯精選與常見需求→讀利專欄；城市入口（22 縣市）、官方資源推薦、學習活動→向光；關於、免責、隱私、查核→關於由己', movedProblems.length === 0, movedProblems.join('；'));
+
+    // 6：首頁六大主題卡全部可開啟
+    const home = await readFile(path.join(DIST, 'index.html'), 'utf8');
+    const catHrefs = [...home.matchAll(/<a class="cat-card" href="([^"]+)"/g)].map((m) => m[1]);
+    const catOk = [];
+    for (const h of catHrefs) {
+      const resp = await page.goto(`${ORIGIN}${BASE}${h}`);
+      if (resp.status() === 200) catOk.push(h);
+    }
+    const expectedCats = ['life-family.html', 'career.html', 'health.html', 'law.html', 'city.html', 'learning.html'];
+    check('首頁六大主題卡：六張依序連到六個分類頁且皆可開啟', JSON.stringify(catHrefs) === JSON.stringify(expectedCats) && catOk.length === 6, catHrefs.join('、'));
+
+    // 7：首頁底部快捷入口只有四個且順序正確
+    const quick = [...home.matchAll(/<a class="quick[^"]*" href="([^"]+)">([\s\S]*?)<\/a>/g)].map((m) => ({ href: m[1], zh: (/<span class="quick-zh">([^<]+)<\/span>/.exec(m[2]) || [])[1], en: (/<span class="quick-en">([^<]+)<\/span>/.exec(m[2]) || [])[1], inner: m[2] }));
+    const quickOk = quick.length === 4
+      && quick.map((q) => q.zh).join('|') === '有急事|讀利專欄|向光|關於由己'
+      && quick[1].en === 'QUIET POWER' && quick[2].en === 'TOWARD THE LIGHT'
+      && quick.map((q) => q.href).join('|') === 'tel:110|quiet-power.html|toward-light.html|about.html';
+    check('首頁快捷入口恰好 4 個，依序為：有急事、讀利專欄 QUIET POWER、向光 TOWARD THE LIGHT、關於由己', quickOk, quick.map((q) => `${q.zh}→${q.href}`).join('、'));
+
+    // 8、9：有急事只有手電筒圖示；為單一 tel:110 連結，不經過網站自製頁面或彈窗，畫面上不顯示電話號碼
+    const urgent = quick[0] || { inner: '' };
+    const urgentTag = (/<a class="quick quick-urgent"[^>]*>/.exec(home) || [''])[0];
+    const svgs = (urgent.inner.match(/<svg/g) || []).length;
+    const visibleText = urgent.inner.replace(/<span class="visually-hidden">[\s\S]*?<\/span>/g, '').replace(/<[^>]+>/g, '').trim();
+    const attrsOk = urgentTag === '<a class="quick quick-urgent" href="tel:110">';
+    const iconOk = svgs === 1 && urgent.inner.includes('icon-flashlight') && !/icon-(phone|bell|alarm)/.test(urgent.inner);
+    const iconFile = await readFile(path.join(ROOT, 'src/icons/flashlight.svg'), 'utf8');
+    const jsSrc = await readFile(path.join(ROOT, 'src/assets/js/main.js'), 'utf8');
+    const jsIntercepts = /tel:|quick-urgent/.test(jsSrc);
+    const ctxU = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    const pu = await ctxU.newPage();
+    let dialogs = 0; let navigatedHttp = 0; const telRequests = [];
+    pu.on('dialog', async (dlg) => { dialogs++; await dlg.dismiss(); });
+    pu.on('framenavigated', (fr) => { if (fr === pu.mainFrame() && /^http/.test(fr.url()) && !fr.url().endsWith('/index.html')) navigatedHttp++; });
+    pu.on('request', (rq) => { if (rq.url().startsWith('tel:')) telRequests.push(rq.url()); });
+    await pu.goto(`${ORIGIN}${BASE}index.html`);
+    const beforeUrl = pu.url();
+    await pu.tap('.quick-urgent').catch(() => null);
+    await pu.waitForTimeout(800);
+    const afterUrl = pu.url();
+    const popups = ctxU.pages().length;
+    await ctxU.close();
+    const ctxN = await browser.newContext({ javaScriptEnabled: false });
+    const pn = await ctxN.newPage();
+    await pn.goto(`${ORIGIN}${BASE}index.html`);
+    const noJsHref = await pn.getAttribute('.quick-urgent', 'href');
+    await ctxN.close();
+    check('有急事：只有一個原創手電筒圖示、畫面只顯示「有急事」三字（不顯示號碼）', iconOk && visibleText === '有急事' && /<svg/.test(iconFile), `圖示 ${svgs} 個，可見文字「${visibleText}」`);
+    check('有急事：單一 <a href="tel:110">，無 target／onclick／JavaScript 攔截；點擊後沒有開啟網站頁面、新分頁或彈窗；停用 JavaScript 仍為 tel:110（未實際撥出）', attrsOk && !jsIntercepts && dialogs === 0 && navigatedHttp === 0 && afterUrl === beforeUrl && popups === 1 && noJsHref === 'tel:110', `標籤 ${urgentTag}；彈窗 ${dialogs}；網站頁面跳轉 ${navigatedHttp}；分頁 ${popups}`);
+  }
+
   // 學習與活動：過期活動隱藏（以頁面注入的模擬資料測試）
   await page.goto(`${ORIGIN}${BASE}learning.html`);
   const eventsOk = await page.evaluate(() => {

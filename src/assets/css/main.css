@@ -31,7 +31,7 @@
 @media (min-width: 720px) { :root { --gutter: 32px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 120px; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 140px; }
 body {
   margin: 0;
   background: var(--bg);
@@ -81,7 +81,28 @@ p { margin: 0 0 1em; }
 
 /* ---------- 頁首 ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: 1px solid var(--line); }
-.header-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 72px; }
+/* 頁首：品牌｜兩個主要目錄｜動作按鈕。手機與平板為雙層：第一層品牌＋選單＋切換畫面，第二層兩個目錄 */
+.header-top {
+  display: grid; align-items: center; gap: 0 12px; min-height: 72px;
+  grid-template-columns: auto 1fr auto; grid-template-areas: "brand dirs actions";
+}
+.header-top .brand { grid-area: brand; }
+.header-top .header-actions { grid-area: actions; }
+.dir-nav { grid-area: dirs; display: flex; justify-content: center; gap: 8px; min-width: 0; }
+.dir-link {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 46px; padding: 4px 14px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--ink); text-decoration: none; line-height: 1.2; text-align: center;
+}
+.dir-link:hover { border-color: var(--terracotta); color: var(--ink); }
+.dir-link[aria-current="page"] { border-color: var(--terracotta); background: var(--terracotta-soft); }
+.dir-zh { font-family: var(--serif); font-weight: 700; font-size: 0.98rem; letter-spacing: 0.1em; white-space: nowrap; }
+.dir-en { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em; color: var(--amber); white-space: nowrap; margin-top: 2px; }
+@media (max-width: 1099px) {
+  .header-top { grid-template-columns: 1fr auto; grid-template-areas: "brand actions" "dirs dirs"; min-height: 0; padding-top: 6px; padding-bottom: 8px; row-gap: 6px; }
+  .dir-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dir-link { min-height: 48px; padding: 4px 6px; }
+}
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); min-width: 0; }
 .brand:hover { color: var(--ink); }
 /* 品牌標誌：葉枝＋「由己」＋細分隔線＋ SELF-AUTHORED／主題說明，視為同一組標誌 */
@@ -120,30 +141,34 @@ p { margin: 0 0 1em; }
 .site-nav a[aria-current="page"] { color: var(--terracotta-dark); font-weight: 600; box-shadow: inset 0 -2px 0 var(--terracotta); }
 .site-nav .nav-extra { display: none; }
 
-@media (max-width: 899px) {
+@media (max-width: 1099px) {
   .hide-sm { display: none !important; }
   .js .site-nav { display: none; }
   .js .site-nav.is-open { display: block; }
-  .site-nav { border-top: 1px solid var(--line); padding-bottom: 12px; max-height: calc(100vh - 72px); overflow-y: auto; }
+  .site-nav { border-top: 1px solid var(--line); padding-bottom: 12px; max-height: calc(100vh - 130px); overflow-y: auto; }
   .site-nav ul { flex-direction: column; padding-top: 6px; }
   .site-nav a { padding: 13px 4px; font-size: 1.0625rem; border-bottom: 1px solid var(--line); }
   .site-nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--terracotta); padding-left: 14px; }
   .site-nav .nav-extra { display: block; }
   .site-nav .nav-sep { height: 10px; }
+  /* 支援資源放在選單第一項 */
+  .site-nav .nav-support a { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #4E6148; background: var(--sage-soft); border-radius: 10px; border-bottom: 0; padding: 12px 12px; margin: 4px 0 6px; }
+  .site-nav .nav-support .icon { width: 20px; height: 20px; }
 }
 @media (max-width: 599px) {
   .brand-sub { display: none; }
 }
 @media (max-width: 440px) {
-  .brand { gap: 8px; }
-  .brand-mark { width: 32px; height: 32px; }
-  .brand-name { font-size: 1.45rem; letter-spacing: 0.08em; }
-  .brand-meta { padding-left: 8px; }
-  .brand-en { font-size: 0.62rem; letter-spacing: 0.2em; }
+  /* 窄螢幕：「由己」在上、SELF-AUTHORED 在下，仍為同一組標誌，避免與選單、切換畫面重疊 */
+  .brand { display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; column-gap: 8px; row-gap: 2px; align-items: center; justify-content: start; }
+  .brand-mark { grid-row: 1 / span 2; width: 30px; height: 30px; }
+  .brand-name { font-size: 1.35rem; letter-spacing: 0.08em; }
+  .brand-meta { grid-column: 2; border-left: 0; padding-left: 0; }
+  .brand-en { font-size: 0.56rem; letter-spacing: 0.18em; }
   .hdr-btn { padding: 0 9px; font-size: 0.875rem; }
   .menu-toggle .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 }
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .site-nav { border-top: 1px solid var(--line); }
   .site-nav ul { justify-content: center; }
   .js .menu-toggle { display: none; }
@@ -252,7 +277,7 @@ main { display: block; }
 @media (max-width: 1199px) {
   /* 手機與平板（含 1100–1199px 的小筆電）：照片完整呈現，文字放在照片下方的實色底上，
      避免文字欄在較窄畫面中覆蓋到照片主體 */
-  .hero-media .photo { height: clamp(300px, 62vh, 470px); aspect-ratio: auto; }
+  .hero-media .photo { height: clamp(220px, 34vh, 360px); aspect-ratio: auto; }
   .hero-media .photo img { object-position: 70% 50%; }
   .hero-media::after { background: linear-gradient(180deg, rgba(250, 246, 239, 0) 72%, rgba(250, 246, 239, 0.9) 100%); }
   .hero .photo-ph { place-items: center; padding: 0; }
@@ -552,19 +577,17 @@ main { display: block; }
 .tips strong { display: block; color: var(--ink); margin-bottom: 4px; }
 
 /* ---------- 頁尾 ---------- */
-.site-footer { margin-top: 0; background: #E9DFD0; padding-block: 56px 32px; font-size: 0.925rem; color: var(--ink); }
-main > .section:last-child { padding-bottom: clamp(56px, 8vw, 104px); }
-.footer-grid { display: grid; gap: 28px; }
-@media (min-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; } }
-.footer-name { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-.footer-name .brand-sub { white-space: normal; }
-.site-footer h2 { font-size: 0.95rem; font-family: var(--sans); letter-spacing: 0.1em; margin-bottom: 10px; }
-.site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.site-footer { margin-top: 0; background: #E9DFD0; padding-block: 36px 28px; font-size: 0.9rem; color: var(--ink); }
+main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
+.footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 32px; }
+.footer-name { display: flex; align-items: center; gap: 10px; margin: 0; }
+.footer-slogan { margin: 0; color: var(--muted); font-size: 0.875rem; max-width: 34em; }
+.footer-links ul { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 4px; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 999px; color: var(--ink); text-decoration: none; background: rgba(255, 253, 249, 0.55); }
+.footer-links a:hover { color: var(--terracotta-dark); background: var(--paper); }
 .site-footer a { color: var(--ink); }
-.site-footer a:hover { color: var(--terracotta-dark); }
-.footer-legal { margin-top: 32px; padding-top: 20px; border-top: 1px solid #D6C9B6; font-size: 0.85rem; color: var(--ink); }
-.footer-legal p { margin-bottom: 0.5em; }
+.footer-legal { margin-top: 18px; padding-top: 14px; border-top: 1px solid #D6C9B6; font-size: 0.8125rem; color: var(--ink); }
+.footer-legal p { margin-bottom: 0.4em; }
 
 /* ---------- 404 ---------- */
 .notfound { text-align: center; padding-block: 80px; }
@@ -576,3 +599,54 @@ main > .section:last-child { padding-bottom: clamp(56px, 8vw, 104px); }
   body { background: #fff; }
   .hero-inner { position: static; }
 }
+
+/* ---------- V3.1：首頁精簡、六大主題手機版、快捷入口、目錄頁 ---------- */
+@media (max-width: 699px) {
+  /* 六大主題：兩欄、較矮的卡片，標題清楚、整張卡皆可點擊 */
+  .cats { padding-top: 28px; padding-bottom: 24px; }
+  .cats .section-head { margin-bottom: 14px; }
+  .cats .section-head h2::after { margin-top: 8px; }
+  .cat-row { gap: 10px; }
+  .cat-card .photo { aspect-ratio: 16 / 10; }
+  .cat-body { padding: 8px 10px 10px; gap: 0; }
+  .cat-title { font-size: 1rem; gap: 6px; }
+  .cat-icon { width: 22px; height: 22px; }
+  .cat-tag { font-size: 0.75rem; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hero-inner { padding-bottom: 8px; }
+  .hero-kicker { margin-bottom: 8px; }
+  .hero h1 { margin-bottom: 0.35em; }
+}
+
+/* 首頁底部四個快捷入口（手機 2×2） */
+.quick-section { padding-block: 8px clamp(40px, 6vw, 72px); }
+.cats + .quick-section { padding-top: 0; }
+.quick-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 900px) { .quick-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+.quick {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  height: 100%; min-height: 76px; padding: 10px 8px; border-radius: 14px; text-align: center;
+  background: var(--paper); border: 1px solid var(--line); color: var(--ink); text-decoration: none;
+}
+.quick:hover { border-color: var(--terracotta); color: var(--ink); }
+.quick-zh { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.1em; line-height: 1.3; }
+.quick-en { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; color: var(--amber); }
+/* 有急事：低飽和橄欖綠底＋手電筒，與其他三個入口區隔；不使用紅色或閃爍 */
+.quick-urgent { flex-direction: row; gap: 10px; background: #55684F; border-color: #55684F; color: #fff; }
+.quick-urgent:hover { background: #4A5C45; border-color: #4A5C45; color: #fff; }
+.quick-urgent .quick-zh { font-size: 1.15rem; }
+.quick-icon { width: 32px; height: 32px; color: #F3E3C3; flex: none; }
+
+/* 目錄頁 */
+.dir-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+.dir-title-en { font-family: var(--sans); font-size: 0.42em; font-weight: 600; letter-spacing: 0.22em; color: var(--amber); }
+.support-entry {
+  display: flex; align-items: center; gap: 14px; margin-top: 22px; max-width: 640px;
+  padding: 14px 18px; border-radius: 14px; background: var(--sage-soft); border: 1px solid #DCE3D4;
+  color: var(--ink); text-decoration: none;
+}
+.support-entry:hover { border-color: var(--sage); color: var(--ink); }
+.support-entry-icon { width: 30px; height: 30px; color: var(--sage); flex: none; }
+.support-entry-text { flex: 1; display: flex; flex-direction: column; }
+.support-entry-text strong { font-size: 1.05rem; color: #4E6148; }
+.support-entry-text small { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+.about-hub { margin-top: 4px; }

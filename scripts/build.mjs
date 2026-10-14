@@ -302,6 +302,10 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
   const navItems = site.nav
     .map((n) => `<li><a href="${base}${n.href}"${n.id === active ? ' aria-current="page"' : ''}>${esc(n.label)}</a></li>`)
     .join('');
+  // 頁首兩個主要目錄：中文＋英文一起呈現
+  const dirLinks = site.directories
+    .map((d) => `<a class="dir-link" href="${base}${d.href}"${d.id === active ? ' aria-current="page"' : ''}><span class="dir-zh">${esc(d.zh)}</span><span class="dir-en">${esc(d.en)}</span></a>`)
+    .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
   const previewBar = IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
@@ -334,6 +338,7 @@ ${previewBar}${noticeBar}
 <header class="site-header">
   <div class="wrap header-top">
     <a class="brand" href="${base}index.html" aria-label="${esc(brandFull)}：回到首頁">${brandLockup()}</a>
+    <nav class="dir-nav" aria-label="主要目錄">${dirLinks}</nav>
     <div class="header-actions">
       <a class="hdr-btn hide-sm" href="${base}search.html">${icon('search')}<span>搜尋</span></a>
       <a class="hdr-btn hide-sm" href="${base}support.html"${active === 'support' ? ' aria-current="page"' : ''}>${icon('leaf')}<span>支援資源</span></a>
@@ -342,7 +347,7 @@ ${previewBar}${noticeBar}
     </div>
   </div>
   <nav id="site-nav" class="site-nav" aria-label="主要導覽">
-    <div class="wrap"><ul>${navItems}<li class="nav-extra nav-sep" aria-hidden="true"></li><li class="nav-extra"><a href="${base}search.html">搜尋全站</a></li><li class="nav-extra"><a href="${base}support.html">支援資源與求助專線</a></li></ul></div>
+    <div class="wrap"><ul><li class="nav-extra nav-support"><a href="${base}support.html"${active === 'support' ? ' aria-current="page"' : ''}>${icon('leaf')}<span>支援資源</span></a></li>${navItems}<li class="nav-extra nav-sep" aria-hidden="true"></li><li class="nav-extra"><a href="${base}search.html">搜尋全站</a></li></ul></div>
   </nav>
 </header>
 <main id="main" tabindex="-1">
@@ -350,39 +355,24 @@ ${body}
 </main>
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <p class="footer-name">${brandLockup()}</p>
-        <p>${esc(site.slogan)}</p>
-        <p>免費、非營利。本站整理公開資訊與官方入口，不承接個案，也不提供法律、醫療或心理專業服務。</p>
-      </div>
-      <div>
-        <h2>生活主題</h2>
-        <ul>${categories.map((c) => `<li><a href="${base}${c.slug}">${esc(c.title)}</a></li>`).join('')}</ul>
-      </div>
-      <div>
-        <h2>關於本站</h2>
-        <ul>
-          <li><a href="${base}about.html">關於由己</a></li>
-          <li><a href="${base}verification.html">查核與更新說明</a></li>
-          <li><a href="${base}disclaimer.html">網站免責聲明</a></li>
-          <li><a href="${base}privacy.html">隱私宣告</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>快速前往</h2>
-        <ul>
-          <li><a href="${base}search.html">搜尋全站</a></li>
-          <li><a href="${base}city.html">依縣市查詢資源</a></li>
-          <li><a href="${base}support.html">支援資源與求助專線</a></li>
-        </ul>
-      </div>
+    <div class="footer-top">
+      <p class="footer-name">${brandLockup()}</p>
+      <p class="footer-slogan">${esc(site.slogan)}</p>
     </div>
+    <nav class="footer-links" aria-label="頁尾連結">
+      <ul>
+        <li><a href="${base}about.html">關於由己</a></li>
+        <li><a href="${base}disclaimer.html">網站免責聲明</a></li>
+        <li><a href="${base}privacy.html">隱私宣告</a></li>
+        <li><a href="${base}verification.html">查核與更新說明</a></li>
+        <li><a href="${base}support.html">支援資源</a></li>
+        <li><a href="${base}search.html">搜尋全站</a></li>
+      </ul>
+    </nav>
     <div class="footer-legal">
-      <p>提供外部機構連結，不代表本站與該機構有正式合作、授權或從屬關係。實際辦理請以主管機關或服務單位最新公告為準。</p>
+      <p>免費、非營利。本站整理公開資訊與官方入口，不承接個案，也不提供法律、醫療或心理專業服務。提供外部機構連結，不代表本站與該機構有正式合作、授權或從屬關係；實際辦理請以主管機關或服務單位最新公告為準。</p>
       <p>本站不具報案或緊急救援功能。如有立即危險，請撥打 <a href="tel:110">110</a> 或 <a href="tel:119">119</a>。</p>
-      <p>本站照片風格圖片皆為 AI 生成的示意圖像，非實地拍攝，也不代表與任何機構合作。</p>
-      <p>本站未使用訪客追蹤或分析工具。網站最後建置：${today}${IS_PREVIEW ? '（預覽版本）' : ''}</p>
+      <p>本站照片風格圖片皆為 AI 生成的示意圖像，非實地拍攝，也不代表與任何機構合作。本站未使用訪客追蹤或分析工具。網站最後建置：${today}${IS_PREVIEW ? '（預覽版本）' : ''}</p>
     </div>
   </div>
 </footer>
@@ -425,16 +415,21 @@ function countyChips(asLinks) {
   ).join('\n');
 }
 
-// ---------- 首頁 ----------
-{
-  const featuredIds = ['taiwanjobs', 'sfaa', 'laf', 'mohw-domhaoh'];
-  const featured = featuredIds.map((id) => resources.find((r) => r.id === id)).filter(Boolean);
-  const featuredArticles = articles.filter((a) => a.featured === true).slice(0, 3);
-  const needs = categories
-    .flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic}` })))
-    .slice(0, 8);
-  const learning = catById.learning;
+// ---------- 首頁（入口型：主視覺、六大主題、四個快捷入口） ----------
+const FEATURED_RESOURCE_IDS = ['taiwanjobs', 'sfaa', 'laf', 'mohw-domhaoh'];
+const dirById = Object.fromEntries(site.directories.map((d) => [d.id, d]));
 
+/** 兩個目錄頁共用：放在頁面最前面的「支援資源」入口（連往同一個既有支援資源頁） */
+function supportEntry(prefix = '') {
+  return `<a class="support-entry" href="${prefix}support.html">${icon('leaf', 'support-entry-icon')}<span class="support-entry-text"><strong>支援資源</strong><small>需要協助時，這裡有可直接撥打的正式專線與相關機構</small></span><span class="need-arrow" aria-hidden="true">→</span></a>`;
+}
+
+{
+  const quick = [
+    `<li><a class="quick quick-urgent" href="tel:110">${icon('flashlight', 'quick-icon icon-flashlight')}<span class="quick-zh">有急事</span><span class="visually-hidden">（撥打 110）</span></a></li>`,
+    ...['quiet-power', 'toward-light'].map((id) => `<li><a class="quick" href="${dirById[id].href}"><span class="quick-zh">${esc(dirById[id].zh)}</span><span class="quick-en">${esc(dirById[id].en)}</span></a></li>`),
+    `<li><a class="quick" href="about.html"><span class="quick-zh">關於由己</span><span class="quick-en">ABOUT</span></a></li>`,
+  ];
   const body = `
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-media">
@@ -469,18 +464,40 @@ function countyChips(asLinks) {
   </div>
 </section>
 
+<section class="section quick-section" aria-labelledby="quick-title">
+  <div class="wrap">
+    <h2 id="quick-title" class="visually-hidden">快捷入口</h2>
+    <ul class="quick-grid">${quick.join('')}</ul>
+  </div>
+</section>`;
+  pages.push({ file: 'index.html', html: layout({ title: '', active: 'home', body, bodyClass: 'home', scripts: ['assets/data/search-index.js', 'assets/js/search.js'] }) });
+  addIndex('頁面', '首頁', site.description, 'index.html', `${site.name} ${site.englishName} 首頁`);
+}
+
+function dirHead(d) {
+  return `<section class="page-head dir-head" aria-labelledby="page-title">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">${esc(d.zh)}</li></ol></nav>
+    <h1 id="page-title" class="dir-title"><span class="dir-title-zh">${esc(d.zh)}</span><span class="dir-title-en">${esc(d.en)}</span></h1>
+    <p class="lead">${esc(d.lead)}</p>
+    ${supportEntry()}
+  </div>
+</section>`;
+}
+
+// ---------- 讀利專欄｜QUIET POWER（文章、常見需求、各主題閱讀方向） ----------
+{
+  const d = dirById['quiet-power'];
+  const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
+  const body = `
+${dirHead(d)}
 <section class="section" aria-labelledby="articles-title">
   <div class="wrap">
-    ${sectionHead('讀力 · Reading', 'articles-title', '編輯精選')}
-    ${
-      featuredArticles.length
-        ? `<div class="story-grid">${featuredArticles.map((a) => articleCard(a, '')).join('\n')}</div>`
-        : emptyBox('導讀文章正在撰寫與查核中，完成後會陸續上架。')
-    }
+    ${sectionHead('Selected Reading', 'articles-title', '編輯精選')}
+    ${articles.length ? `<div class="story-grid">${articles.map((a) => articleCard(a, '')).join('\n')}</div>` : emptyBox('導讀文章正在撰寫與查核中，完成後會陸續上架。')}
     <p class="section-note">各主題的制度導讀文章，將於資料查核完成後陸續上架。</p>
   </div>
 </section>
-
 <section class="section needs" aria-labelledby="needs-title">
   <div class="wrap needs-grid">
     <div class="needs-intro">
@@ -491,7 +508,39 @@ function countyChips(asLinks) {
     ${needList(needs)}
   </div>
 </section>
+<section class="section" aria-labelledby="bytopic-title">
+  <div class="wrap">
+    ${sectionHead('By Topic', 'bytopic-title', '依主題閱讀')}
+    <ul class="cat-list">
+      ${categories.map((c) => `<li><a href="${c.slug}">${icon(c.icon, 'cat-icon')}<span><strong>${esc(c.title)}</strong><small>${esc(c.tagline)}</small></span></a></li>`).join('\n')}
+    </ul>
+  </div>
+</section>`;
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: 'dir-page' }) });
+  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
+}
 
+// ---------- 向光｜TOWARD THE LIGHT（學習、活動、生活探索與官方資源） ----------
+{
+  const d = dirById['toward-light'];
+  const learning = catById.learning;
+  const featured = FEATURED_RESOURCE_IDS.map((id) => resources.find((r) => r.id === id)).filter(Boolean);
+  const body = `
+${dirHead(d)}
+<section class="section feature reverse" aria-labelledby="learn-title">
+  <div class="wrap feature-grid">
+    <div class="feature-media">${photo('home-learning-band', 'band', { sizes: '(min-width: 900px) 50vw, 100vw' })}</div>
+    <div class="feature-copy">
+      <span class="kicker">Learning</span>
+      <h2 id="learn-title">課程與學習活動</h2>
+      <p>${esc(learning.intro)}</p>
+      <ul class="link-list">
+        ${learning.topics.map((t) => `<li><a href="learning.html#${t.id}">${esc(t.title)}</a></li>`).join('\n')}
+      </ul>
+      <div class="btn-row"><a class="btn btn-ghost" href="learning.html">前往學習與活動</a><a class="btn btn-ghost" href="learning.html#events-title">查看近期活動</a></div>
+    </div>
+  </div>
+</section>
 <section class="section feature" aria-labelledby="city-title">
   <div class="wrap feature-grid">
     <div class="feature-media">${photo('home-city-band', 'band', { sizes: '(min-width: 900px) 50vw, 100vw' })}</div>
@@ -504,47 +553,14 @@ function countyChips(asLinks) {
     </div>
   </div>
 </section>
-
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
-    ${sectionHead('Official Resources', 'res-title', '官方資源推薦', '點擊後會直接前往原始機構網站。')}
+    ${sectionHead('Official Resources', 'res-title', '相關官方資源', '點擊後會直接前往原始機構網站。各主題的完整資源，請見六大生活主題頁。')}
     ${featured.length ? `<div class="res-grid">${featured.map((r) => resourceCard(r, { anchor: false })).join('\n')}</div>` : emptyBox('官方資源正在查核中，完成後會陸續公開。')}
   </div>
-</section>
-
-<section class="section feature reverse" aria-labelledby="learn-title">
-  <div class="wrap feature-grid">
-    <div class="feature-media">${photo('home-learning-band', 'band', { sizes: '(min-width: 900px) 50vw, 100vw' })}</div>
-    <div class="feature-copy">
-      <span class="kicker">向光 · Learning</span>
-      <h2 id="learn-title">課程與學習活動</h2>
-      <p>${esc(learning.intro)}</p>
-      <ul class="link-list">
-        ${learning.topics
-          .slice(0, 6)
-          .map((t) => `<li><a href="learning.html#${t.id}">${esc(t.title)}</a></li>`)
-          .join('\n')}
-      </ul>
-      <a class="btn btn-ghost" href="learning.html">看看學習與活動</a>
-    </div>
-  </div>
-</section>
-
-<section class="section about-strip" aria-labelledby="about-title">
-  <div class="wrap about-grid">
-    <div>
-      <span class="kicker">About</span>
-      <h2 id="about-title">關於由己</h2>
-    </div>
-    <div class="about-copy">
-      <p class="about-lead">一個免費、非營利的資訊入口。我們整理已經存在的公共資訊、官方說明與專業機構，讓你更容易找到需要的資源。</p>
-      <p>本站不設會員與留言，不接收個案資料，也不提供法律、醫療或心理專業服務；專業服務由各正式機構提供。需要協助時，可以前往「<a href="support.html">支援資源</a>」查看可直接撥打的正式專線。</p>
-      <div class="btn-row"><a class="btn btn-ghost" href="about.html">認識本站</a><a class="btn btn-ghost" href="verification.html">查核與更新說明</a></div>
-    </div>
-  </div>
 </section>`;
-  pages.push({ file: 'index.html', html: layout({ title: '', active: 'home', body, bodyClass: 'home', scripts: ['assets/data/search-index.js', 'assets/js/search.js'] }) });
-  addIndex('頁面', '首頁', site.description, 'index.html', `${site.name} ${site.englishName} 首頁`);
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: 'dir-page' }) });
+  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '向光 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
 }
 
 // ---------- 分類頁共用 ----------
@@ -788,6 +804,19 @@ const linkResolver = (prefix) => (href) => {
   return { href: prefix + href.replace(/^\//, ''), external: false };
 };
 
+/** 「關於由己」整合入口：沿用既有的免責聲明、隱私宣告、查核與更新說明頁，不另行改寫 */
+function aboutHub() {
+  const items = ['disclaimer', 'privacy', 'verification'].map((n) => pagesAll.find((x) => x.name === n)).filter(Boolean);
+  return `<section class="section section-tight" aria-labelledby="hub-title">
+  <div class="wrap">
+    <h2 id="hub-title" class="visually-hidden">網站說明與公告</h2>
+    <ul class="cat-list about-hub">
+      ${items.map((x) => `<li><a href="${x.name}.html">${icon('page', 'cat-icon')}<span><strong>${esc(x.title)}</strong><small>${esc(x.description || '')}</small></span></a></li>`).join('\n')}
+    </ul>
+  </div>
+</section>`;
+}
+
 for (const p of pagesAll) {
   const body = `
 <section class="page-head" aria-labelledby="page-title">
@@ -799,8 +828,9 @@ for (const p of pagesAll) {
     <p class="article-meta"><span>最後更新：${esc(p.updated)}</span></p>
   </div>
 </section>
+${p.name === 'about' ? aboutHub() : ''}
 <section class="section section-tight"><div class="wrap"><div class="prose">${renderMarkdown(p.body, { link: linkResolver('') })}</div></div></section>`;
-  pages.push({ file: `${p.name}.html`, html: layout({ title: p.title, description: p.description, body }) });
+  pages.push({ file: `${p.name}.html`, html: layout({ title: p.title, description: p.description, body, active: p.name === 'about' ? 'about' : '' }) });
   addIndex('關於本站', p.title, p.description || '', `${p.name}.html`);
 }
 

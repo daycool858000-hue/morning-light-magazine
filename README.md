@@ -67,6 +67,8 @@ docs/                   維護、部署、備份、授權與驗收文件
 - [第一階段視覺重製驗收報告（視覺 V2）](docs/ACCEPTANCE-VISUAL-V2.md)
 - [品牌更名與九張圖片整合驗收報告](docs/ACCEPTANCE-VISUAL-V2-BRAND.md)
 - [九張圖片查核紀錄](docs/PHOTO-REVIEW.md)
+- [候選圖片測試與手機操作展示](docs/ACCEPTANCE-CANDIDATE-MOBILE.md)
+- [V3.1 首頁與導覽架構調整驗收報告](docs/ACCEPTANCE-V3.1.md)
 - [品牌識別](docs/BRAND.md)
 - [內容更新操作教學](docs/CONTENT-GUIDE.md)
 - [GitHub Pages 部署、暫停與關站](docs/DEPLOYMENT.md)
