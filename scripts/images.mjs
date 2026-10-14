@@ -39,7 +39,8 @@ for (const item of items) {
   for (const [cropName, crop] of Object.entries(item.crops)) {
     const [aw, ah] = crop.aspect.split(':').map(Number);
     const ratio = aw / ah;
-    let cw = meta.width;
+    // maxWidth：限制裁切寬度（px），用來避開畫面邊緣不適合的內容；會降低原生解析度
+    let cw = Math.min(meta.width, crop.maxWidth || Infinity);
     let ch = Math.round(cw / ratio);
     if (ch > meta.height) {
       ch = meta.height;

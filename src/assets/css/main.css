@@ -306,7 +306,8 @@ main { display: block; }
   background: var(--paper); border: 1px solid var(--stone); border-radius: 999px;
   box-shadow: var(--shadow);
 }
-.search-form:focus-within { border-color: var(--terracotta); }
+/* 輸入框本身不畫外框，改由整個搜尋框顯示與全站一致的 3px 焦點外框 */
+.search-form:focus-within { border-color: var(--terracotta); outline: 3px solid var(--focus); outline-offset: 3px; }
 .search-icon { width: 22px; height: 22px; color: var(--muted); }
 .search-form input {
   flex: 1; min-width: 0; width: 100%; height: 46px; border: 0; background: transparent;

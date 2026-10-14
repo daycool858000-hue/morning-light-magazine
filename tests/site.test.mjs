@@ -458,7 +458,35 @@ try {
   await nj.goto(`${ORIGIN}${BASE}city.html`);
   const allListed = await nj.locator('[data-res]').count();
   check('停用 JavaScript 時：導覽可見、切換畫面為一般連結、城市頁列出全部資源', navVisible && switchHref === site.switchScreenUrl && allListed > 0);
+  const noJsLocalEmpty = (await nj.isVisible('#local-empty')) ? (await nj.textContent('#local-empty')).trim() : '';
+  check('停用 JavaScript 時：城市頁「在地服務」區塊顯示說明文字，不是空白標題', noJsLocalEmpty.length > 10, noJsLocalEmpty || '（空白）');
   await noJs.close();
+
+  // ---------- 4-1. 無障礙基本檢查：語言、標題、替代文字、表單標籤、跳到主要內容、鍵盤焦點 ----------
+  const a11yProblems = [];
+  for (const p of [...pages, '404.html']) {
+    const html = await readFile(path.join(DIST, p), 'utf8');
+    if (!html.includes(`<html lang="${site.lang}"`)) a11yProblems.push(`${p} 缺少 lang`);
+    const h1 = (html.match(/<h1[\s>]/g) || []).length;
+    if (h1 !== 1) a11yProblems.push(`${p} 有 ${h1} 個 h1`);
+    for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) if (!/\balt="/.test(tag)) a11yProblems.push(`${p} 圖片缺少 alt：${tag.slice(0, 60)}`);
+    for (const [tag, id] of html.matchAll(/<(?:select|input)\b[^>]*\bid="([^"]+)"[^>]*>/g)) {
+      if (!html.includes(`for="${id}"`) && !/aria-label(ledby)?="/.test(tag)) a11yProblems.push(`${p} 表單欄位 #${id} 沒有標籤`);
+    }
+    if (!/<a class="skip-link" href="#main">/.test(html) || !html.includes('<main id="main"')) a11yProblems.push(`${p} 缺少「跳到主要內容」或 main`);
+  }
+  check('無障礙基本檢查：每頁有 lang、恰好一個 h1、圖片皆有 alt、表單欄位皆有標籤、有「跳到主要內容」', a11yProblems.length === 0, a11yProblems.slice(0, 6).join('；'));
+  const kb = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const kp = await kb.newPage();
+  await kp.goto(`${ORIGIN}${BASE}index.html`);
+  await kp.keyboard.press('Tab');
+  const firstFocus = await kp.evaluate(() => ({ cls: document.activeElement.className, top: document.activeElement.getBoundingClientRect().top }));
+  await kp.keyboard.press('Enter');
+  const afterSkip = await kp.evaluate(() => document.activeElement.id);
+  await kp.keyboard.press('Tab');
+  const ring = await kp.evaluate(() => { const el = document.activeElement; const s = getComputedStyle(el.closest('.search-form') || el); return { tag: el.tagName, outline: s.outlineStyle, width: s.outlineWidth }; });
+  await kb.close();
+  check('鍵盤操作：第一個 Tab 是可見的「跳到主要內容」，按 Enter 後焦點移到主要內容，之後的焦點有可見外框', firstFocus.cls === 'skip-link' && firstFocus.top >= 0 && afterSkip === 'main' && ring.outline !== 'none' && parseFloat(ring.width) >= 2, `第一個焦點 ${firstFocus.cls}，跳轉後 #${afterSkip}，下一個 ${ring.tag} 外框 ${ring.outline} ${ring.width}`);
 
   // ---------- 5a. 首頁主視覺文字與照片的實際對比 ----------
   {

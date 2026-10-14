@@ -151,12 +151,11 @@
         480,
         800,
         1200,
-        1600,
-        1672
+        1320
       ],
       "fallback": 1200,
       "ratio": 2.3333333333333335,
-      "nativeWidth": 1672
+      "nativeWidth": 1320
     }
   },
   "cat-learning": {

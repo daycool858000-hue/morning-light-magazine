@@ -532,7 +532,7 @@ ${dirHead(d)}
     <div class="feature-copy">
       <span class="kicker">City Index</span>
       <h2 id="city-title">城市資源入口</h2>
-      <p>選擇你所在的縣市，查詢婦女、家庭、就業與心理衛生等正式服務。不使用定位，也不保存你的選擇。</p>
+      <p>選擇你所在的縣市，查詢可使用的正式服務；各縣市在地據點陸續整理中。不使用定位，也不保存你的選擇。</p>
       <div class="county-areas">${countyChips(true)}</div>
       <a class="btn" href="city.html">開啟城市資源索引</a>
     </div>
@@ -655,7 +655,7 @@ ${categoryHero(c)}
 
     <div class="results-block">
       <h3 id="local-title">在地服務</h3>
-      <div class="empty" id="local-empty" hidden><p></p></div>
+      <div class="empty" id="local-empty"><p>各縣市的在地服務據點正在整理與查核中，目前請先參考下方的全國性資源。</p></div>
       <div class="res-grid" id="local-results"></div>
     </div>
     <div class="results-block">
