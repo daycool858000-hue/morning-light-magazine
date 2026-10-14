@@ -1,5 +1,5 @@
 {
-  "_說明": "機構與官方資源名錄。status 只能是：已確認、待確認、需要修正、已撤下。checkedAt 必須是人工實際查核的日期（YYYY-MM-DD），尚未查核請保持 null，不可填入建檔日期。正式版（production）只會公開 status 為「已確認」且 published 為 true 的資料。",
+  "_說明": "機構與官方資源名錄。status 只能是：已確認、待確認、需要修正、已撤下。checkedAt 必須是人工實際查核的日期（YYYY-MM-DD），尚未查核請保持 null，不可填入建檔日期。正式版（production）只會公開 status 為「已確認」且 published 為 true 的資料。review 欄位是 AI 來源查核紀錄（ChatGPT／Claude），只代表「官方入口與本站簡介有依據」，不等於使用者的人工查核，也不代表申辦條件、費用或方案期限已確認；status 改為「已確認」與填寫 checkedAt 須由使用者核准。",
   "serviceTypes": [
     "婦女福利",
     "育兒與家庭",
@@ -27,6 +27,7 @@
       "url": "https://www.npa.gov.tw/",
       "phones": [],
       "sources": [{ "title": "內政部警政署官方網站", "url": "https://www.npa.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.npa.gov.tw/", "evidence": "警政署全球資訊網首頁，有「110報案」等便民服務與公告入口。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -43,6 +44,7 @@
       "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
       "phones": [],
       "sources": [{ "title": "內政部警政署「110聽語障人士報案專線」", "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2", "evidence": "警政署「110聽語障人士報案專線」頁（更新日期 115-07-20）列出各縣市警察局手機簡訊與傳真報案號碼，並註明只提供文字簡訊（SMS）。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -59,6 +61,7 @@
       "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
       "phones": [{ "label": "113 保護專線", "number": "113", "hours": "24 小時全年無休、免付費，依保護服務司官方介紹頁" }],
       "sources": [{ "title": "衛生福利部保護服務司 113 保護專線", "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html", "evidence": "保護服務司「113保護專線介紹」頁：24 小時全年無休、免付費，受理家庭暴力、性侵害、性騷擾及兒少、老人、身心障礙者保護的求助與通報。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -75,6 +78,7 @@
       "url": "https://www.mohw.gov.tw/",
       "phones": [],
       "sources": [{ "title": "衛生福利部官方網站", "url": "https://www.mohw.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "直接讀取受阻，保持待確認", "source": "https://www.mohw.gov.tw/", "evidence": "ChatGPT 本輪直接讀取衛福部首頁失敗（Claude 2026-10-14 由 GitHub 機房讀取曾回應 200）；機關存在可由衛福部其他官方頁面佐證。" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -91,6 +95,7 @@
       "url": "https://siarc.mohw.gov.tw/",
       "phones": [],
       "sources": [{ "title": "性影像處理中心官方網站", "url": "https://siarc.mohw.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://siarc.mohw.gov.tw/", "evidence": "衛生福利部性影像處理中心首頁：申訴諮詢、移除下架受理與線上諮詢入口。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -107,6 +112,7 @@
       "url": "https://www.laf.org.tw/",
       "phones": [],
       "sources": [{ "title": "法律扶助基金會官方網站", "url": "https://www.laf.org.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.laf.org.tw/", "evidence": "法律扶助基金會首頁：法律諮詢、申請法扶律師、扶助資格說明與分會資訊入口。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -123,6 +129,7 @@
       "url": "https://www.mol.gov.tw/",
       "phones": [],
       "sources": [{ "title": "勞動部官方網站", "url": "https://www.mol.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.mol.gov.tw/", "evidence": "勞動部全球資訊網：勞動法令、勞動關係、勞動條件與就業平等等業務專區。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -139,6 +146,7 @@
       "url": "https://www.taiwanjobs.gov.tw/",
       "phones": [],
       "sources": [{ "title": "台灣就業通官方網站", "url": "https://www.taiwanjobs.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.taiwanjobs.gov.tw/", "evidence": "台灣就業通首頁（勞動部勞動力發展署）：找工作、找課程、微型創業等功能。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -155,6 +163,7 @@
       "url": "https://dep.mohw.gov.tw/DOMHAOH/",
       "phones": [{ "label": "1925 安心專線", "number": "1925", "hours": "24 小時、免付費，依心理健康司官方頁" }],
       "sources": [{ "title": "衛生福利部心理健康司", "url": "https://dep.mohw.gov.tw/DOMHAOH/" }, { "title": "心理健康司「1925安心專線（依舊愛我）」", "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://dep.mohw.gov.tw/DOMHAOH/", "evidence": "心理健康司首頁：1925 安心專線、青壯世代心理健康支持方案、各縣市社區心理諮商服務一覽表等入口。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -171,6 +180,7 @@
       "url": "https://sps.mohw.gov.tw/mhs",
       "phones": [],
       "sources": [{ "title": "心理健康支持方案合作機構查詢", "url": "https://sps.mohw.gov.tw/mhs" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "直接讀取受阻，保持待確認", "source": "https://sps.mohw.gov.tw/mhs", "evidence": "方案查詢網址直接讀取失敗（Claude 2026-10-14 三次連線逾時）；心理健康司「青壯世代心理健康支持方案」官方頁面指向此入口。適用年度、資格與期限未確認，不得猜測。" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -187,6 +197,7 @@
       "url": "https://www.1980.org.tw/",
       "phones": [{ "label": "1980 張老師專線", "number": "1980", "hours": "非 24 小時；官網公告為週一至週六 9:00–12:00、14:00–17:00、18:00–21:30，週日 9:00–12:00、14:00–17:00，各地區依人力調整" }],
       "sources": [{ "title": "張老師基金會官方網站", "url": "https://www.1980.org.tw/" }, { "title": "張老師基金會「張老師服務」", "url": "https://www.1980.org.tw/service_item_show.php?service_item_id=1" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.1980.org.tw/", "evidence": "張老師基金會「張老師服務」頁：1980 電話輔導、函件與網路輔導；服務時段非 24 小時。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -203,6 +214,7 @@
       "url": "https://www.sfaa.gov.tw/",
       "phones": [],
       "sources": [{ "title": "衛生福利部社會及家庭署", "url": "https://www.sfaa.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "直接讀取受阻，保持待確認", "source": "https://www.sfaa.gov.tw/", "evidence": "社會及家庭署首頁直接讀取失敗（Claude 2026-10-14 三次連線逾時）；機關存在可由衛福部所屬機關列表佐證。" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -219,6 +231,7 @@
       "url": "https://www.38.org.tw/",
       "phones": [],
       "sources": [{ "title": "現代婦女基金會官方網站", "url": "https://www.38.org.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.38.org.tw/", "evidence": "現代婦女基金會首頁：家庭關係／親密暴力、性侵害、性騷擾及跟蹤騷擾、離婚家庭家事等服務項目。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -235,6 +248,7 @@
       "url": "https://www.goh.org.tw/",
       "phones": [],
       "sources": [{ "title": "勵馨基金會官方網站", "url": "https://www.goh.org.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.goh.org.tw/", "evidence": "勵馨基金會首頁：親密關係暴力／家庭暴力被害人服務、性暴力防治、兒少與家事商談等服務項目。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -251,6 +265,7 @@
       "url": "https://www.awakening.org.tw/",
       "phones": [],
       "sources": [{ "title": "婦女新知基金會官方網站", "url": "https://www.awakening.org.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.awakening.org.tw/", "evidence": "婦女新知基金會首頁：機構介紹與婚姻家庭法律諮詢熱線等資訊；本站不收錄倡議內容。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -267,6 +282,7 @@
       "url": "https://www.moea.gov.tw/",
       "phones": [],
       "sources": [{ "title": "經濟部官方網站", "url": "https://www.moea.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.moea.gov.tw/", "evidence": "經濟部官方網站，ChatGPT 讀取成功（Claude 2026-10-14 由 GitHub 機房讀取時被 Cloudflare 阻擋，未讀到內容）。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -283,6 +299,7 @@
       "url": "https://www.gov.tw/",
       "phones": [],
       "sources": [{ "title": "我的E政府", "url": "https://www.gov.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.gov.tw/", "evidence": "我的E政府（數位發展部）首頁：依人生大事與日常生活查詢各機關服務與線上申辦項目。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -299,6 +316,7 @@
       "url": "https://www.edu.tw/",
       "phones": [],
       "sources": [{ "title": "教育部官方網站", "url": "https://www.edu.tw/" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "已取得原始來源，待使用者最終核准", "scope": "官方入口網址、機構名稱與本站現有簡介", "source": "https://www.edu.tw/", "evidence": "教育部全球資訊網：終身學習等業務資訊入口。", "notConfirmed": "申辦條件、費用、方案期限與服務時間細節" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
