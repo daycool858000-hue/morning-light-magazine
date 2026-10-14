@@ -2,13 +2,14 @@
 // 由己 SELF-AUTHORED 靜態網站產生器（無外部相依套件）
 // 用法：node scripts/build.mjs [--mode=preview|production] [--out=dist]
 //   preview    ：顯示所有未撤下的資料，並以標籤標示查核狀態；頁面加上「預覽版本」提示與 noindex。
-//   production ：只輸出查核狀態為「已確認」且設定為公開的資料。
+//   production ：機構／專線／圖片只輸出 AI 已核對且作者核准之特定版本；文章與活動維持原查核規則。
 
 import { readFile, writeFile, mkdir, rm, readdir, copyFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml as esc, parseFrontMatter, renderMarkdown } from './lib/markdown.mjs';
+import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from './lib/release.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -35,6 +36,8 @@ const counties = await readJson('content/counties.json');
 const resourceData = await readJson('content/resources.json');
 const hotlineData = await readJson('content/hotlines.json');
 const eventData = await readJson('content/events.json');
+const release = await readJson('content/release-approvals.json');
+const approvals = release.approvals;
 
 async function readMarkdownDir(dir) {
   const full = path.join(ROOT, dir);
@@ -106,9 +109,15 @@ if (errors.length) {
 const isPublic = (status, published = true) =>
   published !== false && status !== '已撤下' && (IS_PREVIEW || status === '已確認');
 
-const resources = resourceData.items.filter((r) => isPublic(r.status, r.published));
-const hotlines = hotlineData.items.filter((h) => isPublic(h.status));
-const channels = hotlineData.channels.filter((h) => isPublic(h.status));
+const resources = resourceData.items.filter((r) => IS_PREVIEW
+  ? isPublic(r.status, r.published)
+  : approvedRecord(r, approvals.resources, 'official-entry'));
+const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
+  ? isPublic(h.status)
+  : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
+const channels = hotlineData.channels.filter((h) => IS_PREVIEW
+  ? isPublic(h.status)
+  : approvedRecord(h, approvals.channels, 'official-channel'));
 const events = eventData.items
   .filter((e) => isPublic(e.status))
   .sort((a, b) => a.startDate.localeCompare(b.startDate));
@@ -157,6 +166,28 @@ const photoById = Object.fromEntries(photoData.items.map((p) => [p.id, p]));
 const PHOTO_DIR = path.resolve(ROOT, process.env.PHOTO_OUT || 'src/assets/photos');
 const generatedPath = path.join(PHOTO_DIR, 'generated.json');
 const generated = existsSync(generatedPath) ? JSON.parse(await readFile(generatedPath, 'utf8')) : {};
+// 核准的圖片同時鎖定原始 PNG、裁切設定與全部正式輸出檔的 Git blob 指紋。
+// 任何檔案被替換或重新處理，舊核准不自動延伸到新內容。
+const approvedPhotoIds = new Set();
+const approvedPhotoAssetNames = new Set();
+if (!IS_PREVIEW) {
+  for (const photoItem of photoData.items) {
+    if (!approvedPhotoMetadata(photoItem, approvals.photos, generated)) continue;
+    const entry = approvals.photos[photoItem.id];
+    const original = path.join(ROOT, 'content/photos/originals', `${photoItem.id}.png`);
+    if (!existsSync(original) || gitBlobSha(await readFile(original)) !== entry.originalGitBlobSha) continue;
+    const filenames = Object.keys(entry.assets);
+    let valid = filenames.length > 0;
+    for (const filename of filenames) {
+      if (!filename.startsWith(`${photoItem.id}-`) || !/\.(webp|jpg)$/.test(filename)) { valid = false; break; }
+      const asset = path.join(PHOTO_DIR, filename);
+      if (!existsSync(asset) || gitBlobSha(await readFile(asset)) !== entry.assets[filename]) { valid = false; break; }
+    }
+    if (!valid) continue;
+    approvedPhotoIds.add(photoItem.id);
+    for (const filename of filenames) approvedPhotoAssetNames.add(filename);
+  }
+}
 const photoErrors = [];
 for (const p of photoData.items) {
   if (!['待補', '待檢查', '已檢查'].includes(p.status)) photoErrors.push(`photos.json → ${p.id}：status 不正確`);
@@ -174,7 +205,7 @@ const ASPECT_CLASS = (aspect) => `ar-${aspect.replace(':', 'x')}`;
 function photoReady(id, crop) {
   const p = photoById[id];
   if (!p || !generated[id]?.[crop]) return false;
-  return IS_PREVIEW || p.status === '已檢查';
+  return IS_PREVIEW || approvedPhotoIds.has(id);
 }
 
 /**
@@ -212,10 +243,12 @@ function photo(id, crop, { prefix = '', sizes = '100vw', eager = false, cls = ''
 function resourceCard(r, { anchor = true } = {}) {
   const cat = catById[r.categories[0]];
   const iconName = cat ? cat.icon : 'support';
-  const phones = r.phones
+  // 基本入口核准僅含機構與服務入口資訊，不連帶核准個人適用資格及詳細通話時段。
+  const basicOnly = !IS_PREVIEW && r.review?.level === 'official-entry';
+  const phones = basicOnly ? '' : r.phones
     .map((p) => `<a class="tel" href="tel:${esc(p.number)}">撥打 ${esc(p.number)}</a>`)
     .join('');
-  const phoneInfo = r.phones.length
+  const phoneInfo = basicOnly ? '' : r.phones.length
     ? `<dt>電話</dt><dd>${r.phones.map((p) => `${esc(p.label)}（服務時間：${esc(p.hours)}）`).join('<br>')}</dd>`
     : '';
   return `<article class="res-card"${anchor ? ` id="res-${esc(r.id)}"` : ''} data-res data-regions="${esc(r.regions.join(' '))}" data-types="${esc(r.serviceTypes.join('|'))}">
@@ -227,9 +260,9 @@ function resourceCard(r, { anchor = true } = {}) {
     </div>
   </header>
   <p class="res-summary">${esc(r.summary)}</p>
-  <dl class="res-dl"><dt>對象</dt><dd>${esc(r.audience)}</dd><dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
+  <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
-    <div class="meta">${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span></div>
+    <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : `${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
     <div class="res-actions">${extLink(r.url, '前往官方網站')}${phones}</div>
   </footer>
 </article>`;
@@ -737,7 +770,7 @@ for (const c of categories) {
           <h3>${esc(h.number)} ${esc(h.title)}</h3>
           <p>${esc(h.purpose)}</p>
           <p class="hotline-meta">服務時間：${esc(h.hours)}${h.source ? `　來源：${extLink(h.source.url, esc(h.source.title))}` : ''}</p>
-          <div class="meta">${statusBadge(h.status)}</div>
+          <div class="meta">${IS_PREVIEW ? statusBadge(h.status) : `<span class="badge badge-ok">專線用途與時間已核對（AI 協助）</span><span>核對：${esc(h.review.date)}</span>`}</div>
         </div>
         <a class="call" href="tel:${esc(h.tel)}">撥打 ${esc(h.number)}</a>
       </article>`,
@@ -753,7 +786,7 @@ for (const c of categories) {
     ${sectionHead('Other Channels', 'ch-title', '不方便通話時')}
     ${channels.length ? `<div class="res-grid">${channels
       .map(
-        (ch) => `<article class="res-card"><header class="res-head">${icon('page', 'res-icon')}<div class="res-title"><h3>${esc(ch.title)}</h3></div></header><p class="res-summary">${esc(ch.text)}</p><footer class="res-foot"><div class="meta">${statusBadge(ch.status)}</div><div class="res-actions">${extLink(ch.url, esc(ch.linkLabel))}</div></footer></article>`,
+        (ch) => `<article class="res-card"><header class="res-head">${icon('page', 'res-icon')}<div class="res-title"><h3>${esc(ch.title)}</h3></div></header><p class="res-summary">${esc(ch.text)}</p><footer class="res-foot"><div class="meta">${IS_PREVIEW ? statusBadge(ch.status) : `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(ch.review.date)}</span>`}</div><div class="res-actions">${extLink(ch.url, esc(ch.linkLabel))}</div></footer></article>`,
       )
       .join('\n')}</div>` : emptyBox('簡訊與視訊報案資訊正在依官方來源查核中。')}
   </div>
@@ -919,10 +952,9 @@ await copyDir(path.join(ROOT, 'src/assets'), path.join(OUT, 'assets'));
 await copyDir(path.join(ROOT, 'src/icons'), path.join(OUT, 'assets/icons'));
 if (existsSync(PHOTO_DIR)) await copyDir(PHOTO_DIR, path.join(OUT, 'assets/photos'));
 if (!IS_PREVIEW) {
-  // 正式版只保留「已檢查」素材的圖檔
+  // 只保留已核准且每一個輸出檔均與核准版本完全一致的圖片。
   for (const file of existsSync(path.join(OUT, 'assets/photos')) ? await readdir(path.join(OUT, 'assets/photos')) : []) {
-    const id = Object.keys(photoById).find((k) => file.startsWith(`${k}-`));
-    if (!id || photoById[id].status !== '已檢查') await rm(path.join(OUT, 'assets/photos', file));
+    if (!approvedPhotoAssetNames.has(file)) await rm(path.join(OUT, 'assets/photos', file));
   }
 }
 await mkdir(path.join(OUT, 'assets/data'), { recursive: true });
