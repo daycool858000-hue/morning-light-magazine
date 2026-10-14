@@ -266,7 +266,7 @@ try {
       return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
     };
     const results5a = [];
-    for (const [w, h] of [[768, 1024], [1024, 768], [1100, 800], [1280, 900], [1440, 900], [1920, 1080], [390, 844]]) {
+    for (const [w, h] of [[768, 1024], [1024, 768], [1100, 800], [1200, 800], [1280, 900], [1440, 900], [1920, 1080], [390, 844]]) {
       const c = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
       const pg = await c.newPage();
       await pg.goto(`${ORIGIN}${BASE}index.html`, { waitUntil: 'load' });
@@ -280,8 +280,12 @@ try {
         return [...range.getClientRects()].filter((r) => r.width > 4).map((r) => ({ sel, x: r.x, y: r.y, w: r.width, h: r.height, color }));
       }));
       await pg.evaluate(() => document.querySelectorAll('.hero-copy > :not(.search-box)').forEach((el) => { el.style.visibility = 'hidden'; }));
-      const shot = await pg.screenshot();
+      // 截取整頁（文字在照片下方時可能超出第一屏），確保量測範圍一定有被截到
+      const shot = await pg.screenshot({ fullPage: true });
       const { data, info } = await sharpLib(shot).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+      for (const sel of ['.hero-kicker', '.hero h1', '.hero-lead']) {
+        if (!boxes.some((b) => b.sel === sel)) results5a.push({ where: `${w}px ${sel}（找不到文字範圍）`, ratio: NaN, large: false });
+      }
       for (const b of boxes) {
         const [tr, tg, tb] = b.color.match(/\d+/g).map(Number);
         const lt = lum(tr, tg, tb);
@@ -293,13 +297,15 @@ try {
           }
         }
         ls.sort((a, z) => a - z);
-        const darkest = ls[Math.floor(ls.length * 0.02)]; // 排除極少數雜訊後，最暗的背景
+        const inside = b.x >= 0 && b.y >= 0 && b.x + b.w <= info.width && b.y + b.h <= info.height;
+        const darkest = inside && ls.length ? ls[Math.floor(ls.length * 0.02)] : NaN; // 排除極少數雜訊後，最暗的背景；量不到即視為失敗
         results5a.push({ where: `${w}px ${b.sel}（右緣 ${Math.round(b.x + b.w)}px）`, ratio: (darkest + 0.05) / (lt + 0.05), large: b.sel === '.hero h1' });
       }
       await c.close();
     }
-    const low5a = results5a.filter((r) => r.ratio < (r.large ? 3 : 4.5));
-    const worst = results5a.reduce((m, r) => (r.ratio < m.ratio ? r : m));
+    // 無法量測（NaN）一律視為不通過，避免空白量測被誤判為通過
+    const low5a = results5a.filter((r) => !Number.isFinite(r.ratio) || r.ratio < (r.large ? 3 : 4.5));
+    const worst = results5a.reduce((m, r) => (!Number.isFinite(r.ratio) || r.ratio < m.ratio ? r : m));
     check('首頁主視覺文字疊在照片上的實際對比（以最暗 2% 背景計算）：標題 ≥ 3:1、其他文字 ≥ 4.5:1', low5a.length === 0, `最低 ${worst.where} = ${worst.ratio.toFixed(2)}${low5a.length ? '；不足：' + low5a.map((r) => `${r.where} ${r.ratio.toFixed(2)}`).join('、') : ''}`);
   }
 

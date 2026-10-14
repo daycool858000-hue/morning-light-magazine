@@ -231,8 +231,14 @@ main { display: block; }
 .hero-media .photo { width: 100%; height: clamp(520px, 46vw, 660px); aspect-ratio: auto; }
 .hero-media::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  /* 讓左側文字在任何照片上都清楚可讀 */
-  background: linear-gradient(90deg, rgba(250, 246, 239, 0.96) 0%, rgba(250, 246, 239, 0.92) 42%, rgba(250, 246, 239, 0.62) 56%, rgba(250, 246, 239, 0) 74%);
+  /* 讓左側文字在任何照片上都清楚可讀：
+     以文字欄位置（--copy-x）為基準的固定寬度實色區，不隨螢幕百分比或字型寬度變動；
+     文字欄最寬 660px，實色區延伸到 700px 後才開始淡出。 */
+  --copy-x: calc(max(0px, (100% - var(--wrap)) / 2) + var(--gutter));
+  background: linear-gradient(90deg,
+    rgba(250, 246, 239, 0.96) 0,
+    rgba(250, 246, 239, 0.92) calc(var(--copy-x) + 700px),
+    rgba(250, 246, 239, 0) calc(var(--copy-x) + 940px));
 }
 .hero-media { position: relative; }
 .hero .photo-ph { place-items: center end; padding-right: 7%; }
@@ -243,8 +249,9 @@ main { display: block; }
 .hero h1 .line { display: block; }
 .hero-lead { font-size: 1.15rem; color: var(--muted); margin-bottom: 1.6em; max-width: 26em; }
 
-@media (max-width: 1099px) {
-  /* 手機與平板：照片完整呈現（人物與光影不被文字遮住），文字放在照片下方，確保文字對比 */
+@media (max-width: 1199px) {
+  /* 手機與平板（含 1100–1199px 的小筆電）：照片完整呈現，文字放在照片下方的實色底上，
+     避免文字欄在較窄畫面中覆蓋到照片主體 */
   .hero-media .photo { height: clamp(300px, 62vh, 470px); aspect-ratio: auto; }
   .hero-media .photo img { object-position: 70% 50%; }
   .hero-media::after { background: linear-gradient(180deg, rgba(250, 246, 239, 0) 72%, rgba(250, 246, 239, 0.9) 100%); }
