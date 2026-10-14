@@ -150,7 +150,12 @@
 
 ### GitHub Actions 線上結果
 
-（推送後等待執行結束，於下一個 commit 補上執行紀錄連結。）
+| commit | GitHub Actions | 結果 |
+|---|---|---|
+| `408cc45`（V3.1 主要變更） | [Run 38595636174](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38595636174) | **失敗**：38／39（320px 頁首重疊，見上方說明） |
+| `9202305`（320px 頁首修正） | [Run 38596185063](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38596185063) | **成功**：39／39；照片上文字最低對比 5.18:1；手機首頁圖片下載 246 KB |
+
+本報告更新另成一個 commit，推送後同樣等待線上測試結束才回報。
 
 ## 七、視覺規範符合程度
 
