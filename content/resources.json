@@ -78,7 +78,7 @@
       "url": "https://www.mohw.gov.tw/",
       "phones": [],
       "sources": [{ "title": "衛生福利部官方網站", "url": "https://www.mohw.gov.tw/" }],
-      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "直接讀取受阻，保持待確認", "source": "https://www.mohw.gov.tw/", "evidence": "ChatGPT 本輪直接讀取衛福部首頁失敗（Claude 2026-10-14 由 GitHub 機房讀取曾回應 200）；機關存在可由衛福部其他官方頁面佐證。" },
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "2026-10-15 追加取得官方首頁內容，待使用者發布核准", "scope": "官方機關身分、入口網址與本站簡介", "source": "https://www.mohw.gov.tw/", "evidence": "衛生福利部官方首頁已可讀取（導向 mp-1.html），基本衛生、社福相關入口符合本站概述；先前的讀取受阻已排除。", "notConfirmed": "特定補助或服務資格、費用與期限" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
@@ -179,8 +179,8 @@
       "summary": "衛生福利部心理健康支持方案的合作機構查詢入口。方案的適用年度、資格與服務期間，請以官方最新公告為準。",
       "url": "https://sps.mohw.gov.tw/mhs",
       "phones": [],
-      "sources": [{ "title": "心理健康支持方案合作機構查詢", "url": "https://sps.mohw.gov.tw/mhs" }],
-      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "直接讀取受阻，保持待確認", "source": "https://sps.mohw.gov.tw/mhs", "evidence": "方案查詢網址直接讀取失敗（Claude 2026-10-14 三次連線逾時）；心理健康司「青壯世代心理健康支持方案」官方頁面指向此入口。適用年度、資格與期限未確認，不得猜測。" },
+      "sources": [{ "title": "心理健康支持方案合作機構查詢", "url": "https://sps.mohw.gov.tw/mhs" }, { "title": "心理健康司：115年續推青壯世代心理健康支持方案（更新 115-03-09）", "url": "https://dep.mohw.gov.tw/Domhaoh/fp-502-85046-107.html" }],
+      "review": { "date": "2026-10-15", "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）", "result": "直接讀取受阻，保持待確認", "source": "https://sps.mohw.gov.tw/mhs", "evidence": "方案查詢網址仍無法直接讀取；已讀心理健康司 115 年正式公告（更新 115-03-09），確認 115 年持續辦理，15–45 歲本國籍或持健保卡外籍人士每人 3 次免費心理諮商，並指向該合作機構查詢網；不代表即時名額、個別資格或查詢頁運作已驗證。", "secondarySource": "https://dep.mohw.gov.tw/Domhaoh/fp-502-85046-107.html" },
       "checkedAt": null,
       "status": "待確認",
       "published": true
