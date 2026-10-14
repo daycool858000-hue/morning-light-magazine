@@ -341,13 +341,12 @@ ${previewBar}${noticeBar}
     <nav class="dir-nav" aria-label="主要目錄">${dirLinks}</nav>
     <div class="header-actions">
       <a class="hdr-btn hide-sm" href="${base}search.html">${icon('search')}<span>搜尋</span></a>
-      <a class="hdr-btn hide-sm" href="${base}support.html"${active === 'support' ? ' aria-current="page"' : ''}>${icon('leaf')}<span>支援資源</span></a>
       <button class="hdr-btn menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">${icon('menu', 'icon icon-menu')}${icon('close', 'icon icon-close')}<span class="label">選單</span></button>
       <a class="hdr-btn switch-screen" href="${esc(site.switchScreenUrl)}" rel="noreferrer noopener" data-switch-screen title="立即切換到 Google 首頁（不會清除瀏覽紀錄）">${icon('switch')}<span>切換畫面</span></a>
     </div>
   </div>
   <nav id="site-nav" class="site-nav" aria-label="主要導覽">
-    <div class="wrap"><ul><li class="nav-extra nav-support"><a href="${base}support.html"${active === 'support' ? ' aria-current="page"' : ''}>${icon('leaf')}<span>支援資源</span></a></li>${navItems}<li class="nav-extra nav-sep" aria-hidden="true"></li><li class="nav-extra"><a href="${base}search.html">搜尋全站</a></li></ul></div>
+    <div class="wrap"><ul>${navItems}<li class="nav-extra nav-sep" aria-hidden="true"></li><li class="nav-extra"><a href="${base}search.html">搜尋全站</a></li></ul></div>
   </nav>
 </header>
 <main id="main" tabindex="-1">
@@ -355,24 +354,10 @@ ${body}
 </main>
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-top">
-      <p class="footer-name">${brandLockup()}</p>
-      <p class="footer-slogan">${esc(site.slogan)}</p>
-    </div>
-    <nav class="footer-links" aria-label="頁尾連結">
-      <ul>
-        <li><a href="${base}about.html">關於由己</a></li>
-        <li><a href="${base}disclaimer.html">網站免責聲明</a></li>
-        <li><a href="${base}privacy.html">隱私宣告</a></li>
-        <li><a href="${base}verification.html">查核與更新說明</a></li>
-        <li><a href="${base}support.html">支援資源</a></li>
-        <li><a href="${base}search.html">搜尋全站</a></li>
-      </ul>
-    </nav>
+    <p class="footer-name">${brandLockup()}</p>
     <div class="footer-legal">
-      <p>免費、非營利。本站整理公開資訊與官方入口，不承接個案，也不提供法律、醫療或心理專業服務。提供外部機構連結，不代表本站與該機構有正式合作、授權或從屬關係；實際辦理請以主管機關或服務單位最新公告為準。</p>
-      <p>本站不具報案或緊急救援功能。如有立即危險，請撥打 <a href="tel:110">110</a> 或 <a href="tel:119">119</a>。</p>
-      <p>本站照片風格圖片皆為 AI 生成的示意圖像，非實地拍攝，也不代表與任何機構合作。本站未使用訪客追蹤或分析工具。網站最後建置：${today}${IS_PREVIEW ? '（預覽版本）' : ''}</p>
+      <p>本站整理公開資訊與官方入口，不提供法律、醫療、心理專業服務或緊急救援；外部連結不代表合作關係。如有立即危險，請撥打 <a href="tel:110">110</a> 或 <a href="tel:119">119</a>。完整說明見<a href="${base}about.html">關於由己</a>。</p>
+      <p>本站照片風格圖片皆為 AI 生成的示意圖像，非實地拍攝。</p>
     </div>
   </div>
 </footer>
@@ -520,7 +505,7 @@ ${dirHead(d)}
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
 }
 
-// ---------- 向光｜TOWARD THE LIGHT（學習、活動、生活探索與官方資源） ----------
+// ---------- 向光｜TOWARD DAYLIGHT（學習、活動、生活探索與官方資源） ----------
 {
   const d = dirById['toward-light'];
   const learning = catById.learning;
@@ -733,7 +718,7 @@ for (const c of categories) {
   <div class="wrap">
     <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">支援資源</li></ol></nav>
     <p class="cat-hero-kicker">${icon('support', 'cat-hero-icon')}<span>Support</span></p>
-    <h1 id="page-title">支援資源與求助專線</h1>
+    <h1 id="page-title">支援資源</h1>
     <p class="lead">需要協助的時候，可以直接聯繫下列正式服務。點擊號碼即可撥打。</p>
     <p class="note" role="note">本站不具報案、通報或緊急救援功能，也不接收任何求助訊息。點擊本頁按鈕不代表已完成報案或求助。如有立即危險，請直接撥打 110 或 119。</p>
   </div>
@@ -792,8 +777,8 @@ for (const c of categories) {
     ${supportResources.length ? `<div class="res-grid">${supportResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('相關機構資訊正在查核中。')}
   </div>
 </section>`;
-  pages.push({ file: 'support.html', html: layout({ title: '支援資源與求助專線', description: '110、119、113、1925 等正式求助專線與數位隱私基本資訊。', active: 'support', body, bodyClass: 'support' }) });
-  addIndex('頁面', '支援資源與求助專線', '可直接撥打的正式專線、簡訊報案資訊與數位隱私提醒。', 'support.html', '緊急 求助 報案 專線 安全 ' + hotlines.map((h) => `${h.number} ${h.title}`).join(' '));
+  pages.push({ file: 'support.html', html: layout({ title: '支援資源', description: '110、119、113、1925 等正式求助專線與數位隱私基本資訊。', active: 'support', body, bodyClass: 'support' }) });
+  addIndex('頁面', '支援資源', '可直接撥打的正式專線、簡訊報案資訊與數位隱私提醒。', 'support.html', '緊急 求助 報案 專線 安全 ' + hotlines.map((h) => `${h.number} ${h.title}`).join(' '));
   for (const h of hotlines) addIndex('求助專線', `${h.number} ${h.title}`, h.purpose, 'support.html', '電話 專線');
 }
 

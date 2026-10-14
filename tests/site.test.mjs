@@ -117,7 +117,8 @@ try {
       if (pattern.test(html)) forbidden.push(`${p}: ${pattern}`);
     }
     if (!html.includes('data-switch-screen')) missingCommon.push(`${p} 缺少切換畫面`);
-    if (!html.includes('disclaimer.html') || !html.includes('privacy.html')) missingCommon.push(`${p} 頁尾缺少聲明連結`);
+    const footer = (/<footer class="site-footer">[\s\S]*?<\/footer>/.exec(html) || [''])[0];
+    if (!footer.includes('about.html') || !footer.includes('AI 生成') || !footer.includes('tel:110')) missingCommon.push(`${p} 頁尾缺少必要聲明或「關於由己」連結`);
     for (const [, href] of html.matchAll(/<a [^>]*href="([^"]+)"/g)) {
       if (href.startsWith('tel:')) { telLinks.add(href); continue; }
       if (/^https?:/.test(href)) {
@@ -145,7 +146,7 @@ try {
   check('所有站內連結與錨點都能開啟', linkProblems.length === 0, linkProblems.slice(0, 8).join('；'));
   check('外部連結皆為 HTTPS 且具 noopener noreferrer、全站 no-referrer', externalProblems.length === 0, externalProblems.slice(0, 5).join('；'));
   check('無 iframe、追蹤碼、sms:110、POST 表單、搜尋以外的輸入欄位或本機儲存', forbidden.length === 0, forbidden.join('；'));
-  check('每頁都有切換畫面與免責聲明／隱私宣告連結', missingCommon.length === 0, missingCommon.join('；'));
+  check('每頁都有切換畫面；頁尾有必要免責聲明、AI 圖像揭露與「關於由己」連結（完整免責與隱私說明在該頁）', missingCommon.length === 0, missingCommon.join('；'));
   const brandProblems = [];
   for (const p of [...pages, '404.html']) {
     const html = await readFile(path.join(DIST, p), 'utf8');
@@ -260,7 +261,7 @@ try {
   {
     const DIRS = [
       { href: 'quiet-power.html', zh: '讀利專欄', en: 'QUIET POWER' },
-      { href: 'toward-light.html', zh: '向光', en: 'TOWARD THE LIGHT' },
+      { href: 'toward-light.html', zh: '向光', en: 'TOWARD DAYLIGHT' },
     ];
     // 1、2、11：手機頁首直接看到兩個目錄（中英文正確），且頁首元素不重疊、無水平溢位
     const headerProblems = [];
@@ -316,7 +317,7 @@ try {
       }
       await c.close();
     }
-    check('頁首：手機 320／375／390px 不開選單即可看到「讀利專欄 QUIET POWER」「向光 TOWARD THE LIGHT」與切換畫面；品牌文字、選單、切換畫面、兩個目錄互不重疊、不超出畫面、點擊區 ≥ 44px、無水平溢位（含捲動後與選單開啟時）', headerProblems.length === 0, headerProblems.slice(0, 6).join('；'));
+    check('頁首：手機 320／375／390px 不開選單即可看到「讀利專欄 QUIET POWER」「向光 TOWARD DAYLIGHT」與切換畫面；品牌文字、選單、切換畫面、兩個目錄互不重疊、不超出畫面、點擊區 ≥ 44px、無水平溢位（含捲動後與選單開啟時）', headerProblems.length === 0, headerProblems.slice(0, 6).join('；'));
 
     // 3、4：點擊兩個目錄前往正確頁面；兩個目錄頁都在前段提供同一個支援資源頁入口
     const dirProblems = [];
@@ -346,15 +347,26 @@ try {
     const supportPages = [];
     for (const f of pages) {
       const html = await readFile(path.join(DIST, f), 'utf8');
-      if (/<h1[^>]*>支援資源/.test(html)) supportPages.push(f);
+      if (/<h1[^>]*>支援資源<\/h1>/.test(html)) supportPages.push(f);
     }
     check('讀利專欄、向光：點擊頁首目錄前往正確頁面；兩頁前段都有「支援資源」入口，連往同一個既有支援資源頁（全站只有一個支援資源頁）', dirProblems.length === 0 && supportPages.length === 1 && supportPages[0] === 'support.html', [...dirProblems, `支援資源頁：${supportPages.join('、')}`].join('；'));
 
-    // 手機選單中「支援資源」排在第一項
-    await page.goto(`${ORIGIN}${BASE}index.html`);
-    await page.tap('.menu-toggle');
-    const firstMenu = await page.evaluate(() => { const a = document.querySelector('#site-nav li a'); return [a?.getAttribute('href'), a?.textContent.trim()]; });
-    check('手機選單：「支援資源」排在第一項', firstMenu[0] === 'support.html' && firstMenu[1] === '支援資源', firstMenu.join(' '));
+    // 頁首與手機選單不再有獨立的「支援資源」入口（只保留在讀利專欄與向光頁內）
+    const navSupport = [];
+    for (const f of pages) {
+      const html = await readFile(path.join(DIST, f), 'utf8');
+      const header = (/<header class="site-header">[\s\S]*?<\/header>/.exec(html) || [''])[0];
+      if (header.includes('support.html')) navSupport.push(f);
+    }
+    check('頁首與手機選單：不再有獨立的「支援資源」入口（支援資源只從讀利專欄、向光頁內進入）', navSupport.length === 0, navSupport.join('、'));
+
+    // 支援資源頁更名：主標題、瀏覽器標題、站內搜尋顯示名稱皆為「支援資源」，原有專線不變
+    const sup = await readFile(path.join(DIST, 'support.html'), 'utf8');
+    const idx = await readFile(path.join(DIST, 'assets/data/search-index.js'), 'utf8');
+    const renameOk = sup.includes('<h1 id="page-title">支援資源</h1>') && sup.includes('<title>支援資源｜由己 SELF-AUTHORED</title>')
+      && idx.includes('"title":"支援資源","text"') && !/支援資源與求助專線/.test(sup + idx)
+      && ['tel:110', 'tel:119', 'tel:113', 'tel:1925'].every((t) => sup.includes(`href="${t}"`));
+    check('支援資源頁：主標題、瀏覽器標題、搜尋名稱皆為「支援資源」，原有 110／119／113／1925 專線仍在', renameOk);
 
     // 5：原首頁移出的內容仍可從相關內頁抵達
     const movedProblems = [];
@@ -384,9 +396,9 @@ try {
     const quick = [...home.matchAll(/<a class="quick[^"]*" href="([^"]+)">([\s\S]*?)<\/a>/g)].map((m) => ({ href: m[1], zh: (/<span class="quick-zh">([^<]+)<\/span>/.exec(m[2]) || [])[1], en: (/<span class="quick-en">([^<]+)<\/span>/.exec(m[2]) || [])[1], inner: m[2] }));
     const quickOk = quick.length === 4
       && quick.map((q) => q.zh).join('|') === '有急事|讀利專欄|向光|關於由己'
-      && quick[1].en === 'QUIET POWER' && quick[2].en === 'TOWARD THE LIGHT'
+      && quick[1].en === 'QUIET POWER' && quick[2].en === 'TOWARD DAYLIGHT'
       && quick.map((q) => q.href).join('|') === 'tel:110|quiet-power.html|toward-light.html|about.html';
-    check('首頁快捷入口恰好 4 個，依序為：有急事、讀利專欄 QUIET POWER、向光 TOWARD THE LIGHT、關於由己', quickOk, quick.map((q) => `${q.zh}→${q.href}`).join('、'));
+    check('首頁快捷入口恰好 4 個，依序為：有急事、讀利專欄 QUIET POWER、向光 TOWARD DAYLIGHT、關於由己', quickOk, quick.map((q) => `${q.zh}→${q.href}`).join('、'));
 
     // 8、9：有急事只有手電筒圖示；為單一 tel:110 連結，不經過網站自製頁面或彈窗，畫面上不顯示電話號碼
     const urgent = quick[0] || { inner: '' };
