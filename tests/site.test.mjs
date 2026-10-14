@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// 晨光生活誌 自動化測試：以模擬 GitHub Pages 的本機伺服器開啟建置結果，並用 Playwright（Chromium）逐頁檢查。
+// 由己 SELF-AUTHORED 自動化測試：以模擬 GitHub Pages 的本機伺服器開啟建置結果，並用 Playwright（Chromium）逐頁檢查。
 // 用法：npm test（會先建置 preview 與 production 版本）
 // 需要 Playwright：本機請先 `npm i -D playwright`；若環境已全域安裝，會自動使用。
 
@@ -87,13 +87,20 @@ try {
       await page.goto(`${ORIGIN}${BASE}${p}`, { waitUntil: 'load' });
       const o = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       if (o > 0) overflow.push(`${p} @${width}px 溢出 ${o}px`);
-      const bad = await page.evaluate(() => [...document.images].filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.src));
+      // 延遲載入的圖片先改為立即載入，再確認每張都成功解碼
+      const bad = await page.evaluate(async () => {
+        // 捲動整頁，讓延遲載入的圖片依正常流程載入
+        for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 40)); }
+        const imgs = [...document.images];
+        await Promise.all(imgs.map((i) => (i.complete ? null : new Promise((r) => { i.addEventListener('load', r); i.addEventListener('error', r); setTimeout(r, 8000); }))));
+        return imgs.filter((i) => i.naturalWidth === 0).map((i) => i.currentSrc || i.src);
+      });
       brokenImages.push(...bad.map((s) => `${p}: ${s}`));
     }
     await ctx.close();
   }
   check(`所有 ${pages.length} 個頁面於 ${widths.join('/')}px 無水平溢位`, overflow.length === 0, overflow.slice(0, 5).join('；'));
-  check('所有圖片與插圖正常載入', brokenImages.length === 0, brokenImages.slice(0, 5).join('；'));
+  check('所有圖片正常載入（含延遲載入的照片）', brokenImages.length === 0, brokenImages.slice(0, 5).join('；'));
   check('沒有 JavaScript 錯誤', consoleErrors.length === 0, consoleErrors.slice(0, 5).join('；'));
   check('沒有載入失敗的資源（404 等）', failed.length === 0, [...new Set(failed)].slice(0, 5).join('；'));
   check('頁面不向任何第三方網域發出請求（無追蹤、無外部字型或腳本）', thirdParty.size === 0, [...thirdParty].slice(0, 5).join('；'));
@@ -139,6 +146,14 @@ try {
   check('外部連結皆為 HTTPS 且具 noopener noreferrer、全站 no-referrer', externalProblems.length === 0, externalProblems.slice(0, 5).join('；'));
   check('無 iframe、追蹤碼、sms:110、POST 表單、搜尋以外的輸入欄位或本機儲存', forbidden.length === 0, forbidden.join('；'));
   check('每頁都有切換畫面與免責聲明／隱私宣告連結', missingCommon.length === 0, missingCommon.join('；'));
+  const brandProblems = [];
+  for (const p of [...pages, '404.html']) {
+    const html = await readFile(path.join(DIST, p), 'utf8');
+    if (/晨光生活誌|Morning Light|OWN WAY/i.test(html)) brandProblems.push(`${p} 仍有舊品牌名稱`);
+    if (!/<title>[^<]*由己 SELF-AUTHORED[^<]*<\/title>/.test(html)) brandProblems.push(`${p} 標題缺少新品牌`);
+    if (!html.includes('class="brand-name">由己<') || !html.includes('class="brand-en">SELF-AUTHORED<')) brandProblems.push(`${p} 頁首品牌標誌不完整`);
+  }
+  check('品牌：每頁標題與頁首皆為「由己 SELF-AUTHORED」，前台不再出現舊品牌名稱', brandProblems.length === 0, brandProblems.slice(0, 5).join('；'));
   const badTel = [...telLinks].filter((t) => !/^tel:\d+$/.test(t));
   check(`撥號連結格式正確（${[...telLinks].sort().join('、')}）`, badTel.length === 0 && ['tel:110', 'tel:113', 'tel:119', 'tel:1925'].every((t) => telLinks.has(t)), badTel.join('、'));
 
@@ -241,6 +256,71 @@ try {
   const allListed = await nj.locator('[data-res]').count();
   check('停用 JavaScript 時：導覽可見、切換畫面為一般連結、城市頁列出全部資源', navVisible && switchHref === site.switchScreenUrl && allListed > 0);
   await noJs.close();
+
+  // ---------- 5a. 首頁主視覺文字與照片的實際對比 ----------
+  {
+    let sharpLib = null;
+    try { sharpLib = require('sharp'); } catch { /* 未安裝 */ }
+    const lum = (r, g, b) => {
+      const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+      return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+    };
+    const results5a = [];
+    for (const [w, h] of [[768, 1024], [1024, 768], [1100, 800], [1280, 900], [1440, 900], [1920, 1080], [390, 844]]) {
+      const c = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
+      const pg = await c.newPage();
+      await pg.goto(`${ORIGIN}${BASE}index.html`, { waitUntil: 'load' });
+      await pg.evaluate(() => Promise.all([...document.images].map((i) => (i.complete ? null : new Promise((r) => { i.addEventListener('load', r); i.addEventListener('error', r); setTimeout(r, 8000); })))));
+      // 以文字實際佔用的範圍（逐行）計算，而非整個區塊寬度
+      const boxes = await pg.evaluate(() => ['.hero-kicker', '.hero h1', '.hero-lead'].flatMap((sel) => {
+        const el = document.querySelector(sel);
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const color = getComputedStyle(el).color;
+        return [...range.getClientRects()].filter((r) => r.width > 4).map((r) => ({ sel, x: r.x, y: r.y, w: r.width, h: r.height, color }));
+      }));
+      await pg.evaluate(() => document.querySelectorAll('.hero-copy > :not(.search-box)').forEach((el) => { el.style.visibility = 'hidden'; }));
+      const shot = await pg.screenshot();
+      const { data, info } = await sharpLib(shot).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+      for (const b of boxes) {
+        const [tr, tg, tb] = b.color.match(/\d+/g).map(Number);
+        const lt = lum(tr, tg, tb);
+        const ls = [];
+        for (let y = Math.max(0, Math.floor(b.y)); y < Math.min(info.height, b.y + b.h); y += 2) {
+          for (let x = Math.max(0, Math.floor(b.x)); x < Math.min(info.width, b.x + b.w); x += 2) {
+            const i = (y * info.width + x) * 3;
+            ls.push(lum(data[i], data[i + 1], data[i + 2]));
+          }
+        }
+        ls.sort((a, z) => a - z);
+        const darkest = ls[Math.floor(ls.length * 0.02)]; // 排除極少數雜訊後，最暗的背景
+        results5a.push({ where: `${w}px ${b.sel}（右緣 ${Math.round(b.x + b.w)}px）`, ratio: (darkest + 0.05) / (lt + 0.05), large: b.sel === '.hero h1' });
+      }
+      await c.close();
+    }
+    const low5a = results5a.filter((r) => r.ratio < (r.large ? 3 : 4.5));
+    const worst = results5a.reduce((m, r) => (r.ratio < m.ratio ? r : m));
+    check('首頁主視覺文字疊在照片上的實際對比（以最暗 2% 背景計算）：標題 ≥ 3:1、其他文字 ≥ 4.5:1', low5a.length === 0, `最低 ${worst.where} = ${worst.ratio.toFixed(2)}${low5a.length ? '；不足：' + low5a.map((r) => `${r.where} ${r.ratio.toFixed(2)}`).join('、') : ''}`);
+  }
+
+  // ---------- 5b. 手機版圖片下載量 ----------
+  {
+    const c = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
+    const pg = await c.newPage();
+    let bytes = 0;
+    let biggest = { url: '', size: 0 };
+    pg.on('response', async (r) => {
+      if (r.request().resourceType() !== 'image') return;
+      const len = (await r.body().catch(() => Buffer.alloc(0))).length;
+      bytes += len;
+      if (len > biggest.size) biggest = { url: r.url().split('/').pop(), size: len };
+    });
+    await pg.goto(`${ORIGIN}${BASE}index.html`, { waitUntil: 'networkidle' });
+    await pg.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } });
+    await pg.waitForLoadState('networkidle');
+    await c.close();
+    check('手機首頁（2 倍解析度、捲動到底）圖片總下載量 ≤ 1.5 MB，單張 ≤ 300 KB', bytes <= 1.5 * 1024 * 1024 && biggest.size <= 300 * 1024, `總計 ${(bytes / 1024).toFixed(0)} KB，最大 ${biggest.url} ${(biggest.size / 1024).toFixed(0)} KB`);
+  }
 
   // ---------- 5. 減少動態效果 ----------
   const rm = await browser.newContext({ reducedMotion: 'reduce' });

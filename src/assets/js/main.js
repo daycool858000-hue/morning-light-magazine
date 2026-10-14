@@ -1,4 +1,4 @@
-/* 晨光生活誌 — 全站共用腳本（不使用任何外部套件、不保存任何資料） */
+/* 由己 SELF-AUTHORED — 全站共用腳本（不使用任何外部套件、不保存任何資料） */
 (function () {
   'use strict';
   document.documentElement.classList.add('js');

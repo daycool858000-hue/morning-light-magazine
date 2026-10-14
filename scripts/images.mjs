@@ -47,8 +47,9 @@ for (const item of items) {
     }
     const left = Math.round(Math.min(Math.max(crop.focusX * meta.width - cw / 2, 0), meta.width - cw));
     const top = Math.round(Math.min(Math.max(crop.focusY * meta.height - ch / 2, 0), meta.height - ch));
-    const widths = WIDTHS.filter((w) => w <= cw);
-    if (!widths.length) widths.push(cw);
+    // 不放大：只輸出不超過裁切後原生寬度的尺寸，並一定包含原生寬度本身
+    const widths = WIDTHS.filter((w) => w < cw);
+    widths.push(Math.min(cw, WIDTHS[WIDTHS.length - 1]));
     for (const w of widths) {
       const h = Math.round(w / ratio);
       await sharp(src)
@@ -66,7 +67,8 @@ for (const item of items) {
       .jpeg({ quality: 80, mozjpeg: true })
       .toFile(path.join(OUT, `${item.id}-${cropName}-${fw}.jpg`));
     generated[item.id][cropName] = { aspect: crop.aspect, widths, fallback: fw, ratio };
-    if (cw < 1600) console.warn(`⚠ ${item.id}（${cropName}）裁切後寬度只有 ${cw}px，大螢幕可能不夠清晰。`);
+    generated[item.id][cropName].nativeWidth = cw;
+    if (cw < 1600 && ['wide', 'banner', 'cover', 'band'].includes(cropName)) console.warn(`⚠ ${item.id}（${cropName}）裁切後寬度只有 ${cw}px，高解析度大螢幕可能略顯柔焦（未放大處理）。`);
   }
   console.log(`✔ ${item.id}：${Object.keys(item.crops).join('、')}`);
 }

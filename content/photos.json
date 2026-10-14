@@ -1,165 +1,257 @@
 {
-  "_說明": "網站攝影素材清單。原始檔放在 content/photos/originals/<id>.jpg（或 .png / .webp），執行 npm run images 會依 crops 自動裁切、壓縮成 WebP 與 JPEG 並移除 EXIF/GPS，輸出到 src/assets/photos/。status：待補、待檢查、已檢查。只有 status 為「已檢查」且 license 填寫完整的素材，才會出現在正式版。檢查標準見 docs/VISUAL-STANDARD.md 第四章。",
+  "_說明": "網站攝影素材清單。原始檔放在 content/photos/originals/<id>.jpg（或 .png / .webp），執行 npm run images 會依 crops 自動裁切、壓縮成 WebP 與 JPEG 並移除 EXIF/GPS，輸出到 src/assets/photos/。status：待補、待檢查、已檢查。只有 status 為「已檢查」且 license 填寫完整的素材，才會出現在正式版。檢查標準見 docs/VISUAL-STANDARD.md 第四章。 本站目前的九張圖片皆為 AI 生成的示意圖像（aiGenerated: true），不是實地拍攝；不得標示為特定地點的實景，也不代表與任何機構合作。review 欄位是 Claude 的初步檢查紀錄，不等於使用者的人工查核；status 改為「已檢查」須由使用者確認。",
   "items": [
     {
       "id": "home-hero",
       "title": "首頁主視覺：晨光照入的客廳",
       "usage": "首頁主視覺（電腦版寬幅、手機版直幅）",
-      "alt": "清晨陽光從大窗照進明亮的客廳，窗邊有綠色植物、亞麻布沙發與一杯冒著熱氣的茶。",
+      "alt": "晨光照進明亮的客廳，一位女性背對畫面坐在沙發上捧著熱茶，窗邊有橄欖樹與龜背芋。（AI 生成示意圖）",
       "brief": "寫實居家攝影。晨光從畫面右側的大窗斜射進來，室內有真實植物（龜背芋或橄欖樹盆栽）、米白亞麻布沙發、原木茶几、陶瓷茶杯。畫面左側 45% 保持明亮、單純、低細節（之後會疊上標題文字）。可有人物背影或局部（手捧杯子），但不需正面女性肖像。",
       "prompt": "Photorealistic interior photograph, early morning sunlight streaming through a large window on the right, warm natural light with soft shadows and visible air haze, cozy Taiwanese apartment living room, cream linen sofa, light oak coffee table, ceramic tea cup with gentle steam, real potted plants (olive tree, monstera), muted warm beige and sage palette, calm and airy, left 45% of the frame bright and uncluttered for text overlay, 35mm lens, shallow depth of field, editorial lifestyle magazine photography, no text, no logo, no people facing camera",
       "crops": {
-        "wide": { "aspect": "16:7", "focusX": 0.62, "focusY": 0.5 },
-        "portrait": { "aspect": "4:5", "focusX": 0.7, "focusY": 0.5 }
+        "wide": {
+          "aspect": "16:7",
+          "focusX": 0.5,
+          "focusY": 0.42
+        },
+        "portrait": {
+          "aspect": "4:5",
+          "focusX": 0.86,
+          "focusY": 0.5
+        }
       },
       "minSize": "3200 × 1800 以上（橫幅原圖）",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途；人物為背影，未出現正面肖像；手部與杯子在原尺寸下未見明顯畸形；左側牆面明亮，適合疊放標題。原圖 1672×941，電腦版 16:7 裁切後原生寬 1672px，高解析度大螢幕會略顯柔焦；手機 4:5 裁切原生寬 753px。"
     },
     {
       "id": "cat-life-family",
       "title": "生活與家庭：灑滿陽光的餐桌",
       "usage": "首頁分類卡、生活與家庭頁主視覺",
-      "alt": "陽光灑在木頭餐桌上，桌上有一束白色小花、打開的書與兩只杯子。",
+      "alt": "陽光灑在窗邊的木頭餐桌上，桌上有一束白色小花、打開的書、兩只杯子與一盤橘子。（AI 生成示意圖）",
       "brief": "家庭生活感但不需人物：原木餐桌、白色小花、打開的書、兩只杯子（暗示家人）、窗邊植物。溫暖、乾淨、不擁擠。",
       "prompt": "Photorealistic lifestyle photograph, morning sunlight on a wooden dining table by a window, small bouquet of white flowers in a glass vase, an open book, two ceramic mugs, potted plants on the windowsill, warm cream and sage tones, soft natural shadows, calm family home atmosphere, editorial magazine style, no text, no logo, no people",
       "crops": {
-        "card": { "aspect": "4:3", "focusX": 0.5, "focusY": 0.55 },
-        "banner": { "aspect": "21:9", "focusX": 0.5, "focusY": 0.55 }
+        "card": {
+          "aspect": "4:3",
+          "focusX": 0.5,
+          "focusY": 0.55
+        },
+        "banner": {
+          "aspect": "21:9",
+          "focusX": 0.5,
+          "focusY": 0.55
+        }
       },
       "minSize": "2400 × 1600 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途；書頁為不可辨識的線條，無可讀文字；未見明顯生成瑕疵。"
     },
     {
       "id": "cat-career",
       "title": "職涯與創業：晨光中的工作桌",
       "usage": "首頁分類卡、職涯與創業頁主視覺",
-      "alt": "晨光下的木質工作桌，上面有筆記型電腦、筆記本、鋼筆與一小盆植物。",
+      "alt": "晨光下的木質工作桌，上面有筆記型電腦、攤開的筆記本與鋼筆、咖啡杯和小盆栽。（AI 生成示意圖）",
       "brief": "工作與重新出發：木質工作桌、筆電（螢幕不顯示文字或品牌）、筆記本、鋼筆、小盆栽。專業、清爽、有希望感。",
       "prompt": "Photorealistic photograph of a light wooden work desk by a sunny window in the morning, open laptop with blank screen and no brand logo, paper notebook and fountain pen, small potted sprout plant, coffee cup, warm natural light and soft shadows, neutral beige and sage palette, clean and hopeful mood, editorial lifestyle magazine photography, no text, no logo, no people",
       "crops": {
-        "card": { "aspect": "4:3", "focusX": 0.5, "focusY": 0.5 },
-        "banner": { "aspect": "21:9", "focusX": 0.5, "focusY": 0.5 }
+        "card": {
+          "aspect": "4:3",
+          "focusX": 0.5,
+          "focusY": 0.5
+        },
+        "banner": {
+          "aspect": "21:9",
+          "focusX": 0.5,
+          "focusY": 0.5
+        }
       },
       "minSize": "2400 × 1600 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途。【需確認】筆電螢幕下方鉸鏈處有類似品牌字樣的模糊字形，外型也近似特定品牌筆電；分類卡尺寸下看不出，分類頁寬幅橫幅中隱約可見。筆記本線圈位置略不自然（輕微）。"
     },
     {
       "id": "cat-health",
       "title": "身心健康：安靜的窗邊角落",
       "usage": "首頁分類卡、身心健康頁主視覺",
-      "alt": "安靜的窗邊角落，陶瓷花瓶裡插著綠色枝葉，旁邊有一杯溫水與摺好的毛毯。",
+      "alt": "安靜的窗邊角落，圓桌上有插著綠色枝葉的陶瓶與一杯花草茶，扶手椅上搭著毛毯。（AI 生成示意圖）",
       "brief": "休息與照顧自己：窗邊角落、陶瓷花瓶與綠色枝葉、一杯溫水或花草茶、摺好的毛毯。安靜、放鬆，避免醫療器材與病房意象。",
       "prompt": "Photorealistic still life photograph, quiet corner by a window with gentle morning light, ceramic vase with fresh green eucalyptus branches, a glass of warm water or herbal tea, folded soft knit blanket, linen fabric, calm restful atmosphere, muted sage, cream and warm grey tones, soft shadows, editorial wellness magazine style, no text, no logo, no people, no medical equipment",
       "crops": {
-        "card": { "aspect": "4:3", "focusX": 0.5, "focusY": 0.5 },
-        "banner": { "aspect": "21:9", "focusX": 0.5, "focusY": 0.5 }
+        "card": {
+          "aspect": "4:3",
+          "focusX": 0.5,
+          "focusY": 0.5
+        },
+        "banner": {
+          "aspect": "21:9",
+          "focusX": 0.5,
+          "focusY": 0.5
+        }
       },
       "minSize": "2400 × 1600 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途；無醫療器材；未見明顯生成瑕疵。"
     },
     {
       "id": "cat-law",
       "title": "法律與權益：書桌上的文件與法律書籍",
       "usage": "首頁分類卡、法律與權益頁主視覺",
-      "alt": "陽光照在書桌上，桌上有整齊的文件夾、幾本厚書與一支鋼筆。",
+      "alt": "陽光照在書桌上，桌上有夾著文件的資料板、鋼筆、幾本精裝書與文件袋。（AI 生成示意圖）",
       "brief": "認識制度、保護自己：書桌上整齊的文件夾、幾本厚重書籍（書脊不可出現可辨識文字）、鋼筆、檯燈或植物。請避免法槌（台灣法院不使用法槌）、手銬、警察等意象。",
       "prompt": "Photorealistic photograph of a tidy study desk in soft morning light, neat stack of document folders, several thick hardcover books with plain spines and no readable text, fountain pen, small green plant, warm wood and cream paper tones, calm and trustworthy mood, editorial magazine photography, no text, no logo, no gavel, no people",
       "crops": {
-        "card": { "aspect": "4:3", "focusX": 0.5, "focusY": 0.5 },
-        "banner": { "aspect": "21:9", "focusX": 0.5, "focusY": 0.5 }
+        "card": {
+          "aspect": "4:3",
+          "focusX": 0.5,
+          "focusY": 0.5
+        },
+        "banner": {
+          "aspect": "21:9",
+          "focusX": 0.5,
+          "focusY": 0.5
+        }
       },
       "minSize": "2400 × 1600 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途；文件為空白頁，書脊無可讀文字，未使用法槌或機構標誌；未見明顯生成瑕疵。"
     },
     {
       "id": "cat-city",
       "title": "城市與福利：清晨的城市與河濱綠地",
       "usage": "首頁分類卡、城市與福利頁主視覺",
-      "alt": "清晨的城市天際線，前景是河濱公園的綠樹與步道。",
+      "alt": "晨光下的河濱步道與綠地，遠方是城市天際線。（AI 生成示意圖，非特定地點實景）",
       "brief": "台灣城市生活感：清晨藍天下的城市天際線、河濱綠地與步道。避免特定可辨識的政府建築或品牌招牌；若出現地標，需確認無生成變形。",
       "prompt": "Photorealistic cityscape photograph of a modern East Asian city at early morning, clear soft blue sky, riverside park with lush green trees and walking path in the foreground, gentle golden light, airy and fresh, natural colors, no readable signs, no brand logos, editorial travel magazine photography, no people in focus",
       "crops": {
-        "card": { "aspect": "4:3", "focusX": 0.5, "focusY": 0.5 },
-        "banner": { "aspect": "21:9", "focusX": 0.5, "focusY": 0.45 }
+        "card": {
+          "aspect": "4:3",
+          "focusX": 0.3,
+          "focusY": 0.5
+        },
+        "banner": {
+          "aspect": "21:9",
+          "focusX": 0.5,
+          "focusY": 0.45
+        }
       },
       "minSize": "2400 × 1600 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "【需確認】天際線中有明顯可辨識的台北 101 造型高樓，河岸、橋梁與建築配置並非真實地理位置，訪客可能誤認為台北實景，也讓「全台 22 縣市」頁面偏向單一城市意象。首頁分類卡已將裁切焦點左移避開該高樓；分類頁 21:9 橫幅為全寬裁切，無法避開。建議重新生成不含地標的版本。",
+      "caption": "示意圖像（AI 生成），非特定地點實景。"
     },
     {
       "id": "cat-learning",
       "title": "學習與活動：攤開的筆記與課程手冊",
       "usage": "首頁分類卡、學習與活動頁主視覺",
-      "alt": "晨光下攤開的筆記本、彩色鉛筆、桌曆與一杯茶。",
+      "alt": "晨光下的書桌，攤開的空白筆記本、鉛筆、桌曆、一杯茶與一疊書。（AI 生成示意圖）",
       "brief": "學習新事物：攤開的筆記本（不可出現可讀文字）、鉛筆、桌曆、茶杯、書本。明亮、有期待感。",
       "prompt": "Photorealistic photograph of an open notebook with blank pages, pencils, a small desk calendar without readable text, a stack of books and a cup of tea on a sunlit table, morning light, warm cream, terracotta and sage accents, inviting learning atmosphere, editorial lifestyle magazine photography, no text, no logo, no people",
       "crops": {
-        "card": { "aspect": "4:3", "focusX": 0.5, "focusY": 0.5 },
-        "banner": { "aspect": "21:9", "focusX": 0.5, "focusY": 0.5 }
+        "card": {
+          "aspect": "4:3",
+          "focusX": 0.5,
+          "focusY": 0.5
+        },
+        "banner": {
+          "aspect": "21:9",
+          "focusX": 0.5,
+          "focusY": 0.5
+        }
       },
       "minSize": "2400 × 1600 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途；筆記本與桌曆為空白，無可讀文字；未見明顯生成瑕疵。"
     },
     {
       "id": "home-city-band",
       "title": "首頁城市資源區：清晨的街道",
       "usage": "首頁「城市資源入口」區塊",
-      "alt": "清晨的街道，人行道旁種著行道樹，陽光穿過樹葉灑在地面。",
+      "alt": "清晨林蔭人行道上，一位女性背對畫面散步，兩旁是行道樹與種滿植物的公寓。（AI 生成示意圖，非特定地點實景）",
       "brief": "台灣日常街景：清晨的人行道、行道樹、騎樓或公寓陽台、光影灑落。不可出現可辨識招牌、車牌或人臉。與「城市與福利」分類圖不同場景，避免重複。",
       "prompt": "Photorealistic street photograph of a quiet tree-lined sidewalk in an East Asian city at early morning, sunlight filtering through leaves onto the pavement, low-rise apartment buildings with balconies and plants, calm and safe atmosphere, warm natural tones, no readable signs, no license plates, no recognizable faces, editorial magazine photography",
       "crops": {
-        "band": { "aspect": "3:2", "focusX": 0.5, "focusY": 0.5 }
+        "band": {
+          "aspect": "3:2",
+          "focusX": 0.5,
+          "focusY": 0.5
+        }
       },
       "minSize": "2000 × 1333 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途；人物為背影，無可辨識臉孔、車牌或招牌；街景為一般化示意，未見明顯生成瑕疵。"
     },
     {
       "id": "home-learning-band",
       "title": "首頁學習區：窗邊的閱讀角",
       "usage": "首頁「課程與學習活動」區塊",
-      "alt": "窗邊的閱讀角，扶手椅上放著一本打開的書，旁邊的書架上有植物。",
+      "alt": "窗邊的閱讀角，扶手椅上放著打開的書與毛毯，旁邊是書架與小圓桌。（AI 生成示意圖）",
       "brief": "閱讀與進修：窗邊扶手椅、打開的書、書架與植物。與「學習與活動」分類圖不同場景，避免重複。",
       "prompt": "Photorealistic interior photograph of a cozy reading nook by a window in morning light, armchair with an open book, wooden bookshelf with plants and books without readable titles, soft warm light, cream and sage palette, calm and inspiring, editorial lifestyle magazine photography, no text, no logo, no people",
       "crops": {
-        "band": { "aspect": "3:2", "focusX": 0.5, "focusY": 0.5 }
+        "band": {
+          "aspect": "3:2",
+          "focusX": 0.5,
+          "focusY": 0.5
+        }
       },
       "minSize": "2000 × 1333 以上",
       "required": true,
-      "source": null,
-      "license": null,
+      "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+      "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
       "checkedAt": null,
-      "status": "待補"
+      "status": "待檢查",
+      "aiGenerated": true,
+      "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+      "review": "內容符合用途；書架書脊有模糊的類文字筆畫但不可閱讀（輕微）；構圖與 cat-health 相近（扶手椅＋小圓桌＋窗邊），整體風格重複度偏高。"
     },
     {
       "id": "article-how-to-use",
@@ -169,8 +261,16 @@
       "brief": "找方向、做規劃：攤開的筆記本與折疊地圖（不可有可讀地名）、咖啡、筆。若無合適素材，此文章維持純文字版面。",
       "prompt": "Photorealistic flat lay photograph of an open notebook and a folded paper map without readable place names on a light wooden table, cup of coffee, pen, soft morning sunlight and gentle shadows, warm cream and sage tones, editorial lifestyle magazine style, no text, no logo, no people",
       "crops": {
-        "card": { "aspect": "3:2", "focusX": 0.5, "focusY": 0.5 },
-        "cover": { "aspect": "21:9", "focusX": 0.5, "focusY": 0.5 }
+        "card": {
+          "aspect": "3:2",
+          "focusX": 0.5,
+          "focusY": 0.5
+        },
+        "cover": {
+          "aspect": "21:9",
+          "focusX": 0.5,
+          "focusY": 0.5
+        }
       },
       "minSize": "2000 × 1333 以上",
       "required": false,

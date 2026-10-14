@@ -1,0 +1,217 @@
+{
+  "home-hero": {
+    "wide": {
+      "aspect": "16:7",
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1672
+      ],
+      "fallback": 1200,
+      "ratio": 2.2857142857142856,
+      "nativeWidth": 1672
+    },
+    "portrait": {
+      "aspect": "4:5",
+      "widths": [
+        480,
+        753
+      ],
+      "fallback": 753,
+      "ratio": 0.8,
+      "nativeWidth": 753
+    }
+  },
+  "cat-life-family": {
+    "card": {
+      "aspect": "4:3",
+      "widths": [
+        480,
+        800,
+        1200,
+        1255
+      ],
+      "fallback": 1200,
+      "ratio": 1.3333333333333333,
+      "nativeWidth": 1255
+    },
+    "banner": {
+      "aspect": "21:9",
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1672
+      ],
+      "fallback": 1200,
+      "ratio": 2.3333333333333335,
+      "nativeWidth": 1672
+    }
+  },
+  "cat-career": {
+    "card": {
+      "aspect": "4:3",
+      "widths": [
+        480,
+        800,
+        1200,
+        1255
+      ],
+      "fallback": 1200,
+      "ratio": 1.3333333333333333,
+      "nativeWidth": 1255
+    },
+    "banner": {
+      "aspect": "21:9",
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1672
+      ],
+      "fallback": 1200,
+      "ratio": 2.3333333333333335,
+      "nativeWidth": 1672
+    }
+  },
+  "cat-health": {
+    "card": {
+      "aspect": "4:3",
+      "widths": [
+        480,
+        800,
+        1200,
+        1255
+      ],
+      "fallback": 1200,
+      "ratio": 1.3333333333333333,
+      "nativeWidth": 1255
+    },
+    "banner": {
+      "aspect": "21:9",
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1672
+      ],
+      "fallback": 1200,
+      "ratio": 2.3333333333333335,
+      "nativeWidth": 1672
+    }
+  },
+  "cat-law": {
+    "card": {
+      "aspect": "4:3",
+      "widths": [
+        480,
+        800,
+        1200,
+        1255
+      ],
+      "fallback": 1200,
+      "ratio": 1.3333333333333333,
+      "nativeWidth": 1255
+    },
+    "banner": {
+      "aspect": "21:9",
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1672
+      ],
+      "fallback": 1200,
+      "ratio": 2.3333333333333335,
+      "nativeWidth": 1672
+    }
+  },
+  "cat-city": {
+    "card": {
+      "aspect": "4:3",
+      "widths": [
+        480,
+        800,
+        1200,
+        1255
+      ],
+      "fallback": 1200,
+      "ratio": 1.3333333333333333,
+      "nativeWidth": 1255
+    },
+    "banner": {
+      "aspect": "21:9",
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1672
+      ],
+      "fallback": 1200,
+      "ratio": 2.3333333333333335,
+      "nativeWidth": 1672
+    }
+  },
+  "cat-learning": {
+    "card": {
+      "aspect": "4:3",
+      "widths": [
+        480,
+        800,
+        1200,
+        1255
+      ],
+      "fallback": 1200,
+      "ratio": 1.3333333333333333,
+      "nativeWidth": 1255
+    },
+    "banner": {
+      "aspect": "21:9",
+      "widths": [
+        480,
+        800,
+        1200,
+        1600,
+        1672
+      ],
+      "fallback": 1200,
+      "ratio": 2.3333333333333335,
+      "nativeWidth": 1672
+    }
+  },
+  "home-city-band": {
+    "band": {
+      "aspect": "3:2",
+      "widths": [
+        480,
+        800,
+        1200,
+        1412
+      ],
+      "fallback": 1200,
+      "ratio": 1.5,
+      "nativeWidth": 1412
+    }
+  },
+  "home-learning-band": {
+    "band": {
+      "aspect": "3:2",
+      "widths": [
+        480,
+        800,
+        1200,
+        1412
+      ],
+      "fallback": 1200,
+      "ratio": 1.5,
+      "nativeWidth": 1412
+    }
+  }
+}

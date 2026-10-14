@@ -1,7 +1,7 @@
 ---
 title: 查核與更新說明
 kicker: How We Check
-description: 晨光生活誌如何選擇來源、標示查核狀態，以及資料更新與撤下的方式。
+description: 由己如何選擇來源、標示查核狀態，以及資料更新與撤下的方式。
 updated: 2026-10-14
 ---
 

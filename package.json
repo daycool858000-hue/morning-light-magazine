@@ -2,7 +2,7 @@
   "name": "morning-light-magazine",
   "version": "0.1.0",
   "private": true,
-  "description": "晨光生活誌：免費、非營利的台灣女性生活資訊導航靜態網站",
+  "description": "由己 SELF-AUTHORED（原晨光生活誌）：免費、非營利的台灣女性生活、權益與在地資源指南靜態網站",
   "license": "UNLICENSED",
   "type": "module",
   "engines": {

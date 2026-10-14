@@ -1,6 +1,10 @@
-# 晨光生活誌 Morning Light Magazine
+# 由己 SELF-AUTHORED
 
-免費、非營利的台灣女性生活資訊導航靜態網站。整理官方制度、專業機構、生活服務、學習活動與求助管道的公開入口。
+> 原專案名稱：晨光生活誌（儲存庫名稱暫不更改）。品牌說明見 [docs/BRAND.md](docs/BRAND.md)。
+
+女性生活、權益與在地資源指南。從生活知識到官方資源，陪你找到需要的資訊，保留自己的選擇。
+
+免費、非營利的靜態網站，整理官方制度、專業機構、生活服務、學習活動與求助管道的公開入口。
 
 > 目前狀態：**第一階段（網站架構與視覺骨架）預覽中，尚未正式公開。**
 > 依 V3.0 規格，正式公開須經使用者驗收確認後，才以 GitHub Pages 手動部署。
@@ -8,7 +12,8 @@
 ## 開發依據（開始任何工作前請先閱讀）
 
 1. 《晨光生活誌 V3.0 完整開發總指令》：網站功能、分類、內容與責任界線。
-2. [《晨光生活誌》永久視覺設計規範 V1.0](docs/VISUAL-STANDARD.md)：視覺風格、素材品質與視覺驗收標準。
+2. [《晨光生活誌》永久視覺設計規範 V1.0](docs/VISUAL-STANDARD.md)：視覺風格、素材品質與視覺驗收標準（品牌已更名為「由己」，規範內容不變）。
+3. [品牌識別：由己 SELF-AUTHORED](docs/BRAND.md)。
 
 兩份規格共同適用、不得互相取代；未經使用者明確同意，不得變更視覺規範。
 
@@ -60,6 +65,9 @@ docs/                   維護、部署、備份、授權與驗收文件
 - [永久視覺設計規範 V1.0](docs/VISUAL-STANDARD.md)
 - [第一階段驗收報告](docs/ACCEPTANCE-PHASE1.md)
 - [第一階段視覺重製驗收報告（視覺 V2）](docs/ACCEPTANCE-VISUAL-V2.md)
+- [品牌更名與九張圖片整合驗收報告](docs/ACCEPTANCE-VISUAL-V2-BRAND.md)
+- [九張圖片查核紀錄](docs/PHOTO-REVIEW.md)
+- [品牌識別](docs/BRAND.md)
 - [內容更新操作教學](docs/CONTENT-GUIDE.md)
 - [GitHub Pages 部署、暫停與關站](docs/DEPLOYMENT.md)
 - [備份與還原](docs/BACKUP.md)

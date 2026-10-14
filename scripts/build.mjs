@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// 晨光生活誌 靜態網站產生器（無外部相依套件）
+// 由己 SELF-AUTHORED 靜態網站產生器（無外部相依套件）
 // 用法：node scripts/build.mjs [--mode=preview|production] [--out=dist]
 //   preview    ：顯示所有未撤下的資料，並以標籤標示查核狀態；頁面加上「預覽版本」提示與 noindex。
 //   production ：只輸出查核狀態為「已確認」且設定為公開的資料。
@@ -237,7 +237,8 @@ function resourceCard(r, { anchor = true } = {}) {
 
 function articleImageId(a) {
   const id = `article-${a.slug}`;
-  return photoById[id] ? id : null;
+  // 選用素材尚未提供時，文章維持純文字版面，不顯示待補框
+  return photoById[id] && (generated[id] || photoById[id].required) ? id : null;
 }
 
 function articleCard(a, prefix, { withImage = true } = {}) {
@@ -289,9 +290,15 @@ function searchBox({ id, placeholder, limit = 50 }) {
 // ---------------------------------------------------------------------------
 // 版面
 // ---------------------------------------------------------------------------
+/** 品牌標誌：葉枝圖形＋「由己」＋ SELF-AUTHORED 與主題說明，作為一組完整標誌 */
+function brandLockup() {
+  return `${icon('logo', 'brand-mark')}<span class="brand-name">${esc(site.name)}</span><span class="brand-meta"><span class="brand-en">${esc(site.englishName)}</span><span class="brand-sub">${esc(site.tagline)}</span></span>`;
+}
+// ---------------------------------------------------------------------------
 function layout({ title, description, active = '', body, scripts = [], prefix = '', absolute = false, bodyClass = '' }) {
   const base = absolute ? site.basePath : prefix;
-  const fullTitle = title ? `${title}｜${site.name}` : `${site.name}｜${site.tagline}`;
+  const brandFull = `${site.name} ${site.englishName}`;
+  const fullTitle = title ? `${title}｜${brandFull}` : `${brandFull}｜${site.tagline}`;
   const navItems = site.nav
     .map((n) => `<li><a href="${base}${n.href}"${n.id === active ? ' aria-current="page"' : ''}>${esc(n.label)}</a></li>`)
     .join('');
@@ -311,6 +318,10 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
 <meta name="referrer" content="no-referrer">
 ${robots}<title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(description || site.description)}">
+<meta name="application-name" content="${esc(brandFull)}">
+<meta property="og:site_name" content="${esc(brandFull)}">
+<meta property="og:title" content="${esc(fullTitle)}">
+<meta property="og:description" content="${esc(description || site.description)}">
 <meta name="theme-color" content="#FAF6EF">
 <link rel="icon" href="${base}assets/icons/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${base}assets/css/main.css">
@@ -322,7 +333,7 @@ ${scripts.map((s) => `<script src="${base}${s}" defer></script>`).join('\n')}
 ${previewBar}${noticeBar}
 <header class="site-header">
   <div class="wrap header-top">
-    <a class="brand" href="${base}index.html">${icon('logo', 'brand-mark')}<span class="brand-text"><span class="brand-name">${esc(site.name)}</span><span class="brand-sub">${esc(site.tagline)}</span></span></a>
+    <a class="brand" href="${base}index.html" aria-label="${esc(brandFull)}：回到首頁">${brandLockup()}</a>
     <div class="header-actions">
       <a class="hdr-btn hide-sm" href="${base}search.html">${icon('search')}<span>搜尋</span></a>
       <a class="hdr-btn hide-sm" href="${base}support.html"${active === 'support' ? ' aria-current="page"' : ''}>${icon('leaf')}<span>支援資源</span></a>
@@ -341,8 +352,9 @@ ${body}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <p class="footer-name">${icon('logo', 'brand-mark')}<span>${esc(site.name)}</span></p>
-        <p>免費、非營利的台灣女性生活資訊導航。本站整理公開資訊與官方入口，不承接個案，也不提供法律、醫療或心理專業服務。</p>
+        <p class="footer-name">${brandLockup()}</p>
+        <p>${esc(site.slogan)}</p>
+        <p>免費、非營利。本站整理公開資訊與官方入口，不承接個案，也不提供法律、醫療或心理專業服務。</p>
       </div>
       <div>
         <h2>生活主題</h2>
@@ -351,7 +363,7 @@ ${body}
       <div>
         <h2>關於本站</h2>
         <ul>
-          <li><a href="${base}about.html">關於晨光生活誌</a></li>
+          <li><a href="${base}about.html">關於由己</a></li>
           <li><a href="${base}verification.html">查核與更新說明</a></li>
           <li><a href="${base}disclaimer.html">網站免責聲明</a></li>
           <li><a href="${base}privacy.html">隱私宣告</a></li>
@@ -369,6 +381,7 @@ ${body}
     <div class="footer-legal">
       <p>提供外部機構連結，不代表本站與該機構有正式合作、授權或從屬關係。實際辦理請以主管機關或服務單位最新公告為準。</p>
       <p>本站不具報案或緊急救援功能。如有立即危險，請撥打 <a href="tel:110">110</a> 或 <a href="tel:119">119</a>。</p>
+      <p>本站照片風格圖片皆為 AI 生成的示意圖像，非實地拍攝，也不代表與任何機構合作。</p>
       <p>本站未使用訪客追蹤或分析工具。網站最後建置：${today}${IS_PREVIEW ? '（預覽版本）' : ''}</p>
     </div>
   </div>
@@ -429,9 +442,9 @@ function countyChips(asLinks) {
   </div>
   <div class="wrap hero-inner">
     <div class="hero-copy fade-in">
-      <p class="hero-kicker">Morning Light · 生活資訊導航</p>
+      <p class="hero-kicker">${esc(site.tagline)}</p>
       <h1 id="hero-title"><span class="line">生活有很多選擇，</span><span class="line">也有很多值得理解的事。</span></h1>
-      <p class="hero-lead">關於生活、工作、健康與關係，從你想了解的地方開始。</p>
+      <p class="hero-lead">${esc(site.slogan)}</p>
       ${searchBox({ id: 'home-q', placeholder: '搜尋主題、機構或縣市，例如：育兒、法律扶助', limit: 6 })}
     </div>
   </div>
@@ -458,7 +471,7 @@ function countyChips(asLinks) {
 
 <section class="section" aria-labelledby="articles-title">
   <div class="wrap">
-    ${sectionHead('Editor’s Picks', 'articles-title', '編輯精選')}
+    ${sectionHead('讀力 · Reading', 'articles-title', '編輯精選')}
     ${
       featuredArticles.length
         ? `<div class="story-grid">${featuredArticles.map((a) => articleCard(a, '')).join('\n')}</div>`
@@ -503,7 +516,7 @@ function countyChips(asLinks) {
   <div class="wrap feature-grid">
     <div class="feature-media">${photo('home-learning-band', 'band', { sizes: '(min-width: 900px) 50vw, 100vw' })}</div>
     <div class="feature-copy">
-      <span class="kicker">Learning</span>
+      <span class="kicker">向光 · Learning</span>
       <h2 id="learn-title">課程與學習活動</h2>
       <p>${esc(learning.intro)}</p>
       <ul class="link-list">
@@ -521,7 +534,7 @@ function countyChips(asLinks) {
   <div class="wrap about-grid">
     <div>
       <span class="kicker">About</span>
-      <h2 id="about-title">關於晨光生活誌</h2>
+      <h2 id="about-title">關於由己</h2>
     </div>
     <div class="about-copy">
       <p class="about-lead">一個免費、非營利的資訊入口。我們整理已經存在的公共資訊、官方說明與專業機構，讓你更容易找到需要的資源。</p>
@@ -531,13 +544,13 @@ function countyChips(asLinks) {
   </div>
 </section>`;
   pages.push({ file: 'index.html', html: layout({ title: '', active: 'home', body, bodyClass: 'home', scripts: ['assets/data/search-index.js', 'assets/js/search.js'] }) });
-  addIndex('頁面', '首頁', site.description, 'index.html', '晨光生活誌 首頁');
+  addIndex('頁面', '首頁', site.description, 'index.html', `${site.name} ${site.englishName} 首頁`);
 }
 
 // ---------- 分類頁共用 ----------
 function categoryHero(c) {
   return `<section class="cat-hero" aria-labelledby="page-title">
-  <div class="cat-hero-media">${photo(c.photo, 'banner', { eager: true, art: [{ crop: 'card', media: '(max-width: 699px)' }] })}</div>
+  <div class="cat-hero-media">${photo(c.photo, 'banner', { eager: true, art: [{ crop: 'card', media: '(max-width: 699px)' }] })}${photoById[c.photo]?.caption && photoReady(c.photo, 'banner') ? `<p class="photo-caption">${esc(photoById[c.photo].caption)}</p>` : ''}</div>
   <div class="wrap">
     <div class="cat-hero-panel">
       <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">${esc(c.title)}</li></ol></nav>

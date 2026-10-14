@@ -1,7 +1,7 @@
 ---
 title: 網站免責聲明
 kicker: Disclaimer
-description: 晨光生活誌的平台性質、專業服務界線、緊急求助與外部連結說明。
+description: 由己的平台性質、專業服務界線、緊急求助與外部連結說明。
 updated: 2026-10-14
 ---
 
