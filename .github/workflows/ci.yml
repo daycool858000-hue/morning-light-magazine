@@ -23,6 +23,8 @@ jobs:
         run: |
           npm ci
           npm install --no-save --no-package-lock playwright@1.56.1
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: 建置並測試
         run: npm test
+      - name: 使用 WebKit 模擬 Safari 進行手機功能與版面驗收
+        run: npm run test:webkit
