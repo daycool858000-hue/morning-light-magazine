@@ -282,5 +282,6 @@
       "checkedAt": null,
       "status": "待補"
     }
-  ]
+  ],
+  "_發布核准說明": "網站發起人 2026-10-15 同意九張現有 AI 示意圖供未來正式版公開，非現在部署及非人工專業審查。各圖片 status、checkedAt 保留原義，獨立核准版本由 content/release-approvals.json 記錄，cat-city 維持既有裁切；可選文章封面未核准。"
 }

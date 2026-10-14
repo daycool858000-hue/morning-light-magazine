@@ -201,7 +201,7 @@ if (photoErrors.length) {
 }
 const ASPECT_CLASS = (aspect) => `ar-${aspect.replace(':', 'x')}`;
 
-/** 素材是否可以顯示：已產生檔案，且（預覽版）或（正式版且已檢查） */
+/** 素材是否可以顯示：已產生檔案，且（預覽版）或（正式版匹配已核准版本） */
 function photoReady(id, crop) {
   const p = photoById[id];
   if (!p || !generated[id]?.[crop]) return false;
@@ -979,5 +979,5 @@ if (!IS_PREVIEW) {
 const pending = resourceData.items.filter((r) => r.status !== '已確認' && r.status !== '已撤下').length;
 const photoMissing = photoData.items.filter((p) => !generated[p.id]).length;
 console.log(`建置完成（${MODE}）：${pages.length} 個頁面 → ${path.relative(ROOT, OUT) || '.'}`);
-console.log(`資源：公開 ${resources.length} 筆／全部 ${resourceData.items.length} 筆（待查核 ${pending} 筆）；文章 ${articles.length} 篇；活動 ${events.length} 筆`);
+console.log(`資源：公開 ${resources.length} 筆／全部 ${resourceData.items.length} 筆（原人工查核狀態仍待確認 ${pending} 筆，AI 來源查核與作者發布核准另記）；文章 ${articles.length} 篇；活動 ${events.length} 筆`);
 console.log(`攝影素材：已處理 ${photoData.items.length - photoMissing} 張／清單 ${photoData.items.length} 張（尚缺 ${photoMissing} 張，執行 npm run images 查看清單）`);

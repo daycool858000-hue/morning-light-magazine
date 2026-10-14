@@ -4,9 +4,12 @@ import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from '../scripts/lib/release.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const require=createRequire(import.meta.url);
+const sharp=require('sharp');
 const readJson=async p=>JSON.parse(await readFile(path.join(root,p),'utf8'));
 const approvals=await readJson('content/release-approvals.json');
 const r=(await readJson('content/resources.json')).items;
@@ -51,6 +54,11 @@ for(const item of p){
  }
 }
 check(allow.size===84,'只允許原先的 84 張響應式衍生圖片');
+// 實際檢查每張已核准的輸出圖片，不能只靠合成測試圖推論 EXIF／GPS 已移除。
+for(const filename of allow){
+ const meta=await sharp(path.join(root,'src/assets/photos',filename)).metadata();
+ check(!meta.exif && !meta.xmp && !meta.iptc && !meta.icc,'圖片不得殘留 EXIF／XMP／IPTC／ICC 等附帶資訊：'+filename);
+}
 const dist=path.join(root,'dist-production');
 const html=await readFile(path.join(dist,'city.html'),'utf8');
 check((html.match(/ data-res /g)||[]).length===16,'正式城市目錄應有 16 筆');
