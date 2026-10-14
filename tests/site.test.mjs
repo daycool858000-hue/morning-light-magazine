@@ -4,7 +4,7 @@
 // 需要 Playwright：本機請先 `npm i -D playwright`；若環境已全域安裝，會自動使用。
 
 import http from 'node:http';
-import { readFile, readdir, stat } from 'node:fs/promises';
+import { readFile, readdir, stat, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
@@ -189,24 +189,35 @@ try {
   await page.goto(`${ORIGIN}${BASE}search.html`);
   await page.fill('#q', '法律扶助');
   await page.waitForTimeout(300);
-  const hits = await page.locator('#search-results li').count();
+  const hits = await page.locator('[data-search-results] li').count();
   await page.fill('#q', '臺中');
   await page.waitForTimeout(300);
-  const countyHits = await page.locator('#search-results li').count();
+  const countyHits = await page.locator('[data-search-results] li').count();
   await page.fill('#q', '台中');
   await page.waitForTimeout(300);
-  const countyHits2 = await page.locator('#search-results li').count();
+  const countyHits2 = await page.locator('[data-search-results] li').count();
   await page.fill('#q', 'zzzz無此內容');
   await page.press('#q', 'Enter');
   await page.waitForTimeout(300);
-  const emptyShown = await page.isVisible('#search-empty');
+  const emptyShown = await page.isVisible('[data-search-empty]');
   check('站內搜尋：機構、縣市（臺／台通用）可搜尋；無結果時提供分類入口', hits > 0 && countyHits > 0 && countyHits2 === countyHits && emptyShown, `法律扶助 ${hits} 筆、臺中 ${countyHits} 筆、台中 ${countyHits2} 筆`);
   check('搜尋文字不出現在網址中', page.url() === `${ORIGIN}${BASE}search.html`, page.url());
+
+  // 首頁主視覺搜尋：結果以浮層顯示、最多 6 筆、不改變網址
+  await page.goto(`${ORIGIN}${BASE}index.html`);
+  await page.fill('#home-q', '心理');
+  await page.waitForTimeout(300);
+  const homeHits = await page.locator('.hero [data-search-results] li').count();
+  const homeFirst = await page.getAttribute('.hero [data-search-results] li a', 'href');
+  await page.press('#home-q', 'Escape');
+  await page.waitForTimeout(200);
+  const homeCleared = await page.locator('.hero [data-search-results] li').count();
+  check('首頁主視覺搜尋：顯示結果（最多 6 筆）、Esc 清除、不改變網址', homeHits > 0 && homeHits <= 6 && !!homeFirst && homeCleared === 0 && page.url() === `${ORIGIN}${BASE}index.html`, `心理 ${homeHits} 筆`);
 
   // 學習與活動：過期活動隱藏（以頁面注入的模擬資料測試）
   await page.goto(`${ORIGIN}${BASE}learning.html`);
   const eventsOk = await page.evaluate(() => {
-    const grid = document.querySelector('#events-title').closest('section').querySelector('.article-grid');
+    const grid = document.querySelector('#events-title').closest('section').querySelector('.event-list');
     grid.innerHTML = '<article data-event-end="2000-01-01">old</article><article data-event-end="2999-12-31">new</article>';
     document.dispatchEvent(new Event('DOMContentLoaded'));
     const [oldE, newE] = grid.querySelectorAll('article');
@@ -250,8 +261,48 @@ if (existsSync(DIST_PROD)) {
     const html = await readFile(path.join(DIST_PROD, p), 'utf8');
     if (html.includes('待查核') && html.includes('badge-pending')) leaks.push(p);
     if (html.includes('preview-bar') || html.includes('noindex')) leaks.push(`${p}（預覽標記）`);
+    if (html.includes('攝影素材待補')) leaks.push(`${p}（素材待補文字）`);
   }
   check('正式版（production）不包含「待查核」資料與預覽標記', leaks.length === 0, leaks.join('、'));
+}
+
+// ---------- 8. 攝影素材處理流程（以測試用圖片驗證，不會進入網站） ----------
+{
+  const { execFileSync } = await import('node:child_process');
+  const { mkdtemp } = await import('node:fs/promises');
+  const os = await import('node:os');
+  let sharp = null;
+  try { sharp = require('sharp'); } catch { /* 未安裝 sharp */ }
+  if (!sharp) {
+    check('攝影素材處理流程（需要 sharp，請先 npm install）', false, '找不到 sharp');
+  } else {
+    const tmp = await mkdtemp(path.join(os.tmpdir(), 'mlm-photos-'));
+    const originals = path.join(tmp, 'originals');
+    const out = path.join(tmp, 'photos');
+    const distTmp = path.join(tmp, 'dist');
+    await (await import('node:fs/promises')).mkdir(originals, { recursive: true });
+    // 測試用圖片：純色合成圖，並刻意寫入含 GPS 的 EXIF，確認輸出會移除
+    await sharp({ create: { width: 3200, height: 1800, channels: 3, background: { r: 230, g: 214, b: 190 } } })
+      .withExif({ IFD0: { Copyright: 'test' }, IFD3: { GPSLatitudeRef: 'N', GPSLatitude: '25/1 2/1 0/1' } })
+      .jpeg().toFile(path.join(originals, 'home-hero.jpg'));
+    const env = { ...process.env, PHOTO_ORIGINALS: originals, PHOTO_OUT: out };
+    execFileSync(process.execPath, [path.join(ROOT, 'scripts/images.mjs')], { env, stdio: 'pipe' });
+    const gen = JSON.parse(await readFile(path.join(out, 'generated.json'), 'utf8'));
+    const files = await readdir(out);
+    const wideOk = gen['home-hero']?.wide?.widths?.includes(2400) && files.includes('home-hero-wide-2400.webp') && files.includes('home-hero-portrait-1200.jpg');
+    const m = await sharp(path.join(out, 'home-hero-wide-1600.webp')).metadata();
+    const ratioOk = Math.abs(m.width / m.height - 16 / 7) < 0.01;
+    const exifGone = !(await sharp(path.join(out, 'home-hero-wide-1200.jpg')).metadata()).exif;
+    execFileSync(process.execPath, [path.join(ROOT, 'scripts/build.mjs'), '--mode=preview', `--out=${distTmp}`], { env, stdio: 'pipe' });
+    const html = await readFile(path.join(distTmp, 'index.html'), 'utf8');
+    const pictureOk = /<picture class="photo[^"]*hero-photo[^"]*"><source media="\(max-width: 699px\)" type="image\/webp" srcset="assets\/photos\/home-hero-portrait-/.test(html) && html.includes('fetchpriority="high"') && existsSync(path.join(distTmp, 'assets/photos/home-hero-wide-800.webp'));
+    execFileSync(process.execPath, [path.join(ROOT, 'scripts/build.mjs'), '--mode=production', `--out=${distTmp}-prod`], { env, stdio: 'pipe' });
+    const prodHasUnchecked = existsSync(path.join(`${distTmp}-prod`, 'assets/photos/home-hero-wide-800.webp')) || (await readFile(path.join(`${distTmp}-prod`, 'index.html'), 'utf8')).includes('<picture');
+    check('攝影素材流程：依比例裁切、輸出多尺寸 WebP＋JPEG、移除 EXIF／GPS、預覽版輸出響應式 <picture>（手機另用直幅裁切）', wideOk && ratioOk && exifGone && pictureOk, `寬幅比例 ${m.width}×${m.height}`);
+    check('正式版不使用尚未「已檢查」的攝影素材', !prodHasUnchecked);
+    await rm(tmp, { recursive: true, force: true });
+    await rm(`${distTmp}-prod`, { recursive: true, force: true });
+  }
 }
 
 // ---------- 7. 色彩對比（WCAG AA 4.5:1） ----------
@@ -261,7 +312,13 @@ if (existsSync(DIST_PROD)) {
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
   const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
-  const pairs = [['#455B50', '#FAF7EF'], ['#665A50', '#FAF7EF'], ['#665A50', '#FBEBDD'], ['#665A50', '#F5ECD3'], ['#665A50', '#E3EBDD'], ['#665A50', '#E6EEF5'], ['#3A4D43', '#F7DAC4'], ['#FFFFFF', '#455B50'], ['#665A50', '#F1EBDD']];
+  // 依 src/assets/css/main.css 的實際文字／背景組合
+  const pairs = [
+    ['#3B342E', '#FAF6EF'], ['#3B342E', '#FFFDF9'], ['#3B342E', '#E9DFD0'], ['#3B342E', '#EFE6D8'],
+    ['#6A5E54', '#FAF6EF'], ['#6A5E54', '#FFFDF9'], ['#6A5E54', '#F3EBDF'], ['#6A5E54', '#EFE6D8'], ['#6A5E54', '#F4E8D2'], ['#6A5E54', '#EEF1E8'],
+    ['#8A5634', '#FAF6EF'], ['#8A5634', '#FFFDF9'], ['#8A5634', '#F3EBDF'], ['#A9532F', '#FFFDF9'],
+    ['#FFFFFF', '#A9532F'], ['#FFFFFF', '#5E7358'], ['#4E6148', '#EEF1E8'], ['#8E4426', '#F2DDD0'], ['#5E7358', '#FFFDF9'],
+  ];
   const low = pairs.map(([f, b]) => [f, b, ratio(f, b)]).filter(([, , r]) => r < 4.5);
   check('主要文字／背景配色對比 ≥ 4.5:1', low.length === 0, low.map(([f, b, r]) => `${f} on ${b} = ${r.toFixed(2)}`).join('；'));
 }

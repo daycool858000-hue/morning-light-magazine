@@ -19,8 +19,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: 安裝測試用瀏覽器（只用於測試，不會打包進網站）
+      - name: 安裝開發工具（sharp 圖片處理）與測試用瀏覽器（皆不會打包進網站）
         run: |
+          npm ci
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
       - name: 建置並測試

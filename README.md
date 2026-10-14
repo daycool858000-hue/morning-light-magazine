@@ -15,11 +15,12 @@
 ## 技術架構
 
 - 純靜態網站：HTML + CSS + 原生 JavaScript，**沒有任何執行期外部套件**。
+- 開發用套件只有 `sharp`（處理攝影素材），不會進入網站。
 - 內容與程式分離：`content/` 內的 JSON 與 Markdown 是唯一資料來源，`scripts/build.mjs`（Node.js，零相依）產生靜態頁面到 `dist/`。
 - 不使用 React／Vite：本站內容以文字與連結為主，原生技術即可完成，部署最穩定、維護成本最低。
 - 不使用外部字型、CDN、分析或追蹤工具；所有請求都只連到本站。
 
-## 常用指令（需要 Node.js 18 以上）
+## 常用指令（需要 Node.js 20.9 以上）
 
 | 指令 | 用途 |
 |---|---|
@@ -28,6 +29,7 @@
 | `npm run preview` | 建置並在本機 `http://127.0.0.1:4173/` 開啟預覽 |
 | `npm test` | 建置兩種版本並執行自動化測試（需要 Playwright） |
 | `npm run check-links` | 檢查所有官方網址是否可連線（需可連外網路） |
+| `npm run images` | 處理 `content/photos/originals/` 的攝影素材（裁切、壓縮、移除 EXIF），需先 `npm install` |
 
 ## 目錄
 
@@ -41,8 +43,11 @@ content/
   counties.json         全台 22 縣市
   articles/*.md         導讀文章
   pages/*.md            關於、免責聲明、隱私宣告、查核說明
+  photos.json           攝影素材清單（用途、構圖說明、裁切比例、授權紀錄）
+  photos/originals/     攝影素材原始檔（由使用者提供）
 src/
-  assets/css|js|img     樣式、腳本、原創插畫
+  assets/css|js         樣式、腳本
+  assets/photos/        處理後的攝影素材（npm run images 產生）
   icons/*.svg           原創概念圖示
 scripts/                建置、本機預覽、連結檢查
 tests/                  自動化測試
@@ -54,6 +59,7 @@ docs/                   維護、部署、備份、授權與驗收文件
 
 - [永久視覺設計規範 V1.0](docs/VISUAL-STANDARD.md)
 - [第一階段驗收報告](docs/ACCEPTANCE-PHASE1.md)
+- [第一階段視覺重製驗收報告（視覺 V2）](docs/ACCEPTANCE-VISUAL-V2.md)
 - [內容更新操作教學](docs/CONTENT-GUIDE.md)
 - [GitHub Pages 部署、暫停與關站](docs/DEPLOYMENT.md)
 - [備份與還原](docs/BACKUP.md)

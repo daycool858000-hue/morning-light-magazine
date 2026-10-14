@@ -5,6 +5,7 @@
 //   production ：只輸出查核狀態為「已確認」且設定為公開的資料。
 
 import { readFile, writeFile, mkdir, rm, readdir, copyFile, stat } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml as esc, parseFrontMatter, renderMarkdown } from './lib/markdown.mjs';
@@ -147,10 +148,70 @@ function regionLabel(regions) {
   return regions.map((g) => (g === 'national' ? '全國' : countyById[g]?.name || g)).join('、');
 }
 
+// ---------------------------------------------------------------------------
+// 攝影素材
+// ---------------------------------------------------------------------------
+const photoData = await readJson('content/photos.json');
+const photoById = Object.fromEntries(photoData.items.map((p) => [p.id, p]));
+// PHOTO_OUT 可指定其他素材輸出資料夾（自動化測試使用）
+const PHOTO_DIR = path.resolve(ROOT, process.env.PHOTO_OUT || 'src/assets/photos');
+const generatedPath = path.join(PHOTO_DIR, 'generated.json');
+const generated = existsSync(generatedPath) ? JSON.parse(await readFile(generatedPath, 'utf8')) : {};
+const photoErrors = [];
+for (const p of photoData.items) {
+  if (!['待補', '待檢查', '已檢查'].includes(p.status)) photoErrors.push(`photos.json → ${p.id}：status 不正確`);
+  if (p.status === '已檢查' && (!p.license || !p.source || !isDate(p.checkedAt))) {
+    photoErrors.push(`photos.json → ${p.id}：「已檢查」的素材必須填寫 source、license 與 checkedAt`);
+  }
+}
+if (photoErrors.length) {
+  console.error('素材檢查失敗：\n- ' + photoErrors.join('\n- '));
+  process.exit(1);
+}
+const ASPECT_CLASS = (aspect) => `ar-${aspect.replace(':', 'x')}`;
+
+/** 素材是否可以顯示：已產生檔案，且（預覽版）或（正式版且已檢查） */
+function photoReady(id, crop) {
+  const p = photoById[id];
+  if (!p || !generated[id]?.[crop]) return false;
+  return IS_PREVIEW || p.status === '已檢查';
+}
+
+/**
+ * 輸出 <picture>。素材尚未提供時：預覽版顯示「攝影素材待補」框，正式版顯示無文字的色塊。
+ * @param {string} id
+ * @param {string} crop 預設裁切
+ * @param {{prefix?: string, sizes?: string, eager?: boolean, cls?: string, art?: {crop: string, media: string}[]}} opts
+ */
+function photo(id, crop, { prefix = '', sizes = '100vw', eager = false, cls = '', art = [] } = {}) {
+  const p = photoById[id];
+  if (!p) throw new Error(`photos.json 沒有 ${id}`);
+  const aspect = p.crops[crop].aspect;
+  if (!photoReady(id, crop)) {
+    const label = IS_PREVIEW
+      ? `<span class="ph-label"><strong>攝影素材待補</strong>${esc(p.title)}<small>${esc(id)} · ${[crop, ...art.map((a) => a.crop)].map((c) => p.crops[c].aspect).join(' / ')}</small></span>`
+      : '';
+    const artCls = art.map((a) => `ph-${a.crop}-${ASPECT_CLASS(p.crops[a.crop].aspect)}`).join(' ');
+    return `<div class="photo photo-ph ${ASPECT_CLASS(aspect)} ${artCls} ${cls}"${IS_PREVIEW ? ` role="img" aria-label="攝影素材待補：${esc(p.title)}"` : ' aria-hidden="true"'}>${label}</div>`;
+  }
+  const srcset = (c) => generated[id][c].widths.map((w) => `${prefix}assets/photos/${id}-${c}-${w}.webp ${w}w`).join(', ');
+  const g = generated[id][crop];
+  const [aw, ah] = aspect.split(':').map(Number);
+  const w = g.fallback;
+  const h = Math.round((w * ah) / aw);
+  const sources = art
+    .filter((a) => photoReady(id, a.crop))
+    .map((a) => `<source media="${a.media}" type="image/webp" srcset="${srcset(a.crop)}" sizes="100vw">`)
+    .join('');
+  return `<picture class="photo ${ASPECT_CLASS(aspect)} ${cls}">${sources}<source type="image/webp" srcset="${srcset(crop)}" sizes="${sizes}"><img src="${prefix}assets/photos/${id}-${crop}-${w}.jpg" width="${w}" height="${h}" alt="${esc(p.alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"></picture>`;
+}
+
+// ---------------------------------------------------------------------------
+// 共用卡片
+// ---------------------------------------------------------------------------
 function resourceCard(r, { anchor = true } = {}) {
   const cat = catById[r.categories[0]];
   const iconName = cat ? cat.icon : 'support';
-  const tone = cat ? `tone-${cat.tone}` : 'tone-green';
   const phones = r.phones
     .map((p) => `<a class="tel" href="tel:${esc(p.number)}">撥打 ${esc(p.number)}</a>`)
     .join('');
@@ -158,19 +219,48 @@ function resourceCard(r, { anchor = true } = {}) {
     ? `<dt>電話</dt><dd>${r.phones.map((p) => `${esc(p.label)}（服務時間：${esc(p.hours)}）`).join('<br>')}</dd>`
     : '';
   return `<article class="res-card"${anchor ? ` id="res-${esc(r.id)}"` : ''} data-res data-regions="${esc(r.regions.join(' '))}" data-types="${esc(r.serviceTypes.join('|'))}">
-  <div class="res-head">${icon(iconName, `res-icon ${tone}`)}<div><h3>${esc(r.name)}</h3><div class="meta">${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span></div></div></div>
-  <ul class="tags">${r.serviceTypes.map((s) => `<li class="tag">${esc(s)}</li>`).join('')}</ul>
-  <p>${esc(r.summary)}</p>
+  <header class="res-head">
+    ${icon(iconName, 'res-icon')}
+    <div class="res-title">
+      <h3>${esc(r.name)}</h3>
+      <p class="res-types">${r.serviceTypes.map(esc).join('・')}</p>
+    </div>
+  </header>
+  <p class="res-summary">${esc(r.summary)}</p>
   <dl class="res-dl"><dt>對象</dt><dd>${esc(r.audience)}</dd><dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
-  <div class="res-actions">${extLink(r.url, '前往官方網站')}${phones}</div>
+  <footer class="res-foot">
+    <div class="meta">${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span></div>
+    <div class="res-actions">${extLink(r.url, '前往官方網站')}${phones}</div>
+  </footer>
 </article>`;
 }
 
-function articleCard(a, prefix) {
-  return `<article class="article-card">
-  <div class="meta"><span class="tag">${esc(categoryLabel(a.category))}</span><span>更新：${esc(a.updated)}</span></div>
-  <h3><a href="${prefix}articles/${esc(a.slug)}.html">${esc(a.title)}</a></h3>
-  <p>${esc(a.summary)}</p>
+function articleImageId(a) {
+  const id = `article-${a.slug}`;
+  return photoById[id] ? id : null;
+}
+
+function articleCard(a, prefix, { withImage = true } = {}) {
+  const imgId = withImage ? articleImageId(a) : null;
+  const href = `${prefix}articles/${esc(a.slug)}.html`;
+  const label = `<span class="pill">${esc(categoryLabel(a.category))}</span>`;
+  if (imgId) {
+    return `<article class="story">
+  <a class="story-media" href="${href}" tabindex="-1" aria-hidden="true">${photo(imgId, 'card', { prefix, sizes: '(min-width: 1000px) 380px, (min-width: 700px) 50vw, 100vw' })}${label}</a>
+  <div class="story-body">
+    <h3><a href="${href}">${esc(a.title)}</a></h3>
+    <p>${esc(a.summary)}</p>
+    <p class="story-date">更新：${esc(a.updated)}</p>
+  </div>
+</article>`;
+  }
+  return `<article class="story story-text">
+  <div class="story-body">
+    ${label}
+    <h3><a href="${href}">${esc(a.title)}</a></h3>
+    <p>${esc(a.summary)}</p>
+    <p class="story-date">更新：${esc(a.updated)}</p>
+  </div>
 </article>`;
 }
 
@@ -178,10 +268,28 @@ function emptyBox(text) {
   return `<div class="empty"><p>${text}</p></div>`;
 }
 
+function sectionHead(kicker, id, title, text = '', extra = '') {
+  return `<div class="section-head"><div><span class="kicker">${kicker}</span><h2 id="${id}">${title}</h2>${text ? `<p>${text}</p>` : ''}</div>${extra}</div>`;
+}
+
+function searchBox({ id, placeholder, limit = 50 }) {
+  return `<div class="search-box" data-search data-search-limit="${limit}">
+  <form class="search-form" role="search" data-search-form>
+    <label class="visually-hidden" for="${id}">搜尋全站</label>
+    ${icon('search', 'icon search-icon')}
+    <input id="${id}" type="search" autocomplete="off" spellcheck="false" placeholder="${esc(placeholder)}" data-search-input>
+    <button type="submit" class="search-submit">搜尋</button>
+  </form>
+  <p class="search-status" role="status" aria-live="polite" data-search-status></p>
+  <ul class="search-results" data-search-results></ul>
+  <div class="search-empty" data-search-empty hidden><p>找不到相符的內容。試試看換個詞，或從生活主題開始瀏覽。</p></div>
+</div>`;
+}
+
 // ---------------------------------------------------------------------------
 // 版面
 // ---------------------------------------------------------------------------
-function layout({ title, description, active = '', body, scripts = [], prefix = '', absolute = false }) {
+function layout({ title, description, active = '', body, scripts = [], prefix = '', absolute = false, bodyClass = '' }) {
   const base = absolute ? site.basePath : prefix;
   const fullTitle = title ? `${title}｜${site.name}` : `${site.name}｜${site.tagline}`;
   const navItems = site.nav
@@ -203,18 +311,18 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
 <meta name="referrer" content="no-referrer">
 ${robots}<title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(description || site.description)}">
-<meta name="theme-color" content="#FAF7EF">
+<meta name="theme-color" content="#FAF6EF">
 <link rel="icon" href="${base}assets/icons/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${base}assets/css/main.css">
 <script src="${base}assets/js/main.js"></script>
 ${scripts.map((s) => `<script src="${base}${s}" defer></script>`).join('\n')}
 </head>
-<body>
+<body${bodyClass ? ` class="${bodyClass}"` : ''}>
 <a class="skip-link" href="#main">跳到主要內容</a>
 ${previewBar}${noticeBar}
 <header class="site-header">
   <div class="wrap header-top">
-    <a class="brand" href="${base}index.html">${icon('logo', 'brand-mark')}<span class="brand-text"><span class="brand-name">${esc(site.name)}</span><span class="brand-sub">${esc(site.englishName)}</span></span></a>
+    <a class="brand" href="${base}index.html">${icon('logo', 'brand-mark')}<span class="brand-text"><span class="brand-name">${esc(site.name)}</span><span class="brand-sub">${esc(site.tagline)}</span></span></a>
     <div class="header-actions">
       <a class="hdr-btn hide-sm" href="${base}search.html">${icon('search')}<span>搜尋</span></a>
       <a class="hdr-btn hide-sm" href="${base}support.html"${active === 'support' ? ' aria-current="page"' : ''}>${icon('leaf')}<span>支援資源</span></a>
@@ -232,9 +340,13 @@ ${body}
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
-      <div>
-        <h2>${esc(site.name)}</h2>
+      <div class="footer-brand">
+        <p class="footer-name">${icon('logo', 'brand-mark')}<span>${esc(site.name)}</span></p>
         <p>免費、非營利的台灣女性生活資訊導航。本站整理公開資訊與官方入口，不承接個案，也不提供法律、醫療或心理專業服務。</p>
+      </div>
+      <div>
+        <h2>生活主題</h2>
+        <ul>${categories.map((c) => `<li><a href="${base}${c.slug}">${esc(c.title)}</a></li>`).join('')}</ul>
       </div>
       <div>
         <h2>關於本站</h2>
@@ -279,56 +391,65 @@ function resourcesFor(predicate) {
   return resources.filter(predicate);
 }
 
+function needList(items) {
+  return `<ol class="need-list">${items
+    .map(
+      (n, i) => `<li><a href="${n.href}"><span class="need-no">${String(i + 1).padStart(2, '0')}</span><span class="need-text">${esc(n.text)}${n.cat ? `<small>${esc(n.cat)}</small>` : ''}</span><span class="need-arrow" aria-hidden="true">→</span></a></li>`,
+    )
+    .join('')}</ol>`;
+}
+
+function countyChips(asLinks) {
+  return AREAS.map(
+    (area) => `<div class="county-area"><h3>${area}</h3><div class="chips">${counties
+      .filter((c) => c.area === area)
+      .map((c) =>
+        asLinks
+          ? `<a class="county-chip" href="city.html#county=${c.id}">${esc(c.name)}</a>`
+          : `<button type="button" class="county-chip" data-county="${c.id}" aria-pressed="false">${esc(c.name)}</button>`,
+      )
+      .join('')}</div></div>`,
+  ).join('\n');
+}
+
 // ---------- 首頁 ----------
 {
-  const featuredIds = ['taiwanjobs', 'sfaa', 'laf', 'mohw-domhaoh', 'mol', 'edu'];
+  const featuredIds = ['taiwanjobs', 'sfaa', 'laf', 'mohw-domhaoh'];
   const featured = featuredIds.map((id) => resources.find((r) => r.id === id)).filter(Boolean);
   const featuredArticles = articles.filter((a) => a.featured === true).slice(0, 3);
-  const needs = categories.flatMap((c) => c.needs.map((n) => ({ ...n, cat: c }))).slice(0, 9);
+  const needs = categories
+    .flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic}` })))
+    .slice(0, 8);
   const learning = catById.learning;
 
   const body = `
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="fade-in">
-      <p class="hero-issue"><span>Morning Light</span><span>Issue 01</span><span>${today.slice(0, 4)}</span></p>
-      <h1><span class="line">生活有很多選擇，</span><br><span class="line">也有很多值得理解的事。</span></h1>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-media">
+    ${photo('home-hero', 'wide', { eager: true, cls: 'hero-photo', art: [{ crop: 'portrait', media: '(max-width: 699px)' }] })}
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy fade-in">
+      <p class="hero-kicker">Morning Light · 生活資訊導航</p>
+      <h1 id="hero-title"><span class="line">生活有很多選擇，</span><span class="line">也有很多值得理解的事。</span></h1>
       <p class="hero-lead">關於生活、工作、健康與關係，從你想了解的地方開始。</p>
-      <div class="btn-row">
-        <a class="btn" href="#topics">瀏覽生活主題</a>
-        <a class="btn btn-ghost" href="city.html">依縣市查詢資源</a>
-      </div>
+      ${searchBox({ id: 'home-q', placeholder: '搜尋主題、機構或縣市，例如：育兒、法律扶助', limit: 6 })}
     </div>
-    <figure class="hero-art fade-in delay"><img src="assets/img/hero-morning.svg" width="560" height="500" alt="清晨的太陽從窗外升起，窗台上有盆栽、一杯熱茶與一本書。"></figure>
   </div>
 </section>
 
-<section class="section" id="topics" aria-labelledby="topics-title">
+<section class="section cats" id="topics" aria-labelledby="topics-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Six Topics</span><h2 id="topics-title">六個生活主題</h2><p>依照生活中常見的需要分類，每個主題都整理了官方制度與正式服務的入口。</p></div>
-    <div class="cat-grid">
+    ${sectionHead('Six Topics', 'topics-title', '六個生活主題')}
+    <ul class="cat-row">
       ${categories
         .map(
-          (c) => `<a class="cat-card tone-${c.tone}" href="${c.slug}">
-        ${icon(c.icon, 'cat-icon')}
-        <span class="cat-no">No.${c.no} · ${esc(c.kicker)}</span>
-        <h3>${esc(c.title)}</h3>
-        <p>${esc(c.short)}</p>
-        <span class="cat-more">進入主題 →</span>
-      </a>`,
-        )
-        .join('\n')}
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="needs-title">
-  <div class="wrap">
-    <div class="section-head"><span class="kicker">Start Here</span><h2 id="needs-title">從你想了解的事開始</h2></div>
-    <ul class="need-list three">
-      ${needs
-        .map(
-          (n) => `<li><a href="${n.cat.slug}#${n.topic === 'finder' ? 'finder' : n.topic}">${icon(n.cat.icon)}<span>${esc(n.text)}<small>${esc(n.cat.title)}</small></span></a></li>`,
+          (c) => `<li><a class="cat-card" href="${c.slug}">
+        ${photo(c.photo, 'card', { sizes: '(min-width: 1100px) 190px, (min-width: 700px) 33vw, 50vw' })}
+        <span class="cat-body">
+          <span class="cat-title">${icon(c.icon, 'cat-icon')}<span>${esc(c.title)}</span></span>
+          <span class="cat-tag">${esc(c.tagline)}</span>
+        </span>
+      </a></li>`,
         )
         .join('\n')}
     </ul>
@@ -337,141 +458,113 @@ function resourcesFor(predicate) {
 
 <section class="section" aria-labelledby="articles-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Reading</span><h2 id="articles-title">實用文章精選</h2><p>簡短、實用的導讀，每篇都標示參考來源與最後更新時間。</p></div>
+    ${sectionHead('Editor’s Picks', 'articles-title', '編輯精選')}
     ${
       featuredArticles.length
-        ? `<div class="article-grid three">${featuredArticles.map((a) => articleCard(a, '')).join('\n')}</div>`
+        ? `<div class="story-grid">${featuredArticles.map((a) => articleCard(a, '')).join('\n')}</div>`
         : emptyBox('導讀文章正在撰寫與查核中，完成後會陸續上架。')
     }
-    <p class="note" role="note">各主題的制度導讀文章將於資料查核完成後陸續上架（第二階段）。</p>
+    <p class="section-note">各主題的制度導讀文章，將於資料查核完成後陸續上架。</p>
+  </div>
+</section>
+
+<section class="section needs" aria-labelledby="needs-title">
+  <div class="wrap needs-grid">
+    <div class="needs-intro">
+      <span class="kicker">Start Here</span>
+      <h2 id="needs-title">從你想了解的事開始</h2>
+      <p>不必先知道機關名稱。選一件你想了解的事，就能找到對應的主題與官方入口。</p>
+    </div>
+    ${needList(needs)}
+  </div>
+</section>
+
+<section class="section feature" aria-labelledby="city-title">
+  <div class="wrap feature-grid">
+    <div class="feature-media">${photo('home-city-band', 'band', { sizes: '(min-width: 900px) 50vw, 100vw' })}</div>
+    <div class="feature-copy">
+      <span class="kicker">City Index</span>
+      <h2 id="city-title">城市資源入口</h2>
+      <p>選擇你所在的縣市，查詢婦女、家庭、就業與心理衛生等正式服務。不使用定位，也不保存你的選擇。</p>
+      <div class="county-areas">${countyChips(true)}</div>
+      <a class="btn" href="city.html">開啟城市資源索引</a>
+    </div>
   </div>
 </section>
 
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Official Resources</span><h2 id="res-title">官方資源推薦</h2><p>點擊後會直接前往原始機構網站。</p></div>
+    ${sectionHead('Official Resources', 'res-title', '官方資源推薦', '點擊後會直接前往原始機構網站。')}
     ${featured.length ? `<div class="res-grid">${featured.map((r) => resourceCard(r, { anchor: false })).join('\n')}</div>` : emptyBox('官方資源正在查核中，完成後會陸續公開。')}
   </div>
 </section>
 
-<section class="section" aria-labelledby="city-title">
-  <div class="wrap">
-    <div class="band tone-blue">
-      <div class="band-grid">
-        <div>
-          <span class="kicker">City Index</span>
-          <h2 id="city-title">城市資源入口</h2>
-          <p>選擇你所在的縣市，查詢婦女、家庭、就業與心理衛生等正式服務。不使用定位，也不保存你的選擇。</p>
-          <a class="btn" href="city.html">開啟城市資源索引</a>
-        </div>
-        <div class="county-areas">
-          ${AREAS.map(
-            (area) => `<div class="county-area"><h3>${area}</h3>${counties
-              .filter((c) => c.area === area)
-              .map((c) => `<a class="county-chip" href="city.html#county=${c.id}">${esc(c.name)}</a>`)
-              .join('')}</div>`,
-          ).join('\n')}
-        </div>
-      </div>
+<section class="section feature reverse" aria-labelledby="learn-title">
+  <div class="wrap feature-grid">
+    <div class="feature-media">${photo('home-learning-band', 'band', { sizes: '(min-width: 900px) 50vw, 100vw' })}</div>
+    <div class="feature-copy">
+      <span class="kicker">Learning</span>
+      <h2 id="learn-title">課程與學習活動</h2>
+      <p>${esc(learning.intro)}</p>
+      <ul class="link-list">
+        ${learning.topics
+          .slice(0, 6)
+          .map((t) => `<li><a href="learning.html#${t.id}">${esc(t.title)}</a></li>`)
+          .join('\n')}
+      </ul>
+      <a class="btn btn-ghost" href="learning.html">看看學習與活動</a>
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="learn-title">
-  <div class="wrap">
-    <div class="band tone-gold">
-      <div class="band-grid">
-        <div>
-          <span class="kicker">Learning</span>
-          <h2 id="learn-title">課程與學習活動</h2>
-          <p>${esc(learning.intro)}</p>
-          <a class="btn" href="learning.html">看看學習與活動</a>
-        </div>
-        <ul class="need-list">
-          ${learning.topics
-            .slice(0, 6)
-            .map((t) => `<li><a href="learning.html#${t.id}">${icon('learning')}<span>${esc(t.title)}</span></a></li>`)
-            .join('\n')}
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="about-title">
-  <div class="wrap about-strip">
+<section class="section about-strip" aria-labelledby="about-title">
+  <div class="wrap about-grid">
     <div>
       <span class="kicker">About</span>
       <h2 id="about-title">關於晨光生活誌</h2>
-      <p>晨光生活誌是免費、非營利的資訊入口。我們整理已經存在的公共資訊、官方說明與專業機構，讓你更容易找到需要的資源。</p>
-      <p>本站不設會員與留言，不接收個案資料，也不提供法律、醫療或心理專業服務；專業服務由各正式機構提供。</p>
-      <div class="btn-row"><a class="btn btn-ghost" href="about.html">認識本站</a><a class="btn btn-ghost" href="verification.html">查核與更新說明</a></div>
     </div>
-    <div class="note">
-      <p><strong>需要支援時</strong></p>
-      <p>如果你正面臨危險或需要協助，可以前往「<a href="support.html">支援資源</a>」頁，查看可直接撥打的正式專線。每頁右上角的「切換畫面」可快速切換到其他網站，但不會清除瀏覽紀錄。</p>
+    <div class="about-copy">
+      <p class="about-lead">一個免費、非營利的資訊入口。我們整理已經存在的公共資訊、官方說明與專業機構，讓你更容易找到需要的資源。</p>
+      <p>本站不設會員與留言，不接收個案資料，也不提供法律、醫療或心理專業服務；專業服務由各正式機構提供。需要協助時，可以前往「<a href="support.html">支援資源</a>」查看可直接撥打的正式專線。</p>
+      <div class="btn-row"><a class="btn btn-ghost" href="about.html">認識本站</a><a class="btn btn-ghost" href="verification.html">查核與更新說明</a></div>
     </div>
   </div>
 </section>`;
-  pages.push({ file: 'index.html', html: layout({ title: '', active: 'home', body }) });
+  pages.push({ file: 'index.html', html: layout({ title: '', active: 'home', body, bodyClass: 'home', scripts: ['assets/data/search-index.js', 'assets/js/search.js'] }) });
   addIndex('頁面', '首頁', site.description, 'index.html', '晨光生活誌 首頁');
 }
 
-// ---------- 六大分類頁 ----------
-for (const c of categories) {
-  if (c.id === 'city' || c.id === 'learning') continue; // 這兩頁有專屬版面
-  const catResources = resourcesFor((r) => r.categories.includes(c.id));
-  const catArticles = articles.filter((a) => a.category === c.id);
-  const body = `
-${categoryHero(c)}
-<section class="section" aria-labelledby="need-title">
-  <div class="wrap">
-    <div class="section-head"><span class="kicker">Start Here</span><h2 id="need-title">從需求開始</h2></div>
-    <ul class="need-list three">${c.needs
-      .map((n) => `<li><a href="#${n.topic}">${icon(c.icon)}<span>${esc(n.text)}</span></a></li>`)
-      .join('')}</ul>
-  </div>
-</section>
-${topicsSection(c)}
-<section class="section" aria-labelledby="res-title">
-  <div class="wrap">
-    <div class="section-head"><span class="kicker">Official Resources</span><h2 id="res-title">官方與正式機構入口</h2><p>點擊「前往官方網站」會直接進入原始機構網站。服務內容、資格與時間請以各機構公告為準。</p></div>
-    ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}
-  </div>
-</section>
-${articlesSection(catArticles)}`;
-  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: c.id, body }) });
-}
-
+// ---------- 分類頁共用 ----------
 function categoryHero(c) {
-  return `<section class="page-hero tone-${c.tone}">
-  <div class="wrap page-hero-inner">
-    ${icon(c.icon, 'big-icon')}
-    <div>
-      <span class="kicker">No.${c.no} · ${esc(c.kicker)}</span>
-      <h1>${esc(c.title)}</h1>
+  return `<section class="cat-hero" aria-labelledby="page-title">
+  <div class="cat-hero-media">${photo(c.photo, 'banner', { eager: true, art: [{ crop: 'card', media: '(max-width: 699px)' }] })}</div>
+  <div class="wrap">
+    <div class="cat-hero-panel">
+      <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">${esc(c.title)}</li></ol></nav>
+      <p class="cat-hero-kicker">${icon(c.icon, 'cat-hero-icon')}<span>No.${c.no} · ${esc(c.kicker)}</span></p>
+      <h1 id="page-title">${esc(c.title)}</h1>
       <p class="lead">${esc(c.intro)}</p>
     </div>
+    <p class="note" role="note">${esc(c.notice)}</p>
   </div>
-  <div class="wrap"><p class="note" role="note">${esc(c.notice)}</p></div>
 </section>`;
 }
 
 function topicsSection(c) {
   return `<section class="section" aria-labelledby="topics-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Topics</span><h2 id="topics-title">主題索引</h2></div>
-    <div class="topic-grid">
+    ${sectionHead('Topics', 'topics-title', '主題索引')}
+    <ol class="topic-list">
       ${c.topics
-        .map((t) => {
+        .map((t, i) => {
           const related = resources.filter((r) => r.topics.includes(t.id));
           const list = related.length
-            ? `<ul>${related.map((r) => `<li><a href="#res-${esc(r.id)}">${esc(r.name)}</a></li>`).join('')}</ul>`
+            ? `<ul class="topic-links">${related.map((r) => `<li><a href="#res-${esc(r.id)}">${esc(r.name)}</a></li>`).join('')}</ul>`
             : `<p class="pending">官方入口整理與查核中。</p>`;
-          return `<section class="topic" id="${esc(t.id)}"><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${list}</section>`;
+          return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${list}</div></li>`;
         })
         .join('\n')}
-    </div>
+    </ol>
   </div>
 </section>`;
 }
@@ -479,10 +572,34 @@ function topicsSection(c) {
 function articlesSection(list) {
   return `<section class="section" aria-labelledby="art-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Reading</span><h2 id="art-title">導讀文章</h2></div>
-    ${list.length ? `<div class="article-grid">${list.map((a) => articleCard(a, '')).join('\n')}</div>` : emptyBox('此主題的導讀文章正在撰寫與查核中，完成後會陸續上架。')}
+    ${sectionHead('Reading', 'art-title', '導讀文章')}
+    ${list.length ? `<div class="story-grid">${list.map((a) => articleCard(a, '')).join('\n')}</div>` : emptyBox('此主題的導讀文章正在撰寫與查核中，完成後會陸續上架。')}
   </div>
 </section>`;
+}
+
+// ---------- 四個一般分類頁 ----------
+for (const c of categories) {
+  if (c.id === 'city' || c.id === 'learning') continue; // 這兩頁有專屬版面
+  const catResources = resourcesFor((r) => r.categories.includes(c.id));
+  const catArticles = articles.filter((a) => a.category === c.id);
+  const body = `
+${categoryHero(c)}
+<section class="section needs" aria-labelledby="need-title">
+  <div class="wrap needs-grid">
+    <div class="needs-intro"><span class="kicker">Start Here</span><h2 id="need-title">從需求開始</h2></div>
+    ${needList(c.needs.map((n) => ({ text: n.text, href: `#${n.topic}` })))}
+  </div>
+</section>
+${topicsSection(c)}
+<section class="section" aria-labelledby="res-title">
+  <div class="wrap">
+    ${sectionHead('Official Resources', 'res-title', '官方與正式機構入口', '點擊「前往官方網站」會直接進入原始機構網站。服務內容、資格與時間請以各機構公告為準。')}
+    ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}
+  </div>
+</section>
+${articlesSection(catArticles)}`;
+  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: c.id, body, bodyClass: `cat-${c.id}` }) });
 }
 
 // ---------- 城市與福利 ----------
@@ -492,7 +609,7 @@ function articlesSection(list) {
 ${categoryHero(c)}
 <section class="section" aria-labelledby="finder-title" id="finder">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">City Index</span><h2 id="finder-title">城市生活資源索引</h2><p>先選擇縣市，再依服務類型篩選。全台 22 個縣市都可以選擇；尚未完成查核的縣市，會先顯示全國性資源。</p></div>
+    ${sectionHead('City Index', 'finder-title', '城市生活資源索引', '先選擇縣市，再依服務類型篩選。全台 22 個縣市都可以選擇；尚未完成查核的縣市，會先顯示全國性資源。')}
     <div class="finder" data-finder>
       <div class="finder-js" hidden>
         <div class="finder-controls">
@@ -516,14 +633,7 @@ ${categoryHero(c)}
             </select>
           </div>
         </div>
-        <div class="county-areas" role="group" aria-label="快速選擇縣市">
-          ${AREAS.map(
-            (area) => `<div class="county-area"><h3>${area}</h3>${counties
-              .filter((x) => x.area === area)
-              .map((x) => `<button type="button" class="county-chip" data-county="${x.id}" aria-pressed="false">${esc(x.name)}</button>`)
-              .join('')}</div>`,
-          ).join('\n')}
-        </div>
+        <div class="county-areas" role="group" aria-label="快速選擇縣市">${countyChips(false)}</div>
         <p class="finder-status" id="finder-status" role="status" aria-live="polite"></p>
       </div>
       <noscript><p>你的瀏覽器未啟用 JavaScript，因此無法使用縣市篩選。以下列出所有資源，你仍可以直接瀏覽。</p></noscript>
@@ -544,7 +654,7 @@ ${categoryHero(c)}
   </div>
 </section>
 ${topicsSection(c)}`;
-  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'city', body, scripts: ['assets/js/city.js'] }) });
+  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'city', body, scripts: ['assets/js/city.js'], bodyClass: 'cat-city' }) });
 }
 
 // ---------- 學習與活動 ----------
@@ -553,10 +663,11 @@ ${topicsSection(c)}`;
   const catResources = resourcesFor((r) => r.categories.includes('learning'));
   const eventCards = events
     .map(
-      (e) => `<article class="article-card" data-event-end="${esc(e.endDate)}">
-  <div class="meta">${statusBadge(e.status)}<span>${esc(e.startDate)} – ${esc(e.endDate)}</span></div>
+      (e) => `<article class="event" data-event-end="${esc(e.endDate)}">
+  <p class="event-date">${esc(e.startDate)} – ${esc(e.endDate)}</p>
   <h3>${esc(e.title)}</h3>
   <dl class="res-dl"><dt>主辦</dt><dd>${esc(e.organizer)}</dd><dt>地區</dt><dd>${esc(regionLabel([e.region]))}</dd><dt>報名條件</dt><dd>${esc(e.eligibility)}</dd><dt>費用</dt><dd>${esc(e.fee)}</dd></dl>
+  <div class="meta">${statusBadge(e.status)}</div>
   <div class="res-actions">${extLink(e.url, '官方活動頁面')}</div>
 </article>`,
     )
@@ -565,23 +676,23 @@ ${topicsSection(c)}`;
 ${categoryHero(c)}
 <section class="section" aria-labelledby="events-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Upcoming</span><h2 id="events-title">近期活動</h2><p>名額與報名狀態以主辦機構公告為準。活動結束後會自動從這裡隱藏，但不代表活動已取消。</p></div>
-    <div class="article-grid">${eventCards}</div>
+    ${sectionHead('Upcoming', 'events-title', '近期活動', '名額與報名狀態以主辦機構公告為準。活動結束後會自動從這裡隱藏，但不代表活動已取消。')}
+    <div class="event-list">${eventCards}</div>
     <div class="empty" id="events-empty"${events.length ? ' hidden' : ''}><p>目前沒有已查核的近期活動。活動經常變動，建議直接查看下方的官方活動列表入口。</p></div>
   </div>
 </section>
 ${topicsSection(c)}
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Official Lists</span><h2 id="res-title">官方課程與活動列表入口</h2></div>
+    ${sectionHead('Official Lists', 'res-title', '官方課程與活動列表入口')}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}
   </div>
 </section>`;
-  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: ['assets/js/events.js'] }) });
+  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: ['assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
 for (const c of categories) {
-  addIndex('生活主題', c.title, c.short, c.slug, [c.kicker, c.intro, ...c.needs.map((n) => n.text)].join(' '));
+  addIndex('生活主題', c.title, c.short, c.slug, [c.kicker, c.tagline, c.intro, ...c.needs.map((n) => n.text)].join(' '));
   for (const t of c.topics) addIndex(`${c.title}・主題`, t.title, t.text, `${c.slug}#${t.id}`);
 }
 
@@ -589,32 +700,31 @@ for (const c of categories) {
 {
   const supportResources = resources.filter((r) => ['npa', 'mohw-113', 'siarc', 'mohw-domhaoh', '1980', 'laf'].includes(r.id));
   const body = `
-<section class="page-hero tone-green">
-  <div class="wrap page-hero-inner">
-    ${icon('support', 'big-icon')}
-    <div>
-      <span class="kicker">Support</span>
-      <h1>支援資源與求助專線</h1>
-      <p class="lead">需要協助的時候，可以直接聯繫下列正式服務。點擊號碼即可撥打。</p>
-    </div>
+<section class="page-head support-head" aria-labelledby="page-title">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">支援資源</li></ol></nav>
+    <p class="cat-hero-kicker">${icon('support', 'cat-hero-icon')}<span>Support</span></p>
+    <h1 id="page-title">支援資源與求助專線</h1>
+    <p class="lead">需要協助的時候，可以直接聯繫下列正式服務。點擊號碼即可撥打。</p>
+    <p class="note" role="note">本站不具報案、通報或緊急救援功能，也不接收任何求助訊息。點擊本頁按鈕不代表已完成報案或求助。如有立即危險，請直接撥打 110 或 119。</p>
   </div>
-  <div class="wrap"><p class="note" role="note">本站不具報案、通報或緊急救援功能，也不接收任何求助訊息。點擊本頁按鈕不代表已完成報案或求助。如有立即危險，請直接撥打 110 或 119。</p></div>
 </section>
 
 <section class="section" aria-labelledby="hot-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Hotlines</span><h2 id="hot-title">可直接撥打的專線</h2><p>服務時間與內容以各主管機關公告為準${IS_PREVIEW ? '；標示「待查核」者尚未完成官方來源核對' : ''}。</p></div>
+    ${sectionHead('Hotlines', 'hot-title', '可直接撥打的專線', `服務時間與內容以各主管機關公告為準${IS_PREVIEW ? '；標示「待查核」者尚未完成官方來源核對' : ''}。`)}
     ${
       hotlines.length
         ? `<div class="hotline-grid">${hotlines
             .map(
               (h) => `<article class="hotline">
-        <div class="meta">${statusBadge(h.status)}</div>
         <span class="num" aria-hidden="true">${esc(h.number)}</span>
-        <h3>${esc(h.number)} ${esc(h.title)}</h3>
-        <p>${esc(h.purpose)}</p>
-        <p>服務時間：${esc(h.hours)}</p>
-        ${h.source ? `<p>來源：${extLink(h.source.url, esc(h.source.title))}</p>` : ''}
+        <div class="hotline-body">
+          <h3>${esc(h.number)} ${esc(h.title)}</h3>
+          <p>${esc(h.purpose)}</p>
+          <p class="hotline-meta">服務時間：${esc(h.hours)}${h.source ? `　來源：${extLink(h.source.url, esc(h.source.title))}` : ''}</p>
+          <div class="meta">${statusBadge(h.status)}</div>
+        </div>
         <a class="call" href="tel:${esc(h.tel)}">撥打 ${esc(h.number)}</a>
       </article>`,
             )
@@ -626,10 +736,10 @@ for (const c of categories) {
 
 <section class="section" aria-labelledby="ch-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Other Channels</span><h2 id="ch-title">不方便通話時</h2></div>
+    ${sectionHead('Other Channels', 'ch-title', '不方便通話時')}
     ${channels.length ? `<div class="res-grid">${channels
       .map(
-        (ch) => `<article class="res-card"><div class="res-head">${icon('page', 'res-icon tone-blue')}<div><h3>${esc(ch.title)}</h3><div class="meta">${statusBadge(ch.status)}</div></div></div><p>${esc(ch.text)}</p><div class="res-actions">${extLink(ch.url, esc(ch.linkLabel))}</div></article>`,
+        (ch) => `<article class="res-card"><header class="res-head">${icon('page', 'res-icon')}<div class="res-title"><h3>${esc(ch.title)}</h3></div></header><p class="res-summary">${esc(ch.text)}</p><footer class="res-foot"><div class="meta">${statusBadge(ch.status)}</div><div class="res-actions">${extLink(ch.url, esc(ch.linkLabel))}</div></footer></article>`,
       )
       .join('\n')}</div>` : emptyBox('簡訊與視訊報案資訊正在依官方來源查核中。')}
   </div>
@@ -637,7 +747,7 @@ for (const c of categories) {
 
 <section class="section" aria-labelledby="safe-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Browsing Safely</span><h2 id="safe-title">基本的數位隱私與瀏覽安全</h2><p>以下為一般性提醒，無法保證完全隱藏裝置上的使用活動。</p></div>
+    ${sectionHead('Browsing Safely', 'safe-title', '基本的數位隱私與瀏覽安全', '以下為一般性提醒，無法保證完全隱藏裝置上的使用活動。')}
     <ul class="tips">
       <li><strong>切換畫面</strong>每頁右上角的「切換畫面」會在原分頁直接前往 Google 首頁，並盡量讓「上一頁」不會回到本站。它不會刪除瀏覽紀錄。</li>
       <li><strong>無痕或私密瀏覽</strong>使用瀏覽器的無痕（私密）模式，關閉視窗後通常不會留下本機瀏覽紀錄，但網路服務商或裝置管理者仍可能看到連線活動。</li>
@@ -649,11 +759,11 @@ for (const c of categories) {
 
 <section class="section" aria-labelledby="org-title">
   <div class="wrap">
-    <div class="section-head"><span class="kicker">Organizations</span><h2 id="org-title">相關正式機構</h2></div>
+    ${sectionHead('Organizations', 'org-title', '相關正式機構')}
     ${supportResources.length ? `<div class="res-grid">${supportResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('相關機構資訊正在查核中。')}
   </div>
 </section>`;
-  pages.push({ file: 'support.html', html: layout({ title: '支援資源與求助專線', description: '110、119、113、1925 等正式求助專線與數位隱私基本資訊。', active: 'support', body }) });
+  pages.push({ file: 'support.html', html: layout({ title: '支援資源與求助專線', description: '110、119、113、1925 等正式求助專線與數位隱私基本資訊。', active: 'support', body, bodyClass: 'support' }) });
   addIndex('頁面', '支援資源與求助專線', '可直接撥打的正式專線、簡訊報案資訊與數位隱私提醒。', 'support.html', '緊急 求助 報案 專線 安全 ' + hotlines.map((h) => `${h.number} ${h.title}`).join(' '));
   for (const h of hotlines) addIndex('求助專線', `${h.number} ${h.title}`, h.purpose, 'support.html', '電話 專線');
 }
@@ -667,15 +777,16 @@ const linkResolver = (prefix) => (href) => {
 
 for (const p of pagesAll) {
   const body = `
-<section class="page-hero plain">
-  <div class="wrap page-hero-inner"><div>
+<section class="page-head" aria-labelledby="page-title">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">${esc(p.title)}</li></ol></nav>
     <span class="kicker">${esc(p.kicker || '')}</span>
-    <h1>${esc(p.title)}</h1>
+    <h1 id="page-title">${esc(p.title)}</h1>
     <p class="lead">${esc(p.description || '')}</p>
     <p class="article-meta"><span>最後更新：${esc(p.updated)}</span></p>
-  </div></div>
+  </div>
 </section>
-<section class="section"><div class="wrap prose">${renderMarkdown(p.body, { link: linkResolver('') })}</div></section>`;
+<section class="section section-tight"><div class="wrap"><div class="prose">${renderMarkdown(p.body, { link: linkResolver('') })}</div></div></section>`;
   pages.push({ file: `${p.name}.html`, html: layout({ title: p.title, description: p.description, body }) });
   addIndex('關於本站', p.title, p.description || '', `${p.name}.html`);
 }
@@ -691,19 +802,24 @@ for (const a of articles) {
       : `<li>${esc(title)}</li>`;
   });
   const backHref = a.category === 'guide' ? `${prefix}index.html` : `${prefix}${catById[a.category].slug}`;
+  const imgId = articleImageId(a);
   const body = `
-<section class="page-hero plain">
-  <div class="wrap page-hero-inner"><div>
-    <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="${prefix}index.html">首頁</a></li><li><a href="${backHref}">${esc(categoryLabel(a.category))}</a></li><li aria-current="page">文章</li></ol></nav>
-    <h1>${esc(a.title)}</h1>
-    <p class="lead">${esc(a.summary)}</p>
-    <p class="article-meta"><span>發布：${esc(a.published)}</span><span>最後實質更新：${esc(a.updated)}</span>${statusBadge(a.status)}</p>
-  </div></div>
-</section>
-<section class="section"><article class="wrap prose">
+<article class="article">
+  <header class="page-head article-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="${prefix}index.html">首頁</a></li><li><a href="${backHref}">${esc(categoryLabel(a.category))}</a></li><li aria-current="page">文章</li></ol></nav>
+      <span class="pill">${esc(categoryLabel(a.category))}</span>
+      <h1>${esc(a.title)}</h1>
+      <p class="lead">${esc(a.summary)}</p>
+      <p class="article-meta"><span>發布：${esc(a.published)}</span><span>最後實質更新：${esc(a.updated)}</span>${statusBadge(a.status)}</p>
+    </div>
+  </header>
+  ${imgId ? `<div class="wrap article-cover">${photo(imgId, 'cover', { prefix, eager: true, sizes: '(min-width: 1200px) 1120px, 100vw' })}</div>` : ''}
+  <div class="section section-tight"><div class="wrap"><div class="prose">
 ${renderMarkdown(a.body, { link: linkResolver(prefix) })}
 <div class="sources"><h2>參考來源</h2><ul>${sources.join('')}</ul><p>本文為一般性資訊整理，實際辦理請以主管機關或服務單位最新公告為準。</p></div>
-</article></section>`;
+  </div></div></div>
+</article>`;
   pages.push({ file: `articles/${a.slug}.html`, html: layout({ title: a.title, description: a.summary, body, prefix }) });
   addIndex('文章', a.title, a.summary, `articles/${a.slug}.html`, categoryLabel(a.category));
 }
@@ -721,31 +837,20 @@ for (const c of counties) {
 // ---------- 搜尋頁 ----------
 {
   const body = `
-<section class="page-hero plain">
-  <div class="wrap page-hero-inner"><div>
-    <span class="kicker">Search</span>
-    <h1>搜尋全站</h1>
-    <p class="lead">可以搜尋主題、文章名稱、機構名稱、服務類型或縣市。搜尋只在你的瀏覽器中進行，不會保存或傳送你輸入的文字。</p>
-  </div></div>
-</section>
-<section class="section">
+<section class="page-head" aria-labelledby="page-title">
   <div class="wrap">
-    <div class="search-box search-js" hidden>
-      <form id="search-form" role="search">
-        <div class="field">
-          <label for="q">想找什麼？</label>
-          <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="例如：育兒、法律扶助、臺中、心理">
-        </div>
-      </form>
-      <p id="search-status" role="status" aria-live="polite"></p>
-    </div>
+    <span class="kicker">Search</span>
+    <h1 id="page-title">搜尋全站</h1>
+    <p class="lead">可以搜尋主題、文章名稱、機構名稱、服務類型或縣市。搜尋只在你的瀏覽器中進行，不會保存或傳送你輸入的文字。</p>
     <noscript><p class="note">搜尋功能需要啟用 JavaScript。你也可以從下方的分類開始瀏覽。</p></noscript>
-    <ul class="search-results" id="search-results"></ul>
-    <div id="search-empty" hidden>
-      <p>試試看換個詞，或從這些分類開始：</p>
-    </div>
-    <ul class="need-list three" aria-label="分類入口">
-      ${categories.map((c) => `<li><a href="${c.slug}">${icon(c.icon)}<span>${esc(c.title)}<small>${esc(c.short)}</small></span></a></li>`).join('\n')}
+    ${searchBox({ id: 'q', placeholder: '例如：育兒、法律扶助、臺中、心理' })}
+  </div>
+</section>
+<section class="section section-tight" aria-labelledby="browse-title">
+  <div class="wrap">
+    ${sectionHead('Browse', 'browse-title', '或從生活主題開始')}
+    <ul class="cat-list">
+      ${categories.map((c) => `<li><a href="${c.slug}">${icon(c.icon, 'cat-icon')}<span><strong>${esc(c.title)}</strong><small>${esc(c.tagline)}</small></span></a></li>`).join('\n')}
     </ul>
   </div>
 </section>`;
@@ -776,7 +881,7 @@ async function copyDir(from, to) {
     const src = path.join(from, entry);
     const dst = path.join(to, entry);
     if ((await stat(src)).isDirectory()) await copyDir(src, dst);
-    else await copyFile(src, dst);
+    else if (entry !== 'generated.json') await copyFile(src, dst);
   }
 }
 
@@ -784,6 +889,14 @@ await rm(OUT, { recursive: true, force: true });
 await mkdir(path.join(OUT, 'articles'), { recursive: true });
 await copyDir(path.join(ROOT, 'src/assets'), path.join(OUT, 'assets'));
 await copyDir(path.join(ROOT, 'src/icons'), path.join(OUT, 'assets/icons'));
+if (existsSync(PHOTO_DIR)) await copyDir(PHOTO_DIR, path.join(OUT, 'assets/photos'));
+if (!IS_PREVIEW) {
+  // 正式版只保留「已檢查」素材的圖檔
+  for (const file of existsSync(path.join(OUT, 'assets/photos')) ? await readdir(path.join(OUT, 'assets/photos')) : []) {
+    const id = Object.keys(photoById).find((k) => file.startsWith(`${k}-`));
+    if (!id || photoById[id].status !== '已檢查') await rm(path.join(OUT, 'assets/photos', file));
+  }
+}
 await mkdir(path.join(OUT, 'assets/data'), { recursive: true });
 await writeFile(
   path.join(OUT, 'assets/data/search-index.js'),
@@ -804,5 +917,7 @@ if (!IS_PREVIEW) {
 }
 
 const pending = resourceData.items.filter((r) => r.status !== '已確認' && r.status !== '已撤下').length;
+const photoMissing = photoData.items.filter((p) => !generated[p.id]).length;
 console.log(`建置完成（${MODE}）：${pages.length} 個頁面 → ${path.relative(ROOT, OUT) || '.'}`);
 console.log(`資源：公開 ${resources.length} 筆／全部 ${resourceData.items.length} 筆（待查核 ${pending} 筆）；文章 ${articles.length} 篇；活動 ${events.length} 筆`);
+console.log(`攝影素材：已處理 ${photoData.items.length - photoMissing} 張／清單 ${photoData.items.length} 張（尚缺 ${photoMissing} 張，執行 npm run images 查看清單）`);

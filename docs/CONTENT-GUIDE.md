@@ -98,6 +98,19 @@ source: 第二個來源 | https://…
 
 活動結束後會自動從「近期活動」隱藏（不代表取消）。過期活動可以定期刪除。經常變動的課程，建議改在 `resources.json` 收錄官方活動列表入口。
 
+## 加入攝影素材
+
+需要的照片清單、用途、構圖說明與建議生成提示詞都在 `content/photos.json`。
+
+1. 依清單準備照片，檔名使用素材 id，例如 `home-hero.jpg`、`cat-law.jpg`，放進 `content/photos/originals/`。
+2. 先移除照片中的 EXIF／GPS 中繼資料（例如 `exiftool -all= home-hero.jpg`）。
+3. 執行 `npm install`（第一次）與 `npm run images`：會自動依各位置的比例裁切，輸出多種寬度的 WebP 與 JPEG 到 `src/assets/photos/`，並再次移除中繼資料。
+4. 執行 `npm run preview` 檢查電腦與手機版的裁切；若主體被裁掉，調整 `photos.json` 中該裁切的 `focusX`／`focusY`（0 到 1，0.5 為置中）後重跑第 3 步。
+5. 依 `docs/VISUAL-STANDARD.md` 第四章完成 8 項檢查，在 `photos.json` 填寫 `source`、`license`、`checkedAt`，並把 `status` 改為「已檢查」。
+6. 提交 `content/photos/originals/`、`src/assets/photos/` 與 `content/photos.json`。
+
+預覽版會顯示所有已處理的照片；正式版只會使用「已檢查」的照片，未提供照片的位置只顯示無文字的米色底。
+
 ## 公告網站停止更新
 
 編輯 `config/site.json` 的 `maintenanceNotice`，例如：

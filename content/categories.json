@@ -5,27 +5,78 @@
     "no": "01",
     "title": "生活與家庭",
     "kicker": "Life & Family",
+    "tagline": "育兒、托育與家庭照顧",
+    "photo": "cat-life-family",
     "icon": "life-family",
     "tone": "apricot",
     "short": "懷孕、育兒、托育、家庭照顧與長照支持，從制度入口開始了解。",
     "intro": "從懷孕、育兒到照顧家人，生活裡的每個階段都有可以認識的制度與服務。這裡整理政府正式公告與原始申請入口，方便你從自己的需要開始查找。",
     "notice": "本站僅介紹制度與官方入口，不代為判定補助資格，也不提供代辦。實際條件與金額請以主管機關最新公告為準。",
     "needs": [
-      { "text": "我想了解懷孕與生育相關福利", "topic": "pregnancy" },
-      { "text": "我想查詢育兒津貼與托育服務", "topic": "childcare" },
-      { "text": "我正在照顧家人，想找喘息與長照支持", "topic": "long-term-care" }
+      {
+        "text": "我想了解懷孕與生育相關福利",
+        "topic": "pregnancy"
+      },
+      {
+        "text": "我想查詢育兒津貼與托育服務",
+        "topic": "childcare"
+      },
+      {
+        "text": "我正在照顧家人，想找喘息與長照支持",
+        "topic": "long-term-care"
+      }
     ],
     "topics": [
-      { "id": "pregnancy", "title": "懷孕與生育相關福利", "text": "整理孕期、生產與生育相關給付及補助的官方說明入口。" },
-      { "id": "childcare", "title": "育兒津貼", "text": "認識育兒相關津貼的主管機關、適用對象說明與申請管道。" },
-      { "id": "daycare", "title": "托育與幼兒照顧", "text": "公共托育、居家托育與幼兒照顧服務的官方查詢入口。" },
-      { "id": "parenting", "title": "親職教育", "text": "家庭教育與親職學習資源，連結至正式機關與服務中心。" },
-      { "id": "single-parent", "title": "單親家庭支持", "text": "單親家庭可了解的福利服務與地方支持資源入口。" },
-      { "id": "special-circumstances", "title": "特殊境遇家庭扶助", "text": "特殊境遇家庭扶助制度的法規與申請窗口說明入口。" },
-      { "id": "family-finance", "title": "家庭經濟與福利資源", "text": "社會福利、經濟扶助相關制度的官方說明與查詢入口。" },
-      { "id": "long-term-care", "title": "長照與家庭照顧者支持", "text": "長期照顧服務與家庭照顧者支持資源的正式入口。" },
-      { "id": "respite", "title": "喘息服務", "text": "讓照顧者有休息時間的喘息服務，連結官方申請說明。" },
-      { "id": "local-family", "title": "地方家庭支持資源", "text": "各縣市家庭服務據點，可至「城市與福利」依縣市查詢。" }
+      {
+        "id": "pregnancy",
+        "title": "懷孕與生育相關福利",
+        "text": "整理孕期、生產與生育相關給付及補助的官方說明入口。"
+      },
+      {
+        "id": "childcare",
+        "title": "育兒津貼",
+        "text": "認識育兒相關津貼的主管機關、適用對象說明與申請管道。"
+      },
+      {
+        "id": "daycare",
+        "title": "托育與幼兒照顧",
+        "text": "公共托育、居家托育與幼兒照顧服務的官方查詢入口。"
+      },
+      {
+        "id": "parenting",
+        "title": "親職教育",
+        "text": "家庭教育與親職學習資源，連結至正式機關與服務中心。"
+      },
+      {
+        "id": "single-parent",
+        "title": "單親家庭支持",
+        "text": "單親家庭可了解的福利服務與地方支持資源入口。"
+      },
+      {
+        "id": "special-circumstances",
+        "title": "特殊境遇家庭扶助",
+        "text": "特殊境遇家庭扶助制度的法規與申請窗口說明入口。"
+      },
+      {
+        "id": "family-finance",
+        "title": "家庭經濟與福利資源",
+        "text": "社會福利、經濟扶助相關制度的官方說明與查詢入口。"
+      },
+      {
+        "id": "long-term-care",
+        "title": "長照與家庭照顧者支持",
+        "text": "長期照顧服務與家庭照顧者支持資源的正式入口。"
+      },
+      {
+        "id": "respite",
+        "title": "喘息服務",
+        "text": "讓照顧者有休息時間的喘息服務，連結官方申請說明。"
+      },
+      {
+        "id": "local-family",
+        "title": "地方家庭支持資源",
+        "text": "各縣市家庭服務據點，可至「城市與福利」依縣市查詢。"
+      }
     ]
   },
   {
@@ -34,26 +85,73 @@
     "no": "02",
     "title": "職涯與創業",
     "kicker": "Work & Business",
+    "tagline": "求職、訓練與創業",
+    "photo": "cat-career",
     "icon": "career",
     "tone": "gold",
     "short": "求職、重新就業、職業訓練與創業輔導，找到正式的起點。",
     "intro": "想重新開始工作、學一項新技能，或是踏出創業的第一步，都可以先從政府的正式就業與創業資源開始了解。",
     "notice": "涉及貸款、融資的內容，本站只提供官方申請資訊與資格說明入口，不提供投資或借貸建議。",
     "needs": [
-      { "text": "我想重新找工作", "topic": "re-employment" },
-      { "text": "我想參加職業訓練、學新技能", "topic": "vocational-training" },
-      { "text": "我想了解創業輔導與資源", "topic": "entrepreneurship" }
+      {
+        "text": "我想重新找工作",
+        "topic": "re-employment"
+      },
+      {
+        "text": "我想參加職業訓練、學新技能",
+        "topic": "vocational-training"
+      },
+      {
+        "text": "我想了解創業輔導與資源",
+        "topic": "entrepreneurship"
+      }
     ],
     "topics": [
-      { "id": "job-seeking", "title": "女性求職", "text": "公立就業服務的求職登記、職缺查詢與就業諮詢入口。" },
-      { "id": "re-employment", "title": "重新就業與二度就業", "text": "離開職場一段時間後重返工作，可了解的官方就業協助。" },
-      { "id": "vocational-training", "title": "職業訓練", "text": "政府辦理或補助的職業訓練課程查詢與報名入口。" },
-      { "id": "employment-centers", "title": "就業服務據點", "text": "各地就業中心與服務站，可依縣市查詢正式據點。" },
-      { "id": "entrepreneurship", "title": "女性創業資源", "text": "政府針對創業者提供的輔導、課程與資訊平台入口。" },
-      { "id": "startup-training", "title": "創業培訓", "text": "創業講座與培訓課程的官方公告與報名管道。" },
-      { "id": "startup-guidance", "title": "政府創業輔導", "text": "經濟部與勞動部等機關的創業輔導服務說明。" },
-      { "id": "startup-loans", "title": "創業融資及貸款制度入口", "text": "只提供官方貸款制度說明與資格入口，不做借貸建議。" },
-      { "id": "workplace-skills", "title": "職場技能課程", "text": "數位、語言與專業技能等公開課程的正式入口。" }
+      {
+        "id": "job-seeking",
+        "title": "女性求職",
+        "text": "公立就業服務的求職登記、職缺查詢與就業諮詢入口。"
+      },
+      {
+        "id": "re-employment",
+        "title": "重新就業與二度就業",
+        "text": "離開職場一段時間後重返工作，可了解的官方就業協助。"
+      },
+      {
+        "id": "vocational-training",
+        "title": "職業訓練",
+        "text": "政府辦理或補助的職業訓練課程查詢與報名入口。"
+      },
+      {
+        "id": "employment-centers",
+        "title": "就業服務據點",
+        "text": "各地就業中心與服務站，可依縣市查詢正式據點。"
+      },
+      {
+        "id": "entrepreneurship",
+        "title": "女性創業資源",
+        "text": "政府針對創業者提供的輔導、課程與資訊平台入口。"
+      },
+      {
+        "id": "startup-training",
+        "title": "創業培訓",
+        "text": "創業講座與培訓課程的官方公告與報名管道。"
+      },
+      {
+        "id": "startup-guidance",
+        "title": "政府創業輔導",
+        "text": "經濟部與勞動部等機關的創業輔導服務說明。"
+      },
+      {
+        "id": "startup-loans",
+        "title": "創業融資及貸款制度入口",
+        "text": "只提供官方貸款制度說明與資格入口，不做借貸建議。"
+      },
+      {
+        "id": "workplace-skills",
+        "title": "職場技能課程",
+        "text": "數位、語言與專業技能等公開課程的正式入口。"
+      }
     ]
   },
   {
@@ -62,26 +160,73 @@
     "no": "03",
     "title": "身心健康",
     "kicker": "Body & Mind",
+    "tagline": "身體照顧與心理支持",
+    "photo": "cat-health",
     "icon": "health",
     "tone": "green",
     "short": "女性身體健康、情緒壓力與心理支持，一般衛教與專業資源分開說明。",
     "intro": "照顧身體，也照顧心情。這裡整理一般衛教知識的官方來源，以及心理健康支持與醫療資源的正式入口。",
     "notice": "本頁內容為一般衛教與資源導航，不構成醫療診斷或心理治療。身體或心理有具體狀況時，請洽詢醫療院所或具資格的專業人員。",
     "needs": [
-      { "text": "我想了解生理期與婦科衛教", "topic": "menstrual" },
-      { "text": "最近壓力很大，想找心理支持", "topic": "mental-support" },
-      { "text": "我想認識關係與個人界線", "topic": "boundaries" }
+      {
+        "text": "我想了解生理期與婦科衛教",
+        "topic": "menstrual"
+      },
+      {
+        "text": "最近壓力很大，想找心理支持",
+        "topic": "mental-support"
+      },
+      {
+        "text": "我想認識關係與個人界線",
+        "topic": "boundaries"
+      }
     ],
     "topics": [
-      { "id": "womens-health", "title": "女性身體健康", "text": "女性健康相關的官方衛教資訊與預防保健入口。" },
-      { "id": "menstrual", "title": "生理期及婦科衛教", "text": "生理期與常見婦科議題的一般衛教，以官方或醫療機構資料為主。" },
-      { "id": "hormones", "title": "荷爾蒙健康常識", "text": "不同生命階段的荷爾蒙變化，一般性知識的正式來源。" },
-      { "id": "bodily-autonomy", "title": "身體自主", "text": "認識自己的身體與健康決定，連結官方衛教說明。" },
-      { "id": "boundaries", "title": "關係與個人界線", "text": "在關係中照顧自己的感受與界線，一般知識與支持入口。" },
-      { "id": "stress", "title": "情緒壓力", "text": "日常壓力調適的一般知識，以及需要時可以聯繫的資源。" },
-      { "id": "mental-support", "title": "心理健康支持", "text": "政府與經查證民間機構提供的心理支持管道。" },
-      { "id": "counseling", "title": "心理諮商及醫療資源", "text": "心理諮商、身心科醫療與各縣市心理衛生中心入口。" },
-      { "id": "support-programs", "title": "正式心理健康支持方案", "text": "政府心理健康支持方案，將標示適用年度、條件與官方來源。" }
+      {
+        "id": "womens-health",
+        "title": "女性身體健康",
+        "text": "女性健康相關的官方衛教資訊與預防保健入口。"
+      },
+      {
+        "id": "menstrual",
+        "title": "生理期及婦科衛教",
+        "text": "生理期與常見婦科議題的一般衛教，以官方或醫療機構資料為主。"
+      },
+      {
+        "id": "hormones",
+        "title": "荷爾蒙健康常識",
+        "text": "不同生命階段的荷爾蒙變化，一般性知識的正式來源。"
+      },
+      {
+        "id": "bodily-autonomy",
+        "title": "身體自主",
+        "text": "認識自己的身體與健康決定，連結官方衛教說明。"
+      },
+      {
+        "id": "boundaries",
+        "title": "關係與個人界線",
+        "text": "在關係中照顧自己的感受與界線，一般知識與支持入口。"
+      },
+      {
+        "id": "stress",
+        "title": "情緒壓力",
+        "text": "日常壓力調適的一般知識，以及需要時可以聯繫的資源。"
+      },
+      {
+        "id": "mental-support",
+        "title": "心理健康支持",
+        "text": "政府與經查證民間機構提供的心理支持管道。"
+      },
+      {
+        "id": "counseling",
+        "title": "心理諮商及醫療資源",
+        "text": "心理諮商、身心科醫療與各縣市心理衛生中心入口。"
+      },
+      {
+        "id": "support-programs",
+        "title": "正式心理健康支持方案",
+        "text": "政府心理健康支持方案，將標示適用年度、條件與官方來源。"
+      }
     ]
   },
   {
@@ -90,26 +235,73 @@
     "no": "04",
     "title": "法律與權益",
     "kicker": "Law & Rights",
+    "tagline": "職場權益與法律扶助",
+    "photo": "cat-law",
     "icon": "law",
     "tone": "gold",
     "short": "職場權益、產假與育嬰、法律扶助，從官方說明認識制度。",
     "intro": "了解現行法律與制度，是保護自己的開始。這裡以一般制度說明、簡短導讀與官方連結為主，協助你找到正確的說明與申訴入口。",
     "notice": "本頁為一般性制度介紹，不提供個別法律判斷，也不評論個別案件。實際狀況請洽法律扶助或具資格的法律專業人員。",
     "needs": [
-      { "text": "我想了解產假與育嬰留職停薪", "topic": "parental-leave" },
-      { "text": "職場上遇到不舒服的對待，想了解申訴管道", "topic": "workplace-harassment" },
-      { "text": "我想知道如何申請法律扶助", "topic": "legal-aid" }
+      {
+        "text": "我想了解產假與育嬰留職停薪",
+        "topic": "parental-leave"
+      },
+      {
+        "text": "職場上遇到不舒服的對待，想了解申訴管道",
+        "topic": "workplace-harassment"
+      },
+      {
+        "text": "我想知道如何申請法律扶助",
+        "topic": "legal-aid"
+      }
     ],
     "topics": [
-      { "id": "gender-equality-work", "title": "性別平等工作法相關權益", "text": "認識性別平等工作法的主要內容與主管機關說明。" },
-      { "id": "workplace-harassment", "title": "職場性騷擾制度", "text": "職場性騷擾的防治、申訴與調查制度官方說明入口。" },
-      { "id": "workplace-bullying", "title": "職場霸凌及勞動爭議", "text": "勞動爭議處理與相關申訴、調解管道的正式入口。" },
-      { "id": "parental-leave", "title": "產假及育嬰留職停薪", "text": "產假、陪產檢及育嬰留職停薪等制度的官方說明。" },
-      { "id": "pregnancy-protection", "title": "懷孕相關勞動保障", "text": "懷孕期間的勞動保護規定與主管機關資訊。" },
-      { "id": "dismissal", "title": "資遣與離職權益", "text": "資遣、離職與相關給付制度的官方說明入口。" },
-      { "id": "legal-aid", "title": "法律扶助", "text": "法律扶助申請條件與服務據點，以基金會公告為準。" },
-      { "id": "intimate-images", "title": "性影像外流之正式處理資源", "text": "僅提供正式處理機構入口。本站不接收任何影像或個案資料。" },
-      { "id": "official-complaints", "title": "官方法律說明與申訴入口", "text": "政府機關提供的法規查詢與申訴管道彙整。" }
+      {
+        "id": "gender-equality-work",
+        "title": "性別平等工作法相關權益",
+        "text": "認識性別平等工作法的主要內容與主管機關說明。"
+      },
+      {
+        "id": "workplace-harassment",
+        "title": "職場性騷擾制度",
+        "text": "職場性騷擾的防治、申訴與調查制度官方說明入口。"
+      },
+      {
+        "id": "workplace-bullying",
+        "title": "職場霸凌及勞動爭議",
+        "text": "勞動爭議處理與相關申訴、調解管道的正式入口。"
+      },
+      {
+        "id": "parental-leave",
+        "title": "產假及育嬰留職停薪",
+        "text": "產假、陪產檢及育嬰留職停薪等制度的官方說明。"
+      },
+      {
+        "id": "pregnancy-protection",
+        "title": "懷孕相關勞動保障",
+        "text": "懷孕期間的勞動保護規定與主管機關資訊。"
+      },
+      {
+        "id": "dismissal",
+        "title": "資遣與離職權益",
+        "text": "資遣、離職與相關給付制度的官方說明入口。"
+      },
+      {
+        "id": "legal-aid",
+        "title": "法律扶助",
+        "text": "法律扶助申請條件與服務據點，以基金會公告為準。"
+      },
+      {
+        "id": "intimate-images",
+        "title": "性影像外流之正式處理資源",
+        "text": "僅提供正式處理機構入口。本站不接收任何影像或個案資料。"
+      },
+      {
+        "id": "official-complaints",
+        "title": "官方法律說明與申訴入口",
+        "text": "政府機關提供的法規查詢與申訴管道彙整。"
+      }
     ]
   },
   {
@@ -118,24 +310,65 @@
     "no": "05",
     "title": "城市與福利",
     "kicker": "City Index",
+    "tagline": "依縣市查詢在地服務",
+    "photo": "cat-city",
     "icon": "city",
     "tone": "blue",
     "short": "選擇你所在的縣市，查詢婦女、家庭、就業與心理衛生服務據點。",
     "intro": "城市生活資源索引：選擇台灣 22 個縣市之一，再依服務類型篩選，就能看到該地可以使用的正式服務與全國性資源。",
     "notice": "本頁不使用 GPS 或自動定位。縣市選擇與篩選只在你的瀏覽器中進行，不會保存或傳送任何選擇紀錄。",
     "needs": [
-      { "text": "我想知道附近有哪些正式服務", "topic": "finder" }
+      {
+        "text": "我想知道附近有哪些正式服務",
+        "topic": "finder"
+      }
     ],
     "topics": [
-      { "id": "women-centers", "title": "婦女福利服務中心", "text": "各縣市婦女福利服務中心與相關據點。" },
-      { "id": "empowerment-centers", "title": "婦女培力中心", "text": "地方婦女培力與學習據點。" },
-      { "id": "legal-aid-offices", "title": "法律扶助據點", "text": "各地法律扶助分會與服務據點。" },
-      { "id": "social-affairs", "title": "地方社會局、社會處", "text": "縣市社會福利主管機關。" },
-      { "id": "health-bureaus", "title": "衛生局及心理衛生中心", "text": "地方衛生與心理健康服務窗口。" },
-      { "id": "labor-offices", "title": "勞動及就業服務據點", "text": "地方勞動主管機關與就業服務站。" },
-      { "id": "family-welfare", "title": "育兒與家庭福利", "text": "地方育兒、托育與家庭福利窗口。" },
-      { "id": "ltc-support", "title": "長照支持", "text": "地方長照管理中心與照顧者支持據點。" },
-      { "id": "ngo-services", "title": "民間團體正式服務", "text": "具有正式服務資訊的民間團體據點。" }
+      {
+        "id": "women-centers",
+        "title": "婦女福利服務中心",
+        "text": "各縣市婦女福利服務中心與相關據點。"
+      },
+      {
+        "id": "empowerment-centers",
+        "title": "婦女培力中心",
+        "text": "地方婦女培力與學習據點。"
+      },
+      {
+        "id": "legal-aid-offices",
+        "title": "法律扶助據點",
+        "text": "各地法律扶助分會與服務據點。"
+      },
+      {
+        "id": "social-affairs",
+        "title": "地方社會局、社會處",
+        "text": "縣市社會福利主管機關。"
+      },
+      {
+        "id": "health-bureaus",
+        "title": "衛生局及心理衛生中心",
+        "text": "地方衛生與心理健康服務窗口。"
+      },
+      {
+        "id": "labor-offices",
+        "title": "勞動及就業服務據點",
+        "text": "地方勞動主管機關與就業服務站。"
+      },
+      {
+        "id": "family-welfare",
+        "title": "育兒與家庭福利",
+        "text": "地方育兒、托育與家庭福利窗口。"
+      },
+      {
+        "id": "ltc-support",
+        "title": "長照支持",
+        "text": "地方長照管理中心與照顧者支持據點。"
+      },
+      {
+        "id": "ngo-services",
+        "title": "民間團體正式服務",
+        "text": "具有正式服務資訊的民間團體據點。"
+      }
     ]
   },
   {
@@ -144,24 +377,64 @@
     "no": "06",
     "title": "學習與活動",
     "kicker": "Learning",
+    "tagline": "課程、講座與進修",
+    "photo": "cat-learning",
     "icon": "learning",
     "tone": "blue",
     "short": "婦女中心課程、就業培訓、親職與生活技能，找一堂適合自己的課。",
     "intro": "學一件新的事，認識新的自己。這裡收錄實用、公開報名的課程與學習活動，並優先提供官方活動列表入口，方便你查看最新場次。",
     "notice": "活動資訊以主辦機構公告為準。本站不保證尚有名額或仍開放報名；活動結束後會從「近期活動」隱藏，但不代表活動已取消。",
     "needs": [
-      { "text": "我想找生活與進修課程", "topic": "life-skills" },
-      { "text": "我想參加就業或創業講座", "topic": "job-training" }
+      {
+        "text": "我想找生活與進修課程",
+        "topic": "life-skills"
+      },
+      {
+        "text": "我想參加就業或創業講座",
+        "topic": "job-training"
+      }
     ],
     "topics": [
-      { "id": "women-center-courses", "title": "婦女中心課程", "text": "各地婦女中心公開課程與講座。" },
-      { "id": "job-training", "title": "就業培訓", "text": "政府辦理的職業訓練與就業準備課程。" },
-      { "id": "startup-talks", "title": "創業講座", "text": "創業知識與經營管理的公開講座。" },
-      { "id": "family-education", "title": "家庭教育", "text": "家庭教育中心辦理的課程與活動。" },
-      { "id": "parenting-courses", "title": "育兒與親職課程", "text": "育兒知識與親子互動課程。" },
-      { "id": "life-skills", "title": "生活技能", "text": "理財常識、數位工具、健康生活等實用課程。" },
-      { "id": "open-learning", "title": "免費或公開報名的進修活動", "text": "社區大學、公開課程與線上學習平台入口。" },
-      { "id": "local-events", "title": "地方政府教育及福利活動", "text": "縣市政府公開辦理的教育與福利活動。" }
+      {
+        "id": "women-center-courses",
+        "title": "婦女中心課程",
+        "text": "各地婦女中心公開課程與講座。"
+      },
+      {
+        "id": "job-training",
+        "title": "就業培訓",
+        "text": "政府辦理的職業訓練與就業準備課程。"
+      },
+      {
+        "id": "startup-talks",
+        "title": "創業講座",
+        "text": "創業知識與經營管理的公開講座。"
+      },
+      {
+        "id": "family-education",
+        "title": "家庭教育",
+        "text": "家庭教育中心辦理的課程與活動。"
+      },
+      {
+        "id": "parenting-courses",
+        "title": "育兒與親職課程",
+        "text": "育兒知識與親子互動課程。"
+      },
+      {
+        "id": "life-skills",
+        "title": "生活技能",
+        "text": "理財常識、數位工具、健康生活等實用課程。"
+      },
+      {
+        "id": "open-learning",
+        "title": "免費或公開報名的進修活動",
+        "text": "社區大學、公開課程與線上學習平台入口。"
+      },
+      {
+        "id": "local-events",
+        "title": "地方政府教育及福利活動",
+        "text": "縣市政府公開辦理的教育與福利活動。"
+      }
     ]
   }
 ]
