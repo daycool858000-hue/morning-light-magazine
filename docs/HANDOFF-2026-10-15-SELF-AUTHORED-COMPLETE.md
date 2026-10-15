@@ -21,26 +21,26 @@
 
 - GitHub：**https://github.com/daycool858000-hue/morning-light-magazine**
 - 專用開發分支：**claude/morning-light-visual-v2**；**main 為原本的正式基準分支，兩者未合併**。
-- 2026-10-15 最後一次核對時：開發分支 HEAD 為 \`babd6f4382e24b7f839b548bc92316bd59ad4dce\`，main HEAD 為 \`ae8a4a0e45f51455c7bebdff6461761400a951e6\`。**歸檔後的新提交會改變 HEAD，以 GitHub 當下最新 SHA 為準。**
+- 2026-10-15 最後一次核對時：開發分支 HEAD 為 `babd6f4382e24b7f839b548bc92316bd59ad4dce`，main HEAD 為 `ae8a4a0e45f51455c7bebdff6461761400a951e6`。**歸檔後的新提交會改變 HEAD，以 GitHub 當下最新 SHA 為準。**
 - 已啟用 GitHub Pages：擁有人於儲存庫 **Settings → Pages → Source 選了 GitHub Actions**。
 - **公開的 QA 測試網址（不是正式核准內容版）：https://daycool858000-hue.github.io/morning-light-magazine/**
-- QA 專屬 workflow：\`.github/workflows/qa-public-preview.yml\`。只在開發分支、修改該 workflow 時才自動觸發部署；使用環境 \`qa-public-preview\`（避免預設 github-pages 環境限制非 main 分支）；建置 \`node scripts/build.mjs --mode=qa --out=dist-qa\`，不改 main，也不把 docs 候選搬入 production。
+- QA 專屬 workflow：`.github/workflows/qa-public-preview.yml`。只在開發分支、修改該 workflow 時才自動觸發部署；使用環境 `qa-public-preview`（避免預設 github-pages 環境限制非 main 分支）；建置 `node scripts/build.mjs --mode=qa --out=dist-qa`，不改 main，也不把 docs 候選搬入 production。
 - 公開 QA 帶有「未核准測試內容」標示與 noindex/robots 排除索引；**但任何知道網址的人都可以瀏覽**。使用者已明確同意使用公開測試版。**noindex 不等於私密權限**。
-- **最新 QA 部署成功**：Actions \`38736276160\`，對應 \`babd6f4\`；**完整 CI 測試成功**：\`38736276300\`，同 SHA。正式部署流程 \`.github/workflows/deploy-pages.yml\` 與獨立內容核准流程仍保留，未在本輪啟動。
-- 曾嘗試 Codespaces 手機預覽：預覽 4173、Safari \`app.github.dev\` 開空白，切回終端機很繁複；之後經使用者同意改為公開 QA。**現在直接使用 GitHub Pages QA，不要讓使用者再操作 Codespaces**。
-- **警告：**部分較早的 \`docs/BATCH2-QA-PREVIEW-REPORT-2026-10-15.md\`、\`docs/IPHONE-ACCEPTANCE.md\`、\`docs/DEPLOYMENT.md\` 仍保留當時「不能公開／必須同 Wi-Fi 本機預覽／Pages 未開啟」的舊描述。它們是歷史紀錄，**目前 QA 的權威現況以本交接、workflow 以及最新 Actions 為準**。不要因舊文件說未部署就否認已存在的公開 QA。
+- **最新 QA 部署成功**：Actions `38736276160`，對應 `babd6f4`；**完整 CI 測試成功**：`38736276300`，同 SHA。正式部署流程 `.github/workflows/deploy-pages.yml` 與獨立內容核准流程仍保留，未在本輪啟動。
+- 曾嘗試 Codespaces 手機預覽：預覽 4173、Safari `app.github.dev` 開空白，切回終端機很繁複；之後經使用者同意改為公開 QA。**現在直接使用 GitHub Pages QA，不要讓使用者再操作 Codespaces**。
+- **警告：**部分較早的 `docs/BATCH2-QA-PREVIEW-REPORT-2026-10-15.md`、`docs/IPHONE-ACCEPTANCE.md`、`docs/DEPLOYMENT.md` 仍保留當時「不能公開／必須同 Wi-Fi 本機預覽／Pages 未開啟」的舊描述。它們是歷史紀錄，**目前 QA 的權威現況以本交接、workflow 以及最新 Actions 為準**。不要因舊文件說未部署就否認已存在的公開 QA。
 
 ## C. 已有網站結構與功能
 
 - 六大主題，**不擅自新增第七大類**：
-  1. 生活與家庭 \`life-family.html\`
-  2. 職涯與創業 \`career.html\`
-  3. 身心健康 \`health.html\`
-  4. 法律與權益 \`law.html\`
-  5. 城市與福利 \`city.html\`
-  6. 學習與活動 \`learning.html\`
-- 兩個整合入口：**讀利專欄｜THE CONSIDERED PAGE** \`quiet-power.html\`（文章閱讀），**向光｜TOWARD OPEN SKIES** \`toward-light.html\`（學習、活動與城市探索）。頁面名稱仍屬待正式商標近似檢索；未宣稱商標權。
-- 首頁有主視覺、六張分類卡、四個快捷入口（含「有急事」直接撥打110、讀利、向光、關於由己）；💪 **支援資源**圖示和入口已修成精簡小卡，進到 \`support.html\`。舊的「使用指南」空白連結與兩篇不適當的指南已撤。
+  1. 生活與家庭 `life-family.html`
+  2. 職涯與創業 `career.html`
+  3. 身心健康 `health.html`
+  4. 法律與權益 `law.html`
+  5. 城市與福利 `city.html`
+  6. 學習與活動 `learning.html`
+- 兩個整合入口：**讀利專欄｜THE CONSIDERED PAGE** `quiet-power.html`（文章閱讀），**向光｜TOWARD OPEN SKIES** `toward-light.html`（學習、活動與城市探索）。頁面名稱仍屬待正式商標近似檢索；未宣稱商標權。
+- 首頁有主視覺、六張分類卡、四個快捷入口（含「有急事」直接撥打110、讀利、向光、關於由己）；💪 **支援資源**圖示和入口已修成精簡小卡，進到 `support.html`。舊的「使用指南」空白連結與兩篇不適當的指南已撤。
 - 22 縣市篩選與服務類型篩選、全國性資源、搜尋、獨立文章頁、站內導覽、iPhone 響應式排版、Google 切換畫面、緊急專線、官方外部連結。
 - V3.3 視覺版面已完成並沿用；偏明亮、清楚、原創，先前的圖片、色彩和行動版面不需無故重做。
 
@@ -48,8 +48,8 @@
 
 - 使用者首次錄影回報：**輸入「托育」時搜尋結果已出現，但原本六大主題、快捷內容也留在畫面，混在一起**。
 - 第一修：搜尋中切成結果專注模式，隱藏首頁六大分類與快捷入口；獨立搜尋頁輸入時也收起「或從生活主題開始」。清空文字理應回復，然而 iPhone Safari 實機回報**清空搜尋後六大類沒有恢復**。
-- 第二修（已完成）：\`src/assets/js/search.js\` 支援 Safari \`input\`／\`search\`／\`change\`／\`click\`／\`pageshow\`，清空立即渲染、取消舊 debounce；明確 44px「×」清除按鈕；\`scripts/build.mjs\` 對搜尋 CSS/JS 加快取版本字串，避免 iPhone 讀舊快取；\`src/assets/css/main.css\` 把搜尋結果獨立排版不覆蓋內容。曾發現 \`change\` 造成點選結果連結時重繪而連結失效，已改成**只有真的清空時才重繪**。
-- 自動測試涵蓋輸入、無結果、搜尋頁隱藏主題、點 × 清除、按 Escape、Safari 原生 search 清空、文章連結可點開；\`tests/qa-batch2.test.mjs\` 和 \`tests/mobile-webkit.test.mjs\`。
+- 第二修（已完成）：`src/assets/js/search.js` 支援 Safari `input`／`search`／`change`／`click`／`pageshow`，清空立即渲染、取消舊 debounce；明確 44px「×」清除按鈕；`scripts/build.mjs` 對搜尋 CSS/JS 加快取版本字串，避免 iPhone 讀舊快取；`src/assets/css/main.css` 把搜尋結果獨立排版不覆蓋內容。曾發現 `change` 造成點選結果連結時重繪而連結失效，已改成**只有真的清空時才重繪**。
+- 自動測試涵蓋輸入、無結果、搜尋頁隱藏主題、點 × 清除、按 Escape、Safari 原生 search 清空、文章連結可點開；`tests/qa-batch2.test.mjs` 和 `tests/mobile-webkit.test.mjs`。
 - **使用者實機最後驗收：搜尋輸入／清除六大分類已成功。** 這件事正式列為已驗收，不需要重新修改。
 
 ## E. 第二批社福地方入口／導讀：已做、待做
@@ -57,13 +57,13 @@
 - **23 筆地方官方入口候選**，涵蓋**22 縣市**：18 縣市主管機關、2 市府福利目錄替代入口、3 衛福部地方社福中心名錄（嘉義市另有第二張不同用途卡）。14 個有實際官方婦女福利業務證據的卡加上「婦女福利」分類，其他不冒稱婦女中心。
 - **12 篇完整導讀**，涵蓋單親與特殊境遇家庭、托育、二度就業、職訓、心理支持、健康衛教、職場騷擾、性影像、城市福利辨識、免費課程限制、家庭教育等；都有來源、獨立頁面，列於讀利。
 - 檔案：
-  - \`docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json\`
-  - \`docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md\`
-  - \`docs/BATCH2-FINAL-OWNER-REVIEW-2026-10-15.md\`
-  - \`docs/BATCH2-QA-PREVIEW-REPORT-2026-10-15.md\`
-  - \`docs/BATCH2-EIGHT-URL-FINAL-VERIFY-2026-10-15.md\`
-  - 其他 \`docs/BATCH2-*\`、\`docs/CITY-AND-TOPICS-BATCH2-2026-10-15.md\`
-- QA 由 \`scripts/lib/qa-batch2.mjs\` 讀取上述 docs；23 筆維持 \`published:false\`、\`status:待確認\`、\`checkedAt:null\`，沒有冒填「人工已確認」。未搬到正式 \`content/resources.json\` 或 \`content/release-approvals.json\`。
+  - `docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json`
+  - `docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md`
+  - `docs/BATCH2-FINAL-OWNER-REVIEW-2026-10-15.md`
+  - `docs/BATCH2-QA-PREVIEW-REPORT-2026-10-15.md`
+  - `docs/BATCH2-EIGHT-URL-FINAL-VERIFY-2026-10-15.md`
+  - 其他 `docs/BATCH2-*`、`docs/CITY-AND-TOPICS-BATCH2-2026-10-15.md`
+- QA 由 `scripts/lib/qa-batch2.mjs` 讀取上述 docs；23 筆維持 `published:false`、`status:待確認`、`checkedAt:null`，沒有冒填「人工已確認」。未搬到正式 `content/resources.json` 或 `content/release-approvals.json`。
 - 使用者已實機測試：**縣市與福利、外部官方連結、讀利文章抽樣、站內操作均可使用且順暢**。曾要求測試新竹市／縣、南投、澎湖、屏東、金門等有國外檢查限制的入口；使用者概括回報連結正常。**抽樣正常 ≠ 每個外站所有內頁或日後永久正常**。金門原導覽可能導到社會處首頁，不可把導覽目的說成直接進入福利細頁。
 - **內容正式發布仍未核准**；不能把「可點到連結／文章有閱讀」當成逐篇事實、權利、來源正式核准。
 
@@ -71,7 +71,7 @@
 
 背景：使用者指出第二批太偏社福與預設求助。明確同意開始加入**免費、無會員、無需個資、自由閱讀或查找**的日常探索資料，仍維持六大分類和原本求助資訊。
 
-- 已**實際載入 QA 的**資料唯一檔：\`docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json\`。
+- 已**實際載入 QA 的**資料唯一檔：`docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json`。
 - **9 筆新增官方導航卡**：
   1. 衛福部心快活｜心理健康文章專區
   2. 衛福部心快活｜心理健康學習課程目錄
@@ -88,50 +88,50 @@
   3. 想理解自己的壓力與關係，可以先讀哪些資料？
   4. 網路購物、預付課程或訂閱服務，先弄清楚哪些事？
   5. 居家安全可以先認識什麼？從防火與求助開始
-- \`scripts/lib/qa-batch3.mjs\` 僅在 \`--mode=qa\` 載入；\`scripts/build.mjs\` 新增讀取第三批資源和文章；學習與活動頁加入 QA 時的文章區（只在有學習文章時呈現）；測試 \`tests/qa-batch2.test.mjs\` 同時測第二、第三批，並檢查正式版**不含任何第二、第三批候選**。
+- `scripts/lib/qa-batch3.mjs` 僅在 `--mode=qa` 載入；`scripts/build.mjs` 新增讀取第三批資源和文章；學習與活動頁加入 QA 時的文章區（只在有學習文章時呈現）；測試 `tests/qa-batch2.test.mjs` 同時測第二、第三批，並檢查正式版**不含任何第二、第三批候選**。
 - **使用者 2026-10-15 晚間已親自開 QA 確認：有新增內容、有連結、可以正常通過操作。** 這表示**連結及操作這輪通過手機抽樣驗收**，不等於她已逐字審定 5 篇正文或 9 筆所有外部條款。
 - 目前 QA 的讀利文章總數：**第二批 12 ＋ 第三批 5 ＝ 17 篇新增候選**；**不是 12＋5＋額外 2 篇安全草稿**。9 筆是第三批已進 QA 的卡，其他探索候選不得重複計數。
 - **重要可用性標示**：「免登入閱讀／公開查詢」與「免費報名、免費票券、能完成課程、免提供個資」分開。第三方網站報名、個人化學習進度、申訴可能要求個資；《由己》站內不要求任何資料。下一階段可優化候選卡可讀性與這些使用條件的文字，但不擅自改成已核准。
 
 ## G. 第三批另有「研究中、尚未上 QA」的候選，勿重複匯入
 
-1. \`docs/BATCH3-LIFE-HEALTH-LEARNING-CULTURE-2026-10-15.md\`：多元內容方向、8 個初步入口＋6 篇導讀題目規劃。
-2. \`docs/BATCH3-DIVERSE-RESOURCE-CANDIDATES-2026-10-15.json\`：**另外 9 筆未上 QA** 的探索候選，如教育部 30⁺ 大學、社區大學、臺北市終身學習、家庭教育資源網、國健署更年期等；部分與已上 QA 的心快活／教育部平台／文化部入口用途重疊。**先去重、核對實際免登入與免費範圍；有特定年齡、學歷或費用門檻者不得冒稱零門檻。**
-3. \`docs/BATCH3-PERSONAL-SAFETY-RESOURCES-2026-10-15.json\`：**另有 6 筆人身安全官方研究候選**，包括警政署夜間外出、跟蹤騷擾、防身影音、高雄婦幼警察隊防身圖解、新北婦幼資訊與兒童安全。**不是 6 筆全部已上 QA**：現有 QA 9 筆之一只含警政署防身影片入口；其餘仍留 docs。
-4. \`docs/BATCH3-DRAFT-GUIDES-PERSONAL-SAFETY-2026-10-15.md\`：**另有 2 篇完整但未上 QA 的安全導讀候選**：「懷疑有人跟隨、騷擾或突然靠近時，可以先做什麼？」「防身術、防身用品、免費課程，該從哪裡開始找？」。
+1. `docs/BATCH3-LIFE-HEALTH-LEARNING-CULTURE-2026-10-15.md`：多元內容方向、8 個初步入口＋6 篇導讀題目規劃。
+2. `docs/BATCH3-DIVERSE-RESOURCE-CANDIDATES-2026-10-15.json`：**另外 9 筆未上 QA** 的探索候選，如教育部 30⁺ 大學、社區大學、臺北市終身學習、家庭教育資源網、國健署更年期等；部分與已上 QA 的心快活／教育部平台／文化部入口用途重疊。**先去重、核對實際免登入與免費範圍；有特定年齡、學歷或費用門檻者不得冒稱零門檻。**
+3. `docs/BATCH3-PERSONAL-SAFETY-RESOURCES-2026-10-15.json`：**另有 6 筆人身安全官方研究候選**，包括警政署夜間外出、跟蹤騷擾、防身影音、高雄婦幼警察隊防身圖解、新北婦幼資訊與兒童安全。**不是 6 筆全部已上 QA**：現有 QA 9 筆之一只含警政署防身影片入口；其餘仍留 docs。
+4. `docs/BATCH3-DRAFT-GUIDES-PERSONAL-SAFETY-2026-10-15.md`：**另有 2 篇完整但未上 QA 的安全導讀候選**：「懷疑有人跟隨、騷擾或突然靠近時，可以先做什麼？」「防身術、防身用品、免費課程，該從哪裡開始找？」。
 5. 人身安全建議先利用現有六大分類，在「法律與權益」加細項「人身安全與自我保護」，「學習與活動／向光」放免費安全教材與防身課程查詢，而不是另外創建第七大分類。可整理個人警報器、哨子、手電筒、手機 SOS、避免單獨對抗的安全概念；防狼噴霧有法律及搭機限制，不能隨意宣稱全面合法；不教攻擊人體要害或推銷危險武器。**警方免費線上影片 ≠ 有開放、免費、可立即報名的實體防身班**；目前未核對到足夠證據支持當期開課、費用、一般民眾資格。
 6. 這些候選都不能一口氣當成「第三批已驗收上線」；需實際核對並經擁有人決定要不要納入 QA／正式內容。避免為求數量而重複入口、複製官方機構首頁或收錄已過期活動。
 
 ## H. 發布核准與資訊安全
 
-- 現有正式發布核准制度 \`content/release-approvals.json\` 繼續使用**獨立的資料版本指紋與範圍**；AI 來源查核不代表擁有人「已人工逐頁審查」，不能擅自填 \`checkedAt\` 或 \`status:已確認\`。
+- 現有正式發布核准制度 `content/release-approvals.json` 繼續使用**獨立的資料版本指紋與範圍**；AI 來源查核不代表擁有人「已人工逐頁審查」，不能擅自填 `checkedAt` 或 `status:已確認`。
 - 現有核准資料以當前 GitHub 文件紀錄為準：16 個機構入口、4 支求助專線、1 個 SMS 官方入口、9 張素材核准快照。不可把舊 16 筆的核准套用到新 23＋9。
-- 正式模式 \`--mode=production\` 與一般預覽模式不能包含第二、第三批未核准候選；目前 QA 測試中每頁顯示未核准訊息，並不進 sitemap；搜尋文字只在瀏覽器處理，不傳送、不儲存。
-- 外部連結需保持 HTTPS、\`noopener noreferrer\`；正式活動須標主辦方、日期、費用、資格、名額限制；當期過期不能顯示為開放報名。引用、素材、商標、停站關站及備份規範請延續原有 docs。
+- 正式模式 `--mode=production` 與一般預覽模式不能包含第二、第三批未核准候選；目前 QA 測試中每頁顯示未核准訊息，並不進 sitemap；搜尋文字只在瀏覽器處理，不傳送、不儲存。
+- 外部連結需保持 HTTPS、`noopener noreferrer`；正式活動須標主辦方、日期、費用、資格、名額限制；當期過期不能顯示為開放報名。引用、素材、商標、停站關站及備份規範請延續原有 docs。
 - 一般讀者不提供資料；**不可以保證外部官方或教育平台不使用 cookie／追蹤或不要求資料**。告知讀者離開《由己》後是外站的規則。
 - **公開 QA 是擁有人同意的測試**，而且雖標示「未核准」仍是公開可看到；如需撤下重大錯誤內容，可更新 QA 版本或向擁有人確認是否暫停 Pages，不要以為 noindex 等於沒人看。
 
 ## I. 測試與部署紀錄（最新核對）
 
-- 截至歸檔前最後成功版本 \`babd6f4382e24b7f839b548bc92316bd59ad4dce\`：
-  - CI \`https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38736276300\`：**Chromium 原有測試 44／44，第二＋第三批 QA 驗收 31／31，WebKit 模擬 Safari 15／15，全部成功**。
+- 截至歸檔前最後成功版本 `babd6f4382e24b7f839b548bc92316bd59ad4dce`：
+  - CI `https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38736276300`：**Chromium 原有測試 44／44，第二＋第三批 QA 驗收 31／31，WebKit 模擬 Safari 15／15，全部成功**。
   - QA 共 **33 個 HTML 頁面**有「未核准測試內容」標示及 noindex（增加5篇後比原28頁多5頁）。
   - QA 地方資源 23 筆、第三批開放探索 9 筆；讀利候選文章 17 篇；22 縣市功能、手機版連結與搜尋測試通過。
-  - QA Pages 發布 \`https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38736276160\`：**成功**；網址仍是上面同一個 \`github.io/morning-light-magazine/\`。
-- 過程中一些 Actions 測試曾短暫失敗（Safari 搜尋重繪、卡片名稱 \`&\` HTML escape、舊斷言未預期新增9筆全國卡／17篇文章）；**已修改程式或測試斷言，最終完整 CI 與 Pages 均成功**。不要把舊的紅色 run 當成目前版本失敗，也不要抹掉失敗歷史。
+  - QA Pages 發布 `https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/38736276160`：**成功**；網址仍是上面同一個 `github.io/morning-light-magazine/`。
+- 過程中一些 Actions 測試曾短暫失敗（Safari 搜尋重繪、卡片名稱 `&` HTML escape、舊斷言未預期新增9筆全國卡／17篇文章）；**已修改程式或測試斷言，最終完整 CI 與 Pages 均成功**。不要把舊的紅色 run 當成目前版本失敗，也不要抹掉失敗歷史。
 - **擁有人實機已確認**：搜尋 Bug 修好；城市／福利連結、文章開啟與滑動順暢；第三批新增文章與連結也能打開。未做的不能宣稱通過每筆內容實質查核。
-- 本輪新增／變更有：\`src/assets/js/search.js\`、\`src/assets/css/main.css\`、\`scripts/build.mjs\`、\`scripts/lib/qa-batch3.mjs\`、\`tests/qa-batch2.test.mjs\`、\`tests/mobile-webkit.test.mjs\`、\`.github/workflows/qa-public-preview.yml\` 與 docs 第三批研究／草稿。先前 Codespaces 設定檔仍在，但已非使用者手機測試的建議方案。
+- 本輪新增／變更有：`src/assets/js/search.js`、`src/assets/css/main.css`、`scripts/build.mjs`、`scripts/lib/qa-batch3.mjs`、`tests/qa-batch2.test.mjs`、`tests/mobile-webkit.test.mjs`、`.github/workflows/qa-public-preview.yml` 與 docs 第三批研究／草稿。先前 Codespaces 設定檔仍在，但已非使用者手機測試的建議方案。
 - **內容測試 ≠ 手機實機每個情境 100% 保證**；Chromium/WebKit 皆為模擬環境，不能冒充真實 iPhone 的完整驗收。
 
 ## J. 下一視窗優先工作（照順序執行）
 
-1. **先核對 repo 最新 HEAD、最近 Actions、Pages、QA 內容及 \`docs/HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md\`。** 若這份交接與即時內容衝突，以可核對的 GitHub 最新檔案與使用者新指令為準。
+1. **先核對 repo 最新 HEAD、最近 Actions、Pages、QA 內容及 `docs/HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md`。** 若這份交接與即時內容衝突，以可核對的 GitHub 最新檔案與使用者新指令為準。
 2. **先不要再改搜尋／六大分類／V3.3**：已由使用者驗收成功。不要再把第二批／第三批內容通通從頭生成，也不用重新設定 Pages／Codespaces。
 3. **以新定位繼續補強內容**：除了既有社福求助，優先搜集「不需在《由己》輸入任何資料、免註冊可直接閱讀或查詢」的實用女性生活知識、自主學習、公開藝文、居住及金錢常識、數位安全、健康衛教等。優先**真正可用的資料頁或教學入口**，避免只塞同一主管機關首頁或過期活動。
 4. **第三批第二組研究**：檢查「另有9筆多元候選」與既有QA 9筆重複／限制，選真正免費免登入且具體可使用者；人身安全另6筆資源與2篇導讀須編輯查核，考慮納入後續 QA。實體免費防身班或特殊年齡資格無證據就不宣稱。若沒有合格入口，直說沒有。
 5. **補上讀者可見的使用條件區分**（如「可直接閱讀」「可免登入查詢」「外站報名另有要求」「有時效，請核當期」），但先規劃文案與最少量 UI，不新增會員、行為追蹤或表單；不要為了花俏重做版面。
 6. 新增文章要有自主閱讀價值、不把所有結尾導向求助專線；同時仍給必要的原始來源、更新日期與適用限制。不要抄外站全文；來源不確定的標待查。
-7. 新資料先放 \`docs/\`；只有清楚標示為 QA 待核准並有測試與擁有人同意的內容才進已同意公開的 QA 預覽。**正式 \`content/\`、核准快照、\`main\`、正式部署都須另獲明確同意**。
+7. 新資料先放 `docs/`；只有清楚標示為 QA 待核准並有測試與擁有人同意的內容才進已同意公開的 QA 預覽。**正式 `content/`、核准快照、`main`、正式部署都須另獲明確同意**。
 8. 修改後做格式、去重、連結有效性、文章獨立頁、分類與搜尋、手機觸控、Safari 核心、發佈隔離驗證，**等 GitHub Actions 最終成功再要求使用者短時間手機驗收**，不可讓使用者反覆試未完成版本。
 9. 工作過程中**定期在對話內回報實際已做什麼、有什麼檔案／commit、待做什麼**，而非一直說「開始」卻沒有動作；若對話太長，將新的決策追加成下一版交接檔，不要只靠 ChatGPT 記憶。
 
@@ -145,4 +145,4 @@
 
 ---
 
-**下一視窗啟動語**：我們繼續開發《由己 SELF-AUTHORED》。請先讀 GitHub 開發分支的 \`docs/HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md\`，查核 \`claude/morning-light-visual-v2\` 最新狀態、Pages QA 與 Actions。延續免費、免會員、無站內個資的女性生活資訊與探索定位，繼續查核第三批後續開放內容及人身安全候選。保持原六大分類，新增內容先走未核准 QA，禁止擅自合併 main 或正式發布。先說明已核對的實際進度，然後直接做剩餘工作。
+**下一視窗啟動語**：我們繼續開發《由己 SELF-AUTHORED》。請先讀 GitHub 開發分支的 `docs/HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md`，查核 `claude/morning-light-visual-v2` 最新狀態、Pages QA 與 Actions。延續免費、免會員、無站內個資的女性生活資訊與探索定位，繼續查核第三批後續開放內容及人身安全候選。保持原六大分類，新增內容先走未核准 QA，禁止擅自合併 main 或正式發布。先說明已核對的實際進度，然後直接做剩餘工作。
