@@ -15,6 +15,7 @@ import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from './lib/release
 import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
+import { loadQaEnglishResources } from './lib/qa-english.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -128,9 +129,10 @@ if (errors.length) {
 const isPublic = (status, published = true) =>
   published !== false && status !== '已撤下' && (IS_PREVIEW || status === '已確認');
 
-const resources = [...resourceData.items.filter((r) => IS_PREVIEW
+const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
   : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources];
+const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -270,19 +272,24 @@ function resourceCard(r, { anchor = true } = {}) {
   const phoneInfo = basicOnly ? '' : r.phones.length
     ? `<dt>電話</dt><dd>${r.phones.map((p) => `${esc(p.label)}（服務時間：${esc(p.hours)}）`).join('<br>')}</dd>`
     : '';
+  const englishName = r.nameEn ? `<p class="res-title-en" lang="en">${esc(r.nameEn)}</p>` : '';
+  const englishSummary = r.summaryEn ? `<p class="res-summary-en" lang="en">${esc(r.summaryEn)}</p>` : '';
+  const englishLink = r.officialEnglishUrl && r.officialEnglishUrl !== r.url ? extLink(r.officialEnglishUrl, 'English official information', 'res-english-link') : '';
   return `<article class="res-card"${anchor ? ` id="res-${esc(r.id)}"` : ''} data-res data-regions="${esc(r.regions.join(' '))}" data-types="${esc(r.serviceTypes.join('|'))}">
   <header class="res-head">
     ${icon(iconName, 'res-icon')}
     <div class="res-title">
       <h3>${esc(r.name)}</h3>
+      ${englishName}
       <p class="res-types">${r.serviceTypes.map(esc).join('・')}</p>
     </div>
   </header>
   <p class="res-summary">${esc(r.summary)}</p>
+  ${englishSummary}
   <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${r.usage ? `<dt>使用方式</dt><dd class="res-usage">${esc(r.usage)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
     <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : `${qaBadge(r)}${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
-    <div class="res-actions">${extLink(r.url, '前往官方網站')}${phones}</div>
+    <div class="res-actions">${extLink(r.url, '前往官方網站')}${englishLink}${phones}</div>
   </footer>
 </article>`;
 }
@@ -916,7 +923,7 @@ ${renderMarkdown(a.body, { link: linkResolver(prefix) })}
 for (const r of resources) {
   const cat = catById[r.categories[0]];
   const url = cat && cat.id !== 'city' ? `${cat.slug}#res-${r.id}` : r.categories.length ? `city.html#res-${r.id}` : 'support.html';
-  addIndex('機構與資源', r.name, r.summary, url, IS_PREVIEW ? [r.serviceTypes.join(' '), regionLabel(r.regions), r.audience, r.phones.map((p) => p.number).join(' ')].join(' ') : [r.serviceTypes.join(' '), regionLabel(r.regions)].join(' '));
+  addIndex('機構與資源', r.name, [r.summary, r.nameEn || '', r.summaryEn || ''].join(' '), url, IS_PREVIEW ? [r.serviceTypes.join(' '), regionLabel(r.regions), r.audience, r.phones.map((p) => p.number).join(' '), (r.keywordsEn || []).join(' ')].join(' ') : [r.serviceTypes.join(' '), regionLabel(r.regions)].join(' '));
 }
 for (const c of counties) {
   addIndex('縣市資源', `${c.name}的生活資源`, `依縣市查詢${c.name}可使用的正式服務據點。`, `city.html#county=${c.id}`, c.area);
