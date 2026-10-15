@@ -6,7 +6,7 @@ summary: 不必先知道機關名稱，從「我想了解什麼」出發，三�
 published: 2026-10
 updated: 2026-10-14
 status: 已確認
-visibility: public
+visibility: withdrawn
 featured: true
 source: 本站網站功能說明 | about.html
 ---

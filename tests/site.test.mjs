@@ -334,12 +334,17 @@ try {
           entryHref: entry?.getAttribute('href'), entryText: entry?.querySelector('strong')?.textContent,
           entryBeforeContent: !!entry && !!firstSection && (entry.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING) > 0,
           entryTop: entry ? entry.getBoundingClientRect().top + window.scrollY : Infinity,
+          entryH: entry ? Math.round(entry.getBoundingClientRect().height) : 0,
+          entryDesc: entry?.querySelector('small')?.textContent,
+          entryIcon: !!entry?.querySelector('svg.support-entry-icon'),
           current: document.querySelector('.dir-nav [aria-current="page"]')?.getAttribute('href'),
         };
       });
       if (info.zh !== d.zh || info.en !== d.en) dirProblems.push(`${d.href} 標題 ${info.zh} ${info.en}`);
       if (info.entryHref !== 'support.html' || info.entryText !== '支援資源' || !info.entryBeforeContent) dirProblems.push(`${d.href} 支援資源入口不在頁面前段`);
       if (info.entryTop > 844 * 1.5) dirProblems.push(`${d.href} 支援資源入口位置過低（${Math.round(info.entryTop)}px）`);
+      // V3.3：小型橫向入口——圖示＋標題＋一行說明，高度 44–72px（可點擊、不再像大型卡片）
+      if (!info.entryIcon || info.entryDesc !== '查看正式求助專線與相關機構' || info.entryH < 44 || info.entryH > 72) dirProblems.push(`${d.href} 支援資源入口樣式不符（高 ${info.entryH}px）`);
       if (info.current !== d.href) dirProblems.push(`${d.href} 頁首未標示目前目錄`);
       await page.tap('.dir-head .support-entry');
       await page.waitForURL('**/support.html');
@@ -349,7 +354,7 @@ try {
       const html = await readFile(path.join(DIST, f), 'utf8');
       if (/<h1[^>]*>支援資源<\/h1>/.test(html)) supportPages.push(f);
     }
-    check('讀利專欄、向光：點擊頁首目錄前往正確頁面；兩頁前段都有「支援資源」入口，連往同一個既有支援資源頁（全站只有一個支援資源頁）', dirProblems.length === 0 && supportPages.length === 1 && supportPages[0] === 'support.html', [...dirProblems, `支援資源頁：${supportPages.join('、')}`].join('；'));
+    check('讀利專欄、向光：點擊頁首目錄前往正確頁面；兩頁前段都有小型「支援資源」入口（肌肉圖示、高度 44–72px），連往同一個既有支援資源頁（全站只有一個支援資源頁）', dirProblems.length === 0 && supportPages.length === 1 && supportPages[0] === 'support.html', [...dirProblems, `支援資源頁：${supportPages.join('、')}`].join('；'));
 
     // 頁首與手機選單不再有獨立的「支援資源」入口（只保留在讀利專欄與向光頁內）
     const navSupport = [];
@@ -373,13 +378,16 @@ try {
     const qp = await readFile(path.join(DIST, 'quiet-power.html'), 'utf8');
     const tl = await readFile(path.join(DIST, 'toward-light.html'), 'utf8');
     const about = await readFile(path.join(DIST, 'about.html'), 'utf8');
-    for (const a of ['articles/how-to-use.html', 'articles/status-labels.html']) if (!qp.includes(`href="${a}"`)) movedProblems.push(`讀利缺少文章 ${a}`);
+    // V3.3：兩篇使用指南不再公開，讀利專欄改為一行操作提示；全站不得留下文章連結或搜尋結果
+    if (/編輯精選|href="articles\//.test(qp) || !qp.includes('class="dir-tip"')) movedProblems.push('讀利仍有使用指南卡片或缺少操作提示');
+    for (const f of pages) if ((await readFile(path.join(DIST, f), 'utf8')).includes('href="articles/') || f.startsWith('articles/')) movedProblems.push(`${f} 仍有已撤下文章`);
+    if (/"type":"文章"/.test(idx)) movedProblems.push('搜尋索引仍有已撤下文章');
     if ((qp.match(/class="need-list"/g) || []).length !== 1 || (qp.match(/class="need-no"/g) || []).length < 8) movedProblems.push('讀利缺少常見需求');
     if ((tl.match(/class="county-chip" href="city\.html#county=/g) || []).length !== 22) movedProblems.push('向光缺少 22 縣市入口');
     for (const name of ['台灣就業通', '衛生福利部社會及家庭署', '財團法人法律扶助基金會', '衛生福利部心理健康司']) if (!tl.includes(`<h3>${name}</h3>`)) movedProblems.push(`向光缺少官方資源 ${name}`);
     if (!tl.includes('href="learning.html"') || !tl.includes('href="learning.html#events-title"')) movedProblems.push('向光缺少學習與活動入口');
     for (const f of ['disclaimer.html', 'privacy.html', 'verification.html']) if (!about.includes(`href="${f}"`)) movedProblems.push(`關於由己缺少 ${f}`);
-    check('原首頁內容仍可抵達：編輯精選與常見需求→讀利專欄；城市入口（22 縣市）、官方資源推薦、學習活動→向光；關於、免責、隱私、查核→關於由己', movedProblems.length === 0, movedProblems.join('；'));
+    check('原首頁內容仍可抵達：常見需求與操作提示→讀利專欄（使用指南卡片已撤下）；城市入口（22 縣市）、官方資源推薦、學習活動→向光；關於、免責、隱私、查核→關於由己', movedProblems.length === 0, movedProblems.join('；'));
 
     // 6：首頁六大主題卡全部可開啟
     const home = await readFile(path.join(DIST, 'index.html'), 'utf8');

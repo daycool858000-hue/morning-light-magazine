@@ -439,7 +439,7 @@ const dirById = Object.fromEntries(site.directories.map((d) => [d.id, d]));
 
 /** 兩個目錄頁共用：放在頁面最前面的「支援資源」入口（連往同一個既有支援資源頁） */
 function supportEntry(prefix = '') {
-  return `<a class="support-entry" href="${prefix}support.html">${icon('leaf', 'support-entry-icon')}<span class="support-entry-text"><strong>支援資源</strong><small>需要協助時，這裡有可直接撥打的正式專線與相關機構</small></span><span class="need-arrow" aria-hidden="true">→</span></a>`;
+  return `<a class="support-entry" href="${prefix}support.html">${icon('muscle', 'support-entry-icon')}<span class="support-entry-text"><strong>支援資源</strong><small>查看正式求助專線與相關機構</small></span><span class="support-entry-arrow" aria-hidden="true">→</span></a>`;
 }
 
 {
@@ -492,12 +492,13 @@ function supportEntry(prefix = '') {
   addIndex('頁面', '首頁', site.description, 'index.html', `${site.name} ${site.englishName} 首頁`);
 }
 
-function dirHead(d) {
+function dirHead(d, tip = '') {
   return `<section class="page-head dir-head" aria-labelledby="page-title">
   <div class="wrap">
     <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">${esc(d.zh)}</li></ol></nav>
     <h1 id="page-title" class="dir-title"><span class="dir-title-zh">${esc(d.zh)}</span><span class="dir-title-en">${esc(d.en)}</span></h1>
     <p class="lead">${esc(d.lead)}</p>
+    ${tip ? `<p class="dir-tip">${esc(tip)}</p>` : ''}
     ${supportEntry()}
   </div>
 </section>`;
@@ -508,14 +509,7 @@ function dirHead(d) {
   const d = dirById['quiet-power'];
   const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
   const body = `
-${dirHead(d)}
-<section class="section" aria-labelledby="articles-title">
-  <div class="wrap">
-    ${sectionHead('Selected Reading', 'articles-title', '編輯精選')}
-    ${articles.length ? `<div class="story-grid">${articles.map((a) => articleCard(a, '')).join('\n')}</div>` : emptyBox('導讀文章正在撰寫與查核中，完成後會陸續上架。')}
-    <p class="section-note">各主題的制度導讀文章，將於資料查核完成後陸續上架。</p>
-  </div>
-</section>
+${dirHead(d, '依照自己的需要選擇生活主題，也可以直接搜尋關鍵字。找到相關資源後，點選連結前往官方網站。')}
 <section class="section needs" aria-labelledby="needs-title">
   <div class="wrap needs-grid">
     <div class="needs-intro">

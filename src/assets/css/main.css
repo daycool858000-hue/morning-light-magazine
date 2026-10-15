@@ -659,16 +659,19 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 /* 目錄頁 */
 .dir-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
 .dir-title-en { font-family: var(--sans); font-size: 0.42em; font-weight: 600; letter-spacing: 0.22em; color: var(--amber); }
+/* 支援資源：小型橫向入口（V3.3 精簡；保留至少 44px 點擊高度） */
 .support-entry {
-  display: flex; align-items: center; gap: 14px; margin-top: 22px; max-width: 640px;
-  padding: 14px 18px; border-radius: 14px; background: var(--sage-soft); border: 1px solid #DCE3D4;
-  color: var(--ink); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; max-width: 100%; min-height: 44px;
+  padding: 6px 14px 6px 10px; border-radius: 999px; background: var(--paper); border: 1px solid #DCE3D4;
+  color: var(--ink); text-decoration: none; line-height: 1.4;
 }
 .support-entry:hover { border-color: var(--sage); color: var(--ink); }
-.support-entry-icon { width: 30px; height: 30px; color: var(--sage); flex: none; }
-.support-entry-text { flex: 1; display: flex; flex-direction: column; }
-.support-entry-text strong { font-size: 1.05rem; color: #4E6148; }
-.support-entry-text small { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+.support-entry-icon { width: 22px; height: 22px; color: var(--sage); flex: none; }
+.support-entry-text { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; }
+.support-entry-text strong { font-size: 0.92rem; color: #4E6148; }
+.support-entry-text small { font-size: 0.8rem; color: var(--muted); }
+.support-entry-arrow { color: var(--sage); font-size: 0.9rem; flex: none; }
+.dir-tip { margin: 10px 0 0; font-size: 0.9rem; color: var(--muted); max-width: 40em; }
 .about-hub { margin-top: 4px; }
 
 /* 320–359px：再收緊頁首間距，讓品牌文字與選單、切換畫面之間保留足夠空間（不同字型寬度也不重疊） */

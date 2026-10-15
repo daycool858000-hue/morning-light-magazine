@@ -6,7 +6,7 @@ summary: 「已確認」「待確認」與最後查核日期代表什麼？讀�
 published: 2026-10
 updated: 2026-10-14
 status: 已確認
-visibility: public
+visibility: withdrawn
 featured: true
 source: 本站查核與更新說明 | verification.html
 ---
