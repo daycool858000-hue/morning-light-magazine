@@ -1,3 +1,4 @@
+# 本次依使用者 GitHub Pages 設定畫面已選 GitHub Actions，重新啟動 QA 部署（2026-10-15）。
 # 僅部署已經以 QA 模式生成的「未核准測試內容」供站主手機驗收。
 # 發布到公開 GitHub Pages；不合併 main，不匯入正式 content，不新增核准紀錄。
 # 不設定一般 push 自動發布；只在新增／修改此 workflow 本身時啟動，避免研究更新被意外公開。
