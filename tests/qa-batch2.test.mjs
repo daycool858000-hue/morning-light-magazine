@@ -9,6 +9,7 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { loadBatch2Articles, BATCH2_RESOURCES } from '../scripts/lib/qa-batch2.mjs';
+import { loadBatch3OpenAccess } from '../scripts/lib/qa-batch3.mjs';
 
 const require = createRequire(import.meta.url);
 function loadPlaywright() {
@@ -28,6 +29,7 @@ const counties = JSON.parse(await readFile(path.join(ROOT, 'content/counties.jso
 const national = JSON.parse(await readFile(path.join(ROOT, 'content/resources.json'), 'utf8')).items;
 const cand = JSON.parse(await readFile(path.join(ROOT, BATCH2_RESOURCES), 'utf8')).items;
 const arts = await loadBatch2Articles(ROOT, categories);
+const third = await loadBatch3OpenAccess(ROOT);
 const BASE = site.basePath;
 const PORT = 4331;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
@@ -50,7 +52,7 @@ async function listFiles(dir, prefix = '') {
 const read = (dir, f) => readFile(path.join(dir, f), 'utf8');
 
 // ---------- 一、發布隔離：候選內容只在 dist-qa ----------
-const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), 'batch2-', '未核准測試內容'];
+const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), 'batch2-', 'batch3-', '未核准測試內容'];
 for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-production', 'dist-production']]) {
   const leaks = [];
   for (const f of await listFiles(path.join(ROOT, dir))) {
@@ -62,7 +64,9 @@ for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-p
 }
 const candStillPending = cand.every((r) => r.published === false && r.status === '待確認' && r.checkedAt === null);
 const approvals = JSON.parse(await readFile(path.join(ROOT, 'content/release-approvals.json'), 'utf8'));
-const notApproved = cand.every((r) => !approvals.resources[r.id]);
+const notApproved = [...cand, ...third.resources].every((r) => !approvals.resources[r.id]);
+const thirdPending = third.resources.every((r) => r.published === false && r.status === '待確認' && r.checkedAt === null) && third.articles.every((a) => a.publishApproval === 'not-approved');
+check('第三批：9 筆生活自主學習入口與 5 篇原創文章均保持未核准且不在正式發布清單', thirdPending && notApproved);
 check('候選資料本身未被改動：23 筆仍為 published:false、待確認、checkedAt:null，且不在既有發布核准清單', candStillPending && notApproved);
 
 // ---------- 二、測試預覽的靜態檢查 ----------
@@ -102,6 +106,7 @@ const kh = cardHtml('batch2-kaohsiung-welfare-directory');
 check('高雄市：標示為市府社會福利目錄，入口類型註明「非社會局／處獨立網站」，名稱未冒稱社會局網站', /市府官方福利查詢目錄（非社會局／處獨立網站）/.test(kh) && !/社會局官方網站|社會局網站/.test(nameOf(kh)));
 
 const nationalCards = national.filter((r) => r.published !== false && r.status !== '已撤下');
+const qaNationalCardsCount = nationalCards.length + third.resources.filter((r) => r.regions.includes('national')).length;
 const natChanged = nationalCards.filter((r) => !cardHtml(r.id).includes(`<h3>${r.name}</h3>`) || !cardHtml(r.id).includes(r.summary));
 check(`原有 ${nationalCards.length} 筆全國性資料仍在且名稱、簡介未被覆寫`, natChanged.length === 0, natChanged.map((r) => r.id).join('、'));
 
@@ -131,6 +136,21 @@ for (const a of arts) {
 check('12 篇文章：各有獨立頁面、正確分類、查核日期與官方來源；讀利專欄與搜尋索引都找得到；不含編輯備註', artProblems.length === 0, artProblems.slice(0, 5).join('；'));
 const withdrawn = existsSync(path.join(QA, 'articles/how-to-use.html')) || existsSync(path.join(QA, 'articles/status-labels.html')) || /看懂資料旁的小標籤|由己使用指南/.test(qp + idx);
 check('兩篇已撤下的舊使用指南沒有重新出現', !withdrawn);
+
+const newArticleProblems = [];
+for (const a of third.articles) {
+  const html = await read(QA, `articles/${a.slug}.html`).catch(() => '');
+  if (!html.includes(`<h1>${a.title}</h1>`)) newArticleProblems.push(`${a.slug} 缺少內文或標題`);
+  if (!html.includes('未核准測試內容')) newArticleProblems.push(`${a.slug} 未標示 QA`);
+  if (!idx.includes(`"url":"articles/${a.slug}.html"`)) newArticleProblems.push(`${a.slug} 缺少搜尋索引`);
+  if (!a.sourcesList.every((x) => html.includes(x.url.replace(/&/g, '&amp;')))) newArticleProblems.push(`${a.slug} 參考來源不完整`);
+}
+for (const r of third.resources) {
+  const html = cardHtml(r.id);
+  if (!html.includes(r.name) || !html.includes('badge-qa')) newArticleProblems.push(`${r.id} 缺少候選卡或標示`);
+  if (!html.includes(r.url.replace(/&/g, '&amp;'))) newArticleProblems.push(`${r.id} 缺少正確外部連結`);
+}
+check('第三批 5 篇文章／9 筆官方學習及生活導覽：連結、搜尋、標籤與來源完整', newArticleProblems.length === 0, newArticleProblems.slice(0, 6).join('；'));
 
 // ---------- 三、瀏覽器操作（Chromium） ----------
 const server = http.createServer(async (req, res) => {
@@ -230,7 +250,7 @@ try {
     if (JSON.stringify(ids) !== JSON.stringify(expected)) countyProblems.push(`${c.name} 顯示 ${ids.length} 筆，應為 ${expected.length} 筆`);
     if (shown.some((s) => !s.regions.split(' ').includes(c.id))) countyProblems.push(`${c.name} 混入其他縣市`);
     const nat = await page.$$eval('#national-results [data-res]:not([hidden])', (els) => els.length);
-    if (nat !== nationalCards.length) countyProblems.push(`${c.name} 全國性 ${nat} 筆`);
+    if (nat !== qaNationalCardsCount) countyProblems.push(`${c.name} 全國性 ${nat} 筆，預期 ${qaNationalCardsCount}`);
   }
   check('22 縣市逐一切換：每個縣市只顯示該縣市的地方入口（嘉義市 2 筆、其餘各 1 筆），全國性資源維持顯示', countyProblems.length === 0, countyProblems.slice(0, 4).join('；'));
 
@@ -278,14 +298,14 @@ try {
   await page.goto(`${ORIGIN}${BASE}quiet-power.html`);
   const qpLinks = await page.$$eval('#articles-title ~ .story-grid a, .story-grid h3 a', (as) => [...new Set(as.map((a) => a.getAttribute('href')))]);
   const entry = await page.$eval('.dir-head .support-entry', (e) => ({ href: e.getAttribute('href'), h: Math.round(e.getBoundingClientRect().height) }));
-  check('讀利專欄：導讀文章區列出 12 篇且連結正確；💪 支援資源小型入口仍在（連往 support.html、高度 ≥ 44px）', qpLinks.length === 12 && arts.every((a) => qpLinks.includes(`articles/${a.slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
+  check('讀利專欄：導讀文章區列出第二批 12 篇及第三批 5 篇且連結正確；💪 支援資源小型入口仍在（連往 support.html、高度 ≥ 44px）', qpLinks.length === 17 && [...arts, ...third.articles].every((a) => qpLinks.includes(`articles/${a.slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
   check('測試預覽操作過程沒有 JavaScript 錯誤', errors.length === 0, errors.slice(0, 2).join('；'));
   await mobile.close();
 
   // 各寬度版面
   const overflow = [];
   const smallText = [];
-  const pagesToCheck = ['index.html', 'city.html', 'quiet-power.html', 'toward-light.html', 'search.html', ...arts.map((a) => `articles/${a.slug}.html`)];
+  const pagesToCheck = ['index.html', 'city.html', 'quiet-power.html', 'toward-light.html', 'search.html', ...arts.map((a) => `articles/${a.slug}.html`), ...third.articles.map((a) => `articles/${a.slug}.html`)];
   for (const w of [320, 375, 390, 768, 1280]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, isMobile: w < 700, hasTouch: w < 700 });
     const p = await ctx.newPage();
