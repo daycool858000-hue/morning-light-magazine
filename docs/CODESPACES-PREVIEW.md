@@ -1,5 +1,7 @@
 # 用 iPhone 開啟第二批測試預覽（GitHub Codespaces 私人網址）
 
+> **2026-10-16 現況附註（Issue #1 工作 D）**：網站擁有人已將 GitHub Pages 來源設為 GitHub Actions，並同意以 `qa-public-preview.yml` 發布**公開但標示「未核准測試內容」**的 QA 網站：https://daycool858000-hue.github.io/morning-light-magazine/ 。它不是正式上線，`main` 未合併；noindex 也不代表私密，知道網址的人都能看到。Codespaces 方式在手機上操作繁複，已改用上述公開 QA，**不需要再使用本文件的步驟**。以下為建立當時的歷史紀錄，保留原文。最新狀態見 [完整交接](HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md)。
+
 這是《由己》第二批**未核准測試內容**（23 筆地方官方入口、12 篇導讀）的線上預覽。網址只有**登入你自己 GitHub 帳號**的人能開啟（私人連接埠），不是公開網站，也不是 GitHub Pages。每一頁頂端都會顯示「未核准測試內容」。
 
 ## 第一次（約 3 分鐘）

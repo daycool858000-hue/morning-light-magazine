@@ -277,7 +277,7 @@ function resourceCard(r, { anchor = true } = {}) {
     </div>
   </header>
   <p class="res-summary">${esc(r.summary)}</p>
-  <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
+  <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${r.usage ? `<dt>使用方式</dt><dd class="res-usage">${esc(r.usage)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
     <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : `${qaBadge(r)}${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
     <div class="res-actions">${extLink(r.url, '前往官方網站')}${phones}</div>

@@ -1,5 +1,7 @@
 # 第二批內容本機測試預覽｜驗收報告（2026-10-15）
 
+> **2026-10-16 現況附註（Issue #1 工作 D）**：網站擁有人已將 GitHub Pages 來源設為 GitHub Actions，並同意以 `qa-public-preview.yml` 發布**公開但標示「未核准測試內容」**的 QA 網站：https://daycool858000-hue.github.io/morning-light-magazine/ 。它不是正式上線，`main` 未合併；noindex 也不代表私密，知道網址的人都能看到。下文「未部署、未建立公開測試站」是 2026-10-15 撰寫時的狀態。以下為建立當時的歷史紀錄，保留原文。最新狀態見 [完整交接](HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md)。
+
 - 分支：`claude/morning-light-visual-v2`（未合併 main、未啟用 GitHub Pages、未建立任何公開測試站）
 - 範圍：只建立**不對外部署的測試預覽**。第二批 23 筆地方官方入口與 12 篇導讀**仍未核准發布**。
 - 資料來源：只使用 ChatGPT 已整理的 `docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json` 與 `docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md`，沒有另外產生資源或文章。

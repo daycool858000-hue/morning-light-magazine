@@ -1,5 +1,7 @@
 # 用自己的 iPhone Safari 驗收正式版（不公開網站）
 
+> **2026-10-16 現況附註（Issue #1 工作 D）**：網站擁有人已將 GitHub Pages 來源設為 GitHub Actions，並同意以 `qa-public-preview.yml` 發布**公開但標示「未核准測試內容」**的 QA 網站：https://daycool858000-hue.github.io/morning-light-magazine/ 。它不是正式上線，`main` 未合併；noindex 也不代表私密，知道網址的人都能看到。目前驗收新內容直接用 Safari 開啟上述 QA 網址即可；下文同 Wi-Fi 電腦預覽仍可用於驗收「正式版」建置。以下為建立當時的歷史紀錄，保留原文。最新狀態見 [完整交接](HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md)。
+
 目的：讓網站擁有人在**自己的 iPhone Safari** 上，實際操作「正式版」網站（只含已核准的資料與圖片），而**不把網站放到網際網路上**。
 
 ## 建議做法：同一個 Wi-Fi 的電腦預覽（免費、不公開）

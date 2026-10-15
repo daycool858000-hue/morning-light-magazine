@@ -9,7 +9,7 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { loadBatch2Articles, BATCH2_RESOURCES } from '../scripts/lib/qa-batch2.mjs';
-import { loadBatch3OpenAccess } from '../scripts/lib/qa-batch3.mjs';
+import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs';
 
 const require = createRequire(import.meta.url);
 function loadPlaywright() {
@@ -151,6 +151,19 @@ for (const r of third.resources) {
   if (!html.includes(r.url.replace(/&/g, '&amp;'))) newArticleProblems.push(`${r.id} 缺少正確外部連結`);
 }
 check('第三批 5 篇文章／9 筆官方學習及生活導覽：連結、搜尋、標籤與來源完整', newArticleProblems.length === 0, newArticleProblems.slice(0, 6).join('；'));
+
+// Issue #1 A：第三批卡片各有一行個別「使用方式」，其他卡片與一般預覽／正式版不顯示
+const usageProblems = [];
+for (const r of third.resources) {
+  const rows = [...cardHtml(r.id).matchAll(/<dt>使用方式<\/dt><dd class="res-usage">([^<]*)<\/dd>/g)].map((m) => m[1]);
+  if (rows.length !== 1 || rows[0] !== USAGE_NOTES[r.id]) usageProblems.push(`${r.id}：${rows.join('／') || '缺少'}`);
+  if (/免費報名|保證免費|零門檻/.test(rows.join(''))) usageProblems.push(`${r.id} 使用方式含不當承諾`);
+}
+for (const r of [...cand, ...national]) if (cardHtml(r.id).includes('res-usage')) usageProblems.push(`${r.id} 不應顯示使用方式`);
+for (const dir of ['dist', 'dist-production']) {
+  for (const f of await listFiles(path.join(ROOT, dir))) if (f.endsWith('.html') && (await read(path.join(ROOT, dir), f)).includes('res-usage')) usageProblems.push(`${dir}/${f} 出現使用方式標示`);
+}
+check('第三批 9 張卡片各有一行個別「使用方式」（依各筆官方服務範圍），其他卡片、一般預覽與正式版不受影響', usageProblems.length === 0, usageProblems.slice(0, 4).join('；'));
 
 // ---------- 三、瀏覽器操作（Chromium） ----------
 const server = http.createServer(async (req, res) => {

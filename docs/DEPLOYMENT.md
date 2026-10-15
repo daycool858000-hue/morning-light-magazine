@@ -1,5 +1,7 @@
 # GitHub Pages 部署、暫停與關站
 
+> **2026-10-16 現況附註（Issue #1 工作 D）**：網站擁有人已將 GitHub Pages 來源設為 GitHub Actions，並同意以 `qa-public-preview.yml` 發布**公開但標示「未核准測試內容」**的 QA 網站：https://daycool858000-hue.github.io/morning-light-magazine/ 。它不是正式上線，`main` 未合併；noindex 也不代表私密，知道網址的人都能看到。下文「第一階段尚未部署」指正式網站；正式部署（`deploy-pages.yml`，需輸入「確認公開」）仍未執行。以下為建立當時的歷史紀錄，保留原文。最新狀態見 [完整交接](HANDOFF-2026-10-15-SELF-AUTHORED-COMPLETE.md)。
+
 > 第一階段尚未部署。以下步驟需**使用者驗收確認後**才執行。
 
 ## 一次性設定（由儲存庫擁有者在 GitHub 網頁操作）
