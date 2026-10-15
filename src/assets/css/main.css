@@ -77,6 +77,8 @@ p { margin: 0 0 1em; }
 /* ---------- 預覽與停止更新提示 ---------- */
 .preview-bar, .notice-bar { font-size: 0.8125rem; text-align: center; padding: 6px var(--gutter); line-height: 1.6; }
 .preview-bar { background: var(--sand-2); color: var(--muted); }
+/* 第二批候選內容的本機測試預覽（qa 模式）：與一般預覽區分，提醒為未核准內容 */
+.qa-bar { background: #F6E3D6; color: #6E3519; font-weight: 600; }
 .notice-bar { background: var(--sage-soft); color: var(--ink); }
 
 /* ---------- 頁首 ---------- */
@@ -207,6 +209,7 @@ main { display: block; }
 }
 .badge-ok { background: var(--sage-soft); color: #4E6148; }
 .badge-pending { background: #F4E8D2; color: var(--muted); }
+.badge-qa { background: #F6E3D6; color: #6E3519; }
 .badge-fix { background: var(--terracotta-soft); color: var(--terracotta-dark); }
 .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 0.8125rem; color: var(--muted); }
 .pill {
@@ -449,7 +452,7 @@ main { display: block; }
 .res-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 .res-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .res-actions a {
-  display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px;
   border-radius: 999px; border: 1px solid var(--ink); color: var(--ink);
   text-decoration: none; font-size: 0.9rem; font-weight: 600;
 }

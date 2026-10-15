@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 // 由己 SELF-AUTHORED 靜態網站產生器（無外部相依套件）
-// 用法：node scripts/build.mjs [--mode=preview|production] [--out=dist]
+// 用法：node scripts/build.mjs [--mode=preview|production|qa] [--out=dist]
 //   preview    ：顯示所有未撤下的資料，並以標籤標示查核狀態；頁面加上「預覽版本」提示與 noindex。
 //   production ：機構／專線／圖片只輸出 AI 已核對且作者核准之特定版本；文章與活動維持原查核規則。
+//   qa         ：只供本機驗收的「第二批候選內容」測試預覽（預設輸出 dist-qa/）。以 preview 為基礎，另外讀取
+//                docs/ 內未核准的 23 筆地方入口與 12 篇文章，每頁標示「未核准測試內容」。不得部署或公開。
 
 import { readFile, writeFile, mkdir, rm, readdir, copyFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -10,6 +12,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml as esc, parseFrontMatter, renderMarkdown } from './lib/markdown.mjs';
 import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from './lib/release.mjs';
+import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -18,9 +21,16 @@ const args = Object.fromEntries(
     return [key, value];
   }),
 );
-const MODE = args.mode === 'production' ? 'production' : 'preview';
-const OUT = path.resolve(ROOT, args.out || 'dist');
-const IS_PREVIEW = MODE === 'preview';
+const MODE = ['production', 'qa'].includes(args.mode) ? args.mode : 'preview';
+const IS_QA = MODE === 'qa';
+const OUT = path.resolve(ROOT, args.out || (IS_QA ? 'dist-qa' : 'dist'));
+// qa 是 preview 的延伸：與預覽版相同的顯示規則，再加上未核准的第二批候選內容
+const IS_PREVIEW = MODE === 'preview' || IS_QA;
+// 防呆：測試內容不得輸出到一般預覽或正式版資料夾
+if (IS_QA && ['dist', 'dist-production'].includes(path.relative(ROOT, OUT))) {
+  console.error('qa 模式不得輸出到 dist／dist-production，請使用 dist-qa。');
+  process.exit(1);
+}
 
 const STATUSES = ['已確認', '待確認', '需要修正', '已撤下'];
 const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei' }).format(new Date());
@@ -63,9 +73,14 @@ const serviceTypes = new Set(resourceData.serviceTypes);
 const isDate = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
 const isHttps = (v) => typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v);
 
+const qaResources = IS_QA ? await loadBatch2Resources(ROOT) : [];
+const qaArticles = IS_QA ? await loadBatch2Articles(ROOT, categories) : [];
 const seen = new Set();
-for (const r of resourceData.items) {
-  const where = `resources.json → ${r.id || '(缺少 id)'}`;
+const seenUrls = new Map();
+for (const r of [...resourceData.items, ...qaResources]) {
+  const where = `${r.qa ? '第二批候選' : 'resources.json'} → ${r.id || '(缺少 id)'}`;
+  if (seenUrls.has(r.url)) errors.push(`${where}：網址與 ${seenUrls.get(r.url)} 重複`);
+  seenUrls.set(r.url, r.id);
   if (!r.id || seen.has(r.id)) errors.push(`${where}：id 缺少或重複`);
   seen.add(r.id);
   if (!r.name) errors.push(`${where}：缺少機構名稱`);
@@ -109,9 +124,9 @@ if (errors.length) {
 const isPublic = (status, published = true) =>
   published !== false && status !== '已撤下' && (IS_PREVIEW || status === '已確認');
 
-const resources = resourceData.items.filter((r) => IS_PREVIEW
+const resources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
-  : approvedRecord(r, approvals.resources, 'official-entry'));
+  : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources];
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -121,8 +136,7 @@ const channels = hotlineData.channels.filter((h) => IS_PREVIEW
 const events = eventData.items
   .filter((e) => isPublic(e.status))
   .sort((a, b) => a.startDate.localeCompare(b.startDate));
-const articles = articlesAll
-  .filter((a) => a.visibility === 'public' && isPublic(a.status))
+const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles]
   .sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
 
 const catById = Object.fromEntries(categories.map((c) => [c.id, c]));
@@ -145,6 +159,7 @@ function icon(name, cls = 'icon') {
 }
 
 const AREAS = ['北部', '中部', '南部', '東部', '離島'];
+const qaBadge = (x) => (x?.qa ? '<span class="badge badge-qa">未核准測試內容</span>' : '');
 const statusBadge = (status) => {
   const map = { 已確認: ['badge-ok', '已確認'], 待確認: ['badge-pending', '待查核'], 需要修正: ['badge-fix', '需要修正'] };
   const [cls, label] = map[status] || ['', status];
@@ -260,9 +275,9 @@ function resourceCard(r, { anchor = true } = {}) {
     </div>
   </header>
   <p class="res-summary">${esc(r.summary)}</p>
-  <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
+  <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
-    <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : `${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
+    <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : `${qaBadge(r)}${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
     <div class="res-actions">${extLink(r.url, '前往官方網站')}${phones}</div>
   </footer>
 </article>`;
@@ -277,7 +292,7 @@ function articleImageId(a) {
 function articleCard(a, prefix, { withImage = true } = {}) {
   const imgId = withImage ? articleImageId(a) : null;
   const href = `${prefix}articles/${esc(a.slug)}.html`;
-  const label = `<span class="pill">${esc(categoryLabel(a.category))}</span>`;
+  const label = `<span class="pill">${esc(categoryLabel(a.category))}</span>${qaBadge(a)}`;
   if (imgId) {
     return `<article class="story">
   <a class="story-media" href="${href}" tabindex="-1" aria-hidden="true">${photo(imgId, 'card', { prefix, sizes: '(min-width: 1000px) 380px, (min-width: 700px) 50vw, 100vw' })}${label}</a>
@@ -340,7 +355,9 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
     .map((d) => `<a class="dir-link" href="${base}${d.href}"${d.id === active ? ' aria-current="page"' : ''}><span class="dir-zh">${esc(d.zh)}</span><span class="dir-en">${esc(d.en)}</span></a>`)
     .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
-  const previewBar = IS_PREVIEW
+  const previewBar = IS_QA
+    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批候選（地方官方入口 23 筆、導讀文章 12 篇）尚未核准發布，僅供本機驗收，請勿公開或轉傳。</div>`
+    : IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
     : '';
   const noticeBar = site.maintenanceNotice
@@ -510,6 +527,12 @@ function dirHead(d, tip = '') {
   const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
   const body = `
 ${dirHead(d, '依照自己的需要選擇生活主題，也可以直接搜尋關鍵字。找到相關資源後，點選連結前往官方網站。')}
+${articles.length ? `<section class="section" aria-labelledby="articles-title">
+  <div class="wrap">
+    ${sectionHead('Reading', 'articles-title', '導讀文章')}
+    <div class="story-grid">${articles.map((a) => articleCard(a, '')).join('\n')}</div>
+  </div>
+</section>` : ''}
 <section class="section needs" aria-labelledby="needs-title">
   <div class="wrap needs-grid">
     <div class="needs-intro">
@@ -849,7 +872,7 @@ ${p.name === 'about' ? aboutHub() : ''}
 // ---------- 文章 ----------
 for (const a of articles) {
   const prefix = '../';
-  const sources = [].concat(a.source || []).map((s) => {
+  const sources = (a.sourcesList ? a.sourcesList.map((x) => `${x.title} | ${x.url}`) : [].concat(a.source || [])).map((s) => {
     const [title, url] = String(s).split('|').map((x) => x.trim());
     const target = linkResolver(prefix)(url || '');
     return url
@@ -866,7 +889,9 @@ for (const a of articles) {
       <span class="pill">${esc(categoryLabel(a.category))}</span>
       <h1>${esc(a.title)}</h1>
       <p class="lead">${esc(a.summary)}</p>
-      <p class="article-meta"><span>發布：${esc(a.published)}</span><span>最後實質更新：${esc(a.updated)}</span>${statusBadge(a.status)}</p>
+      <p class="article-meta">${a.qa
+        ? `<span>來源查核：${esc(a.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</span>${qaBadge(a)}`
+        : `<span>發布：${esc(a.published)}</span><span>最後實質更新：${esc(a.updated)}</span>${statusBadge(a.status)}`}</p>
     </div>
   </header>
   ${imgId ? `<div class="wrap article-cover">${photo(imgId, 'cover', { prefix, eager: true, sizes: '(min-width: 1200px) 1120px, 100vw' })}</div>` : ''}
@@ -973,5 +998,5 @@ if (!IS_PREVIEW) {
 const pending = resourceData.items.filter((r) => r.status !== '已確認' && r.status !== '已撤下').length;
 const photoMissing = photoData.items.filter((p) => !generated[p.id]).length;
 console.log(`建置完成（${MODE}）：${pages.length} 個頁面 → ${path.relative(ROOT, OUT) || '.'}`);
-console.log(`資源：公開 ${resources.length} 筆／全部 ${resourceData.items.length} 筆（原人工查核狀態仍待確認 ${pending} 筆，AI 來源查核與作者發布核准另記）；文章 ${articles.length} 篇；活動 ${events.length} 筆`);
+console.log(`資源：公開 ${resources.length} 筆／全部 ${resourceData.items.length} 筆${IS_QA ? `（含第二批未核准測試候選 ${qaResources.length} 筆）` : ""}（原人工查核狀態仍待確認 ${pending} 筆，AI 來源查核與作者發布核准另記）；文章 ${articles.length} 篇；活動 ${events.length} 筆`);
 console.log(`攝影素材：已處理 ${photoData.items.length - photoMissing} 張／清單 ${photoData.items.length} 張（尚缺 ${photoMissing} 張，執行 npm run images 查看清單）`);
