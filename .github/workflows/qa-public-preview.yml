@@ -1,0 +1,68 @@
+# 僅部署已經以 QA 模式生成的「未核准測試內容」供站主手機驗收。
+# 發布到公開 GitHub Pages；不合併 main，不匯入正式 content，不新增核准紀錄。
+# 不設定一般 push 自動發布；只在新增／修改此 workflow 本身時啟動，避免研究更新被意外公開。
+name: 由己｜公開測試預覽（非正式網站）
+
+on:
+  push:
+    branches:
+      - claude/morning-light-visual-v2
+    paths:
+      - .github/workflows/qa-public-preview.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    if: ${{ github.ref == 'refs/heads/claude/morning-light-visual-v2' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 下載開發分支（不修改 main）
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝建置所需工具
+        run: npm ci
+      - name: 建置含 23 地方入口與 12 導讀的公開測試版
+        run: node scripts/build.mjs --mode=qa --out=dist-qa
+      - name: 確認發布內容是 QA 而非正式版
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f dist-qa/index.html
+          test -f dist-qa/city.html
+          test -f dist-qa/articles/batch2-01.html
+          grep -q '未核准測試內容' dist-qa/index.html
+          grep -q '未核准測試內容' dist-qa/city.html
+          grep -q '未核准測試內容' dist-qa/articles/batch2-01.html
+          grep -q 'Disallow: /' dist-qa/robots.txt
+          test ! -f dist-qa/sitemap.xml
+          echo "已確認只會部署未核准 QA 測試頁。"
+      - name: 設定 GitHub Pages（需要擁有人事先在 Settings → Pages 選 GitHub Actions）
+        uses: actions/configure-pages@v5
+      - name: 上傳測試版靜態網站
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-qa
+      - name: 部署公開測試版（不是正式發布）
+        id: deploy
+        uses: actions/deploy-pages@v4
+      - name: 顯示測試網站網址
+        run: |
+          echo "公開 QA 預覽網址：${{ steps.deploy.outputs.page_url }}"
+          echo "請保留未核准測試內容標示；任何人知道網址都可以瀏覽。"
