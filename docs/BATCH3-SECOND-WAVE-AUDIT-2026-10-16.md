@@ -11,7 +11,7 @@
 | --- | --- | --- |
 | b3-health-wellbeing | 重疊，不重建 | QA 已有心快活文章與課程兩張更具體卡；首頁作備援。 |
 | b3-learning-lifelong-course | 重複 URL | QA 已有教育部終身學習課程查詢。 |
-| b3-learning-thirtyplus | 保留，優先 | 教育部 [30⁺ 大學](https://lle.moe.edu.tw/life-college/)官方 FAQ：**年滿 30 歲**、依校規繳學分學雜費。可公開查詢 ≠ 人人可免費修課；各校資格及時間另看當期公告。 |
+| b3-learning-thirtyplus | 保留，優先 | 教育部 [30⁺ 大學](https://lle.moe.edu.tw/life-college/)官方 FAQ：**年滿 30 歲、具高中以上同等學力（歷）之中華民國國籍者**，依校規繳學分學雜費，並依校方提供學歷證明。可公開查詢 ≠ 人人可免費修課；各校資格及時間另看當期公告。 |
 | b3-learning-community-college | 保留待連線 | [全國社區大學資訊網](https://cc.moe.edu.tw/school)有官方學校資訊，但這輪精確 school 頁直接擷取逾時。需手機再驗與各校招生頁；班別非全免費。 |
 | b3-learning-iculture | 重複 URL | QA 已有文化部 iCulture。 |
 | b3-learning-moc-events | 重複 URL | QA 已有文化部藝文活動平台（與 iCulture 服務範圍不同，但本候選本身重複）。 |
