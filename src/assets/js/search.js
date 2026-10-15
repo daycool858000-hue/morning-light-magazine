@@ -77,8 +77,13 @@
     }
     input.addEventListener('input', queueRender);
     // iPhone Safari 的原生搜尋欄叉叉可能觸發 search / change，未必觸發 input。
-    input.addEventListener('search', renderNow);
-    input.addEventListener('change', renderNow);
+    function resetIfCleared() {
+      // change 也會在點搜尋結果導致輸入框失焦時觸發。
+      // 只處理變成空字串的情況，避免重繪結果把使用者正在點的連結移除。
+      if (!normalize(input.value)) renderNow();
+    }
+    input.addEventListener('search', resetIfCleared);
+    input.addEventListener('change', resetIfCleared);
     input.addEventListener('click', function () {
       // 補救部分 iOS Safari 只把內建清除按鈕的值清空，卻沒有立刻派發 input。
       setTimeout(function () {
