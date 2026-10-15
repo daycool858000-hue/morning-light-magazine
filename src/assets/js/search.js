@@ -17,6 +17,7 @@
     var list = box.querySelector('[data-search-results]');
     var status = box.querySelector('[data-search-status]');
     var empty = box.querySelector('[data-search-empty]');
+    var clearButton = box.querySelector('[data-search-clear]');
     var limit = Number(box.getAttribute('data-search-limit')) || 50;
     // 在首頁輸入搜尋時切換成專注搜尋的畫面；清空後恢復六大分類。
     var onHome = Boolean(document.body.classList.contains('home') && box.closest('.hero'));
@@ -25,6 +26,7 @@
 
     function render() {
       var query = normalize(input.value);
+      if (clearButton) clearButton.hidden = !query;
       if (onHome) document.body.classList.toggle('home-searching', Boolean(query));
       if (onSearchPage) document.body.classList.toggle('search-page-searching', Boolean(query));
       list.innerHTML = '';
@@ -63,17 +65,39 @@
     }
 
     var timer;
-    input.addEventListener('input', function () {
+    function queueRender() {
       clearTimeout(timer);
+      // 清空時立即恢復首頁，無須等待延遲，也不讓前次搜尋計時器覆寫狀態。
+      if (!normalize(input.value)) { render(); return; }
       timer = setTimeout(render, 120);
+    }
+    function renderNow() {
+      clearTimeout(timer);
+      render();
+    }
+    input.addEventListener('input', queueRender);
+    // iPhone Safari 的原生搜尋欄叉叉可能觸發 search / change，未必觸發 input。
+    input.addEventListener('search', renderNow);
+    input.addEventListener('change', renderNow);
+    input.addEventListener('click', function () {
+      // 補救部分 iOS Safari 只把內建清除按鈕的值清空，卻沒有立刻派發 input。
+      setTimeout(function () {
+        if (!normalize(input.value) && box.classList.contains('has-query')) renderNow();
+      }, 0);
     });
     form.addEventListener('submit', function (event) {
       event.preventDefault();
-      render();
+      renderNow();
     });
     input.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') { input.value = ''; render(); }
+      if (event.key === 'Escape') { input.value = ''; renderNow(); }
     });
+    if (clearButton) clearButton.addEventListener('click', function () {
+      input.value = '';
+      renderNow();
+      input.focus();
+    });
+    window.addEventListener('pageshow', renderNow);
     render();
   }
 
