@@ -35,7 +35,7 @@
 **官方參考來源（2026-10-16 複核）：**
 - [國立臺灣美術館](https://www.ntmofa.gov.tw/)（展覽、活動資訊）
 - [臺北市立美術館](https://www.tfam.museum/)（展覽、典藏品查詢與導覽）
-- [文化部 iCulture](https://cloud.culture.tw/)（跨縣市找藝文活動，原 QA 已有入口）
+- [文化部 iCulture](https://cloud.culture.tw/)（跨縣市查找藝文活動）
 
 **待核准：** 館所個別活動精確 URL、用語、站主內容審核；本篇不列單場展覽開放期、票價與名額。
 
