@@ -383,6 +383,9 @@ body.home.home-searching .hero .search-results:empty { display: none; }
 body.home.home-searching .hero .search-results a { border: 1px solid var(--line); }
 body.home.home-searching .hero .search-empty p { margin: 0; }
 
+/* 獨立搜尋頁也在輸入時收起「或從生活主題開始」，清空立即恢復。 */
+body.search-page-searching .section[aria-labelledby="browse-title"] { display: none; }
+
 /* ---------- 六大分類 ---------- */
 .cats { padding-top: clamp(36px, 5vw, 64px); }
 .cat-row { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
