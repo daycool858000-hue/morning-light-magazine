@@ -77,6 +77,7 @@ docs/                   維護、部署、備份、授權與驗收文件
 - [2026-10-15 正式公開前最新驗收清單](docs/PRELAUNCH-READINESS-2026-10-15.md)
 - [用自己的 iPhone Safari 驗收正式版](docs/IPHONE-ACCEPTANCE.md)
 - [第二批內容本機測試預覽驗收報告](docs/BATCH2-QA-PREVIEW-REPORT-2026-10-15.md)
+- [用 iPhone 開啟第二批測試預覽（Codespaces 私人網址）](docs/CODESPACES-PREVIEW.md)
 - [品牌識別](docs/BRAND.md)
 - [內容更新操作教學](docs/CONTENT-GUIDE.md)
 - [GitHub Pages 部署、暫停與關站](docs/DEPLOYMENT.md)

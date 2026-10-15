@@ -5,3 +5,4 @@ test-results/
 .DS_Store
 dist-production/
 dist-qa/
+qa-preview-url.txt
