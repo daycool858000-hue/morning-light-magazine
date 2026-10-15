@@ -24,7 +24,7 @@ jobs:
   preview:
     if: ${{ github.ref == 'refs/heads/claude/morning-light-visual-v2' }}
     environment:
-      name: github-pages
+      name: qa-public-preview
       url: ${{ steps.deploy.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
