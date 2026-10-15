@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { escapeHtml as esc, parseFrontMatter, renderMarkdown } from './lib/markdown.mjs';
 import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from './lib/release.mjs';
 import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
+import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -75,9 +76,10 @@ const isHttps = (v) => typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v);
 
 const qaResources = IS_QA ? await loadBatch2Resources(ROOT) : [];
 const qaArticles = IS_QA ? await loadBatch2Articles(ROOT, categories) : [];
+const qaBatch3 = IS_QA ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
 const seen = new Set();
 const seenUrls = new Map();
-for (const r of [...resourceData.items, ...qaResources]) {
+for (const r of [...resourceData.items, ...qaResources, ...qaBatch3.resources]) {
   const where = `${r.qa ? '第二批候選' : 'resources.json'} → ${r.id || '(缺少 id)'}`;
   if (seenUrls.has(r.url)) errors.push(`${where}：網址與 ${seenUrls.get(r.url)} 重複`);
   seenUrls.set(r.url, r.id);
@@ -126,7 +128,7 @@ const isPublic = (status, published = true) =>
 
 const resources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
-  : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources];
+  : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources];
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -136,7 +138,7 @@ const channels = hotlineData.channels.filter((h) => IS_PREVIEW
 const events = eventData.items
   .filter((e) => isPublic(e.status))
   .sort((a, b) => a.startDate.localeCompare(b.startDate));
-const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles]
+const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles, ...qaBatch3.articles]
   .sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
 
 const catById = Object.fromEntries(categories.map((c) => [c.id, c]));
@@ -357,7 +359,7 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
     .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
   const previewBar = IS_QA
-    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批候選（地方官方入口 23 筆、導讀文章 12 篇）供公開測試使用，尚未正式核准發布；各項服務請以來源機關最新公告為準。</div>`
+    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
     : IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
     : '';
