@@ -86,3 +86,54 @@
 - 第四批再向下追查具體婦女中心、社福中心與其他服務據點，不與第一層機關入口混為一談。
 
 **這份文件是內部候選研究表（公開 GitHub 檔案會對外可見，但不會被網站 builder 自動納入內容），不代表已公開到 GitHub Pages，也未宣稱商標或手機實機驗收全部完成。**
+
+
+---
+
+## D. 2026-10-15 第二輪逐筆複核（ChatGPT／AI，非作者人工查核）
+
+**範圍**：查核各地方主管機關名稱及網頁是否能由目前工具直接讀取，或是否有可讀的其他官方文件佐證；**不查核**個別中心存在、電話、服務時間、資格、金額、名額及課程。查詢時官方網頁無法取回，應記為「本輪讀取受阻」，不能等同判定該機關已失效。此表是第一批研究表的增補，**絕非發布核准清單**。查詢日：2026-10-15；查核者：ChatGPT（AI）。
+
+狀態說明：**A／官網直接可讀**＝本輪已讀目標官方頁，限基本入口資訊；**B／官方替代證據**＝主網站未能直接讀取，但找到另個可讀的政府來源；**C／需補查**＝現有候選網址待以其他方式確認，暫不把它列成完成查核。
+
+| ID | 縣市 | 本輪狀態 | 紀錄及後續動作 |
+|---|---|---|---|
+| keelung | 基隆市 | A | [基隆市政府社會處](https://www.klcg.gov.tw/tw/social/)可讀，含婦女福利、救助等入口。 |
+| taipei | 臺北市 | A | [臺北市政府社會局](https://dosw.gov.taipei/)可讀。 |
+| new-taipei | 新北市 | A | [新北市政府社會局](https://www.sw.ntpc.gov.tw/index.jsp)可讀。 |
+| taoyuan | 桃園市 | A | [桃園市政府社會局](https://sab.tycg.gov.tw/)可讀。 |
+| hsinchu-city | 新竹市 | C | 第一輪已有官方社會處聯絡頁；本輪抓取受阻，需再以正式首頁或可讀的市府機關介紹佐證。 |
+| hsinchu-county | 新竹縣 | C | [新竹縣政府社會處](https://social.hsinchu.gov.tw/)本輪讀取受阻；保留第一輪紀錄，發布前補查。 |
+| yilan | 宜蘭縣 | A | [宜蘭縣政府社會處](https://sntroot.e-land.gov.tw/default.aspx)可讀。 |
+| miaoli | 苗栗縣 | A | **改善候選網址**：直接使用[苗栗縣政府社會處首頁](https://www.miaoli.gov.tw/social_affairs/)，可讀且含社會福利服務中心等導覽，比原婦女福利單頁完整。 |
+| taichung | 臺中市 | A | [臺中市政府社會局](https://www.society.taichung.gov.tw/)可讀。 |
+| changhua | 彰化縣 | A | [彰化縣政府社會處](https://www.chcg.gov.tw/DTO/social/00home/index01.aspx)可讀，含婦女福利及社福項目。 |
+| nantou | 南投縣 | C | [南投縣政府社會及勞動局社會福利資訊網](https://welfare.nantou.gov.tw/)本輪抓取受阻，仍保留第一輪候選。 |
+| yunlin | 雲林縣 | A | [雲林縣政府社會處](https://social.yunlin.gov.tw/Default.aspx)可讀。 |
+| chiayi-city | 嘉義市 | B | [嘉義市政府社會處官方托育頁](https://social.chiayi.gov.tw/cl.aspx?n=4251)可讀，足以佐證機關／托育業務；[社會處首頁](https://social.chiayi.gov.tw/)本輪抓取逾時，**托育頁不可寫成涵蓋所有社福制度的完整首頁**。 |
+| chiayi-county | 嘉義縣 | B | [嘉義縣社會局](https://sabcc.cyhg.gov.tw/)直接讀取逾時；[政府資料開放平臺](https://data.gov.tw/dataset/90375)近期資料仍明列「嘉義縣社會局」為資料提供機關並連至該網域；縣府教育體系115年公告亦引用該域。**機關與網域有官方交叉佐證，但仍未成功讀取社會局首頁，保留待查標示**。 |
+| tainan | 臺南市 | A | [臺南市政府社會局](https://sab.tainan.gov.tw/)可讀。 |
+| kaohsiung | 高雄市 | B | [高雄市政府官方社會局機關介紹](https://www.kcg.gov.tw/Organ_Detail.aspx?n=D33B55D537402BAA&s=6577239FDC0F719E&sms=9F779BBA07F163E2)可讀且列出[社會局專屬站](https://socbu.kcg.gov.tw/)，但專屬站本輪無法讀取。優先使用市府機關介紹頁為備用候選。 |
+| pingtung | 屏東縣 | C | [屏東縣政府社會處](https://www.pthg.gov.tw/PlanJdp/default.aspx)本輪讀取受阻；此前研究有官方來源，仍待再讀。 |
+| hualien | 花蓮縣 | A | [花蓮縣政府社會處](https://sa.hl.gov.tw/)可讀。 |
+| taitung | 臺東縣 | A | [臺東縣政府社會處](https://ttcd.taitung.gov.tw/)可讀，本站內容較精簡；不因此推定其他服務已核對。 |
+| penghu | 澎湖縣 | C | [澎湖縣政府社會處](https://www.penghu.gov.tw/society/index.jsp)本輪讀取受阻；維持第一輪資料待查。 |
+| kinmen | 金門縣 | C | [金門縣政府社會處](https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36)本輪讀取受阻；維持第一輪資料待查。 |
+| lienchiang | 連江縣 | B | 現行「**連江縣政府民政社會處／社會福利科**」由[連江縣現行法規服務計畫](https://law.matsu.gov.tw/LawContent.aspx?id=GL000657)（主辦單位欄）及[政府開放資料單位列表](https://eip.matsu.gov.tw/matsuopendata/chhtml/datalist02/9999)佐證；[處網站候選](https://www.matsu.gov.tw/Chhtml/index/371030000A0001)不能直接讀。**法規不是民眾社福導航首頁，仍需找到可讀的正式福利服務入口；不可用舊「衛生福利局」名稱**。 |
+
+**本輪小結**：12/22 為 A（目標主管機關首頁可讀）；3/22 為 B（嘉義市、嘉義縣、高雄市）再加連江縣 B，共 4 筆；6/22 為 C（新竹市、新竹縣、南投縣、屏東縣、澎湖縣、金門縣）。**A、B、C 都只是研究進度，不是 22 筆資料的公開核准，也不代表網址在所有手機網路均正常。**
+
+### 第二層可作為起點的正式名錄（尚無個別據點核准）
+
+1. [衛福部婦女福利](https://www.mohw.gov.tw/cp-190-225-1.html)：有「各縣市婦女福利服務中心」名錄／連結；須進一步核對每個實際中心的個別官方頁。
+2. [衛福部各縣市社區心理諮商服務一覽表](https://dep.mohw.gov.tw/domhaoh/cp-4558-69568-107.html)：更新標示 115-06-30，適合追查各縣市心理支持入口，不等於全部屬醫療院所。
+3. [我的 E 政府：單親／特殊境遇家庭扶助](https://www.gov.tw/News_Content_26_694361)：有全臺縣市辦理資訊入口；頁面本身不是各縣市各項補助的最新核准文件。
+4. [台灣就業通婦女專區](https://job.taiwanjobs.gov.tw/Internet/special2/woman/index.aspx)及[職訓分區課程查詢](https://course.taiwanjobs.gov.tw/course/area)：能按地區找職缺／課程；職缺、活動、開班時段會變動，應導流至官方即時查詢，而非在本站抄錄固定名額。
+5. [教育部家庭教育資源網](https://familyedu.moe.gov.tw/front.aspx/index.aspx)：彙整各縣市家庭教育中心導覽，可供下一輪獨立據點查核。
+
+### 匯入前不得跳過
+
+- 優先再查 C 類六縣市是否有可讀的市／縣政府社福局處替代入口，並為 B 類優先找到**真正可供一般民眾使用的入口**。
+- 如某處只能找到正式政府法規或聯絡頁，仍須如實標成該頁性質，不得虛寫「完整福利中心」。
+- 不建立電話、地址、服務時間，除非有該欄位的直接官方證據；不得繼承既有 16 筆核准。
+- 不修改 \`content/resources.json\`、\`content/release-approvals.json\`、\`main\` 或 GitHub Pages；此表完成僅表示新增調查紀錄。
