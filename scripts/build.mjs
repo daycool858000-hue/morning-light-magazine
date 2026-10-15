@@ -356,7 +356,7 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
     .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
   const previewBar = IS_QA
-    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批候選（地方官方入口 23 筆、導讀文章 12 篇）尚未核准發布，僅供本機驗收，請勿公開或轉傳。</div>`
+    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批候選（地方官方入口 23 筆、導讀文章 12 篇）供公開測試使用，尚未正式核准發布；各項服務請以來源機關最新公告為準。</div>`
     : IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
     : '';
