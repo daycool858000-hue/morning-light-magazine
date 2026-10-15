@@ -23,19 +23,33 @@ for (const a of arts) for (const s of a.sourcesList) if (!targets.has(s.url)) ta
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ locale: 'zh-TW', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36' });
-const page = await ctx.newPage();
 const rows = [];
 for (const [url, label] of targets) {
+  const page = await ctx.newPage();
   let line;
   try {
-    const res = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    const status = res ? res.status() : 0;
-    const title = (await page.title()).replace(/\s+/g, ' ').slice(0, 40);
-    const final = page.url() !== url ? `｜最終：${new URL(page.url()).host}${new URL(page.url()).pathname.slice(0, 40)}` : '';
-    line = { label, url, ok: status >= 200 && status < 400, text: `${status}｜${title || '（無標題）'}${final}` };
+    let status = 0;
+    let redirected = false;
+    try {
+      const res = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      status = res ? res.status() : 0;
+    } catch (err) {
+      // 網站以 JavaScript／meta 立即轉址時，第一次導覽會被「中斷」；改等轉址後的頁面載入完成
+      if (!/interrupted by another navigation|Execution context was destroyed/.test(err.message)) throw err;
+      redirected = true;
+    }
+    await page.waitForLoadState('domcontentloaded', { timeout: 15000 }).catch(() => {});
+    await page.waitForTimeout(redirected ? 2000 : 300);
+    const title = (await page.title().catch(() => '')).replace(/\s+/g, ' ').slice(0, 40);
+    const u = new URL(page.url());
+    const final = page.url() !== url ? `｜最終：${u.host}${u.pathname.slice(0, 40)}` : '';
+    const challenge = /Just a moment|Attention Required/i.test(title);
+    const ok = !challenge && (redirected ? /^https:/.test(page.url()) && Boolean(title) : status >= 200 && status < 400);
+    line = { label, url, ok, text: `${redirected ? '轉址後載入' : status}｜${title || '（無標題）'}${challenge ? '（防護驗證頁，未能進入網站內容）' : ''}${final}` };
   } catch (err) {
     line = { label, url, ok: false, text: `開啟失敗：${String(err.message).split('\n')[0].replace(/ at .*$/, '').slice(0, 80)}` };
   }
+  await page.close();
   rows.push(line);
   console.log(`${line.ok ? '✔' : '✘'} ${line.label}｜${line.text}｜${url}`);
 }

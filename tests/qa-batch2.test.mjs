@@ -123,6 +123,8 @@ for (const a of arts) {
   if (!/來源查核：\d{4}-\d{2}-\d{2}/.test(t)) artProblems.push(`${a.no} 沒有查核日期`);
   const srcBox = (/<div class="sources">[\s\S]*?<\/div>/.exec(t) || [''])[0];
   if (a.sourcesList.some((s) => !srcBox.includes(s.url.replace(/&/g, '&amp;')))) artProblems.push(`${a.no} 官方來源缺漏`);
+  const mainHtml = (/<main[\s\S]*<\/main>/.exec(t) || [''])[0];
+  if ((mainHtml.match(new RegExp(a.summary.slice(0, 20).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length > 1) artProblems.push(`${a.no} 開頭段落在頁面中重複出現`);
   if (/發布前再確認|候選終稿|尚未核准公開|編輯附錄|<p>---<\/p>|\*\*/.test(t)) artProblems.push(`${a.no} 含編輯備註或未轉換的 Markdown`);
   if (!idx.includes(`"url":"articles/${a.slug}.html"`)) artProblems.push(`${a.no} 搜尋索引沒有`);
 }
@@ -223,7 +225,7 @@ try {
     const p = await ctx.newPage();
     for (const f of pagesToCheck) {
       await p.goto(`${ORIGIN}${BASE}${f}`);
-      const r = await p.evaluate(() => ({ o: document.documentElement.scrollWidth - innerWidth, fs: parseFloat(getComputedStyle(document.querySelector('.prose p, main p') || document.body).fontSize) }));
+      const r = await p.evaluate(() => ({ o: document.documentElement.scrollWidth - innerWidth, fs: parseFloat(getComputedStyle(document.querySelector('.prose p') || document.body).fontSize) }));
       if (r.o > 0) overflow.push(`${w}px ${f} 溢出 ${r.o}px`);
       if (f.startsWith('articles/') && r.fs < 15) smallText.push(`${w}px ${f} 內文 ${r.fs}px`);
     }

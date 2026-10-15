@@ -888,7 +888,7 @@ for (const a of articles) {
       <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="${prefix}index.html">首頁</a></li><li><a href="${backHref}">${esc(categoryLabel(a.category))}</a></li><li aria-current="page">文章</li></ol></nav>
       <span class="pill">${esc(categoryLabel(a.category))}</span>
       <h1>${esc(a.title)}</h1>
-      <p class="lead">${esc(a.summary)}</p>
+      ${a.qa ? '' /* 第二批文章的摘要取自正文第一段，頁首不重複顯示 */ : `<p class="lead">${esc(a.summary)}</p>`}
       <p class="article-meta">${a.qa
         ? `<span>來源查核：${esc(a.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</span>${qaBadge(a)}`
         : `<span>發布：${esc(a.published)}</span><span>最後實質更新：${esc(a.updated)}</span>${statusBadge(a.status)}`}</p>
