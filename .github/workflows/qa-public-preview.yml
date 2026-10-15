@@ -1,3 +1,4 @@
+# 2026-10-16｜英文輔助（QA-only）＋兩項文章來源勘誤，依成功 CI 38814863350 更新已同意公開的 QA；絕不更動 main 或核准資料。
 # 2026-10-16｜Issue #2：第四批9篇＋第五批4篇導讀與第三批「使用方式」，CI 全數通過後更新已同意公開的未核准QA版。
 # 2026-10-15｜已通過第三批9筆免登入資訊與5篇原創導讀完整測試，更新已同意公開的未核准QA版。
 # 2026-10-15 iPhone Safari 清空搜尋後恢復六大分類、搜尋連結穩定性修正，完整測試成功後重部署 QA。
@@ -57,6 +58,16 @@ jobs:
           grep -q '未核准測試內容' dist-qa/articles/batch2-01.html
           grep -q '未核准測試內容' dist-qa/articles/batch4-npm-online-collection.html
           grep -q '未核准測試內容' dist-qa/articles/batch5-open-courses-moocs.html
+          # 新增英文資源只能存在 QA，既有卡片不被覆寫；新民生活多語資源可用。
+          grep -q 'National Immigration Agency' dist-qa/city.html
+          grep -q 'Foreigners In Taiwan Hotline: 1990' dist-qa/city.html
+          grep -q 'lang="en"' dist-qa/city.html
+          grep -q '未核准測試內容' dist-qa/city.html
+          # 第四／五批文章來源勘誤已進入 QA 生成頁，保留未核准標示。
+          grep -q '跨縣市查找藝文活動' dist-qa/articles/batch4-art-museum-first-visit.html
+          ! grep -q '原 QA 已有入口' dist-qa/articles/batch4-art-museum-first-visit.html
+          grep -q '22 縣市癌症篩檢活動專區' dist-qa/articles/batch5-preventive-health-screening.html
+          ! grep -q 'escreening.hpa.gov.tw/Home' dist-qa/articles/batch5-preventive-health-screening.html
           grep -q 'noindex' dist-qa/articles/batch5-harassment-three-laws.html
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
