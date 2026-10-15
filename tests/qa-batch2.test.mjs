@@ -178,6 +178,28 @@ try {
   check('首頁清空搜尋：恢復六大分類及快捷入口',
     !await page.locator('body').evaluate(e => e.classList.contains('home-searching')) &&
     await page.locator('.cats').isVisible() && await page.locator('.quick-section').isVisible());
+  await page.fill('#home-q', '育兒');
+  await page.waitForTimeout(190);
+  const resetButton = page.locator('[data-search-clear]').first();
+  check('搜尋文字存在時：顯示至少 44px 的明確清除按鈕',
+    await resetButton.isVisible() &&
+    await resetButton.evaluate(el => el.getBoundingClientRect().height >= 44 && el.getBoundingClientRect().width >= 44));
+  await resetButton.click();
+  await page.waitForTimeout(30);
+  check('點擊清除搜尋文字：即時回復六大主題和快捷入口',
+    await page.locator('#home-q').inputValue() === '' &&
+    await page.locator('.cats').isVisible() &&
+    await page.locator('.quick-section').isVisible() &&
+    await resetButton.isHidden());
+  await page.fill('#home-q', '托育');
+  await page.waitForTimeout(190);
+  await page.locator('#home-q').evaluate(el => {
+    el.value = '';
+    el.dispatchEvent(new Event('search', { bubbles: true }));
+  });
+  await page.waitForTimeout(20);
+  check('模擬 Safari 原生清除 search 事件：立即還原分類',
+    await page.locator('.cats').isVisible() && !(await page.locator('body').evaluate(el => el.classList.contains('home-searching'))));
   await page.fill('#home-q', '職訓');
   await page.waitForTimeout(190);
   await page.locator('#home-q').press('Escape');
