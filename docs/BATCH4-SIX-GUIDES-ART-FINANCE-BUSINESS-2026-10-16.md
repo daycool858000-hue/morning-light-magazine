@@ -210,7 +210,7 @@
 
 **官方來源（2026-10-16 複核）：**
 - [經濟部新創圓夢網｜創業資源整合](https://startup.sme.gov.tw/home/)
-- [經濟部新創圓夢網｜創業諮詢](https://startup.sme.gov.tw/home/modules/talk/?city=%E9%AB%98)（官方公開頁說明免費諮詢、預約和次數限制；需先查看現行實際條件）
+- [我的E政府｜新創圓夢網創業諮詢申請](https://www.gov.tw/News_Content_2_376930)（全國性官方申辦說明：免費諮詢、須預約、申請次數及資料要求以現行規定為準）
 - [經濟部｜女性創業飛雁計畫](https://www.sme.gov.tw/article-tw-2891-13903)
 - [經濟部新創圓夢網｜創業服務發展計畫](https://startup.sme.gov.tw/home/modules/rproject/detail/?sId=38)
 
