@@ -90,7 +90,7 @@
 - [衛福部｜2025 年起擴大癌症篩檢](https://www.mohw.gov.tw/cp-2704-80948-1.html)
 - [衛福部｜擴大癌症篩檢查詢方式](https://www.mohw.gov.tw/cp-7183-81302-1.html)
 - [國民健康署｜成人預防保健主題](https://www.hpa.gov.tw/Pages/List.aspx?nodeid=189)
-- [國民健康署｜22 縣市癌症篩檢活動專區（2026-04-10 更新）](https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=612&pid=19989&sid=1093)
+- [國民健康署｜22 縣市癌症篩檢活動專區（2026-04-10 更新）](https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=612&pid=19989&sid=1102)
 
 **來源查核紀錄：** 原先使用的 `https://escreening.hpa.gov.tw/Home` 曾在 GitHub 美國機房出現 `ERR_CERT_DATE_INVALID`，目前正文來源列表改列國健署 2026 年 4 月更新的「22 縣市癌症篩檢活動專區」。原網址仍由官方舊公告引用，但憑證警告不能忽略；站主不需為了驗收強行繞過憑證警告。其他醫療院所查詢請從最新官方頁進入。
 
