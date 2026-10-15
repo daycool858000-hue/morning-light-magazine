@@ -1,3 +1,4 @@
+# 2026-10-16｜Issue #2：第四批9篇＋第五批4篇導讀與第三批「使用方式」，CI 全數通過後更新已同意公開的未核准QA版。
 # 2026-10-15｜已通過第三批9筆免登入資訊與5篇原創導讀完整測試，更新已同意公開的未核准QA版。
 # 2026-10-15 iPhone Safari 清空搜尋後恢復六大分類、搜尋連結穩定性修正，完整測試成功後重部署 QA。
 # 2026-10-15：iPhone 使用者回報首頁搜尋介面，修正後重新部署已授權的公開 QA 測試。
@@ -54,6 +55,9 @@ jobs:
           grep -q '未核准測試內容' dist-qa/index.html
           grep -q '未核准測試內容' dist-qa/city.html
           grep -q '未核准測試內容' dist-qa/articles/batch2-01.html
+          grep -q '未核准測試內容' dist-qa/articles/batch4-npm-online-collection.html
+          grep -q '未核准測試內容' dist-qa/articles/batch5-open-courses-moocs.html
+          grep -q 'noindex' dist-qa/articles/batch5-harassment-three-laws.html
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
           echo "已確認只會部署未核准 QA 測試頁。"
