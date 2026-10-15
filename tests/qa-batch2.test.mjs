@@ -152,6 +152,50 @@ try {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
 
+  // iPhone 實機回報：搜尋時不能讓六大主題與搜尋結果同時顯示。
+  await page.goto(`${ORIGIN}${BASE}index.html`);
+  await page.fill('#home-q', '托育');
+  await page.waitForTimeout(190);
+  const homeSearchActive = await page.evaluate(() => ({
+    state: document.body.classList.contains('home-searching'),
+    categoriesHidden: getComputedStyle(document.querySelector('.cats')).display === 'none',
+    quickHidden: getComputedStyle(document.querySelector('.quick-section')).display === 'none',
+    count: document.querySelectorAll('.hero .search-results a').length,
+    firstVisible: Boolean(document.querySelector('.hero .search-results a')?.getClientRects().length),
+    resultPosition: getComputedStyle(document.querySelector('.hero .search-results')).position,
+  }));
+  check('首頁輸入托育：只顯示可閱讀的搜尋結果，六大分類及快捷入口收起、不以浮層重疊',
+    homeSearchActive.state && homeSearchActive.categoriesHidden && homeSearchActive.quickHidden &&
+    homeSearchActive.count > 0 && homeSearchActive.firstVisible && homeSearchActive.resultPosition === 'static',
+    JSON.stringify(homeSearchActive));
+  await page.fill('#home-q', '完全不存在的測試詞xyz678');
+  await page.waitForTimeout(190);
+  check('首頁搜尋不到：顯示無結果提示且六大分類仍收起',
+    await page.locator('.hero [data-search-empty]').isVisible() &&
+    await page.locator('.cats').isHidden());
+  await page.fill('#home-q', '');
+  await page.waitForTimeout(190);
+  check('首頁清空搜尋：恢復六大分類及快捷入口',
+    !await page.locator('body').evaluate(e => e.classList.contains('home-searching')) &&
+    await page.locator('.cats').isVisible() && await page.locator('.quick-section').isVisible());
+  await page.fill('#home-q', '職訓');
+  await page.waitForTimeout(190);
+  await page.locator('#home-q').press('Escape');
+  await page.waitForTimeout(40);
+  check('首頁按 Escape：清空查詢並還原六大主題',
+    await page.locator('#home-q').inputValue() === '' && await page.locator('.cats').isVisible());
+
+  await page.goto(`${ORIGIN}${BASE}search.html`);
+  await page.fill('#q', '心理');
+  await page.waitForTimeout(190);
+  check('獨立搜尋頁：輸入時不混入六大主題瀏覽區',
+    await page.locator('.section[aria-labelledby="browse-title"]').isHidden() &&
+    await page.locator('[data-search-results] a').count() > 0);
+  await page.fill('#q', '');
+  await page.waitForTimeout(190);
+  check('獨立搜尋頁：清空後恢復主題瀏覽區',
+    await page.locator('.section[aria-labelledby="browse-title"]').isVisible());
+
   // 22 縣市逐一切換
   await page.goto(`${ORIGIN}${BASE}city.html`);
   const countyProblems = [];
