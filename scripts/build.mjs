@@ -327,6 +327,7 @@ function searchBox({ id, placeholder, limit = 50 }) {
     <label class="visually-hidden" for="${id}">搜尋全站</label>
     ${icon('search', 'icon search-icon')}
     <input id="${id}" type="search" autocomplete="off" spellcheck="false" placeholder="${esc(placeholder)}" data-search-input>
+    <button type="button" class="search-clear" data-search-clear aria-label="清除搜尋文字" title="清除搜尋文字" hidden>×</button>
     <button type="submit" class="search-submit">搜尋</button>
   </form>
   <p class="search-status" role="status" aria-live="polite" data-search-status></p>
@@ -378,9 +379,9 @@ ${robots}<title>${esc(fullTitle)}</title>
 <meta property="og:description" content="${esc(description || site.description)}">
 <meta name="theme-color" content="#FAF6EF">
 <link rel="icon" href="${base}assets/icons/logo.svg" type="image/svg+xml">
-<link rel="stylesheet" href="${base}assets/css/main.css">
+<link rel="stylesheet" href="${base}assets/css/main.css?v=20261015search-clear-v2">
 <script src="${base}assets/js/main.js"></script>
-${scripts.map((s) => `<script src="${base}${s}" defer></script>`).join('\n')}
+${scripts.map((s) => `<script src="${base}${s}${s === 'assets/js/search.js' ? '?v=20261015search-clear-v2' : ''}" defer></script>`).join('\n')}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
 <a class="skip-link" href="#main">跳到主要內容</a>
