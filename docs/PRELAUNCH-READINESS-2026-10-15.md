@@ -140,3 +140,18 @@
 - **真實 iPhone Safari 驗收**：方法已備妥，需網站擁有人實際操作；Claude 的檢查都是模擬，不等於實機。
 - 正式台灣商標近似檢索尚未完成，不宣稱商標零風險。
 - 正式部署前，需網站擁有人另行明確核准；本輪未合併 main、未部署。
+
+## 2026-10-15 交接文件核對（以 GitHub 實際狀態為準）
+
+另一個對話視窗的交接文件以 `722ea4f` 為基準；實際開發分支已到 `33b9b45`，其後有 16 個提交。交接文件中列為「下一步」的下列事項**已經完成，不需重做**：
+
+| 交接文件所列下一步 | 實際狀態 | 依據 |
+|---|---|---|
+| 第一階段：AI 查核與發布核准分離（Claude 任務 A） | 已完成。網站發起人 2026-10-15 整批核准 16 入口、4 專線、110 簡訊入口；`status`／`checkedAt` 未改，AI 查核與作者核准分開記錄；`mohw-sps`、`sfaa`、110 視訊 App 不公開 | `content/release-approvals.json`、`scripts/lib/release.mjs`、`content/pages/verification.md`、`docs/RELEASE-APPROVAL-2026-10-15.md` |
+| 第二階段：九張圖片整批核准（Claude 任務 B） | 已完成。九張圖片（含 `cat-city` 裁切版）以版本快照與雜湊核准；`photos.json` 的 `status` 仍為「待檢查」，未冒充人工檢查 | 同上，`tests/release-gate.test.mjs` |
+| 第四階段：手機與正式版最終檢查 | 自動化與模擬部分已完成（Chromium 44／44、WebKit 12／12、正式版交叉檢查 0 項不符）；iPhone 實機方法已備妥 | 本文件前一節、`docs/IPHONE-ACCEPTANCE.md` |
+| 最新版備份還原（Claude 任務 C 一部分） | 已完成（`33b9b45`） | `docs/BACKUP.md` |
+
+交接文件與現況不同之處：119 的來源已改為消防署 `ids=66` 頁面並註明 24 小時（`content/hotlines.json`）；測試數為 Chromium 44 項加 WebKit 12 項，不是 43 項。
+
+**實際剩下的事**：① 網站擁有人用 iPhone 依 `docs/IPHONE-ACCEPTANCE.md` 實機驗收；② 正式台灣商標近似檢索（智慧財產局互動系統，工具無法取得逐案結果）；③ 網站擁有人另行明確核准後，才合併 main 與部署。
