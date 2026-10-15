@@ -274,11 +274,28 @@ try {
     !await page.locator('body').evaluate(e => e.classList.contains('home-searching')) &&
     await page.locator('.cats').isVisible() && await page.locator('.quick-section').isVisible());
   await page.fill('#home-q', '育兒');
-  await page.waitForTimeout(190);
+  // CI 在高速連續填寫時偶爾還在處理 search input；等待明確可見及完整 44px 尺寸，
+  // 不能跳過檢查，也不修改站主已驗收的搜尋腳本／按鈕樣式。
   const resetButton = page.locator('[data-search-clear]').first();
+  let clearButtonOk = false;
+  try {
+    await resetButton.waitFor({ state: 'visible', timeout: 3500 });
+    await page.waitForFunction(() => {
+      const e = document.querySelector('.hero [data-search-clear]');
+      if (!e || e.hidden || getComputedStyle(e).display === 'none') return false;
+      const rect = e.getBoundingClientRect();
+      return rect.height >= 44 && rect.width >= 44;
+    }, null, { timeout: 3500 });
+    clearButtonOk = true;
+  } catch {
+    // Report actual dimensions on failure; an actual too-small button remains a failing test.
+  }
+  const clearButtonDimensions = await resetButton.evaluate(el => {
+    const box = el.getBoundingClientRect();
+    return { width: box.width, height: box.height, hidden: el.hidden };
+  });
   check('搜尋文字存在時：顯示至少 44px 的明確清除按鈕',
-    await resetButton.isVisible() &&
-    await resetButton.evaluate(el => el.getBoundingClientRect().height >= 44 && el.getBoundingClientRect().width >= 44));
+    clearButtonOk, JSON.stringify(clearButtonDimensions));
   await resetButton.click();
   await page.waitForTimeout(30);
   check('點擊清除搜尋文字：即時回復六大主題和快捷入口',
