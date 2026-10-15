@@ -44,7 +44,8 @@
         "children",
         "welfare",
         "social support"
-      ]
+      ],
+      "nameEn": "Social and Family Affairs Administration"
     },
     "mol": {
       "summaryEn": "Official information on workers' rights, employment policies, and labor services.",
@@ -54,7 +55,9 @@
         "labor",
         "workers rights",
         "job"
-      ]
+      ],
+      "nameEn": "Ministry of Labor",
+      "officialEnglishUrl": "https://www.mol.gov.tw/21003/"
     },
     "taiwanjobs": {
       "summaryEn": "Explore public employment services, job listings, and vocational training information.",
@@ -73,7 +76,9 @@
         "learning",
         "school",
         "courses"
-      ]
+      ],
+      "nameEn": "Ministry of Education",
+      "officialEnglishUrl": "https://english.moe.gov.tw/mp-1.html"
     },
     "gov-tw": {
       "summaryEn": "Find information about government services, applications, and public benefits.",
@@ -231,5 +236,6 @@
       "published": false,
       "checkedAt": null
     }
-  ]
+  ],
+  "_查核補充": "英譯正式名稱採官方英文來源：衛福部、勞動部、教育部、法律扶助基金會；移民署、IFI 與 1990 由移民署英文官方頁和官方年報確認。IFI 官網抓取逾時，須在 iPhone 再驗，不能稱精確網址已完成實機測試。無官方確認英文子頁的卡只標示編輯式英文用途。"
 }
