@@ -1,0 +1,235 @@
+{
+  "_說明": "只供 QA 英文輔助導覽。官方英文名稱及多語連結經一手頁面核對；其他英文為本站編輯用途摘要，不是官方逐字翻譯。不修改正式資源資料與正式核准紀錄。",
+  "updated": "2026-10-16",
+  "approvalStatus": "not-approved",
+  "overrides": {
+    "mohw": {
+      "nameEn": "Ministry of Health and Welfare",
+      "summaryEn": "Information on healthcare, social welfare, and long-term care services in Taiwan.",
+      "keywordsEn": [
+        "health",
+        "healthcare",
+        "welfare",
+        "family",
+        "long-term care"
+      ],
+      "officialEnglishUrl": "https://www.mohw.gov.tw/EN/mp-2.html"
+    },
+    "laf": {
+      "nameEn": "Legal Aid Foundation",
+      "summaryEn": "Learn about legal advice and how to apply for legal aid. Eligibility and appointments are handled by the foundation.",
+      "keywordsEn": [
+        "legal aid",
+        "lawyer",
+        "legal advice",
+        "legal rights"
+      ],
+      "officialEnglishUrl": "https://www.laf.org.tw/en/"
+    },
+    "mohw-113": {
+      "summaryEn": "Official information about the 113 protection hotline and available support.",
+      "keywordsEn": [
+        "113",
+        "safety",
+        "protection",
+        "domestic violence",
+        "help"
+      ]
+    },
+    "sfaa": {
+      "summaryEn": "Government information on family support, child welfare, and social care services.",
+      "keywordsEn": [
+        "family",
+        "childcare",
+        "children",
+        "welfare",
+        "social support"
+      ]
+    },
+    "mol": {
+      "summaryEn": "Official information on workers' rights, employment policies, and labor services.",
+      "keywordsEn": [
+        "work",
+        "employment",
+        "labor",
+        "workers rights",
+        "job"
+      ]
+    },
+    "taiwanjobs": {
+      "summaryEn": "Explore public employment services, job listings, and vocational training information.",
+      "keywordsEn": [
+        "jobs",
+        "employment",
+        "job search",
+        "job training",
+        "career"
+      ]
+    },
+    "edu": {
+      "summaryEn": "Information on education policy, learning resources, and government education services.",
+      "keywordsEn": [
+        "education",
+        "learning",
+        "school",
+        "courses"
+      ]
+    },
+    "gov-tw": {
+      "summaryEn": "Find information about government services, applications, and public benefits.",
+      "keywordsEn": [
+        "government services",
+        "benefits",
+        "application",
+        "welfare",
+        "housing"
+      ]
+    }
+  },
+  "resources": [
+    {
+      "id": "qa-en-nia",
+      "name": "內政部移民署｜在臺生活與居留資訊",
+      "nameEn": "National Immigration Agency",
+      "summary": "提供外來人士在臺居留、生活適應及新住民相關資訊；實際申辦條件依移民署公告。",
+      "summaryEn": "Official information about residence, immigration procedures, and living in Taiwan.",
+      "keywordsEn": [
+        "immigration",
+        "residence",
+        "visa",
+        "new immigrants",
+        "living in Taiwan"
+      ],
+      "officialEnglishUrl": "https://www.immigration.gov.tw/5475/",
+      "categories": [
+        "city",
+        "life-family"
+      ],
+      "topics": [],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "audience": "外來人士、新住民與一般查詢民眾；實際申辦依個別規定",
+      "url": "https://www.immigration.gov.tw/5475/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "內政部移民署 National Immigration Agency 官方英文站",
+          "url": "https://www.immigration.gov.tw/5475/"
+        }
+      ],
+      "usage": "可直接閱讀官方資訊；居留等正式申辦有身分及文件條件",
+      "review": {
+        "date": "2026-10-16",
+        "by": "ChatGPT（AI）官方來源第一輪查核，非站主人工核准",
+        "result": "未核准 QA 候選",
+        "scope": "機構英文名稱、官方連結與一般服務描述",
+        "notConfirmed": "各別居留資格、簽證收費與受理時間",
+        "level": "official-entry"
+      },
+      "status": "待確認",
+      "published": false,
+      "checkedAt": null
+    },
+    {
+      "id": "qa-en-ifi",
+      "name": "新住民培力發展資訊網｜多語生活資源",
+      "summary": "整合新住民在臺生活、學習、就業、健康及福利等主題，提供多語資訊。",
+      "summaryEn": "Multilingual information on everyday life, learning, employment, healthcare, and support for new immigrants.",
+      "keywordsEn": [
+        "new immigrants",
+        "multilingual",
+        "living in Taiwan",
+        "employment",
+        "welfare",
+        "language support"
+      ],
+      "officialEnglishUrl": "https://ifi.immigration.gov.tw/",
+      "categories": [
+        "city",
+        "learning"
+      ],
+      "topics": [],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "綜合政府服務",
+        "教育與學習"
+      ],
+      "audience": "新住民與其家庭、想閱讀多語公共資訊的人",
+      "url": "https://ifi.immigration.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "內政部移民署｜新住民培力發展資訊網",
+          "url": "https://ifi.immigration.gov.tw/"
+        }
+      ],
+      "usage": "可閱讀多語公開資訊；各項活動及課程依外站個別規定",
+      "review": {
+        "date": "2026-10-16",
+        "by": "ChatGPT（AI）官方來源第一輪查核，非站主人工核准",
+        "result": "未核准 QA 候選",
+        "scope": "移民署多語服務介紹與網站入口",
+        "notConfirmed": "各語系子頁是否完整一致、外站個別服務資格及課程收費",
+        "level": "official-entry"
+      },
+      "status": "待確認",
+      "published": false,
+      "checkedAt": null
+    },
+    {
+      "id": "qa-en-1990",
+      "name": "1990 外來人士在臺生活諮詢服務",
+      "nameEn": "Foreigners In Taiwan Hotline: 1990",
+      "summary": "移民署提供多語生活諮詢，涵蓋居留、就業、醫療、家庭、福利與法律相關資訊；以官方公告服務時間為準。",
+      "summaryEn": "Multilingual phone guidance about daily life in Taiwan, including residence, work, healthcare, welfare, and legal information.",
+      "keywordsEn": [
+        "1990",
+        "hotline",
+        "foreigners",
+        "multilingual",
+        "help",
+        "residence",
+        "living in Taiwan"
+      ],
+      "officialEnglishUrl": "https://www.immigration.gov.tw/5475/5478/6928/6940/204896/204917/",
+      "categories": [
+        "city",
+        "life-family"
+      ],
+      "topics": [],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "audience": "外來人士與新住民；依官方語言服務和時間提供諮詢",
+      "url": "https://www.immigration.gov.tw/5475/5478/6928/6940/204896/204917/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "移民署 Foreigners In Taiwan Hotline: 1990 官方英文說明",
+          "url": "https://www.immigration.gov.tw/5475/5478/6928/6940/204896/204917/"
+        }
+      ],
+      "usage": "可直接閱讀；實際致電諮詢依語言服務時段",
+      "review": {
+        "date": "2026-10-16",
+        "by": "ChatGPT（AI）官方來源第一輪查核，非站主人工核准",
+        "result": "未核准 QA 候選",
+        "scope": "1990 專線用途與官方英文資訊",
+        "notConfirmed": "臨時服務異動、不同語系的最新服務時段",
+        "level": "official-entry"
+      },
+      "status": "待確認",
+      "published": false,
+      "checkedAt": null
+    }
+  ]
+}
