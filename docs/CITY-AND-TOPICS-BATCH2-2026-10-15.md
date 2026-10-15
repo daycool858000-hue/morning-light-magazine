@@ -60,7 +60,7 @@
 
 ### 已找到可直接作下一輪文章來源的官方頁
 
-- [衛福部：特殊境遇家庭扶助條例](https://www.mohw.gov.tw/cp-6661-82846-1.html)（法規說明入口；實際適用法規、最新條文再交叉核對）。
+- [全國法規資料庫：特殊境遇家庭扶助條例](https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050075)（現行條文查詢入口；實際適用範圍與地方辦理規定仍需再查核）。
 - [台灣就業通官方入口](https://www.taiwanjobs.gov.tw/)。
 - [職業訓練整合網：分區課程](https://course.taiwanjobs.gov.tw/course/area)。
 - [衛福部性影像處理中心](https://siarc.mohw.gov.tw/)。
