@@ -9,6 +9,7 @@ on:
       - .github/workflows/qa-links-browser.yml
       - docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json
       - docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md
+      - scripts/lib/qa-batch45.mjs
   workflow_dispatch:
 
 permissions:
@@ -17,7 +18,7 @@ permissions:
 jobs:
   browser-links:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,3 +32,5 @@ jobs:
           npx playwright install --with-deps chromium
       - name: 以 Chromium 開啟候選官方網址
         run: node scripts/check-links-browser.mjs
+      - name: 以 Chromium 開啟第四、五批 13 篇文章的參考來源（Issue #2）
+        run: node scripts/check-links-browser.mjs --set=batch45

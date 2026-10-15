@@ -577,6 +577,23 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 .prose h2 { font-size: 1.4rem; margin-top: 1.8em; }
 .prose ul, .prose ol { padding-left: 1.4em; margin: 0 0 1em; }
 .prose li { margin-bottom: 0.4em; }
+/* 正文表格：窄螢幕時在框內左右捲動，不撐開整頁 */
+.table-wrap { overflow-x: auto; margin: 0 0 1.2em; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); }
+.prose table { width: 100%; min-width: 300px; border-collapse: collapse; font-size: 0.95rem; line-height: 1.6; }
+.prose th, .prose td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.prose th { font-weight: 600; background: var(--sand); }
+.prose tr:last-child td { border-bottom: 0; }
+/* 手機：表格改為逐列堆疊，每格上方顯示欄名，避免欄位被擠成兩字一行 */
+@media (max-width: 559px) {
+  .prose table { min-width: 0; }
+  .prose thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .prose table, .prose tbody, .prose tr, .prose td { display: block; }
+  .prose tr { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .prose tr:last-child { border-bottom: 0; }
+  .prose td { border-bottom: 0; padding: 6px 16px; }
+  .prose td::before { content: attr(data-label); display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+}
+.sources .src-note { color: var(--muted); }
 .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.925rem; color: var(--muted); }
 .sources h2 { font-size: 1.05rem; font-family: var(--sans); margin-top: 0; }
 

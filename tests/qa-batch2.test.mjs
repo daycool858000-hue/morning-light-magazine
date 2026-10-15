@@ -10,6 +10,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { loadBatch2Articles, BATCH2_RESOURCES } from '../scripts/lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs';
+import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.mjs';
 
 const require = createRequire(import.meta.url);
 function loadPlaywright() {
@@ -30,6 +31,7 @@ const national = JSON.parse(await readFile(path.join(ROOT, 'content/resources.js
 const cand = JSON.parse(await readFile(path.join(ROOT, BATCH2_RESOURCES), 'utf8')).items;
 const arts = await loadBatch2Articles(ROOT, categories);
 const third = await loadBatch3OpenAccess(ROOT);
+const fourth = await loadBatch45Articles(ROOT, categories); // Issue #2：第四批 9 篇＋第五批 4 篇
 const BASE = site.basePath;
 const PORT = 4331;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
@@ -52,7 +54,7 @@ async function listFiles(dir, prefix = '') {
 const read = (dir, f) => readFile(path.join(dir, f), 'utf8');
 
 // ---------- 一、發布隔離：候選內容只在 dist-qa ----------
-const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), 'batch2-', 'batch3-', '未核准測試內容'];
+const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), 'batch2-', 'batch3-', 'batch4-', 'batch5-', '未核准測試內容'];
 for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-production', 'dist-production']]) {
   const leaks = [];
   for (const f of await listFiles(path.join(ROOT, dir))) {
@@ -60,7 +62,7 @@ for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-p
     const t = await read(path.join(ROOT, dir), f);
     for (const m of markers) if (t.includes(m)) { leaks.push(`${f}：${m.slice(0, 30)}`); break; }
   }
-  check(`發布隔離：${label} 不含第二批 23 筆候選、12 篇候選文章或測試標示`, leaks.length === 0, leaks.slice(0, 3).join('；'));
+  check(`發布隔離：${label} 不含第二批 23 筆候選、第二～五批 30 篇候選文章或測試標示`, leaks.length === 0, leaks.slice(0, 3).join('；'));
 }
 const candStillPending = cand.every((r) => r.published === false && r.status === '待確認' && r.checkedAt === null);
 const approvals = JSON.parse(await readFile(path.join(ROOT, 'content/release-approvals.json'), 'utf8'));
@@ -151,6 +153,51 @@ for (const r of third.resources) {
   if (!html.includes(r.url.replace(/&/g, '&amp;'))) newArticleProblems.push(`${r.id} 缺少正確外部連結`);
 }
 check('第三批 5 篇文章／9 筆官方學習及生活導覽：連結、搜尋、標籤與來源完整', newArticleProblems.length === 0, newArticleProblems.slice(0, 6).join('；'));
+
+// Issue #2：第四批 9 篇＋第五批 4 篇
+const approvalsText = await read(ROOT, 'content/release-approvals.json');
+const fourthProblems = [];
+const EDITOR_LEFTOVER = /尚待核定|待核准事項|待核准：|出版前注意|公開前網址驗收|有效性提醒|維護策略|建議分類|刊登前限制|正式上稿前必查|避免混同|更新方式：|編輯說明|上 QA 前的批次|本次六篇的資料管理|統整｜本檔四篇|狀態：未核准候選|<p>---<\/p>|\*\*/;
+const plain = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+for (const a of fourth) {
+  const f = `articles/${a.slug}.html`;
+  if (!existsSync(path.join(QA, f))) { fourthProblems.push(`${a.slug} 缺少頁面`); continue; }
+  const t = await read(QA, f);
+  const cat = categories.find((c) => c.id === a.category);
+  if (!t.includes(`<h1>${a.title}</h1>`)) fourthProblems.push(`${a.slug} 標題不符`);
+  if (!t.includes(`<span class="pill">${cat.title}</span>`)) fourthProblems.push(`${a.slug} 分類不符`);
+  if (!t.includes('來源查核：2026-10-16（AI 編輯查核，尚未經網站擁有人核准）') || !t.includes('badge-qa">未核准測試內容')) fourthProblems.push(`${a.slug} 缺少查核日期或未核准標籤`);
+  if (!/<meta name="robots" content="noindex/.test(t)) fourthProblems.push(`${a.slug} 未禁止收錄`);
+  if (!qp.includes(`href="articles/${a.slug}.html"`)) fourthProblems.push(`${a.slug} 讀利專欄沒有連結`);
+  if (!(await read(QA, cat.slug)).includes(`articles/${a.slug}.html`)) fourthProblems.push(`${a.slug} 分類頁 ${cat.slug} 沒有連結`);
+  if (!idx.includes(`"url":"articles/${a.slug}.html"`)) fourthProblems.push(`${a.slug} 搜尋索引沒有`);
+  const srcBox = (/<div class="sources">[\s\S]*?<\/div>/.exec(t) || [''])[0];
+  for (const x of a.sourcesList) {
+    if (!x.url.startsWith('https://')) fourthProblems.push(`${a.slug} 來源非 https`);
+    if (!srcBox.includes(`href="${x.url.replace(/&/g, '&amp;')}" class="ext" rel="noopener noreferrer"`)) fourthProblems.push(`${a.slug} 來源缺漏或缺 noopener：${x.url}`);
+    if (x.note && !plain(srcBox).includes(x.note)) fourthProblems.push(`${a.slug} 來源說明未保留：${x.note.slice(0, 12)}`);
+  }
+  if (EDITOR_LEFTOVER.test(t)) fourthProblems.push(`${a.slug} 含編輯備註或未轉換的 Markdown：${EDITOR_LEFTOVER.exec(t)[0]}`);
+  // 正文保真：原稿每個小標、每段文字（去掉 Markdown 記號後）都要原樣出現在頁面
+  const pageText = plain((/<div class="prose">[\s\S]*?<div class="sources">/.exec(t) || [''])[0]).replace(/\s+/g, '');
+  for (const line of a.body.split('\n').map((l) => l.trim()).filter(Boolean)) {
+    if (/^\|[\s:|-]+\|$/.test(line)) continue;
+    const want = line.replace(/^#{2,3}\s+|^-\s+|^\d+\.\s+/, '').replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\|/g, '').replace(/\s+/g, '');
+    if (!pageText.includes(want)) { fourthProblems.push(`${a.slug} 正文未完整保留：${line.slice(0, 20)}`); break; }
+  }
+  if (a.status !== '待確認' || a.publishApproval !== 'not-approved' || a.ownerApproved !== false || approvalsText.includes(a.slug)) fourthProblems.push(`${a.slug} 狀態被改成核准或進入正式核准清單`);
+}
+const tableHtml = await read(QA, 'articles/batch5-harassment-three-laws.html');
+if ((tableHtml.match(/<table>[\s\S]*?<\/table>/) || [''])[0].split('<tr>').length - 1 !== 4) fourthProblems.push('三部性騷擾法規文章的比較表未轉為 1 列表頭＋3 列內容');
+const allSlugs = [...arts, ...third.articles, ...fourth].map((a) => a.slug);
+const qaArticleFiles = (await readdir(path.join(QA, 'articles'))).filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, ''));
+const extra = qaArticleFiles.filter((f) => !allSlugs.includes(f));
+if (new Set(allSlugs).size !== allSlugs.length || allSlugs.length !== 30) fourthProblems.push(`QA 文章 slug 數 ${allSlugs.length}，應為 30 且不重複`);
+if (extra.length) fourthProblems.push(`QA 出現不在範圍內的文章：${extra.join('、')}`);
+const byCat = Object.fromEntries(categories.map((c) => [c.id, fourth.filter((a) => a.category === c.id).length]));
+if (JSON.stringify(byCat) !== JSON.stringify({ 'life-family': 3, career: 3, health: 1, law: 2, city: 0, learning: 4 })) fourthProblems.push(`分類分布不符：${JSON.stringify(byCat)}`);
+if (BATCH45_SOURCES.length !== 3) fourthProblems.push('載入來源檔不是 Issue #2 指定的三個原稿');
+check('第四、五批 13 篇：各有獨立頁、六大分類正確（學習 4／生活 3／職涯 3／法律 2／健康 1）、正文與表格完整保留、來源 https 且附原稿說明、讀利／分類頁／搜尋皆可找到、無編輯備註、未核准＋noindex；QA 共 30 篇且無範圍外草稿', fourthProblems.length === 0, fourthProblems.slice(0, 6).join('；'));
 
 // Issue #1 A：第三批卡片各有一行個別「使用方式」，其他卡片與一般預覽／正式版不顯示
 const usageProblems = [];
@@ -289,36 +336,36 @@ try {
 
   // 搜尋文章並開啟
   const searchProblems = [];
-  for (const a of [arts[0], arts[6], arts[11]]) {
+  for (const a of [arts[0], arts[6], arts[11], fourth[0], fourth[6], fourth[9], fourth[12]]) {
     await page.goto(`${ORIGIN}${BASE}search.html`);
     const kw = a.title.slice(0, 6);
     await page.fill('[data-search] input', kw);
     await page.waitForTimeout(150);
     const link = page.locator(`[data-search] a[href$="articles/${a.slug}.html"]`).first();
-    if (!(await link.count())) { searchProblems.push(`搜尋「${kw}」找不到第 ${a.no} 篇`); continue; }
+    if (!(await link.count())) { searchProblems.push(`搜尋「${kw}」找不到 ${a.no || a.slug}`); continue; }
     await link.click();
     await page.waitForURL(`**/articles/${a.slug}.html`);
-    if ((await page.textContent('h1')).trim() !== a.title) searchProblems.push(`第 ${a.no} 篇開啟後標題不符`);
+    if ((await page.textContent('h1')).trim() !== a.title) searchProblems.push(`${a.no || a.slug} 開啟後標題不符`);
   }
   await page.goto(`${ORIGIN}${BASE}search.html`);
   await page.fill('[data-search] input', '嘉義市');
   await page.waitForTimeout(150);
   const chiayiHits = await page.locator('[data-search] a[href*="batch2-chiayi-city"]').count();
   if (chiayiHits !== 2) searchProblems.push(`搜尋「嘉義市」找到 ${chiayiHits} 張嘉義市地方卡片`);
-  check('站內搜尋：可找到文章並開啟閱讀頁；搜尋「嘉義市」可找到兩張地方卡片', searchProblems.length === 0, searchProblems.join('；'));
+  check('站內搜尋：可找到文章（含第四、五批新文）並開啟閱讀頁；搜尋「嘉義市」可找到兩張地方卡片', searchProblems.length === 0, searchProblems.join('；'));
 
   // 讀利專欄進入所有文章
   await page.goto(`${ORIGIN}${BASE}quiet-power.html`);
   const qpLinks = await page.$$eval('#articles-title ~ .story-grid a, .story-grid h3 a', (as) => [...new Set(as.map((a) => a.getAttribute('href')))]);
   const entry = await page.$eval('.dir-head .support-entry', (e) => ({ href: e.getAttribute('href'), h: Math.round(e.getBoundingClientRect().height) }));
-  check('讀利專欄：導讀文章區列出第二批 12 篇及第三批 5 篇且連結正確；💪 支援資源小型入口仍在（連往 support.html、高度 ≥ 44px）', qpLinks.length === 17 && [...arts, ...third.articles].every((a) => qpLinks.includes(`articles/${a.slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
+  check('讀利專欄：導讀文章區列出第二批 12 篇、第三批 5 篇、第四批 9 篇、第五批 4 篇共 30 篇且連結正確；💪 支援資源小型入口仍在（連往 support.html、高度 ≥ 44px）', qpLinks.length === 30 && [...arts, ...third.articles, ...fourth].every((a) => qpLinks.includes(`articles/${a.slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
   check('測試預覽操作過程沒有 JavaScript 錯誤', errors.length === 0, errors.slice(0, 2).join('；'));
   await mobile.close();
 
   // 各寬度版面
   const overflow = [];
   const smallText = [];
-  const pagesToCheck = ['index.html', 'city.html', 'quiet-power.html', 'toward-light.html', 'search.html', ...arts.map((a) => `articles/${a.slug}.html`), ...third.articles.map((a) => `articles/${a.slug}.html`)];
+  const pagesToCheck = ['index.html', 'city.html', 'quiet-power.html', 'toward-light.html', 'search.html', ...arts.map((a) => `articles/${a.slug}.html`), ...third.articles.map((a) => `articles/${a.slug}.html`), ...fourth.map((a) => `articles/${a.slug}.html`)];
   for (const w of [320, 375, 390, 768, 1280]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, isMobile: w < 700, hasTouch: w < 700 });
     const p = await ctx.newPage();
@@ -330,7 +377,7 @@ try {
     }
     await ctx.close();
   }
-  check('320／375／390／768／1280px：首頁、城市、讀利、向光、搜尋及 12 篇文章皆無水平溢位，文章內文字級 ≥ 15px', overflow.length === 0 && smallText.length === 0, [...overflow, ...smallText].slice(0, 4).join('；'));
+  check('320／375／390／768／1280px：首頁、城市、讀利、向光、搜尋及 30 篇 QA 文章（含比較表）皆無水平溢位，文章內文字級 ≥ 15px', overflow.length === 0 && smallText.length === 0, [...overflow, ...smallText].slice(0, 4).join('；'));
 } finally {
   await browser.close();
   server.close();

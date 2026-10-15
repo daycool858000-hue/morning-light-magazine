@@ -1,5 +1,5 @@
 // 精簡 Markdown 轉換器：只支援本站內容需要的語法，避免引入外部套件。
-// 支援：## / ### 標題、段落、- 與 1. 清單、**粗體**、[連結](網址)。
+// 支援：## / ### 標題、段落、- 與 1. 清單、**粗體**、[連結](網址)、| 表格 |（第二列為 |---| 分隔線）。
 
 export function escapeHtml(value) {
   return String(value ?? '')
@@ -51,11 +51,24 @@ export function renderMarkdown(text, options) {
   const out = [];
   let paragraph = [];
   let list = null;
+  let table = null;
 
   const flushParagraph = () => {
     if (paragraph.length) {
       out.push(`<p>${inline(paragraph.join(''), options)}</p>`);
       paragraph = [];
+    }
+  };
+  const cells = (row) => row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+  const flushTable = () => {
+    if (table) {
+      const [head, ...rows] = table.filter((row) => !/^\|[\s:|-]+\|$/.test(row));
+      const th = cells(head).map((c) => `<th scope="col">${inline(c, options)}</th>`).join('');
+      const labels = cells(head).map((c) => escapeHtml(c.replace(/\*\*/g, '')));
+      // data-label 讓窄螢幕改成逐列堆疊時，每格仍看得到所屬欄名
+      const tb = rows.map((row) => `<tr>${cells(row).map((c, i) => `<td data-label="${labels[i] || ''}">${inline(c, options)}</td>`).join('')}</tr>`).join('');
+      out.push(`<div class="table-wrap"><table><thead><tr>${th}</tr></thead><tbody>${tb}</tbody></table></div>`);
+      table = null;
     }
   };
   const flushList = () => {
@@ -68,9 +81,14 @@ export function renderMarkdown(text, options) {
   for (const line of lines) {
     const trimmed = line.trim();
     let m;
+    if (table && !trimmed.startsWith('|')) flushTable();
     if (!trimmed) {
       flushParagraph();
       flushList();
+    } else if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+      flushParagraph();
+      flushList();
+      (table ||= []).push(trimmed);
     } else if ((m = /^(#{2,3})\s+(.*)$/.exec(trimmed))) {
       flushParagraph();
       flushList();
@@ -91,5 +109,6 @@ export function renderMarkdown(text, options) {
   }
   flushParagraph();
   flushList();
+  flushTable();
   return out.join('\n');
 }
