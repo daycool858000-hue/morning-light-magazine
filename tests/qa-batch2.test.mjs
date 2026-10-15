@@ -147,7 +147,7 @@ for (const a of third.articles) {
 }
 for (const r of third.resources) {
   const html = cardHtml(r.id);
-  if (!html.includes(r.name) || !html.includes('badge-qa')) newArticleProblems.push(`${r.id} 缺少候選卡或標示`);
+  if (!html.includes(r.name.replace(/&/g, '&amp;')) || !html.includes('badge-qa')) newArticleProblems.push(`${r.id} 缺少候選卡或標示`);
   if (!html.includes(r.url.replace(/&/g, '&amp;'))) newArticleProblems.push(`${r.id} 缺少正確外部連結`);
 }
 check('第三批 5 篇文章／9 筆官方學習及生活導覽：連結、搜尋、標籤與來源完整', newArticleProblems.length === 0, newArticleProblems.slice(0, 6).join('；'));
