@@ -500,6 +500,12 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 .res-title h3 { font-family: var(--sans); font-size: 1.12rem; letter-spacing: 0.03em; margin: 0; line-height: 1.5; }
 .res-types { margin: 2px 0 0; font-size: 0.8125rem; color: var(--amber); }
 .res-summary { margin: 0; font-size: 0.975rem; }
+/* QA English discovery: short assistance, not a translated website. */
+.res-title { min-width: 0; }
+.res-title-en { margin: 3px 0 0; color: var(--muted); font-size: 0.84rem; line-height: 1.45; overflow-wrap: anywhere; }
+.res-summary-en { margin: -4px 0 0; color: var(--muted); font-size: 0.91rem; line-height: 1.55; overflow-wrap: anywhere; }
+.res-card .res-actions a { max-width: 100%; white-space: normal; overflow-wrap: anywhere; justify-content: center; text-align: center; }
+.res-card .res-actions .res-english-link { border-color: var(--sage); color: var(--ink); }
 .res-dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 14px; margin: 0; font-size: 0.875rem; color: var(--muted); }
 .res-dl dt { font-weight: 600; color: var(--ink); white-space: nowrap; }
 .res-dl dd { margin: 0; }
