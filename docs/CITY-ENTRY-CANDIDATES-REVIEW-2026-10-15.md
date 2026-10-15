@@ -10,24 +10,24 @@
 
 | County ID | 縣市 | 第一層候選名稱 | 建議直接導流的原始入口 | 限於來源支持的卡片摘要 |
 |---|---|---|---|---|
-| \`keelung\` | 基隆市 | 基隆市政府社會處 | https://www.klcg.gov.tw/tw/social/ | 基隆市社福業務官方入口，可再查婦女、家庭及社會救助等資料。 |
-| \`taipei\` | 臺北市 | 臺北市政府社會局 | https://dosw.gov.taipei/ | 臺北市社福政策、福利申辦及服務據點的政府入口。 |
-| \`new-taipei\` | 新北市 | 新北市政府社會局 | https://www.sw.ntpc.gov.tw/index.jsp | 新北市婦女、家庭及其他社會福利資訊的市府入口。 |
-| \`taoyuan\` | 桃園市 | 桃園市政府社會局 | https://sab.tycg.gov.tw/ | 桃園市社會福利、家庭服務與相關服務中心資訊入口。 |
-| \`hsinchu-city\` | 新竹市 | 新竹市政府社會處 | https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0 | 新竹市社會處機關介紹與婦女、家庭、社會救助業務方向。 |
-| \`hsinchu-county\` | 新竹縣 | 新竹縣政府社會處 | https://social.hsinchu.gov.tw/ | 新竹縣社會處官方入口，可進一步查社福及家庭相關服務。 |
-| \`yilan\` | 宜蘭縣 | 宜蘭縣政府社會處 | https://sntroot.e-land.gov.tw/default.aspx | 宜蘭縣社會處業務與公告官方入口。 |
-| \`miaoli\` | 苗栗縣 | 苗栗縣政府社會處 | https://www.miaoli.gov.tw/social_affairs/ | 苗栗縣政府社會處正式入口，可再查婦女福利及相關服務。 |
-| \`taichung\` | 臺中市 | 臺中市政府社會局 | https://www.society.taichung.gov.tw/ | 臺中市社福、婦女及新住民、家庭等市府資訊入口。 |
-| \`changhua\` | 彰化縣 | 彰化縣政府社會處 | https://www.chcg.gov.tw/DTO/social/00home/index01.aspx | 彰化縣社福政策及婦女等相關服務資訊入口。 |
-| \`nantou\` | 南投縣 | 南投縣政府社會及勞動局社會福利資訊網 | https://welfare.nantou.gov.tw/ | 南投縣社福主管機關相關資訊，可查婦女福利、救助等主題。 |
-| \`yunlin\` | 雲林縣 | 雲林縣政府社會處 | https://social.yunlin.gov.tw/Default.aspx | 雲林縣社會處官方福利與公告資訊入口。 |
-| \`tainan\` | 臺南市 | 臺南市政府社會局 | https://sab.tainan.gov.tw/ | 臺南市社會福利與婦女、家庭相關服務的官方入口。 |
-| \`pingtung\` | 屏東縣 | 屏東縣政府社會處 | https://www.pthg.gov.tw/PlanJdp/default.aspx | 屏東縣社會處官方入口，含婦女福利、社會救助與社福中心導覽。 |
-| \`hualien\` | 花蓮縣 | 花蓮縣政府社會處 | https://sa.hl.gov.tw/ | 花蓮縣政府社會處官方社福資訊入口。 |
-| \`taitung\` | 臺東縣 | 臺東縣政府社會處 | https://ttcd.taitung.gov.tw/ | 臺東縣政府社會處官方入口；具體育兒等服務需由相關頁另查。 |
-| \`penghu\` | 澎湖縣 | 澎湖縣政府社會處 | https://www.penghu.gov.tw/Society/index.jsp | 澎湖縣社會處官方入口，可查婦女福利及相關業務。 |
-| \`kinmen\` | 金門縣 | 金門縣政府社會處 | https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36 | 金門縣政府社會處福利主題頁，含婦女及家庭支持等業務。 |
+| `keelung` | 基隆市 | 基隆市政府社會處 | https://www.klcg.gov.tw/tw/social/ | 基隆市社福業務官方入口，可再查婦女、家庭及社會救助等資料。 |
+| `taipei` | 臺北市 | 臺北市政府社會局 | https://dosw.gov.taipei/ | 臺北市社福政策、福利申辦及服務據點的政府入口。 |
+| `new-taipei` | 新北市 | 新北市政府社會局 | https://www.sw.ntpc.gov.tw/index.jsp | 新北市婦女、家庭及其他社會福利資訊的市府入口。 |
+| `taoyuan` | 桃園市 | 桃園市政府社會局 | https://sab.tycg.gov.tw/ | 桃園市社會福利、家庭服務與相關服務中心資訊入口。 |
+| `hsinchu-city` | 新竹市 | 新竹市政府社會處 | https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0 | 新竹市社會處機關介紹與婦女、家庭、社會救助業務方向。 |
+| `hsinchu-county` | 新竹縣 | 新竹縣政府社會處 | https://social.hsinchu.gov.tw/ | 新竹縣社會處官方入口，可進一步查社福及家庭相關服務。 |
+| `yilan` | 宜蘭縣 | 宜蘭縣政府社會處 | https://sntroot.e-land.gov.tw/default.aspx | 宜蘭縣社會處業務與公告官方入口。 |
+| `miaoli` | 苗栗縣 | 苗栗縣政府社會處 | https://www.miaoli.gov.tw/social_affairs/ | 苗栗縣政府社會處正式入口，可再查婦女福利及相關服務。 |
+| `taichung` | 臺中市 | 臺中市政府社會局 | https://www.society.taichung.gov.tw/ | 臺中市社福、婦女及新住民、家庭等市府資訊入口。 |
+| `changhua` | 彰化縣 | 彰化縣政府社會處 | https://www.chcg.gov.tw/DTO/social/00home/index01.aspx | 彰化縣社福政策及婦女等相關服務資訊入口。 |
+| `nantou` | 南投縣 | 南投縣政府社會及勞動局社會福利資訊網 | https://welfare.nantou.gov.tw/ | 南投縣社福主管機關相關資訊，可查婦女福利、救助等主題。 |
+| `yunlin` | 雲林縣 | 雲林縣政府社會處 | https://social.yunlin.gov.tw/Default.aspx | 雲林縣社會處官方福利與公告資訊入口。 |
+| `tainan` | 臺南市 | 臺南市政府社會局 | https://sab.tainan.gov.tw/ | 臺南市社會福利與婦女、家庭相關服務的官方入口。 |
+| `pingtung` | 屏東縣 | 屏東縣政府社會處 | https://www.pthg.gov.tw/PlanJdp/default.aspx | 屏東縣社會處官方入口，含婦女福利、社會救助與社福中心導覽。 |
+| `hualien` | 花蓮縣 | 花蓮縣政府社會處 | https://sa.hl.gov.tw/ | 花蓮縣政府社會處官方社福資訊入口。 |
+| `taitung` | 臺東縣 | 臺東縣政府社會處 | https://ttcd.taitung.gov.tw/ | 臺東縣政府社會處官方入口；具體育兒等服務需由相關頁另查。 |
+| `penghu` | 澎湖縣 | 澎湖縣政府社會處 | https://www.penghu.gov.tw/Society/index.jsp | 澎湖縣社會處官方入口，可查婦女福利及相關業務。 |
+| `kinmen` | 金門縣 | 金門縣政府社會處 | https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36 | 金門縣政府社會處福利主題頁，含婦女及家庭支持等業務。 |
 
 **A 類的查核限度**：這是 AI 依政府網站確認「機關／網址／基本服務分類」；沒有對全部地方扶助制度或所有服務據點逐頁審核，也沒有獲取網站擁有人對本批的公開核准。
 
@@ -35,10 +35,10 @@
 
 | County ID | 縣市 | 現行機關與已找到的**備用官方頁** | 未完成部分及發布風險 |
 |---|---|---|---|
-| \`chiayi-city\` | 嘉義市 | 嘉義市政府社會處；[官方托育服務頁](https://social.chiayi.gov.tw/cl.aspx?n=4251) | 目前所讀為**托育特定主題**，不能寫成全部社會福利的總入口；需找到可讀機關首頁或更廣的市府社福頁。 |
-| \`chiayi-county\` | 嘉義縣 | 嘉義縣社會局；[官方網域候選](https://sabcc.cyhg.gov.tw/)；[政府資料開放平臺之機關佐證](https://data.gov.tw/dataset/90375) | 專屬站本輪直接讀取逾時；雖可由其他政府來源確認機關及網域，仍缺**已實際讀取並可讓一般民眾完成導航**的廣義福利入口。 |
-| \`kaohsiung\` | 高雄市 | 高雄市政府社會局；[高雄市政府正式機關介紹頁](https://www.kcg.gov.tw/Organ_Detail.aspx?n=D33B55D537402BAA&s=6577239FDC0F719E&sms=9F779BBA07F163E2) | 市府機關介紹可作備用入口；[專屬社會局站](https://socbu.kcg.gov.tw/)本輪無法直接讀取，不保證本站選項可直接抵達所需福利資訊。 |
-| \`lienchiang\` | 連江縣 | **連江縣政府民政社會處**；[現行組織自治條例](https://law.matsu.gov.tw/LawContent.aspx?id=FL033849)及[縣府開放資料機關表](https://eip.matsu.gov.tw/matsuopendata/chhtml/datalist02/9999) | 上述可證實單位存在及業務，但**法規頁、機關名錄不是一般民眾社福首頁**；[民政社會處網站候選](https://www.matsu.gov.tw/Chhtml/index/371030000A0001)本輪讀取受阻，還需要真正可讀的日常福利服務導覽。不可採用舊機關名稱。 |
+| `chiayi-city` | 嘉義市 | 嘉義市政府社會處；[官方托育服務頁](https://social.chiayi.gov.tw/cl.aspx?n=4251) | 目前所讀為**托育特定主題**，不能寫成全部社會福利的總入口；需找到可讀機關首頁或更廣的市府社福頁。 |
+| `chiayi-county` | 嘉義縣 | 嘉義縣社會局；[官方網域候選](https://sabcc.cyhg.gov.tw/)；[政府資料開放平臺之機關佐證](https://data.gov.tw/dataset/90375) | 專屬站本輪直接讀取逾時；雖可由其他政府來源確認機關及網域，仍缺**已實際讀取並可讓一般民眾完成導航**的廣義福利入口。 |
+| `kaohsiung` | 高雄市 | 高雄市政府社會局；**建議優先備用：[高雄市政府「貼心 e 服務／社會福利目錄」](https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A)**；[市府機關介紹](https://www.kcg.gov.tw/Organ_Detail.aspx?n=D33B55D537402BAA&s=6577239FDC0F719E&sms=9F779BBA07F163E2) | 福利目錄本輪可直接讀，提供婦女福利、單親特境家庭、托育及救助等分類，**可作對民眾有用的替代入口**；惟[社會局獨立站](https://socbu.kcg.gov.tw/)仍未直接取回，不能將替代頁冒充為社會局網站首頁。 |
+| `lienchiang` | 連江縣 | **連江縣政府民政社會處**；[現行組織自治條例](https://law.matsu.gov.tw/LawContent.aspx?id=FL033849)及[縣府開放資料機關表](https://eip.matsu.gov.tw/matsuopendata/chhtml/datalist02/9999) | 上述可證實單位存在及業務，但**法規頁、機關名錄不是一般民眾社福首頁**；[民政社會處網站候選](https://www.matsu.gov.tw/Chhtml/index/371030000A0001)本輪讀取受阻，還需要真正可讀的日常福利服務導覽。不可採用舊機關名稱。 |
 
 **B 類暫不假裝已完成可用導航。** 除非作者同意採用明確標示用途的市府機關介紹頁等替代入口，或後續 AI 找到有力而可用的官網來源，否則不應將它們與 18 筆 A 類混成「22 筆已完整查核」。
 
@@ -58,11 +58,11 @@
 ## 丁｜未來交給 Claude 的匯入條件（尚未授權啟動）
 
 1. **只匯入網站擁有人已明確核准的地方候選**；不得因研究表為 A 就自動公開，B 類必須另外決定是否採有標示的替代入口，或繼續延後。
-2. 沿用 \`content/counties.json\` 的唯一 \`county id\`，不要修改 22 縣市選擇 UI、六大分類及既有 V3.3 版面。
-3. 每張第一層卡的類別為 \`city\`、主題 \`social-affairs\`，服務類型為現有 \`社會福利\`，\`regions\` **只有對應單一縣市**，不得標成全國資源。
-4. 從本表撰寫基本摘要，附直接官網來源與 \`review\`（by＝AI、date＝實際查核日期、scope＝官方入口基本資訊），\`status\`／\`checkedAt\` 繼續保留人工核對的真實意義，不得填假日期。
-5. \`release-approvals.json\` 需為這批資料**另建立獨立核准快照**，不能繼承原 16 筆；實際公開條件須經既有 release gate，測試未核准／改版資料不會外洩。
+2. 沿用 `content/counties.json` 的唯一 `county id`，不要修改 22 縣市選擇 UI、六大分類及既有 V3.3 版面。
+3. 每張第一層卡的類別為 `city`、主題 `social-affairs`，服務類型為現有 `社會福利`，`regions` **只有對應單一縣市**，不得標成全國資源。
+4. 從本表撰寫基本摘要，附直接官網來源與 `review`（by＝AI、date＝實際查核日期、scope＝官方入口基本資訊），`status`／`checkedAt` 繼續保留人工核對的真實意義，不得填假日期。
+5. `release-approvals.json` 需為這批資料**另建立獨立核准快照**，不能繼承原 16 筆；實際公開條件須經既有 release gate，測試未核准／改版資料不會外洩。
 6. 新增地方卡後，測試選縣市、服務類型、搜尋、外部連結、手機、瀏覽器回退及同一機關不重複顯示；全國性與地方資料分組清楚。
-7. **本文件只是草案**，不得據此自行更動正式內容、合併 \`main\` 或部署 GitHub Pages。
+7. **本文件只是草案**，不得據此自行更動正式內容、合併 `main` 或部署 GitHub Pages。
 
-**目前正式網站地方機關資料筆數仍是 0，因為研究文件在 \`docs/\` 而非正式 \`content/resources.json\`。**
+**目前正式網站地方機關資料筆數仍是 0，因為研究文件在 `docs/` 而非正式 `content/resources.json`。**
