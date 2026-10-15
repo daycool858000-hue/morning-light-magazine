@@ -18,10 +18,13 @@
     var status = box.querySelector('[data-search-status]');
     var empty = box.querySelector('[data-search-empty]');
     var limit = Number(box.getAttribute('data-search-limit')) || 50;
+    // 在首頁輸入搜尋時切換成專注搜尋的畫面；清空後恢復六大分類。
+    var onHome = Boolean(document.body.classList.contains('home') && box.closest('.hero'));
     box.classList.add('is-ready');
 
     function render() {
       var query = normalize(input.value);
+      if (onHome) document.body.classList.toggle('home-searching', Boolean(query));
       list.innerHTML = '';
       if (!query) {
         status.textContent = '';
