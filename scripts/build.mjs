@@ -3,8 +3,8 @@
 // 用法：node scripts/build.mjs [--mode=preview|production|qa] [--out=dist]
 //   preview    ：顯示所有未撤下的資料，並以標籤標示查核狀態；頁面加上「預覽版本」提示與 noindex。
 //   production ：機構／專線／圖片只輸出 AI 已核對且作者核准之特定版本；文章與活動維持原查核規則。
-//   qa         ：只供本機驗收的「第二批候選內容」測試預覽（預設輸出 dist-qa/）。以 preview 為基礎，另外讀取
-//                docs/ 內未核准的 23 筆地方入口與 12 篇文章，每頁標示「未核准測試內容」。不得部署或公開。
+//   qa         ：加入 docs/ 內第二批、第三批尚未核准的候選資料，標示「未核准測試內容」。
+//                QA 僅能依網站擁有人同意作為公開測試版；不得冒充正式內容或寫入正式發布核准。
 
 import { readFile, writeFile, mkdir, rm, readdir, copyFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -754,7 +754,8 @@ ${topicsSection(c)}
     ${sectionHead('Official Lists', 'res-title', '官方課程與活動列表入口')}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}
   </div>
-</section>`;
+</section>
+${articles.some((a) => a.category === 'learning') ? articlesSection(articles.filter((a) => a.category === 'learning')) : ''}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: ['assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
