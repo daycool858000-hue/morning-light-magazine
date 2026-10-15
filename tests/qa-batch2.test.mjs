@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { loadBatch2Articles, BATCH2_RESOURCES } from '../scripts/lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs';
 import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.mjs';
+import { loadQaEnglishResources } from '../scripts/lib/qa-english.mjs';
 
 const require = createRequire(import.meta.url);
 function loadPlaywright() {
@@ -32,6 +33,8 @@ const cand = JSON.parse(await readFile(path.join(ROOT, BATCH2_RESOURCES), 'utf8'
 const arts = await loadBatch2Articles(ROOT, categories);
 const third = await loadBatch3OpenAccess(ROOT);
 const fourth = await loadBatch45Articles(ROOT, categories); // Issue #2：第四批 9 篇＋第五批 4 篇
+const englishResources = await loadQaEnglishResources(ROOT, [...national, ...cand, ...third.resources]);
+const newEnglishResources = englishResources.filter(r => r.id.startsWith('qa-en-'));
 const BASE = site.basePath;
 const PORT = 4331;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
@@ -54,7 +57,7 @@ async function listFiles(dir, prefix = '') {
 const read = (dir, f) => readFile(path.join(dir, f), 'utf8');
 
 // ---------- 一、發布隔離：候選內容只在 dist-qa ----------
-const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), 'batch2-', 'batch3-', 'batch4-', 'batch5-', '未核准測試內容'];
+const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', '未核准測試內容'];
 for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-production', 'dist-production']]) {
   const leaks = [];
   for (const f of await listFiles(path.join(ROOT, dir))) {
@@ -95,6 +98,18 @@ const uncovered = counties.filter((c) => !cand.some((r) => r.regions.includes(c.
 check('23 筆皆為有效分類、主題與縣市，且 22 縣市每一個都有地方入口', badRef.length === 0 && uncovered.length === 0, [...badRef.map((r) => r.id), ...uncovered.map((c) => c.name)].join('、'));
 
 const cardHtml = (id) => (new RegExp(`<article class="res-card" id="res-${id}"[\\s\\S]*?</article>`).exec(city) || [''])[0];
+const englishCardProblems = [];
+for (const item of newEnglishResources) {
+  const card = cardHtml(item.id);
+  if (!card || !card.includes('lang="en"') || !card.includes('未核准測試內容')) englishCardProblems.push(item.id + ' missing English QA card');
+  if (item.nameEn && !card.includes(item.nameEn)) englishCardProblems.push(item.id + ' missing English agency name');
+}
+for (const item of englishResources.filter(r => r.qaEnglish && !r.id.startsWith('qa-en-'))) {
+  const card = cardHtml(item.id);
+  if (!card.includes('res-summary-en')) englishCardProblems.push(item.id + ' missing English summary');
+}
+check('英文輔助 QA：3 張多語官方入口及 8 張既有資源英文說明；維持未核准狀態與官方來源', englishCardProblems.length === 0 && newEnglishResources.length === 3 && englishResources.filter(r => r.qaEnglish && !r.id.startsWith('qa-en-')).length === 8, englishCardProblems.join('；'));
+
 const chiayi = cand.filter((r) => r.regions.includes('chiayi-city')).map((r) => cardHtml(r.id));
 const typeOf = (h) => (/<dt>入口類型<\/dt><dd>([^<]+)<\/dd>/.exec(h) || [])[1] || '';
 const nameOf = (h) => (/<h3>([^<]+)<\/h3>/.exec(h) || [])[1] || '';
@@ -108,7 +123,7 @@ const kh = cardHtml('batch2-kaohsiung-welfare-directory');
 check('高雄市：標示為市府社會福利目錄，入口類型註明「非社會局／處獨立網站」，名稱未冒稱社會局網站', /市府官方福利查詢目錄（非社會局／處獨立網站）/.test(kh) && !/社會局官方網站|社會局網站/.test(nameOf(kh)));
 
 const nationalCards = national.filter((r) => r.published !== false && r.status !== '已撤下');
-const qaNationalCardsCount = nationalCards.length + third.resources.filter((r) => r.regions.includes('national')).length;
+const qaNationalCardsCount = nationalCards.length + third.resources.filter((r) => r.regions.includes('national')).length + newEnglishResources.filter(r => r.regions.includes('national')).length;
 const natChanged = nationalCards.filter((r) => !cardHtml(r.id).includes(`<h3>${r.name}</h3>`) || !cardHtml(r.id).includes(r.summary));
 check(`原有 ${nationalCards.length} 筆全國性資料仍在且名稱、簡介未被覆寫`, natChanged.length === 0, natChanged.map((r) => r.id).join('、'));
 
@@ -259,11 +274,28 @@ try {
     !await page.locator('body').evaluate(e => e.classList.contains('home-searching')) &&
     await page.locator('.cats').isVisible() && await page.locator('.quick-section').isVisible());
   await page.fill('#home-q', '育兒');
-  await page.waitForTimeout(190);
+  // CI 在高速連續填寫時偶爾還在處理 search input；等待明確可見及完整 44px 尺寸，
+  // 不能跳過檢查，也不修改站主已驗收的搜尋腳本／按鈕樣式。
   const resetButton = page.locator('[data-search-clear]').first();
+  let clearButtonOk = false;
+  try {
+    await resetButton.waitFor({ state: 'visible', timeout: 3500 });
+    await page.waitForFunction(() => {
+      const e = document.querySelector('.hero [data-search-clear]');
+      if (!e || e.hidden || getComputedStyle(e).display === 'none') return false;
+      const rect = e.getBoundingClientRect();
+      return rect.height >= 44 && rect.width >= 44;
+    }, null, { timeout: 3500 });
+    clearButtonOk = true;
+  } catch {
+    // Report actual dimensions on failure; an actual too-small button remains a failing test.
+  }
+  const clearButtonDimensions = await resetButton.evaluate(el => {
+    const box = el.getBoundingClientRect();
+    return { width: box.width, height: box.height, hidden: el.hidden };
+  });
   check('搜尋文字存在時：顯示至少 44px 的明確清除按鈕',
-    await resetButton.isVisible() &&
-    await resetButton.evaluate(el => el.getBoundingClientRect().height >= 44 && el.getBoundingClientRect().width >= 44));
+    clearButtonOk, JSON.stringify(clearButtonDimensions));
   await resetButton.click();
   await page.waitForTimeout(30);
   check('點擊清除搜尋文字：即時回復六大主題和快捷入口',
@@ -346,6 +378,14 @@ try {
     await link.click();
     await page.waitForURL(`**/articles/${a.slug}.html`);
     if ((await page.textContent('h1')).trim() !== a.title) searchProblems.push(`${a.no || a.slug} 開啟後標題不符`);
+  }
+
+  await page.goto(`${ORIGIN}${BASE}search.html`);
+  for (const query of ['immigration', 'childcare', 'legal aid', 'residence']) {
+    await page.fill('[data-search] input', query);
+    await page.waitForTimeout(120);
+    const count = await page.locator('[data-search-results] a').count();
+    if (!count) searchProblems.push('英文搜尋無法找到相關資源：' + query);
   }
   await page.goto(`${ORIGIN}${BASE}search.html`);
   await page.fill('[data-search] input', '嘉義市');
