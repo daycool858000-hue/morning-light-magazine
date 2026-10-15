@@ -318,6 +318,21 @@ main { display: block; }
 }
 .search-form input:focus { outline: none; }
 .search-form input::placeholder { color: #8C8076; }
+/* 以明確且可鍵盤操作的清除鍵取代 Safari 搜尋欄的原生叉叉，避免 iOS 清除未派發事件。 */
+.search-form input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; display: none; }
+.search-clear {
+  flex: none; width: 44px; height: 44px; min-width: 44px;
+  padding: 0; border: 0; border-radius: 50%;
+  background: var(--sand); color: var(--ink);
+  font: inherit; font-size: 1.8rem; line-height: 1; cursor: pointer;
+}
+.search-clear[hidden] { display: none !important; }
+.search-clear:hover { background: var(--sand-2); }
+.search-clear:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+@media (max-width: 399px) {
+  .search-form { gap: 4px; padding-left: 10px; }
+  .search-submit { padding-inline: 12px; }
+}
 .search-submit {
   flex: none; min-height: 46px; padding: 0 22px; border: 0; border-radius: 999px;
   background: var(--terracotta); color: #fff; font: inherit; font-weight: 600; cursor: pointer;
