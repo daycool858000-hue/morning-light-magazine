@@ -502,7 +502,9 @@ main { display: block; }
 .topic-no { font-family: var(--serif); font-size: 1.2rem; color: var(--terracotta); line-height: 1.6; }
 .topic h3 { font-size: 1.12rem; margin-bottom: 4px; }
 .topic p { font-size: 0.95rem; color: var(--muted); margin-bottom: 6px; }
-.topic-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.9rem; }
+.topic-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 14px; font-size: 0.9rem; }
+/* 手機點擊區：文字外觀不變，點擊範圍高度至少 44px */
+.topic-links a { display: inline-flex; align-items: center; min-height: 44px; }
 .topic .pending { font-size: 0.85rem; color: var(--muted); margin: 0; }
 
 /* ---------- 一般頁首（說明頁、文章、搜尋、求助） ---------- */
@@ -627,6 +629,12 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
   .hero-inner { padding-bottom: 8px; }
   .hero-kicker { margin-bottom: 8px; }
   .hero h1 { margin-bottom: 0.35em; }
+}
+
+/* 320px 等極窄螢幕：分類卡標題字距與圖示縮小，避免「職涯與創業」等標題在字中斷行 */
+@media (max-width: 339px) {
+  .cat-title { font-size: 0.95rem; letter-spacing: 0.02em; gap: 4px; }
+  .cat-icon { width: 18px; height: 18px; }
 }
 
 /* 首頁底部四個快捷入口（手機 2×2） */

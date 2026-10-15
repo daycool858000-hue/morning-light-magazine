@@ -12,6 +12,7 @@
     "build": "node scripts/build.mjs --mode=preview",
     "build:production": "node scripts/build.mjs --mode=production --out=dist-production",
     "preview": "node scripts/build.mjs --mode=preview && node scripts/serve.mjs",
+    "phone-preview": "node scripts/build.mjs --mode=production --out=dist-production && node scripts/serve.mjs dist-production --lan",
     "test": "node scripts/build.mjs --mode=preview && node scripts/build.mjs --mode=production --out=dist-production && node tests/site.test.mjs && node tests/release-gate.test.mjs",
     "check-links": "node scripts/check-links.mjs",
     "images": "node scripts/images.mjs",

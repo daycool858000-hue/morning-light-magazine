@@ -32,6 +32,7 @@
 | `npm run build` | 建置預覽版到 `dist/`（顯示所有未撤下資料並標示查核狀態） |
 | `npm run build:production` | 建置正式版到 `dist-production/`（只含「已確認」資料） |
 | `npm run preview` | 建置並在本機 `http://127.0.0.1:4173/` 開啟預覽 |
+| `npm run phone-preview` | 建置正式版，只在同一個 Wi-Fi 內提供給自己的 iPhone 驗收（隨機網址、60 分鐘自動停止，不公開；見 [IPHONE-ACCEPTANCE.md](docs/IPHONE-ACCEPTANCE.md)） |
 | `npm test` | 建置兩種版本並執行自動化測試（需要 Playwright） |
 | `npm run check-links` | 檢查所有官方網址是否可連線（需可連外網路） |
 | `npm run images` | 處理 `content/photos/originals/` 的攝影素材（裁切、壓縮、移除 EXIF），需先 `npm install` |
@@ -73,6 +74,7 @@ docs/                   維護、部署、備份、授權與驗收文件
 - [V3.2 官方資源與專線查核紀錄](docs/VERIFICATION-LOG-V3.2.md)
 - [V3.2 查核對照表與可核准清單](docs/REVIEW-TABLE-V3.2.md)
 - [2026-10-15 正式公開前最新驗收清單](docs/PRELAUNCH-READINESS-2026-10-15.md)
+- [用自己的 iPhone Safari 驗收正式版](docs/IPHONE-ACCEPTANCE.md)
 - [品牌識別](docs/BRAND.md)
 - [內容更新操作教學](docs/CONTENT-GUIDE.md)
 - [GitHub Pages 部署、暫停與關站](docs/DEPLOYMENT.md)

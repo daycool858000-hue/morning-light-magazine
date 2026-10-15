@@ -488,6 +488,23 @@ try {
   await kb.close();
   check('鍵盤操作：第一個 Tab 是可見的「跳到主要內容」，按 Enter 後焦點移到主要內容，之後的焦點有可見外框', firstFocus.cls === 'skip-link' && firstFocus.top >= 0 && afterSkip === 'main' && ring.outline !== 'none' && parseFloat(ring.width) >= 2, `第一個焦點 ${firstFocus.cls}，跳轉後 #${afterSkip}，下一個 ${ring.tag} 外框 ${ring.outline} ${ring.width}`);
 
+  // ---------- 4-2. 手機最終檢查發現的兩個問題（2026-10-15）：主題索引連結點擊區、320px 分類卡標題斷行 ----------
+  const tapCtx = await browser.newContext({ viewport: { width: 320, height: 640 }, isMobile: true, hasTouch: true });
+  const tp = await tapCtx.newPage();
+  const smallLinks = [];
+  for (const cat of ['life-family', 'career', 'health', 'law', 'city', 'learning']) {
+    await tp.goto(`${ORIGIN}${BASE}${cat}.html`);
+    const hs = await tp.$$eval('.topic-links a', (as) => as.map((a) => Math.round(a.getBoundingClientRect().height)));
+    for (const h of hs) if (h < 44) smallLinks.push(`${cat} ${h}px`);
+  }
+  await tp.goto(`${ORIGIN}${BASE}index.html`);
+  const wrapped = await tp.$$eval('.cat-title', (ts) => ts.filter((t) => {
+    const r = document.createRange(); r.selectNodeContents(t.lastElementChild || t);
+    return new Set([...r.getClientRects()].map((x) => Math.round(x.top))).size > 1;
+  }).map((t) => t.textContent.trim()));
+  await tapCtx.close();
+  check('手機：分類頁「主題索引」的機構連結點擊高度 ≥ 44px；320px 首頁六張分類卡標題不在字中斷行', smallLinks.length === 0 && wrapped.length === 0, [...smallLinks.slice(0, 3), ...wrapped].join('、'));
+
   // ---------- 5a. 首頁主視覺文字與照片的實際對比 ----------
   {
     let sharpLib = null;
