@@ -1,0 +1,908 @@
+{
+  "_說明": "《由己》第二批 23 筆地方官方導覽候選。只存 docs/，不放 content/，不會被網站產生器讀取。published=false、待確認及 checkedAt=null 都不得為了上線而擅自變更。作者發布核准與 AI 來源查核必須分開；真正內容匯入須按既有 release gate 和新核准快照。",
+  "assembledAt": "2026-10-15",
+  "preparedBy": "ChatGPT (AI)",
+  "approvalStatus": "not-approved",
+  "countyCount": 22,
+  "itemCount": 23,
+  "categoriesNote": "局處與市府福利目錄放 city / social-affairs；一般社福中心官方名錄暫放 city / family-welfare，不是 women-centers。serviceTypes 只標可普遍支持的社會福利，細分類仍需逐筆查來源，不得為了搜尋強加婦女中心身分。",
+  "items": [
+    {
+      "id": "batch2-keelung-social-affairs",
+      "name": "基隆市政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "keelung"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "基隆市社福業務官方入口，可再查婦女、家庭及社會救助等資料。",
+      "url": "https://www.klcg.gov.tw/tw/social/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜基隆市政府社會處",
+          "url": "https://www.klcg.gov.tw/tw/social/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.klcg.gov.tw/tw/social/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-taipei-social-affairs",
+      "name": "臺北市政府社會局",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taipei"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "臺北市社福政策、福利申辦及服務據點的政府入口。",
+      "url": "https://dosw.gov.taipei/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜臺北市政府社會局",
+          "url": "https://dosw.gov.taipei/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://dosw.gov.taipei/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-new-taipei-social-affairs",
+      "name": "新北市政府社會局",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "new-taipei"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "新北市婦女、家庭及其他社會福利資訊的市府入口。",
+      "url": "https://www.sw.ntpc.gov.tw/index.jsp",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜新北市政府社會局",
+          "url": "https://www.sw.ntpc.gov.tw/index.jsp"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.sw.ntpc.gov.tw/index.jsp",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-taoyuan-social-affairs",
+      "name": "桃園市政府社會局",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taoyuan"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "桃園市社會福利、家庭服務與相關服務中心資訊入口。",
+      "url": "https://sab.tycg.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜桃園市政府社會局",
+          "url": "https://sab.tycg.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://sab.tycg.gov.tw/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-hsinchu-city-social-affairs",
+      "name": "新竹市政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "hsinchu-city"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "新竹市社會處機關介紹與婦女、家庭、社會救助業務方向。",
+      "url": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜新竹市政府社會處",
+          "url": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-hsinchu-county-social-affairs",
+      "name": "新竹縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "hsinchu-county"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "新竹縣社會處官方入口，可進一步查社福及家庭相關服務。",
+      "url": "https://social.hsinchu.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜新竹縣政府社會處",
+          "url": "https://social.hsinchu.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://social.hsinchu.gov.tw/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-yilan-social-affairs",
+      "name": "宜蘭縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "yilan"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "宜蘭縣社會處業務與公告官方入口。",
+      "url": "https://sntroot.e-land.gov.tw/default.aspx",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜宜蘭縣政府社會處",
+          "url": "https://sntroot.e-land.gov.tw/default.aspx"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://sntroot.e-land.gov.tw/default.aspx",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-miaoli-social-affairs",
+      "name": "苗栗縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "miaoli"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "苗栗縣政府社會處正式入口，可再查婦女福利及相關服務。",
+      "url": "https://www.miaoli.gov.tw/social_affairs/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜苗栗縣政府社會處",
+          "url": "https://www.miaoli.gov.tw/social_affairs/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.miaoli.gov.tw/social_affairs/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-taichung-social-affairs",
+      "name": "臺中市政府社會局",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taichung"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "臺中市社福、婦女及新住民、家庭等市府資訊入口。",
+      "url": "https://www.society.taichung.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜臺中市政府社會局",
+          "url": "https://www.society.taichung.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.society.taichung.gov.tw/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-changhua-social-affairs",
+      "name": "彰化縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "changhua"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "彰化縣社福政策及婦女等相關服務資訊入口。",
+      "url": "https://www.chcg.gov.tw/DTO/social/00home/index01.aspx",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜彰化縣政府社會處",
+          "url": "https://www.chcg.gov.tw/DTO/social/00home/index01.aspx"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.chcg.gov.tw/DTO/social/00home/index01.aspx",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-nantou-social-affairs",
+      "name": "南投縣政府社會及勞動局社會福利資訊網",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "nantou"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "南投縣社福主管機關相關資訊，可查婦女福利、救助等主題。",
+      "url": "https://welfare.nantou.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜南投縣政府社會及勞動局社會福利資訊網",
+          "url": "https://welfare.nantou.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://welfare.nantou.gov.tw/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-yunlin-social-affairs",
+      "name": "雲林縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "yunlin"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "雲林縣社會處官方福利與公告資訊入口。",
+      "url": "https://social.yunlin.gov.tw/Default.aspx",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜雲林縣政府社會處",
+          "url": "https://social.yunlin.gov.tw/Default.aspx"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://social.yunlin.gov.tw/Default.aspx",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-tainan-social-affairs",
+      "name": "臺南市政府社會局",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "tainan"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "臺南市社會福利與婦女、家庭相關服務的官方入口。",
+      "url": "https://sab.tainan.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜臺南市政府社會局",
+          "url": "https://sab.tainan.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://sab.tainan.gov.tw/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-pingtung-social-affairs",
+      "name": "屏東縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "pingtung"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "屏東縣社會處官方入口，含婦女福利、社會救助與社福中心導覽。",
+      "url": "https://www.pthg.gov.tw/PlanJdp/default.aspx",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜屏東縣政府社會處",
+          "url": "https://www.pthg.gov.tw/PlanJdp/default.aspx"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.pthg.gov.tw/PlanJdp/default.aspx",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-hualien-social-affairs",
+      "name": "花蓮縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "hualien"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "花蓮縣政府社會處官方社福資訊入口。",
+      "url": "https://sa.hl.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜花蓮縣政府社會處",
+          "url": "https://sa.hl.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://sa.hl.gov.tw/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-taitung-social-affairs",
+      "name": "臺東縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taitung"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "臺東縣政府社會處官方入口；具體育兒等服務需由相關頁另查。",
+      "url": "https://ttcd.taitung.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜臺東縣政府社會處",
+          "url": "https://ttcd.taitung.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://ttcd.taitung.gov.tw/",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-penghu-social-affairs",
+      "name": "澎湖縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "penghu"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "澎湖縣社會處官方入口，可查婦女福利及相關業務。",
+      "url": "https://www.penghu.gov.tw/Society/index.jsp",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜澎湖縣政府社會處",
+          "url": "https://www.penghu.gov.tw/Society/index.jsp"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.penghu.gov.tw/Society/index.jsp",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-kinmen-social-affairs",
+      "name": "金門縣政府社會處",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "kinmen"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "金門縣政府社會處福利主題頁，含婦女及家庭支持等業務。",
+      "url": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36",
+      "phones": [],
+      "sources": [
+        {
+          "title": "主管機關入口｜金門縣政府社會處",
+          "url": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36",
+        "evidence": "AI 原始官方頁或官方頁索引初查；直連可用性依 23 筆一致性查核表",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-chiayi-city-welfare-directory",
+      "name": "嘉義市政府—社福救助與社會處入口",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "chiayi-city"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "嘉義市政府官方網站，可從便民服務查詢社福救助與相關福利資訊；本連結並非社會處獨立網站首頁。",
+      "url": "https://www.chiayi.gov.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "市府官方福利查詢入口｜嘉義市政府—社福救助與社會處入口",
+          "url": "https://www.chiayi.gov.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.chiayi.gov.tw/",
+        "evidence": "官方替代導覽，非專屬局處網站",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-kaohsiung-welfare-directory",
+      "name": "高雄市政府—社會福利服務目錄",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "kaohsiung"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "高雄市政府社會福利服務目錄，包含婦女福利、托育及社會救助等主題；本連結並非社會局獨立網站首頁。",
+      "url": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A",
+      "phones": [],
+      "sources": [
+        {
+          "title": "市府官方福利查詢入口｜高雄市政府—社會福利服務目錄",
+          "url": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A",
+        "evidence": "官方替代導覽，非專屬局處網站",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-chiayi-county-service-center-roster",
+      "name": "衛福部—嘉義縣社會福利服務中心通訊錄",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "family-welfare"
+      ],
+      "regions": [
+        "chiayi-county"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "衛福部社會安全網公布的嘉義縣社會福利服務中心通訊錄，列有各中心名稱、轄區及聯絡資訊；詳細服務及最新時段請向中心確認。",
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html",
+      "phones": [],
+      "sources": [
+        {
+          "title": "在地社福中心官方名錄｜衛福部—嘉義縣社會福利服務中心通訊錄",
+          "url": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html",
+        "evidence": "中央衛福部 2026-06-13 更新的地方中心名錄，不是地方主管機關首頁",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-chiayi-city-service-center-roster",
+      "name": "衛福部—嘉義市社會福利服務中心通訊錄",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "family-welfare"
+      ],
+      "regions": [
+        "chiayi-city"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "衛福部社會安全網公布的嘉義市社會福利服務中心通訊錄，列有各中心名稱、轄區及聯絡資訊；詳細服務及最新時段請向中心確認。",
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48225-204.html",
+      "phones": [],
+      "sources": [
+        {
+          "title": "在地社福中心官方名錄｜衛福部—嘉義市社會福利服務中心通訊錄",
+          "url": "https://topics.mohw.gov.tw/SS/cp-4528-48225-204.html"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://topics.mohw.gov.tw/SS/cp-4528-48225-204.html",
+        "evidence": "中央衛福部 2026-06-13 更新的地方中心名錄，不是地方主管機關首頁",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "batch2-lienchiang-service-center-roster",
+      "name": "衛福部—連江縣社會福利服務中心通訊錄",
+      "categories": [
+        "city"
+      ],
+      "topics": [
+        "family-welfare"
+      ],
+      "regions": [
+        "lienchiang"
+      ],
+      "serviceTypes": [
+        "社會福利"
+      ],
+      "audience": "一般查詢社福資訊的民眾；實際服務資格依官方公告",
+      "summary": "衛福部社會安全網公布的連江縣社會福利服務中心通訊錄，列有各中心名稱、轄區及聯絡資訊；詳細服務及最新時段請向中心確認。",
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48205-204.html",
+      "phones": [],
+      "sources": [
+        {
+          "title": "在地社福中心官方名錄｜衛福部—連江縣社會福利服務中心通訊錄",
+          "url": "https://topics.mohw.gov.tw/SS/cp-4528-48205-204.html"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對",
+        "result": "候選來源一致性檢查完成；未獲本批發布核准",
+        "scope": "機關／名錄名稱、官方網址、縣市對應、入口用途及本站基本簡介",
+        "source": "https://topics.mohw.gov.tw/SS/cp-4528-48205-204.html",
+        "evidence": "中央衛福部 2026-06-13 更新的地方中心名錄，不是地方主管機關首頁",
+        "notConfirmed": "即時可用性、個別方案資格、中心營業時間、服務電話接聽、是否尚有名額、作者發布決定",
+        "level": "official-entry"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    }
+  ]
+}
