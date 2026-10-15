@@ -63,6 +63,25 @@ try{
   await page.goto(`${origin}${base}index.html`);
   await page.locator('.menu-toggle').click();
   check('WebKit 手機選單可打開',await page.locator('.menu-toggle').getAttribute('aria-expanded')==='true'&&await page.locator('#site-nav').evaluate(e=>e.classList.contains('is-open')));
+  await page.goto(`${origin}${base}index.html`);
+  await page.locator('#home-q').fill('育兒');
+  await page.waitForTimeout(170);
+  check('WebKit 首頁搜尋中收起六大主題',
+    await page.locator('.cats').isHidden() &&
+    await page.locator('.search-clear').isVisible());
+  await page.locator('.search-clear').click();
+  check('WebKit 手機明確清除鍵立即恢復六大分類',
+    await page.locator('#home-q').inputValue() === '' &&
+    await page.locator('.cats').isVisible() &&
+    await page.locator('.quick-section').isVisible());
+  await page.locator('#home-q').fill('托育');
+  await page.waitForTimeout(170);
+  await page.locator('#home-q').evaluate(el => {
+    el.value = '';
+    el.dispatchEvent(new Event('search', { bubbles: true }));
+  });
+  check('WebKit 模擬 Safari 原生 search 清空事件仍恢復分類',
+    await page.locator('.cats').isVisible());
   await page.goto(`${origin}${base}search.html`);
   await page.locator('[data-search-input]').first().fill('警政署');
   await page.locator('[data-search-form]').first().evaluate(e=>e.requestSubmit());
