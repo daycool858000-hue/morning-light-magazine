@@ -625,6 +625,25 @@ function dirHead(d, tip = '', extra = '') {
 }
 
 // ---------- 讀利專欄｜THE CONSIDERED PAGE（文章、常見需求、各主題閱讀方向） ----------
+// QA 閱讀前排：跨六大生活面向安排實用導讀，避免全部依同一天的更新日期排序。
+// 僅改讀利的文章展示次序，不動分類、原稿、搜尋、向光索引或正式核准資料。
+const READLI_PRIORITY = [
+  'batch6-welfare-overview',
+  'batch5-harassment-three-laws',
+  'batch5-preventive-health-screening',
+  'batch4-labor-insurance-pension',
+  'batch4-savings-emergency-fund',
+  'batch2-03',
+  'batch5-phone-emergency-sos',
+  'batch3-learn-free',
+];
+const readliPriority = new Map(READLI_PRIORITY.map((slug, i) => [slug, i]));
+const readliArticles = IS_QA ? [...articles].sort((a, b) =>
+  (readliPriority.get(a.slug) ?? Infinity) - (readliPriority.get(b.slug) ?? Infinity)
+) : articles;
+if (IS_QA && READLI_PRIORITY.some((slug) => !articles.some((a) => a.slug === slug))) {
+  throw new Error('讀利優先文章有不存在的 slug');
+}
 {
   const d = dirFor('quiet-power');
   const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
@@ -634,7 +653,7 @@ ${dirHead(d, IS_QA ? QA_DIRECTORY_COPY['quiet-power'].tip : '依照自己的需�
 ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   <div class="wrap">
     ${sectionHead('Reading', 'articles-title', '導讀文章')}
-    <div class="story-grid">${articles.map((a) => articleCard(a, '')).join('\n')}</div>
+    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '')).join('\n')}</div>
   </div>
 </section>` : ''}
 <section class="section needs" aria-labelledby="needs-title">
@@ -872,7 +891,8 @@ ${qaBatch6.length ? `<section class="section benefits-intro" aria-labelledby="be
     </div>
   </div>
 </section>
-${topicsSection(c)}`;
+${topicsSection(c)}
+${IS_QA ? articlesSection(articles.filter((a) => a.category === 'city' && !qaBatch6.some((x) => x.slug === a.slug))) : ''}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'city', body, scripts: ['assets/js/city.js'], bodyClass: 'cat-city' }) });
 }
 
