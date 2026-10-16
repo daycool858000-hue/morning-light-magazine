@@ -1,3 +1,4 @@
+# 2026-10-16｜目錄頁首文案（讀利、向光）＋向光索引兩欄展開不重排，站主授權後依 CI 38848752697（707a000）更新未核准QA版。
 # 2026-10-16｜Issue #6：向光八索引＋讀利「從你想了解的事開始 ↓」，站主授權後依 CI 38841104030 更新已同意公開的未核准QA版。
 # 2026-10-16｜Issue #3：城市與福利六篇福利導讀與城市頁「先了解有哪些福利」區塊，CI 38834893490 通過後更新已同意公開的未核准QA版。
 # 2026-10-16｜英文輔助（QA-only）＋兩項文章來源勘誤，依成功 CI 38814863350 更新已同意公開的 QA；絕不更動 main 或核准資料。
@@ -79,6 +80,10 @@ jobs:
           grep -q 'id="toward-women-center"' dist-qa/toward-light.html
           grep -q 'href="articles/batch6-women-center-services.html"' dist-qa/toward-light.html
           ! grep -q 'class="county-areas"' dist-qa/toward-light.html
+          test "$(grep -o 'class="toward-toggle"' dist-qa/toward-light.html | wc -l)" -eq 8
+          grep -q '整理生活中值得了解的知識、制度與公共資源' dist-qa/quiet-power.html
+          grep -q '循著興趣探索不同主題' dist-qa/toward-light.html
+          ! grep -q '在地資源索引' dist-qa/toward-light.html
           test "$(ls dist-qa/articles/*.html | wc -l)" -eq 36
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
