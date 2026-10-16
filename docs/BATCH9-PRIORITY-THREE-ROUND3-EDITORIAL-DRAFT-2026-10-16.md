@@ -118,6 +118,3 @@
 - [教育部家庭教育資源網｜家庭教育範圍與各縣市中心](https://familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072)
 - [新北市家庭教育網｜親職教育影音與公開資源](https://ntpc.familyedu.moe.gov.tw/mainList.aspx?pid=3149&uid=3149)
 
----
-
-**內部提醒：** 此處三篇屬第三輪候選稿；不因 AI 完成編輯或查核而視為站主批准。正文字數與寫作內容應由站主本人決定是否採用；未採用者可保留研究，不須增加站內文章數。
