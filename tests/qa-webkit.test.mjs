@@ -62,6 +62,22 @@ try {
     );
     check(`WebKit ${width}px 讀利：23 篇為精簡單欄清單，標題可觸控、沒有大型圖片`,
       compact.length === 23 && compact.every(c => c.h >= 75 && c.h < 240 && c.linkH >= 44 && c.cardW < width && c.media !== 'block'), JSON.stringify(compact.slice(0, 3)));
+    await page.goto(`${origin}${base}learning.html`);
+    const learningState = await page.evaluate(() => {
+      const list = [...document.querySelectorAll('#events-title + .notice-list .notice, [data-act-list] > .notice')];
+      const title = document.getElementById('art-title')?.getBoundingClientRect().top ?? -1;
+      const upcoming = document.getElementById('events-title')?.getBoundingClientRect().top ?? -1;
+      return {
+        activities: list.length,
+        sources: list.filter(e => e.querySelector('.notice-link[href^="https://"]')).length,
+        firstArticleBeforeActivities: title >= 0 && upcoming > title,
+        noHorizontalScroll: document.documentElement.scrollWidth <= innerWidth,
+      };
+    });
+    check(`WebKit ${width}px 學習與活動：先看到八篇閱讀文章，再顯示六筆真實活動及官方來源`,
+      learningState.activities === 6 && learningState.sources === 6 &&
+      learningState.firstArticleBeforeActivities && learningState.noHorizontalScroll,
+      JSON.stringify(learningState));
     check(`WebKit ${width}px 首頁、活動頁、讀利、向光、城市福利與含表格文章無水平溢位，無 JS 錯誤`, overflow.length === 0 && errors.length === 0, [...overflow, ...errors].join('；'));
     await ctx.close();
   }
