@@ -48,7 +48,12 @@
 - 已有內容不用重寫、不要增第七生活主題、不要修改讀利／向光已驗收的版面。優先考慮城市與福利、職涯與創業等原主題和搜尋可發現性。
 - Chromium／WebKit、320／375／390px、無水平溢位、搜尋與兩目錄回歸檢查，QA-only 不外洩 production。完成一階段回報並等待驗收，不自行部署。
 
-來源：`docs/NEW-IMMIGRANT-MULTILINGUAL-RESOURCE-AUDIT-AND-ENGLISH-EXPANSION-2026-10-16.md`。
+來源（以第二輪**官方一手來源實查、語言狀態與法律生效提醒**為最新）：
+
+- `docs/NEW-IMMIGRANT-ROUND2-OFFICIAL-PRIMARY-SOURCES-AND-LANGUAGE-STATUS-2026-10-16.md`
+- `docs/NEW-IMMIGRANT-MULTILINGUAL-RESOURCE-AUDIT-AND-ENGLISH-EXPANSION-2026-10-16.md`（第一輪概況）
+
+**特別注意：** 國健署英文、越、印尼、泰、柬文的 2025 年版孕媽咪手冊現已核對官方原頁，可作健康／親職多語來源，與 2026 年中文版不可推定版本同步。《新住民基本法》於查核日法規資料庫仍註明部分或全部條文尚未生效，**不可寫成已全面施行**。新住民總覽與單一市府服務站要區分全國／地方適用範圍。
 
 ## 第三階段（後續；不與前兩階段同時啟動）：每月連結檢查
 
