@@ -186,6 +186,19 @@
           "https://www.sw.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=202efb1cf9659f1122fae42302892988&id=4ee902eba1348b6f"
         ],
         "still": "外語選單每個子頁內容及各中心實際接待時段未逐項驗"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "new-taipei"
+        ],
+        "serviceTypes": [
+          "婦女福利",
+          "社會福利"
+        ],
+        "entryType": "新北市政府委辦的新住民家庭暨婦女服務中心入口",
+        "reason": "政府社會局與中心專站可相互核對；區別於社會局一般總頁",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
       }
     },
     {
@@ -210,6 +223,19 @@
           "https://nit.taipei/Default.aspx"
         ],
         "still": "各外語版本翻譯完備程度及單項活動報名資格未逐頁驗"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "taipei"
+        ],
+        "serviceTypes": [
+          "綜合政府服務",
+          "社會福利"
+        ],
+        "entryType": "臺北市新住民跨主題官方資訊專區",
+        "reason": "市府全領域總覽，不是單一據點",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
       }
     },
     {
@@ -234,6 +260,19 @@
           "https://dowcd.tycg.gov.tw/cl.aspx?n=16359"
         ],
         "still": "子服務個別目前辦理時段及外語內容完整性未逐頁確認"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "taoyuan"
+        ],
+        "serviceTypes": [
+          "婦女福利",
+          "社會福利"
+        ],
+        "entryType": "桃園市政府婦幼發展局新住民專門服務索引",
+        "reason": "跨中心、通譯、培力及支持服務",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
       }
     },
     {
@@ -260,6 +299,19 @@
           "https://www.taichung.gov.tw/1961693/1966308/1966510/2315315/post"
         ],
         "still": "主站 Safari 真正開啟、各語種子頁是否齊全及過期活動清理仍待"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "taichung"
+        ],
+        "serviceTypes": [
+          "綜合政府服務",
+          "教育與學習"
+        ],
+        "entryType": "臺中市政府新住民綜合資訊網站",
+        "reason": "資訊分類含教育與學習，主頁 Safari 尚待驗",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
       }
     },
     {
@@ -284,6 +336,19 @@
           "https://sab.tainan.gov.tw/News_Content.aspx?n=21363&s=4378270"
         ],
         "still": "中心今日聯絡資訊、開放時段、個別課程與名額尚待新公告確認"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "tainan"
+        ],
+        "serviceTypes": [
+          "社會福利",
+          "育兒與家庭"
+        ],
+        "entryType": "臺南市政府社會局新住民家庭服務中心介紹",
+        "reason": "地方家庭中心正式介紹，不宣稱目前招生",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
       }
     },
     {
@@ -308,6 +373,19 @@
           "https://new-inhabitants.miaoli.gov.tw/"
         ],
         "still": "英／越／印各子頁完整翻譯與個別活動是否仍可參與尚未逐一查核"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "miaoli"
+        ],
+        "serviceTypes": [
+          "綜合政府服務",
+          "社會福利"
+        ],
+        "entryType": "苗栗縣新住民照顧輔導官方資訊專區",
+        "reason": "跨生活適應、福利、就業與教育之正式索引",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
       }
     }
   ],
@@ -315,6 +393,7 @@
     "asOf": "2026-10-17",
     "initialOfficialPageChecks": 13,
     "remainingCandidatesWithoutInitialSourceCheck": 0,
-    "scope": "13/13 皆有初輪官方來源證據；NI-11 主頁僅由官方搜尋索引及民政局官網交叉佐證；PDF 逐份下載、各外語頁與手機 Safari 未完整驗收，全部仍未獲發佈核准。"
+    "scope": "13/13 皆有初輪官方來源證據；NI-11 主頁僅由官方搜尋索引及民政局官網交叉佐證；PDF 逐份下載、各外語頁與手機 Safari 未完整驗收，全部仍未獲發佈核准。",
+    "qaMappingNote": "NI-08~13 的 entryType 及 serviceTypes 現有具體編輯初步建議；Claude 需比對現有正式 serviceTypes，不能用一律『綜合政府服務（層級待查核）』的佇列暫存值直接公開。NI-11 網站原頁仍待瀏覽器開啟；所有候選維持關閉。"
   }
 }
