@@ -13,6 +13,7 @@ import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs'
 import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.mjs';
 import { loadQaEnglishResources } from '../scripts/lib/qa-english.mjs';
 import { loadBatch6Articles, BATCH6_SOURCES } from '../scripts/lib/qa-batch6.mjs';
+import { resolveTowardEditorial } from '../scripts/lib/toward-light-editorial.mjs';
 
 const require = createRequire(import.meta.url);
 function loadPlaywright() {
@@ -37,6 +38,7 @@ const fourth = await loadBatch45Articles(ROOT, categories); // Issue #2：第四
 const sixth = await loadBatch6Articles(ROOT, categories); // Issue #3：第六批城市與福利 6 篇
 const englishResources = await loadQaEnglishResources(ROOT, [...national, ...cand, ...third.resources]);
 const newEnglishResources = englishResources.filter(r => r.id.startsWith('qa-en-'));
+const towardIndex = resolveTowardEditorial([...arts, ...third.articles, ...fourth, ...sixth], englishResources);
 const BASE = site.basePath;
 const PORT = 4331;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
@@ -59,7 +61,7 @@ async function listFiles(dir, prefix = '') {
 const read = (dir, f) => readFile(path.join(dir, f), 'utf8');
 
 // ---------- 一、發布隔離：候選內容只在 dist-qa ----------
-const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', '未核准測試內容'];
+const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', 'class="dir-jump"', 'toward-topic', '未核准測試內容'];
 for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-production', 'dist-production']]) {
   const leaks = [];
   for (const f of await listFiles(path.join(ROOT, dir))) {
@@ -135,6 +137,27 @@ check('每張地方候選卡片都有「未核准測試內容」標籤', allQaBa
 // 文章
 const qp = await read(QA, 'quiet-power.html');
 const idx = await read(QA, 'assets/data/search-index.js');
+const towardHtml = await read(QA, 'toward-light.html');
+const topicProblems = [];
+if (towardIndex.topics.length !== 8) topicProblems.push('未保留原有八項索引');
+for (const topic of towardIndex.topics) {
+  if (!towardHtml.includes(`id="toward-${topic.id}"`)) topicProblems.push('缺索引 ' + topic.id);
+  for (const a of topic.stories) if (!towardHtml.includes(`href="articles/${a.slug}.html"`)) topicProblems.push('缺文章 ' + a.slug);
+}
+for (const a of towardIndex.featured) if (!towardHtml.includes(`href="articles/${a.slug}.html"`)) topicProblems.push('缺精選 ' + a.slug);
+for (const r of towardIndex.official) if (!towardHtml.includes(r.name)) topicProblems.push('缺延伸官方入口 ' + r.name);
+if (towardHtml.includes('class="county-areas"') || towardHtml.includes('開啟城市資源索引') || towardHtml.includes('class="res-grid"')) topicProblems.push('向光仍重複完整縣市索引或大型官方卡');
+if (!towardHtml.includes('href="city.html"')) topicProblems.push('缺簡短城市入口');
+for (const topic of towardIndex.topics) for (const a of topic.stories) if (!existsSync(path.join(QA, `articles/${a.slug}.html`))) topicProblems.push('索引文章頁不存在 ' + a.slug);
+if (towardIndex.topics[0].stories[0]?.slug !== 'batch6-women-center-services') topicProblems.push('婦女中心課程索引未優先列出 batch6-women-center-services');
+if (towardHtml.includes('class="dir-jump"')) topicProblems.push('向光不應出現讀利專用的跳轉連結');
+check('向光 QA：原八個索引各有實質文章（婦女中心課程優先列出城市福利第 06 篇）、四篇精選、三筆精簡官方入口；沒有重複 22 縣市索引與大型資源卡', topicProblems.length === 0, topicProblems.slice(0, 5).join('；'));
+
+// 讀利專欄：💪 支援資源正下方的文字跳轉，連到既有「從你想了解的事開始」
+const qpHead = (/<section class="page-head dir-head"[\s\S]*?<\/section>/.exec(qp) || [''])[0];
+const jumpOk = /<a class="support-entry"[\s\S]*?<\/a>\s*<p class="dir-jump"><a href="#needs-title">從你想了解的事開始/.test(qpHead) && (qp.match(/class="dir-jump"/g) || []).length === 1 && qp.includes('<h2 id="needs-title">從你想了解的事開始</h2>') && !/<script[^>]*>[^<]*needs-title/.test(qp);
+check('讀利專欄 QA：支援資源入口正下方有「從你想了解的事開始 ↓」原生錨點（連到既有 #needs-title，無額外 JavaScript），只出現一次', jumpOk);
+
 const artProblems = [];
 for (const a of arts) {
   const f = `articles/${a.slug}.html`;
@@ -273,6 +296,39 @@ try {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
 
+  // 向光：手機點開索引直接取得已有文章，不經另一層空白分類頁。
+  await page.goto(`${ORIGIN}${BASE}toward-light.html`);
+  const beforeExpand = await page.locator('#toward-women-center').evaluate(el => el.open);
+  await page.locator('#toward-women-center summary').click();
+  const afterExpand = await page.locator('#toward-women-center').evaluate(el => el.open);
+  const firstArticleUrl = await page.locator('#toward-women-center .toward-story-links a').first().getAttribute('href');
+  check('向光手機：索引可用原生 details 展開，顯示可點的文章而非只到外部資源', !beforeExpand && afterExpand && firstArticleUrl?.startsWith('articles/batch'));
+  const allTopics = [];
+  for (const topic of towardIndex.topics) {
+    const sel = `#toward-${topic.id}`;
+    if (!(await page.locator(sel).evaluate((el) => el.open))) await page.locator(`${sel} summary`).click();
+    const links = await page.$$eval(`${sel} .toward-story-links a`, (as) => as.map((a) => ({ href: a.getAttribute('href'), h: Math.round(a.getBoundingClientRect().height), visible: a.offsetParent !== null })));
+    allTopics.push({ id: topic.id, open: await page.locator(sel).evaluate((el) => el.open), links });
+  }
+  const topicBad = allTopics.filter((t) => !t.open || t.links.length !== towardIndex.topics.find((x) => x.id === t.id).stories.length || t.links.some((l) => !l.visible || l.h < 44 || !/^articles\/batch\d-[a-z0-9-]+\.html$/.test(l.href)));
+  await page.click(`#toward-women-center .toward-story-links a[href="articles/batch6-women-center-services.html"]`);
+  await page.waitForURL('**/articles/batch6-women-center-services.html');
+  check('向光手機：八個索引全部可展開，每篇文章連結可見、點擊高度 ≥ 44px、連到站內文章頁；點婦女中心課程第一篇可開啟', topicBad.length === 0, topicBad.map((t) => t.id).join('、'));
+
+  // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
+  const jumpProblems = [];
+  for (const w of [320, 375, 390]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 760 }, isMobile: true, hasTouch: true });
+    const p = await ctx.newPage();
+    await p.goto(`${ORIGIN}${BASE}quiet-power.html`);
+    const link = await p.$eval('.dir-jump a', (a) => ({ h: Math.round(a.getBoundingClientRect().height), below: a.getBoundingClientRect().top >= document.querySelector('.dir-head .support-entry').getBoundingClientRect().bottom }));
+    await p.click('.dir-jump a');
+    await p.waitForTimeout(500);
+    const r = await p.evaluate(() => ({ hash: location.hash, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().bottom), kicker: Math.round(document.querySelector('.needs-intro .kicker').getBoundingClientRect().top), title: Math.round(document.getElementById('needs-title').getBoundingClientRect().top), scrolled: Math.round(scrollY), overflow: document.documentElement.scrollWidth - innerWidth }));
+    if (link.h < 44 || !link.below || r.hash !== '#needs-title' || r.kicker < r.header || r.title > 760 || r.scrolled < 200 || r.overflow > 0) jumpProblems.push(`${w}px ${JSON.stringify({ ...link, ...r })}`);
+    await ctx.close();
+  }
+  check('讀利專欄手機 320／375／390px：「從你想了解的事開始 ↓」在支援資源下方、高度 ≥ 44px；點擊後跳到 START HERE，Start Here 小標與標題都在固定頁首下方可見', jumpProblems.length === 0, jumpProblems.join('；'));
   // iPhone 實機回報：搜尋時不能讓六大主題與搜尋結果同時顯示。
   await page.goto(`${ORIGIN}${BASE}index.html`);
   await page.fill('#home-q', '托育');

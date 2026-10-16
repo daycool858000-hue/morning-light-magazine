@@ -756,6 +756,10 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .support-entry-text small { font-size: 0.8rem; color: var(--muted); }
 .support-entry-arrow { color: var(--sage); font-size: 0.9rem; flex: none; }
 .dir-tip { margin: 10px 0 0; font-size: 0.9rem; color: var(--muted); max-width: 40em; }
+/* 讀利專欄：支援資源下方的文字跳轉，點擊後到「從你想了解的事開始」；目標上方多留空間，讓 Start Here 小標不被固定頁首遮住 */
+.dir-jump { margin: 6px 0 0; }
+.dir-jump a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.92rem; font-weight: 600; }
+#needs-title { scroll-margin-top: 48px; }
 .about-hub { margin-top: 4px; }
 
 /* 320–359px：再收緊頁首間距，讓品牌文字與選單、切換畫面之間保留足夠空間（不同字型寬度也不重疊） */
@@ -766,3 +770,42 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
   .header-actions { gap: 2px; }
   .hdr-btn { padding: 0 7px; gap: 4px; }
 }
+
+
+/* 《向光》QA 編輯式閱讀入口：既有八個索引直達文章；手機優先、無新增 JS。 */
+.toward-reading .toward-featured { padding-top: 32px; }
+.toward-reading .toward-featured-grid { margin-top: 18px; }
+.toward-reading .toward-index { background: var(--sand); }
+.toward-index-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
+.toward-topic { min-width: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); overflow: clip; }
+.toward-topic summary { display: flex; align-items: center; gap: 12px; padding: 20px 18px; min-height: 76px; cursor: pointer; list-style: none; }
+.toward-topic summary::-webkit-details-marker { display: none; }
+.toward-topic summary:focus-visible, .toward-story-links a:focus-visible, .toward-official-links a:focus-visible, .toward-compact-link:focus-visible { outline: 3px solid var(--focus); outline-offset: -4px; }
+.toward-topic-count { font-size: 0.84rem; color: var(--amber); font-weight: 700; align-self: flex-start; margin-top: 3px; }
+.toward-topic-heading { display: grid; gap: 5px; flex: 1; min-width: 0; }
+.toward-topic-heading strong { color: var(--ink); font-size: 1.08rem; line-height: 1.4; }
+.toward-topic-heading small { color: var(--muted); font-size: 0.89rem; line-height: 1.5; overflow-wrap: anywhere; }
+.toward-topic-arrow { color: var(--terracotta-dark); font-size: 1.35rem; font-weight: 700; line-height: 1; }
+.toward-topic[open] .toward-topic-arrow { transform: rotate(45deg); }
+.toward-story-links { list-style: none; padding: 0 18px 12px 46px; margin: 0; }
+.toward-story-links li { border-top: 1px solid var(--line); }
+.toward-story-links a { display: block; color: var(--ink); font-size: 0.99rem; font-weight: 600; line-height: 1.55; padding: 15px 4px 15px 0; text-decoration: none; overflow-wrap: anywhere; }
+.toward-story-links a:hover { color: var(--terracotta-dark); }
+.toward-more-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.toward-compact-link { display: grid; gap: 6px; border: 1px solid var(--line); border-radius: 16px; padding: 20px; text-decoration: none; background: var(--paper); color: var(--ink); }
+.toward-compact-link strong { font-size: 1.04rem; }
+.toward-compact-link span { color: var(--muted); font-size: 0.93rem; line-height: 1.55; }
+.toward-official { background: var(--sand); }
+.toward-official-links { display: grid; grid-template-columns: minmax(0, 1fr); list-style: none; padding: 0; margin: 0; gap: 0 24px; }
+.toward-official-links li { border-bottom: 1px solid var(--stone); min-width: 0; }
+.toward-official-links a { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 56px; padding: 12px 4px; text-decoration: none; color: var(--ink); line-height: 1.5; font-weight: 600; overflow-wrap: anywhere; }
+.toward-official-links a:hover { color: var(--terracotta-dark); }
+.toward-official-links a span:last-child { color: var(--terracotta-dark); flex: 0 0 auto; }
+@media (min-width: 720px) {
+  .toward-index-grid, .toward-more-grid, .toward-official-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 359px) {
+  .toward-topic summary { padding: 16px 12px; gap: 9px; }
+  .toward-story-links { padding-left: 32px; padding-right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .toward-topic-arrow { transition: none; } }
