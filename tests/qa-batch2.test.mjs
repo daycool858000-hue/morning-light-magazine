@@ -349,7 +349,7 @@ for (const c of categories) {
   const html = await read(QA, c.slug);
   const reading = qaArticleByCategory.filter(a => a.category === c.id);
   if (reading.length !== expectedTopicCounts[c.id]) topicReadingProblems.push(`${c.title} 分類原稿數量不符：${reading.length}`);
-  const hrefs = [...html.matchAll(/<h3><a href="articles\\/([^"]+)\\.html">/g)].map(m => m[1]);
+  const hrefs = [...html.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map(m => m[1]);
   if (hrefs.length !== expectedTopicCounts[c.id] || new Set(hrefs).size !== hrefs.length ||
       !reading.every(a => hrefs.includes(a.slug))) topicReadingProblems.push(`${c.title} 文章入口不完整或重複：${hrefs.length}`);
   if (c.id !== 'city') {
