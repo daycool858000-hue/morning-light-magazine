@@ -279,7 +279,7 @@ for (const it of acts.items) {
 }
 for (const category of ['life-family', 'career', 'health', 'law', 'learning']) {
   const html = await read(QA, category + '.html');
-  const slugs = [...html.matchAll(/<li id="portal-(act-\\d+)">/g)].map(m => m[1]);
+  const slugs = [...html.matchAll(/<li id="portal-(act-\d+)">/g)].map(m => m[1]);
   const expected = acts.items.filter(it => it.id !== 'act-09' && portalCategory[it.id] === category).map(it => it.id);
   if (JSON.stringify(slugs) !== JSON.stringify(expected)) actProblems.push(category + ' 入口未全部顯示或順序錯誤');
 }
