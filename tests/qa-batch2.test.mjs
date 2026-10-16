@@ -13,6 +13,7 @@ import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs'
 import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.mjs';
 import { loadQaEnglishResources } from '../scripts/lib/qa-english.mjs';
 import { loadBatch6Articles, BATCH6_SOURCES } from '../scripts/lib/qa-batch6.mjs';
+import { loadQaActivities, ACTIVITY_TYPES } from '../scripts/lib/qa-activities.mjs';
 import { resolveTowardEditorial } from '../scripts/lib/toward-light-editorial.mjs';
 
 const require = createRequire(import.meta.url);
@@ -36,6 +37,7 @@ const arts = await loadBatch2Articles(ROOT, categories);
 const third = await loadBatch3OpenAccess(ROOT);
 const fourth = await loadBatch45Articles(ROOT, categories); // Issue #2：第四批 9 篇＋第五批 4 篇
 const sixth = await loadBatch6Articles(ROOT, categories); // Issue #3：第六批城市與福利 6 篇
+const acts = await loadQaActivities(ROOT); // 首頁「活動與講座」官方入口頁
 const englishResources = await loadQaEnglishResources(ROOT, [...national, ...cand, ...third.resources]);
 const newEnglishResources = englishResources.filter(r => r.id.startsWith('qa-en-'));
 const towardIndex = resolveTowardEditorial([...arts, ...third.articles, ...fourth, ...sixth], englishResources);
@@ -61,7 +63,7 @@ async function listFiles(dir, prefix = '') {
 const read = (dir, f) => readFile(path.join(dir, f), 'utf8');
 
 // ---------- 一、發布隔離：候選內容只在 dist-qa ----------
-const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', 'class="dir-jump"', 'toward-topic', 'toward-toggle', '整理生活中值得了解的知識、制度與公共資源', '循著興趣探索不同主題', '需要申辦或使用服務時，再前往正式來源確認', '未核准測試內容'];
+const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', 'class="dir-jump"', 'toward-topic', 'toward-toggle', 'act-entry', 'activities.html', '活動與講座', '整理生活中值得了解的知識、制度與公共資源', '循著興趣探索不同主題', '需要申辦或使用服務時，再前往正式來源確認', '未核准測試內容'];
 for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-production', 'dist-production']]) {
   const leaks = [];
   for (const f of await listFiles(path.join(ROOT, dir))) {
@@ -168,6 +170,35 @@ check('向光 QA：八索引在精選之前、沿用兩欄文字樣式（→、�
 const qpHead = (/<section class="page-head dir-head"[\s\S]*?<\/section>/.exec(qp) || [''])[0];
 const jumpOk = /<a class="support-entry"[\s\S]*?<\/a>\s*<p class="dir-jump"><a href="#needs-title">從你想了解的事開始/.test(qpHead) && (qp.match(/class="dir-jump"/g) || []).length === 1 && qp.includes('<h2 id="needs-title">從你想了解的事開始</h2>') && !/<script[^>]*>[^<]*needs-title/.test(qp);
 check('讀利專欄 QA：支援資源入口正下方有「從你想了解的事開始 ↓」原生錨點（連到既有 #needs-title，無額外 JavaScript），只出現一次', jumpOk);
+
+// 首頁「活動與講座」入口與官方公告／查詢入口頁（QA 限定）
+const actProblems = [];
+const homeQa = await read(QA, 'index.html');
+const actHtml = existsSync(path.join(QA, 'activities.html')) ? await read(QA, 'activities.html') : '';
+if ((homeQa.match(/class="act-entry" href="activities.html"/g) || []).length !== 1) actProblems.push('首頁應恰有一個活動與講座入口');
+if (!homeQa.includes('探索理財、職涯、健康、藝文與各種生活學習活動。')) actProblems.push('首頁入口缺說明文字');
+const quickSec = (/<section class="section quick-section"[\s\S]*?<\/section>/.exec(homeQa) || [''])[0];
+if (!quickSec.includes('act-entry') || (quickSec.match(/class="quick[ "]/g) || []).length !== 4) actProblems.push('入口應在四個快捷入口下方，且快捷入口仍為 4 個');
+if (!actHtml) actProblems.push('缺少 activities.html');
+if (!/<meta name="robots" content="noindex/.test(actHtml) || !actHtml.includes('qa-bar')) actProblems.push('活動頁缺 noindex 或 QA 提示');
+const actItems = [...actHtml.matchAll(/<li class="act-item" id="([^"]+)">\s*<a class="act-name" href="([^"]+)" target="_blank" rel="noopener noreferrer">/g)];
+if (actItems.length !== acts.items.length || acts.items.length < 10) actProblems.push(`活動頁項目數 ${actItems.length}／資料 ${acts.items.length}`);
+for (const it of acts.items) {
+  if (!actItems.some((m) => m[1] === it.id && m[2] === it.url.replace(/&/g, '&amp;'))) actProblems.push(`${it.id} 缺少或連結錯誤（需 https、另開新分頁、noopener noreferrer）`);
+  if (!idx.includes(`activities.html#${it.id}`)) actProblems.push(`${it.id} 不在搜尋索引`);
+}
+if ((actHtml.match(/<h2 id="act-group-\d">/g) || []).length !== acts.groups.length) actProblems.push('頁內主題標籤數不符');
+if (/報名中|尚有名額|即將截止|額滿/.test(actHtml.replace(/<dl class="act-legend">[\s\S]*?<\/dl>/, ''))) actProblems.push('活動頁含需每日更新的報名狀態文字');
+for (const label of Object.values(ACTIVITY_TYPES)) if (!actHtml.includes(label)) actProblems.push(`缺少狀態說明「${label}」`);
+if (!actHtml.includes('href="index.html">← 回到首頁')) actProblems.push('缺回到首頁連結');
+if (/<form|<input|<iframe/.test(actHtml)) actProblems.push('活動頁不應有表單或嵌入外站');
+if (!/"url":"activities.html"[^}]*activities events lectures/.test(idx)) actProblems.push('搜尋索引缺活動頁或英文主題字');
+// 結束日已過的具體場次不顯示（以 2027-01-17 模擬）
+const later = await loadQaActivities(ROOT, { today: '2027-01-17' });
+if (later.items.some((it) => it.type === 'event' && it.endDate < '2027-01-17') || later.hidden < 1) actProblems.push('已結束場次未自動隱藏');
+// 正式版與一般預覽不應有這個頁面
+for (const dir of ['dist', 'dist-production']) if (existsSync(path.join(ROOT, dir, 'activities.html'))) actProblems.push(`${dir} 出現 activities.html`);
+check('活動與講座（QA）：首頁四個快捷入口下方恰有一個入口；活動頁列出全部官方入口（https、另開新分頁、noopener）、五個頁內主題、四種狀態說明、回首頁連結，無報名狀態文字與表單；已結束場次自動隱藏；搜尋可用中英文找到；正式版無此頁', actProblems.length === 0, actProblems.slice(0, 5).join('；'));
 // 2026-10-16 目錄頁首文案（QA 限定）：讀利主說明＋補充說明、向光主說明；舊說明不再出現，向光不加回第二段
 const QA_COPY = {
   qpLead: '從家庭、職場、身心健康到法律與權益，整理生活中值得了解的知識、制度與公共資源。',
@@ -358,6 +389,28 @@ try {
   }
   check('向光手機 320／375／390px：進入後第一個畫面就看到第一排索引，八個索引兩欄排列、點擊高度 ≥ 44px、無水平溢位', towardFirst.length === 0, towardFirst.join('；'));
 
+  // 首頁「活動與講座」入口：320／375／390px 可見、可點、不溢位；減少動態設定時不播放動畫；搜尋可用中英文找到
+  const actEntryProblems = [];
+  for (const w of [320, 375, 390]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: w === 320 ? 'reduce' : 'no-preference' });
+    const p = await ctx.newPage();
+    await p.goto(`${ORIGIN}${BASE}index.html`);
+    const r = await p.$eval('.act-entry', (e) => { const b = e.getBoundingClientRect(); const q = [...document.querySelectorAll('.quick')].map((x) => x.getBoundingClientRect().bottom); return { h: Math.round(b.height), belowQuick: b.top >= Math.max(...q) - 1, inside: b.left >= 0 && b.right <= innerWidth, anim: getComputedStyle(e.querySelector('.act-entry-arrow')).animationName, overflow: document.documentElement.scrollWidth - innerWidth }; });
+    if (r.h < 44 || !r.belowQuick || !r.inside || r.overflow > 0 || (w === 320 ? r.anim !== 'none' : r.anim !== 'act-nudge')) actEntryProblems.push(`${w}px ${JSON.stringify(r)}`);
+    await p.click('.act-entry');
+    await p.waitForURL('**/activities.html');
+    const a = await p.evaluate(() => ({ h1: document.querySelector('h1').textContent.trim(), overflow: document.documentElement.scrollWidth - innerWidth, small: [...document.querySelectorAll('.act-name, .act-groups a, .act-back a')].filter((x) => x.getBoundingClientRect().height < 44).length }));
+    if (a.h1 !== '活動與講座' || a.overflow > 0 || a.small > 0) actEntryProblems.push(`${w}px 活動頁 ${JSON.stringify(a)}`);
+    await ctx.close();
+  }
+  for (const kw of ['lecture', '職訓', '國家圖書館']) {
+    await page.goto(`${ORIGIN}${BASE}search.html`);
+    await page.fill('[data-search] input', kw);
+    await page.waitForTimeout(150);
+    if (!(await page.locator('[data-search] a[href*="activities.html"]').count())) actEntryProblems.push(`搜尋「${kw}」找不到活動頁項目`);
+  }
+  check('首頁活動與講座入口（320／375／390px）：在快捷入口下方、高度 ≥ 44px、無溢位，可點進活動頁（頁面連結高度 ≥ 44px）；減少動態設定時不播放動畫；搜尋 lecture／職訓／國家圖書館 可找到', actEntryProblems.length === 0, actEntryProblems.slice(0, 4).join('；'));
+
   // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
   const jumpProblems = [];
   for (const w of [320, 375, 390]) {
@@ -541,7 +594,7 @@ try {
   // 各寬度版面
   const overflow = [];
   const smallText = [];
-  const pagesToCheck = ['index.html', 'city.html', 'quiet-power.html', 'toward-light.html', 'search.html', ...arts.map((a) => `articles/${a.slug}.html`), ...third.articles.map((a) => `articles/${a.slug}.html`), ...fourth.map((a) => `articles/${a.slug}.html`), ...sixth.map((a) => `articles/${a.slug}.html`)];
+  const pagesToCheck = ['index.html', 'city.html', 'quiet-power.html', 'toward-light.html', 'search.html', 'activities.html', ...arts.map((a) => `articles/${a.slug}.html`), ...third.articles.map((a) => `articles/${a.slug}.html`), ...fourth.map((a) => `articles/${a.slug}.html`), ...sixth.map((a) => `articles/${a.slug}.html`)];
   for (const w of [320, 375, 390, 768, 1280]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, isMobile: w < 700, hasTouch: w < 700 });
     const p = await ctx.newPage();

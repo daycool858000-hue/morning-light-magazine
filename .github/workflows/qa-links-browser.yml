@@ -11,6 +11,8 @@ on:
       - docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md
       - scripts/lib/qa-batch45.mjs
       - scripts/lib/qa-batch6.mjs
+      - scripts/lib/qa-activities.mjs
+      - docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json
   workflow_dispatch:
 
 permissions:
@@ -37,3 +39,5 @@ jobs:
         run: node scripts/check-links-browser.mjs --set=batch45
       - name: 以 Chromium 開啟第六批城市與福利 6 篇文章的參考來源（Issue #3）
         run: node scripts/check-links-browser.mjs --set=batch6
+      - name: 以 Chromium 開啟首頁「活動與講座」的官方入口
+        run: node scripts/check-links-browser.mjs --set=activities

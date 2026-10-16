@@ -42,7 +42,7 @@ try {
     const r = await page.evaluate(() => ({ hash: location.hash, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().bottom), kicker: Math.round(document.querySelector('.needs-intro .kicker').getBoundingClientRect().top), title: Math.round(document.getElementById('needs-title').getBoundingClientRect().top) }));
     check(`WebKit ${width}px 讀利：點「從你想了解的事開始 ↓」跳到 START HERE，小標不被固定頁首遮住`, r.hash === '#needs-title' && r.kicker >= r.header && r.title < 760, JSON.stringify(r));
     const overflow = [];
-    for (const f of ['quiet-power.html', 'toward-light.html', 'city.html', 'articles/batch6-welfare-overview.html', 'articles/batch5-harassment-three-laws.html']) {
+    for (const f of ['index.html', 'activities.html', 'quiet-power.html', 'toward-light.html', 'city.html', 'articles/batch6-welfare-overview.html', 'articles/batch5-harassment-three-laws.html']) {
       await page.goto(`${origin}${base}${f}`);
       const o = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
       if (o > 0) overflow.push(`${f} ${o}px`);
@@ -50,7 +50,7 @@ try {
     await page.goto(`${origin}${base}toward-light.html`);
     const t = await page.evaluate(() => { const s = [...document.querySelectorAll('.toward-entry')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstBottom: Math.round(s[0].bottom), sameRow: Math.round(s[0].top) === Math.round(s[1].top) }; });
     check(`WebKit ${width}px 向光：第一個畫面就看到第一排索引，八個索引兩欄排列`, t.n === 8 && t.firstBottom <= 760 && t.sameRow, JSON.stringify(t));
-    check(`WebKit ${width}px 讀利、向光、城市福利與含表格文章無水平溢位，無 JS 錯誤`, overflow.length === 0 && errors.length === 0, [...overflow, ...errors].join('；'));
+    check(`WebKit ${width}px 首頁、活動頁、讀利、向光、城市福利與含表格文章無水平溢位，無 JS 錯誤`, overflow.length === 0 && errors.length === 0, [...overflow, ...errors].join('；'));
     await ctx.close();
   }
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
@@ -68,6 +68,12 @@ try {
   await page.tap('#toward-women-center a[href="articles/batch6-women-center-services.html"]');
   await page.waitForURL('**/articles/batch6-women-center-services.html');
   check('WebKit 390px 向光：八個索引都能點開（入口維持原欄位），文章連結齊全且高度 ≥ 44px；婦女中心課程第一篇可開啟', bad.length === 0, bad.join('；'));
+  await page.goto(`${origin}${base}index.html`);
+  const entry = await page.$eval('.act-entry', (e) => Math.round(e.getBoundingClientRect().height));
+  await page.tap('.act-entry');
+  await page.waitForURL('**/activities.html');
+  const actCount = await page.locator('.act-item a[target="_blank"][rel="noopener noreferrer"]').count();
+  check('WebKit 390px 首頁「活動與講座」入口可點進活動頁，官方入口連結另開新分頁並帶 noopener', entry >= 44 && actCount >= 10, `入口高度 ${entry}px；連結 ${actCount} 筆`);
   await page.goto(`${origin}${base}city.html`);
   const order = await page.evaluate(() => document.getElementById('benefits').getBoundingClientRect().top < document.getElementById('finder').getBoundingClientRect().top && document.querySelectorAll('#benefits .story').length === 6);
   check('WebKit 390px 城市與福利：「先了解有哪些福利」六篇在縣市選擇之前', order);
