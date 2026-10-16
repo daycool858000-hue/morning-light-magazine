@@ -47,6 +47,9 @@ try {
       const o = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
       if (o > 0) overflow.push(`${f} ${o}px`);
     }
+    await page.goto(`${origin}${base}toward-light.html`);
+    const t = await page.evaluate(() => { const s = [...document.querySelectorAll('.toward-topic summary')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstBottom: Math.round(s[0].bottom), sameRow: Math.round(s[0].top) === Math.round(s[1].top) }; });
+    check(`WebKit ${width}px 向光：第一個畫面就看到第一排索引，八個索引兩欄排列`, t.n === 8 && t.firstBottom <= 760 && t.sameRow, JSON.stringify(t));
     check(`WebKit ${width}px 讀利、向光、城市福利與含表格文章無水平溢位，無 JS 錯誤`, overflow.length === 0 && errors.length === 0, [...overflow, ...errors].join('；'));
     await ctx.close();
   }

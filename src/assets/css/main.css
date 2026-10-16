@@ -773,23 +773,25 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 
 
 /* 《向光》QA 編輯式閱讀入口：既有八個索引直達文章；手機優先、無新增 JS。 */
+/* 八索引沿用舊版 .link-list 的兩欄文字樣式（粗體標題、右側 →、底部細線），點開後該項改為整列，列出站內文章 */
+.toward-reading .dir-head { padding-block: 22px 18px; }
+.toward-reading .toward-index { padding-top: 24px; }
 .toward-reading .toward-featured { padding-top: 32px; }
 .toward-reading .toward-featured-grid { margin-top: 18px; }
-.toward-reading .toward-index { background: var(--sand); }
-.toward-index-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
-.toward-topic { min-width: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); overflow: clip; }
-.toward-topic summary { display: flex; align-items: center; gap: 12px; padding: 20px 18px; min-height: 76px; cursor: pointer; list-style: none; }
+.toward-index h2 { margin-top: 4px; }
+.toward-link-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.toward-link-list > li { min-width: 0; }
+.toward-link-list > li:has(> .toward-topic[open]) { grid-column: 1 / -1; }
+.toward-topic summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-weight: 600; cursor: pointer; list-style: none; }
 .toward-topic summary::-webkit-details-marker { display: none; }
+.toward-topic summary:hover { color: var(--terracotta-dark); }
 .toward-topic summary:focus-visible, .toward-story-links a:focus-visible, .toward-official-links a:focus-visible, .toward-compact-link:focus-visible { outline: 3px solid var(--focus); outline-offset: -4px; }
-.toward-topic-count { font-size: 0.84rem; color: var(--amber); font-weight: 700; align-self: flex-start; margin-top: 3px; }
-.toward-topic-heading { display: grid; gap: 5px; flex: 1; min-width: 0; }
-.toward-topic-heading strong { color: var(--ink); font-size: 1.08rem; line-height: 1.4; }
-.toward-topic-heading small { color: var(--muted); font-size: 0.89rem; line-height: 1.5; overflow-wrap: anywhere; }
-.toward-topic-arrow { color: var(--terracotta-dark); font-size: 1.35rem; font-weight: 700; line-height: 1; }
-.toward-topic[open] .toward-topic-arrow { transform: rotate(45deg); }
-.toward-story-links { list-style: none; padding: 0 18px 12px 46px; margin: 0; }
-.toward-story-links li { border-top: 1px solid var(--line); }
-.toward-story-links a { display: block; color: var(--ink); font-size: 0.99rem; font-weight: 600; line-height: 1.55; padding: 15px 4px 15px 0; text-decoration: none; overflow-wrap: anywhere; }
+.toward-topic-title { min-width: 0; overflow-wrap: anywhere; }
+.toward-topic-arrow { color: var(--terracotta); flex: none; }
+.toward-topic[open] .toward-topic-arrow { transform: rotate(90deg); }
+.toward-story-links { list-style: none; margin: 0 0 10px; padding: 0 0 0 14px; border-left: 2px solid var(--line); }
+.toward-story-links li { border-bottom: 1px solid var(--line); }
+.toward-story-links a { display: flex; align-items: center; min-height: 44px; padding: 8px 0; color: var(--ink); font-size: 0.95rem; font-weight: 500; line-height: 1.5; text-decoration: none; overflow-wrap: anywhere; }
 .toward-story-links a:hover { color: var(--terracotta-dark); }
 .toward-more-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .toward-compact-link { display: grid; gap: 6px; border: 1px solid var(--line); border-radius: 16px; padding: 20px; text-decoration: none; background: var(--paper); color: var(--ink); }
@@ -802,10 +804,9 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .toward-official-links a:hover { color: var(--terracotta-dark); }
 .toward-official-links a span:last-child { color: var(--terracotta-dark); flex: 0 0 auto; }
 @media (min-width: 720px) {
-  .toward-index-grid, .toward-more-grid, .toward-official-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .toward-more-grid, .toward-official-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 359px) {
-  .toward-topic summary { padding: 16px 12px; gap: 9px; }
-  .toward-story-links { padding-left: 32px; padding-right: 12px; }
+  .toward-link-list { gap: 0 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .toward-topic-arrow { transition: none; } }

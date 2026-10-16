@@ -580,22 +580,23 @@ ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   const editorial = IS_QA ? resolveTowardEditorial(articles, resources) : null;
   const featured = FEATURED_RESOURCE_IDS.map((id) => resources.find((r) => r.id === id)).filter(Boolean);
   const body = IS_QA ? `
-${dirHead(d, '從一篇有興趣的文章開始。了解內容後，再決定是否尋找課程、活動或官方資源。')}
-<section class="section toward-featured" aria-labelledby="toward-featured-title">
-  <div class="wrap">
-    ${sectionHead('Start Reading', 'toward-featured-title', '從這裡開始讀', '文化、創業、藝文與公開學習，選一篇想了解的內容。')}
-    <div class="story-grid toward-featured-grid">${editorial.featured.map((a) => articleCard(a, '')).join('\n')}</div>
-  </div>
-</section>
+${dirHead(d)}
 <section class="section toward-index" aria-labelledby="toward-index-title">
   <div class="wrap">
-    ${sectionHead('Explore', 'toward-index-title', '依興趣找到文章', '八個學習與活動方向，每一項都能直接展開閱讀，不必先離開《由己》。')}
-    <div class="toward-index-grid">
-      ${editorial.topics.map((topic, n) => `<details class="toward-topic" id="toward-${esc(topic.id)}">
-        <summary><span class="toward-topic-count" aria-hidden="true">${String(n + 1).padStart(2, '0')}</span><span class="toward-topic-heading"><strong>${esc(topic.title)}</strong><small>${esc(topic.intro)}</small></span><span class="toward-topic-arrow" aria-hidden="true">＋</span></summary>
+    <span class="kicker">Explore</span>
+    <h2 id="toward-index-title">依興趣找到文章</h2>
+    <ul class="toward-link-list">
+      ${editorial.topics.map((topic) => `<li><details class="toward-topic" id="toward-${esc(topic.id)}">
+        <summary><span class="toward-topic-title">${esc(topic.title)}</span><span class="toward-topic-arrow" aria-hidden="true">→</span></summary>
         <ul class="toward-story-links">${topic.stories.map(a => `<li><a href="articles/${esc(a.slug)}.html">${esc(a.title)}<span class="visually-hidden">，閱讀文章</span></a></li>`).join('')}</ul>
-      </details>`).join('\n')}
-    </div>
+      </details></li>`).join('\n')}
+    </ul>
+  </div>
+</section>
+<section class="section toward-featured" aria-labelledby="toward-featured-title">
+  <div class="wrap">
+    ${sectionHead('Further Reading', 'toward-featured-title', '延伸閱讀', '藝文與文化的入門文章。')}
+    <div class="story-grid toward-featured-grid">${editorial.featured.map((a) => articleCard(a, '')).join('\n')}</div>
   </div>
 </section>
 <section class="section toward-more" aria-labelledby="toward-more-title">

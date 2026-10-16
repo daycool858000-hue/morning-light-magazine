@@ -151,7 +151,18 @@ if (!towardHtml.includes('href="city.html"')) topicProblems.push('缺簡短城�
 for (const topic of towardIndex.topics) for (const a of topic.stories) if (!existsSync(path.join(QA, `articles/${a.slug}.html`))) topicProblems.push('索引文章頁不存在 ' + a.slug);
 if (towardIndex.topics[0].stories[0]?.slug !== 'batch6-women-center-services') topicProblems.push('婦女中心課程索引未優先列出 batch6-women-center-services');
 if (towardHtml.includes('class="dir-jump"')) topicProblems.push('向光不應出現讀利專用的跳轉連結');
-check('向光 QA：原八個索引各有實質文章（婦女中心課程優先列出城市福利第 06 篇）、四篇精選、三筆精簡官方入口；沒有重複 22 縣市索引與大型資源卡', topicProblems.length === 0, topicProblems.slice(0, 5).join('；'));
+// 2026-10-16 站主 iPhone 回饋：八索引先出現、兩欄文字樣式；精選只留不重複的延伸閱讀；移除名稱不符的文章
+if (!(towardHtml.indexOf('class="section toward-index"') > 0 && towardHtml.indexOf('class="section toward-index"') < towardHtml.indexOf('class="section toward-featured"'))) topicProblems.push('八索引不在精選文章之前');
+if (/toward-topic-count|＋|toward-index-grid/.test(towardHtml)) topicProblems.push('仍有數字編號、＋ 或單欄大卡樣式');
+if ((towardHtml.match(/<span class="toward-topic-arrow" aria-hidden="true">→<\/span>/g) || []).length !== 8) topicProblems.push('八個索引未全部使用右側 →');
+const indexedSlugs = new Set(towardIndex.topics.flatMap((t) => t.stories.map((a) => a.slug)));
+if (towardIndex.featured.length !== 2 || towardIndex.featured.some((a) => indexedSlugs.has(a.slug))) topicProblems.push('延伸閱讀應為 2 篇且不與八索引重複');
+const topicSlugs = (id) => towardIndex.topics.find((t) => t.id === id).stories.map((a) => a.slug);
+if (topicSlugs('parenting').includes('batch2-02') || topicSlugs('family-education').includes('batch3-mind-reading')) topicProblems.push('名稱不符的文章仍在索引中');
+for (const [slug, catId] of [['batch2-02', 'life-family'], ['batch3-mind-reading', 'health']]) {
+  if (!qp.includes(`href="articles/${slug}.html"`) || !(await read(QA, categories.find((c) => c.id === catId).slug)).includes(`articles/${slug}.html`)) topicProblems.push(`${slug} 不應從讀利或分類頁消失`);
+}
+check('向光 QA：八索引在精選之前、沿用兩欄文字樣式（→、無編號與＋）；各有實質文章（婦女中心優先列第六批、育兒津貼與心理閱讀已移出不相符索引但仍在讀利與分類頁）；延伸閱讀 2 篇不重複；三筆精簡官方入口；沒有 22 縣市清單與大型資源卡', topicProblems.length === 0, topicProblems.slice(0, 5).join('；'));
 
 // 讀利專欄：💪 支援資源正下方的文字跳轉，連到既有「從你想了解的事開始」
 const qpHead = (/<section class="page-head dir-head"[\s\S]*?<\/section>/.exec(qp) || [''])[0];
@@ -314,6 +325,18 @@ try {
   await page.click(`#toward-women-center .toward-story-links a[href="articles/batch6-women-center-services.html"]`);
   await page.waitForURL('**/articles/batch6-women-center-services.html');
   check('向光手機：八個索引全部可展開，每篇文章連結可見、點擊高度 ≥ 44px、連到站內文章頁；點婦女中心課程第一篇可開啟', topicBad.length === 0, topicBad.map((t) => t.id).join('、'));
+
+  // 向光：進入頁面第一個畫面就看得到索引，手機也維持兩欄
+  const towardFirst = [];
+  for (const w of [320, 375, 390]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true });
+    const p = await ctx.newPage();
+    await p.goto(`${ORIGIN}${BASE}toward-light.html`);
+    const r = await p.evaluate(() => { const s = [...document.querySelectorAll('.toward-topic summary')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstTop: Math.round(s[0].top), firstBottom: Math.round(s[0].bottom), pairTop: Math.round(s[1].top), leftX: Math.round(s[0].left), rightX: Math.round(s[1].left), minH: Math.round(Math.min(...s.map((x) => x.height))), overflow: document.documentElement.scrollWidth - innerWidth }; });
+    if (r.n !== 8 || r.firstBottom > 844 || r.pairTop !== r.firstTop || r.rightX <= r.leftX || r.minH < 44 || r.overflow > 0) towardFirst.push(`${w}px ${JSON.stringify(r)}`);
+    await ctx.close();
+  }
+  check('向光手機 320／375／390px：進入後第一個畫面就看到第一排索引，八個索引兩欄排列、點擊高度 ≥ 44px、無水平溢位', towardFirst.length === 0, towardFirst.join('；'));
 
   // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
   const jumpProblems = [];
