@@ -380,6 +380,22 @@ for (const c of categories) {
 }
 check('六大主題：各自保留全部 36 篇對應文章且無重複；五個一般分類在大型官方入口之前顯示文章，城市與福利原優先福利區塊維持',
   topicReadingProblems.length === 0, topicReadingProblems.slice(0, 6).join('；'));
+// 五個分類有文字式「從需求開始」捷徑，城市與福利維持自己的福利／縣市索引。
+// 跳轉只透過原生 href 錨點，不改標題、文章、資源或正式版。
+const categoryJumps = [];
+for (const c of categories) {
+  const pageHtml = await read(QA, c.slug);
+  const links = [...pageHtml.matchAll(/<p class="cat-hero-jump"><a href="#([^"]+)">([^<]+)<span aria-hidden="true">&nbsp;↓<\/span><\/a><\/p>/g)];
+  if (c.id === 'city') {
+    if (links.length) categoryJumps.push('城市與福利不應再增加頁首捷徑');
+    continue;
+  }
+  const expected = c.id === 'learning' ? ['topics-title', '直接探索學習主題'] : ['need-title', '從你想了解的事開始'];
+  if (links.length !== 1 || links[0][1] !== expected[0] || links[0][2] !== expected[1] ||
+      !pageHtml.includes(`id="${expected[0]}"`)) categoryJumps.push(`${c.title} 跳轉入口或目標錯誤`);
+}
+check('五個主題介紹下方有小型原生錨點；學習與活動連主題索引，其他四個連需求，城市專屬版面不動',
+  categoryJumps.length === 0, categoryJumps.join('；'));
 
 // Issue #3：城市與福利「先了解有哪些福利」區塊與第六批六篇
 const sixthProblems = [];
