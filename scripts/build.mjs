@@ -785,6 +785,7 @@ function categoryHero(c) {
       <p class="cat-hero-kicker">${icon(c.icon, 'cat-hero-icon')}<span>No.${c.no} · ${esc(c.kicker)}</span></p>
       <h1 id="page-title">${esc(c.title)}</h1>
       <p class="lead">${esc(c.intro)}</p>
+      ${IS_QA && c.id !== 'city' ? `<p class="cat-hero-jump"><a href="${c.id === 'learning' ? '#topics-title' : '#need-title'}">${c.id === 'learning' ? '直接探索學習主題' : '從你想了解的事開始'}<span aria-hidden="true">&nbsp;↓</span></a></p>` : ''}
     </div>
     <p class="note" role="note">${esc(c.notice)}</p>
   </div>
