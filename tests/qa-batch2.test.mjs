@@ -12,6 +12,7 @@ import { loadBatch2Articles, BATCH2_RESOURCES } from '../scripts/lib/qa-batch2.m
 import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs';
 import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.mjs';
 import { loadQaEnglishResources } from '../scripts/lib/qa-english.mjs';
+import { resolveTowardEditorial } from '../scripts/lib/toward-light-editorial.mjs';
 
 const require = createRequire(import.meta.url);
 function loadPlaywright() {
@@ -35,6 +36,7 @@ const third = await loadBatch3OpenAccess(ROOT);
 const fourth = await loadBatch45Articles(ROOT, categories); // Issue #2：第四批 9 篇＋第五批 4 篇
 const englishResources = await loadQaEnglishResources(ROOT, [...national, ...cand, ...third.resources]);
 const newEnglishResources = englishResources.filter(r => r.id.startsWith('qa-en-'));
+const towardIndex = resolveTowardEditorial([...arts, ...third.articles, ...fourth], englishResources);
 const BASE = site.basePath;
 const PORT = 4331;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
@@ -133,6 +135,19 @@ check('每張地方候選卡片都有「未核准測試內容」標籤', allQaBa
 // 文章
 const qp = await read(QA, 'quiet-power.html');
 const idx = await read(QA, 'assets/data/search-index.js');
+const towardHtml = await read(QA, 'toward-light.html');
+const topicProblems = [];
+if (towardIndex.topics.length !== 8) topicProblems.push('未保留原有八項索引');
+for (const topic of towardIndex.topics) {
+  if (!towardHtml.includes(`id="toward-${topic.id}"`)) topicProblems.push('缺索引 ' + topic.id);
+  for (const a of topic.stories) if (!towardHtml.includes(`href="articles/${a.slug}.html"`)) topicProblems.push('缺文章 ' + a.slug);
+}
+for (const a of towardIndex.featured) if (!towardHtml.includes(`href="articles/${a.slug}.html"`)) topicProblems.push('缺精選 ' + a.slug);
+for (const r of towardIndex.official) if (!towardHtml.includes(r.name)) topicProblems.push('缺延伸官方入口 ' + r.name);
+if (towardHtml.includes('class="county-areas"') || towardHtml.includes('開啟城市資源索引') || towardHtml.includes('class="res-grid"')) topicProblems.push('向光仍重複完整縣市索引或大型官方卡');
+if (!towardHtml.includes('href="city.html"')) topicProblems.push('缺簡短城市入口');
+check('向光 QA：原八個索引各有實質文章、四篇精選、三筆精簡官方入口；沒有重複 22 縣市索引與大型資源卡', topicProblems.length === 0, topicProblems.slice(0, 5).join('；'));
+
 const artProblems = [];
 for (const a of arts) {
   const f = `articles/${a.slug}.html`;
@@ -247,6 +262,13 @@ try {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
 
+  // 向光：手機點開索引直接取得已有文章，不經另一層空白分類頁。
+  await page.goto(`${ORIGIN}${BASE}toward-light.html`);
+  const beforeExpand = await page.locator('#toward-women-center').evaluate(el => el.open);
+  await page.locator('#toward-women-center summary').click();
+  const afterExpand = await page.locator('#toward-women-center').evaluate(el => el.open);
+  const firstArticleUrl = await page.locator('#toward-women-center .toward-story-links a').first().getAttribute('href');
+  check('向光手機：索引可用原生 details 展開，顯示可點的文章而非只到外部資源', !beforeExpand && afterExpand && firstArticleUrl?.startsWith('articles/batch'));
   // iPhone 實機回報：搜尋時不能讓六大主題與搜尋結果同時顯示。
   await page.goto(`${ORIGIN}${BASE}index.html`);
   await page.fill('#home-q', '托育');
