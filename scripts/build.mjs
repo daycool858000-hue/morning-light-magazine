@@ -691,8 +691,8 @@ ${qaBatch6.length ? `<section class="section benefits-intro" aria-labelledby="be
     <div class="story-grid">${qaBatch6.map((a) => articleCard(a, '')).join('\n')}</div>
     <p class="benefits-next"><a href="#finder">讀完後，往下選擇縣市與官方入口</a></p>
   </div>
-</section>` : ''}
-<section class="section" aria-labelledby="finder-title" id="finder">
+</section>
+` : ''}<section class="section" aria-labelledby="finder-title" id="finder">
   <div class="wrap">
     ${sectionHead('City Index', 'finder-title', '城市生活資源索引', '先選擇縣市，再依服務類型篩選。全台 22 個縣市都可以選擇；尚未完成查核的縣市，會先顯示全國性資源。')}
     <div class="finder" data-finder>
