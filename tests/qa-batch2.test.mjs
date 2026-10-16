@@ -340,6 +340,29 @@ if (JSON.stringify(byCat) !== JSON.stringify({ 'life-family': 3, career: 3, heal
 if (BATCH45_SOURCES.length !== 3) fourthProblems.push('載入來源檔不是 Issue #2 指定的三個原稿');
 check('第四、五批 13 篇＋第六批 6 篇：各有獨立頁、六大分類正確，文章屬讀利或向光之一、分類頁及搜尋皆可找到，正文及來源完整；QA 共 36 篇且無範圍外草稿', fourthProblems.length === 0, fourthProblems.slice(0, 6).join('；'));
 
+// 六大主題內閱讀入口的手機可發現性：除城市福利原六篇已在縣市選擇之前，
+// 其他五個分類均須先列出對應文章，再進入主題及大量官方機構入口。
+const qaArticleByCategory = [...arts, ...third.articles, ...fourth, ...sixth];
+const expectedTopicCounts = { 'life-family': 6, career: 5, health: 4, law: 5, city: 8, learning: 8 };
+const topicReadingProblems = [];
+for (const c of categories) {
+  const html = await read(QA, c.slug);
+  const reading = qaArticleByCategory.filter(a => a.category === c.id);
+  if (reading.length !== expectedTopicCounts[c.id]) topicReadingProblems.push(`${c.title} 分類原稿數量不符：${reading.length}`);
+  const hrefs = [...html.matchAll(/<h3><a href="articles\\/([^"]+)\\.html">/g)].map(m => m[1]);
+  if (hrefs.length !== expectedTopicCounts[c.id] || new Set(hrefs).size !== hrefs.length ||
+      !reading.every(a => hrefs.includes(a.slug))) topicReadingProblems.push(`${c.title} 文章入口不完整或重複：${hrefs.length}`);
+  if (c.id !== 'city') {
+    const pos = (id) => html.indexOf(`id="${id}"`);
+    const order = [pos('page-title'), pos('art-title'), pos(c.id === 'learning' ? 'events-title' : 'need-title'), pos('topics-title'), pos('res-title')];
+    if (order.some(v => v < 0) || order.some((v, i) => i && v <= order[i - 1])) {
+      topicReadingProblems.push(`${c.title} 應先文章再活動／需求、主題索引與官方入口：${order.join(',')}`);
+    }
+  }
+}
+check('六大主題：各自保留全部 36 篇對應文章且無重複；五個一般分類在大型官方入口之前顯示文章，城市與福利原優先福利區塊維持',
+  topicReadingProblems.length === 0, topicReadingProblems.slice(0, 6).join('；'));
+
 // Issue #3：城市與福利「先了解有哪些福利」區塊與第六批六篇
 const sixthProblems = [];
 const cityHtml = await read(QA, 'city.html');
