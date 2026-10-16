@@ -147,8 +147,8 @@ const expectedReadingFirst = [
   'batch5-preventive-health-screening', 'batch6-income-support-emergency-aid',
   'batch4-labor-insurance-pension', 'batch2-08', 'batch2-02',
 ];
-const readliLinks = [...qp.matchAll(/<h3><a href="articles\\/([^"]+)\\.html">/g)].map((m) => m[1]);
-const towardGalleryLinks = [...towardHtml.matchAll(/<article class="toward-reading-card">\\s*<a href="articles\\/([^"]+)\\.html">/g)].map((m) => m[1]);
+const readliLinks = [...qp.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+const towardGalleryLinks = [...towardHtml.matchAll(/<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
 const allReadingArticles = [...arts, ...third.articles, ...fourth, ...sixth].map(a => a.slug);
 const towardSlugs = new Set(TOWARD_READING_SLUGS);
 check('讀利與向光：讀利 23 篇、向光 13 篇，兩邊完整不重複，讀利首八篇以福利、權益、健康、安全及生活需求為優先',
