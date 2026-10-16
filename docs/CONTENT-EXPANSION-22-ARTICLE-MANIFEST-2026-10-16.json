@@ -224,11 +224,13 @@
       "workstream": "地方課程與展覽",
       "sourceFile": "docs/BATCH9-FIRST-FOUR-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
       "latestSourceFile": null,
-      "reviewNote": "活動網站導覽相同URL列兩次，需去重",
-      "status": "draft-unapproved",
+      "reviewNote": "第二輪已刪除重複文化部網站導覽網址，2026-10-17 復核官方網站導覽可讀；只待 QA 瀏覽器實驗及站主試讀",
+      "status": "draft-v2-source-followup-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "reviewDate": "2026-10-17",
+      "reviewFollowupFile": "docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md"
     },
     {
       "id": "B1",
@@ -302,11 +304,13 @@
       "workstream": "學習與生活技能",
       "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
       "latestSourceFile": null,
-      "reviewNote": "照片著作權、肖像、個資與公開權利要分開校稿",
-      "status": "draft-unapproved",
+      "reviewNote": "第二輪已把著作權、他人圖庫授權、肖像／隱私與錄音素材分開，2026-10-17 直接核對 3 個智慧局官方原頁；仍待 QA 實開及站主試讀",
+      "status": "draft-v2-source-followup-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "reviewDate": "2026-10-17",
+      "reviewFollowupFile": "docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md"
     }
   ],
   "cityTracker": "docs/CITY-22-COUNTIES-SERVICE-DEPTH-TRACKER-2026-10-16.md",
