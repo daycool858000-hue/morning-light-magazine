@@ -28,3 +28,5 @@ jobs:
         run: npm test
       - name: 使用 WebKit 模擬 Safari 進行手機功能與版面驗收
         run: npm run test:webkit
+      - name: 使用 WebKit 模擬 Safari 檢查 QA 測試版新增功能（讀利跳轉、向光索引、城市福利）
+        run: npm run test:webkit-qa
