@@ -50,6 +50,18 @@ try {
     await page.goto(`${origin}${base}toward-light.html`);
     const t = await page.evaluate(() => { const s = [...document.querySelectorAll('.toward-entry')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstBottom: Math.round(s[0].bottom), sameRow: Math.round(s[0].top) === Math.round(s[1].top) }; });
     check(`WebKit ${width}px 向光：第一個畫面就看到第一排索引，八個索引兩欄排列`, t.n === 8 && t.firstBottom <= 760 && t.sameRow, JSON.stringify(t));
+    const vertical = await page.locator('.toward-reading-card').evaluateAll(cards =>
+      cards.map(c => ({ x: Math.round(c.getBoundingClientRect().left), y: Math.round(c.getBoundingClientRect().top), w: Math.round(c.getBoundingClientRect().width), h: Math.round(c.getBoundingClientRect().height) }))
+    );
+    check(`WebKit ${width}px 向光：13 篇採單欄上下滑動、寬度一致且文字可閱讀`,
+      vertical.length === 13 && vertical.every((v,i) => v.w >= width - 56 && v.w < width && v.h >= 106 && v.h < 230 &&
+        (i === 0 || (v.x === vertical[i-1].x && v.y > vertical[i-1].y))), JSON.stringify(vertical.slice(0, 3)));
+    await page.goto(`${origin}${base}quiet-power.html`);
+    const compact = await page.locator('.readli-reading .story-grid .story').evaluateAll(cards =>
+      cards.map(c => { const h = c.querySelector('h3 a').getBoundingClientRect(); return { h: Math.round(c.getBoundingClientRect().height), linkH: Math.round(h.height), cardW: Math.round(c.getBoundingClientRect().width), media: getComputedStyle(c.querySelector('.story-media') || c).display }; })
+    );
+    check(`WebKit ${width}px 讀利：23 篇為精簡單欄清單，標題可觸控、沒有大型圖片`,
+      compact.length === 23 && compact.every(c => c.h >= 75 && c.h < 240 && c.linkH >= 44 && c.cardW < width && c.media !== 'block'), JSON.stringify(compact.slice(0, 3)));
     check(`WebKit ${width}px 首頁、活動頁、讀利、向光、城市福利與含表格文章無水平溢位，無 JS 錯誤`, overflow.length === 0 && errors.length === 0, [...overflow, ...errors].join('；'));
     await ctx.close();
   }
@@ -70,10 +82,11 @@ try {
     cards.slice(0, 3).map(c => ({ x: Math.round(c.getBoundingClientRect().left), y: Math.round(c.getBoundingClientRect().top), w: Math.round(c.getBoundingClientRect().width) }))
   );
   const cardLinks = await page.locator('.toward-reading-card a[href^="articles/"]').count();
-  check('WebKit 向光：13 篇文章直接展示為可點擊卡片，手機 390px 每排兩張且不產生單卡溢出',
+  check('WebKit 向光：13 篇文章直接展示為單欄可點擊閱讀卡，390px 上下滑動',
     gallery === 13 && cardLinks === 13 && readingLayout.length === 3 &&
-    readingLayout[0].y === readingLayout[1].y && readingLayout[2].y > readingLayout[1].y &&
-    readingLayout[0].x < readingLayout[1].x && readingLayout.every(c => c.w >= 120 && c.w <= 190),
+    readingLayout[0].y < readingLayout[1].y && readingLayout[1].y < readingLayout[2].y &&
+    readingLayout[0].x === readingLayout[1].x && readingLayout[1].x === readingLayout[2].x &&
+    readingLayout.every(c => c.w >= 300 && c.w <= 390),
     JSON.stringify({ gallery, cardLinks, readingLayout }));
   await page.tap('#toward-women-center a[href="articles/batch6-women-center-services.html"]');
   await page.waitForURL('**/articles/batch6-women-center-services.html');
