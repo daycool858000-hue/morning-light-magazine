@@ -549,7 +549,8 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 .cat-hero-icon { width: 40px; height: 40px; color: var(--amber); }
 .lead { font-size: 1.08rem; color: var(--muted); max-width: 42em; margin-bottom: 0; }
 /* QA 六大主題中的五個文章分類：在介紹段落下放低干擾的頁內捷徑，純文字呈現。 */
-.cat-hero-jump { margin: 12px 0 0; font-family: var(--sans); line-height: 1.35; }
+.cat-hero-jump { display: none; margin: 12px 0 0; font-family: var(--sans); line-height: 1.35; }
+@media (max-width: 699px) { .cat-hero-jump { display: block; } }
 .cat-hero-jump a {
   display: inline-flex; align-items: center; min-height: 44px; padding: 2px 0;
   font-size: 0.92rem; font-weight: 600; color: var(--terracotta-dark); text-decoration: underline;
