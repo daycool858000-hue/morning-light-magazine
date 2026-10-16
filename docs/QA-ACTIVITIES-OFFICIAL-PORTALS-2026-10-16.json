@@ -1,0 +1,22 @@
+{
+  "source": "docs/ACTIVITIES-2027-LOW-MAINTENANCE-OFFICIAL-PORTALS-V1-2026-10-16.md、docs/2027-FORWARD-LOOKING-PROGRAMS-EDITORIAL-GUIDE-2026-10-16.md（ChatGPT 編輯分支 editorial/batch7-9-source-review-20261016）",
+  "status": "candidate-not-approved",
+  "ownerPublicationApproval": false,
+  "checkedOn": "2026-10-16",
+  "note": "首頁「活動與講座」QA 測試頁的唯一資料來源。只收正式機構持續更新的官方查詢入口（type＝portal），不收單次場次或單一年度公告，避免活動結束後網站還留著舊資訊；不寫報名中、尚有名額、即將截止等需每日更新的狀態。2026-10-16 依編輯審查移出「國家圖書館冬季講座（2026-11-14～2027-01-16）」與「116 年度（2027）全國技能競賽」兩筆，原始來源保留在編輯分支研究文件。",
+  "groups": ["理財與創業", "工作與技能", "健康與心理", "藝文與閱讀", "家庭與生活學習"],
+  "items": [
+    { "id": "act-03", "group": "理財與創業", "type": "portal", "name": "女性創業飛雁計畫：找課程", "org": "經濟部中小及新創企業署", "url": "https://www.sme.gov.tw/women/article-women-3327-18767", "region": "全國", "purpose": "女性創業課程、創業學院與線上學習資源。", "caution": "原頁可能仍列往年內容；2027 年課程與徵選以官方最新公告為準。", "keywordsEn": "women entrepreneurship startup course" },
+    { "id": "act-04", "group": "理財與創業", "type": "portal", "name": "全民金融教育網：我要上課", "org": "台灣金融研訓院", "url": "https://if.tabf.org.tw/lectureList", "region": "全國", "purpose": "成人理財與金融教育課程查詢。", "caution": "部分課程限定特定對象，請看各場次說明。", "keywordsEn": "financial literacy money personal finance class" },
+    { "id": "act-05", "group": "理財與創業", "type": "portal", "name": "金融消費評議中心：活動資訊", "org": "財團法人金融消費評議中心", "url": "https://www.foi.org.tw/Article.aspx?Arti=55&Lang=1", "region": "全國", "purpose": "金融消費教育與案例宣導活動。", "caution": "活動資訊不是投資建議。", "keywordsEn": "financial consumer education" },
+    { "id": "act-01", "group": "工作與技能", "type": "portal", "name": "勞動部職訓課程查詢", "org": "勞動部勞動力發展署", "url": "https://course.taiwanjobs.gov.tw/course/conditions", "region": "全國", "purpose": "依開課年月、縣市、職類與課程種類查詢職業訓練。", "caution": "不是所有課程都免費，費用與資格依各班別公告。", "keywordsEn": "vocational training job skills course" },
+    { "id": "act-02", "group": "工作與技能", "type": "portal", "name": "台灣就業通：職缺與徵才活動", "org": "勞動部勞動力發展署", "url": "https://job.taiwanjobs.gov.tw/", "region": "全國", "purpose": "官方職缺與徵才活動入口。", "caution": "各縣市徵才活動場次依主辦單位公告。", "keywordsEn": "jobs career fair employment" },
+    { "id": "act-06", "group": "健康與心理", "type": "portal", "name": "臺北市社區心理衛生中心：講座與活動", "org": "臺北市政府衛生局", "url": "https://mental-health.gov.taipei/ActiveList.aspx?n=6CCBECECB36BFE4E&sms=F62510C10F2670B1", "region": "臺北市", "purpose": "心理健康講座與社區活動。", "caution": "只收臺北市相關活動；其他縣市請查所在地衛生局。", "keywordsEn": "mental health talk wellbeing Taipei" },
+    { "id": "act-07", "group": "健康與心理", "type": "portal", "name": "心快活：心理健康學習平台", "org": "衛生福利部", "url": "https://wellbeing.mohw.gov.tw/nor/main", "region": "全國", "purpose": "線上心理健康學習、資源與教材。", "caution": "線上學習入口，不是實體講座報名。", "keywordsEn": "mental health online learning wellbeing" },
+    { "id": "act-09", "group": "藝文與閱讀", "type": "portal", "name": "文化部共構藝文活動平台", "org": "文化部", "url": "https://event.culture.tw/", "region": "全國", "purpose": "展演、講座、導覽預約與活動報名查詢。", "caution": "是否需要登入或收費，由各主辦單位決定。", "keywordsEn": "arts culture exhibition performance events" },
+    { "id": "act-10", "group": "藝文與閱讀", "type": "portal", "name": "國家圖書館：活動報名系統", "org": "國家圖書館", "url": "https://web.ncl.edu.tw/event/Home", "region": "全國", "purpose": "專題講座、閱讀活動與研習課程，可依日期篩選。", "caution": "各場次的報名方式與名額依活動頁說明。", "keywordsEn": "library lecture reading event" },
+    { "id": "act-11", "group": "藝文與閱讀", "type": "portal", "name": "國立公共資訊圖書館：活動資訊", "org": "國立公共資訊圖書館", "url": "https://activity.nlpi.edu.tw/", "region": "全國（館舍在臺中）", "purpose": "講座、研習、展覽、手作與電影欣賞等活動。", "caution": "部分場次免報名，部分需在原網站登記。", "keywordsEn": "public library workshop film exhibition" },
+    { "id": "act-08", "group": "家庭與生活學習", "type": "portal", "name": "教育部家庭教育資源網", "org": "教育部", "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx", "region": "全國", "purpose": "各縣市家庭教育中心入口與公開教材。", "caution": "各縣市課程以地方家庭教育中心公告為準。", "keywordsEn": "family education parenting" },
+    { "id": "act-12", "group": "家庭與生活學習", "type": "portal", "name": "臺北市終身學習課程查詢", "org": "臺北市政府教育局", "url": "https://lle.tp.edu.tw/course", "region": "臺北市", "purpose": "社區大學、成人教育、樂齡與生活藝能等課程。", "caution": "地理範圍為臺北市，其他縣市請查所在地終身學習或社區大學資訊。", "keywordsEn": "lifelong learning community college adult education" }
+  ]
+}

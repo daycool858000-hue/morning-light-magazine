@@ -1,0 +1,547 @@
+{
+  "title": "《由己》第三批免登入內容：日常探索、學習、身心、消費與居住安全",
+  "createdOn": "2026-10-15",
+  "status": "candidate-not-approved",
+  "ownerPublicationApproval": false,
+  "ownerRequestedDirection": "免費、免註冊、無個資之《由己》內容平台；提供開放閱讀資訊、原創摘要與官方外部連結。",
+  "cautions": [
+    "免費『瀏覽資料』不代表第三方課程、活動、票券或申訴『免費且不需提供資料』。",
+    "任何官方文章或照片開放閱讀都不當作可自由複製或改作的著作授權；本站只發布原創導讀與引用官方連結。",
+    "外部官方頁面可能使用 Cookie 或有自行處理個資的規定，不代表《由己》可以保證其他網站零資料處理。",
+    "這 9 筆與 5 篇仍是待核准候選。只能進入有醒目未核准標示的 QA，不得進正式 release、main 或一般 production。"
+  ],
+  "resources": [
+    {
+      "id": "open-mind-articles",
+      "name": "衛福部心快活｜心理健康文章專區",
+      "categories": [
+        "health"
+      ],
+      "topics": [
+        "stress",
+        "boundaries"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "衛生與心理健康"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "免費閱讀心理健康短文，可依家庭、情感、人際與身心平衡等主題探索。閱讀不必在《由己》註冊或提供個資。",
+      "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+      "phones": [],
+      "sources": [
+        {
+          "title": "衛福部心快活｜心理健康文章專區",
+          "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "文章分類頁有可公開閱讀的主題清單；進入其他互動或訂閱功能條件另看來源頁。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-mind-courses",
+      "name": "衛福部心快活｜心理健康學習課程",
+      "categories": [
+        "health"
+      ],
+      "topics": [
+        "stress",
+        "mental-support"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "衛生與心理健康"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "公開瀏覽職場壓力、家庭關係等心理學習課程目錄；站方說明若要紀錄學習進度才需要登入。",
+      "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+      "phones": [],
+      "sources": [
+        {
+          "title": "衛福部心快活｜心理健康學習課程",
+          "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "官方課程區明示未登入狀態及學習進度需登入；不推定所有單元均可免登入完成。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-learn-directory",
+      "name": "教育部終身學習資源平臺｜課程與資源查詢",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "open-learning",
+        "life-skills",
+        "local-events"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "教育與學習"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "免登入查詢各縣市的終身學習課程、學習資源及活動資訊；實際參加與費用須看開課單位公告。",
+      "url": "https://lle.moe.edu.tw/lesson-resource/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "教育部終身學習資源平臺｜課程與資源查詢",
+          "url": "https://lle.moe.edu.tw/lesson-resource/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://lle.moe.edu.tw/lesson-resource/",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "官方公開列表有縣市、起訖時間與來源篩選；瀏覽清單不等於課程免報名或免費。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-culture-iculture",
+      "name": "文化部 iCulture｜藝文活動與文化空間",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "local-events",
+        "open-learning"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "教育與學習"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "免登入瀏覽全台展覽、閱讀活動、講座及文化空間；可先探索有興趣的地方再查主辦公告。",
+      "url": "https://cloud.culture.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "文化部 iCulture｜藝文活動與文化空間",
+          "url": "https://cloud.culture.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://cloud.culture.tw/",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "首頁提供找活動與博物館、特色圖書館等項目；舊活動可能留存，不代表仍可報名。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-culture-events",
+      "name": "文化部藝文活動平台｜展演與導覽",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "local-events"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "教育與學習"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "公開查找文化部所屬館所舉辦的展覽、導覽與活動，部分需要另外向館所預約。",
+      "url": "https://event.culture.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "文化部藝文活動平台｜展演與導覽",
+          "url": "https://event.culture.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://event.culture.tw/",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "官方館所活動入口可公開瀏覽；參觀票價、預約與截止日期依當期公告。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-cpc-faq",
+      "name": "行政院消保會｜生活消費Q&A",
+      "categories": [
+        "law"
+      ],
+      "topics": [
+        "official-complaints"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "免登入閱讀網購、預付交易、旅遊、金融保險與家庭用品等消費知識分類。",
+      "url": "https://cpc.ey.gov.tw/Page/98915573CEA4451D",
+      "phones": [],
+      "sources": [
+        {
+          "title": "行政院消保會｜生活消費Q&A",
+          "url": "https://cpc.ey.gov.tw/Page/98915573CEA4451D"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://cpc.ey.gov.tw/Page/98915573CEA4451D",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "官方 Q&A 分為網購、預付交易、醫美、金融等主題；提出正式申訴需要個資，兩者分開。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-cpc-antifraud",
+      "name": "行政院消保會｜防詐知識專區",
+      "categories": [
+        "law"
+      ],
+      "topics": [
+        "official-complaints"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "免費閱讀消費詐騙及一般詐騙相關官方資料，先了解常見情境與求證方式。",
+      "url": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B",
+      "phones": [],
+      "sources": [
+        {
+          "title": "行政院消保會｜防詐知識專區",
+          "url": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "官網主題頁提供消費詐騙與一般詐騙兩類，無需在《由己》留下報案資料。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-fire-home",
+      "name": "消防署｜住宅防火與居家安全知識",
+      "categories": [
+        "life-family"
+      ],
+      "topics": [],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "可直接閱讀住宅防火、火災警報器、瓦斯與日常防災等官方宣導，作為居住安全的自學入口。",
+      "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=1409",
+      "phones": [],
+      "sources": [
+        {
+          "title": "消防署｜住宅防火與居家安全知識",
+          "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=1409"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=1409",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "消防署民眾版有住宅防火、防颱、地震及瓦斯安全主題；不可假設所有項目都集中在本子頁。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    },
+    {
+      "id": "open-police-selfdefense",
+      "name": "警政署婦幼抱抱｜安全宣導與簡易防身影片",
+      "categories": [
+        "law"
+      ],
+      "topics": [
+        "official-complaints"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "警政與保護"
+      ],
+      "audience": "任何人可閱讀本站導讀；外部網站特定服務可能另有條件",
+      "summary": "開放觀看婦幼安全、跟蹤騷擾與簡易防身術相關宣導，適合先理解安全與求助原則。",
+      "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726",
+      "phones": [],
+      "sources": [
+        {
+          "title": "警政署婦幼抱抱｜安全宣導與簡易防身影片",
+          "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認",
+        "result": "官方公開導覽／閱讀功能可從公開頁面辨識；待正式內容核准",
+        "scope": "公開可查的基本主題、連結用途與可見內容",
+        "source": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726",
+        "evidence": "官方直接公開的主題目錄或教學導覽入口",
+        "notConfirmed": "警方公開影音入口，非實體課程，不保證每部外部影片持續可播放，也不提供高風險徒手對抗指導。"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false,
+      "access": {
+        "readWithoutAccount": "公開內容可見，未完成全部 iPhone Safari 子頁實測",
+        "free": "免費瀏覽頁面；外部課程、門票或報名可能需費用",
+        "personalData": "《由己》不要求任何個資；外部報名、訂閱、個人化進度屬第三方服務",
+        "reuse": "僅以本站原創摘要加官方連結導覽；不得任意轉載原站文章、圖片、影片"
+      }
+    }
+  ],
+  "articles": [
+    {
+      "id": "learn-free",
+      "slug": "batch3-learn-free",
+      "title": "想學新東西，可以從哪些免登入資源開始？",
+      "category": "learning",
+      "summary": "從興趣、地區和可投入的時間出發，先免費探索課程資訊，再判斷是否要報名。",
+      "body": "想學一項新技能，有時候不確定自己會不會喜歡，就不想先填資料、付報名費或加入會員。其實可以先從公開的課程與學習資源目錄開始，**只看資訊，不代表必須報名**。\n\n## 先分清楚你現在想做的是什麼\n\n**只是好奇。** 想了解攝影、語言、繪畫、數位工具有哪些課程，可以先看教育部終身學習資源平臺。平台提供地區、縣市、時間及來源篩選。把搜尋結果當成可探索的方向，不必一次就決定要上哪一堂。\n\n**想讀一篇就有收穫。** 不一定要選有證書的課程。例如衛福部「心快活」的公開心理健康文章，按家庭、人際、情感與身心平衡等主題整理，能先讀自己在意的議題。\n\n**真的想固定上課。** 看到感興趣的課程後，再去主辦單位的正式頁核對日期、地點、課程內容與費用。有些社區課程收學費、有些線上講座免費，也可能設有年齡、身分或名額限制。免登入「查資料」不能寫成免登入「取得所有課程」。\n\n## 怎麼避免花時間卻找不到？\n\n先用三個條件縮小清單：**住哪裡或能上線的時間、想學的領域、能接受的費用**。如果課程只留下一張沒有日期的舊海報，先回主辦單位網站確認是否還開放。\n\n《由己》只提供這些官方頁面和原創導讀，站內不蒐集報名資料。外部網站若要求登入、訂閱或填寫個資，請先判斷自己是否有參加的需要，也可以只閱讀本站文章而不前往報名。",
+      "updated": "2026-10-15",
+      "published": "2026-10",
+      "status": "待確認",
+      "visibility": "public",
+      "checkedOn": "2026-10-15",
+      "sourcesList": [
+        {
+          "title": "教育部｜終身學習資源平臺課程與資源",
+          "url": "https://lle.moe.edu.tw/lesson-resource/"
+        },
+        {
+          "title": "衛福部心快活｜文章專區",
+          "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1"
+        }
+      ],
+      "qa": true,
+      "publishApproval": "not-approved"
+    },
+    {
+      "id": "culture-nearby",
+      "slug": "batch3-culture-nearby",
+      "title": "週末想看展、聽講座或逛博物館，如何開始找？",
+      "category": "learning",
+      "summary": "從文化部公開活動目錄找到興趣與場館，不需先註冊或填個人資料。",
+      "body": "如果週末有空，想出門看看展覽或講座，又沒有特定的目的地，可以先從**活動類型與所在城市**搜尋，不必先決定要買票。\n\n## 想看什麼，比一次找齊所有活動重要\n\n文化部 iCulture 有「找活動」與「文化空間」等入口，可以瀏覽展覽、閱讀活動、親子活動，也能尋找博物館、特色圖書館和地方文化館。喜歡慢慢看書或逛室內展覽的人，可以先從文化空間找起；想參加活動的人，再切換到活動列表。\n\n另一個選擇是文化部藝文活動平台，偏向文化部所屬館所的展演、導覽與其他活動公告。兩個入口不是完全相同的活動清單，不需要同一場活動存兩次。\n\n## 看見活動後，確認四件事\n\n**日期。** 活動清單中可能保留已結束的展覽或舊活動紀錄，必須點回該場次公告核對日期。\n\n**地點。** 有些頁面整理全台活動，不代表就在住家附近；先選地區，若是跨縣市活動也要考量交通。\n\n**費用。** 免費瀏覽活動資料，不等於活動免費。館舍可能需要門票，工作坊也可能有材料費。\n\n**報名。** 參觀常設展、參加講座和需要預約的導覽，報名方式不會一樣。若主辦方要求姓名或電話，那是第三方服務的流程；《由己》本身不收集，也不代為報名。\n\n沒有合適場次也不必硬湊。改查文化空間和公開展覽，仍然可以發現原本不知道的地方。",
+      "updated": "2026-10-15",
+      "published": "2026-10",
+      "status": "待確認",
+      "visibility": "public",
+      "checkedOn": "2026-10-15",
+      "sourcesList": [
+        {
+          "title": "文化部 iCulture｜藝文活動與文化空間",
+          "url": "https://cloud.culture.tw/"
+        },
+        {
+          "title": "文化部藝文活動平台",
+          "url": "https://event.culture.tw/"
+        }
+      ],
+      "qa": true,
+      "publishApproval": "not-approved"
+    },
+    {
+      "id": "mind-reading",
+      "slug": "batch3-mind-reading",
+      "title": "想理解自己的壓力與關係，可以先讀哪些資料？",
+      "category": "health",
+      "summary": "把心理健康知識當作日常學習，而不只是在危機時才使用的求助資訊。",
+      "body": "有人想了解情緒、關係或壓力，只是因為好奇自己的反應，未必遇到危機，也未必需要立刻諮商。\n\n## 想了解心理知識，可以先從公開文章開始\n\n衛福部的「心快活」心理健康學習平台有文章專區，分類包含家庭互動、日常社交、情感關係、身心平衡等；它也整理了職場適應與解壓、家庭關係等學習單元。對只想閱讀的人，先選一個在意的主題就好。\n\n像是工作後很累、與家人溝通不順、對某些互動感到困惑，可能都能先藉由一般性文章整理問題。但不同人的背景很不一樣，文章提供的是**學習的角度**，不能依單篇文章推定任何人有某種心理疾病。\n\n## 怎麼判斷一篇文章是否值得參考？\n\n看它是否有**作者或機構身分、發表日期、明確的適用範圍**，並留意文章究竟是在說研究結果、通用建議，還是個人的故事。當內容聲稱「一個方法適用所有人」或將複雜關係簡化成絕對結論，可以再找其他專業來源比較。\n\n也要區分公開閱讀與個人化服務。心快活的課程頁明示，**若要紀錄學習進度需要登入**；但這不表示你必須為了讀《由己》的導讀而建立帳號。\n\n如果困擾長時間影響生活、睡眠或工作，可以再看看本站其他專業心理支持及醫療服務入口。學習資訊與實際專業服務各有用途，使用者自己決定何時需要。",
+      "updated": "2026-10-15",
+      "published": "2026-10",
+      "status": "待確認",
+      "visibility": "public",
+      "checkedOn": "2026-10-15",
+      "sourcesList": [
+        {
+          "title": "衛福部心快活｜心理健康文章專區",
+          "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1"
+        },
+        {
+          "title": "衛福部心快活｜課程區",
+          "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8"
+        }
+      ],
+      "qa": true,
+      "publishApproval": "not-approved"
+    },
+    {
+      "id": "consumer-knowledge",
+      "slug": "batch3-consumer-knowledge",
+      "title": "網路購物、預付課程或訂閱服務，先弄清楚哪些事？",
+      "category": "law",
+      "summary": "免費閱讀消費知識，辨認付款前該看的條件，以及遇到爭議可以查的正式窗口。",
+      "body": "購買線上課程、訂閱服務、購物平台商品或預付型方案時，最容易忽略的是後續條件。付款前花幾分鐘看清楚，比事後找不到資訊容易處理。\n\n## 下單前先查四個問題\n\n**向誰買？** 販售者有沒有可查的名稱、聯絡方式及商品或服務說明？只有私人帳號或陌生訊息、要求把錢轉到其他個人帳戶時，先停下來核實。\n\n**買到的是什麼？** 是單次商品、固定期間訂閱、會員資格，還是未來才交付的服務？提供的內容、起始日期和實際費用應能找到明確說明。\n\n**如果不想用了呢？** 先看取消、續扣、退款及例外條件。不要假設每種線上交易都適用相同的解除或退費規則；例如不同的數位服務、客製化商品與實體商品可能有不同規定。\n\n**誰處理問題？** 如果業者未交付或內容與宣稱不同，保留交易紀錄、契約、商品頁資訊及溝通訊息。先比對官方消費資訊，再判斷下一步。\n\n## 哪裡有不必註冊就能閱讀的官方資料？\n\n行政院消費者保護會有公開的**消保 Q&A**，分類涵蓋網路購物、預付交易、休閒旅遊、金融保險、醫療美容等，也有防詐專區。讀者可以先查一般問題，不需要把自己的經歷送給《由己》。\n\n**正式申訴是另一回事。** 政府線上申訴程序可能需要姓名、聯絡資料與具體交易證據，因為要處理個案。本站不蒐集、不代為轉交這些個資，也不會宣稱一般閱讀可以取代正式申訴。",
+      "updated": "2026-10-15",
+      "published": "2026-10",
+      "status": "待確認",
+      "visibility": "public",
+      "checkedOn": "2026-10-15",
+      "sourcesList": [
+        {
+          "title": "行政院消費者保護會｜消保 Q&A",
+          "url": "https://cpc.ey.gov.tw/Page/98915573CEA4451D"
+        },
+        {
+          "title": "行政院消費者保護會｜防詐專區",
+          "url": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B"
+        },
+        {
+          "title": "行政院消費者保護會｜消費爭議處理程序",
+          "url": "https://cpc.ey.gov.tw/Page/71E988F034956960"
+        }
+      ],
+      "qa": true,
+      "publishApproval": "not-approved"
+    },
+    {
+      "id": "home-safety",
+      "slug": "batch3-home-safety",
+      "title": "居家安全可以先認識什麼？從防火與求助開始",
+      "category": "life-family",
+      "summary": "不需會員就能讀的居家防火、防災官方入口，適合獨居者與家庭作為生活準備。",
+      "body": "居家生活不只有家務和收納。住在租屋處、宿舍，或是一個人居住，也可以先花一點時間理解常見的居住安全問題，遇到突發狀況比較知道去哪裡查資訊。\n\n## 先知道住家有哪些風險\n\n**住宅防火。** 消防署民眾版提供住宅防火、住宅用火災警報器、瓦斯安全等主題。可以從官方說明認識住家火警預警、電器用火與逃生觀念，與家人或同住者確認警報器及逃生動線。\n\n**一氧化碳與瓦斯安全。** 熱水器、通風和燃氣設備的使用環境值得留意。當懷疑有瓦斯外洩或一氧化碳中毒風險時，不要以自己的猜測代替專業處理；先採取適合當下狀況的避險和求助方式。\n\n**緊急求助。** 先知道住家地址、附近可求助的人和消防、警察的正式聯絡管道。遇到火警、重大傷病或其他緊急狀況，依事件性質聯絡 119 或 110；本站不接收即時求救。\n\n## 讀資訊可以免登入，但不要把閱讀當成實際演練\n\n消防署公開的防災知識可供自主查詢，不需要在《由己》登記住家位置或個人資料。若需要到現場進行消防安全檢修，應找有資格的專業人員；不能只靠一篇文章確認整棟建物安全。\n\n日常整理一張自己看得懂的求助聯絡表、確認逃生通道不被堆物阻擋，都是可以先做的小事。本站以清楚的官方入口支援讀者自我學習，不要求提供家庭或住址細節。",
+      "updated": "2026-10-15",
+      "published": "2026-10",
+      "status": "待確認",
+      "visibility": "public",
+      "checkedOn": "2026-10-15",
+      "sourcesList": [
+        {
+          "title": "內政部消防署｜住宅防火",
+          "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=1409"
+        },
+        {
+          "title": "內政部消防署｜民眾版防災知識",
+          "url": "https://www.nfa.gov.tw/cht/"
+        }
+      ],
+      "qa": true,
+      "publishApproval": "not-approved"
+    }
+  ],
+  "reviewer": "ChatGPT (AI)，依公開官方主題頁檢索與閱讀；未以網站擁有人身分逐頁驗證。",
+  "accessLimit": "官方首頁和索引可讀，不等於每個外部網站的所有單元或子功能已用 iPhone Safari 測試。"
+}

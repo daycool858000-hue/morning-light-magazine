@@ -1,0 +1,66 @@
+{
+  "name": "由己",
+  "englishName": "SELF-AUTHORED",
+  "tagline": "女性生活、權益與在地資源指南",
+  "slogan": "從生活知識到官方資源，陪你找到需要的資訊，保留自己的選擇。",
+  "description": "由己 SELF-AUTHORED 是免費、非營利的台灣女性生活、權益與在地資源指南，整理官方制度、專業機構、生活服務、學習活動與求助管道的公開入口。",
+  "lang": "zh-Hant-TW",
+  "basePath": "/morning-light-magazine/",
+  "productionUrl": "https://daycool858000-hue.github.io/morning-light-magazine/",
+  "switchScreenUrl": "https://www.google.com/",
+  "maintenanceNotice": "",
+  "nav": [
+    {
+      "label": "首頁",
+      "href": "index.html",
+      "id": "home"
+    },
+    {
+      "label": "生活與家庭",
+      "href": "life-family.html",
+      "id": "life-family"
+    },
+    {
+      "label": "職涯與創業",
+      "href": "career.html",
+      "id": "career"
+    },
+    {
+      "label": "身心健康",
+      "href": "health.html",
+      "id": "health"
+    },
+    {
+      "label": "法律與權益",
+      "href": "law.html",
+      "id": "law"
+    },
+    {
+      "label": "城市與福利",
+      "href": "city.html",
+      "id": "city"
+    },
+    {
+      "label": "學習與活動",
+      "href": "learning.html",
+      "id": "learning"
+    }
+  ],
+  "directories": [
+    {
+      "id": "quiet-power",
+      "href": "quiet-power.html",
+      "zh": "讀利專欄",
+      "en": "THE CONSIDERED PAGE",
+      "lead": "生活知識與閱讀選集。整理常見需求入口與各主題的閱讀方向。"
+    },
+    {
+      "id": "toward-light",
+      "href": "toward-light.html",
+      "zh": "向光",
+      "en": "TOWARD OPEN SKIES",
+      "lead": "學習、活動與生活探索。整理課程與活動入口、在地資源索引，以及相關的官方資源。"
+    }
+  ],
+  "nameStatus": "讀利專欄｜THE CONSIDERED PAGE 與 向光｜TOWARD OPEN SKIES 為暫定採用名稱，尚待正式商標查核。"
+}

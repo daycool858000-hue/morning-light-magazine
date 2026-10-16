@@ -1,0 +1,35 @@
+# 一次性開發分支連結稽核：不建置、不部署、不修改已核准的資料。
+name: 由己已核准官方連結稽核
+
+on:
+  push:
+    branches: [claude/morning-light-visual-v2]
+    paths:
+      - scripts/audit-approved-urls.mjs
+      - .github/workflows/approved-links-audit.yml
+
+permissions:
+  contents: read
+
+jobs:
+  approved-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 僅測試已核准的官方連結（每個網址最多 12 秒）
+        env:
+          LINK_AUDIT_OUTPUT: ${{ runner.temp }}/approved-url-check.md
+        run: node scripts/audit-approved-urls.mjs
+      - name: 保存連線狀態報告（30 天）
+        uses: actions/upload-artifact@v4
+        with:
+          name: self-authored-approved-official-links
+          path: ${{ runner.temp }}/approved-url-check.md
+          retention-days: 30
+          if-no-files-found: error

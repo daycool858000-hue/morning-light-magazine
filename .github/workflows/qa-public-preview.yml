@@ -1,0 +1,121 @@
+# 2026-10-16｜站主同意將所有現有 QA 功能（含全站浮動小日曆、六筆具體活動）公開部署，並將工程合併 main。此 workflow 只發布 QA，保留所有未核准標示與 noindex；不可將候選資料自動核准。
+# 2026-10-16｜目錄頁首文案（讀利、向光）＋向光索引兩欄展開不重排，站主授權後依 CI 38848752697（707a000）更新未核准QA版。
+# 2026-10-16｜Issue #6：向光八索引＋讀利「從你想了解的事開始 ↓」，站主授權後依 CI 38841104030 更新已同意公開的未核准QA版。
+# 2026-10-16｜Issue #3：城市與福利六篇福利導讀與城市頁「先了解有哪些福利」區塊，CI 38834893490 通過後更新已同意公開的未核准QA版。
+# 2026-10-16｜英文輔助（QA-only）＋兩項文章來源勘誤，依成功 CI 38814863350 更新已同意公開的 QA；絕不更動 main 或核准資料。
+# 2026-10-16｜Issue #2：第四批9篇＋第五批4篇導讀與第三批「使用方式」，CI 全數通過後更新已同意公開的未核准QA版。
+# 2026-10-15｜已通過第三批9筆免登入資訊與5篇原創導讀完整測試，更新已同意公開的未核准QA版。
+# 2026-10-15 iPhone Safari 清空搜尋後恢復六大分類、搜尋連結穩定性修正，完整測試成功後重部署 QA。
+# 2026-10-15：iPhone 使用者回報首頁搜尋介面，修正後重新部署已授權的公開 QA 測試。
+# 本次依使用者 GitHub Pages 設定畫面已選 GitHub Actions，重新啟動 QA 部署（2026-10-15）。
+# 僅部署已經以 QA 模式生成的「未核准測試內容」供站主手機驗收。
+# 發布到公開 GitHub Pages；不合併 main，不匯入正式 content，不新增核准紀錄。
+# 不設定一般 push 自動發布；只在新增／修改此 workflow 本身時啟動，避免研究更新被意外公開。
+name: 由己｜公開測試預覽（非正式網站）
+
+on:
+  push:
+    branches:
+      - claude/morning-light-visual-v2
+    paths:
+      - .github/workflows/qa-public-preview.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    if: ${{ github.ref == 'refs/heads/claude/morning-light-visual-v2' }}
+    environment:
+      name: qa-public-preview
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 下載開發分支（不修改 main）
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝建置所需工具
+        run: npm ci
+      - name: 建置含 23 地方入口與 12 導讀的公開測試版
+        run: node scripts/build.mjs --mode=qa --out=dist-qa
+      - name: 確認發布內容是 QA 而非正式版
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f dist-qa/index.html
+          test -f dist-qa/city.html
+          test -f dist-qa/articles/batch2-01.html
+          grep -q '未核准測試內容' dist-qa/index.html
+          grep -q '未核准測試內容' dist-qa/city.html
+          grep -q '未核准測試內容' dist-qa/articles/batch2-01.html
+          grep -q '未核准測試內容' dist-qa/articles/batch4-npm-online-collection.html
+          grep -q '未核准測試內容' dist-qa/articles/batch5-open-courses-moocs.html
+          # 新增英文資源只能存在 QA，既有卡片不被覆寫；新民生活多語資源可用。
+          grep -q 'National Immigration Agency' dist-qa/city.html
+          grep -q 'Foreigners In Taiwan Hotline: 1990' dist-qa/city.html
+          grep -q 'lang="en"' dist-qa/city.html
+          grep -q '未核准測試內容' dist-qa/city.html
+          # 第四／五批文章來源勘誤已進入 QA 生成頁，保留未核准標示。
+          grep -q '跨縣市查找藝文活動' dist-qa/articles/batch4-art-museum-first-visit.html
+          ! grep -q '原 QA 已有入口' dist-qa/articles/batch4-art-museum-first-visit.html
+          grep -q '22 縣市癌症篩檢活動專區' dist-qa/articles/batch5-preventive-health-screening.html
+          ! grep -q 'escreening.hpa.gov.tw/Home' dist-qa/articles/batch5-preventive-health-screening.html
+          grep -q 'noindex' dist-qa/articles/batch5-harassment-three-laws.html
+          grep -q 'id="benefits"' dist-qa/city.html
+          grep -q '先了解有哪些福利' dist-qa/city.html
+          grep -q '未核准測試內容' dist-qa/articles/batch6-welfare-overview.html
+          grep -q 'noindex' dist-qa/articles/batch6-women-center-services.html
+          grep -q 'class="dir-jump"><a href="#needs-title">' dist-qa/quiet-power.html
+          grep -q 'id="toward-women-center"' dist-qa/toward-light.html
+          grep -q 'href="articles/batch6-women-center-services.html"' dist-qa/toward-light.html
+          ! grep -q 'class="county-areas"' dist-qa/toward-light.html
+          test "$(grep -o 'class="toward-toggle"' dist-qa/toward-light.html | wc -l)" -eq 8
+          grep -q '整理生活中值得了解的知識、制度與公共資源' dist-qa/quiet-power.html
+          grep -q '循著興趣探索不同主題' dist-qa/toward-light.html
+          ! grep -q '在地資源索引' dist-qa/toward-light.html
+          # 全站小日曆及六筆已公告活動：僅限 QA，不能變成 production 正式核准內容。
+          test -f dist-qa/activities.html
+          test -f dist-qa/assets/js/qa-calendar.js
+          test -f dist-qa/assets/js/qa-activities.js
+          grep -q 'href="activities.html"' dist-qa/index.html
+          grep -q 'class="act-entry"' dist-qa/index.html
+          grep -q 'href="../activities.html"' dist-qa/articles/batch6-welfare-overview.html
+          grep -q '未核准測試內容' dist-qa/activities.html
+          grep -q 'noindex' dist-qa/activities.html
+          grep -q '已公布的活動消息' dist-qa/activities.html
+          grep -q '詳情待公告' dist-qa/activities.html
+          grep -q 'data-act-until' dist-qa/activities.html
+          test "$(grep -o 'class="notice"' dist-qa/activities.html | wc -l)" -eq 6
+          test "$(grep -o 'class="act-item"' dist-qa/activities.html | wc -l)" -eq 12
+          node -e "const d=require('./docs/QA-ACTIVITIES-NOTICES-2026Q4-2027-2026-10-16.json'); if(d.status!=='candidate-not-approved'||d.ownerPublicationApproval!==false||d.items.length!==6) process.exit(1)"
+          ! grep -q 'act-entry' dist-production/index.html
+          ! test -f dist-production/activities.html
+          test "$(ls dist-qa/articles/*.html | wc -l)" -eq 36
+          grep -q 'Disallow: /' dist-qa/robots.txt
+          test ! -f dist-qa/sitemap.xml
+          echo "已確認只會部署未核准 QA 測試頁。"
+      - name: 設定 GitHub Pages（需要擁有人事先在 Settings → Pages 選 GitHub Actions）
+        uses: actions/configure-pages@v5
+      - name: 上傳測試版靜態網站
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-qa
+      - name: 部署公開測試版（不是正式發布）
+        id: deploy
+        uses: actions/deploy-pages@v4
+      - name: 顯示測試網站網址
+        run: |
+          echo "公開 QA 預覽網址：${{ steps.deploy.outputs.page_url }}"
+          echo "請保留未核准測試內容標示；任何人知道網址都可以瀏覽。"

@@ -1,0 +1,49 @@
+# 正式部署到 GitHub Pages。
+# 只能由維護者在 GitHub「Actions」頁面手動執行（workflow_dispatch），推送程式碼不會自動公開網站。
+# 僅發布有來源核對及網站發起人明確核准之版本（production 模式）；正式部署仍需手動輸入「確認公開」。
+name: 部署到 GitHub Pages（手動）
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: '請輸入「確認公開」以部署正式網站'
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: ${{ github.event.inputs.confirm == '確認公開' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 建置正式版
+        run: node scripts/build.mjs --mode=production --out=dist-production
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-production
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,4 @@
+{
+  "_說明": "近期活動。每筆需有 id、title、organizer、region（縣市 id 或 national）、startDate、endDate（YYYY-MM-DD）、eligibility、fee、url、status、checkedAt。結束日期過後會自動從「近期活動」隱藏，但不代表活動已取消。經常變動的活動，請優先在 resources.json 收錄官方活動列表入口。",
+  "items": []
+}

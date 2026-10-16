@@ -1,0 +1,22 @@
+{
+  // 由己：GitHub Codespaces 私人測試預覽（第二批未核准內容）
+  // 開啟 Codespace 後會自動建置 dist-qa 並在 4173 連接埠提供；連接埠預設為「私人」，只有登入 GitHub 且有權限的人能開啟。
+  // 不會部署 GitHub Pages、不會合併 main。
+  "name": "由己｜第二批測試預覽（未核准內容）",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "hostRequirements": { "cpus": 2 },
+  "postStartCommand": "bash .devcontainer/start-qa-preview.sh",
+  "forwardPorts": [4173],
+  "portsAttributes": {
+    "4173": {
+      "label": "由己 第二批測試預覽（未核准內容）",
+      "onAutoForward": "notify",
+      "protocol": "http"
+    }
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["docs/CODESPACES-PREVIEW.md"]
+    }
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "_description": "《由己》第三批多元學習與身心資源候選｜僅供人工整批審閱。docs/ 是研究檔，不得由一般 preview/production 讀取，亦不得自動繼承既有發布核准。",
+  "preparedAt": "2026-10-15",
+  "reviewer": "ChatGPT (AI)",
+  "ownerApproval": "not-approved",
+  "itemCount": 9,
+  "notes": [
+    "已移除與心快活用途重複的衛福部心理健康總覽候選卡，該總覽僅作背景來源。",
+    "教育部社區大學入口與國健署更年期專題，直接擷取受阻；須保留這項不確定性。",
+    "文化部 iCulture 與部屬館所平台雖然都是藝文，但服務範圍不同；上稿時不能只用相同簡介。",
+    "課程與活動提供的是長期查詢入口，並非個別活動場次。不得杜撰時間、票價、名額或免費資格。"
+  ],
+  "items": [
+    {
+      "id": "b3-health-wellbeing",
+      "name": "心快活｜心理健康學習平台",
+      "categories": [
+        "health"
+      ],
+      "topics": [
+        "stress",
+        "boundaries",
+        "mental-support"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "衛生與心理健康"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "提供職場壓力、家庭關係、親子溝通等心理健康主題與自我學習課程，適合先從知識閱讀開始。",
+      "url": "https://wellbeing.mohw.gov.tw/nor/main/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "心快活｜心理健康學習平台",
+          "url": "https://wellbeing.mohw.gov.tw/nor/main/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://wellbeing.mohw.gov.tw/nor/main/",
+        "evidence": "首頁及課程區官方頁可讀；課程區含職場適應、家庭與親密關係等分類",
+        "notConfirmed": "首頁／課程主題，不代表逐單元學習均免註冊或免費",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-learning-lifelong-course",
+      "name": "教育部終身學習資源平臺｜課程與資源",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "open-learning",
+        "life-skills",
+        "local-events"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "教育與學習"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "可依縣市、時間及來源搜尋社區學習、數位培力與其他終身學習課程；選定課程後再看主辦單位招生內容。",
+      "url": "https://lle.moe.edu.tw/lesson-resource/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "教育部終身學習資源平臺｜課程與資源",
+          "url": "https://lle.moe.edu.tw/lesson-resource/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://lle.moe.edu.tw/lesson-resource/",
+        "evidence": "官方查詢頁含22縣市、起訖日期、來源及課程／資源切換",
+        "notConfirmed": "查詢結果會更動；費用、資格及名額不是本站確認事項",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-learning-thirtyplus",
+      "name": "教育部 30⁺ 大學｜跨領域學分學程",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "open-learning",
+        "life-skills"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "教育與學習"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "以進修目的查找開課學校、學分學程及 FAQ；適用對象、學費與是否授學分須按該校公告。",
+      "url": "https://lle.moe.edu.tw/life-college/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "教育部 30⁺ 大學｜跨領域學分學程",
+          "url": "https://lle.moe.edu.tw/life-college/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://lle.moe.edu.tw/life-college/",
+        "evidence": "官方搜尋頁和 FAQ 存在，列年齡、學歷、收費等問答",
+        "notConfirmed": "不得視為人人免費或自動取得正式大學生學籍",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-learning-community-college",
+      "name": "教育部全國社區大學教育資訊網",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "open-learning",
+        "life-skills"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "教育與學習"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "先找所在縣市的社區大學，再前往各校查看當期課表、報名日期及課程費用。",
+      "url": "https://cc.moe.edu.tw/school",
+      "phones": [],
+      "sources": [
+        {
+          "title": "教育部全國社區大學教育資訊網",
+          "url": "https://cc.moe.edu.tw/school"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://cc.moe.edu.tw/school",
+        "evidence": "教育部終身學習券官網直接指向此站，子頁可由官方索引辨識",
+        "notConfirmed": "本次直接擷取站點逾時；需用台灣 Safari 再驗入口；不保證班別皆可報名",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-learning-iculture",
+      "name": "文化部 iCulture｜全台藝文活動查詢",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "local-events",
+        "life-skills"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "藝文與活動"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "可查展覽、講座、親子與閱讀活動，也能找博物館、特色圖書館與文化空間；參加前回主辦公告確認日期。",
+      "url": "https://cloud.culture.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "文化部 iCulture｜全台藝文活動查詢",
+          "url": "https://cloud.culture.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://cloud.culture.tw/",
+        "evidence": "官方首頁可讀，列找活動、閱讀活動、親子活動與文化空間分類",
+        "notConfirmed": "首頁推薦有歷史場次，不能直接視為仍開放報名",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-learning-moc-events",
+      "name": "文化部藝文活動平台｜部屬館所",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "local-events",
+        "open-learning"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "藝文與活動"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "從文化部所屬館所的入口尋找展覽、導覽、講座及活動；實際費用、預約方式依個別館所。",
+      "url": "https://event.culture.tw/",
+      "phones": [],
+      "sources": [
+        {
+          "title": "文化部藝文活動平台｜部屬館所",
+          "url": "https://event.culture.tw/"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://event.culture.tw/",
+        "evidence": "官方首頁可讀，明列國家博物館、文化館所等入口",
+        "notConfirmed": "與 iCulture 用途相近但主要聚焦部屬館所；勿重複建立同一單場活動",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-learning-taipei-life",
+      "name": "臺北市終身學習網站｜課程查詢",
+      "categories": [
+        "learning"
+      ],
+      "topics": [
+        "local-events",
+        "life-skills",
+        "open-learning"
+      ],
+      "regions": [
+        "taipei"
+      ],
+      "serviceTypes": [
+        "教育與學習"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "臺北市民可依行政區、開課單位與美術、語言、運動、科技等類別比較當期課程。",
+      "url": "https://lle.tp.edu.tw/course",
+      "phones": [],
+      "sources": [
+        {
+          "title": "臺北市終身學習網站｜課程查詢",
+          "url": "https://lle.tp.edu.tw/course"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://lle.tp.edu.tw/course",
+        "evidence": "臺北市政府教育局入口可讀，含行政區、學群分類等篩選",
+        "notConfirmed": "僅適用臺北市，不能設成全國性資源；課程費用及名額依開課單位",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-family-parenting-learning",
+      "name": "教育部家庭教育資源網｜親職與家庭學習",
+      "categories": [
+        "life-family"
+      ],
+      "topics": [
+        "parenting",
+        "local-family"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "育兒與家庭"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "可閱讀親子互動、家庭共學、家庭教育影音等正式學習資源，亦能從網站尋找各縣市家庭教育中心。",
+      "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+      "phones": [],
+      "sources": [
+        {
+          "title": "教育部家庭教育資源網｜親職與家庭學習",
+          "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+        "evidence": "官方索引顯示社會大眾學習資源及家庭教育中心；部分官方單篇文章可從索引確認",
+        "notConfirmed": "自動擷取部分頁面逾時；已有文章可能年代較久，引用時要標原始日期",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    },
+    {
+      "id": "b3-health-menopause",
+      "name": "國民健康署｜更年期保健",
+      "categories": [
+        "health"
+      ],
+      "topics": [
+        "womens-health",
+        "hormones"
+      ],
+      "regions": [
+        "national"
+      ],
+      "serviceTypes": [
+        "衛生與心理健康"
+      ],
+      "audience": "一般民眾；個別課程或服務之適用條件以來源公告為準",
+      "summary": "查詢更年期身心變化與日常保健的正式衛教，了解哪些症狀值得進一步諮詢醫療人員。",
+      "url": "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=218",
+      "phones": [],
+      "sources": [
+        {
+          "title": "國民健康署｜更年期保健",
+          "url": "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=218"
+        }
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT（AI）官方來源研究；非擁有人逐頁人工核對",
+        "result": "官網來源第一輪交叉查核完成，仍為未核准候選",
+        "scope": "官方網站身分、讀者可查用途、服務範圍與必要提醒",
+        "source": "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=218",
+        "evidence": "國民健康署官方專題可由網站索引辨識；2025年更年期保健公告可提供佐證",
+        "notConfirmed": "直接擷取專題頁曾回傳502；個人症狀及治療仍需醫事人員評估",
+        "level": "official-navigation-candidate"
+      },
+      "checkedAt": null,
+      "status": "待確認",
+      "published": false
+    }
+  ]
+}

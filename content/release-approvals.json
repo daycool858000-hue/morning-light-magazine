@@ -1,0 +1,1437 @@
+{
+  "_說明": "2026-10-15 網站發起人於 ChatGPT 對話整批核准 16 筆入口、4 支專線及 110 SMS 入口、9 張 AI 示意圖片進入未來正式版；未核准 main 合併或網站部署。snapshot 與目前記錄完全吻合才可公開；照片同時比對原圖、已輸出尺寸與處理資訊。此為內容發布核准，非人工逐頁查核或法律專業鑑定。",
+  "approvedAt": "2026-10-15",
+  "approvedBy": "網站發起人（整批發布核准）",
+  "scope": {
+    "resources": "機構名稱、官方網址、既有有根據的基本簡介、服務類型與來源；不包含未查核的特定資格、收費、詳細服務時間",
+    "hotlines": "110、119、113、1925 的號碼、用途、官方來源與服務時間",
+    "channels": "僅官方 110 SMS 號碼資訊連結與已核對的使用說明",
+    "photos": "9 張現有 AI 示意圖及目前裁切；cat-city 使用避開地標的既有版本"
+  },
+  "resources": {
+    "1980": {
+      "snapshot": {
+        "id": "1980",
+        "name": "張老師基金會",
+        "categories": [
+          "health"
+        ],
+        "topics": [
+          "mental-support",
+          "stress"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "衛生與心理健康",
+          "民間團體"
+        ],
+        "audience": "需要情緒支持與陪伴的民眾",
+        "summary": "提供 1980 張老師專線、函件與網路輔導等情緒支持服務的民間機構。專線不是 24 小時服務，實際時段以官網公告為準。",
+        "url": "https://www.1980.org.tw/",
+        "phones": [
+          {
+            "label": "1980 張老師專線",
+            "number": "1980",
+            "hours": "非 24 小時；官網公告為週一至週六 9:00–12:00、14:00–17:00、18:00–21:30，週日 9:00–12:00、14:00–17:00，各地區依人力調整"
+          }
+        ],
+        "sources": [
+          {
+            "title": "張老師基金會官方網站",
+            "url": "https://www.1980.org.tw/"
+          },
+          {
+            "title": "張老師基金會「張老師服務」",
+            "url": "https://www.1980.org.tw/service_item_show.php?service_item_id=1"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.1980.org.tw/",
+          "evidence": "張老師基金會「張老師服務」頁：1980 電話輔導、函件與網路輔導；服務時段非 24 小時。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "npa": {
+      "snapshot": {
+        "id": "npa",
+        "name": "內政部警政署",
+        "categories": [
+          "law"
+        ],
+        "topics": [
+          "official-complaints"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "警政與保護"
+        ],
+        "audience": "一般民眾",
+        "summary": "全國警政主管機關，提供報案方式、警政服務與相關公告的官方入口。",
+        "url": "https://www.npa.gov.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "內政部警政署官方網站",
+            "url": "https://www.npa.gov.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.npa.gov.tw/",
+          "evidence": "警政署全球資訊網首頁，有「110報案」等便民服務與公告入口。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "npa-110-sms": {
+      "snapshot": {
+        "id": "npa-110-sms",
+        "name": "警政署 110 簡訊報案資訊",
+        "categories": [],
+        "topics": [],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "警政與保護"
+        ],
+        "audience": "不便以語音報案的民眾",
+        "summary": "警政署公布的各縣市警察局手機簡訊報案號碼與傳真報案號碼。簡訊報案需使用各縣市專用號碼，並非直接傳送至 110；只接受文字簡訊（SMS）。",
+        "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+        "phones": [],
+        "sources": [
+          {
+            "title": "內政部警政署「110聽語障人士報案專線」",
+            "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+          "evidence": "警政署「110聽語障人士報案專線」頁（更新日期 115-07-20）列出各縣市警察局手機簡訊與傳真報案號碼，並註明只提供文字簡訊（SMS）。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "mohw-113": {
+      "snapshot": {
+        "id": "mohw-113",
+        "name": "衛生福利部 113 保護專線",
+        "categories": [
+          "life-family"
+        ],
+        "topics": [
+          "family-finance"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "警政與保護",
+          "社會福利"
+        ],
+        "audience": "家庭暴力、性侵害、性騷擾，以及兒少、老人與身心障礙者保護等需求者",
+        "summary": "衛生福利部的保護專線官方說明頁，介紹 113 的服務內容與求助方式。",
+        "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+        "phones": [
+          {
+            "label": "113 保護專線",
+            "number": "113",
+            "hours": "24 小時全年無休、免付費，依保護服務司官方介紹頁"
+          }
+        ],
+        "sources": [
+          {
+            "title": "衛生福利部保護服務司 113 保護專線",
+            "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+          "evidence": "保護服務司「113保護專線介紹」頁：24 小時全年無休、免付費，受理家庭暴力、性侵害、性騷擾及兒少、老人、身心障礙者保護的求助與通報。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "mohw": {
+      "snapshot": {
+        "id": "mohw",
+        "name": "衛生福利部",
+        "categories": [
+          "health",
+          "life-family"
+        ],
+        "topics": [
+          "womens-health",
+          "family-finance",
+          "long-term-care"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "衛生與心理健康",
+          "社會福利"
+        ],
+        "audience": "一般民眾",
+        "summary": "全國衛生與社會福利主管機關，提供健康、社福、長照與保護服務等政策資訊入口。",
+        "url": "https://www.mohw.gov.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "衛生福利部官方網站",
+            "url": "https://www.mohw.gov.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方機關身分、入口網址與本站簡介",
+          "source": "https://www.mohw.gov.tw/",
+          "evidence": "衛生福利部官方首頁已可讀取（導向 mp-1.html），基本衛生、社福相關入口符合本站概述；先前的讀取受阻已排除。",
+          "notConfirmed": "特定補助或服務資格、費用與期限",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "siarc": {
+      "snapshot": {
+        "id": "siarc",
+        "name": "性影像處理中心",
+        "categories": [
+          "law"
+        ],
+        "topics": [
+          "intimate-images"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "警政與保護"
+        ],
+        "audience": "性影像遭不當散布或有疑慮者",
+        "summary": "衛生福利部設立的性影像處理相關服務入口，說明申訴與移除協助方式。本站不接收任何影像或個案資料，請直接洽詢該中心。",
+        "url": "https://siarc.mohw.gov.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "性影像處理中心官方網站",
+            "url": "https://siarc.mohw.gov.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://siarc.mohw.gov.tw/",
+          "evidence": "衛生福利部性影像處理中心首頁：申訴諮詢、移除下架受理與線上諮詢入口。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "laf": {
+      "snapshot": {
+        "id": "laf",
+        "name": "財團法人法律扶助基金會",
+        "categories": [
+          "law"
+        ],
+        "topics": [
+          "legal-aid"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "法律扶助"
+        ],
+        "audience": "符合基金會扶助條件者（以官方公告為準）",
+        "summary": "提供法律扶助申請說明、資格查詢與各地分會資訊的官方網站。",
+        "url": "https://www.laf.org.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "法律扶助基金會官方網站",
+            "url": "https://www.laf.org.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.laf.org.tw/",
+          "evidence": "法律扶助基金會首頁：法律諮詢、申請法扶律師、扶助資格說明與分會資訊入口。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "mol": {
+      "snapshot": {
+        "id": "mol",
+        "name": "勞動部",
+        "categories": [
+          "career",
+          "law"
+        ],
+        "topics": [
+          "gender-equality-work",
+          "parental-leave",
+          "workplace-bullying",
+          "pregnancy-protection",
+          "dismissal",
+          "re-employment"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "勞動與就業"
+        ],
+        "audience": "勞工、求職者與雇主",
+        "summary": "全國勞動主管機關，提供勞動法令、性別工作平等、勞資爭議與就業政策的官方說明。",
+        "url": "https://www.mol.gov.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "勞動部官方網站",
+            "url": "https://www.mol.gov.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.mol.gov.tw/",
+          "evidence": "勞動部全球資訊網：勞動法令、勞動關係、勞動條件與就業平等等業務專區。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "taiwanjobs": {
+      "snapshot": {
+        "id": "taiwanjobs",
+        "name": "台灣就業通",
+        "categories": [
+          "career",
+          "learning"
+        ],
+        "topics": [
+          "job-seeking",
+          "re-employment",
+          "vocational-training",
+          "employment-centers",
+          "job-training",
+          "workplace-skills"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "勞動與就業",
+          "教育與學習"
+        ],
+        "audience": "求職者、轉職者與想參加職業訓練的民眾",
+        "summary": "勞動部的就業服務平台，可查詢職缺、職業訓練課程與就業服務據點。",
+        "url": "https://www.taiwanjobs.gov.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "台灣就業通官方網站",
+            "url": "https://www.taiwanjobs.gov.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.taiwanjobs.gov.tw/",
+          "evidence": "台灣就業通首頁（勞動部勞動力發展署）：找工作、找課程、微型創業等功能。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "mohw-domhaoh": {
+      "snapshot": {
+        "id": "mohw-domhaoh",
+        "name": "衛生福利部心理健康司",
+        "categories": [
+          "health"
+        ],
+        "topics": [
+          "mental-support",
+          "counseling",
+          "stress"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "衛生與心理健康"
+        ],
+        "audience": "一般民眾",
+        "summary": "心理健康政策主管單位，提供心理健康資源、各縣市心理衛生中心與相關方案資訊。",
+        "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+        "phones": [
+          {
+            "label": "1925 安心專線",
+            "number": "1925",
+            "hours": "24 小時、免付費，依心理健康司官方頁"
+          }
+        ],
+        "sources": [
+          {
+            "title": "衛生福利部心理健康司",
+            "url": "https://dep.mohw.gov.tw/DOMHAOH/"
+          },
+          {
+            "title": "心理健康司「1925安心專線（依舊愛我）」",
+            "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://dep.mohw.gov.tw/DOMHAOH/",
+          "evidence": "心理健康司首頁：1925 安心專線、青壯世代心理健康支持方案、各縣市社區心理諮商服務一覽表等入口。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "38-org": {
+      "snapshot": {
+        "id": "38-org",
+        "name": "現代婦女基金會",
+        "categories": [
+          "law",
+          "life-family"
+        ],
+        "topics": [
+          "legal-aid"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "民間團體",
+          "婦女福利"
+        ],
+        "audience": "需要相關支持服務的婦女（服務範圍待查核）",
+        "summary": "民間婦女服務機構。本站僅整理其公開的服務與法律知識資訊，不代表支持該機構的所有觀點。",
+        "url": "https://www.38.org.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "現代婦女基金會官方網站",
+            "url": "https://www.38.org.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.38.org.tw/",
+          "evidence": "現代婦女基金會首頁：家庭關係／親密暴力、性侵害、性騷擾及跟蹤騷擾、離婚家庭家事等服務項目。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "goh": {
+      "snapshot": {
+        "id": "goh",
+        "name": "勵馨基金會",
+        "categories": [
+          "life-family"
+        ],
+        "topics": [
+          "single-parent",
+          "local-family"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "民間團體",
+          "婦女福利",
+          "育兒與家庭"
+        ],
+        "audience": "婦女、少女與家庭（服務範圍待查核）",
+        "summary": "民間社會福利機構。本站僅整理其公開的支持服務資訊，不代表支持該機構的所有觀點。",
+        "url": "https://www.goh.org.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "勵馨基金會官方網站",
+            "url": "https://www.goh.org.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.goh.org.tw/",
+          "evidence": "勵馨基金會首頁：親密關係暴力／家庭暴力被害人服務、性暴力防治、兒少與家事商談等服務項目。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "awakening": {
+      "snapshot": {
+        "id": "awakening",
+        "name": "婦女新知基金會",
+        "categories": [
+          "law"
+        ],
+        "topics": [
+          "gender-equality-work"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "民間團體"
+        ],
+        "audience": "想了解相關法律知識的民眾（收錄範圍待查核）",
+        "summary": "民間婦女團體。本站僅考慮收錄其公開的法律知識與實用服務頁面，不收錄倡議或動員內容，也不代表支持該機構的觀點。",
+        "url": "https://www.awakening.org.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "婦女新知基金會官方網站",
+            "url": "https://www.awakening.org.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.awakening.org.tw/",
+          "evidence": "婦女新知基金會首頁：機構介紹與婚姻家庭法律諮詢熱線等資訊；本站不收錄倡議內容。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "moea": {
+      "snapshot": {
+        "id": "moea",
+        "name": "經濟部",
+        "categories": [
+          "career"
+        ],
+        "topics": [
+          "entrepreneurship",
+          "startup-guidance",
+          "startup-loans"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "創業輔導"
+        ],
+        "audience": "創業者與中小企業",
+        "summary": "經濟事務主管機關，可查詢中小企業與創業相關的輔導資源與政策說明。",
+        "url": "https://www.moea.gov.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "經濟部官方網站",
+            "url": "https://www.moea.gov.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.moea.gov.tw/",
+          "evidence": "經濟部官方網站，ChatGPT 讀取成功（Claude 2026-10-14 由 GitHub 機房讀取時被 Cloudflare 阻擋，未讀到內容）。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "gov-tw": {
+      "snapshot": {
+        "id": "gov-tw",
+        "name": "我的E政府",
+        "categories": [
+          "city",
+          "life-family"
+        ],
+        "topics": [
+          "family-finance",
+          "social-affairs"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "綜合政府服務"
+        ],
+        "audience": "一般民眾",
+        "summary": "政府服務的入口網站，可查詢各機關服務與線上申辦項目。",
+        "url": "https://www.gov.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "我的E政府",
+            "url": "https://www.gov.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.gov.tw/",
+          "evidence": "我的E政府（數位發展部）首頁：依人生大事與日常生活查詢各機關服務與線上申辦項目。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    },
+    "edu": {
+      "snapshot": {
+        "id": "edu",
+        "name": "教育部",
+        "categories": [
+          "learning"
+        ],
+        "topics": [
+          "family-education",
+          "open-learning"
+        ],
+        "regions": [
+          "national"
+        ],
+        "serviceTypes": [
+          "教育與學習"
+        ],
+        "audience": "一般民眾",
+        "summary": "教育主管機關，可查詢終身學習、家庭教育與社區學習相關政策與資源。",
+        "url": "https://www.edu.tw/",
+        "phones": [],
+        "sources": [
+          {
+            "title": "教育部官方網站",
+            "url": "https://www.edu.tw/"
+          }
+        ],
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）",
+          "result": "AI 官方來源核對完成；網站發起人已核准這筆基本入口於未來正式版使用（非人工逐頁查核）",
+          "scope": "官方入口網址、機構名稱與本站現有簡介",
+          "source": "https://www.edu.tw/",
+          "evidence": "教育部全球資訊網：終身學習等業務資訊入口。",
+          "notConfirmed": "申辦條件、費用、方案期限與服務時間細節",
+          "level": "official-entry"
+        },
+        "checkedAt": null,
+        "status": "待確認",
+        "published": true
+      }
+    }
+  },
+  "hotlines": {
+    "110": {
+      "snapshot": {
+        "id": "110",
+        "number": "110",
+        "title": "警察緊急報案",
+        "purpose": "遇到急難需要協助或救助、發現可疑或影響治安與交通的情況，或其他需要警察處理的事。",
+        "hours": "24 小時（依警政署「110為民服務全天候不打烊」，更新日期 115-08-04）",
+        "tel": "110",
+        "source": {
+          "title": "內政部警政署「110報案」",
+          "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950"
+        },
+        "status": "待確認",
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+          "level": "hotline-purpose-hours",
+          "scope": "專線號碼、用途、官方來源及服務時間",
+          "source": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950",
+          "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+        }
+      }
+    },
+    "113": {
+      "snapshot": {
+        "id": "113",
+        "number": "113",
+        "title": "保護專線",
+        "purpose": "家庭暴力、性侵害、性騷擾，以及兒童、少年、老人或身心障礙者受到虐待、疏忽等情況的求助、諮詢與通報。官方頁面提醒：若有立即人身安全危險，請先撥打 110。",
+        "hours": "24 小時全年無休，市話、公共電話、手機皆免付費（依保護服務司 113 保護專線介紹頁，更新時間 113-05-24）",
+        "tel": "113",
+        "source": {
+          "title": "衛生福利部保護服務司「113保護專線介紹」",
+          "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html"
+        },
+        "status": "待確認",
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+          "level": "hotline-purpose-hours",
+          "scope": "專線號碼、用途、官方來源及服務時間",
+          "source": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+          "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+        }
+      }
+    },
+    "119": {
+      "snapshot": {
+        "id": "119",
+        "number": "119",
+        "title": "消防與緊急救護",
+        "purpose": "火災、意外受傷、急病等需要消防或救護車的情況。",
+        "hours": "24 小時（依內政部消防署『119、112』官方說明）",
+        "tel": "119",
+        "source": {
+          "title": "內政部消防署｜119、112",
+          "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=66"
+        },
+        "status": "待確認",
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+          "level": "hotline-purpose-hours",
+          "scope": "專線號碼、用途、官方來源及服務時間",
+          "source": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=66",
+          "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+        }
+      }
+    },
+    "1925": {
+      "snapshot": {
+        "id": "1925",
+        "number": "1925",
+        "title": "安心專線",
+        "purpose": "有心理壓力或情緒困擾時，提供心理諮詢服務的專線。",
+        "hours": "24 小時、免付費（依心理健康司「1925安心專線（依舊愛我）」頁，更新時間 114-08-28）",
+        "tel": "1925",
+        "source": {
+          "title": "衛生福利部心理健康司「1925安心專線（依舊愛我）」",
+          "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html"
+        },
+        "status": "待確認",
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+          "level": "hotline-purpose-hours",
+          "scope": "專線號碼、用途、官方來源及服務時間",
+          "source": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html",
+          "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+        }
+      }
+    }
+  },
+  "channels": {
+    "sms-110": {
+      "snapshot": {
+        "id": "sms-110",
+        "title": "110 簡訊報案（聽語障人士及一般民眾）",
+        "text": "不方便說話時，可使用各縣市警察局設置的手機簡訊報案號碼。請注意：簡訊不是傳到 110，而是依所在縣市使用不同號碼；只能傳文字簡訊（SMS），不能傳圖片或影片等多媒體簡訊（MMS）。各縣市號碼請以警政署「110聽語障人士報案專線」頁面為準。",
+        "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+        "linkLabel": "前往警政署簡訊報案號碼表",
+        "status": "待確認",
+        "review": {
+          "date": "2026-10-15",
+          "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+          "level": "official-channel",
+          "scope": "官方 110 SMS 號碼資訊頁及簡訊使用限制",
+          "source": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+          "evidence": "只接受 SMS 文字；各縣市使用警政署公告的不同專用號碼，本站不自行複製門號表。"
+        }
+      }
+    }
+  },
+  "photos": {
+    "home-hero": {
+      "snapshot": {
+        "id": "home-hero",
+        "title": "首頁主視覺：晨光照入的客廳",
+        "usage": "首頁主視覺（電腦版寬幅、手機版直幅）",
+        "alt": "晨光照進明亮的客廳，一位女性背對畫面坐在沙發上捧著熱茶，窗邊有橄欖樹與龜背芋。（AI 生成示意圖）",
+        "brief": "寫實居家攝影。晨光從畫面右側的大窗斜射進來，室內有真實植物（龜背芋或橄欖樹盆栽）、米白亞麻布沙發、原木茶几、陶瓷茶杯。畫面左側 45% 保持明亮、單純、低細節（之後會疊上標題文字）。可有人物背影或局部（手捧杯子），但不需正面女性肖像。",
+        "prompt": "Photorealistic interior photograph, early morning sunlight streaming through a large window on the right, warm natural light with soft shadows and visible air haze, cozy Taiwanese apartment living room, cream linen sofa, light oak coffee table, ceramic tea cup with gentle steam, real potted plants (olive tree, monstera), muted warm beige and sage palette, calm and airy, left 45% of the frame bright and uncluttered for text overlay, 35mm lens, shallow depth of field, editorial lifestyle magazine photography, no text, no logo, no people facing camera",
+        "crops": {
+          "wide": {
+            "aspect": "16:7",
+            "focusX": 0.5,
+            "focusY": 0.42
+          },
+          "portrait": {
+            "aspect": "4:5",
+            "focusX": 0.86,
+            "focusY": 0.5
+          }
+        },
+        "minSize": "3200 × 1800 以上（橫幅原圖）",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途；人物為背影，未出現正面肖像；手部與杯子在原尺寸下未見明顯畸形；左側牆面明亮，適合疊放標題。原圖 1672×941，電腦版 16:7 裁切後原生寬 1672px，高解析度大螢幕會略顯柔焦；手機 4:5 裁切原生寬 753px。"
+      },
+      "originalGitBlobSha": "2f18dfec521cf9c7afd919c89a6538f629a7732e",
+      "generatedSnapshot": {
+        "wide": {
+          "aspect": "16:7",
+          "widths": [
+            480,
+            800,
+            1200,
+            1600,
+            1672
+          ],
+          "fallback": 1200,
+          "ratio": 2.2857142857142856,
+          "nativeWidth": 1672
+        },
+        "portrait": {
+          "aspect": "4:5",
+          "widths": [
+            480,
+            753
+          ],
+          "fallback": 753,
+          "ratio": 0.8,
+          "nativeWidth": 753
+        }
+      },
+      "assets": {
+        "home-hero-portrait-480.webp": "18c3ac93fea0a97530d12a361d3b7a242f64fb13",
+        "home-hero-portrait-753.jpg": "ca08ca8fa0b0dc999f50701122b4eeeeae250e8b",
+        "home-hero-portrait-753.webp": "92ab50211536d19c36e224dbefd121788b535a38",
+        "home-hero-wide-1200.jpg": "f3005708488df3ac28a62954c85498d999f4ca90",
+        "home-hero-wide-1200.webp": "6b100efea0c51d12f0876e9a2fe7ac06000fc4fe",
+        "home-hero-wide-1600.webp": "5d3605b21437ff3fc6eca609dbcbbe657b55988e",
+        "home-hero-wide-1672.webp": "4f9cbaa53fc437ba1d9fc2785fe3971089d167d6",
+        "home-hero-wide-480.webp": "479f91fea9a8d12ab67635db63995194f8f0cc98",
+        "home-hero-wide-800.webp": "68ce46ab3ea2d28ddb14db89429cd89810efa650"
+      }
+    },
+    "cat-life-family": {
+      "snapshot": {
+        "id": "cat-life-family",
+        "title": "生活與家庭：灑滿陽光的餐桌",
+        "usage": "首頁分類卡、生活與家庭頁主視覺",
+        "alt": "陽光灑在窗邊的木頭餐桌上，桌上有一束白色小花、打開的書、兩只杯子與一盤橘子。（AI 生成示意圖）",
+        "brief": "家庭生活感但不需人物：原木餐桌、白色小花、打開的書、兩只杯子（暗示家人）、窗邊植物。溫暖、乾淨、不擁擠。",
+        "prompt": "Photorealistic lifestyle photograph, morning sunlight on a wooden dining table by a window, small bouquet of white flowers in a glass vase, an open book, two ceramic mugs, potted plants on the windowsill, warm cream and sage tones, soft natural shadows, calm family home atmosphere, editorial magazine style, no text, no logo, no people",
+        "crops": {
+          "card": {
+            "aspect": "4:3",
+            "focusX": 0.5,
+            "focusY": 0.55
+          },
+          "banner": {
+            "aspect": "21:9",
+            "focusX": 0.5,
+            "focusY": 0.55
+          }
+        },
+        "minSize": "2400 × 1600 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途；書頁為不可辨識的線條，無可讀文字；未見明顯生成瑕疵。"
+      },
+      "originalGitBlobSha": "c6e7e85c20b49a28a302466af43cda013a356a4f",
+      "generatedSnapshot": {
+        "card": {
+          "aspect": "4:3",
+          "widths": [
+            480,
+            800,
+            1200,
+            1255
+          ],
+          "fallback": 1200,
+          "ratio": 1.3333333333333333,
+          "nativeWidth": 1255
+        },
+        "banner": {
+          "aspect": "21:9",
+          "widths": [
+            480,
+            800,
+            1200,
+            1600,
+            1672
+          ],
+          "fallback": 1200,
+          "ratio": 2.3333333333333335,
+          "nativeWidth": 1672
+        }
+      },
+      "assets": {
+        "cat-life-family-banner-1200.jpg": "7fee781048fbc58db46fb484ce5bd562c7952325",
+        "cat-life-family-banner-1200.webp": "76095174194dc538e67d5059b227cbad78d3a668",
+        "cat-life-family-banner-1600.webp": "864d2e822713bfacd8beb9c31d1e0cfc3fdd41da",
+        "cat-life-family-banner-1672.webp": "e427d5de99c58c86143e1ae7cc8fb6d17ea406f7",
+        "cat-life-family-banner-480.webp": "97eac66599ee7bcf3619d4848df5b207532d5e10",
+        "cat-life-family-banner-800.webp": "7d67155502e71d8e1af1b6ef14fe7005e8cfa56b",
+        "cat-life-family-card-1200.jpg": "b2a5af155637f855221bf8427a6dba9ae157d05b",
+        "cat-life-family-card-1200.webp": "7a955937255a7228b253e1a9ee577905879ac873",
+        "cat-life-family-card-1255.webp": "f8de5fe6c3a7ef9ae9b73e696a54fe849c61062c",
+        "cat-life-family-card-480.webp": "41461a9ca6c8896baa028ca1c6afd9b2bc37f220",
+        "cat-life-family-card-800.webp": "79010beab80b6e4c83c9500a76381256f480297e"
+      }
+    },
+    "cat-career": {
+      "snapshot": {
+        "id": "cat-career",
+        "title": "職涯與創業：晨光中的工作桌",
+        "usage": "首頁分類卡、職涯與創業頁主視覺",
+        "alt": "晨光下的木質工作桌，上面有筆記型電腦、攤開的筆記本與鋼筆、咖啡杯和小盆栽。（AI 生成示意圖）",
+        "brief": "工作與重新出發：木質工作桌、筆電（螢幕不顯示文字或品牌）、筆記本、鋼筆、小盆栽。專業、清爽、有希望感。",
+        "prompt": "Photorealistic photograph of a light wooden work desk by a sunny window in the morning, open laptop with blank screen and no brand logo, paper notebook and fountain pen, small potted sprout plant, coffee cup, warm natural light and soft shadows, neutral beige and sage palette, clean and hopeful mood, editorial lifestyle magazine photography, no text, no logo, no people",
+        "crops": {
+          "card": {
+            "aspect": "4:3",
+            "focusX": 0.5,
+            "focusY": 0.5
+          },
+          "banner": {
+            "aspect": "21:9",
+            "focusX": 0.5,
+            "focusY": 0.5
+          }
+        },
+        "minSize": "2400 × 1600 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途。V3.2 已局部修除筆電鉸鏈處的類品牌字樣（3 倍放大檢視已無可辨識筆畫，修補處未見明顯接縫）。【仍需確認】筆電整體外型（銀色機身、黑色鍵盤、螢幕上緣鏡頭）仍近似特定品牌筆電，但畫面上無標誌或文字；筆記本線圈位置略不自然（輕微）。",
+        "edits": "2026-10-14（V3.2）：鉸鏈處約 27×7 px 的模糊類品牌字樣已以相鄰邊框像素內插覆蓋；未修圖原始檔保存在 content/photos/unedited/cat-career.png。"
+      },
+      "originalGitBlobSha": "19570b4237cf869265f94aa9d2ccc1a4ea4f1613",
+      "generatedSnapshot": {
+        "card": {
+          "aspect": "4:3",
+          "widths": [
+            480,
+            800,
+            1200,
+            1255
+          ],
+          "fallback": 1200,
+          "ratio": 1.3333333333333333,
+          "nativeWidth": 1255
+        },
+        "banner": {
+          "aspect": "21:9",
+          "widths": [
+            480,
+            800,
+            1200,
+            1600,
+            1672
+          ],
+          "fallback": 1200,
+          "ratio": 2.3333333333333335,
+          "nativeWidth": 1672
+        }
+      },
+      "assets": {
+        "cat-career-banner-1200.jpg": "3e01ffc1498c526aa17ea1d29055405c441d7368",
+        "cat-career-banner-1200.webp": "26de437c79c73085b24864304b0d56366d1822b0",
+        "cat-career-banner-1600.webp": "9bd9d0ce43e6c39a1e7625f1eeb3a1fcfac58bd3",
+        "cat-career-banner-1672.webp": "0ed782fc2298aadf54256bdfef734d96ecd1acbd",
+        "cat-career-banner-480.webp": "543c0223ac8c1a8ca0a3fa7c8e8d334d9362cae9",
+        "cat-career-banner-800.webp": "cd68a2e9db92f4277e4dc5a412e94874f4492e8f",
+        "cat-career-card-1200.jpg": "b4993d688e0faf368d2c612c4f60742d95a8e058",
+        "cat-career-card-1200.webp": "1f52d973629478c6f0c02d8dbbf0dbda8361c90c",
+        "cat-career-card-1255.webp": "94001990491871fa84fff3431cfcfa7d167328b8",
+        "cat-career-card-480.webp": "4ef8e843b6252a557915867f26527e92922e1640",
+        "cat-career-card-800.webp": "c5560ed5a7575662f305d4645f061530f39e79b1"
+      }
+    },
+    "cat-health": {
+      "snapshot": {
+        "id": "cat-health",
+        "title": "身心健康：安靜的窗邊角落",
+        "usage": "首頁分類卡、身心健康頁主視覺",
+        "alt": "安靜的窗邊角落，圓桌上有插著綠色枝葉的陶瓶與一杯花草茶，扶手椅上搭著毛毯。（AI 生成示意圖）",
+        "brief": "休息與照顧自己：窗邊角落、陶瓷花瓶與綠色枝葉、一杯溫水或花草茶、摺好的毛毯。安靜、放鬆，避免醫療器材與病房意象。",
+        "prompt": "Photorealistic still life photograph, quiet corner by a window with gentle morning light, ceramic vase with fresh green eucalyptus branches, a glass of warm water or herbal tea, folded soft knit blanket, linen fabric, calm restful atmosphere, muted sage, cream and warm grey tones, soft shadows, editorial wellness magazine style, no text, no logo, no people, no medical equipment",
+        "crops": {
+          "card": {
+            "aspect": "4:3",
+            "focusX": 0.5,
+            "focusY": 0.5
+          },
+          "banner": {
+            "aspect": "21:9",
+            "focusX": 0.5,
+            "focusY": 0.5
+          }
+        },
+        "minSize": "2400 × 1600 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途；無醫療器材；未見明顯生成瑕疵。"
+      },
+      "originalGitBlobSha": "ce08c87b96924e35a5674a6de7096587769faeeb",
+      "generatedSnapshot": {
+        "card": {
+          "aspect": "4:3",
+          "widths": [
+            480,
+            800,
+            1200,
+            1255
+          ],
+          "fallback": 1200,
+          "ratio": 1.3333333333333333,
+          "nativeWidth": 1255
+        },
+        "banner": {
+          "aspect": "21:9",
+          "widths": [
+            480,
+            800,
+            1200,
+            1600,
+            1672
+          ],
+          "fallback": 1200,
+          "ratio": 2.3333333333333335,
+          "nativeWidth": 1672
+        }
+      },
+      "assets": {
+        "cat-health-banner-1200.jpg": "b7ddcbd3a4f6e8abf460f395dd14dd2c0414bd60",
+        "cat-health-banner-1200.webp": "7f4f576b72c6012ae022fc5eeb7bb61e07d35079",
+        "cat-health-banner-1600.webp": "0df3ace54d4d2c7e97e34e0d966bc5b2d2ba8e79",
+        "cat-health-banner-1672.webp": "93d64800b77336817b84ce42f13dfe930d4039ba",
+        "cat-health-banner-480.webp": "3cd58368118e8808b6e38666f8f59627f77fe5fe",
+        "cat-health-banner-800.webp": "3057dbfd71ff78981db7982f802395dfcb040858",
+        "cat-health-card-1200.jpg": "c9718cc4da6b91899bf10a2e8462c2e74a424d7c",
+        "cat-health-card-1200.webp": "d73dd895a4c0103f6cb9f824caad10ff321ac48d",
+        "cat-health-card-1255.webp": "b1cbd39af22cfd68c1e19d2f286b7c097f563777",
+        "cat-health-card-480.webp": "0019531a7c5250a8d02cf68a7defca0291719bf4",
+        "cat-health-card-800.webp": "7c5f4c57076afdbc0d5f78dba65753178c144226"
+      }
+    },
+    "cat-law": {
+      "snapshot": {
+        "id": "cat-law",
+        "title": "法律與權益：書桌上的文件與法律書籍",
+        "usage": "首頁分類卡、法律與權益頁主視覺",
+        "alt": "陽光照在書桌上，桌上有夾著文件的資料板、鋼筆、幾本精裝書與文件袋。（AI 生成示意圖）",
+        "brief": "認識制度、保護自己：書桌上整齊的文件夾、幾本厚重書籍（書脊不可出現可辨識文字）、鋼筆、檯燈或植物。請避免法槌（台灣法院不使用法槌）、手銬、警察等意象。",
+        "prompt": "Photorealistic photograph of a tidy study desk in soft morning light, neat stack of document folders, several thick hardcover books with plain spines and no readable text, fountain pen, small green plant, warm wood and cream paper tones, calm and trustworthy mood, editorial magazine photography, no text, no logo, no gavel, no people",
+        "crops": {
+          "card": {
+            "aspect": "4:3",
+            "focusX": 0.5,
+            "focusY": 0.5
+          },
+          "banner": {
+            "aspect": "21:9",
+            "focusX": 0.5,
+            "focusY": 0.5
+          }
+        },
+        "minSize": "2400 × 1600 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途；文件為空白頁，書脊無可讀文字，未使用法槌或機構標誌；未見明顯生成瑕疵。"
+      },
+      "originalGitBlobSha": "fbd2327659f9332e4316a940807805d236303ebf",
+      "generatedSnapshot": {
+        "card": {
+          "aspect": "4:3",
+          "widths": [
+            480,
+            800,
+            1200,
+            1255
+          ],
+          "fallback": 1200,
+          "ratio": 1.3333333333333333,
+          "nativeWidth": 1255
+        },
+        "banner": {
+          "aspect": "21:9",
+          "widths": [
+            480,
+            800,
+            1200,
+            1600,
+            1672
+          ],
+          "fallback": 1200,
+          "ratio": 2.3333333333333335,
+          "nativeWidth": 1672
+        }
+      },
+      "assets": {
+        "cat-law-banner-1200.jpg": "e02f97188bcf1b7fa78ca29739dede500f6ac937",
+        "cat-law-banner-1200.webp": "03d4353a5d251a038c5648be8c5e961e49cdf362",
+        "cat-law-banner-1600.webp": "f6ea2d5dc67f552a93a7b93133e214febeffce71",
+        "cat-law-banner-1672.webp": "622fa272d088e78150a45d0c8626617983358658",
+        "cat-law-banner-480.webp": "6ab1ddcc6adece4a75fabdf48cceb7496d9e1ea5",
+        "cat-law-banner-800.webp": "51d1a0db06aba7a78a6912f1ab6966358d5bc40c",
+        "cat-law-card-1200.jpg": "16f6376fbc76bb3750e338688499a084f2a3e94d",
+        "cat-law-card-1200.webp": "a014beaeb70009e5d008b7d51fe7b7c16d0cb64c",
+        "cat-law-card-1255.webp": "701850652407878def1472799e0265c44da359ea",
+        "cat-law-card-480.webp": "e6835abdef4ce47267ad4aa2ec6c88938a858cb1",
+        "cat-law-card-800.webp": "57f9a6849ceb1563802b1cd13a783c93c068e1ff"
+      }
+    },
+    "cat-city": {
+      "snapshot": {
+        "id": "cat-city",
+        "title": "城市與福利：清晨的城市與河濱綠地",
+        "usage": "首頁分類卡、城市與福利頁主視覺",
+        "alt": "晨光下的河濱步道與綠地，遠方是城市天際線。（AI 生成示意圖，非特定地點實景）",
+        "brief": "台灣城市生活感：清晨藍天下的城市天際線、河濱綠地與步道。避免特定可辨識的政府建築或品牌招牌；若出現地標，需確認無生成變形。",
+        "prompt": "Photorealistic cityscape photograph of a modern East Asian city at early morning, clear soft blue sky, riverside park with lush green trees and walking path in the foreground, gentle golden light, airy and fresh, natural colors, no readable signs, no brand logos, editorial travel magazine photography, no people in focus",
+        "crops": {
+          "card": {
+            "aspect": "4:3",
+            "focusX": 0.3,
+            "focusY": 0.5
+          },
+          "banner": {
+            "aspect": "21:9",
+            "focusX": 0,
+            "focusY": 0.45,
+            "maxWidth": 1320
+          }
+        },
+        "minSize": "2400 × 1600 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "【需確認】原圖天際線中有明顯可辨識的台北 101 造型高樓，河岸、橋梁與建築配置並非真實地理位置。V3.2 起首頁分類卡（focusX 0.3）與分類頁橫幅（maxWidth 1320）兩種裁切都已不含該高樓，但原圖仍含地標，且裁切後解析度偏低。原先曾建議重新生成，但使用者於 2026-10-15 同意先保留現行已裁掉地標的版本，停止本階段反覆生圖；原圖仍含地標，大螢幕仍有柔焦限制。本決定僅是暫不換圖，尚非素材最終發布核准。",
+        "caption": "示意圖像（AI 生成），非特定地點實景。",
+        "edits": "2026-10-14（V3.2）：分類頁 21:9 橫幅改為只取原圖左側 1320px（crops.banner.maxWidth），避開台北 101 造型高樓；原圖未修改。代價是橫幅原生寬度由 1672px 降為 1320px，大螢幕略顯柔焦。 2026-10-15：另試作的四張替代圖片仍出現 101 式地標／部分夾帶內嵌文字，全部未採用、未上傳至儲存庫；依使用者決定保留現有裁切版本，不改動 status／checkedAt。"
+      },
+      "originalGitBlobSha": "b2c695a730da6cb7904b85fe22d3c54a216a4d2f",
+      "generatedSnapshot": {
+        "card": {
+          "aspect": "4:3",
+          "widths": [
+            480,
+            800,
+            1200,
+            1255
+          ],
+          "fallback": 1200,
+          "ratio": 1.3333333333333333,
+          "nativeWidth": 1255
+        },
+        "banner": {
+          "aspect": "21:9",
+          "widths": [
+            480,
+            800,
+            1200,
+            1320
+          ],
+          "fallback": 1200,
+          "ratio": 2.3333333333333335,
+          "nativeWidth": 1320
+        }
+      },
+      "assets": {
+        "cat-city-banner-1200.jpg": "1c0c39309a049210025fbe3610decf032b2839c8",
+        "cat-city-banner-1200.webp": "9b70832d9d5e809d3e7499ac78bf386d7ebb31ea",
+        "cat-city-banner-1320.webp": "f857f86a7e99b0d56def235ec2d1bfbff55be6e9",
+        "cat-city-banner-480.webp": "ec9dc0a08f2459fce6e1da4efcf650cf1fd92e14",
+        "cat-city-banner-800.webp": "5e97548a6caaef946598a531fc320e502bc69052",
+        "cat-city-card-1200.jpg": "c21e36cb96ed18a5c69952a694013b98f9b7404f",
+        "cat-city-card-1200.webp": "0fd602fdb729d645c522faa0bca394d62464b2fd",
+        "cat-city-card-1255.webp": "4c60fed17c81224af8cf07ed5471c01ef6351651",
+        "cat-city-card-480.webp": "ac5078169adc946180d501f6ff92863c2223c3fd",
+        "cat-city-card-800.webp": "a48789c3aa1316f872d67faa129015396f1bc67a"
+      }
+    },
+    "cat-learning": {
+      "snapshot": {
+        "id": "cat-learning",
+        "title": "學習與活動：攤開的筆記與課程手冊",
+        "usage": "首頁分類卡、學習與活動頁主視覺",
+        "alt": "晨光下的書桌，攤開的空白筆記本、鉛筆、桌曆、一杯茶與一疊書。（AI 生成示意圖）",
+        "brief": "學習新事物：攤開的筆記本（不可出現可讀文字）、鉛筆、桌曆、茶杯、書本。明亮、有期待感。",
+        "prompt": "Photorealistic photograph of an open notebook with blank pages, pencils, a small desk calendar without readable text, a stack of books and a cup of tea on a sunlit table, morning light, warm cream, terracotta and sage accents, inviting learning atmosphere, editorial lifestyle magazine photography, no text, no logo, no people",
+        "crops": {
+          "card": {
+            "aspect": "4:3",
+            "focusX": 0.5,
+            "focusY": 0.5
+          },
+          "banner": {
+            "aspect": "21:9",
+            "focusX": 0.5,
+            "focusY": 0.5
+          }
+        },
+        "minSize": "2400 × 1600 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途；筆記本與桌曆為空白，無可讀文字；未見明顯生成瑕疵。"
+      },
+      "originalGitBlobSha": "0306364668ca885a89933337f5c2dee6c00fed82",
+      "generatedSnapshot": {
+        "card": {
+          "aspect": "4:3",
+          "widths": [
+            480,
+            800,
+            1200,
+            1255
+          ],
+          "fallback": 1200,
+          "ratio": 1.3333333333333333,
+          "nativeWidth": 1255
+        },
+        "banner": {
+          "aspect": "21:9",
+          "widths": [
+            480,
+            800,
+            1200,
+            1600,
+            1672
+          ],
+          "fallback": 1200,
+          "ratio": 2.3333333333333335,
+          "nativeWidth": 1672
+        }
+      },
+      "assets": {
+        "cat-learning-banner-1200.jpg": "77ebbc77148132be23ae34a73b69e13a17ac55fe",
+        "cat-learning-banner-1200.webp": "b0f45d9248df86ab2168c080365f13457aafed11",
+        "cat-learning-banner-1600.webp": "49b0e6939d25301c398fe215a5130bed591504dd",
+        "cat-learning-banner-1672.webp": "087dd27d5e28f2a7a25c3a2585856d325634f2be",
+        "cat-learning-banner-480.webp": "78473e39edafb8aa1083a054addb1aa1d44e86c8",
+        "cat-learning-banner-800.webp": "0f07dbf0eeac77aee295002fb0d8a1fa0db27b45",
+        "cat-learning-card-1200.jpg": "d2350f52fbe5aa72e680511d7d59179b61b85e65",
+        "cat-learning-card-1200.webp": "d227d98e05b37cc7d9074f12f721d6af14c81a36",
+        "cat-learning-card-1255.webp": "375fdac3b8883225c17a238c49fed713a3594916",
+        "cat-learning-card-480.webp": "3c7b2b059c39583cdcb8330306f674258a066188",
+        "cat-learning-card-800.webp": "b7ab1ed7e2491f05f51567486948b5b405f732bc"
+      }
+    },
+    "home-city-band": {
+      "snapshot": {
+        "id": "home-city-band",
+        "title": "首頁城市資源區：清晨的街道",
+        "usage": "首頁「城市資源入口」區塊",
+        "alt": "清晨林蔭人行道上，一位女性背對畫面散步，兩旁是行道樹與種滿植物的公寓。（AI 生成示意圖，非特定地點實景）",
+        "brief": "台灣日常街景：清晨的人行道、行道樹、騎樓或公寓陽台、光影灑落。不可出現可辨識招牌、車牌或人臉。與「城市與福利」分類圖不同場景，避免重複。",
+        "prompt": "Photorealistic street photograph of a quiet tree-lined sidewalk in an East Asian city at early morning, sunlight filtering through leaves onto the pavement, low-rise apartment buildings with balconies and plants, calm and safe atmosphere, warm natural tones, no readable signs, no license plates, no recognizable faces, editorial magazine photography",
+        "crops": {
+          "band": {
+            "aspect": "3:2",
+            "focusX": 0.5,
+            "focusY": 0.5
+          }
+        },
+        "minSize": "2000 × 1333 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途；人物為背影，無可辨識臉孔、車牌或招牌；街景為一般化示意，未見明顯生成瑕疵。"
+      },
+      "originalGitBlobSha": "c469154153dc84d4099be31f145eaba6977dcaee",
+      "generatedSnapshot": {
+        "band": {
+          "aspect": "3:2",
+          "widths": [
+            480,
+            800,
+            1200,
+            1412
+          ],
+          "fallback": 1200,
+          "ratio": 1.5,
+          "nativeWidth": 1412
+        }
+      },
+      "assets": {
+        "home-city-band-band-1200.jpg": "da6e45a0d15f54ac1cd811e7b3689d3cd3f27ef0",
+        "home-city-band-band-1200.webp": "30de52e2e557e7b3354d1c5d3bae322fbdefcd99",
+        "home-city-band-band-1412.webp": "e16caee08fa1112b7f55fd17b88d7b50aaa12649",
+        "home-city-band-band-480.webp": "ae2d6cdc09d930d401b8ebf1114c4a6019a96f91",
+        "home-city-band-band-800.webp": "e6faa2955cf7a87ba83405bb5a30d17126623308"
+      }
+    },
+    "home-learning-band": {
+      "snapshot": {
+        "id": "home-learning-band",
+        "title": "首頁學習區：窗邊的閱讀角",
+        "usage": "首頁「課程與學習活動」區塊",
+        "alt": "窗邊的閱讀角，扶手椅上放著打開的書與毛毯，旁邊是書架與小圓桌。（AI 生成示意圖）",
+        "brief": "閱讀與進修：窗邊扶手椅、打開的書、書架與植物。與「學習與活動」分類圖不同場景，避免重複。",
+        "prompt": "Photorealistic interior photograph of a cozy reading nook by a window in morning light, armchair with an open book, wooden bookshelf with plants and books without readable titles, soft warm light, cream and sage palette, calm and inspiring, editorial lifestyle magazine photography, no text, no logo, no people",
+        "crops": {
+          "band": {
+            "aspect": "3:2",
+            "focusX": 0.5,
+            "focusY": 0.5
+          }
+        },
+        "minSize": "2000 × 1333 以上",
+        "required": true,
+        "source": "ChatGPT 圖像生成工具（OpenAI），2026-10-14，由使用者要求製作的原創 AI 生成示意圖像；原始檔名見 docs/PHOTO-REVIEW.md",
+        "license": "依 OpenAI 使用條款，使用者擁有其輸出內容，OpenAI 將其對輸出的權利（如有）讓與使用者；本站不宣稱專屬著作權，也不保證與第三方作品絕無近似。使用前請再次確認最新條款內容。",
+        "checkedAt": null,
+        "status": "待檢查",
+        "aiGenerated": true,
+        "originalSize": "1672 × 941（PNG，無 EXIF／PNG 中繼資料）",
+        "review": "內容符合用途；書架書脊有模糊的類文字筆畫但不可閱讀（輕微）；構圖與 cat-health 相近（扶手椅＋小圓桌＋窗邊），整體風格重複度偏高。"
+      },
+      "originalGitBlobSha": "a41222b9120d701406962f3047353d35367ab527",
+      "generatedSnapshot": {
+        "band": {
+          "aspect": "3:2",
+          "widths": [
+            480,
+            800,
+            1200,
+            1412
+          ],
+          "fallback": 1200,
+          "ratio": 1.5,
+          "nativeWidth": 1412
+        }
+      },
+      "assets": {
+        "home-learning-band-band-1200.jpg": "5832779f3c0657799f1745f66bd5d1528bd61ad7",
+        "home-learning-band-band-1200.webp": "885726b1630c5264990d06ae34423d1945319853",
+        "home-learning-band-band-1412.webp": "15912d229ad9b283cde1a0075578e5d27585d85e",
+        "home-learning-band-band-480.webp": "7c9351a03950eb28568831955e4fdab2e1619075",
+        "home-learning-band-band-800.webp": "2e6f48feabac09ee1f5d707bb511ad0dd1a7f29c"
+      }
+    }
+  }
+}

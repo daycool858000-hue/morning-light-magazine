@@ -1,0 +1,74 @@
+# 僅在此檔加入開發分支時執行一次的完整備份／還原驗證。沒有 Pages 部署權限。
+name: 由己最新版備份與還原驗證（一次性）
+
+on:
+  push:
+    branches:
+      - claude/morning-light-visual-v2
+    paths:
+      - .github/workflows/backup-audit.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify-backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 產生全分支 Git mirror 與完整 bundle、實際還原到新資料夾
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKUP_DIR="$RUNNER_TEMP/self-authored-backup"
+          MIRROR="$BACKUP_DIR/mirror.git"
+          BUNDLE="$BACKUP_DIR/self-authored-2026-10-15.bundle"
+          RESTORED="$RUNNER_TEMP/self-authored-restored"
+          mkdir -p "$BACKUP_DIR"
+          git clone --mirror "https://github.com/$GITHUB_REPOSITORY.git" "$MIRROR"
+          git -C "$MIRROR" bundle create "$BUNDLE" --all
+          git -C "$MIRROR" bundle verify "$BUNDLE"
+          git clone -b claude/morning-light-visual-v2 "$BUNDLE" "$RESTORED"
+          test "$(git -C "$RESTORED" rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git -C "$RESTORED" rev-parse --is-shallow-repository)" = "false"
+          sha256sum "$BUNDLE" | tee "$BACKUP_DIR/sha256.txt"
+          du -h "$BUNDLE"
+      - name: 從備份還原原始圖片並驗證網站建置檔逐檔相同
+        shell: bash
+        run: |
+          set -euo pipefail
+          RESTORED="$RUNNER_TEMP/self-authored-restored"
+          npm ci --prefix "$RESTORED"
+          (
+            cd "$RESTORED"
+            npm run images
+            if [ -n "$(git status --porcelain -- src/assets/photos)" ]; then
+              echo "ERROR: 從原始圖片產生的網站圖片與備份版本不同"
+              git status --short -- src/assets/photos
+              exit 1
+            fi
+            npm run build
+            npm run build:production
+          )
+          npm run build:production
+          diff -qr "$GITHUB_WORKSPACE/dist-production" "$RESTORED/dist-production"
+          echo "已驗證：完整歷史 bundle 可還原、影像可重新產生、production 網站逐檔相同。"
+      - name: 保存可下載 Git bundle 備份及雜湊記錄（30 天）
+        uses: actions/upload-artifact@v4
+        with:
+          name: self-authored-full-git-bundle-2026-10-15
+          path: |
+            ${{ runner.temp }}/self-authored-backup/self-authored-2026-10-15.bundle
+            ${{ runner.temp }}/self-authored-backup/sha256.txt
+          retention-days: 30
+          if-no-files-found: error
+          compression-level: 0
+
+# 2026-10-15：重跑含 WebKit 窄螢幕修正、最新驗收紀錄的完整歷史備份；此 workflow 不部署網站。

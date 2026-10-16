@@ -1,0 +1,115 @@
+{
+  "_說明": "110、119、113、1925 專線用途與時間具 AI 官方來源核對及網站發起人 2026-10-15 整批發布核准；110 SMS 管道只連警政署官方資訊。AI review 與原 status 待確認（人工逐頁確認）維持分開，正式版以 release-approvals.json 的特定版本控制，未核准的 110 視訊 App 保留待確認。不得使用 sms:110，不收集定位、通報或個資。",
+  "items": [
+    {
+      "id": "110",
+      "number": "110",
+      "title": "警察緊急報案",
+      "purpose": "遇到急難需要協助或救助、發現可疑或影響治安與交通的情況，或其他需要警察處理的事。",
+      "hours": "24 小時（依警政署「110為民服務全天候不打烊」，更新日期 115-08-04）",
+      "tel": "110",
+      "source": {
+        "title": "內政部警政署「110報案」",
+        "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950"
+      },
+      "status": "待確認",
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+        "level": "hotline-purpose-hours",
+        "scope": "專線號碼、用途、官方來源及服務時間",
+        "source": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950",
+        "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+      }
+    },
+    {
+      "id": "119",
+      "number": "119",
+      "title": "消防與緊急救護",
+      "purpose": "火災、意外受傷、急病等需要消防或救護車的情況。",
+      "hours": "24 小時（依內政部消防署『119、112』官方說明）",
+      "tel": "119",
+      "source": {
+        "title": "內政部消防署｜119、112",
+        "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=66"
+      },
+      "status": "待確認",
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+        "level": "hotline-purpose-hours",
+        "scope": "專線號碼、用途、官方來源及服務時間",
+        "source": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=66",
+        "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+      }
+    },
+    {
+      "id": "113",
+      "number": "113",
+      "title": "保護專線",
+      "purpose": "家庭暴力、性侵害、性騷擾，以及兒童、少年、老人或身心障礙者受到虐待、疏忽等情況的求助、諮詢與通報。官方頁面提醒：若有立即人身安全危險，請先撥打 110。",
+      "hours": "24 小時全年無休，市話、公共電話、手機皆免付費（依保護服務司 113 保護專線介紹頁，更新時間 113-05-24）",
+      "tel": "113",
+      "source": {
+        "title": "衛生福利部保護服務司「113保護專線介紹」",
+        "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html"
+      },
+      "status": "待確認",
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+        "level": "hotline-purpose-hours",
+        "scope": "專線號碼、用途、官方來源及服務時間",
+        "source": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+        "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+      }
+    },
+    {
+      "id": "1925",
+      "number": "1925",
+      "title": "安心專線",
+      "purpose": "有心理壓力或情緒困擾時，提供心理諮詢服務的專線。",
+      "hours": "24 小時、免付費（依心理健康司「1925安心專線（依舊愛我）」頁，更新時間 114-08-28）",
+      "tel": "1925",
+      "source": {
+        "title": "衛生福利部心理健康司「1925安心專線（依舊愛我）」",
+        "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html"
+      },
+      "status": "待確認",
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+        "level": "hotline-purpose-hours",
+        "scope": "專線號碼、用途、官方來源及服務時間",
+        "source": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html",
+        "evidence": "來源與查核範圍見 docs/REVIEW-TABLE-V3.2.md。網站只提供官方資訊，不保證接通或個案處置結果。"
+      }
+    }
+  ],
+  "channels": [
+    {
+      "id": "sms-110",
+      "title": "110 簡訊報案（聽語障人士及一般民眾）",
+      "text": "不方便說話時，可使用各縣市警察局設置的手機簡訊報案號碼。請注意：簡訊不是傳到 110，而是依所在縣市使用不同號碼；只能傳文字簡訊（SMS），不能傳圖片或影片等多媒體簡訊（MMS）。各縣市號碼請以警政署「110聽語障人士報案專線」頁面為準。",
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+      "linkLabel": "前往警政署簡訊報案號碼表",
+      "status": "待確認",
+      "review": {
+        "date": "2026-10-15",
+        "by": "ChatGPT／Claude（AI 官方來源核對，非人工逐頁簽核）",
+        "level": "official-channel",
+        "scope": "官方 110 SMS 號碼資訊頁及簡訊使用限制",
+        "source": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+        "evidence": "只接受 SMS 文字；各縣市使用警政署公告的不同專用號碼，本站不自行複製門號表。"
+      }
+    },
+    {
+      "id": "video-110",
+      "title": "110 視訊報案 App",
+      "text": "警政署提供「110 視訊報案 App」。依警政署公布的隱私權政策，使用視訊報案時，App 會使用相機與麥克風，並傳送所在位置與你在 App 內自行填寫的資料。本站尚未查到警政署專屬的下載說明頁；下載前，請確認發布者為內政部警政署。",
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=18753&serno=04f72711-214c-4f29-881d-5764aa3cf10a",
+      "linkLabel": "前往警政署 110 視訊報案 App 隱私權政策",
+      "status": "待確認"
+    }
+  ]
+}

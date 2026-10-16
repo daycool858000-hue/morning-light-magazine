@@ -1,0 +1,227 @@
+{
+  "title": "《由己》新增人身安全與自我保護：官方入口候選（未核准）",
+  "date": "2026-10-15",
+  "courseRules": "將長期公開的免費影片教材與單次實體課程分離；實體課程須逐筆查日期、費用、公開資格、報名狀態及主辦者；未證實對一般民眾開放時不寫『免費可報名』。 目前沒有找到足以核對為一般民眾可立即報名的免費實體防身班，應明確顯示「尚未確認」，不可用付費或額滿課程充數。",
+  "itemRules": "防護輔助用品先介紹哨子、個人警報器、手電筒、手機緊急求助設定；噴霧器涉及使用比例與攜帶環境／航空限制，須附官方法規；不推動刀械電擊器或將物品視為安全保證。",
+  "items": [
+    {
+      "id": "safety-npa-tips",
+      "name": "警政署｜夜間外出安全與求助指引",
+      "url": "https://www.npa.gov.tw/ch/app/news/view?id=2139&module=news&serno=67c7fb4d-a40d-4157-b0c8-799e0139aafa",
+      "type": "日常應變",
+      "summary": "警政署轉載臺北市警局的夜間安全指引：走向人多明亮處、善用店家與管理室、求助、報警與安全後保存線索。",
+      "sources": [
+        {
+          "name": "警政署｜夜間外出安全與求助指引",
+          "url": "https://www.npa.gov.tw/ch/app/news/view?id=2139&module=news&serno=67c7fb4d-a40d-4157-b0c8-799e0139aafa"
+        }
+      ],
+      "tags": [
+        "人身安全",
+        "自我保護"
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "reviewer": "ChatGPT（AI）",
+        "basis": "官方文章可讀；文章屬安全宣導，不保證每種情境均能照做。",
+        "scope": "官方網址存在與可辨識的安全學習用途；不含現場班次即時可報名或個別法律判斷",
+        "remaining": "正式 iPhone 跳轉、近期課程名額、課程對象、開課費用仍須以主辦方當期公告查核"
+      },
+      "publication": {
+        "ownerApproved": false,
+        "imported": false,
+        "status": "candidate"
+      }
+    },
+    {
+      "id": "safety-npa-video",
+      "name": "警政署婦幼抱抱｜免費安全宣導影音入口",
+      "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726",
+      "type": "免費線上學習",
+      "summary": "警政署官方介紹 NPA Care U 頻道，含婦幼安全、性騷擾、跟騷與簡易防身術教學影音。",
+      "sources": [
+        {
+          "name": "警政署婦幼抱抱｜免費安全宣導影音入口",
+          "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726"
+        }
+      ],
+      "tags": [
+        "人身安全",
+        "自我保護",
+        "免費線上教材"
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "reviewer": "ChatGPT（AI）",
+        "basis": "免費開放觀看的宣導入口；不視為任何正式實體課程報名或個別情境的動作訓練。",
+        "scope": "官方網址存在與可辨識的安全學習用途；不含現場班次即時可報名或個別法律判斷",
+        "remaining": "正式 iPhone 跳轉、近期課程名額、課程對象、開課費用仍須以主辦方當期公告查核"
+      },
+      "publication": {
+        "ownerApproved": false,
+        "imported": false,
+        "status": "candidate"
+      }
+    },
+    {
+      "id": "safety-kaohsiung-self-defense",
+      "name": "高雄市婦幼警察隊｜女子簡易防身術介紹",
+      "url": "https://kcpd-wcpb.kcg.gov.tw/Content_List.aspx?n=6ED9A17F455685C8",
+      "type": "官方防身術教材",
+      "summary": "官方防身術教學目錄與圖解，用來了解保持安全距離、脫身及離開現場的概念；動作練習宜由合格人員指導。",
+      "sources": [
+        {
+          "name": "高雄市婦幼警察隊｜女子簡易防身術介紹",
+          "url": "https://kcpd-wcpb.kcg.gov.tw/Content_List.aspx?n=6ED9A17F455685C8"
+        }
+      ],
+      "tags": [
+        "人身安全",
+        "自我保護",
+        "免費公開教材"
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "reviewer": "ChatGPT（AI）",
+        "basis": "公開教材非免費實體課程；不擷取原站圖片全文，也不保證徒手對抗可以成功。",
+        "scope": "官方網址存在與可辨識的安全學習用途；不含現場班次即時可報名或個別法律判斷",
+        "remaining": "正式 iPhone 跳轉、近期課程名額、課程對象、開課費用仍須以主辦方當期公告查核"
+      },
+      "publication": {
+        "ownerApproved": false,
+        "imported": false,
+        "status": "candidate"
+      }
+    },
+    {
+      "id": "safety-ntpc-women-child",
+      "name": "新北市婦幼警察隊｜安全宣導與活動消息",
+      "url": "https://www.wpb.police.ntpc.gov.tw/",
+      "type": "課程／活動查詢入口",
+      "summary": "查看婦幼小教室、公開安全宣導、影音及最新活動；若有民眾可參加的實體課程，仍需看單次公告與報名資格。",
+      "sources": [
+        {
+          "name": "新北市婦幼警察隊｜安全宣導與活動消息",
+          "url": "https://www.wpb.police.ntpc.gov.tw/"
+        }
+      ],
+      "tags": [
+        "人身安全",
+        "自我保護",
+        "官方公告入口（非已確認免費課程）"
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "reviewer": "ChatGPT（AI）",
+        "basis": "目前僅確認資訊入口，未確認2026-10-15有對一般民眾開放的免費防身實體班。",
+        "scope": "官方網址存在與可辨識的安全學習用途；不含現場班次即時可報名或個別法律判斷",
+        "remaining": "正式 iPhone 跳轉、近期課程名額、課程對象、開課費用仍須以主辦方當期公告查核"
+      },
+      "publication": {
+        "ownerApproved": false,
+        "imported": false,
+        "status": "candidate"
+      }
+    },
+    {
+      "id": "safety-npa-stalking",
+      "name": "警政署｜跟蹤騷擾防制法懶人包",
+      "url": "https://www.npa.gov.tw/ch/app/data/view?id=18680&module=wg203&serno=beb9ed2b-a08e-4e0b-8a07-e08f7ce6427e",
+      "type": "跟蹤騷擾防護",
+      "summary": "辨認被跟蹤、反覆接觸、威脅時的官方求助、報案與保護資訊；遇到急迫危險先撥110。",
+      "sources": [
+        {
+          "name": "警政署｜跟蹤騷擾防制法懶人包",
+          "url": "https://www.npa.gov.tw/ch/app/data/view?id=18680&module=wg203&serno=beb9ed2b-a08e-4e0b-8a07-e08f7ce6427e"
+        }
+      ],
+      "tags": [
+        "人身安全",
+        "自我保護"
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "reviewer": "ChatGPT（AI）",
+        "basis": "一般法令資訊，不代替個案法律認定。",
+        "scope": "官方網址存在與可辨識的安全學習用途；不含現場班次即時可報名或個別法律判斷",
+        "remaining": "正式 iPhone 跳轉、近期課程名額、課程對象、開課費用仍須以主辦方當期公告查核"
+      },
+      "publication": {
+        "ownerApproved": false,
+        "imported": false,
+        "status": "candidate"
+      }
+    },
+    {
+      "id": "safety-ntpc-children",
+      "name": "新北市婦幼警察隊｜兒童防身術",
+      "url": "https://www.wpb.police.ntpc.gov.tw/cp-3284-116967-30.html",
+      "type": "家庭親子安全",
+      "summary": "提供保持距離、求助警報器與兒童智慧手錶等親子安全概念；不以孩子必須自行處理暴力為前提。",
+      "sources": [
+        {
+          "name": "新北市婦幼警察隊｜兒童防身術",
+          "url": "https://www.wpb.police.ntpc.gov.tw/cp-3284-116967-30.html"
+        }
+      ],
+      "tags": [
+        "人身安全",
+        "自我保護"
+      ],
+      "review": {
+        "date": "2026-10-15",
+        "reviewer": "ChatGPT（AI）",
+        "basis": "原文具親子情境，不要直接用來取代成人防身學習課程。",
+        "scope": "官方網址存在與可辨識的安全學習用途；不含現場班次即時可報名或個別法律判斷",
+        "remaining": "正式 iPhone 跳轉、近期課程名額、課程對象、開課費用仍須以主辦方當期公告查核"
+      },
+      "publication": {
+        "ownerApproved": false,
+        "imported": false,
+        "status": "candidate"
+      }
+    }
+  ],
+  "legalSources": [
+    {
+      "title": "社會秩序維護法第63條：無正當理由攜帶具殺傷力化學製劑／危險物品等",
+      "url": "https://web.law.ntpc.gov.tw/Scripts/FLAWDOC01.aspx?fcode=B0080001&flno=63"
+    },
+    {
+      "title": "經濟部辣椒噴霧商品標示解釋令",
+      "url": "https://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg028056/ch04/type2/gov31/num9/Eg.htm"
+    },
+    {
+      "title": "航空警察局飛安宣導：防狼噴霧不得手提或託運",
+      "url": "https://www.apb.npa.gov.tw/ch/app/artwebsite/view?id=1603&module=artwebsite&serno=9a637548-0b8c-4e87-97ef-a8aa670c7172"
+    }
+  ],
+  "excluded": [
+    {
+      "reason": "查到2026年9月臺中市社會局免費人身安全課",
+      "status": "該次課程只對社會局同仁開放且已結束，不可放進可報名清單",
+      "source": "https://welfare.taichung.gov.tw/registration/index-1.asp?Parser=29%2C14%2C60%2C%2C%2C%2C685"
+    },
+    {
+      "reason": "查到2013年臺中免費暑期婦女防身成長營",
+      "status": "歷史活動，不可當成2026年有效場次",
+      "source": "https://www.taichung.gov.tw/8868/8872/9962/943083"
+    },
+    {
+      "reason": "2026-11-07女子防身實作課",
+      "status": "單位官方報名頁顯示收費900元且已額滿，不能標示為免費或仍可報名",
+      "source": "https://hotline.org.tw/civicrm/event/info?id=963&reset=1"
+    }
+  ],
+  "ownerApproved": false,
+  "websiteImported": false,
+  "mainMerged": false,
+  "recommendedPlacement": {
+    "primary": "法律與權益 → 新增細部主題『人身安全與自我保護』",
+    "crosslinks": [
+      "身心健康 → 身體自主：個人界線及暴力後心理支持",
+      "學習與活動／向光 → 『免費安全教材與防身課程查詢』"
+    ],
+    "navigationNote": "保留現有六大分類，避免獨立新增第七大類；不得把所有防身資源都當成法律申訴或身心醫療。"
+  }
+}

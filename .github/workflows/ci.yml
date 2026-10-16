@@ -1,0 +1,32 @@
+# 每次推送與 Pull Request 時：檢查內容格式、建置網站並執行自動化測試。不會部署或公開網站。
+name: 檢查與測試
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝開發工具（sharp 圖片處理）與測試用瀏覽器（皆不會打包進網站）
+        run: |
+          npm ci
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: 建置並測試
+        run: npm test
+      - name: 使用 WebKit 模擬 Safari 進行手機功能與版面驗收
+        run: npm run test:webkit
+      - name: 使用 WebKit 模擬 Safari 檢查 QA 測試版新增功能（讀利跳轉、向光索引、城市福利）
+        run: npm run test:webkit-qa

@@ -1,0 +1,43 @@
+# 第二批候選官方連結的瀏覽器開頁檢查：只讀取、只印出狀態與標題，不建置、不部署、不修改資料。
+name: 第二批候選連結瀏覽器檢查（不部署）
+
+on:
+  push:
+    branches: [claude/morning-light-visual-v2]
+    paths:
+      - scripts/check-links-browser.mjs
+      - .github/workflows/qa-links-browser.yml
+      - docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json
+      - docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md
+      - scripts/lib/qa-batch45.mjs
+      - scripts/lib/qa-batch6.mjs
+      - scripts/lib/qa-activities.mjs
+      - docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝測試用瀏覽器（不會打包進網站）
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: 以 Chromium 開啟候選官方網址
+        run: node scripts/check-links-browser.mjs
+      - name: 以 Chromium 開啟第四、五批 13 篇文章的參考來源（Issue #2）
+        run: node scripts/check-links-browser.mjs --set=batch45
+      - name: 以 Chromium 開啟第六批城市與福利 6 篇文章的參考來源（Issue #3）
+        run: node scripts/check-links-browser.mjs --set=batch6
+      - name: 以 Chromium 開啟首頁「活動與講座」的官方入口
+        run: node scripts/check-links-browser.mjs --set=activities
