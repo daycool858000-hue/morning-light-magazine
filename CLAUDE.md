@@ -50,6 +50,14 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 2026-10-17 城市研究與 Claude 接軌工作更新（本節優先於下方舊版 2/22）
+
+- 站主已把「V2 文章佇列與解析器修復」指令交給 Claude；工程分支 `claude/qa-expansion-import-20261016` 舊 CI `38967525534` success，但仍待 Claude 將 12 篇 V2 真正接入、校正 7 篇改名與來源解析負向測試。**不要代替 Claude 在此編輯分支更新 build.mjs 或把任何佇列開關打開。**
+- 供 Claude 的最新工程修正文件：`docs/CLAUDE-V2-QUEUE-RECONCILIATION-2026-10-17.md`；正式原稿是兩個 V2 檔，V1 只保留歷史。PR #10／#11 不可自行合併、不可觸發 GitHub Pages 部署。
+- 22 縣市深度工作：**6／22 縣市有部分新增官方服務／中心／學習資料**，合計 **17 筆不同 URL**（彰化4、新北3、臺北3、桃園2、臺中2、臺南3），索引 `docs/CITY-SIX-COUNTIES-17-SERVICE-ENTRY-INDEX-2026-10-17.json`。這不是 6 縣已完整驗收（五層完整驗收仍 0/22），其餘 16 縣待深入。已有候選皆未公開 QA。
+- 資源分類：同一官網名錄列出多個中心時只保留**一個該 URL 的查詢入口**；同機關的其他不同網址用途可保留簡潔文字連結。桃園 2026 Q4 北南婦女中心活動 `validThrough: 2026-12-31`，不可永久顯示為「近期活動」。臺南歷史服務新聞不作 2026 當期時刻。
+- 文章內容仍由 ChatGPT 負責逐篇校核和地方資料；Claude 只需完成 V2 解析、佇列及技術回歸驗收，除非收到站主新指示，不新增尚未查核的服務卡或任何正式版內容。
+
 ## 2026-10-17 第二輪內容編輯最新進度（此節優先於下方第一輪六篇／七項進度）
 
 - **新增 12 篇均已完成 V2 正文**，分為兩檔：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`（02／03／04／09／10／11）及 `docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`（01／05／06／07／08／12），舊 V1 永久保留。
