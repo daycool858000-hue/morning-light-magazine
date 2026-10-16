@@ -17,6 +17,7 @@ import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadBatch6Articles } from './lib/qa-batch6.mjs';
 import { loadQaActivities, loadQaNotices } from './lib/qa-activities.mjs';
+import { resolveQaPortalRouting } from './lib/qa-portal-routing.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
 import { resolveTowardEditorial, TOWARD_READING_SLUGS } from './lib/toward-light-editorial.mjs';
 
@@ -139,6 +140,7 @@ const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
   : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources];
 const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
+const qaPortalRouting = IS_QA ? resolveQaPortalRouting(qaActivities.items, resources) : { primary: [], reused: [] };
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -292,7 +294,7 @@ function resourceCard(r, { anchor = true } = {}) {
       <p class="res-types">${r.serviceTypes.map(esc).join('・')}</p>
     </div>
   </header>
-  <p class="res-summary">${esc(r.summary)}</p>
+  <p class="res-summary">${esc(r.summary)}${IS_QA && r.id === 'open-culture-events' ? ' 也能從此入口查詢展演、講座、導覽預約與活動報名，費用及資格依主辦公告。' : ''}</p>
   ${englishSummary}
   <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${r.usage ? `<dt>使用方式</dt><dd class="res-usage">${esc(r.usage)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
@@ -610,7 +612,12 @@ if (IS_QA) {
   pages.push({ file: 'activities.html', html: layout({ title: '近期活動與講座', description: lead, active: 'activities', body, bodyClass: 'activities', scripts: ['assets/js/qa-activities.js'] }) });
   addIndex('頁面', '近期活動與講座', lead, 'activities.html', '活動 講座 課程 研習 展覽 書展 科學節 日曆 activities events lectures workshops courses exhibitions calendar finance career health arts culture library family learning');
   for (const n of notices) searchIndex.push({ type: '活動消息', title: n.title, text: `${n.dateLabel}｜${n.organizer}｜${n.region}`, url: `activities.html#${n.id}`, keywords: `${n.category} ${n.typeLabel} 活動 講座 展覽`, until: n.visibleUntil, order: order++ });
-  for (const it of items) addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, `activities.html#${it.id}`, `${it.group} 官方查詢入口 ${it.region} ${it.keywordsEn || ''}`);
+  for (const it of items) {
+    const reused = qaPortalRouting.reused.find((r) => r.id === it.id);
+    const category = qaPortalRouting.primary.find((r) => r.id === it.id)?.category;
+    const dest = reused ? `learning.html#res-${reused.existingResourceId}` : `${catById[category].slug}#portal-${it.id}`;
+    addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, dest, `${it.group} 官方查詢入口 ${it.region} ${it.keywordsEn || ''}`);
+  }
 }
 
 // extra：放在支援資源入口正下方的額外內容（目前只有 QA 讀利專欄的「從你想了解的事開始」跳轉）
@@ -820,6 +827,24 @@ function articlesSection(list) {
 </section>`;
 }
 
+// 12 筆官方查詢入口已由原始資料判斷相同 URL；同網址的 act-09 沿用既有卡片。
+// 其餘僅提供輕量文字列，不新增與既有機構卡相同的格子。
+function qaPortalSection(category) {
+  if (!IS_QA) return '';
+  const items = qaPortalRouting.primary.filter(it => it.category === category);
+  if (!items.length) return '';
+  return `<section class="section qa-portal-section" aria-labelledby="qa-portals-title">
+  <div class="wrap">
+    ${sectionHead('Official Learning Links', 'qa-portals-title', '更多官方查詢入口', '以下是可以查詢課程或公開活動的原始網站；是否免費、需預約及參加資格，以各主辦單位公告為準。')}
+    <ul class="qa-portal-list">${items.map(it => `<li id="portal-${esc(it.id)}">
+      <a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span aria-hidden="true">↗</span></a>
+      <p>${esc(it.purpose)}</p>
+      <small>${esc(it.region)}｜${esc(it.caution)}　<span class="badge badge-qa">未核准測試內容</span></small>
+    </li>`).join('\n')}</ul>
+  </div>
+</section>`;
+}
+
 // ---------- 四個一般分類頁 ----------
 for (const c of categories) {
   if (c.id === 'city' || c.id === 'learning') continue; // 這兩頁有專屬版面
@@ -841,7 +866,8 @@ ${topicsSection(c)}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}
   </div>
 </section>
-${IS_QA ? '' : articlesSection(catArticles)}`;
+${IS_QA ? '' : articlesSection(catArticles)}
+${qaPortalSection(c.id)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: c.id, body, bodyClass: `cat-${c.id}` }) });
 }
 
@@ -945,7 +971,8 @@ ${topicsSection(c)}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}
   </div>
 </section>
-${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}`;
+${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}
+${qaPortalSection(c.id)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: [IS_QA ? 'assets/js/qa-activities.js' : 'assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
