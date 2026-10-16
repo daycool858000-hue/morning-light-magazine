@@ -17,11 +17,13 @@
       "workstream": "家庭理財",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 01｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
       "productionApproved": false,
-      "reviewScope": "家庭分帳屬原創實用建議；與既有緊急預備金文章明確區隔，仍待來源與全文校核"
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17"
     },
     {
       "id": "exp-02",
@@ -75,10 +77,13 @@
       "workstream": "面試與履歷",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 05｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱"
     },
     {
       "id": "exp-06",
@@ -87,10 +92,13 @@
       "workstream": "個人工作者資源",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 06｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱"
     },
     {
       "id": "exp-07",
@@ -99,11 +107,13 @@
       "workstream": "睡眠",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 07｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
       "productionApproved": false,
-      "reviewScope": "睡眠屬健康衛教，需補精確官方睡眠資料，不能只以平台首頁支持所有敘述"
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17"
     },
     {
       "id": "exp-08",
@@ -112,11 +122,13 @@
       "workstream": "人際關係與身體自主",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 08｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
       "productionApproved": false,
-      "reviewScope": "關係界線屬原創例子；現有深層來源要重新確認可見內容及適用範圍"
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17"
     },
     {
       "id": "exp-09",
@@ -170,11 +182,13 @@
       "workstream": "科學與生活知識",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 12｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
       "productionApproved": false,
-      "reviewScope": "科學識讀主題與 AI 查證舊稿不同，仍待核對科教館深層網址及例子"
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17"
     }
   ],
   "olderArticles": [
@@ -323,5 +337,18 @@
     "日期性活動仍只使用官方公告並在日期後自動隱藏",
     "WebKit 320/375/390及正式版本隔離檢測",
     "站主手機電腦QA驗收後才考慮正式核准"
-  ]
+  ],
+  "currentStatus20261017": {
+    "newDraftsTotal": 12,
+    "newDraftsV2": 12,
+    "olderArticleCandidates": 10,
+    "reviewedSourcesForMultilingual": 13,
+    "deepCountySources": {
+      "changhua": 4,
+      "new-taipei": 3
+    },
+    "qaImportedNew": 0,
+    "ownerArticleApprovals": 0,
+    "remarks": "12篇有V2，不代表逐句或實機驗收／正式上架。"
+  }
 }
