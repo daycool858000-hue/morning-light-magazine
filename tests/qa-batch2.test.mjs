@@ -622,13 +622,21 @@ try {
   check('過期活動：模擬臺灣時間 2027-02-01 時只隱藏已結束的科學節與國圖講座；2027-07-26 時全部隱藏並顯示「目前沒有」說明；搜尋也找不到已結束活動', expiry.length === 0, expiry.join('；'));
 
   const searchAct = [];
-  for (const kw of ['lecture', '職訓', '國家圖書館', '科學節', '書展']) {
+  const expectedSearch = [
+    ['lecture', 'learning.html#portal-act-10'],
+    ['職訓', 'career.html#portal-act-01'],
+    ['國家圖書館', 'learning.html#portal-act-10'],
+    ['科學節', 'activities.html#notice-taiwan-science-festival-2026'],
+    ['書展', 'activities.html#notice-tibe-2027'],
+  ];
+  for (const [kw, href] of expectedSearch) {
     await page.goto(`${ORIGIN}${BASE}search.html`);
     await page.fill('[data-search] input', kw);
     await page.waitForTimeout(150);
-    if (!(await page.locator('[data-search] a[href*="activities.html"]').count())) searchAct.push(`搜尋「${kw}」找不到活動頁項目`);
+    if (!(await page.locator(`[data-search] a[href="${href}"]`).count()))
+      searchAct.push(`搜尋「${kw}」找不到對應官方入口 ${href}`);
   }
-  check('搜尋 lecture／職訓／國家圖書館／科學節／書展 可找到活動頁項目', searchAct.length === 0, searchAct.join('；'));
+  check('搜尋 lecture／職訓／國家圖書館導向六大主題；科學節／書展仍導向活動公告', searchAct.length === 0, searchAct.join('；'));
 
   // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
   const jumpProblems = [];
