@@ -12,7 +12,7 @@
   "newArticles": [
     {
       "id": "exp-01",
-      "title": "住在同一個家，生活費一定要全部放在同一個帳戶嗎？",
+      "title": "一起生活，家庭共同費用與自己的錢怎麼分開記？",
       "category": "life-family",
       "workstream": "家庭理財",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
@@ -23,7 +23,9 @@
       "productionApproved": false,
       "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
-      "reviewDate": "2026-10-17"
+      "reviewDate": "2026-10-17",
+      "originalDraftTitle": "住在同一個家，生活費一定要全部放在同一個帳戶嗎？",
+      "latestReviewedHeading": "01"
     },
     {
       "id": "exp-02",
@@ -38,7 +40,8 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱",
+      "latestReviewedHeading": "02"
     },
     {
       "id": "exp-03",
@@ -53,7 +56,8 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱",
+      "latestReviewedHeading": "03"
     },
     {
       "id": "exp-04",
@@ -68,11 +72,12 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱",
+      "latestReviewedHeading": "04"
     },
     {
       "id": "exp-05",
-      "title": "第一次面試一份新工作，除了薪水還可以問什麼？",
+      "title": "面試時除了問薪水，還有哪幾個工作條件值得確認？",
       "category": "career",
       "workstream": "面試與履歷",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
@@ -83,11 +88,13 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱"
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
+      "originalDraftTitle": "第一次面試一份新工作，除了薪水還可以問什麼？",
+      "latestReviewedHeading": "05"
     },
     {
       "id": "exp-06",
-      "title": "開始接案或做個人工作者，要先把哪些事情談清楚？",
+      "title": "接案前把交付內容寫清楚，可以少掉哪些誤會？",
       "category": "career",
       "workstream": "個人工作者資源",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
@@ -98,11 +105,13 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱"
+      "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
+      "originalDraftTitle": "開始接案或做個人工作者，要先把哪些事情談清楚？",
+      "latestReviewedHeading": "06"
     },
     {
       "id": "exp-07",
-      "title": "睡得不好時，怎麼分辨是生活作息還是需要多了解的健康問題？",
+      "title": "常常睡不好，生活情境能提供哪些觀察線索？",
       "category": "health",
       "workstream": "睡眠",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
@@ -113,11 +122,13 @@
       "productionApproved": false,
       "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
-      "reviewDate": "2026-10-17"
+      "reviewDate": "2026-10-17",
+      "originalDraftTitle": "睡得不好時，怎麼分辨是生活作息還是需要多了解的健康問題？",
+      "latestReviewedHeading": "07"
     },
     {
       "id": "exp-08",
-      "title": "在人際關係中，什麼時候可以說出自己的界線？",
+      "title": "朋友、家人和工作夥伴之間，界線可以怎麼說清楚？",
       "category": "health",
       "workstream": "人際關係與身體自主",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
@@ -128,7 +139,9 @@
       "productionApproved": false,
       "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
-      "reviewDate": "2026-10-17"
+      "reviewDate": "2026-10-17",
+      "originalDraftTitle": "在人際關係中，什麼時候可以說出自己的界線？",
+      "latestReviewedHeading": "08"
     },
     {
       "id": "exp-09",
@@ -143,7 +156,8 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱",
+      "latestReviewedHeading": "09"
     },
     {
       "id": "exp-10",
@@ -158,11 +172,12 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱",
+      "latestReviewedHeading": "10"
     },
     {
       "id": "exp-11",
-      "title": "免費公開課程、觀看影片、完成證書，為什麼會是不同的事情？",
+      "title": "一門免費課程適不適合自己？可以先試學一小段",
       "category": "learning",
       "workstream": "免費公開課程與技能學習",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
@@ -173,11 +188,13 @@
       "productionApproved": false,
       "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
-      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱",
+      "originalDraftTitle": "免費公開課程、觀看影片、完成證書，為什麼會是不同的事情？",
+      "latestReviewedHeading": "11"
     },
     {
       "id": "exp-12",
-      "title": "想看生活中的科學知識，要怎麼判斷一篇科普文章講得夠不夠清楚？",
+      "title": "同一個生活實驗，換了條件，結果還能直接比較嗎？",
       "category": "learning",
       "workstream": "科學與生活知識",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
@@ -188,7 +205,9 @@
       "productionApproved": false,
       "reviewScope": "相關官方原始網站提供主題性證據；個別生活例子與延伸觀點屬本站原創，尚須逐段及正式外連驗收；未經站主審閱",
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
-      "reviewDate": "2026-10-17"
+      "reviewDate": "2026-10-17",
+      "originalDraftTitle": "想看生活中的科學知識，要怎麼判斷一篇科普文章講得夠不夠清楚？",
+      "latestReviewedHeading": "12"
     }
   ],
   "olderArticles": [
@@ -349,6 +368,7 @@
     },
     "qaImportedNew": 0,
     "ownerArticleApprovals": 0,
-    "remarks": "12篇有V2，不代表逐句或實機驗收／正式上架。"
+    "remarks": "12篇有V2，不代表逐句或實機驗收／正式上架。",
+    "manifestTitlesUse": "V2 正式候選標題；originalDraftTitle 只供追溯 10/16 V1，後台佇列要以 title 最新值與 V2 真正原稿比對"
   }
 }
