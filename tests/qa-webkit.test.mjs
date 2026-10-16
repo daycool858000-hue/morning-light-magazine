@@ -78,6 +78,30 @@ try {
       learningState.activities === 6 && learningState.sources === 6 &&
       learningState.firstArticleBeforeActivities && learningState.noHorizontalScroll,
       JSON.stringify(learningState));
+    // 網站內容增加後，五個主題可以直接跳到需求／索引，無須把整頁滑到底。
+    const jumpFailures = [];
+    for (const [file, target] of [
+      ['life-family.html', 'need-title'], ['career.html', 'need-title'],
+      ['health.html', 'need-title'], ['law.html', 'need-title'],
+      ['learning.html', 'topics-title'],
+    ]) {
+      await page.goto(`${origin}${base}${file}`);
+      const jump = page.locator('.cat-hero-jump a');
+      if (await jump.count() !== 1) { jumpFailures.push(file + ' missing shortcut'); continue; }
+      await jump.tap();
+      await page.waitForTimeout(450);
+      const o = await page.evaluate((id) => {
+        const heading = document.getElementById(id), header = document.querySelector('.site-header');
+        const r = heading.getBoundingClientRect();
+        return {hash:location.hash, top:Math.round(r.top), header:Math.round(header.getBoundingClientRect().bottom), bottom:Math.round(r.bottom)};
+      }, target);
+      if (o.hash !== '#' + target || o.top < o.header || o.top > 760 || o.bottom <= o.top)
+        jumpFailures.push(file + ' ' + JSON.stringify(o));
+    }
+    await page.goto(`${origin}${base}city.html`);
+    if (await page.locator('.cat-hero-jump').count() !== 0) jumpFailures.push('city should keep independent layout');
+    check(`WebKit ${width}px 五個主題頁首捷徑：44px 可觸控，直接跳到未被固定頁首遮住的需求或索引；城市原版不變`,
+      jumpFailures.length === 0, jumpFailures.join('；'));
     check(`WebKit ${width}px 首頁、活動頁、讀利、向光、城市福利與含表格文章無水平溢位，無 JS 錯誤`, overflow.length === 0 && errors.length === 0, [...overflow, ...errors].join('；'));
     await ctx.close();
   }
