@@ -959,3 +959,18 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .notice-empty, .notice-more { margin: 16px 0 0; font-size: 0.9rem; color: var(--muted); }
 .act-portals { margin-top: 32px; border-top: 1px solid var(--line); }
 .act-portals h2 { font-size: 1.2rem; margin: 0; }
+
+/* ---------- QA：六大主題擴充匯入（只有 dist-qa 會出現這些元素） ---------- */
+/* 網址不同的全國性官方入口：主題頁官方資源下方的精簡文字列，不新增大型機構卡。 */
+.qa-x-links { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 6px; }
+.qa-x-links h3 { font-size: 1.05rem; margin: 12px 0 4px; }
+.qa-x-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+.qa-x-list li { min-width: 0; padding: 12px 0 14px; border-bottom: 1px solid var(--line); }
+.qa-x-list .qa-x-name { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 650; color: var(--ink); overflow-wrap: anywhere; }
+.qa-x-arrow { color: var(--terracotta-dark); font-size: 0.86rem; flex: none; }
+.qa-x-list p { font-size: 0.92rem; line-height: 1.6; color: var(--muted); margin: 2px 0 4px; }
+.qa-x-list small { display: block; font-size: 0.8rem; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
+.qa-x-list .badge-qa { font-size: 0.7rem; vertical-align: baseline; }
+@media (min-width: 830px) { .qa-x-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }
+/* 同網址資源：沿用原卡，只多一段補充說明。 */
+.res-summary-qa { font-size: 0.9rem; line-height: 1.6; color: var(--muted); margin: 6px 0 0; overflow-wrap: anywhere; }

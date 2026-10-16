@@ -8,10 +8,16 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { TOWARD_TOPICS } from '../scripts/lib/toward-light-editorial.mjs';
+import { QA_EXPANSION_QUEUE } from '../scripts/lib/qa-expansion.mjs';
 const require = createRequire(import.meta.url);
 const { webkit } = require('playwright');
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist-qa');
+// 六大主題擴充佇列明確指定讀利／向光的文章，會接在原 23／13 篇之後
+const expansionQueue = JSON.parse(await readFile(path.join(ROOT, QA_EXPANSION_QUEUE), 'utf8'));
+const extraIn = (dir) => expansionQueue.articles.filter((a) => a.importToQa && a.directory === dir).length;
+const TOWARD_COUNT = 13 + extraIn('toward');
+const READLI_COUNT = 23 + extraIn('readli');
 const base = JSON.parse(await readFile(path.join(ROOT, 'config/site.json'), 'utf8')).basePath;
 const port = 4371;
 const origin = `http://127.0.0.1:${port}`;
@@ -54,14 +60,14 @@ try {
       cards.map(c => ({ x: Math.round(c.getBoundingClientRect().left), y: Math.round(c.getBoundingClientRect().top), w: Math.round(c.getBoundingClientRect().width), h: Math.round(c.getBoundingClientRect().height) }))
     );
     check(`WebKit ${width}px 向光：13 篇採單欄上下滑動、寬度一致且文字可閱讀`,
-      vertical.length === 13 && vertical.every((v,i) => v.w >= width - 56 && v.w < width && v.h >= 106 && v.h < 230 &&
+      vertical.length === TOWARD_COUNT && vertical.every((v,i) => v.w >= width - 56 && v.w < width && v.h >= 106 && v.h < 230 &&
         (i === 0 || (v.x === vertical[i-1].x && v.y > vertical[i-1].y))), JSON.stringify(vertical.slice(0, 3)));
     await page.goto(`${origin}${base}quiet-power.html`);
     const compact = await page.locator('.readli-reading .story-grid .story').evaluateAll(cards =>
       cards.map(c => { const h = c.querySelector('h3 a').getBoundingClientRect(); return { h: Math.round(c.getBoundingClientRect().height), linkH: Math.round(h.height), cardW: Math.round(c.getBoundingClientRect().width), media: c.querySelector('.story-media') ? getComputedStyle(c.querySelector('.story-media')).display : 'none' }; })
     );
     check(`WebKit ${width}px 讀利：23 篇為精簡單欄清單，標題可觸控、沒有大型圖片`,
-      compact.length === 23 && compact.every(c => c.h >= 75 && c.h < 240 && c.linkH >= 44 && c.cardW < width && c.media !== 'block'), JSON.stringify(compact.slice(0, 3)));
+      compact.length === READLI_COUNT && compact.every(c => c.h >= 75 && c.h < 240 && c.linkH >= 44 && c.cardW < width && c.media !== 'block'), JSON.stringify(compact.slice(0, 3)));
     await page.goto(`${origin}${base}learning.html`);
     const learningState = await page.evaluate(() => {
       const list = [...document.querySelectorAll('#events-title + .notice-list .notice, [data-act-list] > .notice')];
@@ -123,7 +129,7 @@ try {
   );
   const cardLinks = await page.locator('.toward-reading-card a[href^="articles/"]').count();
   check('WebKit 向光：13 篇文章直接展示為單欄可點擊閱讀卡，390px 上下滑動',
-    gallery === 13 && cardLinks === 13 && readingLayout.length === 3 &&
+    gallery === TOWARD_COUNT && cardLinks === TOWARD_COUNT && readingLayout.length === 3 &&
     readingLayout[0].y < readingLayout[1].y && readingLayout[1].y < readingLayout[2].y &&
     readingLayout[0].x === readingLayout[1].x && readingLayout[1].x === readingLayout[2].x &&
     readingLayout.every(c => c.w >= 300 && c.w <= 390),
