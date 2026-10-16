@@ -14,7 +14,7 @@ import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.
 import { loadQaEnglishResources } from '../scripts/lib/qa-english.mjs';
 import { loadBatch6Articles, BATCH6_SOURCES } from '../scripts/lib/qa-batch6.mjs';
 import { loadQaActivities, loadQaNotices } from '../scripts/lib/qa-activities.mjs';
-import { resolveTowardEditorial } from '../scripts/lib/toward-light-editorial.mjs';
+import { resolveTowardEditorial, TOWARD_READING_SLUGS } from '../scripts/lib/toward-light-editorial.mjs';
 
 const require = createRequire(import.meta.url);
 function loadPlaywright() {
@@ -141,18 +141,23 @@ check('每張地方候選卡片都有「未核准測試內容」標籤', allQaBa
 const qp = await read(QA, 'quiet-power.html');
 const idx = await read(QA, 'assets/data/search-index.js');
 const towardHtml = await read(QA, 'toward-light.html');
-// 讀利只調整展示先後：跨生活、法律、健康、財務、職涯及學習的八篇文章置前，其他 28 篇保留。
+// 兩目錄編輯式分流：向光完整顯示其 13 篇，讀利顯示其他 23 篇，無重複且六大分類照常保有全文。
 const expectedReadingFirst = [
-  'batch6-welfare-overview', 'batch5-harassment-three-laws', 'batch5-preventive-health-screening',
-  'batch4-labor-insurance-pension', 'batch4-savings-emergency-fund', 'batch2-03',
-  'batch5-phone-emergency-sos', 'batch3-learn-free',
+  'batch6-welfare-overview', 'batch5-harassment-three-laws', 'batch5-phone-emergency-sos',
+  'batch5-preventive-health-screening', 'batch6-income-support-emergency-aid',
+  'batch4-labor-insurance-pension', 'batch2-08', 'batch2-02',
 ];
-const readliLinks = [...qp.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+const readliLinks = [...qp.matchAll(/<h3><a href="articles\\/([^"]+)\\.html">/g)].map((m) => m[1]);
+const towardGalleryLinks = [...towardHtml.matchAll(/<article class="toward-reading-card">\\s*<a href="articles\\/([^"]+)\\.html">/g)].map((m) => m[1]);
 const allReadingArticles = [...arts, ...third.articles, ...fourth, ...sixth].map(a => a.slug);
-check('讀利文章：36 篇無重複，先呈現生活福利、法律權益、健康、退休財務、職涯與學習等八篇實用閱讀，全部原稿保持', 
-  readliLinks.length === 36 && new Set(readliLinks).size === 36 &&
+const towardSlugs = new Set(TOWARD_READING_SLUGS);
+check('讀利與向光：讀利 23 篇、向光 13 篇，兩邊完整不重複，讀利首八篇以福利、權益、健康、安全及生活需求為優先',
+  readliLinks.length === 23 && towardGalleryLinks.length === 13 &&
+  new Set(readliLinks).size === 23 && new Set(towardGalleryLinks).size === 13 &&
+  !readliLinks.some(slug => towardSlugs.has(slug)) &&
+  JSON.stringify(towardGalleryLinks) === JSON.stringify(TOWARD_READING_SLUGS) &&
   JSON.stringify(readliLinks.slice(0, 8)) === JSON.stringify(expectedReadingFirst) &&
-  allReadingArticles.every((slug) => readliLinks.includes(slug)));
+  allReadingArticles.length === 36 && allReadingArticles.every(slug => readliLinks.includes(slug) !== towardSlugs.has(slug)));
 // 城市頁原本「先了解有哪些福利」的六篇與縣市篩選不動，再補兩篇既有城市資源導讀。
 const cityArticleLinks = [...city.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
 check('城市與福利：第六批六篇保留原有順序，另可閱讀既有 batch2-09、batch2-10 兩篇社福窗口導讀，無重複',
@@ -165,7 +170,7 @@ for (const topic of towardIndex.topics) {
   if (!towardHtml.includes(`id="toward-${topic.id}"`)) topicProblems.push('缺索引 ' + topic.id);
   for (const a of topic.stories) if (!towardHtml.includes(`href="articles/${a.slug}.html"`)) topicProblems.push('缺文章 ' + a.slug);
 }
-for (const a of towardIndex.featured) if (!towardHtml.includes(`href="articles/${a.slug}.html"`)) topicProblems.push('缺精選 ' + a.slug);
+for (const a of towardIndex.gallery) if (!towardHtml.includes(`href="articles/${a.slug}.html"`)) topicProblems.push('缺文章格 ' + a.slug);
 for (const r of towardIndex.official) if (!towardHtml.includes(r.name)) topicProblems.push('缺延伸官方入口 ' + r.name);
 if (towardHtml.includes('class="county-areas"') || towardHtml.includes('開啟城市資源索引') || towardHtml.includes('class="res-grid"')) topicProblems.push('向光仍重複完整縣市索引或大型官方卡');
 if (!towardHtml.includes('href="city.html"')) topicProblems.push('缺簡短城市入口');
@@ -173,17 +178,17 @@ for (const topic of towardIndex.topics) for (const a of topic.stories) if (!exis
 if (towardIndex.topics[0].stories[0]?.slug !== 'batch6-women-center-services') topicProblems.push('婦女中心課程索引未優先列出 batch6-women-center-services');
 if (towardHtml.includes('class="dir-jump"')) topicProblems.push('向光不應出現讀利專用的跳轉連結');
 // 2026-10-16 站主 iPhone 回饋：八索引先出現、兩欄文字樣式；精選只留不重複的延伸閱讀；移除名稱不符的文章
-if (!(towardHtml.indexOf('class="section toward-index"') > 0 && towardHtml.indexOf('class="section toward-index"') < towardHtml.indexOf('class="section toward-featured"'))) topicProblems.push('八索引不在精選文章之前');
+if (!(towardHtml.indexOf('class="section toward-index"') > 0 && towardHtml.indexOf('class="section toward-index"') < towardHtml.indexOf('class="section toward-featured"'))) topicProblems.push('八索引不在文章格之前');
 if (/toward-topic-count|＋|toward-index-grid/.test(towardHtml)) topicProblems.push('仍有數字編號、＋ 或單欄大卡樣式');
 if ((towardHtml.match(/<span class="toward-topic-arrow" aria-hidden="true">→<\/span>/g) || []).length !== 8) topicProblems.push('八個索引未全部使用右側 →');
 const indexedSlugs = new Set(towardIndex.topics.flatMap((t) => t.stories.map((a) => a.slug)));
-if (towardIndex.featured.length !== 2 || towardIndex.featured.some((a) => indexedSlugs.has(a.slug))) topicProblems.push('延伸閱讀應為 2 篇且不與八索引重複');
+if (towardIndex.gallery.length !== 13 || [...indexedSlugs].some(slug => !towardSlugs.has(slug))) topicProblems.push('向光文章格需展示完整 13 篇，八索引不應混入讀利文章');
 const topicSlugs = (id) => towardIndex.topics.find((t) => t.id === id).stories.map((a) => a.slug);
 if (topicSlugs('parenting').includes('batch2-02') || topicSlugs('family-education').includes('batch3-mind-reading')) topicProblems.push('名稱不符的文章仍在索引中');
 for (const [slug, catId] of [['batch2-02', 'life-family'], ['batch3-mind-reading', 'health']]) {
   if (!qp.includes(`href="articles/${slug}.html"`) || !(await read(QA, categories.find((c) => c.id === catId).slug)).includes(`articles/${slug}.html`)) topicProblems.push(`${slug} 不應從讀利或分類頁消失`);
 }
-check('向光 QA：八索引在精選之前、沿用兩欄文字樣式（→、無編號與＋）；各有實質文章（婦女中心優先列第六批、育兒津貼與心理閱讀已移出不相符索引但仍在讀利與分類頁）；延伸閱讀 2 篇不重複；三筆精簡官方入口；沒有 22 縣市清單與大型資源卡', topicProblems.length === 0, topicProblems.slice(0, 5).join('；'));
+check('向光 QA：八索引仍為兩欄文字樣式，索引下方完整展示 13 張可閱讀文章格；育兒津貼、心理閱讀僅屬讀利；三筆官方入口、無大型縣市清單', topicProblems.length === 0, topicProblems.slice(0, 5).join('；'));
 
 // 讀利專欄：💪 支援資源正下方的文字跳轉，連到既有「從你想了解的事開始」
 const qpHead = (/<section class="page-head dir-head"[\s\S]*?<\/section>/.exec(qp) || [''])[0];
@@ -259,7 +264,7 @@ for (const a of arts) {
   const f = `articles/${a.slug}.html`;
   if (!existsSync(path.join(QA, f))) { artProblems.push(`${a.no} 缺少頁面`); continue; }
   const t = await read(QA, f);
-  if (!qp.includes(`href="articles/${a.slug}.html"`)) artProblems.push(`${a.no} 讀利專欄沒有連結`);
+  if (!(towardSlugs.has(a.slug) ? towardHtml : qp).includes(`href="articles/${a.slug}.html"`)) artProblems.push(`${a.no} 所屬目錄沒有連結`);
   if (!t.includes(`<h1>${a.title}</h1>`)) artProblems.push(`${a.no} 標題不符`);
   const cat = categories.find((c) => c.id === a.category);
   if (!t.includes(`<span class="pill">${cat.title}</span>`)) artProblems.push(`${a.no} 分類不符`);
@@ -304,7 +309,7 @@ for (const a of [...fourth, ...sixth]) {
   if (!t.includes(`<span class="pill">${cat.title}</span>`)) fourthProblems.push(`${a.slug} 分類不符`);
   if (!t.includes('來源查核：2026-10-16（AI 編輯查核，尚未經網站擁有人核准）') || !t.includes('badge-qa">未核准測試內容')) fourthProblems.push(`${a.slug} 缺少查核日期或未核准標籤`);
   if (!/<meta name="robots" content="noindex/.test(t)) fourthProblems.push(`${a.slug} 未禁止收錄`);
-  if (!qp.includes(`href="articles/${a.slug}.html"`)) fourthProblems.push(`${a.slug} 讀利專欄沒有連結`);
+  if (!(towardSlugs.has(a.slug) ? towardHtml : qp).includes(`href="articles/${a.slug}.html"`)) fourthProblems.push(`${a.slug} 所屬目錄沒有連結`);
   if (!(await read(QA, cat.slug)).includes(`articles/${a.slug}.html`)) fourthProblems.push(`${a.slug} 分類頁 ${cat.slug} 沒有連結`);
   if (!idx.includes(`"url":"articles/${a.slug}.html"`)) fourthProblems.push(`${a.slug} 搜尋索引沒有`);
   const srcBox = (/<div class="sources">[\s\S]*?<\/div>/.exec(t) || [''])[0];
@@ -333,7 +338,7 @@ if (extra.length) fourthProblems.push(`QA 出現不在範圍內的文章：${ext
 const byCat = Object.fromEntries(categories.map((c) => [c.id, fourth.filter((a) => a.category === c.id).length]));
 if (JSON.stringify(byCat) !== JSON.stringify({ 'life-family': 3, career: 3, health: 1, law: 2, city: 0, learning: 4 })) fourthProblems.push(`分類分布不符：${JSON.stringify(byCat)}`);
 if (BATCH45_SOURCES.length !== 3) fourthProblems.push('載入來源檔不是 Issue #2 指定的三個原稿');
-check('第四、五批 13 篇＋第六批 6 篇：各有獨立頁、六大分類正確（第四五批 學習 4／生活 3／職涯 3／法律 2／健康 1；第六批全為城市與福利）、正文與表格完整保留、來源 https 且附原稿說明、讀利／分類頁／搜尋皆可找到、無編輯備註、未核准＋noindex；QA 共 36 篇且無範圍外草稿', fourthProblems.length === 0, fourthProblems.slice(0, 6).join('；'));
+check('第四、五批 13 篇＋第六批 6 篇：各有獨立頁、六大分類正確，文章屬讀利或向光之一、分類頁及搜尋皆可找到，正文及來源完整；QA 共 36 篇且無範圍外草稿', fourthProblems.length === 0, fourthProblems.slice(0, 6).join('；'));
 
 // Issue #3：城市與福利「先了解有哪些福利」區塊與第六批六篇
 const sixthProblems = [];
@@ -705,11 +710,11 @@ try {
   const openedTitle = (await page.textContent('h1')).trim();
   check('手機城市頁：「先了解有哪些福利」6 張文章卡在縣市選擇之前，可開啟文章；「往下選擇縣市」連結高度 ≥ 44px 且會跳到縣市選擇', order.b < order.f && order.cards === 6 && order.next >= 44 && finderTop < 300 && openedTitle === sixth[1].title, `${JSON.stringify(order)}；跳轉後縣市選擇位置 ${finderTop}px；開啟 ${openedTitle}`);
 
-  // 讀利專欄進入所有文章
+  // 讀利與向光各自保留主題相符的文章；原始文章全部存在於六大分類與搜尋
   await page.goto(`${ORIGIN}${BASE}quiet-power.html`);
   const qpLinks = await page.$$eval('#articles-title ~ .story-grid a, .story-grid h3 a', (as) => [...new Set(as.map((a) => a.getAttribute('href')))]);
   const entry = await page.$eval('.dir-head .support-entry', (e) => ({ href: e.getAttribute('href'), h: Math.round(e.getBoundingClientRect().height) }));
-  check('讀利專欄：導讀文章區列出第二批 12 篇、第三批 5 篇、第四批 9 篇、第五批 4 篇、第六批 6 篇共 36 篇且連結正確；💪 支援資源小型入口仍在（連往 support.html、高度 ≥ 44px）', qpLinks.length === 36 && [...arts, ...third.articles, ...fourth, ...sixth].every((a) => qpLinks.includes(`articles/${a.slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
+  check('讀利專欄：23 篇實用資訊文章獨立展示，與向光 13 篇互斥；💪 支援資源小型入口維持原狀', qpLinks.length === 23 && allReadingArticles.filter(a => !towardSlugs.has(a)).every(slug => qpLinks.includes(`articles/${slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
   check('測試預覽操作過程沒有 JavaScript 錯誤', errors.length === 0, errors.slice(0, 2).join('；'));
   await mobile.close();
 
