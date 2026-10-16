@@ -840,7 +840,7 @@ function qaPortalSection(category) {
       <a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span aria-hidden="true">↗</span></a>
       <p>${esc(it.purpose)}</p>
       <small>${esc(it.region)}｜${esc(it.caution)}　<span class="badge badge-qa">未核准測試內容</span></small>
-    </li>`).join('\\n')}</ul>
+    </li>`).join('\n')}</ul>
   </div>
 </section>`;
 }
