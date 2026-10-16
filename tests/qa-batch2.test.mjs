@@ -227,6 +227,24 @@ if (/報名中|可報名|開放報名|尚有名額|即將截止|額滿/.test(act
 if (notices.all.some((n) => n.visibleUntil < notices.window.from)) actProblems.push('資料含 2026-11-01 前已結束的活動');
 if (!actHtml.includes('<script src="assets/js/qa-activities.js" defer></script>') || !actHtml.includes('id="notices-empty"')) actProblems.push('活動頁缺依日期隱藏的腳本或「目前沒有」說明');
 if (!/MLM_SEARCH_INDEX\.filter\(function \(x\) \{ return !x\.until/.test(idx)) actProblems.push('搜尋索引沒有依日期剔除已結束活動');
+// 六大主題「學習與活動」的近期活動必須直接顯示，與全站小日曆的六筆共用來源。
+// 同步使用 UTC+8 到期隱藏腳本，不得只顯示空白事件格或另外手動維護資料。
+const learningQa = await read(QA, 'learning.html');
+const learningNotices = [...learningQa.matchAll(/<li class="notice" id="([^"]+)" data-act-until="(\d{4}-\d{2}-\d{2})">/g)];
+if (learningNotices.length !== notices.items.length ||
+    JSON.stringify(learningNotices.map(m => m[1])) !== JSON.stringify(notices.items.map(n => n.id)) ||
+    learningNotices.some((m, i) => m[2] !== notices.items[i].visibleUntil)) {
+  actProblems.push('學習與活動沒有完整共用小日曆六筆活動與相同過期日期');
+}
+for (const n of notices.items) {
+  if (!learningQa.includes(n.title) || !learningQa.includes(n.sourceUrl.replace(/&/g, '&amp;')) ||
+      !learningQa.includes(n.dateLabel)) actProblems.push(`學習與活動缺少公告內容或來源：${n.id}`);
+}
+if (!learningQa.includes('id="events-title"') || !learningQa.includes('id="notices-empty"') ||
+    !learningQa.includes('<script src="assets/js/qa-activities.js" defer></script>') ||
+    !learningQa.includes('href="activities.html"')) {
+  actProblems.push('學習與活動缺活動列表、到期處理、空狀態說明或日曆完整頁入口');
+}
 // 次要參考：12 個長期官方查詢入口（資料與連結不變）
 const actItems = [...actHtml.matchAll(/<li class="act-item" id="([^"]+)">\s*<a class="act-name" href="([^"]+)" target="_blank" rel="noopener noreferrer">/g)];
 if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal') || actItems.length !== 12) actProblems.push(`長期官方查詢入口應維持 12 筆（資料 ${acts.items.length}／頁面 ${actItems.length}）`);
