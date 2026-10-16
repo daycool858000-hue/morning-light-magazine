@@ -1,3 +1,4 @@
+# 2026-10-16｜站主已同意公開 QA 手機驗收首頁「活動與講座」動畫入口＋12 個長期官方活動查詢入口；基於提交 121747a、成功測試 38863116472 與連結檢查 38863116471；僅更新未核准 QA，不動正式 main。
 # 2026-10-16｜目錄頁首文案（讀利、向光）＋向光索引兩欄展開不重排，站主授權後依 CI 38848752697（707a000）更新未核准QA版。
 # 2026-10-16｜Issue #6：向光八索引＋讀利「從你想了解的事開始 ↓」，站主授權後依 CI 38841104030 更新已同意公開的未核准QA版。
 # 2026-10-16｜Issue #3：城市與福利六篇福利導讀與城市頁「先了解有哪些福利」區塊，CI 38834893490 通過後更新已同意公開的未核准QA版。
@@ -84,6 +85,17 @@ jobs:
           grep -q '整理生活中值得了解的知識、制度與公共資源' dist-qa/quiet-power.html
           grep -q '循著興趣探索不同主題' dist-qa/toward-light.html
           ! grep -q '在地資源索引' dist-qa/toward-light.html
+          # 活動與講座僅限 QA：首頁動畫入口、五個主題、12 筆長期官方查詢，均未正式核准。
+          test -f dist-qa/activities.html
+          grep -q 'href="activities.html"' dist-qa/index.html
+          grep -q 'class="act-entry"' dist-qa/index.html
+          grep -q '未核准測試內容' dist-qa/activities.html
+          grep -q 'noindex' dist-qa/activities.html
+          grep -q '理財與創業' dist-qa/activities.html
+          grep -q '家庭與生活學習' dist-qa/activities.html
+          test "$(grep -o 'class="act-item"' dist-qa/activities.html | wc -l)" -eq 12
+          ! grep -q '全國技能競賽' dist-qa/activities.html
+          ! grep -q '愛麗絲夢遊仙境' dist-qa/activities.html
           test "$(ls dist-qa/articles/*.html | wc -l)" -eq 36
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
