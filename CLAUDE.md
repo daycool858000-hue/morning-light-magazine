@@ -50,6 +50,15 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 2026-10-17 第二輪內容編輯最新進度（此節優先於下方第一輪六篇／七項進度）
+
+- **新增 12 篇均已完成 V2 正文**，分為兩檔：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`（02／03／04／09／10／11）及 `docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`（01／05／06／07／08／12），舊 V1 永久保留。
+- 第一輪與第二輪官方來源及原 36 篇主題重疊追蹤皆在 `docs/EXPANSION-BATCH10-12-ARTICLE-SOURCE-AND-OVERLAP-AUDIT-2026-10-17.md`；法規／醫療／求職／金融資訊仍須依 2026 年發布時點再審，完整 36 篇正文逐段比對及 Safari 外站測試尚未完成。**V2 不是已核准／已公開。**
+- **NI-01～NI-13 全部 13 項已完成至少一輪官方來源用途初核**，更新 `docs/NEW-IMMIGRANT-13-OFFICIAL-RESOURCE-CANDIDATES-2026-10-16.json`；其中 NI-11 臺中主頁工具讀取出錯，已有臺中市民政局原始官網及官方搜尋索引佐證。各外語文件逐份驗證仍待；所有資源不予自動上 QA。
+- **地方服務深度新增兩縣**：彰化 `docs/CITY-CHANGHUA-WOMEN-IMMIGRANT-FOUR-PRIMARY-PORTALS-2026-10-17.json` 4 筆、新北 `docs/CITY-NEW-TAIPEI-WOMEN-LEARNING-SOCIAL-PRIMARY-PORTALS-2026-10-17.json` 3 筆；新北新住民 NI-08 與社會局來源已交叉核對，只有一個對應入口，勿另做同址卡。其他 20 縣市仍需補深度，**不是 2 縣已全部完工**。
+- 舊十篇 A4 地方活動／B6 日常創作第二輪稿原本已處理主要問題，詳 `docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md`；待站主審閱、QA 實開即可評估入站。
+- **當前須由 Claude 處理的是 QA-only 分批匯入機制與前台驗收**，內容來源只使用最新 V2 快照和 manifest；**不要自行合併 PR #11／PR #10、修改 `release-approvals.json`、觸發公開 QA 部署**。編輯稿件核對與新縣市來源繼續由 ChatGPT 負責。
+
 ## 2026-10-17 編輯工作實際進度（最新，優先於 10/16 舊未完成敘述）
 
 - 新 12 篇已做原 36 篇標題／閱讀定位重疊排查，核對紀錄在 `docs/EXPANSION-BATCH10-12-ARTICLE-SOURCE-AND-OVERLAP-AUDIT-2026-10-17.md`；其中 02／03／04／09／10／11 **六篇已重寫 V2 完整正文並核對主要官方來源**：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`。第 11 篇因原稿和既有第五批 MOOC 幾乎同題，已改成「如何試學與選課」。
