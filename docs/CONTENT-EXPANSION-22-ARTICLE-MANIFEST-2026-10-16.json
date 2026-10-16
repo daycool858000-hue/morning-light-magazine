@@ -20,7 +20,8 @@
       "status": "draft-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "reviewScope": "家庭分帳屬原創實用建議；與既有緊急預備金文章明確區隔，仍待來源與全文校核"
     },
     {
       "id": "exp-02",
@@ -29,10 +30,13 @@
       "workstream": "消費陷阱",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 02｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
     },
     {
       "id": "exp-03",
@@ -41,10 +45,13 @@
       "workstream": "家庭照顧",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 03｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
     },
     {
       "id": "exp-04",
@@ -53,10 +60,13 @@
       "workstream": "女性重返職場",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 04｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
     },
     {
       "id": "exp-05",
@@ -92,7 +102,8 @@
       "status": "draft-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "reviewScope": "睡眠屬健康衛教，需補精確官方睡眠資料，不能只以平台首頁支持所有敘述"
     },
     {
       "id": "exp-08",
@@ -104,7 +115,8 @@
       "status": "draft-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "reviewScope": "關係界線屬原創例子；現有深層來源要重新確認可見內容及適用範圍"
     },
     {
       "id": "exp-09",
@@ -113,10 +125,13 @@
       "workstream": "跟蹤騷擾與人身安全",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 09｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
     },
     {
       "id": "exp-10",
@@ -125,10 +140,13 @@
       "workstream": "數位安全",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 10｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
     },
     {
       "id": "exp-11",
@@ -137,10 +155,13 @@
       "workstream": "免費公開課程與技能學習",
       "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
       "sourceHeading": "# 11｜",
-      "status": "draft-unapproved",
+      "status": "draft-v2-source-partial-review-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "latestReviewedFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "reviewDate": "2026-10-17",
+      "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱"
     },
     {
       "id": "exp-12",
@@ -152,7 +173,8 @@
       "status": "draft-unapproved",
       "ownerPublicationApproval": false,
       "qaImported": false,
-      "productionApproved": false
+      "productionApproved": false,
+      "reviewScope": "科學識讀主題與 AI 查證舊稿不同，仍待核對科教館深層網址及例子"
     }
   ],
   "olderArticles": [
