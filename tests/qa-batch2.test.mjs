@@ -141,6 +141,24 @@ check('每張地方候選卡片都有「未核准測試內容」標籤', allQaBa
 const qp = await read(QA, 'quiet-power.html');
 const idx = await read(QA, 'assets/data/search-index.js');
 const towardHtml = await read(QA, 'toward-light.html');
+// 讀利只調整展示先後：跨生活、法律、健康、財務、職涯及學習的八篇文章置前，其他 28 篇保留。
+const expectedReadingFirst = [
+  'batch6-welfare-overview', 'batch5-harassment-three-laws', 'batch5-preventive-health-screening',
+  'batch4-labor-insurance-pension', 'batch4-savings-emergency-fund', 'batch2-03',
+  'batch5-phone-emergency-sos', 'batch3-learn-free',
+];
+const readliLinks = [...qp.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+const allReadingArticles = [...arts, ...third.articles, ...fourth, ...sixth].map(a => a.slug);
+check('讀利文章：36 篇無重複，先呈現生活福利、法律權益、健康、退休財務、職涯與學習等八篇實用閱讀，全部原稿保持', 
+  readliLinks.length === 36 && new Set(readliLinks).size === 36 &&
+  JSON.stringify(readliLinks.slice(0, 8)) === JSON.stringify(expectedReadingFirst) &&
+  allReadingArticles.every((slug) => readliLinks.includes(slug)));
+// 城市頁原本「先了解有哪些福利」的六篇與縣市篩選不動，再補兩篇既有城市資源導讀。
+const cityArticleLinks = [...city.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+check('城市與福利：第六批六篇保留原有順序，另可閱讀既有 batch2-09、batch2-10 兩篇社福窗口導讀，無重複',
+  cityArticleLinks.length === 8 && new Set(cityArticleLinks).size === 8 &&
+  JSON.stringify(cityArticleLinks.slice(0, 6)) === JSON.stringify(sixth.map((x) => x.slug)) &&
+  JSON.stringify(cityArticleLinks.slice(6)) === JSON.stringify(['batch2-09', 'batch2-10']));
 const topicProblems = [];
 if (towardIndex.topics.length !== 8) topicProblems.push('未保留原有八項索引');
 for (const topic of towardIndex.topics) {
