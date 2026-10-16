@@ -1,7 +1,7 @@
 {
   "documentType": "qa-expansion-import-queue",
   "title": "由己六大主題擴充｜QA 分批匯入佇列",
-  "updatedOn": "2026-10-16",
+  "updatedOn": "2026-10-17",
   "approvalStatus": "not-approved",
   "rules": [
     "只有 importToQa=true 且 sourceCheck=source-checked、填寫 sourceCheckedOn 與 sourceCheckRecord（docs/ 內查核紀錄）的項目會進入 QA 測試版；其他一律不顯示。",
@@ -12,17 +12,21 @@
     "本檔不是正式發布核准，不得加入 ownerPublicationApproval／productionApproved；正式版只讀 content/release-approvals.json。"
   ],
   "sourceFiles": {
-    "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md": {
-      "stopAt": "## 十二篇共通的 QA 前查核清單"
+    "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md": {
+      "stopAt": "**QA 編輯狀態："
+    },
+    "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md": {
+      "stopAt": "## 本批編輯校核門檻"
     }
   },
   "articles": [
     {
       "id": "exp-01",
       "slug": "exp-household-shared-budget",
-      "title": "住在同一個家，生活費一定要全部放在同一個帳戶嗎？",
+      "title": "一起生活，家庭共同費用與自己的錢怎麼分開記？",
+      "originalDraftTitle": "住在同一個家，生活費一定要全部放在同一個帳戶嗎？",
       "category": "life-family",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "heading": "01",
       "directory": "none",
       "related": [],
@@ -36,7 +40,7 @@
       "slug": "exp-consumer-dispute-records",
       "title": "預付課程、訂閱服務或網購發生爭議，先留下哪些資料？",
       "category": "life-family",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "heading": "02",
       "directory": "none",
       "related": [],
@@ -50,7 +54,7 @@
       "slug": "exp-family-care-handover",
       "title": "照顧家人時，如果要請別人幫忙，事情怎麼交接？",
       "category": "life-family",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "heading": "03",
       "directory": "none",
       "related": [],
@@ -64,7 +68,7 @@
       "slug": "exp-career-gap-resume",
       "title": "離開職場幾年，履歷上的空白可以怎麼介紹？",
       "category": "career",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "heading": "04",
       "directory": "none",
       "related": [],
@@ -76,9 +80,10 @@
     {
       "id": "exp-05",
       "slug": "exp-first-interview-questions",
-      "title": "第一次面試一份新工作，除了薪水還可以問什麼？",
+      "title": "面試時除了問薪水，還有哪幾個工作條件值得確認？",
+      "originalDraftTitle": "第一次面試一份新工作，除了薪水還可以問什麼？",
       "category": "career",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "heading": "05",
       "directory": "none",
       "related": [],
@@ -90,9 +95,10 @@
     {
       "id": "exp-06",
       "slug": "exp-freelance-agreements",
-      "title": "開始接案或做個人工作者，要先把哪些事情談清楚？",
+      "title": "接案前把交付內容寫清楚，可以少掉哪些誤會？",
+      "originalDraftTitle": "開始接案或做個人工作者，要先把哪些事情談清楚？",
       "category": "career",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "heading": "06",
       "directory": "none",
       "related": [],
@@ -104,9 +110,10 @@
     {
       "id": "exp-07",
       "slug": "exp-sleep-habits-health",
-      "title": "睡得不好時，怎麼分辨是生活作息還是需要多了解的健康問題？",
+      "title": "常常睡不好，生活情境能提供哪些觀察線索？",
+      "originalDraftTitle": "睡得不好時，怎麼分辨是生活作息還是需要多了解的健康問題？",
       "category": "health",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "heading": "07",
       "directory": "none",
       "related": [],
@@ -118,9 +125,10 @@
     {
       "id": "exp-08",
       "slug": "exp-personal-boundaries",
-      "title": "在人際關係中，什麼時候可以說出自己的界線？",
+      "title": "朋友、家人和工作夥伴之間，界線可以怎麼說清楚？",
+      "originalDraftTitle": "在人際關係中，什麼時候可以說出自己的界線？",
       "category": "health",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "heading": "08",
       "directory": "none",
       "related": [],
@@ -134,7 +142,7 @@
       "slug": "exp-stalking-legal-info",
       "title": "被反覆跟蹤、傳訊或監看時，正式法律資訊可以怎麼找？",
       "category": "law",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "heading": "09",
       "directory": "none",
       "related": [],
@@ -148,7 +156,7 @@
       "slug": "exp-digital-safety-three-risks",
       "title": "手機帳號、定位分享和照片外流，是三種不同的數位安全問題",
       "category": "law",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "heading": "10",
       "directory": "none",
       "related": [],
@@ -160,9 +168,10 @@
     {
       "id": "exp-11",
       "slug": "exp-open-course-certificates",
-      "title": "免費公開課程、觀看影片、完成證書，為什麼會是不同的事情？",
+      "title": "一門免費課程適不適合自己？可以先試學一小段",
+      "originalDraftTitle": "免費公開課程、觀看影片、完成證書，為什麼會是不同的事情？",
       "category": "learning",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
       "heading": "11",
       "directory": "none",
       "related": [],
@@ -174,9 +183,10 @@
     {
       "id": "exp-12",
       "slug": "exp-reading-popular-science",
-      "title": "想看生活中的科學知識，要怎麼判斷一篇科普文章講得夠不夠清楚？",
+      "title": "同一個生活實驗，換了條件，結果還能直接比較嗎？",
+      "originalDraftTitle": "想看生活中的科學知識，要怎麼判斷一篇科普文章講得夠不夠清楚？",
       "category": "learning",
-      "sourceFile": "docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "heading": "12",
       "directory": "none",
       "related": [],

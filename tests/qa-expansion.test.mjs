@@ -6,6 +6,7 @@
 //   二、範例佇列：單篇文章有獨立網址、來源、日期、分類與搜尋；讀利／向光只在指定時接在原清單之後；
 //       同網址資源只補原卡、不同網址以簡潔入口呈現、縣市資源進城市篩選；未查核項目不出現。
 //   三、錯誤情境：未查核卻開啟、slug 重複、自行標成核准、與長期入口同網址等，建置會失敗。
+//   三之二、真實 V2 原稿：佇列對齊 manifest、來源標題不誤判、22 篇真實原稿逐行無遺失、兩份 V2 的 stopAt 有效。
 //   四、320／375／390／1280px（Chromium，及 CI 中的 WebKit）沒有水平溢位，入口可點高度 ≥ 44px。
 import http from 'node:http';
 import { execFileSync } from 'node:child_process';
@@ -14,7 +15,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { loadQaExpansion, QA_EXPANSION_QUEUE } from '../scripts/lib/qa-expansion.mjs';
+import { loadQaExpansion, parseExpansionArticle, extractSection, SOURCE_LABELS, QA_EXPANSION_QUEUE } from '../scripts/lib/qa-expansion.mjs';
 import { TOWARD_READING_SLUGS } from '../scripts/lib/toward-light-editorial.mjs';
 
 const require = createRequire(import.meta.url);
@@ -226,6 +227,96 @@ let outside = '';
 try { await loadQaExpansion(ROOT, { ...ctx, queueFile: 'content/resources.json' }); outside = '佇列放在 content/ 沒有被擋下'; } catch { /* 預期 */ }
 check('錯誤情境：未查核、缺查核紀錄、slug 重複、自行核准、未指定目錄、分類／標題不符、與長期入口同網址、縣市欄位不全、佇列位置錯誤，建置都會失敗',
   negative.length === 0 && !outside, [...negative, outside].filter(Boolean).join('；'));
+
+// ---------- 三之二、真實 V2 原稿回歸（PR #11，2026-10-17） ----------
+const manifest = await readJson('docs/CONTENT-EXPANSION-22-ARTICLE-MANIFEST-2026-10-16.json');
+const V1_FILE = 'docs/EXPANSION-BATCH10-TWELVE-NEW-ARTICLES-DRAFT-2026-10-16.md';
+const expQueue = realQueue.articles.filter((x) => x.id.startsWith('exp-'));
+const queueProblems = [];
+for (const m of manifest.newArticles) {
+  const x = expQueue.find((a) => a.id === m.id);
+  if (!x) { queueProblems.push(`${m.id} 不在佇列`); continue; }
+  if (x.sourceFile !== m.latestReviewedFile || x.heading !== m.latestReviewedHeading) queueProblems.push(`${m.id} 未指向 V2 最新原稿`);
+  if (x.title !== m.title) queueProblems.push(`${m.id} 標題與 manifest 不符`);
+  if ((x.originalDraftTitle || null) !== (m.originalDraftTitle || null)) queueProblems.push(`${m.id} V1 原標題溯源不符`);
+  if (x.category !== m.category) queueProblems.push(`${m.id} 分類與 manifest 不符`);
+  if (!realQueue.sourceFiles[x.sourceFile]?.stopAt) queueProblems.push(`${m.id} 原稿沒有設定 stopAt`);
+}
+if (expQueue.length !== 12 || expQueue.some((x) => x.sourceFile === V1_FILE) || realQueue.sourceFiles[V1_FILE]) queueProblems.push('佇列仍引用 V1 舊稿');
+if (realQueue.articles.some((x) => x.importToQa !== false || x.sourceCheck !== 'pending') || realQueue.resources.some((x) => x.importToQa !== false || x.sourceCheck !== 'pending')) queueProblems.push('正式佇列有項目被開啟或標成已查核');
+check('真實佇列：exp-01～12 全部改讀 2026-10-17 兩份 V2 原稿，標題、編號、分類與 manifest 一致（7 篇改題保留 V1 原標題），22 篇與 13 項資源全部仍為 importToQa=false／pending',
+  queueProblems.length === 0 && expQueue.filter((x) => x.originalDraftTitle).length === 7, queueProblems.join('；'));
+
+// 來源標題：一般正文小標不可被當成文末來源清單
+const item = '\n- [教育部終身學習資源平臺](https://lle.moe.edu.tw/lesson-resource/)\n';
+const bodyHeads = ['## 用公開官方入口延伸探索', '## 官方入口怎麼選？', '## 怎麼看求職與再就業資源', '**官方入口怎麼選：**'];
+const listHeads = ['**正式參考來源（2026-10-17 查閱）：**', '**官方參考入口（2026-10-17 核對）：**', '**正式衛教來源（2026-10-17 查閱）：**', '**正式入口（2026-10-17 查閱）：**',
+  '### 官方來源與延伸閱讀', '### 來源與延伸閱讀', '### 官方教育來源', '### 官方法規與學習入口', '### 官方來源與學習入口'];
+const headProblems = [];
+for (const h of bodyHeads) {
+  const a = parseExpansionArticle('負向', `前言。\n\n${h}\n\n正文第一段，不可遺失。\n\n**正式來源（2026-10-17 查閱）：**${item}`);
+  if (!a.body.includes(h) || !a.body.includes('正文第一段，不可遺失。') || a.sources.length !== 1 || a.problems.length) headProblems.push(`「${h}」被誤判為來源`);
+}
+for (const h of listHeads) {
+  const a = parseExpansionArticle('正向', `前言。\n\n${h}${item}`);
+  if (a.body.includes(h) || a.sources.length !== 1 || a.problems.length) headProblems.push(`「${h}」沒有被辨識為來源清單`);
+}
+check('來源標題解析：「用公開官方入口延伸探索」「官方入口怎麼選？」等正文小標保留在正文；「正式參考來源（日期）」「官方來源與延伸閱讀」等文末清單才切入參考來源',
+  headProblems.length === 0, headProblems.join('；'));
+
+// 用真實原稿（12 篇 V2＋原有十篇）在記憶體中全部試開；只供測試，正式佇列檔案不改。
+// sourceCheckRecord 借用既有 docs 檔滿足存在性檢查，不代表任何一篇已完成查核。
+const existingTitles = await Promise.all(oldSlugs.map(async (slug) => ({ slug, title: (/<h1>([^<]+)<\/h1>/.exec(await read('dist-qa', `articles/${slug}.html`)) || [])[1] })));
+const realCtx = { ...ctx, existingArticles: existingTitles, queueFile: QA_EXPANSION_QUEUE };
+const trial = JSON.parse(JSON.stringify(realQueue));
+for (const a of trial.articles) Object.assign(a, { importToQa: true, sourceCheck: 'source-checked', sourceCheckedOn: '2026-10-17', sourceCheckRecord: 'docs/QA-EXPANSION-IMPORT-GUIDE-2026-10-16.md' });
+let trialResult = null;
+let trialError = '';
+try { trialResult = await loadQaExpansion(ROOT, { ...realCtx, queue: trial }); } catch (e) { trialError = e.message.slice(0, 300); }
+const LEAK = /QA 編輯狀態|本批編輯校核門檻|十二篇共通的 QA 前查核清單|建議分類|建議閱讀入口|編輯對應/;
+const isListHead = (t) => SOURCE_LABELS.includes(t.replace(/^#{2,3}\s+|^\*\*|：?\*\*$|：$/g, '').replace(/（[^）]*）$/, ''));
+const lossProblems = [];
+const fileText = new Map();
+for (const x of trial.articles) {
+  const a = trialResult?.articles.find((r) => r.expansionId === x.id);
+  if (!a) { lossProblems.push(`${x.id} 沒有解析結果`); continue; }
+  if (!fileText.has(x.sourceFile)) fileText.set(x.sourceFile, await readFile(path.join(ROOT, x.sourceFile), 'utf8'));
+  const text = fileText.get(x.sourceFile);
+  const stop = trial.sourceFiles[x.sourceFile]?.stopAt;
+  const [{ raw }] = extractSection(text, x.heading, stop ? text.indexOf(stop) : -1);
+  const srcUrls = new Set(a.sourcesList.map((s) => s.url));
+  const listItems = raw.split('\n').filter((l) => /^-\s+\[[^\]]+\]\(https?:/.test(l.trim()) && !a.body.includes(l.trim()));
+  if (!a.sourcesList.length || a.sourcesList.length !== listItems.length) lossProblems.push(`${x.id} 來源 ${a.sourcesList.length} 筆，原稿清單 ${listItems.length} 筆`);
+  if (a.sourcesList.some((s) => !/^https:\/\//.test(s.url) || !s.title.trim())) lossProblems.push(`${x.id} 來源格式錯誤`);
+  // 原稿每一行非空內容都必須在正文或來源中出現；只有分類行、編輯對應行、分隔線與來源標題可以不進正文
+  for (const line of raw.split('\n').map((l) => l.trim()).filter(Boolean)) {
+    if (line === '---' || /^\*\*(?:建議分類：|分類)/.test(line) || /^\*\*(?:編輯對應|建議閱讀入口)：/.test(line) || isListHead(line)) continue;
+    const m = /^-\s+\[[^\]]+\]\((https?:\/\/[^)\s]+)\)/.exec(line);
+    if (m && srcUrls.has(m[1])) continue;
+    if (!a.body.includes(line)) { lossProblems.push(`${x.id} 遺失：${line.slice(0, 30)}`); break; }
+  }
+  if (LEAK.test(a.body) || a.sourcesList.some((s) => LEAK.test(s.note))) lossProblems.push(`${x.id} 夾帶編輯註記`);
+  if (a.body.length < 400) lossProblems.push(`${x.id} 正文只有 ${a.body.length} 字`);
+}
+const exp11 = trialResult?.articles.find((a) => a.expansionId === 'exp-11');
+if (!exp11?.body.includes('## 用公開官方入口延伸探索') || !exp11.body.includes('《由己》只提供閱讀方向與官方連結')) lossProblems.push('exp-11「用公開官方入口延伸探索」段落被截斷');
+const titleMismatch = manifest.newArticles.filter((m) => trialResult?.articles.find((a) => a.expansionId === m.id)?.title !== m.title).map((m) => m.id);
+check('真實原稿試跑（僅記憶體）：12 篇 V2 與原有十篇全部可解析，標題與 manifest 一字不差，每篇至少一筆來源且原稿清單全數收錄，正文逐行無遺失、無編輯註記',
+  !trialError && trialResult?.articles.length === 22 && lossProblems.length === 0 && titleMismatch.length === 0,
+  [trialError, ...lossProblems, titleMismatch.length ? `標題不符 ${titleMismatch.join('、')}` : ''].filter(Boolean).slice(0, 5).join('；'));
+
+// 兩份 V2 的 stopAt：各自只出現一次、在最後一篇之後；拿掉時檔尾編輯註記會被當成不明段落而擋下，不會默默上網
+const stopProblems = [];
+for (const [file, { stopAt }] of Object.entries(realQueue.sourceFiles)) {
+  const text = await readFile(path.join(ROOT, file), 'utf8');
+  const lastHead = Math.max(...[...text.matchAll(/^# \d\d｜/gm)].map((m) => m.index));
+  if (text.split(stopAt).length !== 2 || text.indexOf(stopAt) < lastHead) stopProblems.push(`${file} stopAt 不唯一或位置錯誤`);
+  const noStop = JSON.parse(JSON.stringify(trial));
+  delete noStop.sourceFiles[file];
+  try { await loadQaExpansion(ROOT, { ...realCtx, queue: noStop }); stopProblems.push(`${file} 沒有 stopAt 時沒有被擋下`); } catch (e) { if (!/來源之後有無法辨識的段落/.test(e.message)) stopProblems.push(`${file} 錯誤訊息不符`); }
+}
+check('兩份 V2 各自設定 stopAt（「**QA 編輯狀態：」「## 本批編輯校核門檻」），位置在最後一篇之後；若漏設，檔尾編輯註記會讓建置失敗而不是出現在前台',
+  Object.keys(realQueue.sourceFiles).length === 2 && stopProblems.length === 0, stopProblems.join('；'));
 
 // ---------- 四、手機與電腦版面 ----------
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain' };
