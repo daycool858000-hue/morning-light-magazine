@@ -825,6 +825,7 @@ for (const c of categories) {
   const catArticles = articles.filter((a) => a.category === c.id);
   const body = `
 ${categoryHero(c)}
+${IS_QA ? articlesSection(catArticles) : ''}
 <section class="section needs" aria-labelledby="need-title">
   <div class="wrap needs-grid">
     <div class="needs-intro"><span class="kicker">Start Here</span><h2 id="need-title">從需求開始</h2></div>
@@ -838,7 +839,7 @@ ${topicsSection(c)}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}
   </div>
 </section>
-${articlesSection(catArticles)}`;
+${IS_QA ? '' : articlesSection(catArticles)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: c.id, body, bodyClass: `cat-${c.id}` }) });
 }
 
@@ -909,6 +910,7 @@ ${IS_QA ? articlesSection(articles.filter((a) => a.category === 'city' && !qaBat
 {
   const c = catById.learning;
   const catResources = resourcesFor((r) => r.categories.includes('learning'));
+  const catArticles = articles.filter((a) => a.category === 'learning');
   const eventCards = events
     .map(
       (e) => `<article class="event" data-event-end="${esc(e.endDate)}">
@@ -922,6 +924,7 @@ ${IS_QA ? articlesSection(articles.filter((a) => a.category === 'city' && !qaBat
     .join('\n');
   const body = `
 ${categoryHero(c)}
+${IS_QA && catArticles.length ? articlesSection(catArticles) : ''}
 <section class="section" aria-labelledby="events-title">
   <div class="wrap">
     ${sectionHead('Upcoming', 'events-title', '近期活動', '名額與報名狀態以主辦機構公告為準。活動結束後會自動從這裡隱藏，但不代表活動已取消。')}
@@ -936,7 +939,7 @@ ${topicsSection(c)}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}
   </div>
 </section>
-${articles.some((a) => a.category === 'learning') ? articlesSection(articles.filter((a) => a.category === 'learning')) : ''}`;
+${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: ['assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
