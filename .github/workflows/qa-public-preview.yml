@@ -1,3 +1,4 @@
+# 2026-10-16｜Issue #3：城市與福利六篇福利導讀與城市頁「先了解有哪些福利」區塊，CI 38834893490 通過後更新已同意公開的未核准QA版。
 # 2026-10-16｜英文輔助（QA-only）＋兩項文章來源勘誤，依成功 CI 38814863350 更新已同意公開的 QA；絕不更動 main 或核准資料。
 # 2026-10-16｜Issue #2：第四批9篇＋第五批4篇導讀與第三批「使用方式」，CI 全數通過後更新已同意公開的未核准QA版。
 # 2026-10-15｜已通過第三批9筆免登入資訊與5篇原創導讀完整測試，更新已同意公開的未核准QA版。
@@ -69,6 +70,10 @@ jobs:
           grep -q '22 縣市癌症篩檢活動專區' dist-qa/articles/batch5-preventive-health-screening.html
           ! grep -q 'escreening.hpa.gov.tw/Home' dist-qa/articles/batch5-preventive-health-screening.html
           grep -q 'noindex' dist-qa/articles/batch5-harassment-three-laws.html
+          grep -q 'id="benefits"' dist-qa/city.html
+          grep -q '先了解有哪些福利' dist-qa/city.html
+          grep -q '未核准測試內容' dist-qa/articles/batch6-welfare-overview.html
+          grep -q 'noindex' dist-qa/articles/batch6-women-center-services.html
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
           echo "已確認只會部署未核准 QA 測試頁。"
