@@ -548,6 +548,16 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 }
 .cat-hero-icon { width: 40px; height: 40px; color: var(--amber); }
 .lead { font-size: 1.08rem; color: var(--muted); max-width: 42em; margin-bottom: 0; }
+/* QA 六大主題中的五個文章分類：在介紹段落下放低干擾的頁內捷徑，純文字呈現。 */
+.cat-hero-jump { display: none; margin: 12px 0 0; font-family: var(--sans); line-height: 1.35; }
+@media (max-width: 699px) { .cat-hero-jump { display: block; } }
+.cat-hero-jump a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 2px 0;
+  font-size: 0.92rem; font-weight: 600; color: var(--terracotta-dark); text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.cat-hero-jump a:hover { color: var(--ink); }
+#need-title, #topics-title { scroll-margin-top: 42px; }
 .cat-hero .note { margin: 24px 0 0; max-width: 780px; }
 @media (max-width: 699px) {
   .cat-hero-media .photo { max-height: none; }
@@ -787,6 +797,62 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .toward-reading-kind { display: block; font-size: 0.74rem; color: var(--terracotta-dark); font-weight: 600; }
 .toward-reading-card h3 { font-size: clamp(0.92rem, 2.7vw, 1.06rem); line-height: 1.5; margin: 0; font-weight: 600; }
 .toward-reading-go { margin-top: auto; font-size: 0.79rem; color: var(--muted); font-weight: 600; }
+/* 手機文章閱讀：向光採單欄縱向滑動；每組四張輪替暖紙色、橄欖綠、淡陶土，
+   只用 CSS 的淡線紋理，不用圖片、動畫或額外外部資源。 */
+.readli-inline-kind { display: none; }
+@media (max-width: 699px) {
+  .toward-reading-grid { grid-template-columns: minmax(0, 1fr); gap: 13px; margin-top: 16px; }
+  .toward-reading-card {
+    position: relative; isolation: isolate; border-radius: 15px; border: 1px solid var(--line);
+    border-left: 4px solid #A89C81; background: #FBF4E9;
+  }
+  .toward-reading-card:nth-child(4n + 2) { background: #F0F2E9; border-left-color: #6C7B5F; }
+  .toward-reading-card:nth-child(4n + 3) { background: #F8ECE3; border-left-color: #AE795D; }
+  .toward-reading-card:nth-child(4n) { background: #F7F3ED; border-left-color: #978572; }
+  .toward-reading-card::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    width: 95px; height: 95px; top: -50px; right: -26px; border-radius: 50%;
+    border: 1px solid rgba(113, 104, 83, 0.14);
+    box-shadow: 0 0 0 13px rgba(113, 104, 83, 0.035), 0 0 0 28px rgba(113, 104, 83, 0.026);
+  }
+  .toward-reading-card:nth-child(2n)::before { border-radius: 12% 82% 16% 82%; transform: rotate(22deg); }
+  .toward-reading-card a {
+    min-height: 106px; height: auto; gap: 4px; padding: 14px 44px 14px 17px; position: relative;
+  }
+  .toward-reading-card h3 { font-size: 1.05rem; line-height: 1.55; letter-spacing: 0.02em; }
+  .toward-reading-kind { font-size: 0.75rem; letter-spacing: 0.06em; }
+  .toward-reading-go { font-size: 0.8rem; margin-top: 6px; }
+  .toward-reading-card a:active { background: rgba(255, 255, 255, 0.22); }
+
+  /* 讀利：大卡片改為緊湊的單欄文章清單，縮短翻找 23 篇時的滑動距離。
+     只影響讀利 QA 手機版；其他六大分類與電腦版的文章卡完全維持原樣。 */
+  .readli-reading .story-grid { gap: 0; }
+  .readli-reading .story,
+  .readli-reading .story.story-text {
+    display: block; padding: 13px 2px 14px; margin: 0;
+    border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent;
+  }
+  .readli-reading .story:first-child { border-top: 1px solid var(--line); }
+  .readli-reading .story .story-media { display: none; }
+  .readli-reading .story .story-body,
+  .readli-reading .story.story-text .story-body { padding: 0; }
+  .readli-reading .readli-inline-kind,
+  .readli-reading .story-text .pill {
+    display: inline-block; width: auto; max-width: 100%;
+    margin: 0 0 5px; padding: 0; background: none; border: 0; border-radius: 0;
+    color: var(--terracotta-dark); font-size: 0.76rem; font-weight: 650; letter-spacing: 0.04em;
+  }
+  .readli-reading .story-text .badge-qa { font-size: 0.69rem; margin-left: 7px; vertical-align: middle; }
+  .readli-reading .story h3, .readli-reading .story.story-text h3 {
+    font-size: 1.06rem; line-height: 1.48; letter-spacing: 0.02em; margin: 0 0 3px;
+  }
+  .readli-reading .story h3 a { display: flex; align-items: center; min-height: 44px; color: var(--ink); }
+  .readli-reading .story .story-body > p:not(.story-date) {
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+    overflow: hidden; line-height: 1.55; font-size: 0.85rem; margin: 3px 0 0; color: var(--muted);
+  }
+  .readli-reading .story .story-date { display: none; }
+}
 @media (min-width: 700px) { .toward-reading-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }
 @media (min-width: 1050px) { .toward-reading-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; } }
 .toward-index h2 { margin-top: 4px; }

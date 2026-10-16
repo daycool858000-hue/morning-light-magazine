@@ -227,6 +227,24 @@ if (/報名中|可報名|開放報名|尚有名額|即將截止|額滿/.test(act
 if (notices.all.some((n) => n.visibleUntil < notices.window.from)) actProblems.push('資料含 2026-11-01 前已結束的活動');
 if (!actHtml.includes('<script src="assets/js/qa-activities.js" defer></script>') || !actHtml.includes('id="notices-empty"')) actProblems.push('活動頁缺依日期隱藏的腳本或「目前沒有」說明');
 if (!/MLM_SEARCH_INDEX\.filter\(function \(x\) \{ return !x\.until/.test(idx)) actProblems.push('搜尋索引沒有依日期剔除已結束活動');
+// 六大主題「學習與活動」的近期活動必須直接顯示，與全站小日曆的六筆共用來源。
+// 同步使用 UTC+8 到期隱藏腳本，不得只顯示空白事件格或另外手動維護資料。
+const learningQa = await read(QA, 'learning.html');
+const learningNotices = [...learningQa.matchAll(/<li class="notice" id="([^"]+)" data-act-until="(\d{4}-\d{2}-\d{2})">/g)];
+if (learningNotices.length !== notices.items.length ||
+    JSON.stringify(learningNotices.map(m => m[1])) !== JSON.stringify(notices.items.map(n => n.id)) ||
+    learningNotices.some((m, i) => m[2] !== notices.items[i].visibleUntil)) {
+  actProblems.push('學習與活動沒有完整共用小日曆六筆活動與相同過期日期');
+}
+for (const n of notices.items) {
+  if (!learningQa.includes(n.title) || !learningQa.includes(n.sourceUrl.replace(/&/g, '&amp;')) ||
+      !learningQa.includes(n.dateLabel)) actProblems.push(`學習與活動缺少公告內容或來源：${n.id}`);
+}
+if (!learningQa.includes('id="events-title"') || !learningQa.includes('id="notices-empty"') ||
+    !learningQa.includes('<script src="assets/js/qa-activities.js" defer></script>') ||
+    !learningQa.includes('href="activities.html"')) {
+  actProblems.push('學習與活動缺活動列表、到期處理、空狀態說明或日曆完整頁入口');
+}
 // 次要參考：12 個長期官方查詢入口（資料與連結不變）
 const actItems = [...actHtml.matchAll(/<li class="act-item" id="([^"]+)">\s*<a class="act-name" href="([^"]+)" target="_blank" rel="noopener noreferrer">/g)];
 if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal') || actItems.length !== 12) actProblems.push(`長期官方查詢入口應維持 12 筆（資料 ${acts.items.length}／頁面 ${actItems.length}）`);
@@ -339,6 +357,45 @@ const byCat = Object.fromEntries(categories.map((c) => [c.id, fourth.filter((a) 
 if (JSON.stringify(byCat) !== JSON.stringify({ 'life-family': 3, career: 3, health: 1, law: 2, city: 0, learning: 4 })) fourthProblems.push(`分類分布不符：${JSON.stringify(byCat)}`);
 if (BATCH45_SOURCES.length !== 3) fourthProblems.push('載入來源檔不是 Issue #2 指定的三個原稿');
 check('第四、五批 13 篇＋第六批 6 篇：各有獨立頁、六大分類正確，文章屬讀利或向光之一、分類頁及搜尋皆可找到，正文及來源完整；QA 共 36 篇且無範圍外草稿', fourthProblems.length === 0, fourthProblems.slice(0, 6).join('；'));
+
+// 六大主題內閱讀入口的手機可發現性：除城市福利原六篇已在縣市選擇之前，
+// 其他五個分類均須先列出對應文章，再進入主題及大量官方機構入口。
+const qaArticleByCategory = [...arts, ...third.articles, ...fourth, ...sixth];
+const expectedTopicCounts = { 'life-family': 6, career: 5, health: 4, law: 5, city: 8, learning: 8 };
+const topicReadingProblems = [];
+for (const c of categories) {
+  const html = await read(QA, c.slug);
+  const reading = qaArticleByCategory.filter(a => a.category === c.id);
+  if (reading.length !== expectedTopicCounts[c.id]) topicReadingProblems.push(`${c.title} 分類原稿數量不符：${reading.length}`);
+  const hrefs = [...html.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map(m => m[1]);
+  if (hrefs.length !== expectedTopicCounts[c.id] || new Set(hrefs).size !== hrefs.length ||
+      !reading.every(a => hrefs.includes(a.slug))) topicReadingProblems.push(`${c.title} 文章入口不完整或重複：${hrefs.length}`);
+  if (c.id !== 'city') {
+    const pos = (id) => html.indexOf(`id="${id}"`);
+    const order = [pos('page-title'), pos('art-title'), pos(c.id === 'learning' ? 'events-title' : 'need-title'), pos('topics-title'), pos('res-title')];
+    if (order.some(v => v < 0) || order.some((v, i) => i && v <= order[i - 1])) {
+      topicReadingProblems.push(`${c.title} 應先文章再活動／需求、主題索引與官方入口：${order.join(',')}`);
+    }
+  }
+}
+check('六大主題：各自保留全部 36 篇對應文章且無重複；五個一般分類在大型官方入口之前顯示文章，城市與福利原優先福利區塊維持',
+  topicReadingProblems.length === 0, topicReadingProblems.slice(0, 6).join('；'));
+// 五個分類有文字式「從需求開始」捷徑，城市與福利維持自己的福利／縣市索引。
+// 跳轉只透過原生 href 錨點，不改標題、文章、資源或正式版。
+const categoryJumps = [];
+for (const c of categories) {
+  const pageHtml = await read(QA, c.slug);
+  const links = [...pageHtml.matchAll(/<p class="cat-hero-jump"><a href="#([^"]+)">([^<]+)<span aria-hidden="true">&nbsp;↓<\/span><\/a><\/p>/g)];
+  if (c.id === 'city') {
+    if (links.length) categoryJumps.push('城市與福利不應再增加頁首捷徑');
+    continue;
+  }
+  const expected = c.id === 'learning' ? ['topics-title', '直接探索學習主題'] : ['need-title', '從你想了解的事開始'];
+  if (links.length !== 1 || links[0][1] !== expected[0] || links[0][2] !== expected[1] ||
+      !pageHtml.includes(`id="${expected[0]}"`)) categoryJumps.push(`${c.title} 跳轉入口或目標錯誤`);
+}
+check('五個主題介紹下方有小型原生錨點；學習與活動連主題索引，其他四個連需求，城市專屬版面不動',
+  categoryJumps.length === 0, categoryJumps.join('；'));
 
 // Issue #3：城市與福利「先了解有哪些福利」區塊與第六批六篇
 const sixthProblems = [];

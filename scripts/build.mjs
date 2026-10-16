@@ -308,7 +308,7 @@ function articleImageId(a) {
   return photoById[id] && (generated[id] || photoById[id].required) ? id : null;
 }
 
-function articleCard(a, prefix, { withImage = true } = {}) {
+function articleCard(a, prefix, { withImage = true, readli = false } = {}) {
   const imgId = withImage ? articleImageId(a) : null;
   const href = `${prefix}articles/${esc(a.slug)}.html`;
   const label = `<span class="pill">${esc(categoryLabel(a.category))}</span>${qaBadge(a)}`;
@@ -316,6 +316,7 @@ function articleCard(a, prefix, { withImage = true } = {}) {
     return `<article class="story">
   <a class="story-media" href="${href}" tabindex="-1" aria-hidden="true">${photo(imgId, 'card', { prefix, sizes: '(min-width: 1000px) 380px, (min-width: 700px) 50vw, 100vw' })}${label}</a>
   <div class="story-body">
+    ${readli ? `<span class="readli-inline-kind">${esc(categoryLabel(a.category))}</span>` : ''}
     <h3><a href="${href}">${esc(a.title)}</a></h3>
     <p>${esc(a.summary)}</p>
     <p class="story-date">更新：${esc(a.updated)}</p>
@@ -549,17 +550,7 @@ function activitiesEntry(base = '', active = '') {
   return `<a class="act-entry" href="${base}activities.html" aria-label="近期活動與講座：查看已公布的活動消息"${active === 'activities' ? ' aria-current="page"' : ''}><span class="act-entry-icon">${CALENDAR_SVG}</span><span class="act-entry-label">近期活動</span></a>`;
 }
 const zhDate = (d) => { const [y, m, day] = d.split('-').map(Number); return `${y} 年 ${m} 月 ${day} 日`; };
-if (IS_QA) {
-  const { groups, items, checkedOn } = qaActivities;
-  const notices = qaNotices.items;
-  const gid = (g) => `act-group-${groups.indexOf(g) + 1}`;
-  const itemHtml = (it) => `<li class="act-item" id="${esc(it.id)}">
-        <a class="act-name" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span class="visually-hidden">（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
-        <p class="act-org">${esc(it.org)}｜${esc(it.region)}</p>
-        <p class="act-purpose">${esc(it.purpose)}</p>
-        <p class="act-caution">${esc(it.caution)}</p>
-      </li>`;
-  const noticeHtml = (n) => `<li class="notice" id="${esc(n.id)}" data-act-until="${esc(n.visibleUntil)}">
+const noticeHtml = (n) => `<li class="notice" id="${esc(n.id)}" data-act-until="${esc(n.visibleUntil)}">
         <p class="notice-meta"><span class="notice-type${n.announcementType === 'plan' ? ' is-plan' : ''}">${esc(n.typeLabel)}</span><span class="notice-cat">${esc(n.category)}</span></p>
         <h3 class="notice-title">${esc(n.title)}</h3>
         <dl class="notice-facts">
@@ -571,6 +562,17 @@ if (IS_QA) {
         <p class="notice-summary">${esc(n.summary)}</p>
         <p class="notice-caution">${esc(n.eligibilityCaution)}</p>
         <a class="notice-link" href="${esc(n.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看官方公告<span class="visually-hidden">：${esc(n.title)}（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
+      </li>`;
+
+if (IS_QA) {
+  const { groups, items, checkedOn } = qaActivities;
+  const notices = qaNotices.items;
+  const gid = (g) => `act-group-${groups.indexOf(g) + 1}`;
+  const itemHtml = (it) => `<li class="act-item" id="${esc(it.id)}">
+        <a class="act-name" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span class="visually-hidden">（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
+        <p class="act-org">${esc(it.org)}｜${esc(it.region)}</p>
+        <p class="act-purpose">${esc(it.purpose)}</p>
+        <p class="act-caution">${esc(it.caution)}</p>
       </li>`;
   const lead = '2026 年 11 月至 2027 年底，政府、公立場館與正式機構已公布的活動、講座、展覽與課程消息。';
   const body = `
@@ -659,7 +661,7 @@ ${dirHead(d, IS_QA ? QA_DIRECTORY_COPY['quiet-power'].tip : '依照自己的需�
 ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   <div class="wrap">
     ${sectionHead('Reading', 'articles-title', '導讀文章')}
-    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '')).join('\n')}</div>
+    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '', { readli: IS_QA })).join('\n')}</div>
   </div>
 </section>` : ''}
 <section class="section needs" aria-labelledby="needs-title">
@@ -680,7 +682,7 @@ ${articles.length ? `<section class="section" aria-labelledby="articles-title">
     </ul>
   </div>
 </section>`;
-  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: 'dir-page' }) });
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: IS_QA ? 'dir-page readli-reading' : 'dir-page' }) });
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
 }
 
@@ -783,6 +785,7 @@ function categoryHero(c) {
       <p class="cat-hero-kicker">${icon(c.icon, 'cat-hero-icon')}<span>No.${c.no} · ${esc(c.kicker)}</span></p>
       <h1 id="page-title">${esc(c.title)}</h1>
       <p class="lead">${esc(c.intro)}</p>
+      ${IS_QA && c.id !== 'city' ? `<p class="cat-hero-jump"><a href="${c.id === 'learning' ? '#topics-title' : '#need-title'}">${c.id === 'learning' ? '直接探索學習主題' : '從你想了解的事開始'}<span aria-hidden="true">&nbsp;↓</span></a></p>` : ''}
     </div>
     <p class="note" role="note">${esc(c.notice)}</p>
   </div>
@@ -824,6 +827,7 @@ for (const c of categories) {
   const catArticles = articles.filter((a) => a.category === c.id);
   const body = `
 ${categoryHero(c)}
+${IS_QA ? articlesSection(catArticles) : ''}
 <section class="section needs" aria-labelledby="need-title">
   <div class="wrap needs-grid">
     <div class="needs-intro"><span class="kicker">Start Here</span><h2 id="need-title">從需求開始</h2></div>
@@ -837,7 +841,7 @@ ${topicsSection(c)}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}
   </div>
 </section>
-${articlesSection(catArticles)}`;
+${IS_QA ? '' : articlesSection(catArticles)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: c.id, body, bodyClass: `cat-${c.id}` }) });
 }
 
@@ -908,6 +912,7 @@ ${IS_QA ? articlesSection(articles.filter((a) => a.category === 'city' && !qaBat
 {
   const c = catById.learning;
   const catResources = resourcesFor((r) => r.categories.includes('learning'));
+  const catArticles = articles.filter((a) => a.category === 'learning');
   const eventCards = events
     .map(
       (e) => `<article class="event" data-event-end="${esc(e.endDate)}">
@@ -921,11 +926,16 @@ ${IS_QA ? articlesSection(articles.filter((a) => a.category === 'city' && !qaBat
     .join('\n');
   const body = `
 ${categoryHero(c)}
+${IS_QA && catArticles.length ? articlesSection(catArticles) : ''}
 <section class="section" aria-labelledby="events-title">
   <div class="wrap">
     ${sectionHead('Upcoming', 'events-title', '近期活動', '名額與報名狀態以主辦機構公告為準。活動結束後會自動從這裡隱藏，但不代表活動已取消。')}
-    <div class="event-list">${eventCards}</div>
-    <div class="empty" id="events-empty"${events.length ? ' hidden' : ''}><p>目前沒有已查核的近期活動。活動經常變動，建議直接查看下方的官方活動列表入口。</p></div>
+    ${IS_QA ? `<p class="act-intro">以下與全站小日曆共用同一批已公布公告。活動日期與參加方式請以原主辦單位為準；此區為未核准測試資訊，不代表本站提供報名。</p>
+    <ol class="notice-list" data-act-list>${qaNotices.items.map(noticeHtml).join('\n')}</ol>
+    <p class="notice-empty" id="notices-empty"${qaNotices.items.length ? ' hidden' : ''}>目前沒有尚未結束的已公布活動；新消息整理後會更新。</p>
+    <p class="notice-more"><a href="activities.html">查看活動與講座完整資訊及長期官方查詢入口 →</a></p>`
+      : `<div class="event-list">${eventCards}</div>
+    <div class="empty" id="events-empty"${events.length ? ' hidden' : ''}><p>目前沒有已查核的近期活動。活動經常變動，建議直接查看下方的官方活動列表入口。</p></div>`}
   </div>
 </section>
 ${topicsSection(c)}
@@ -935,8 +945,8 @@ ${topicsSection(c)}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}
   </div>
 </section>
-${articles.some((a) => a.category === 'learning') ? articlesSection(articles.filter((a) => a.category === 'learning')) : ''}`;
-  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: ['assets/js/events.js'], bodyClass: 'cat-learning' }) });
+${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}`;
+  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: [IS_QA ? 'assets/js/qa-activities.js' : 'assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
 for (const c of categories) {
