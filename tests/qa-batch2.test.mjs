@@ -13,7 +13,7 @@ import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs'
 import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.mjs';
 import { loadQaEnglishResources } from '../scripts/lib/qa-english.mjs';
 import { loadBatch6Articles, BATCH6_SOURCES } from '../scripts/lib/qa-batch6.mjs';
-import { loadQaActivities, ACTIVITY_TYPES } from '../scripts/lib/qa-activities.mjs';
+import { loadQaActivities } from '../scripts/lib/qa-activities.mjs';
 import { resolveTowardEditorial } from '../scripts/lib/toward-light-editorial.mjs';
 
 const require = createRequire(import.meta.url);
@@ -188,17 +188,21 @@ for (const it of acts.items) {
   if (!idx.includes(`activities.html#${it.id}`)) actProblems.push(`${it.id} 不在搜尋索引`);
 }
 if ((actHtml.match(/<h2 id="act-group-\d">/g) || []).length !== acts.groups.length) actProblems.push('頁內主題標籤數不符');
-if (/報名中|尚有名額|即將截止|額滿/.test(actHtml.replace(/<dl class="act-legend">[\s\S]*?<\/dl>/, ''))) actProblems.push('活動頁含需每日更新的報名狀態文字');
-for (const label of Object.values(ACTIVITY_TYPES)) if (!actHtml.includes(label)) actProblems.push(`缺少狀態說明「${label}」`);
+if (/報名中|尚有名額|即將截止|額滿/.test(actHtml)) actProblems.push('活動頁含需每日更新的報名狀態文字');
+// 只放長期官方查詢入口：不顯示狀態圖例，也不再有單次講座或年度競賽卡
+if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal')) actProblems.push(`活動資料應為 12 個長期官方查詢入口（目前 ${acts.items.length} 筆）`);
+if (/act-legend|act-type|已公告|年度計畫|已公布具體場次|愛麗絲|全國技能競賽/.test(actHtml) || /act-ncl-alice|act-skills-2027/.test(actHtml + idx)) actProblems.push('活動頁或搜尋索引仍有狀態圖例或已移出的時間性活動');
+// 全站 QA 提示列維持 a49b80a 原文，不因活動頁而改（活動頁自己的說明放在頁首）
+const qaBarText = (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(actHtml) || [])[1] || '';
+if (qaBarText !== (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(qp) || [])[1] || qaBarText.includes('活動')) actProblems.push('QA 提示列被改動');
+if (!actHtml.includes('不代為報名')) actProblems.push('活動頁缺報名提醒');
+if (!/<div class="preview-bar qa-bar" role="note">未核准測試內容｜/.test(actHtml) || !/<span class="badge badge-qa">未核准測試內容<\/span> 來源核對/.test(actHtml)) actProblems.push('活動頁未清楚標示未核准測試內容');
 if (!actHtml.includes('href="index.html">← 回到首頁')) actProblems.push('缺回到首頁連結');
 if (/<form|<input|<iframe/.test(actHtml)) actProblems.push('活動頁不應有表單或嵌入外站');
 if (!/"url":"activities.html"[^}]*activities events lectures/.test(idx)) actProblems.push('搜尋索引缺活動頁或英文主題字');
-// 結束日已過的具體場次不顯示（以 2027-01-17 模擬）
-const later = await loadQaActivities(ROOT, { today: '2027-01-17' });
-if (later.items.some((it) => it.type === 'event' && it.endDate < '2027-01-17') || later.hidden < 1) actProblems.push('已結束場次未自動隱藏');
 // 正式版與一般預覽不應有這個頁面
 for (const dir of ['dist', 'dist-production']) if (existsSync(path.join(ROOT, dir, 'activities.html'))) actProblems.push(`${dir} 出現 activities.html`);
-check('活動與講座（QA）：首頁四個快捷入口下方恰有一個入口；活動頁列出全部官方入口（https、另開新分頁、noopener）、五個頁內主題、四種狀態說明、回首頁連結，無報名狀態文字與表單；已結束場次自動隱藏；搜尋可用中英文找到；正式版無此頁', actProblems.length === 0, actProblems.slice(0, 5).join('；'));
+check('活動與講座（QA）：首頁四個快捷入口下方恰有一個入口；活動頁列出全部官方入口（https、另開新分頁、noopener）、五個頁內主題、報名提醒、回首頁連結；只放 12 個長期官方查詢入口，無狀態圖例、已移出的時間性活動、報名狀態文字與表單；全站 QA 提示列維持原文、活動頁頁首標示未核准測試內容；搜尋可用中英文找到；正式版無此頁', actProblems.length === 0, actProblems.slice(0, 5).join('；'));
 // 2026-10-16 目錄頁首文案（QA 限定）：讀利主說明＋補充說明、向光主說明；舊說明不再出現，向光不加回第二段
 const QA_COPY = {
   qpLead: '從家庭、職場、身心健康到法律與權益，整理生活中值得了解的知識、制度與公共資源。',

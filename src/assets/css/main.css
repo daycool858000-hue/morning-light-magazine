@@ -816,7 +816,7 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 }
 @media (prefers-reduced-motion: reduce) { .toward-topic-arrow { transition: none; } }
 
-/* 活動與講座（QA）：首頁小入口與官方公告／查詢入口頁。動畫只在載入時輕微播放兩次，尊重減少動態設定。 */
+/* 活動與講座（QA）：首頁小入口與官方查詢入口頁。動畫只在載入時輕微播放兩次，尊重減少動態設定。 */
 .act-entry {
   display: flex; align-items: center; gap: 12px; margin-top: 16px; max-width: 560px; min-height: 56px;
   padding: 10px 16px; border-radius: var(--radius-sm); background: var(--paper); border: 1px solid var(--line);
@@ -841,15 +841,6 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .act-groups ul { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
 .act-groups a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
 .act-list { padding-top: 24px; }
-.act-legend { display: grid; gap: 10px; margin: 0 0 8px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); font-size: 0.88rem; }
-.act-legend div { display: grid; gap: 2px; }
-.act-legend dt, .act-legend dd { margin: 0; }
-.act-legend dd { color: var(--muted); }
-.act-type { display: inline-block; padding: 1px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; background: var(--sand); color: var(--ink); }
-.act-type-event { background: #F6E3D6; color: #8A4426; }
-.act-type-announced { background: #EFE6D2; color: #6B5426; }
-.act-type-plan { background: #E9E4F0; color: #4F4466; }
-.act-type-portal { background: #E3ECDF; color: #3F5A3A; }
 .act-group { margin-top: 28px; }
 .act-group h2 { font-size: 1.3rem; margin: 0 0 6px; scroll-margin-top: 24px; }
 .act-items { list-style: none; margin: 0; padding: 0; }
@@ -857,10 +848,9 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .act-name { display: block; min-height: 44px; padding: 8px 0 4px; font-weight: 700; font-size: 1.02rem; line-height: 1.55; color: var(--ink); text-decoration-color: var(--line); }
 .act-name:hover { color: var(--terracotta-dark); }
 .act-ext { margin-left: 4px; color: var(--terracotta); }
-.act-org, .act-purpose, .act-caution, .act-meta { margin: 2px 0 0; }
+.act-org, .act-purpose, .act-caution { margin: 2px 0 0; }
 .act-org { font-size: 0.85rem; color: var(--muted); }
 .act-purpose { font-size: 0.95rem; }
 .act-caution { font-size: 0.85rem; color: var(--muted); }
-.act-meta { margin-top: 6px; }
 .act-back { margin-top: 28px; }
 .act-back a { display: inline-flex; align-items: center; min-height: 44px; }

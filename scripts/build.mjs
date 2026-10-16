@@ -16,7 +16,7 @@ import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadBatch6Articles } from './lib/qa-batch6.mjs';
-import { loadQaActivities, ACTIVITY_TYPES } from './lib/qa-activities.mjs';
+import { loadQaActivities } from './lib/qa-activities.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
 import { resolveTowardEditorial } from './lib/toward-light-editorial.mjs';
 
@@ -375,7 +375,7 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
     .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
   const previewBar = IS_QA
-    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀、第六批 6 篇城市福利導讀與首頁「活動與講座」官方入口頁，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
+    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀、第六批 6 篇城市福利導讀，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
     : IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
     : '';
@@ -553,7 +553,6 @@ if (IS_QA) {
         <p class="act-org">${esc(it.org)}｜${esc(it.region)}</p>
         <p class="act-purpose">${esc(it.purpose)}</p>
         <p class="act-caution">${esc(it.caution)}</p>
-        <p class="act-meta"><span class="act-type act-type-${esc(it.type)}">${esc(ACTIVITY_TYPES[it.type])}</span></p>
       </li>`;
   const body = `
 <section class="page-head act-head" aria-labelledby="page-title">
@@ -561,14 +560,13 @@ if (IS_QA) {
     <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">活動與講座</li></ol></nav>
     <h1 id="page-title">活動與講座</h1>
     <p class="lead">探索理財、職涯、健康、藝文與各種生活學習活動。</p>
-    <p class="act-intro">這裡整理政府與公共機構正式公告的活動與查詢入口，以 2027 年為主，並銜接 2026 年底仍可參與的跨年度活動。活動日期、費用、參與條件與報名狀態，請以主辦單位最新公告為準；需要報名時，會在原網站依其規定辦理，《由己》不代為報名，也不蒐集任何資料。</p>
+    <p class="act-intro">這裡整理政府與公共機構長期提供的官方查詢入口，點進原網站即可查到最新的課程、講座與活動。活動日期、費用、參與條件與報名狀態，請以主辦單位最新公告為準；需要報名時，會在原網站依其規定辦理，《由己》不代為報名，也不蒐集任何資料。</p>
     <p class="act-intro"><span class="badge badge-qa">未核准測試內容</span> 來源核對：${esc(checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</p>
     <nav class="act-groups" aria-label="活動主題"><ul>${groups.map((g) => `<li><a href="#${gid(g)}">${esc(g)}</a></li>`).join('')}</ul></nav>
   </div>
 </section>
-<section class="section act-list" aria-label="官方公告與查詢入口">
+<section class="section act-list" aria-label="官方查詢入口">
   <div class="wrap">
-    <dl class="act-legend">${Object.entries(ACTIVITY_TYPES).map(([k, v]) => `<div><dt><span class="act-type act-type-${k}">${esc(v)}</span></dt><dd>${esc({ event: '主辦單位已公布日期的活動，結束後會自動不顯示。', announced: '已公告預定時間，報名方式等細節尚待主辦單位公布。', plan: '年度方向或計畫，不是可直接報名的課程。', portal: '機構持續更新的活動或課程查詢頁，請在原網站查最新場次。' }[k])}</dd></div>`).join('')}</dl>
     ${groups.map((g) => `<section class="act-group" aria-labelledby="${gid(g)}">
       <h2 id="${gid(g)}">${esc(g)}</h2>
       <ul class="act-items">${items.filter((it) => it.group === g).map(itemHtml).join('')}</ul>
@@ -577,8 +575,8 @@ if (IS_QA) {
   </div>
 </section>`;
   pages.push({ file: 'activities.html', html: layout({ title: '活動與講座', description: '探索理財、職涯、健康、藝文與各種生活學習活動。', body, bodyClass: 'activities' }) });
-  addIndex('頁面', '活動與講座', '探索理財、職涯、健康、藝文與各種生活學習活動。', 'activities.html', '活動 講座 課程 研習 展覽 2027 activities events lectures workshops courses finance career health arts culture library family learning');
-  for (const it of items) addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, `activities.html#${it.id}`, `${it.group} ${ACTIVITY_TYPES[it.type]} ${it.region} ${it.keywordsEn || ''}`);
+  addIndex('頁面', '活動與講座', '探索理財、職涯、健康、藝文與各種生活學習活動。', 'activities.html', '活動 講座 課程 研習 展覽 activities events lectures workshops courses finance career health arts culture library family learning');
+  for (const it of items) addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, `activities.html#${it.id}`, `${it.group} 官方查詢入口 ${it.region} ${it.keywordsEn || ''}`);
 }
 
 // extra：放在支援資源入口正下方的額外內容（目前只有 QA 讀利專欄的「從你想了解的事開始」跳轉）
