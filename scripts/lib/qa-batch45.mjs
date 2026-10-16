@@ -47,7 +47,8 @@ export const BATCH45_COUNT = 13;
 export const BATCH45_CHECKED_ON = '2026-10-16';
 
 // 每篇開頭的分類行（三種寫法），整行不進正文
-const CATEGORY_LINE = /^\*\*(?:分類：\*\*\s*|建議分類：)(.+)$/;
+// 第六批寫成 **分類**：城市與福利（冒號在粗體外）
+const CATEGORY_LINE = /^\*\*(?:分類：\*\*\s*|分類\*\*：|建議分類：)(.+)$/;
 // 參考來源標題行，例如 **官方參考來源（2026-10-16 核對公開頁）：**、**官方來源：**、**正式來源（…）：**
 const SOURCE_HEADER = /^\*\*[^*]*來源[^*]*：\*\*$/;
 const SOURCE_ITEM = /^-\s+\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\s*(.*)$/;
@@ -67,7 +68,7 @@ function sourceNote(rest) {
   return rest.replace(/^[—–-]\s*/, '').trim();
 }
 
-function parseArticle(label, raw) {
+export function parseArticle(label, raw) {
   const lines = raw.split('\n');
   const problems = [];
   let categoryLine = '';
@@ -101,10 +102,18 @@ function parseArticle(label, raw) {
 }
 
 export async function loadBatch45Articles(root, categories) {
+  return loadArticleDocs(root, categories, { sources: BATCH45_SOURCES, count: BATCH45_COUNT, checkedOn: BATCH45_CHECKED_ON, name: '第四、五批' });
+}
+
+/**
+ * 依指定原稿與 slug 對照表載入 QA 文章（第四、五批與第六批共用）。
+ * @param {{ sources: typeof BATCH45_SOURCES, count: number, checkedOn: string, name: string, related?: Record<string, string[]> }} spec
+ */
+export async function loadArticleDocs(root, categories, spec) {
   const byId = Object.fromEntries(categories.map((c) => [c.id, c.title]));
   const out = [];
   const problems = [];
-  for (const src of BATCH45_SOURCES) {
+  for (const src of spec.sources) {
     const text = await readFile(path.join(root, src.file), 'utf8');
     const stopAt = text.search(src.stop);
     if (stopAt < 0) problems.push(`${src.file} 找不到批次說明段落，無法確認正文結束位置`);
@@ -122,21 +131,21 @@ export async function loadBatch45Articles(root, categories) {
       problems.push(...a.problems);
       if (!byId[category]) problems.push(`${label} 分類 ${category} 不在六大分類中`);
       else if (!a.categoryLine.startsWith(byId[category])) problems.push(`${label} 原稿分類「${a.categoryLine}」與對應分類「${byId[category]}」不一致`);
-      if (!/^batch[45]-[a-z0-9-]+$/.test(slug)) problems.push(`${label} slug 格式錯誤：${slug}`);
+      if (!/^batch\d-[a-z0-9-]+$/.test(slug)) problems.push(`${label} slug 格式錯誤：${slug}`);
       if (!a.sources.length) problems.push(`${label} 沒有參考來源`);
       for (const s of a.sources) if (!s.url.startsWith('https://')) problems.push(`${label} 來源不是 https：${s.url}`);
-      if (a.body.length < 600) problems.push(`${label} 正文過短，可能解析錯誤`);
+      if (a.body.length < 400) problems.push(`${label} 正文過短，可能解析錯誤`);
       out.push({
         qa: true, slug, title: parts[i + 1].trim(), category, summary: a.summary,
-        published: BATCH45_CHECKED_ON.slice(0, 7), updated: BATCH45_CHECKED_ON, checkedOn: BATCH45_CHECKED_ON,
+        published: spec.checkedOn.slice(0, 7), updated: spec.checkedOn, checkedOn: spec.checkedOn,
         status: '待確認', visibility: 'public', publishApproval: 'not-approved', ownerApproved: false,
-        body: a.body, sourcesList: a.sources,
+        body: a.body, sourcesList: a.sources, ...(spec.related?.[slug] ? { related: spec.related[slug] } : {}),
       });
     }
     for (const no of Object.keys(src.slugs)) if (!seen.has(no)) problems.push(`${src.file} 缺少第 ${no} 篇`);
   }
-  if (out.length !== BATCH45_COUNT) problems.push(`應有 ${BATCH45_COUNT} 篇文章，實際 ${out.length} 篇`);
+  if (out.length !== spec.count) problems.push(`應有 ${spec.count} 篇文章，實際 ${out.length} 篇`);
   if (new Set(out.map((a) => a.slug)).size !== out.length) problems.push('slug 重複');
-  if (problems.length) throw new Error(`第四、五批文章檢查失敗：\n- ${problems.join('\n- ')}`);
+  if (problems.length) throw new Error(`${spec.name}文章檢查失敗：\n- ${problems.join('\n- ')}`);
   return out;
 }

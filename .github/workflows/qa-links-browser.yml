@@ -10,6 +10,7 @@ on:
       - docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json
       - docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md
       - scripts/lib/qa-batch45.mjs
+      - scripts/lib/qa-batch6.mjs
   workflow_dispatch:
 
 permissions:
@@ -34,3 +35,5 @@ jobs:
         run: node scripts/check-links-browser.mjs
       - name: 以 Chromium 開啟第四、五批 13 篇文章的參考來源（Issue #2）
         run: node scripts/check-links-browser.mjs --set=batch45
+      - name: 以 Chromium 開啟第六批城市與福利 6 篇文章的參考來源（Issue #3）
+        run: node scripts/check-links-browser.mjs --set=batch6

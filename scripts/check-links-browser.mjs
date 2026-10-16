@@ -5,12 +5,14 @@
 // 結果只代表「這台檢查機器（GitHub 美國機房）當下」能否開啟；不等於台灣使用者或 iPhone Safari 的結果。
 // 用法：node scripts/check-links-browser.mjs（需要 Playwright Chromium）
 //       node scripts/check-links-browser.mjs --set=batch45　只檢查第四、五批 13 篇文章的參考來源（Issue #2）
+//       node scripts/check-links-browser.mjs --set=batch6　 只檢查第六批城市與福利 6 篇文章的參考來源（Issue #3）
 import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { loadBatch2Articles, BATCH2_RESOURCES } from './lib/qa-batch2.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
+import { loadBatch6Articles } from './lib/qa-batch6.mjs';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
@@ -20,8 +22,9 @@ const cand = JSON.parse(await readFile(path.join(ROOT, BATCH2_RESOURCES), 'utf8'
 const arts = await loadBatch2Articles(ROOT, categories);
 
 const targets = new Map();
-if (process.argv.includes('--set=batch45')) {
-  for (const a of await loadBatch45Articles(ROOT, categories)) for (const s of a.sourcesList) if (!targets.has(s.url)) targets.set(s.url, `${a.slug} 來源`);
+if (process.argv.includes('--set=batch45') || process.argv.includes('--set=batch6')) {
+  const list = process.argv.includes('--set=batch6') ? await loadBatch6Articles(ROOT, categories) : await loadBatch45Articles(ROOT, categories);
+  for (const a of list) for (const s of a.sourcesList) if (!targets.has(s.url)) targets.set(s.url, `${a.slug} 來源`);
 } else {
   for (const r of cand) targets.set(r.url, `地方入口 ${r.id.replace('batch2-', '')}`);
   for (const a of arts) for (const s of a.sourcesList) if (!targets.has(s.url)) targets.set(s.url, `文章 ${a.no} 來源`);

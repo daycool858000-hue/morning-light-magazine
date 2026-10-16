@@ -602,6 +602,10 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 .sources .src-note { color: var(--muted); }
 .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.925rem; color: var(--muted); }
 .sources h2 { font-size: 1.05rem; font-family: var(--sans); margin-top: 0; }
+.related + .sources { margin-top: 24px; }
+/* 城市與福利：「先了解有哪些福利」文章區塊與往下選縣市的提示 */
+.benefits-next { margin: 20px 0 0; }
+.benefits-next a { display: inline-flex; align-items: center; min-height: 44px; }
 
 .cat-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 @media (min-width: 700px) { .cat-list { grid-template-columns: repeat(2, 1fr); } }

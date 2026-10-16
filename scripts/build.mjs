@@ -15,6 +15,7 @@ import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from './lib/release
 import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
+import { loadBatch6Articles } from './lib/qa-batch6.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -80,6 +81,7 @@ const qaResources = IS_QA ? await loadBatch2Resources(ROOT) : [];
 const qaArticles = IS_QA ? await loadBatch2Articles(ROOT, categories) : [];
 const qaBatch3 = IS_QA ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
 const qaBatch45 = IS_QA ? await loadBatch45Articles(ROOT, categories) : [];
+const qaBatch6 = IS_QA ? await loadBatch6Articles(ROOT, categories) : [];
 const seen = new Set();
 const seenUrls = new Map();
 for (const r of [...resourceData.items, ...qaResources, ...qaBatch3.resources]) {
@@ -142,7 +144,7 @@ const channels = hotlineData.channels.filter((h) => IS_PREVIEW
 const events = eventData.items
   .filter((e) => isPublic(e.status))
   .sort((a, b) => a.startDate.localeCompare(b.startDate));
-const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles, ...qaBatch3.articles, ...qaBatch45]
+const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6]
   .sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
 
 const catById = Object.fromEntries(categories.map((c) => [c.id, c]));
@@ -368,7 +370,7 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
     .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
   const previewBar = IS_QA
-    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
+    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀、第六批 6 篇城市福利導讀，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
     : IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
     : '';
@@ -683,6 +685,13 @@ ${articlesSection(catArticles)}`;
   const c = catById.city;
   const body = `
 ${categoryHero(c)}
+${qaBatch6.length ? `<section class="section benefits-intro" aria-labelledby="benefits-title" id="benefits">
+  <div class="wrap">
+    ${sectionHead('Benefits', 'benefits-title', '先了解有哪些福利', '先認識福利名稱、服務內容與常見條件差異，再到下方選擇縣市，開啟官方機構入口。文章只說明制度，不判定個人資格。')}
+    <div class="story-grid">${qaBatch6.map((a) => articleCard(a, '')).join('\n')}</div>
+    <p class="benefits-next"><a href="#finder">讀完後，往下選擇縣市與官方入口</a></p>
+  </div>
+</section>` : ''}
 <section class="section" aria-labelledby="finder-title" id="finder">
   <div class="wrap">
     ${sectionHead('City Index', 'finder-title', '城市生活資源索引', '先選擇縣市，再依服務類型篩選。全台 22 個縣市都可以選擇；尚未完成查核的縣市，會先顯示全國性資源。')}
@@ -883,6 +892,12 @@ ${p.name === 'about' ? aboutHub() : ''}
 }
 
 // ---------- 文章 ----------
+// 相關閱讀：只列確實存在的文章（目前僅第六批 QA 文章設定 related）
+function relatedList(a, prefix) {
+  const list = (a.related || []).map((slug) => articles.find((x) => x.slug === slug)).filter(Boolean);
+  if (!list.length) return '';
+  return `<div class="sources related"><h2>相關閱讀</h2><ul>${list.map((x) => `<li><a href="${prefix}articles/${esc(x.slug)}.html">${esc(x.title)}</a></li>`).join('')}</ul></div>`;
+}
 for (const a of articles) {
   const prefix = '../';
   const sources = (a.sourcesList ? a.sourcesList.map((x) => `${x.title} | ${x.url} | ${x.note || ''}`) : [].concat(a.source || [])).map((s) => {
@@ -912,7 +927,7 @@ for (const a of articles) {
   ${imgId ? `<div class="wrap article-cover">${photo(imgId, 'cover', { prefix, eager: true, sizes: '(min-width: 1200px) 1120px, 100vw' })}</div>` : ''}
   <div class="section section-tight"><div class="wrap"><div class="prose">
 ${renderMarkdown(a.body, { link: linkResolver(prefix) })}
-<div class="sources"><h2>參考來源</h2><ul>${sources.join('')}</ul><p>本文為一般性資訊整理，實際辦理請以主管機關或服務單位最新公告為準。</p></div>
+${relatedList(a, prefix)}<div class="sources"><h2>參考來源</h2><ul>${sources.join('')}</ul><p>本文為一般性資訊整理，實際辦理請以主管機關或服務單位最新公告為準。</p></div>
   </div></div></div>
 </article>`;
   pages.push({ file: `articles/${a.slug}.html`, html: layout({ title: a.title, description: a.summary, body, prefix }) });
