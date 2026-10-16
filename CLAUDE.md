@@ -51,7 +51,7 @@
 
 ## 目前進度（2026-10-16 更新）
 
-- **首頁「活動與講座」動畫重製（分支 `claude/homepage-activities-animation-uzm9aa`，未部署）**：站主 iPhone 驗收舊版「橫向目錄卡＋箭頭動兩次」不通過。已依編輯分支 `docs/ACTIVITIES-HOMEPAGE-ACTUAL-ANIMATED-FEATURE-QA-2026-10-16.md` 改成「動態資訊小櫥窗」：左側文字（活動與講座／說明／查看活動資訊 →）固定不動，右側三張原創 SVG 紙卡（日曆頁、拱形展演、翻開的書，不含活動名稱或日期）以 7.5 秒一輪持續交替（每 2.5 秒換一張：上浮右滑淡出→退到底層→中層→最前）；減少動態設定時停成三張層次靜態紙卡。只改 `scripts/build.mjs`（`ACT_CARD_SVGS`、`activitiesEntry()`）、`main.css` 的 `.act-entry` 區段與兩個 QA 測試；活動頁 12 個連結、讀利、向光、正式版不動。錄影與截圖在 `docs/qa-media/`。**等待站主看過錄影再決定是否更新公開 QA，未經同意不要部署。**
+- **首頁「活動與講座」動畫重製（分支 `claude/homepage-activities-animation-uzm9aa`，未部署）**：站主 iPhone 驗收舊版「橫向目錄卡＋箭頭動兩次」不通過。已依編輯分支 `docs/ACTIVITIES-HOMEPAGE-ACTUAL-ANIMATED-FEATURE-QA-2026-10-16.md` 改成「動態資訊小櫥窗」：左側文字（活動與講座／說明／查看活動資訊 →）固定不動，右側三張原創 SVG 紙卡（日曆頁、拱形展演、翻開的書，不含活動名稱或日期）以 7.5 秒一輪持續交替（每 2.5 秒換一張：上浮右滑淡出→退到底層→中層→最前）；減少動態設定時停成三張層次靜態紙卡。只改 `scripts/build.mjs`（`ACT_CARD_SVGS`、`activitiesEntry()`）、`main.css` 的 `.act-entry` 區段與兩個 QA 測試；活動頁 12 個連結、讀利、向光、正式版不動。錄影與截圖在 `docs/qa-media/`。**站主看過錄影後判定理解錯誤、整個要重做（不通過）；等待 ChatGPT 新規格，不要併回、不要部署，也不要依這版繼續微調。**
 - 教育部家庭教育資源網：**站主已確認臺灣 iPhone 可正常開啟**，12 個官方連結全部可用，不要再重查或要求站主再點。
 
 - 公開 QA 已部署到 `a49b80a`（內容來源 `707a000`）：36 篇未核准 QA 文章、城市福利「先了解有哪些福利」、讀利快捷入口、向光八個兩欄索引，以及讀利、向光頁首文案。**站主已用 iPhone 驗收讀利與向光，兩個目錄結案，不再修改。**
@@ -61,7 +61,7 @@
 
 ## 下一步
 
-1. 站主看過 `docs/qa-media/activities-entry-390-loop-2026-10-16.mp4` 後：同意 → 併回開發分支並（另經同意）更新公開 QA；要調整 → 只改 `.act-entry` 動畫。活動頁與 12 個連結已驗收，不再修改；**不要修改正式版**。
+1. 首頁「活動與講座」動畫：`e5034a6` 這版站主不通過，等 ChatGPT 新規格送來後依新規格全部重做（仍在 `claude/homepage-activities-animation-uzm9aa`）。活動頁與 12 個連結已驗收，不再修改；**不要修改正式版、不要部署**。
 2. 第二階段：新住民跨主管機關入口＋英文／多語輔助（規格見編輯分支 `editorial/batch7-9-source-review-20261016` 的 `docs/CLAUDE-NEXT-STAGES-HOMEPAGE-ACTIVITIES-AND-NEW-IMMIGRANT-MULTILINGUAL-2026-10-16.md`）。
 3. 第三階段：每月一次的官方連結檢查（GitHub Actions，只產生報告）。
 
