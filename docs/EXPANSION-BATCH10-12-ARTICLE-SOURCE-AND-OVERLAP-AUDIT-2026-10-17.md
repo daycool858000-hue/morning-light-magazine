@@ -32,9 +32,24 @@
 8. **性影像中心**：處理中心服務有法令諮詢、證據保留、通知平台下架與後續追蹤，但外部正式申訴要信箱、網址與事證。https://siarc.mohw.gov.tw/service.php 、https://siarc.mohw.gov.tw/appeal.php
 9. **公開學習**：教育部平台聚合多元開課單位，並不保證全部免費、免登入、拿證書。https://lle.moe.edu.tw/lesson-resource/ 、https://lle.moe.edu.tw/site-map/
 
+## 2026-10-17 第二輪補充｜原待修其餘六篇都已寫成 V2
+
+另新增 `docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`，共 6 篇完整精修（01、05、06、07、08、12），與第一次六篇合計 **12／12 都有 V2**；舊版全文保留：
+
+| ID | 原稿問題 | 這次如何補深度 | 原始官方來源與限制 |
+|---|---|---|---|
+| exp-01 家庭共同費用 | 來源只有金融教育網站首頁 | 金管會金融智慧網「生活指南」直接有記帳、收支計畫；本文獨立探討家庭共同費用、無償家務 | https://moneywise.fsc.gov.tw/home.jsp?id=6&parentpath=0；家庭分工實例是本站原創，**非金管會指示** |
+| exp-05 面試與工時 | 原文只有勞動部首頁 | 用勞動部部分工時勞動條件、台灣就業通求職防騙教戰守則，補面試具體問法及徵才辨識 | https://www.mol.gov.tw/1607/28690/87756/87780/nodelist；https://job.taiwanjobs.gov.tw/Internet/special2/freshman2/docDetail.aspx?docid=141&uk=1922 |
+| exp-06 接案委託 | 只引經濟部／智慧局主站，無權利條文對應 | 加入著作權法第 12 條出資委託完成作品的權利預設，**區分員工職務著作的第 11 條**；交付與修改次數是合同事先協調建議 | https://www.tipo.gov.tw/tw/copyright/692-12987.html；https://www.tipo.gov.tw/tw/copyright/692-16438.html |
+| exp-07 睡眠與輪班 | 心快活心理平台總頁無法支撐睡眠醫學敘述 | 改引臺大醫院專門衛教，指出多種睡眠障礙與輪班／環境／藥物等可能因素；個別治療須專業判斷 | https://epaper.ntuh.gov.tw/health/202006/health_2.html；https://www.taic.mohw.gov.tw/?aid=504&iid=3428&page_name=detail&pid=88 |
+| exp-08 人際界線 | 舊深層來源用途未證實 | 心快活公開網站導覽與信任、關係主題可確認；明示具體說話例子為編輯原創、**不聲稱官方心理治療方法** | https://wellbeing.mohw.gov.tw/nor/main/；https://wellbeing.mohw.gov.tw/nor/info/intro |
+| exp-12 科學實驗與變因 | 原文太像已存在的 AI 及健康查證文章 | 改以兩個杯子實驗的**控制變因／觀察／推論**為主，不再只教檢查網路消息 | https://www.ntsec.gov.tw/index.aspx；https://estore.ntsec.gov.tw/classes.aspx?CTC=0010&TYPE2=1&pid=13&uid=49 |
+
+**已知剩餘**：兩批 V2 的來源到主要敘述初輪查核完成；逐句對照完整 36 篇舊正文、當期法規／醫學更新、所有 URL 外站 Safari、站主逐篇閱讀與 QA 排版尚未完成。不可將 12/12 V2 冒稱 12/12 正式批准。
+
 ## 三、尚未完成且不應對外宣稱的部分
 
-- **已完成 V2 且查原始官方來源：6／12**（02、03、04、09、10、11）；另外 6 篇仍待補精確來源、全文精修或深入查重。
+- **V2 完整正文：12／12**；02、03、04、09、10、11 在原第一輪 V2 檔，01、05、06、07、08、12 在第二輪 V2 檔。各篇仍待逐句和外站連結驗收及站主試讀。
 - 本次的重疊排查以**標題、主題及既有文章的功能定位**為主，尚需在 QA 匯入前依完整正文進行語意／段落級逐篇比對。
 - 原十篇成人候選仍有第九批 A4「地方活動」與 B6「日常創作」的舊問題；修訂必須另外記錄，不因 12 篇新增就跳過。
 - 法律、健康等類型的文章，在未經站主核准與最新來源再確認前不得以「已確認」「正式法律指引」「專業診斷」標示。
