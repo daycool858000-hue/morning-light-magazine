@@ -65,6 +65,16 @@ try {
     if (!s.open || s.links !== t.slugs.length) bad.push(`${t.id} ${JSON.stringify(s)}`);
   }
   if (JSON.stringify(await boxes()) !== JSON.stringify(cols)) bad.push('展開後入口欄位改變');
+  const gallery = await page.locator('.toward-reading-card').count();
+  const readingLayout = await page.locator('.toward-reading-card').evaluateAll(cards =>
+    cards.slice(0, 3).map(c => ({ x: Math.round(c.getBoundingClientRect().left), y: Math.round(c.getBoundingClientRect().top), w: Math.round(c.getBoundingClientRect().width) }))
+  );
+  const cardLinks = await page.locator('.toward-reading-card a[href^="articles/"]').count();
+  check('WebKit 向光：13 篇文章直接展示為可點擊卡片，手機 390px 每排兩張且不產生單卡溢出',
+    gallery === 13 && cardLinks === 13 && readingLayout.length === 3 &&
+    readingLayout[0].y === readingLayout[1].y && readingLayout[2].y > readingLayout[1].y &&
+    readingLayout[0].x < readingLayout[1].x && readingLayout.every(c => c.w >= 120 && c.w <= 190),
+    JSON.stringify({ gallery, cardLinks, readingLayout }));
   await page.tap('#toward-women-center a[href="articles/batch6-women-center-services.html"]');
   await page.waitForURL('**/articles/batch6-women-center-services.html');
   check('WebKit 390px 向光：八個索引都能點開（入口維持原欄位），文章連結齊全且高度 ≥ 44px；婦女中心課程第一篇可開啟', bad.length === 0, bad.join('；'));

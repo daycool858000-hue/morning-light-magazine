@@ -1,3 +1,4 @@
+# 2026-10-16｜站主已要求將讀利與向光文章分流（23／13）並讓向光 13 篇直接顯示成手機兩欄文章格；以 CI 38880426841 全數通過為基礎，僅更新公開 QA，仍保留 noindex 與未核准標示。
 # 2026-10-16｜站主同意將所有現有 QA 功能（含全站浮動小日曆、六筆具體活動）公開部署，並將工程合併 main。此 workflow 只發布 QA，保留所有未核准標示與 noindex；不可將候選資料自動核准。
 # 2026-10-16｜目錄頁首文案（讀利、向光）＋向光索引兩欄展開不重排，站主授權後依 CI 38848752697（707a000）更新未核准QA版。
 # 2026-10-16｜Issue #6：向光八索引＋讀利「從你想了解的事開始 ↓」，站主授權後依 CI 38841104030 更新已同意公開的未核准QA版。
@@ -84,6 +85,11 @@ jobs:
           test "$(grep -o 'class="toward-toggle"' dist-qa/toward-light.html | wc -l)" -eq 8
           grep -q '整理生活中值得了解的知識、制度與公共資源' dist-qa/quiet-power.html
           grep -q '循著興趣探索不同主題' dist-qa/toward-light.html
+          # 讀利／向光文章分流，36 篇原稿仍保留，向光文章格直接露出 13 篇。
+          grep -q 'class="toward-reading-grid"' dist-qa/toward-light.html
+          test "$(grep -o 'class="toward-reading-card"' dist-qa/toward-light.html | wc -l)" -eq 13
+          grep -q 'href="articles/batch6-welfare-overview.html"' dist-qa/quiet-power.html
+          ! grep -q 'href="articles/batch4-art-museum-first-visit.html"' dist-qa/quiet-power.html
           ! grep -q '在地資源索引' dist-qa/toward-light.html
           # 全站小日曆及六筆已公告活動：僅限 QA，不能變成 production 正式核准內容。
           test -f dist-qa/activities.html

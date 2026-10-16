@@ -18,7 +18,7 @@ import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadBatch6Articles } from './lib/qa-batch6.mjs';
 import { loadQaActivities, loadQaNotices } from './lib/qa-activities.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
-import { resolveTowardEditorial } from './lib/toward-light-editorial.mjs';
+import { resolveTowardEditorial, TOWARD_READING_SLUGS } from './lib/toward-light-editorial.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -625,6 +625,31 @@ function dirHead(d, tip = '', extra = '') {
 }
 
 // ---------- 讀利專欄｜THE CONSIDERED PAGE（文章、常見需求、各主題閱讀方向） ----------
+// 讀利／向光分別展示不同文章，既有六大分類和搜尋仍連到同一原始文章。
+// 讀利優先呈現福利、法律、安全、健康及個人財務，避免以「同一天更新」決定閱讀重要性。
+const READLI_PRIORITY = [
+  'batch6-welfare-overview',
+  'batch5-harassment-three-laws',
+  'batch5-phone-emergency-sos',
+  'batch5-preventive-health-screening',
+  'batch6-income-support-emergency-aid',
+  'batch4-labor-insurance-pension',
+  'batch2-08',
+  'batch2-02',
+];
+const readliPriority = new Map(READLI_PRIORITY.map((slug, i) => [slug, i]));
+const towardReadingSet = new Set(TOWARD_READING_SLUGS);
+const readliArticles = IS_QA ? articles.filter(a => !towardReadingSet.has(a.slug)).sort((a, b) =>
+  (readliPriority.get(a.slug) ?? Infinity) - (readliPriority.get(b.slug) ?? Infinity)
+) : articles;
+if (IS_QA && (articles.length !== readliArticles.length + towardReadingSet.size ||
+  TOWARD_READING_SLUGS.some(slug => !articles.some(a => a.slug === slug)) ||
+  READLI_PRIORITY.some(slug => towardReadingSet.has(slug)))) {
+  throw new Error('讀利／向光分流出現缺篇、重複或跨目錄混入');
+}
+if (IS_QA && READLI_PRIORITY.some((slug) => !articles.some((a) => a.slug === slug))) {
+  throw new Error('讀利優先文章有不存在的 slug');
+}
 {
   const d = dirFor('quiet-power');
   const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
@@ -634,7 +659,7 @@ ${dirHead(d, IS_QA ? QA_DIRECTORY_COPY['quiet-power'].tip : '依照自己的需�
 ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   <div class="wrap">
     ${sectionHead('Reading', 'articles-title', '導讀文章')}
-    <div class="story-grid">${articles.map((a) => articleCard(a, '')).join('\n')}</div>
+    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '')).join('\n')}</div>
   </div>
 </section>` : ''}
 <section class="section needs" aria-labelledby="needs-title">
@@ -690,8 +715,10 @@ ${dirHead(d)}
 </section>
 <section class="section toward-featured" aria-labelledby="toward-featured-title">
   <div class="wrap">
-    ${sectionHead('Further Reading', 'toward-featured-title', '延伸閱讀', '藝文與文化的入門文章。')}
-    <div class="story-grid toward-featured-grid">${editorial.featured.map((a) => articleCard(a, '')).join('\n')}</div>
+    ${sectionHead('Explore Reading', 'toward-featured-title', '探索文章', '藝文、公開學習、培訓及創業等文章都可以直接從下方打開閱讀。')}
+    <div class="toward-reading-grid">${editorial.gallery.map((a) => `<article class="toward-reading-card">
+      <a href="articles/${esc(a.slug)}.html"><span class="toward-reading-kind">${esc(categoryLabel(a.category))}</span><h3>${esc(a.title)}</h3><span class="toward-reading-go">閱讀文章 <span aria-hidden="true">→</span></span></a>
+    </article>`).join('\n')}</div>
   </div>
 </section>
 <section class="section toward-more" aria-labelledby="toward-more-title">
@@ -872,7 +899,8 @@ ${qaBatch6.length ? `<section class="section benefits-intro" aria-labelledby="be
     </div>
   </div>
 </section>
-${topicsSection(c)}`;
+${topicsSection(c)}
+${IS_QA ? articlesSection(articles.filter((a) => a.category === 'city' && !qaBatch6.some((x) => x.slug === a.slug))) : ''}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'city', body, scripts: ['assets/js/city.js'], bodyClass: 'cat-city' }) });
 }
 

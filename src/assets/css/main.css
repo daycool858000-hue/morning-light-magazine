@@ -778,7 +778,17 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .toward-reading .dir-head { padding-block: 22px 18px; }
 .toward-reading .toward-index { padding-top: 24px; }
 .toward-reading .toward-featured { padding-top: 32px; }
-.toward-reading .toward-featured-grid { margin-top: 18px; }
+/* 向光文章格：手機每排兩張、寬螢幕每排四張；完整展示 13 篇文章，不再只露出兩篇精選。 */
+.toward-reading-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; align-items: stretch; }
+.toward-reading-card { min-width: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.toward-reading-card a { display: flex; flex-direction: column; gap: 8px; height: 100%; min-height: 166px; padding: 16px 12px; text-decoration: none; color: var(--ink); overflow-wrap: anywhere; }
+.toward-reading-card a:hover { border-color: var(--terracotta); background: var(--sand); }
+.toward-reading-card a:focus-visible { outline: 3px solid var(--focus); outline-offset: -4px; }
+.toward-reading-kind { display: block; font-size: 0.74rem; color: var(--terracotta-dark); font-weight: 600; }
+.toward-reading-card h3 { font-size: clamp(0.92rem, 2.7vw, 1.06rem); line-height: 1.5; margin: 0; font-weight: 600; }
+.toward-reading-go { margin-top: auto; font-size: 0.79rem; color: var(--muted); font-weight: 600; }
+@media (min-width: 700px) { .toward-reading-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }
+@media (min-width: 1050px) { .toward-reading-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; } }
 .toward-index h2 { margin-top: 4px; }
 .toward-link-list { position: relative; margin: 8px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 20px; }
 .toward-toggle { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
