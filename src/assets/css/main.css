@@ -966,8 +966,7 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .qa-x-links h3 { font-size: 1.05rem; margin: 12px 0 4px; }
 .qa-x-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
 .qa-x-list li { min-width: 0; padding: 12px 0 14px; border-bottom: 1px solid var(--line); }
-.qa-x-list .qa-x-name { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 650; color: var(--ink); overflow-wrap: anywhere; }
-.qa-x-arrow { color: var(--terracotta-dark); font-size: 0.86rem; flex: none; }
+.qa-x-list .qa-x-name { display: inline-block; padding: 10px 0; min-height: 44px; line-height: 1.5; font-weight: 650; color: var(--ink); overflow-wrap: anywhere; }
 .qa-x-list p { font-size: 0.92rem; line-height: 1.6; color: var(--muted); margin: 2px 0 4px; }
 .qa-x-list small { display: block; font-size: 0.8rem; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
 .qa-x-list .badge-qa { font-size: 0.7rem; vertical-align: baseline; }

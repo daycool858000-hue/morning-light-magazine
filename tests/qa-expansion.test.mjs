@@ -173,7 +173,9 @@ const cityHtml = await read(OUT, 'city.html');
 if (!new RegExp(`id="res-qa-x-fx-tpe" data-res data-regions="taipei"`).test(cityHtml) || !cityHtml.includes(tpe.entryType)) resProblems.push('縣市入口沒有進城市頁縣市篩選');
 if (!idx.includes('"url":"city.html#res-qa-x-fx-tpe"')) resProblems.push('縣市入口不在搜尋索引');
 for (const p of ['life-family.html', 'career.html', 'health.html', 'law.html', 'learning.html', 'city.html']) {
-  const urls = links(await read(OUT, p), /<a href="(https:[^"]+)" class="ext[^"]*" rel="noopener noreferrer">[^<]*(?:<span class="qa-x-arrow|前往官方網站)/g);
+  const html = await read(OUT, p);
+  // 機構卡的「前往官方網站」與擴充文字入口，同一頁不可出現相同網址
+  const urls = [...links(html, /<a href="(https:[^"]+)" class="ext " rel="noopener noreferrer">前往官方網站/g), ...links(html, /<a href="(https:[^"]+)" class="ext qa-x-name"/g)];
   if (new Set(urls).size !== urls.length) resProblems.push(`${p} 出現相同網址的重複入口`);
 }
 check('官方資源：同網址只在原卡補文字（不另建卡、搜尋可找到）；不同網址全國入口以簡潔文字列呈現；縣市入口進城市篩選；各頁無同網址重複入口',

@@ -325,7 +325,7 @@ function expansionEntries(categoryId) {
   return `<div class="qa-x-links">
       <h3 id="qa-x-${esc(categoryId)}-title">更多官方入口</h3>
       <ul class="qa-x-list">${items.map((x) => `<li id="qa-x-${esc(x.id)}">
-        ${extLink(x.url, `${esc(x.name)}<span class="qa-x-arrow" aria-hidden="true">↗</span>`, 'qa-x-name')}
+        ${extLink(x.url, esc(x.name), 'qa-x-name')}
         <p>${esc(x.purpose)}</p>
         <small>${esc(regionLabel(x.regions))}${x.languages.length ? `｜語言：${esc(x.languages.join('、'))}` : ''}${x.caution ? `｜${esc(x.caution)}` : ''}｜來源查核：${esc(x.checkedOn)} ${qaBadge(x)}</small>
       </li>`).join('')}</ul>
