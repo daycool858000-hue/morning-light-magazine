@@ -468,6 +468,18 @@ function countyChips(asLinks) {
 // ---------- 首頁（入口型：主視覺、六大主題、四個快捷入口） ----------
 const FEATURED_RESOURCE_IDS = ['taiwanjobs', 'sfaa', 'laf', 'mohw-domhaoh'];
 const dirById = Object.fromEntries(site.directories.map((d) => [d.id, d]));
+// QA 版目錄頁首文案（docs/DIRECTORY-INTRO-COPY-ONE-PASS-QA-SPEC-2026-10-16.md，編輯分支）。
+// config/site.json 為正式版與一般預覽共用，故只在 QA 覆寫，不改共用設定。
+const QA_DIRECTORY_COPY = {
+  'quiet-power': {
+    lead: '從家庭、職場、身心健康到法律與權益，整理生活中值得了解的知識、制度與公共資源。',
+    tip: '可以依主題閱讀文章，也能直接搜尋想了解的問題；需要申辦或使用服務時，再前往正式來源確認。',
+  },
+  'toward-light': {
+    lead: '從學習、藝文、創業到生活技能與各種活動，循著興趣探索不同主題，閱讀文章並認識更多可能的學習機會。',
+  },
+};
+const dirFor = (id) => (IS_QA && QA_DIRECTORY_COPY[id] ? { ...dirById[id], lead: QA_DIRECTORY_COPY[id].lead } : dirById[id]);
 
 /** 兩個目錄頁共用：放在頁面最前面的「支援資源」入口（連往同一個既有支援資源頁） */
 function supportEntry(prefix = '') {
@@ -539,10 +551,10 @@ function dirHead(d, tip = '', extra = '') {
 
 // ---------- 讀利專欄｜THE CONSIDERED PAGE（文章、常見需求、各主題閱讀方向） ----------
 {
-  const d = dirById['quiet-power'];
+  const d = dirFor('quiet-power');
   const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
   const body = `
-${dirHead(d, '依照自己的需要選擇生活主題，也可以直接搜尋關鍵字。找到相關資源後，點選連結前往官方網站。', IS_QA ? `
+${dirHead(d, IS_QA ? QA_DIRECTORY_COPY['quiet-power'].tip : '依照自己的需要選擇生活主題，也可以直接搜尋關鍵字。找到相關資源後，點選連結前往官方網站。', IS_QA ? `
     <p class="dir-jump"><a href="#needs-title">從你想了解的事開始<span aria-hidden="true">&nbsp;↓</span></a></p>` : '')}
 ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   <div class="wrap">
@@ -573,9 +585,20 @@ ${articles.length ? `<section class="section" aria-labelledby="articles-title">
 }
 
 // ---------- 向光｜TOWARD OPEN SKIES ----------
+// 八索引固定兩欄四排：每排兩個入口後面接該排的文章清單（預設收起）。用核取方塊＋label 切換，不需 JavaScript；
+// 打開時清單出現在該排正下方、橫跨兩欄，八個入口的位置不會互換或單獨落到上一排。
+function towardRows(topics) {
+  const rows = [];
+  for (let i = 0; i < topics.length; i += 2) {
+    const pair = topics.slice(i, i + 2);
+    rows.push(pair.map((t) => `<input type="checkbox" class="toward-toggle" id="toward-toggle-${esc(t.id)}" aria-controls="toward-${esc(t.id)}"><label class="toward-entry" for="toward-toggle-${esc(t.id)}"><span class="toward-topic-title">${esc(t.title)}</span><span class="toward-topic-arrow" aria-hidden="true">→</span></label>`).join('')
+      + pair.map((t) => `<div class="toward-panel" id="toward-${esc(t.id)}" data-topic="${esc(t.id)}"><p class="toward-panel-title">${esc(t.title)}</p><ul class="toward-story-links">${t.stories.map((a) => `<li><a href="articles/${esc(a.slug)}.html">${esc(a.title)}<span class="visually-hidden">，閱讀文章</span></a></li>`).join('')}</ul></div>`).join(''));
+  }
+  return rows.join('\n      ');
+}
 // QA 以編輯式閱讀入口連到既有同一篇文章；正式／一般預覽保留原頁，避免未核准變更滲出。
 {
-  const d = dirById['toward-light'];
+  const d = dirFor('toward-light');
   const learning = catById.learning;
   const editorial = IS_QA ? resolveTowardEditorial(articles, resources) : null;
   const featured = FEATURED_RESOURCE_IDS.map((id) => resources.find((r) => r.id === id)).filter(Boolean);
@@ -585,12 +608,9 @@ ${dirHead(d)}
   <div class="wrap">
     <span class="kicker">Explore</span>
     <h2 id="toward-index-title">依興趣找到文章</h2>
-    <ul class="toward-link-list">
-      ${editorial.topics.map((topic) => `<li><details class="toward-topic" id="toward-${esc(topic.id)}">
-        <summary><span class="toward-topic-title">${esc(topic.title)}</span><span class="toward-topic-arrow" aria-hidden="true">→</span></summary>
-        <ul class="toward-story-links">${topic.stories.map(a => `<li><a href="articles/${esc(a.slug)}.html">${esc(a.title)}<span class="visually-hidden">，閱讀文章</span></a></li>`).join('')}</ul>
-      </details></li>`).join('\n')}
-    </ul>
+    <div class="toward-link-list">
+      ${towardRows(editorial.topics)}
+    </div>
   </div>
 </section>
 <section class="section toward-featured" aria-labelledby="toward-featured-title">

@@ -48,7 +48,7 @@ try {
       if (o > 0) overflow.push(`${f} ${o}px`);
     }
     await page.goto(`${origin}${base}toward-light.html`);
-    const t = await page.evaluate(() => { const s = [...document.querySelectorAll('.toward-topic summary')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstBottom: Math.round(s[0].bottom), sameRow: Math.round(s[0].top) === Math.round(s[1].top) }; });
+    const t = await page.evaluate(() => { const s = [...document.querySelectorAll('.toward-entry')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstBottom: Math.round(s[0].bottom), sameRow: Math.round(s[0].top) === Math.round(s[1].top) }; });
     check(`WebKit ${width}px 向光：第一個畫面就看到第一排索引，八個索引兩欄排列`, t.n === 8 && t.firstBottom <= 760 && t.sameRow, JSON.stringify(t));
     check(`WebKit ${width}px 讀利、向光、城市福利與含表格文章無水平溢位，無 JS 錯誤`, overflow.length === 0 && errors.length === 0, [...overflow, ...errors].join('；'));
     await ctx.close();
@@ -57,14 +57,17 @@ try {
   const page = await ctx.newPage();
   await page.goto(`${origin}${base}toward-light.html`);
   const bad = [];
+  const boxes = () => page.$$eval('.toward-entry', (es) => es.map((e) => Math.round(e.getBoundingClientRect().left)));
+  const cols = await boxes();
   for (const t of TOWARD_TOPICS) {
-    await page.tap(`#toward-${t.id} summary`);
-    const s = await page.evaluate((id) => { const d = document.getElementById(id); return { open: d.open, links: [...d.querySelectorAll('.toward-story-links a')].filter((a) => a.getBoundingClientRect().height >= 44).length }; }, `toward-${t.id}`);
+    await page.tap(`label[for="toward-toggle-${t.id}"]`);
+    const s = await page.evaluate((id) => { const d = document.getElementById(id); return { open: getComputedStyle(d).display !== 'none', links: [...d.querySelectorAll('.toward-story-links a')].filter((a) => a.getBoundingClientRect().height >= 44).length }; }, `toward-${t.id}`);
     if (!s.open || s.links !== t.slugs.length) bad.push(`${t.id} ${JSON.stringify(s)}`);
   }
+  if (JSON.stringify(await boxes()) !== JSON.stringify(cols)) bad.push('展開後入口欄位改變');
   await page.tap('#toward-women-center a[href="articles/batch6-women-center-services.html"]');
   await page.waitForURL('**/articles/batch6-women-center-services.html');
-  check('WebKit 390px 向光：八個索引都能點開，文章連結齊全且高度 ≥ 44px；婦女中心課程第一篇可開啟', bad.length === 0, bad.join('；'));
+  check('WebKit 390px 向光：八個索引都能點開（入口維持原欄位），文章連結齊全且高度 ≥ 44px；婦女中心課程第一篇可開啟', bad.length === 0, bad.join('；'));
   await page.goto(`${origin}${base}city.html`);
   const order = await page.evaluate(() => document.getElementById('benefits').getBoundingClientRect().top < document.getElementById('finder').getBoundingClientRect().top && document.querySelectorAll('#benefits .story').length === 6);
   check('WebKit 390px 城市與福利：「先了解有哪些福利」六篇在縣市選擇之前', order);

@@ -61,7 +61,7 @@ async function listFiles(dir, prefix = '') {
 const read = (dir, f) => readFile(path.join(dir, f), 'utf8');
 
 // ---------- 一、發布隔離：候選內容只在 dist-qa ----------
-const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', 'class="dir-jump"', 'toward-topic', '未核准測試內容'];
+const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', 'class="dir-jump"', 'toward-topic', 'toward-toggle', '整理生活中值得了解的知識、制度與公共資源', '循著興趣探索不同主題', '需要申辦或使用服務時，再前往正式來源確認', '未核准測試內容'];
 for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-production', 'dist-production']]) {
   const leaks = [];
   for (const f of await listFiles(path.join(ROOT, dir))) {
@@ -168,6 +168,18 @@ check('向光 QA：八索引在精選之前、沿用兩欄文字樣式（→、�
 const qpHead = (/<section class="page-head dir-head"[\s\S]*?<\/section>/.exec(qp) || [''])[0];
 const jumpOk = /<a class="support-entry"[\s\S]*?<\/a>\s*<p class="dir-jump"><a href="#needs-title">從你想了解的事開始/.test(qpHead) && (qp.match(/class="dir-jump"/g) || []).length === 1 && qp.includes('<h2 id="needs-title">從你想了解的事開始</h2>') && !/<script[^>]*>[^<]*needs-title/.test(qp);
 check('讀利專欄 QA：支援資源入口正下方有「從你想了解的事開始 ↓」原生錨點（連到既有 #needs-title，無額外 JavaScript），只出現一次', jumpOk);
+// 2026-10-16 目錄頁首文案（QA 限定）：讀利主說明＋補充說明、向光主說明；舊說明不再出現，向光不加回第二段
+const QA_COPY = {
+  qpLead: '從家庭、職場、身心健康到法律與權益，整理生活中值得了解的知識、制度與公共資源。',
+  qpTip: '可以依主題閱讀文章，也能直接搜尋想了解的問題；需要申辦或使用服務時，再前往正式來源確認。',
+  twLead: '從學習、藝文、創業到生活技能與各種活動，循著興趣探索不同主題，閱讀文章並認識更多可能的學習機會。',
+};
+const towardHead = (/<section class="page-head dir-head"[\s\S]*?<\/section>/.exec(towardHtml) || [''])[0];
+const copyOk = qpHead.includes(`<p class="lead">${QA_COPY.qpLead}</p>`) && qpHead.includes(`<p class="dir-tip">${QA_COPY.qpTip}</p>`)
+  && towardHead.includes(`<p class="lead">${QA_COPY.twLead}</p>`) && !towardHead.includes('dir-tip')
+  && !/在地資源索引|生活知識與閱讀選集|依照自己的需要選擇生活主題/.test(qp + towardHtml + idx)
+  && idx.includes(QA_COPY.qpLead) && idx.includes(QA_COPY.twLead);
+check('目錄頁首文案（QA）：讀利主說明與補充說明、向光主說明皆為指定文字，向光沒有第二段說明；頁面與搜尋索引不再出現舊的「在地資源索引」「生活知識與閱讀選集」等說明', copyOk);
 
 const artProblems = [];
 for (const a of arts) {
@@ -307,19 +319,27 @@ try {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
 
-  // 向光：手機點開索引直接取得已有文章，不經另一層空白分類頁。
+  // 向光：手機點開索引直接取得已有文章，不經另一層空白分類頁；點開時八個入口位置不變
   await page.goto(`${ORIGIN}${BASE}toward-light.html`);
-  const beforeExpand = await page.locator('#toward-women-center').evaluate(el => el.open);
-  await page.locator('#toward-women-center summary').click();
-  const afterExpand = await page.locator('#toward-women-center').evaluate(el => el.open);
-  const firstArticleUrl = await page.locator('#toward-women-center .toward-story-links a').first().getAttribute('href');
-  check('向光手機：索引可用原生 details 展開，顯示可點的文章而非只到外部資源', !beforeExpand && afterExpand && firstArticleUrl?.startsWith('articles/batch'));
+  const entryBoxes = () => page.$$eval('.toward-entry', (es) => es.map((e) => { const r = e.getBoundingClientRect(); return [Math.round(r.left), Math.round(r.top + scrollY)]; }));
+  const panelShown = (id) => page.$eval(`#toward-${id}`, (el) => getComputedStyle(el).display !== 'none');
+  const before = await entryBoxes();
+  const hiddenAtStart = (await Promise.all(towardIndex.topics.map((t) => panelShown(t.id)))).every((x) => !x);
+  await page.click('label[for="toward-toggle-job-training"]'); // 右欄
+  const afterRight = await entryBoxes();
+  const geo = await page.evaluate(() => { const r = (sel) => document.querySelector(sel).getBoundingClientRect(); return { rowBottom: Math.round(r('label[for="toward-toggle-job-training"]').bottom), panelTop: Math.round(r('#toward-job-training').top), nextRowTop: Math.round(r('label[for="toward-toggle-startup"]').top), panelBottom: Math.round(r('#toward-job-training').bottom) }; });
+  const sameColumns = before.every(([x], i) => afterRight[i][0] === x) && afterRight[0][1] === afterRight[1][1] && afterRight.slice(2).every(([, y], i) => y > before[i + 2][1]);
+  const placedBelowRow = geo.panelTop >= geo.rowBottom - 1 && geo.panelBottom <= geo.nextRowTop + 1;
+  await page.click('label[for="toward-toggle-job-training"]'); // 再點一次收起
+  const closedAgain = !(await panelShown('job-training'));
+  const afterClose = await entryBoxes();
+  check('向光手機：點開右欄索引時，八個入口仍是固定兩欄四排（同排兩項不分開），文章清單出現在該排正下方；再點一次可收起並恢復原位',
+    hiddenAtStart && sameColumns && placedBelowRow && closedAgain && JSON.stringify(afterClose) === JSON.stringify(before), JSON.stringify({ hiddenAtStart, sameColumns, placedBelowRow, closedAgain, geo }));
   const allTopics = [];
   for (const topic of towardIndex.topics) {
-    const sel = `#toward-${topic.id}`;
-    if (!(await page.locator(sel).evaluate((el) => el.open))) await page.locator(`${sel} summary`).click();
-    const links = await page.$$eval(`${sel} .toward-story-links a`, (as) => as.map((a) => ({ href: a.getAttribute('href'), h: Math.round(a.getBoundingClientRect().height), visible: a.offsetParent !== null })));
-    allTopics.push({ id: topic.id, open: await page.locator(sel).evaluate((el) => el.open), links });
+    if (!(await panelShown(topic.id))) await page.click(`label[for="toward-toggle-${topic.id}"]`);
+    const links = await page.$$eval(`#toward-${topic.id} .toward-story-links a`, (as) => as.map((a) => ({ href: a.getAttribute('href'), h: Math.round(a.getBoundingClientRect().height), visible: a.offsetParent !== null })));
+    allTopics.push({ id: topic.id, open: await panelShown(topic.id), links });
   }
   const topicBad = allTopics.filter((t) => !t.open || t.links.length !== towardIndex.topics.find((x) => x.id === t.id).stories.length || t.links.some((l) => !l.visible || l.h < 44 || !/^articles\/batch\d-[a-z0-9-]+\.html$/.test(l.href)));
   await page.click(`#toward-women-center .toward-story-links a[href="articles/batch6-women-center-services.html"]`);
@@ -332,7 +352,7 @@ try {
     const ctx = await browser.newContext({ viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true });
     const p = await ctx.newPage();
     await p.goto(`${ORIGIN}${BASE}toward-light.html`);
-    const r = await p.evaluate(() => { const s = [...document.querySelectorAll('.toward-topic summary')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstTop: Math.round(s[0].top), firstBottom: Math.round(s[0].bottom), pairTop: Math.round(s[1].top), leftX: Math.round(s[0].left), rightX: Math.round(s[1].left), minH: Math.round(Math.min(...s.map((x) => x.height))), overflow: document.documentElement.scrollWidth - innerWidth }; });
+    const r = await p.evaluate(() => { const s = [...document.querySelectorAll('.toward-entry')].map((e) => e.getBoundingClientRect()); return { n: s.length, firstTop: Math.round(s[0].top), firstBottom: Math.round(s[0].bottom), pairTop: Math.round(s[1].top), leftX: Math.round(s[0].left), rightX: Math.round(s[1].left), minH: Math.round(Math.min(...s.map((x) => x.height))), overflow: document.documentElement.scrollWidth - innerWidth }; });
     if (r.n !== 8 || r.firstBottom > 844 || r.pairTop !== r.firstTop || r.rightX <= r.leftX || r.minH < 44 || r.overflow > 0) towardFirst.push(`${w}px ${JSON.stringify(r)}`);
     await ctx.close();
   }

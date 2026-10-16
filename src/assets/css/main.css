@@ -773,22 +773,27 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 
 
 /* 《向光》QA 編輯式閱讀入口：既有八個索引直達文章；手機優先、無新增 JS。 */
-/* 八索引沿用舊版 .link-list 的兩欄文字樣式（粗體標題、右側 →、底部細線），點開後該項改為整列，列出站內文章 */
+/* 八索引沿用舊版 .link-list 的兩欄文字樣式（粗體標題、右側 →、底部細線），固定兩欄四排。
+   每排兩個入口之後接該排的文章清單；以核取方塊＋label 切換（無 JavaScript），清單出現在該排正下方、橫跨兩欄，入口位置不變。 */
 .toward-reading .dir-head { padding-block: 22px 18px; }
 .toward-reading .toward-index { padding-top: 24px; }
 .toward-reading .toward-featured { padding-top: 32px; }
 .toward-reading .toward-featured-grid { margin-top: 18px; }
 .toward-index h2 { margin-top: 4px; }
-.toward-link-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
-.toward-link-list > li { min-width: 0; }
-.toward-link-list > li:has(> .toward-topic[open]) { grid-column: 1 / -1; }
-.toward-topic summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-weight: 600; cursor: pointer; list-style: none; }
-.toward-topic summary::-webkit-details-marker { display: none; }
-.toward-topic summary:hover { color: var(--terracotta-dark); }
-.toward-topic summary:focus-visible, .toward-story-links a:focus-visible, .toward-official-links a:focus-visible, .toward-compact-link:focus-visible { outline: 3px solid var(--focus); outline-offset: -4px; }
+.toward-link-list { position: relative; margin: 8px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 20px; }
+.toward-toggle { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.toward-entry { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; min-height: 44px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-weight: 600; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.toward-entry:hover { color: var(--terracotta-dark); }
+.toward-toggle:focus-visible + .toward-entry, .toward-story-links a:focus-visible, .toward-official-links a:focus-visible, .toward-compact-link:focus-visible { outline: 3px solid var(--focus); outline-offset: -4px; }
 .toward-topic-title { min-width: 0; overflow-wrap: anywhere; }
 .toward-topic-arrow { color: var(--terracotta); flex: none; }
-.toward-topic[open] .toward-topic-arrow { transform: rotate(90deg); }
+.toward-toggle:checked + .toward-entry { color: var(--terracotta-dark); }
+.toward-toggle:checked + .toward-entry .toward-topic-arrow { transform: rotate(90deg); }
+.toward-panel { display: none; grid-column: 1 / -1; padding: 6px 0 4px; }
+/* 第一個入口勾選 → 該排第一個清單；第二個入口勾選 → 該排第二個清單 */
+.toward-toggle:checked + .toward-entry + .toward-toggle + .toward-entry + .toward-panel,
+.toward-toggle:checked + .toward-entry + .toward-panel + .toward-panel { display: block; }
+.toward-panel-title { margin: 0 0 2px; font-size: 0.85rem; font-weight: 600; color: var(--muted); }
 .toward-story-links { list-style: none; margin: 0 0 10px; padding: 0 0 0 14px; border-left: 2px solid var(--line); }
 .toward-story-links li { border-bottom: 1px solid var(--line); }
 .toward-story-links a { display: flex; align-items: center; min-height: 44px; padding: 8px 0; color: var(--ink); font-size: 0.95rem; font-weight: 500; line-height: 1.5; text-decoration: none; overflow-wrap: anywhere; }
@@ -807,6 +812,6 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
   .toward-more-grid, .toward-official-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 359px) {
-  .toward-link-list { gap: 0 14px; }
+  .toward-link-list { column-gap: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .toward-topic-arrow { transition: none; } }
