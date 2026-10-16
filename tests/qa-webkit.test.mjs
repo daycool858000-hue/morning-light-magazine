@@ -58,7 +58,7 @@ try {
         (i === 0 || (v.x === vertical[i-1].x && v.y > vertical[i-1].y))), JSON.stringify(vertical.slice(0, 3)));
     await page.goto(`${origin}${base}quiet-power.html`);
     const compact = await page.locator('.readli-reading .story-grid .story').evaluateAll(cards =>
-      cards.map(c => { const h = c.querySelector('h3 a').getBoundingClientRect(); return { h: Math.round(c.getBoundingClientRect().height), linkH: Math.round(h.height), cardW: Math.round(c.getBoundingClientRect().width), media: getComputedStyle(c.querySelector('.story-media') || c).display }; })
+      cards.map(c => { const h = c.querySelector('h3 a').getBoundingClientRect(); return { h: Math.round(c.getBoundingClientRect().height), linkH: Math.round(h.height), cardW: Math.round(c.getBoundingClientRect().width), media: c.querySelector('.story-media') ? getComputedStyle(c.querySelector('.story-media')).display : 'none' }; })
     );
     check(`WebKit ${width}px 讀利：23 篇為精簡單欄清單，標題可觸控、沒有大型圖片`,
       compact.length === 23 && compact.every(c => c.h >= 75 && c.h < 240 && c.linkH >= 44 && c.cardW < width && c.media !== 'block'), JSON.stringify(compact.slice(0, 3)));
