@@ -50,6 +50,15 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 2026-10-17 PR #12 驗收與第一批 QA 編輯決策（本節最新）
+
+- PR #12 `claude/qa-expansion-v2-reconcile-20261017` 的提交 `8dce66c` 已核對 push CI `38975868799` 和 pull_request CI `38975900065` success；PR 仍開放草稿、`mergeable_state=clean`，沒有合併、沒有部署，22 篇／13 項佇列仍全部關閉且 pending。
+- 第一批先選 **exp-01／08／11／12 四篇**，且僅為來源審查後供獨立 QA 暫存試讀。讀利 `readli`：exp-01、exp-08；向光 `toward`：exp-11、exp-12。其他 18 篇暫維持 `directory:none`。
+- 第 11 篇 slug **`exp-choosing-open-courses`**（原 `exp-open-course-certificates` 停用）；第 12 篇 slug **`exp-compare-everyday-experiments`**（原 `exp-reading-popular-science` 停用）。尚未公開 QA，現在改名無既有網址相容問題。
+- 官方原頁與逐段查核證據、與原 36 篇的不同閱讀目的及開發詳細限制：`docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md`；22 篇 manifest 的 `firstQaBatchEditorial` 已標記上述四篇。
+- **重要版本同步**：exp-11 2026-10-17 修正文句，避免未經證實「教育部平台一定能以主題篩選」；exp-12 新增科教館 2022 年科學教育原始資料連結。Claude 工程分支中的兩份 V2 複本曾取自較舊編輯 commit，真正準備 QA 暫存前需從 PR #11 最新檔同步、重跑 22 篇解析與全文回歸測試。
+- 目前已做的是 AI 來源與逐段編輯審查，**不能等同站主審閱**。Claude 不得據此自行開真實 `importToQa`、自行合併 PR #10／#11／#12 或觸發 GitHub Pages，待獨立 QA 暫存驗收報告及站主明確同意才有下一步。
+
 ## 2026-10-17 城市研究與 Claude 接軌工作更新（本節優先於下方舊版 2/22）
 
 - 站主已把「V2 文章佇列與解析器修復」指令交給 Claude；工程分支 `claude/qa-expansion-import-20261016` 舊 CI `38967525534` success，但仍待 Claude 將 12 篇 V2 真正接入、校正 7 篇改名與來源解析負向測試。**不要代替 Claude 在此編輯分支更新 build.mjs 或把任何佇列開關打開。**
