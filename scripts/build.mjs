@@ -308,7 +308,7 @@ function articleImageId(a) {
   return photoById[id] && (generated[id] || photoById[id].required) ? id : null;
 }
 
-function articleCard(a, prefix, { withImage = true } = {}) {
+function articleCard(a, prefix, { withImage = true, readli = false } = {}) {
   const imgId = withImage ? articleImageId(a) : null;
   const href = `${prefix}articles/${esc(a.slug)}.html`;
   const label = `<span class="pill">${esc(categoryLabel(a.category))}</span>${qaBadge(a)}`;
@@ -316,6 +316,7 @@ function articleCard(a, prefix, { withImage = true } = {}) {
     return `<article class="story">
   <a class="story-media" href="${href}" tabindex="-1" aria-hidden="true">${photo(imgId, 'card', { prefix, sizes: '(min-width: 1000px) 380px, (min-width: 700px) 50vw, 100vw' })}${label}</a>
   <div class="story-body">
+    ${readli ? `<span class="readli-inline-kind">${esc(categoryLabel(a.category))}</span>` : ''}
     <h3><a href="${href}">${esc(a.title)}</a></h3>
     <p>${esc(a.summary)}</p>
     <p class="story-date">更新：${esc(a.updated)}</p>
@@ -659,7 +660,7 @@ ${dirHead(d, IS_QA ? QA_DIRECTORY_COPY['quiet-power'].tip : '依照自己的需�
 ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   <div class="wrap">
     ${sectionHead('Reading', 'articles-title', '導讀文章')}
-    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '')).join('\n')}</div>
+    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '', { readli: IS_QA })).join('\n')}</div>
   </div>
 </section>` : ''}
 <section class="section needs" aria-labelledby="needs-title">
@@ -680,7 +681,7 @@ ${articles.length ? `<section class="section" aria-labelledby="articles-title">
     </ul>
   </div>
 </section>`;
-  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: 'dir-page' }) });
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: IS_QA ? 'dir-page readli-reading' : 'dir-page' }) });
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
 }
 
