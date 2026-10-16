@@ -642,7 +642,7 @@ ${dirHead(d)}
     ${featured.length ? `<div class="res-grid">${featured.map((r) => resourceCard(r, { anchor: false })).join('\\n')}</div>` : emptyBox('官方資源正在查核中，完成後會陸續公開。')}
   </div>
 </section>`;
-  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: 'dir-page toward-reading' }) });
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: IS_QA ? 'dir-page toward-reading' : 'dir-page' }) });
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, IS_QA ? '向光 學習 活動 課程 生活探索 文章 藝文 文化 創業 親職 婦女中心 就業培訓 家庭教育 生活技能 公開課程' : '向光 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
 }
 
