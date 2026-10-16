@@ -147,7 +147,7 @@
 ### 官方來源與延伸入口
 - [文化部｜藝文活動平台（場館、報名與活動查詢）](https://event.culture.tw/)
 - [文化部｜藝文活動平台網站導覽](https://event.culture.tw/indexsitemap.jsp)
-- [文化部 iCulture 藝文資訊入口](https://cloud.culture.tw/frontsite/)
+- [文化部｜藝文活動平台網站導覽（官方場館與報名入口）](https://event.culture.tw/indexsitemap.jsp)
 
 **編輯備註（不公開）：** 文化部平台包含會員及預約功能，不能把外站全部描述為免登入。站內閱讀仍免費無帳號。
 
