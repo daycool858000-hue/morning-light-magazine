@@ -52,11 +52,18 @@ for (const [url, label] of targets) {
     const title = (await page.title().catch(() => '')).replace(/\s+/g, ' ').slice(0, 40);
     const u = new URL(page.url());
     const final = page.url() !== url ? `｜最終：${u.host}${u.pathname.slice(0, 40)}` : '';
-    const challenge = /Just a moment|Attention Required/i.test(title);
+    // 防護驗證頁，或 HTTP 200 但內容是拒絕／錯誤頁（例如 pip.moi.gov.tw 的 Request Rejected、法規資料庫的 Error）
+    const challenge = /Just a moment|Attention Required|Request Rejected|^Error$/i.test(title);
     const ok = !challenge && (redirected ? /^https:/.test(page.url()) && Boolean(title) : status >= 200 && status < 400);
-    line = { label, url, ok, text: `${redirected ? '轉址後載入' : status}｜${title || '（無標題）'}${challenge ? '（防護驗證頁，未能進入網站內容）' : ''}${final}` };
+    line = { label, url, ok, text: `${redirected ? '轉址後載入' : status}｜${title || '（無標題）'}${challenge ? '（防護驗證或錯誤頁，未能進入網站內容）' : ''}${final}` };
   } catch (err) {
     line = { label, url, ok: false, text: `開啟失敗：${String(err.message).split('\n')[0].replace(/ at .*$/, '').slice(0, 80)}` };
+  }
+  // 法規資料庫網址參數大小寫不同時另測一次 PCode=，只印出診斷結果，不修改文章網址
+  if (!line.ok && /law\.moj\.gov\.tw\/.*[?&]pcode=/.test(url)) {
+    const alt = url.replace('pcode=', 'PCode=');
+    const r = await page.goto(alt, { waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => null);
+    line.text += `｜診斷：改用 PCode= 時 ${r ? r.status() : '開啟失敗'}｜${(await page.title().catch(() => '')).slice(0, 40)}`;
   }
   await page.close();
   rows.push(line);
