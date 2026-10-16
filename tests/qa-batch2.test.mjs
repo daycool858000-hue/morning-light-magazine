@@ -147,8 +147,10 @@ const expectedReadingFirst = [
   'batch5-preventive-health-screening', 'batch6-income-support-emergency-aid',
   'batch4-labor-insurance-pension', 'batch2-08', 'batch2-02',
 ];
-const readliLinks = [...qp.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
-const towardGalleryLinks = [...towardHtml.matchAll(/<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+// 六大主題擴充文章（exp-）由 tests/qa-expansion.test.mjs 另行驗收；本檔只核對原有 36 篇維持原狀。
+const isOriginal = (slug) => !slug.startsWith('exp-');
+const readliLinks = [...qp.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]).filter(isOriginal);
+const towardGalleryLinks = [...towardHtml.matchAll(/<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]).filter(isOriginal);
 const allReadingArticles = [...arts, ...third.articles, ...fourth, ...sixth].map(a => a.slug);
 const towardSlugs = new Set(TOWARD_READING_SLUGS);
 check('讀利與向光：讀利 23 篇、向光 13 篇，兩邊完整不重複，讀利首八篇以福利、權益、健康、安全及生活需求為優先',
@@ -159,7 +161,7 @@ check('讀利與向光：讀利 23 篇、向光 13 篇，兩邊完整不重複�
   JSON.stringify(readliLinks.slice(0, 8)) === JSON.stringify(expectedReadingFirst) &&
   allReadingArticles.length === 36 && allReadingArticles.every(slug => readliLinks.includes(slug) !== towardSlugs.has(slug)));
 // 城市頁原本「先了解有哪些福利」的六篇與縣市篩選不動，再補兩篇既有城市資源導讀。
-const cityArticleLinks = [...city.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+const cityArticleLinks = [...city.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]).filter(isOriginal);
 check('城市與福利：第六批六篇保留原有順序，另可閱讀既有 batch2-09、batch2-10 兩篇社福窗口導讀，無重複',
   cityArticleLinks.length === 8 && new Set(cityArticleLinks).size === 8 &&
   JSON.stringify(cityArticleLinks.slice(0, 6)) === JSON.stringify(sixth.map((x) => x.slug)) &&
@@ -350,7 +352,7 @@ const tableHtml = await read(QA, 'articles/batch5-harassment-three-laws.html');
 if ((tableHtml.match(/<table>[\s\S]*?<\/table>/) || [''])[0].split('<tr>').length - 1 !== 4) fourthProblems.push('三部性騷擾法規文章的比較表未轉為 1 列表頭＋3 列內容');
 const allSlugs = [...arts, ...third.articles, ...fourth, ...sixth].map((a) => a.slug);
 const qaArticleFiles = (await readdir(path.join(QA, 'articles'))).filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, ''));
-const extra = qaArticleFiles.filter((f) => !allSlugs.includes(f));
+const extra = qaArticleFiles.filter((f) => !allSlugs.includes(f) && isOriginal(f));
 if (new Set(allSlugs).size !== allSlugs.length || allSlugs.length !== 36) fourthProblems.push(`QA 文章 slug 數 ${allSlugs.length}，應為 36 且不重複`);
 if (extra.length) fourthProblems.push(`QA 出現不在範圍內的文章：${extra.join('、')}`);
 const byCat = Object.fromEntries(categories.map((c) => [c.id, fourth.filter((a) => a.category === c.id).length]));
@@ -367,7 +369,7 @@ for (const c of categories) {
   const html = await read(QA, c.slug);
   const reading = qaArticleByCategory.filter(a => a.category === c.id);
   if (reading.length !== expectedTopicCounts[c.id]) topicReadingProblems.push(`${c.title} 分類原稿數量不符：${reading.length}`);
-  const hrefs = [...html.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map(m => m[1]);
+  const hrefs = [...html.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map(m => m[1]).filter(isOriginal);
   if (hrefs.length !== expectedTopicCounts[c.id] || new Set(hrefs).size !== hrefs.length ||
       !reading.every(a => hrefs.includes(a.slug))) topicReadingProblems.push(`${c.title} 文章入口不完整或重複：${hrefs.length}`);
   if (c.id !== 'city') {
@@ -700,7 +702,8 @@ try {
     await page.selectOption('#service-type', '');
     const shown = await page.$$eval('#local-results [data-res]:not([hidden])', (els) => els.map((e) => ({ id: e.id.replace('res-', ''), regions: e.dataset.regions })));
     const expected = cand.filter((r) => r.regions.includes(c.id)).map((r) => r.id).sort();
-    const ids = shown.map((s) => s.id).sort();
+    // 擴充佇列的縣市入口（qa-x-）由 qa-expansion 測試驗收；這裡核對原 23 筆地方入口，下一行仍檢查全部卡片不混入他縣市
+    const ids = shown.map((s) => s.id).filter((id) => !id.startsWith('qa-x-')).sort();
     if (JSON.stringify(ids) !== JSON.stringify(expected)) countyProblems.push(`${c.name} 顯示 ${ids.length} 筆，應為 ${expected.length} 筆`);
     if (shown.some((s) => !s.regions.split(' ').includes(c.id))) countyProblems.push(`${c.name} 混入其他縣市`);
     const nat = await page.$$eval('#national-results [data-res]:not([hidden])', (els) => els.length);
@@ -769,7 +772,7 @@ try {
 
   // 讀利與向光各自保留主題相符的文章；原始文章全部存在於六大分類與搜尋
   await page.goto(`${ORIGIN}${BASE}quiet-power.html`);
-  const qpLinks = await page.$$eval('#articles-title ~ .story-grid a, .story-grid h3 a', (as) => [...new Set(as.map((a) => a.getAttribute('href')))]);
+  const qpLinks = (await page.$$eval('#articles-title ~ .story-grid a, .story-grid h3 a', (as) => [...new Set(as.map((a) => a.getAttribute('href')))])).filter((h) => !h.startsWith('articles/exp-'));
   const entry = await page.$eval('.dir-head .support-entry', (e) => ({ href: e.getAttribute('href'), h: Math.round(e.getBoundingClientRect().height) }));
   check('讀利專欄：23 篇實用資訊文章獨立展示，與向光 13 篇互斥；💪 支援資源小型入口維持原狀', qpLinks.length === 23 && allReadingArticles.filter(a => !towardSlugs.has(a)).every(slug => qpLinks.includes(`articles/${slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
   check('測試預覽操作過程沒有 JavaScript 錯誤', errors.length === 0, errors.slice(0, 2).join('；'));
