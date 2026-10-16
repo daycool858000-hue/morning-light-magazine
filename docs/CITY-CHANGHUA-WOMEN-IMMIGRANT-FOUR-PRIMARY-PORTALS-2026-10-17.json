@@ -1,0 +1,72 @@
+{
+  "name": "彰化縣深度服務首批四筆（婦女中心2、學習1、新住民1）",
+  "checkedOn": "2026-10-17",
+  "auditedBy": "ChatGPT（AI）",
+  "kind": "editorial-qa-candidate",
+  "county": "changhua",
+  "ownerApproved": false,
+  "published": false,
+  "reviewLimit": "僅原頁、所屬機關與用途初核；未電話或現場確認、未逐份下載 PDF、未 iPhone Safari 實機驗收。",
+  "items": [
+    {
+      "id": "cg-women-dream-center",
+      "name": "彰化夢想館",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2412&data_id=20193&topsn=2390",
+      "type": "婦女中心",
+      "purpose": "彰化縣政府列出的女性成長、就業與生涯課程、福利諮詢、婦女團體培力及性別友善空間",
+      "evidence": "官方頁寫有彰化市金馬路三段656號4樓及提供婦女相關服務，電話與開放時間尚未再經當日接聽驗證",
+      "display": "單一在地中心文字入口",
+      "regions": [
+        "changhua"
+      ],
+      "status": "原頁可讀－待網站發布核准",
+      "checkedBy": "ChatGPT AI",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "id": "cg-women-tianzhong-center",
+      "name": "田中區婦女中心",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2412&data_id=11396&topsn=2390",
+      "type": "婦女中心",
+      "purpose": "彰化縣田中區婦女中心提供福利諮詢、借閱、空間、成長性活動及婦女團體相關服務",
+      "evidence": "官方頁列田中鎮斗中路222號3樓與服務項目，實際時段、最新開課請再看公告",
+      "display": "與彰化夢想館不同中心、不同 URL，各留一條文字入口",
+      "regions": [
+        "changhua"
+      ],
+      "status": "原頁可讀－待網站發布核准",
+      "checkedBy": "ChatGPT AI",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "id": "cg-women-passport",
+      "name": "Women學習護照",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=8133&data_id=28418&topsn=2390",
+      "type": "地方學習資料",
+      "purpose": "彰化縣政府婦女學習護照 115 年 5 月改版資料下載入口，供了解婦女學習主題與資訊",
+      "evidence": "原頁可見 115 年 5 月改版 36MB 文件下載，不等於目前有可報名課程、免費或免登入",
+      "display": "地方學習文字入口",
+      "regions": [
+        "changhua"
+      ],
+      "status": "原頁可讀－待網站發布核准",
+      "checkedBy": "ChatGPT AI",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "id": "cg-immigrant-family-center",
+      "name": "彰化縣新住民家庭服務中心官方介紹",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2414&data_id=11305&topsn=2390",
+      "type": "新住民服務",
+      "purpose": "彰化縣政府社會處新住民家庭服務中心簡介，含諮詢、社會支持、社區資源與正式中心導引",
+      "evidence": "原頁說明縣府委託及 4 區服務據點，非所有活動立即可參加；若指向中心子站需另查其現行資訊",
+      "display": "縣市新住民專門入口，補 13 項來源未覆蓋的彰化縣",
+      "regions": [
+        "changhua"
+      ],
+      "status": "原頁可讀－待網站發布核准",
+      "checkedBy": "ChatGPT AI",
+      "checkedAt": "2026-10-17"
+    }
+  ]
+}
