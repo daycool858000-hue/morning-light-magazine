@@ -16,6 +16,7 @@ import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
+import { resolveTowardEditorial } from './lib/toward-light-editorial.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -567,12 +568,47 @@ ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
 }
 
-// ---------- 向光｜TOWARD OPEN SKIES（學習、活動、生活探索與官方資源） ----------
+// ---------- 向光｜TOWARD OPEN SKIES ----------
+// QA 以編輯式閱讀入口連到既有同一篇文章；正式／一般預覽保留原頁，避免未核准變更滲出。
 {
   const d = dirById['toward-light'];
   const learning = catById.learning;
+  const editorial = IS_QA ? resolveTowardEditorial(articles, resources) : null;
   const featured = FEATURED_RESOURCE_IDS.map((id) => resources.find((r) => r.id === id)).filter(Boolean);
-  const body = `
+  const body = IS_QA ? `
+${dirHead(d, '從一篇有興趣的文章開始。了解內容後，再決定是否尋找課程、活動或官方資源。')}
+<section class="section toward-featured" aria-labelledby="toward-featured-title">
+  <div class="wrap">
+    ${sectionHead('Start Reading', 'toward-featured-title', '從這裡開始讀', '文化、創業、藝文與公開學習，選一篇想了解的內容。')}
+    <div class="story-grid toward-featured-grid">${editorial.featured.map((a) => articleCard(a, '')).join('\\n')}</div>
+  </div>
+</section>
+<section class="section toward-index" aria-labelledby="toward-index-title">
+  <div class="wrap">
+    ${sectionHead('Explore', 'toward-index-title', '依興趣找到文章', '八個學習與活動方向，每一項都能直接展開閱讀，不必先離開《由己》。')}
+    <div class="toward-index-grid">
+      ${editorial.topics.map((topic, n) => `<details class="toward-topic" id="toward-${esc(topic.id)}">
+        <summary><span class="toward-topic-count" aria-hidden="true">${String(n + 1).padStart(2, '0')}</span><span class="toward-topic-heading"><strong>${esc(topic.title)}</strong><small>${esc(topic.intro)}</small></span><span class="toward-topic-arrow" aria-hidden="true">＋</span></summary>
+        <ul class="toward-story-links">${topic.stories.map(a => `<li><a href="articles/${esc(a.slug)}.html">${esc(a.title)}<span class="visually-hidden">，閱讀文章</span></a></li>`).join('')}</ul>
+      </details>`).join('\\n')}
+    </div>
+  </div>
+</section>
+<section class="section toward-more" aria-labelledby="toward-more-title">
+  <div class="wrap">
+    ${sectionHead('Continue Exploring', 'toward-more-title', '還想繼續探索？', '可以到六大生活主題查詢相關知識與服務，也可以從正式活動入口查閱當期安排。')}
+    <div class="toward-more-grid">
+      <a class="toward-compact-link" href="learning.html"><strong>學習與活動</strong><span>更多公開課程與正式學習資源 →</span></a>
+      <a class="toward-compact-link" href="city.html"><strong>各縣市生活資源</strong><span>前往城市與福利，選擇縣市 →</span></a>
+    </div>
+  </div>
+</section>
+<section class="section toward-official" aria-labelledby="toward-official-title">
+  <div class="wrap">
+    ${sectionHead('Official Links', 'toward-official-title', '延伸官方入口', '活動日期、報名資格與費用請以主辦機構當期公告為準。')}
+    <ul class="toward-official-links">${editorial.official.map(r=>`<li><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(r.name)}</span><span aria-hidden="true">↗</span></a></li>`).join('')}</ul>
+  </div>
+</section>` : `
 ${dirHead(d)}
 <section class="section feature reverse" aria-labelledby="learn-title">
   <div class="wrap feature-grid">
@@ -582,7 +618,7 @@ ${dirHead(d)}
       <h2 id="learn-title">課程與學習活動</h2>
       <p>${esc(learning.intro)}</p>
       <ul class="link-list">
-        ${learning.topics.map((t) => `<li><a href="learning.html#${t.id}">${esc(t.title)}</a></li>`).join('\n')}
+        ${learning.topics.map((t) => `<li><a href="learning.html#${t.id}">${esc(t.title)}</a></li>`).join('\\n')}
       </ul>
       <div class="btn-row"><a class="btn btn-ghost" href="learning.html">前往學習與活動</a><a class="btn btn-ghost" href="learning.html#events-title">查看近期活動</a></div>
     </div>
@@ -603,11 +639,11 @@ ${dirHead(d)}
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
     ${sectionHead('Official Resources', 'res-title', '相關官方資源', '點擊後會直接前往原始機構網站。各主題的完整資源，請見六大生活主題頁。')}
-    ${featured.length ? `<div class="res-grid">${featured.map((r) => resourceCard(r, { anchor: false })).join('\n')}</div>` : emptyBox('官方資源正在查核中，完成後會陸續公開。')}
+    ${featured.length ? `<div class="res-grid">${featured.map((r) => resourceCard(r, { anchor: false })).join('\\n')}</div>` : emptyBox('官方資源正在查核中，完成後會陸續公開。')}
   </div>
 </section>`;
-  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: 'dir-page' }) });
-  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '向光 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: 'dir-page toward-reading' }) });
+  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, IS_QA ? '向光 學習 活動 課程 生活探索 文章 藝文 文化 創業 親職 婦女中心 就業培訓 家庭教育 生活技能 公開課程' : '向光 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
 }
 
 // ---------- 分類頁共用 ----------
