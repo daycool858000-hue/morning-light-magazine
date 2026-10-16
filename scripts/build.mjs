@@ -550,17 +550,7 @@ function activitiesEntry(base = '', active = '') {
   return `<a class="act-entry" href="${base}activities.html" aria-label="近期活動與講座：查看已公布的活動消息"${active === 'activities' ? ' aria-current="page"' : ''}><span class="act-entry-icon">${CALENDAR_SVG}</span><span class="act-entry-label">近期活動</span></a>`;
 }
 const zhDate = (d) => { const [y, m, day] = d.split('-').map(Number); return `${y} 年 ${m} 月 ${day} 日`; };
-if (IS_QA) {
-  const { groups, items, checkedOn } = qaActivities;
-  const notices = qaNotices.items;
-  const gid = (g) => `act-group-${groups.indexOf(g) + 1}`;
-  const itemHtml = (it) => `<li class="act-item" id="${esc(it.id)}">
-        <a class="act-name" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span class="visually-hidden">（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
-        <p class="act-org">${esc(it.org)}｜${esc(it.region)}</p>
-        <p class="act-purpose">${esc(it.purpose)}</p>
-        <p class="act-caution">${esc(it.caution)}</p>
-      </li>`;
-  const noticeHtml = (n) => `<li class="notice" id="${esc(n.id)}" data-act-until="${esc(n.visibleUntil)}">
+const noticeHtml = (n) => `<li class="notice" id="${esc(n.id)}" data-act-until="${esc(n.visibleUntil)}">
         <p class="notice-meta"><span class="notice-type${n.announcementType === 'plan' ? ' is-plan' : ''}">${esc(n.typeLabel)}</span><span class="notice-cat">${esc(n.category)}</span></p>
         <h3 class="notice-title">${esc(n.title)}</h3>
         <dl class="notice-facts">
@@ -572,6 +562,17 @@ if (IS_QA) {
         <p class="notice-summary">${esc(n.summary)}</p>
         <p class="notice-caution">${esc(n.eligibilityCaution)}</p>
         <a class="notice-link" href="${esc(n.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看官方公告<span class="visually-hidden">：${esc(n.title)}（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
+      </li>`;
+
+if (IS_QA) {
+  const { groups, items, checkedOn } = qaActivities;
+  const notices = qaNotices.items;
+  const gid = (g) => `act-group-${groups.indexOf(g) + 1}`;
+  const itemHtml = (it) => `<li class="act-item" id="${esc(it.id)}">
+        <a class="act-name" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span class="visually-hidden">（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
+        <p class="act-org">${esc(it.org)}｜${esc(it.region)}</p>
+        <p class="act-purpose">${esc(it.purpose)}</p>
+        <p class="act-caution">${esc(it.caution)}</p>
       </li>`;
   const lead = '2026 年 11 月至 2027 年底，政府、公立場館與正式機構已公布的活動、講座、展覽與課程消息。';
   const body = `
@@ -928,8 +929,12 @@ ${IS_QA && catArticles.length ? articlesSection(catArticles) : ''}
 <section class="section" aria-labelledby="events-title">
   <div class="wrap">
     ${sectionHead('Upcoming', 'events-title', '近期活動', '名額與報名狀態以主辦機構公告為準。活動結束後會自動從這裡隱藏，但不代表活動已取消。')}
-    <div class="event-list">${eventCards}</div>
-    <div class="empty" id="events-empty"${events.length ? ' hidden' : ''}><p>目前沒有已查核的近期活動。活動經常變動，建議直接查看下方的官方活動列表入口。</p></div>
+    ${IS_QA ? `<p class="act-intro">以下與全站小日曆共用同一批已公布公告。活動日期與參加方式請以原主辦單位為準；此區為未核准測試資訊，不代表本站提供報名。</p>
+    <ol class="notice-list" data-act-list>${qaNotices.items.map(noticeHtml).join('\n')}</ol>
+    <p class="notice-empty" id="notices-empty"${qaNotices.items.length ? ' hidden' : ''}>目前沒有尚未結束的已公布活動；新消息整理後會更新。</p>
+    <p class="notice-more"><a href="activities.html">查看活動與講座完整資訊及長期官方查詢入口 →</a></p>`
+      : `<div class="event-list">${eventCards}</div>
+    <div class="empty" id="events-empty"${events.length ? ' hidden' : ''}><p>目前沒有已查核的近期活動。活動經常變動，建議直接查看下方的官方活動列表入口。</p></div>`}
   </div>
 </section>
 ${topicsSection(c)}
@@ -940,7 +945,7 @@ ${topicsSection(c)}
   </div>
 </section>
 ${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}`;
-  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: ['assets/js/events.js'], bodyClass: 'cat-learning' }) });
+  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: [IS_QA ? 'assets/js/qa-activities.js' : 'assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
 for (const c of categories) {
