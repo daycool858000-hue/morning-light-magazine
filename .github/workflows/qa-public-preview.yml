@@ -1,3 +1,4 @@
+# 2026-10-16｜Issue #6：向光八索引＋讀利「從你想了解的事開始 ↓」，站主授權後依 CI 38841104030 更新已同意公開的未核准QA版。
 # 2026-10-16｜Issue #3：城市與福利六篇福利導讀與城市頁「先了解有哪些福利」區塊，CI 38834893490 通過後更新已同意公開的未核准QA版。
 # 2026-10-16｜英文輔助（QA-only）＋兩項文章來源勘誤，依成功 CI 38814863350 更新已同意公開的 QA；絕不更動 main 或核准資料。
 # 2026-10-16｜Issue #2：第四批9篇＋第五批4篇導讀與第三批「使用方式」，CI 全數通過後更新已同意公開的未核准QA版。
@@ -74,6 +75,11 @@ jobs:
           grep -q '先了解有哪些福利' dist-qa/city.html
           grep -q '未核准測試內容' dist-qa/articles/batch6-welfare-overview.html
           grep -q 'noindex' dist-qa/articles/batch6-women-center-services.html
+          grep -q 'class="dir-jump"><a href="#needs-title">' dist-qa/quiet-power.html
+          grep -q 'id="toward-women-center"' dist-qa/toward-light.html
+          grep -q 'href="articles/batch6-women-center-services.html"' dist-qa/toward-light.html
+          ! grep -q 'class="county-areas"' dist-qa/toward-light.html
+          test "$(ls dist-qa/articles/*.html | wc -l)" -eq 36
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
           echo "已確認只會部署未核准 QA 測試頁。"
