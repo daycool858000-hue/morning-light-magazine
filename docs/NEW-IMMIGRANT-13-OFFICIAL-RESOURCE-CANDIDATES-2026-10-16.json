@@ -25,10 +25,17 @@
       "purpose": "生活、醫療、教育、就業及地方服務的跨部會官方入口",
       "caution": "原總覽可能含舊年度資格或金額；本站不重製補助表",
       "display": "own-text-entry",
-      "status": "待查核",
+      "status": "來源用途已初核－待逐頁和人工確認",
       "published": false,
       "checkedAt": null,
-      "qa": false
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "我的 E 政府跨部會新住民入口原頁可讀；總覽更新 2025-03-31，內文舊年金額與資格不可引用為 2026 現行規則",
+        "source": "https://www.gov.tw/News_Content_26_805862",
+        "status": "official-page-verified-purpose-only"
+      }
     },
     {
       "id": "NI-02",
@@ -39,10 +46,17 @@
       "purpose": "求職登記、職訓、就業權益及創業資源入口",
       "caution": "職缺數與開課日期需以原站即時公告為準",
       "display": "own-text-entry",
-      "status": "待查核",
+      "status": "來源用途已初核－待逐頁和人工確認",
       "published": false,
       "checkedAt": null,
-      "qa": false
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "勞動部台灣就業通新住民專區原頁可讀；求職、就業權益、職訓、技能與創業分類確認，職缺數即時變動不可搬本站",
+        "source": "https://job.taiwanjobs.gov.tw/Internet/special2/foreignspouse/index.aspx",
+        "status": "official-page-verified-purpose-only"
+      }
     },
     {
       "id": "NI-03",
@@ -53,10 +67,17 @@
       "purpose": "中文、越南語、印尼語、英語、泰語就業文宣入口（依前輪研究）",
       "caution": "逐語文件年度、連結與可下載狀態須再核對；不轉載 PDF",
       "display": "own-compact-text-link",
-      "status": "待查核",
+      "status": "來源用途已初核－待逐頁和人工確認",
       "published": false,
       "checkedAt": null,
-      "qa": false
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "勞動部勞動力發展署正式頁可見中文、越文、印文、英文、泰文 PDF 清單；尚未逐一下載開啟檔案",
+        "source": "https://www.wda.gov.tw/News_Content.aspx?n=156&s=18648",
+        "status": "official-language-index-verified-file-unopened"
+      }
     },
     {
       "id": "NI-04",
@@ -67,10 +88,17 @@
       "purpose": "新住民語文教材、親子共讀及教育正式資訊",
       "caution": "學校端與一般家庭服務對象不同，不可宣稱任何課程均可報名",
       "display": "own-text-entry",
-      "status": "待查核",
+      "status": "來源用途已初核－待逐頁和人工確認",
       "published": false,
       "checkedAt": null,
-      "qa": false
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "教育部國教署新住民子女教育資訊網首頁可讀，確認語文教材、研習、公開資訊、跨國銜轉及親子共讀公告；個別服務／活動資格尚未驗證",
+        "source": "https://mkm.k12ea.gov.tw/",
+        "status": "official-page-verified-purpose-only"
+      }
     },
     {
       "id": "NI-05",
@@ -81,10 +109,17 @@
       "purpose": "2026 中文及 2025 年部分外語孕期健康手冊官方入口",
       "caution": "不能假設中文與外語版本更新同步；核對個別語言及出版年",
       "display": "own-compact-text-link",
-      "status": "待查核",
+      "status": "來源用途已初核－待逐頁和人工確認",
       "published": false,
       "checkedAt": null,
-      "qa": false
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "國健署孕媽咪健康手冊官方頁可見中文 115 年 6 月、英／越／印／柬／泰文 114 年 9 月；尚未逐份開啟 PDF",
+        "source": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+        "status": "official-language-index-verified-file-unopened"
+      }
     },
     {
       "id": "NI-06",
@@ -95,10 +130,17 @@
       "purpose": "孕產、產後健康官方衛教手冊；含前輪已核對多語版本",
       "caution": "與 NI-05 同機構不同手冊網址，放在同一區塊文字延伸而非當同一 URL",
       "display": "own-compact-text-link",
-      "status": "待查核",
+      "status": "來源用途已初核－待逐頁和人工確認",
       "published": false,
       "checkedAt": null,
-      "qa": false
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "國健署孕媽咪衛教手冊直接 EBook 原頁在工具擷取逾時，但官方 TopicList 子頁及搜尋結果顯示114年外語版；需再逐語瀏覽及實機核對",
+        "source": "https://www.hpa.gov.tw/Pages/TopicList.aspx?nodeid=4840",
+        "status": "official-list-visible-deep-page-unverified"
+      }
     },
     {
       "id": "NI-07",
@@ -109,10 +151,17 @@
       "purpose": "數位學習、課程與多語資訊官方入口",
       "caution": "課程當期名額與收費依公告；與既有移民署卡同機構但不同網址",
       "display": "short-learning-entry",
-      "status": "待查核",
+      "status": "來源用途已初核－待逐頁和人工確認",
       "published": false,
       "checkedAt": null,
-      "qa": false
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "移民署新住民數位資訊e網首頁原頁可讀；可見中文、English、越、印、泰、柬語選單與公開試讀課程；實際課程報名、費用與每種語言內容仍需逐頁確認",
+        "source": "https://nit.immigration.gov.tw/",
+        "status": "official-page-verified-purpose-only"
+      }
     },
     {
       "id": "NI-08",
@@ -198,5 +247,11 @@
       "checkedAt": null,
       "qa": false
     }
-  ]
+  ],
+  "round3": {
+    "asOf": "2026-10-17",
+    "initialOfficialPageChecks": 7,
+    "remainingCandidates": 6,
+    "scope": "七項官方原頁用途或語種清單初核；非逐份PDF、課程現況或手機 Safari 驗收；13項全數仍未獲發布核准"
+  }
 }
