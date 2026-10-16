@@ -399,8 +399,26 @@ try {
     const ctx = await browser.newContext({ viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: w === 320 ? 'reduce' : 'no-preference' });
     const p = await ctx.newPage();
     await p.goto(`${ORIGIN}${BASE}index.html`);
-    const r = await p.$eval('.act-entry', (e) => { const b = e.getBoundingClientRect(); const q = [...document.querySelectorAll('.quick')].map((x) => x.getBoundingClientRect().bottom); return { h: Math.round(b.height), belowQuick: b.top >= Math.max(...q) - 1, inside: b.left >= 0 && b.right <= innerWidth, anim: getComputedStyle(e.querySelector('.act-entry-arrow')).animationName, overflow: document.documentElement.scrollWidth - innerWidth }; });
-    if (r.h < 44 || !r.belowQuick || !r.inside || r.overflow > 0 || (w === 320 ? r.anim !== 'none' : r.anim !== 'act-nudge')) actEntryProblems.push(`${w}px ${JSON.stringify(r)}`);
+    const r = await p.$eval('.act-entry', (e) => { const b = e.getBoundingClientRect(); const q = [...document.querySelectorAll('.quick')].map((x) => x.getBoundingClientRect().bottom); return { h: Math.round(b.height), belowQuick: b.top >= Math.max(...q) - 1, inside: b.left >= 0 && b.right <= innerWidth, anim: getComputedStyle(e.querySelector('.act-card')).animationName, cards: e.querySelectorAll('.act-stage .act-card').length, overflow: document.documentElement.scrollWidth - innerWidth }; });
+    if (r.h < 44 || !r.belowQuick || !r.inside || r.overflow > 0 || r.h > 220 || r.cards !== 3 || (w === 320 ? r.anim !== 'none' : r.anim !== 'act-shuffle')) actEntryProblems.push(`${w}px ${JSON.stringify(r)}`);
+    if (w !== 320) {
+      // 真的在動：首輪 3 秒後每 0.4 秒取樣一次（共約 2.8 秒，超過一次換卡間隔 2.5 秒），紙卡 transform／opacity 須改變、最前面那張須換人；文字與區塊尺寸不動
+      const sample = () => p.$eval('.act-entry', (e) => {
+        const cs = [...e.querySelectorAll('.act-card')].map((c) => getComputedStyle(c));
+        const t = e.querySelector('.act-entry-text strong').getBoundingClientRect();
+        return { sig: cs.map((c) => `${c.transform}|${Number(c.opacity).toFixed(2)}`).join(';'), front: cs.map((c) => Number(c.zIndex)).reduce((m, z, i, a) => (z > a[m] ? i : m), 0), text: `${Math.round(t.top)},${Math.round(t.left)}`, h: Math.round(e.getBoundingClientRect().height), dur: cs[0].animationDuration, iter: cs[0].animationIterationCount };
+      });
+      await p.waitForTimeout(3200);
+      const ss = [];
+      for (let i = 0; i < 8; i++) { ss.push(await sample()); await p.waitForTimeout(400); }
+      const dur = parseFloat(ss[0].dur);
+      const m = { sigs: new Set(ss.map((x) => x.sig)).size, fronts: new Set(ss.map((x) => x.front)).size, texts: new Set(ss.map((x) => x.text)).size, hs: new Set(ss.map((x) => x.h)).size, dur, iter: ss[0].iter };
+      if (m.sigs < 3 || m.fronts < 2 || m.texts !== 1 || m.hs !== 1 || !(dur >= 6 && dur <= 9) || m.iter !== 'infinite') actEntryProblems.push(`${w}px 動畫 ${JSON.stringify(m)}`);
+    } else {
+      // 減少動態效果：沒有任何播放中的動畫，三張紙卡仍以靜態層次顯示
+      const s = await p.$eval('.act-entry', (e) => ({ running: document.getAnimations().filter((a) => e.contains(a.effect && a.effect.target)).length, visible: [...e.querySelectorAll('.act-card')].filter((c) => Number(getComputedStyle(c).opacity) > 0.5 && c.getBoundingClientRect().width > 40).length }));
+      if (s.running !== 0 || s.visible !== 3) actEntryProblems.push(`320px 減少動態 ${JSON.stringify(s)}`);
+    }
     await p.click('.act-entry');
     await p.waitForURL('**/activities.html');
     const a = await p.evaluate(() => ({ h1: document.querySelector('h1').textContent.trim(), overflow: document.documentElement.scrollWidth - innerWidth, small: [...document.querySelectorAll('.act-name, .act-groups a, .act-back a')].filter((x) => x.getBoundingClientRect().height < 44).length }));
@@ -413,7 +431,7 @@ try {
     await page.waitForTimeout(150);
     if (!(await page.locator('[data-search] a[href*="activities.html"]').count())) actEntryProblems.push(`搜尋「${kw}」找不到活動頁項目`);
   }
-  check('首頁活動與講座入口（320／375／390px）：在快捷入口下方、高度 ≥ 44px、無溢位，可點進活動頁（頁面連結高度 ≥ 44px）；減少動態設定時不播放動畫；搜尋 lecture／職訓／國家圖書館 可找到', actEntryProblems.length === 0, actEntryProblems.slice(0, 4).join('；'));
+  check('首頁活動與講座動態櫥窗（320／375／390px）：在快捷入口下方、高度 44–220px、無溢位，三張紙卡在首輪 3 秒後仍持續交替（6–9 秒一輪、無限循環），文字與區塊尺寸不動；可點進活動頁（頁面連結高度 ≥ 44px）；減少動態設定時無任何動畫、保留三張靜態紙卡；搜尋 lecture／職訓／國家圖書館 可找到', actEntryProblems.length === 0, actEntryProblems.slice(0, 4).join('；'));
 
   // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
   const jumpProblems = [];

@@ -816,25 +816,66 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 }
 @media (prefers-reduced-motion: reduce) { .toward-topic-arrow { transition: none; } }
 
-/* 活動與講座（QA）：首頁小入口與官方查詢入口頁。動畫只在載入時輕微播放兩次，尊重減少動態設定。 */
+/* 活動與講座（QA）：首頁動態資訊櫥窗與官方查詢入口頁。
+   文字與點擊提示固定不動；右側三張原創紙卡以 7.5 秒為一輪持續交替（每 2.5 秒換一張），
+   只用低幅度 transform／opacity，不改變區塊尺寸；減少動態設定時停在有層次的靜態畫面。 */
 .act-entry {
-  display: flex; align-items: center; gap: 12px; margin-top: 16px; max-width: 560px; min-height: 56px;
-  padding: 10px 16px; border-radius: var(--radius-sm); background: var(--paper); border: 1px solid var(--line);
-  color: var(--ink); text-decoration: none; line-height: 1.45;
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px;
+  margin-top: 16px; max-width: 560px; min-height: 152px; padding: 16px 12px 16px 18px; overflow: hidden;
+  border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow);
+  background: linear-gradient(115deg, var(--paper) 0%, var(--paper) 48%, var(--sand) 100%);
+  color: var(--ink); text-decoration: none; line-height: 1.5;
 }
 .act-entry:hover { border-color: var(--terracotta); color: var(--ink); }
 .act-entry:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-.act-entry-icon { display: inline-flex; color: var(--terracotta); flex: none; animation: act-cal-in 0.7s ease-out 0.2s both; }
-.act-entry-icon svg { width: 26px; height: 26px; }
-.act-entry-text { display: flex; flex-direction: column; min-width: 0; flex: 1; }
-.act-entry-text strong { font-size: 1rem; }
-.act-entry-text small { font-size: 0.85rem; color: var(--muted); }
-.act-entry-arrow { color: var(--terracotta); flex: none; animation: act-nudge 1.4s ease-in-out 0.9s 2; transition: transform 0.2s ease; }
+.act-entry-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.act-entry-text strong { font-family: var(--serif); font-size: 1.24rem; line-height: 1.35; letter-spacing: 0.02em; }
+.act-entry-text small { font-size: 0.86rem; color: var(--muted); }
+.act-entry-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 0.92rem; font-weight: 700; color: var(--terracotta-dark); }
+.act-entry-arrow { display: inline-block; transition: transform 0.2s ease; }
 .act-entry:hover .act-entry-arrow, .act-entry:focus-visible .act-entry-arrow { transform: translateX(4px); }
-@keyframes act-cal-in { from { opacity: 0.35; transform: translateY(3px); } to { opacity: 1; transform: none; } }
-@keyframes act-nudge { 0%, 100% { transform: none; } 50% { transform: translateX(4px); } }
+.act-stage { position: relative; width: 116px; height: 124px; flex: none; }
+.act-stage::before { content: ""; position: absolute; inset: 14px 2px 6px 10px; border-radius: 50%; background: var(--sage-soft); }
+.act-card {
+  position: absolute; left: 26px; top: 20px; width: 72px; height: 95px; display: block;
+  transform-origin: 50% 85%; filter: drop-shadow(0 4px 6px rgba(59, 52, 46, 0.14));
+  animation: act-shuffle 7.5s ease-in-out infinite; will-change: transform, opacity;
+}
+.act-card svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.act-card-2 { animation-delay: -5s; }
+.act-card-3 { animation-delay: -2.5s; }
+.act-card .pg { fill: var(--paper); stroke: var(--stone); stroke-width: 1.2; }
+.act-card .band { stroke: none; }
+.act-card .band-a { fill: var(--terracotta-soft); }
+.act-card .band-b { fill: var(--sage-soft); }
+.act-card .band-c { fill: var(--sand-2); }
+.act-card .ring { stroke: var(--amber); stroke-width: 2.4; stroke-linecap: round; }
+.act-card .cell rect { fill: var(--sand); }
+.act-card .mark-a { fill: var(--terracotta); }
+.act-card .mark-b { fill: var(--olive); }
+.act-card .arch { stroke: var(--sage); stroke-width: 2; stroke-linecap: round; }
+.act-card .book { stroke: var(--amber); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.act-card .line { stroke: var(--stone); stroke-width: 2; stroke-linecap: round; }
+.act-card .dash { stroke: var(--olive); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 3 5; }
+/* 一張紙卡的一輪：在最前停留 → 上浮往右滑開淡出 → 回到底層淡入 → 移到中層 → 接到最前 */
+@keyframes act-shuffle {
+  0%, 22% { transform: translate(0, 0) rotate(-2deg); opacity: 1; z-index: 4; }
+  31% { transform: translate(28px, -14px) rotate(9deg); opacity: 0; z-index: 4; }
+  33.4% { transform: translate(-20px, -14px) rotate(-11deg) scale(0.86); opacity: 0; z-index: 1; }
+  42%, 55.3% { transform: translate(-20px, -14px) rotate(-11deg) scale(0.86); opacity: 0.85; z-index: 1; }
+  64%, 88.7% { transform: translate(-10px, -7px) rotate(-6deg) scale(0.93); opacity: 1; z-index: 2; }
+  97%, 100% { transform: translate(0, 0) rotate(-2deg); opacity: 1; z-index: 3; }
+}
+@media (max-width: 359px) {
+  .act-entry { padding-left: 16px; }
+  .act-stage { width: 100px; }
+  .act-card { left: 20px; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .act-entry-icon, .act-entry-arrow { animation: none; transition: none; }
+  .act-card, .act-entry-arrow { animation: none; transition: none; }
+  .act-card-1 { transform: rotate(-2deg); z-index: 3; }
+  .act-card-2 { transform: translate(-10px, -7px) rotate(-6deg) scale(0.93); z-index: 2; }
+  .act-card-3 { transform: translate(-20px, -14px) rotate(-11deg) scale(0.86); opacity: 0.85; z-index: 1; }
 }
 .activities .act-head { padding-block: 24px 20px; }
 .act-intro { margin: 10px 0 0; max-width: 46em; font-size: 0.92rem; color: var(--muted); }

@@ -22,7 +22,7 @@
 
 - **用途**：《由己 SELF-AUTHORED》是免費、非營利的台灣女性生活、權益與官方資源導覽靜態網站。只整理公開資訊與官方入口，不提供會員、登入、表單、追蹤或付費服務。
 - **技術**：Node.js 22 自寫靜態網站產生器（`scripts/build.mjs`），無執行期套件；測試用 Playwright（Chromium、WebKit）。CI 與部署都用 GitHub Actions。
-- **分支**：開發在 `claude/morning-light-visual-v2`；`main` 停在 `ae8a4a0`，**不得合併或修改**。
+- **分支**：開發在 `claude/morning-light-visual-v2`（首頁活動動畫重製在 `claude/homepage-activities-animation-uzm9aa`，以 `e22da7c` 為基礎，尚未併回）；`main` 停在 `ae8a4a0`，**不得合併或修改**。
 - **三種建置模式**：
   - `preview` → `dist`（一般預覽）
   - `production` → `dist-production`（正式版，只含 `content/release-approvals.json` 已核准資料）
@@ -51,14 +51,17 @@
 
 ## 目前進度（2026-10-16 更新）
 
+- **首頁「活動與講座」動畫重製（分支 `claude/homepage-activities-animation-uzm9aa`，未部署）**：站主 iPhone 驗收舊版「橫向目錄卡＋箭頭動兩次」不通過。已依編輯分支 `docs/ACTIVITIES-HOMEPAGE-ACTUAL-ANIMATED-FEATURE-QA-2026-10-16.md` 改成「動態資訊小櫥窗」：左側文字（活動與講座／說明／查看活動資訊 →）固定不動，右側三張原創 SVG 紙卡（日曆頁、拱形展演、翻開的書，不含活動名稱或日期）以 7.5 秒一輪持續交替（每 2.5 秒換一張：上浮右滑淡出→退到底層→中層→最前）；減少動態設定時停成三張層次靜態紙卡。只改 `scripts/build.mjs`（`ACT_CARD_SVGS`、`activitiesEntry()`）、`main.css` 的 `.act-entry` 區段與兩個 QA 測試；活動頁 12 個連結、讀利、向光、正式版不動。錄影與截圖在 `docs/qa-media/`。**等待站主看過錄影再決定是否更新公開 QA，未經同意不要部署。**
+- 教育部家庭教育資源網：**站主已確認臺灣 iPhone 可正常開啟**，12 個官方連結全部可用，不要再重查或要求站主再點。
+
 - 公開 QA 已部署到 `a49b80a`（內容來源 `707a000`）：36 篇未核准 QA 文章、城市福利「先了解有哪些福利」、讀利快捷入口、向光八個兩欄索引，以及讀利、向光頁首文案。**站主已用 iPhone 驗收讀利與向光，兩個目錄結案，不再修改。**
 - 開發分支：首頁「活動與講座」小入口＋`activities.html` 官方查詢頁（`3265b4b`），已依編輯審查做部署前修正：只放 12 個長期官方查詢入口（移出國家圖書館冬季講座與 2027 全國技能競賽兩筆時間性活動，原始來源留在編輯分支研究文件）、拿掉狀態圖例、全站 QA 提示列恢復 `a49b80a` 原文（讀利、向光等既有 QA 頁與 `a49b80a` 逐位元組相同）。資料在 `docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json`，載入器只接受 `type: portal`。**已獲站主同意並於 2026-10-16 更新公開 QA**：觸發提交 `d439d437`，部署工作 `38865986288` 成功，部署前檢查確認活動頁只有 12 筆長期官方查詢入口與未核准／noindex 標示。**目前等待站主 iPhone 驗收首頁動畫、活動頁及教育部家庭教育網連結，並未核准正式上線**。
-- `familyedu.moe.gov.tw` 在 GitHub 美國機房逾時，記為「待臺灣實機複查」，不要自動刪除。
+- `familyedu.moe.gov.tw` 在 GitHub 美國機房偶爾逾時，但臺灣 iPhone 已可開啟；不要刪除、替換或重查。
 - 第七至九批十篇成人候選文章只在 `docs/`，**未核准，不得匯入**。
 
 ## 下一步
 
-1. 公開 QA 的「活動與講座」已部署，等站主 iPhone 驗收首頁入口動畫、活動內頁 12 個查詢入口，以及教育部家庭教育資源網在臺灣是否可開啟；**不要重複部署、不要修改正式版**。
+1. 站主看過 `docs/qa-media/activities-entry-390-loop-2026-10-16.mp4` 後：同意 → 併回開發分支並（另經同意）更新公開 QA；要調整 → 只改 `.act-entry` 動畫。活動頁與 12 個連結已驗收，不再修改；**不要修改正式版**。
 2. 第二階段：新住民跨主管機關入口＋英文／多語輔助（規格見編輯分支 `editorial/batch7-9-source-review-20261016` 的 `docs/CLAUDE-NEXT-STAGES-HOMEPAGE-ACTIVITIES-AND-NEW-IMMIGRANT-MULTILINGUAL-2026-10-16.md`）。
 3. 第三階段：每月一次的官方連結檢查（GitHub Actions，只產生報告）。
 

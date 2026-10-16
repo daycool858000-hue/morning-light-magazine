@@ -70,6 +70,13 @@ try {
   check('WebKit 390px 向光：八個索引都能點開（入口維持原欄位），文章連結齊全且高度 ≥ 44px；婦女中心課程第一篇可開啟', bad.length === 0, bad.join('；'));
   await page.goto(`${origin}${base}index.html`);
   const entry = await page.$eval('.act-entry', (e) => Math.round(e.getBoundingClientRect().height));
+  // WebKit 也要真的在動：首輪 3 秒後取樣約 2.8 秒，紙卡 transform／opacity 要改變，標題位置不動
+  const actSample = () => page.$eval('.act-entry', (e) => [...e.querySelectorAll('.act-card')].map((c) => { const s = getComputedStyle(c); return `${s.transform}|${Number(s.opacity).toFixed(2)}`; }).join(';') + `#${Math.round(e.querySelector('strong').getBoundingClientRect().top)}`);
+  await page.waitForTimeout(3200);
+  const actSigs = [];
+  for (let i = 0; i < 8; i++) { actSigs.push(await actSample()); await page.waitForTimeout(400); }
+  const actTexts = new Set(actSigs.map((x) => x.split('#')[1])).size;
+  check('WebKit 390px 首頁「活動與講座」紙卡在首輪 3 秒後仍持續交替，標題位置不動', new Set(actSigs).size >= 3 && actTexts === 1, `取樣 ${new Set(actSigs).size} 種狀態；標題位置 ${actTexts} 種`);
   await page.tap('.act-entry');
   await page.waitForURL('**/activities.html');
   const actCount = await page.locator('.act-item a[target="_blank"][rel="noopener noreferrer"]').count();

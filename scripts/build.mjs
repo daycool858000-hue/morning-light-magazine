@@ -171,7 +171,15 @@ function icon(name, cls = 'icon') {
 
 const AREAS = ['北部', '中部', '南部', '東部', '離島'];
 // 活動與講座首頁入口的日曆圖示：直接內嵌，不新增 src/icons 檔案，避免正式版與一般預覽的資產改變。
-const CALENDAR_SVG = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path class="act-cal-dot" d="M8 13.5h2.5v2.5H8z" fill="currentColor" stroke="none"/></svg>';
+// 首頁「活動與講座」動態櫥窗：三張原創抽象紙卡（課程／展演／學習），不含任何活動名稱、日期或名額
+const ACT_CARD_SVGS = [
+  // 課程：日曆頁
+  '<rect class="pg" x="1" y="1" width="70" height="90" rx="7"/><path class="band band-a" d="M1 8a7 7 0 0 1 7-7h56a7 7 0 0 1 7 7v12H1z"/><path class="ring" d="M20 -2v9M52 -2v9"/><g class="cell"><rect x="11" y="31" width="10" height="9" rx="2"/><rect x="31" y="31" width="10" height="9" rx="2"/><rect x="51" y="31" width="10" height="9" rx="2"/><rect x="11" y="47" width="10" height="9" rx="2"/><rect x="51" y="47" width="10" height="9" rx="2"/><rect x="11" y="63" width="10" height="9" rx="2"/><rect x="31" y="63" width="10" height="9" rx="2"/></g><rect class="mark-a" x="31" y="47" width="10" height="9" rx="2"/><path class="dash" d="M11 81h50"/>',
+  // 展演：拱形舞台
+  '<rect class="pg" x="1" y="1" width="70" height="90" rx="7"/><path class="band band-b" d="M1 8a7 7 0 0 1 7-7h56a7 7 0 0 1 7 7v12H1z"/><path class="arch" d="M18 62V46a18 18 0 0 1 36 0v16"/><circle class="mark-b" cx="36" cy="49" r="5"/><path class="line" d="M12 62h48"/><path class="dash" d="M12 72h48M12 81h30"/>',
+  // 學習：翻開的書
+  '<rect class="pg" x="1" y="1" width="70" height="90" rx="7"/><path class="band band-c" d="M1 8a7 7 0 0 1 7-7h56a7 7 0 0 1 7 7v12H1z"/><path class="book" d="M36 38c-6-4-14-5-22-4v24c8-1 16 0 22 4M36 38c6-4 14-5 22-4v24c-8-1-16 0-22 4M36 38v24"/><path class="line" d="M14 72h44"/><path class="dash" d="M14 81h28"/>',
+].map((inner, i) => `<span class="act-card act-card-${i + 1}"><svg viewBox="0 -3 72 95" width="72" height="95" fill="none" aria-hidden="true" focusable="false">${inner}</svg></span>`).join('');
 const qaBadge = (x) => (x?.qa ? '<span class="badge badge-qa">未核准測試內容</span>' : '');
 const statusBadge = (status) => {
   const map = { 已確認: ['badge-ok', '已確認'], 待確認: ['badge-pending', '待查核'], 需要修正: ['badge-fix', '需要修正'] };
@@ -543,7 +551,7 @@ function supportEntry(prefix = '') {
 // ---------- 活動與講座（QA）：首頁小入口＋官方公告與查詢入口頁 ----------
 function activitiesEntry() {
   return `
-    <a class="act-entry" href="activities.html"><span class="act-entry-icon">${CALENDAR_SVG}</span><span class="act-entry-text"><strong>活動與講座</strong><small>探索理財、職涯、健康、藝文與各種生活學習活動。</small></span><span class="act-entry-arrow" aria-hidden="true">→</span></a>`;
+    <a class="act-entry" href="activities.html"><span class="act-entry-text"><strong>活動與講座</strong><small>探索理財、職涯、健康、藝文與各種生活學習活動。</small><span class="act-entry-cta">查看活動資訊<span class="act-entry-arrow" aria-hidden="true">→</span></span></span><span class="act-stage" aria-hidden="true">${ACT_CARD_SVGS}</span></a>`;
 }
 if (IS_QA) {
   const { groups, items, checkedOn } = qaActivities;
