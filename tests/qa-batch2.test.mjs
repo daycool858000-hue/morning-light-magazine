@@ -13,7 +13,7 @@ import { loadBatch3OpenAccess, USAGE_NOTES } from '../scripts/lib/qa-batch3.mjs'
 import { loadBatch45Articles, BATCH45_SOURCES } from '../scripts/lib/qa-batch45.mjs';
 import { loadQaEnglishResources } from '../scripts/lib/qa-english.mjs';
 import { loadBatch6Articles, BATCH6_SOURCES } from '../scripts/lib/qa-batch6.mjs';
-import { loadQaActivities } from '../scripts/lib/qa-activities.mjs';
+import { loadQaActivities, loadQaNotices } from '../scripts/lib/qa-activities.mjs';
 import { resolveTowardEditorial } from '../scripts/lib/toward-light-editorial.mjs';
 
 const require = createRequire(import.meta.url);
@@ -37,7 +37,8 @@ const arts = await loadBatch2Articles(ROOT, categories);
 const third = await loadBatch3OpenAccess(ROOT);
 const fourth = await loadBatch45Articles(ROOT, categories); // Issue #2：第四批 9 篇＋第五批 4 篇
 const sixth = await loadBatch6Articles(ROOT, categories); // Issue #3：第六批城市與福利 6 篇
-const acts = await loadQaActivities(ROOT); // 首頁「活動與講座」官方入口頁
+const acts = await loadQaActivities(ROOT); // 活動頁次要參考區：12 個長期官方查詢入口
+const notices = await loadQaNotices(ROOT); // 小日曆點進去的主要內容：官方已公告的具體活動
 const englishResources = await loadQaEnglishResources(ROOT, [...national, ...cand, ...third.resources]);
 const newEnglishResources = englishResources.filter(r => r.id.startsWith('qa-en-'));
 const towardIndex = resolveTowardEditorial([...arts, ...third.articles, ...fourth, ...sixth], englishResources);
@@ -63,7 +64,7 @@ async function listFiles(dir, prefix = '') {
 const read = (dir, f) => readFile(path.join(dir, f), 'utf8');
 
 // ---------- 一、發布隔離：候選內容只在 dist-qa ----------
-const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', 'class="dir-jump"', 'toward-topic', 'toward-toggle', 'act-entry', 'activities.html', '活動與講座', '整理生活中值得了解的知識、制度與公共資源', '循著興趣探索不同主題', '需要申辦或使用服務時，再前往正式來源確認', '未核准測試內容'];
+const markers = [...cand.map((r) => r.url), ...cand.map((r) => r.id), ...arts.map((a) => a.title), ...third.resources.map((r) => r.url), ...third.resources.map((r) => r.id), ...third.articles.map((a) => a.title), ...fourth.map((a) => a.title), ...sixth.map((a) => a.title), ...newEnglishResources.map(r => r.id), 'batch2-', 'batch3-', 'batch4-', 'batch5-', 'batch6-', '先了解有哪些福利', 'id="benefits"', 'class="dir-jump"', 'toward-topic', 'toward-toggle', 'act-entry', 'qa-calendar', 'activities.html', '活動與講座', ...notices.all.map((n) => n.id), '整理生活中值得了解的知識、制度與公共資源', '循著興趣探索不同主題', '需要申辦或使用服務時，再前往正式來源確認', '未核准測試內容'];
 for (const [label, dir] of [['一般預覽版 dist', 'dist'], ['正式版 dist-production', 'dist-production']]) {
   const leaks = [];
   for (const f of await listFiles(path.join(ROOT, dir))) {
@@ -171,38 +172,57 @@ const qpHead = (/<section class="page-head dir-head"[\s\S]*?<\/section>/.exec(qp
 const jumpOk = /<a class="support-entry"[\s\S]*?<\/a>\s*<p class="dir-jump"><a href="#needs-title">從你想了解的事開始/.test(qpHead) && (qp.match(/class="dir-jump"/g) || []).length === 1 && qp.includes('<h2 id="needs-title">從你想了解的事開始</h2>') && !/<script[^>]*>[^<]*needs-title/.test(qp);
 check('讀利專欄 QA：支援資源入口正下方有「從你想了解的事開始 ↓」原生錨點（連到既有 #needs-title，無額外 JavaScript），只出現一次', jumpOk);
 
-// 首頁「活動與講座」入口與官方公告／查詢入口頁（QA 限定）
+// 近期活動與講座（QA 限定）：全站小日曆＋已公布活動消息頁（12 個長期查詢入口降為頁內次要參考區）
 const actProblems = [];
 const homeQa = await read(QA, 'index.html');
 const actHtml = existsSync(path.join(QA, 'activities.html')) ? await read(QA, 'activities.html') : '';
-if ((homeQa.match(/class="act-entry" href="activities.html"/g) || []).length !== 1) actProblems.push('首頁應恰有一個活動與講座入口');
-if (!homeQa.includes('探索理財、職涯、健康、藝文與各種生活學習活動。')) actProblems.push('首頁入口缺說明文字');
 const quickSec = (/<section class="section quick-section"[\s\S]*?<\/section>/.exec(homeQa) || [''])[0];
-if (!quickSec.includes('act-entry') || (quickSec.match(/class="quick[ "]/g) || []).length !== 4) actProblems.push('入口應在四個快捷入口下方，且快捷入口仍為 4 個');
+if (quickSec.includes('act-entry') || (quickSec.match(/class="quick[ "]/g) || []).length !== 4) actProblems.push('首頁快捷區不應再有靜態活動卡，且快捷入口仍為 4 個');
+for (const f of (await listFiles(QA)).filter((x) => x.endsWith('.html'))) {
+  const t = await read(QA, f);
+  const pre = f.startsWith('articles/') ? '../' : f === '404.html' ? BASE : '';
+  if ((t.match(/<a class="act-entry"/g) || []).length !== 1 || !t.includes(`</footer>\n<a class="act-entry" href="${pre}activities.html"`)) actProblems.push(`${f} 沒有恰好一個放在頁尾後的小日曆`);
+  if (!t.includes(`<script src="${pre}assets/js/qa-calendar.js"></script>`)) actProblems.push(`${f} 缺小日曆腳本`);
+}
 if (!actHtml) actProblems.push('缺少 activities.html');
 if (!/<meta name="robots" content="noindex/.test(actHtml) || !actHtml.includes('qa-bar')) actProblems.push('活動頁缺 noindex 或 QA 提示');
+// 主要內容：官方已公告的具體活動
+const noticeLis = [...actHtml.matchAll(/<li class="notice" id="([^"]+)" data-act-until="(\d{4}-\d{2}-\d{2})">([\s\S]*?)<\/li>/g)];
+if (noticeLis.length !== notices.items.length || notices.items.length < 4) actProblems.push(`活動消息 ${noticeLis.length}／資料 ${notices.items.length}`);
+if (actHtml.indexOf('class="notice"') > actHtml.indexOf('id="portals-title"')) actProblems.push('具體活動應排在長期查詢入口之前');
+for (const n of notices.items) {
+  const m = noticeLis.find((x) => x[1] === n.id);
+  if (!m) { actProblems.push(`${n.id} 不在活動頁`); continue; }
+  if (m[2] !== n.visibleUntil) actProblems.push(`${n.id} 隱藏日期不符`);
+  if (!m[3].includes(`<a class="notice-link" href="${n.sourceUrl.replace(/&/g, '&amp;')}" target="_blank" rel="noopener noreferrer">查看官方公告`)) actProblems.push(`${n.id} 官方公告連結錯誤`);
+  for (const k of ['title', 'organizer', 'region', 'dateLabel', 'summary']) if (!m[3].includes(n[k])) actProblems.push(`${n.id} 缺 ${k}`);
+  if (!idx.includes(`"url":"activities.html#${n.id}"`) || !new RegExp(`"url":"activities.html#${n.id}"[^}]*"until":"${n.visibleUntil}"`).test(idx)) actProblems.push(`${n.id} 不在搜尋索引或缺 until`);
+}
+const plan = noticeLis.find((x) => /is-plan/.test(x[3]));
+if (!plan || !plan[3].includes('已公布計畫・詳情待公告') || /<time datetime="2027/.test(plan[3].split('<dt>公告')[0])) actProblems.push('預定計畫須標「詳情待公告」且不可給確定日期');
+if (/報名中|可報名|開放報名|尚有名額|即將截止|額滿/.test(actHtml)) actProblems.push('活動頁含需每日更新的報名狀態文字');
+if (notices.all.some((n) => n.visibleUntil < notices.window.from)) actProblems.push('資料含 2026-11-01 前已結束的活動');
+if (!actHtml.includes('<script src="assets/js/qa-activities.js" defer></script>') || !actHtml.includes('id="notices-empty"')) actProblems.push('活動頁缺依日期隱藏的腳本或「目前沒有」說明');
+if (!/MLM_SEARCH_INDEX\.filter\(function \(x\) \{ return !x\.until/.test(idx)) actProblems.push('搜尋索引沒有依日期剔除已結束活動');
+// 次要參考：12 個長期官方查詢入口（資料與連結不變）
 const actItems = [...actHtml.matchAll(/<li class="act-item" id="([^"]+)">\s*<a class="act-name" href="([^"]+)" target="_blank" rel="noopener noreferrer">/g)];
-if (actItems.length !== acts.items.length || acts.items.length < 10) actProblems.push(`活動頁項目數 ${actItems.length}／資料 ${acts.items.length}`);
+if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal') || actItems.length !== 12) actProblems.push(`長期官方查詢入口應維持 12 筆（資料 ${acts.items.length}／頁面 ${actItems.length}）`);
 for (const it of acts.items) {
-  if (!actItems.some((m) => m[1] === it.id && m[2] === it.url.replace(/&/g, '&amp;'))) actProblems.push(`${it.id} 缺少或連結錯誤（需 https、另開新分頁、noopener noreferrer）`);
+  if (!actItems.some((m) => m[1] === it.id && m[2] === it.url.replace(/&/g, '&amp;'))) actProblems.push(`${it.id} 缺少或連結錯誤`);
   if (!idx.includes(`activities.html#${it.id}`)) actProblems.push(`${it.id} 不在搜尋索引`);
 }
-if ((actHtml.match(/<h2 id="act-group-\d">/g) || []).length !== acts.groups.length) actProblems.push('頁內主題標籤數不符');
-if (/報名中|尚有名額|即將截止|額滿/.test(actHtml)) actProblems.push('活動頁含需每日更新的報名狀態文字');
-// 只放長期官方查詢入口：不顯示狀態圖例，也不再有單次講座或年度競賽卡
-if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal')) actProblems.push(`活動資料應為 12 個長期官方查詢入口（目前 ${acts.items.length} 筆）`);
-if (/act-legend|act-type|已公告|年度計畫|已公布具體場次|愛麗絲|全國技能競賽/.test(actHtml) || /act-ncl-alice|act-skills-2027/.test(actHtml + idx)) actProblems.push('活動頁或搜尋索引仍有狀態圖例或已移出的時間性活動');
+if ((actHtml.match(/<h3 id="act-group-\d">/g) || []).length !== acts.groups.length) actProblems.push('查詢入口主題標題數不符');
 // 全站 QA 提示列維持 a49b80a 原文，不因活動頁而改（活動頁自己的說明放在頁首）
 const qaBarText = (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(actHtml) || [])[1] || '';
 if (qaBarText !== (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(qp) || [])[1] || qaBarText.includes('活動')) actProblems.push('QA 提示列被改動');
 if (!actHtml.includes('不代為報名')) actProblems.push('活動頁缺報名提醒');
-if (!/<div class="preview-bar qa-bar" role="note">未核准測試內容｜/.test(actHtml) || !/<span class="badge badge-qa">未核准測試內容<\/span> 來源核對/.test(actHtml)) actProblems.push('活動頁未清楚標示未核准測試內容');
+if (!/<span class="badge badge-qa">未核准測試內容<\/span> 來源核對/.test(actHtml)) actProblems.push('活動頁未清楚標示未核准測試內容');
 if (!actHtml.includes('href="index.html">← 回到首頁')) actProblems.push('缺回到首頁連結');
 if (/<form|<input|<iframe/.test(actHtml)) actProblems.push('活動頁不應有表單或嵌入外站');
 if (!/"url":"activities.html"[^}]*activities events lectures/.test(idx)) actProblems.push('搜尋索引缺活動頁或英文主題字');
-// 正式版與一般預覽不應有這個頁面
-for (const dir of ['dist', 'dist-production']) if (existsSync(path.join(ROOT, dir, 'activities.html'))) actProblems.push(`${dir} 出現 activities.html`);
-check('活動與講座（QA）：首頁四個快捷入口下方恰有一個入口；活動頁列出全部官方入口（https、另開新分頁、noopener）、五個頁內主題、報名提醒、回首頁連結；只放 12 個長期官方查詢入口，無狀態圖例、已移出的時間性活動、報名狀態文字與表單；全站 QA 提示列維持原文、活動頁頁首標示未核准測試內容；搜尋可用中英文找到；正式版無此頁', actProblems.length === 0, actProblems.slice(0, 5).join('；'));
+// 正式版與一般預覽：沒有活動頁、沒有小日曆與 QA 腳本
+for (const dir of ['dist', 'dist-production']) for (const f of ['activities.html', 'assets/js/qa-calendar.js', 'assets/js/qa-activities.js']) if (existsSync(path.join(ROOT, dir, f))) actProblems.push(`${dir} 出現 ${f}`);
+check('近期活動與講座（QA）：每個 QA 頁面恰有一個頁尾後的小日曆與腳本，首頁不再有靜態活動卡；活動頁先列官方已公告的具體活動（名稱、日期、地區、主辦、說明、官方公告連結、隱藏日期），預定計畫標「詳情待公告」，無報名狀態文字；12 個長期查詢入口保留為次要參考；搜尋索引會剔除已結束活動；QA 提示列原文、報名提醒、回首頁；正式版與一般預覽沒有活動頁、小日曆與 QA 腳本', actProblems.length === 0, actProblems.slice(0, 5).join('；'));
 // 2026-10-16 目錄頁首文案（QA 限定）：讀利主說明＋補充說明、向光主說明；舊說明不再出現，向光不加回第二段
 const QA_COPY = {
   qpLead: '從家庭、職場、身心健康到法律與權益，整理生活中值得了解的知識、制度與公共資源。',
@@ -393,45 +413,107 @@ try {
   }
   check('向光手機 320／375／390px：進入後第一個畫面就看到第一排索引，八個索引兩欄排列、點擊高度 ≥ 44px、無水平溢位', towardFirst.length === 0, towardFirst.join('；'));
 
-  // 首頁「活動與講座」入口：320／375／390px 可見、可點、不溢位；減少動態設定時不播放動畫；搜尋可用中英文找到
-  const actEntryProblems = [];
+  // 全站小日曆：首次進站第 0／2 秒看不到、第 3.5 秒已浮現、第 8 秒仍在；之後換頁直接顯示、不重等也不重播；
+  // 不蓋住頁首切換畫面／選單／目錄、有急事與 110／119 等操作；減少動態設定時延遲出現但無動態；從文章直接進站也一樣計時
+  const calProblems = [];
+  const calState = (p) => p.evaluate(() => { const e = document.querySelector('.act-entry'); const s = getComputedStyle(e); const b = e.getBoundingClientRect(); return { t: Math.round(performance.now()), vis: s.visibility, op: Math.round(parseFloat(s.opacity) * 100) / 100, tf: s.transform, tr: s.transitionDuration, w: Math.round(b.width), h: Math.round(b.height), inView: b.left >= 0 && b.right <= innerWidth && b.top >= 0 && b.bottom <= innerHeight }; });
+  const at = (p, ms) => p.waitForFunction((x) => performance.now() >= x, ms, { polling: 50 });
+  // 由上到下每 250px 捲動檢查一次：求助電話、有急事、切換畫面、搜尋框、表單與按鈕完全不可被小日曆蓋住；
+  // 其他連結即使與小日曆部分重疊，也必須仍點得到（元素中央不被擋住）
+  const calOverlaps = (p) => p.evaluate(async () => {
+    const out = new Set();
+    const CRIT = 'input, select, textarea, button, a[href^="tel:"], a[href^="sms:"], .quick-urgent, [data-switch-screen], .search-form, .support-entry';
+    const max = document.documentElement.scrollHeight - innerHeight;
+    for (let y = 0; ; y = Math.min(max, y + 250)) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 40));
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+      const chip = document.querySelector('.act-entry');
+      const c = chip.getBoundingClientRect();
+      for (const el of document.querySelectorAll(`${CRIT}, a[href], label[for], summary`)) {
+        if (chip.contains(el) || el.classList.contains('skip-link')) continue;
+        const crit = el.matches(CRIT);
+        for (const r of el.getClientRects()) {
+          if (!(r.width && r.height && r.left < c.right && r.right > c.left && r.top < c.bottom && r.bottom > c.top && r.bottom > 0 && r.top < innerHeight)) continue;
+          const name = (el.textContent || el.getAttribute('aria-label') || el.getAttribute('placeholder') || el.tagName).trim().replace(/\s+/g, '').slice(0, 10);
+          if (crit) out.add(`捲動 ${y}px 蓋住 ${name}`);
+          else { const hit = document.elementFromPoint(Math.min(innerWidth - 1, Math.max(0, r.left + r.width / 2)), Math.min(innerHeight - 1, Math.max(0, (Math.max(r.top, 0) + Math.min(r.bottom, innerHeight)) / 2))); if (!hit || !el.contains(hit)) out.add(`捲動 ${y}px 擋住 ${name} 的中央`); }
+        }
+      }
+      if (y >= max) break;
+    }
+    window.scrollTo(0, 0);
+    return [...out];
+  });
   for (const w of [320, 375, 390]) {
-    const ctx = await browser.newContext({ viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: w === 320 ? 'reduce' : 'no-preference' });
+    const reduce = w === 320;
+    const ctx = await browser.newContext({ viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: reduce ? 'reduce' : 'no-preference' });
     const p = await ctx.newPage();
-    await p.goto(`${ORIGIN}${BASE}index.html`);
-    const r = await p.$eval('.act-entry', (e) => { const b = e.getBoundingClientRect(); const q = [...document.querySelectorAll('.quick')].map((x) => x.getBoundingClientRect().bottom); return { h: Math.round(b.height), belowQuick: b.top >= Math.max(...q) - 1, inside: b.left >= 0 && b.right <= innerWidth, anim: getComputedStyle(e.querySelector('.act-card')).animationName, cards: e.querySelectorAll('.act-stage .act-card').length, overflow: document.documentElement.scrollWidth - innerWidth }; });
-    if (r.h < 44 || !r.belowQuick || !r.inside || r.overflow > 0 || r.h > 220 || r.cards !== 3 || (w === 320 ? r.anim !== 'none' : r.anim !== 'act-shuffle')) actEntryProblems.push(`${w}px ${JSON.stringify(r)}`);
-    if (w !== 320) {
-      // 真的在動：首輪 3 秒後每 0.4 秒取樣一次（共約 2.8 秒，超過一次換卡間隔 2.5 秒），紙卡 transform／opacity 須改變、最前面那張須換人；文字與區塊尺寸不動
-      const sample = () => p.$eval('.act-entry', (e) => {
-        const cs = [...e.querySelectorAll('.act-card')].map((c) => getComputedStyle(c));
-        const t = e.querySelector('.act-entry-text strong').getBoundingClientRect();
-        return { sig: cs.map((c) => `${c.transform}|${Number(c.opacity).toFixed(2)}`).join(';'), front: cs.map((c) => Number(c.zIndex)).reduce((m, z, i, a) => (z > a[m] ? i : m), 0), text: `${Math.round(t.top)},${Math.round(t.left)}`, h: Math.round(e.getBoundingClientRect().height), dur: cs[0].animationDuration, iter: cs[0].animationIterationCount };
-      });
-      await p.waitForTimeout(3200);
-      const ss = [];
-      for (let i = 0; i < 8; i++) { ss.push(await sample()); await p.waitForTimeout(400); }
-      const dur = parseFloat(ss[0].dur);
-      const m = { sigs: new Set(ss.map((x) => x.sig)).size, fronts: new Set(ss.map((x) => x.front)).size, texts: new Set(ss.map((x) => x.text)).size, hs: new Set(ss.map((x) => x.h)).size, dur, iter: ss[0].iter };
-      if (m.sigs < 3 || m.fronts < 2 || m.texts !== 1 || m.hs !== 1 || !(dur >= 6 && dur <= 9) || m.iter !== 'infinite') actEntryProblems.push(`${w}px 動畫 ${JSON.stringify(m)}`);
-    } else {
-      // 減少動態效果：沒有任何播放中的動畫，三張紙卡仍以靜態層次顯示
-      const s = await p.$eval('.act-entry', (e) => ({ running: document.getAnimations().filter((a) => e.contains(a.effect && a.effect.target)).length, visible: [...e.querySelectorAll('.act-card')].filter((c) => Number(getComputedStyle(c).opacity) > 0.5 && c.getBoundingClientRect().width > 40).length }));
-      if (s.running !== 0 || s.visible !== 3) actEntryProblems.push(`320px 減少動態 ${JSON.stringify(s)}`);
+    p.on('pageerror', (e) => errors.push(e.message));
+    await p.goto(`${ORIGIN}${BASE}index.html`, { waitUntil: 'domcontentloaded' });
+    const s0 = await calState(p);
+    await at(p, 2000); const s2 = await calState(p);
+    await at(p, 3500); const s35 = await calState(p);
+    await at(p, 8000); const s8 = await calState(p);
+    if (s0.vis !== 'hidden' || s0.op !== 0 || s2.vis !== 'hidden' || s2.op !== 0) calProblems.push(`${w}px 第 0／2 秒不應看見 ${JSON.stringify([s0, s2])}`);
+    if (s35.vis !== 'visible' || s35.op < (reduce ? 1 : 0.5) || (reduce && s35.tf !== 'none')) calProblems.push(`${w}px 第 3.5 秒應已浮現 ${JSON.stringify(s35)}`);
+    if (s8.vis !== 'visible' || s8.op !== 1 || s8.tf !== 'none' || !s8.inView || s8.w < 44 || s8.h < 44 || s8.w > 80 || s8.h > 64) calProblems.push(`${w}px 第 8 秒應小巧常駐 ${JSON.stringify(s8)}`);
+    if (reduce ? s8.tr !== '0s' : s8.tr === '0s') calProblems.push(`${w}px 進場過渡設定不符（減少動態：${reduce}）${s8.tr}`);
+    // 焦點可達
+    if (!(await p.evaluate(() => { const e = document.querySelector('.act-entry'); e.focus(); return document.activeElement === e; }))) calProblems.push(`${w}px 小日曆無法取得焦點`);
+    // 跨頁：讀利 → 文章 → 向光 → 城市 → 搜尋 → 支援 → 首頁，每頁一載入就看得到、不重播進場
+    for (const f of ['quiet-power.html', 'articles/batch6-welfare-overview.html', 'toward-light.html', 'city.html', 'search.html', 'support.html', 'index.html']) {
+      await p.goto(`${ORIGIN}${BASE}${f}`, { waitUntil: 'domcontentloaded' });
+      const s = await calState(p);
+      if (s.t > 2000 || s.vis !== 'visible' || s.op !== 1 || s.tr !== '0s' || !s.inView) calProblems.push(`${w}px 換到 ${f} 應直接顯示 ${JSON.stringify(s)}`);
+      const o = await calOverlaps(p);
+      if (o.length) calProblems.push(`${w}px ${f} 小日曆蓋住 ${o.slice(0, 3).join('、')}`);
     }
     await p.click('.act-entry');
     await p.waitForURL('**/activities.html');
-    const a = await p.evaluate(() => ({ h1: document.querySelector('h1').textContent.trim(), overflow: document.documentElement.scrollWidth - innerWidth, small: [...document.querySelectorAll('.act-name, .act-groups a, .act-back a')].filter((x) => x.getBoundingClientRect().height < 44).length }));
-    if (a.h1 !== '活動與講座' || a.overflow > 0 || a.small > 0) actEntryProblems.push(`${w}px 活動頁 ${JSON.stringify(a)}`);
+    const a = await p.evaluate(() => ({ h1: document.querySelector('h1').textContent.trim(), cur: document.querySelector('.act-entry').getAttribute('aria-current'), shown: [...document.querySelectorAll('.notice')].filter((n) => !n.hidden).length, overflow: document.documentElement.scrollWidth - innerWidth, small: [...document.querySelectorAll('.notice-link, .act-name, .act-groups a, .act-back a')].filter((x) => x.getBoundingClientRect().height < 44).length }));
+    if (a.h1 !== '近期活動與講座' || a.cur !== 'page' || a.shown !== notices.items.length || a.overflow > 0 || a.small > 0) calProblems.push(`${w}px 活動頁 ${JSON.stringify(a)}`);
+    const o = await calOverlaps(p);
+    if (o.length) calProblems.push(`${w}px activities.html 小日曆蓋住 ${o.slice(0, 3).join('、')}`);
     await ctx.close();
   }
-  for (const kw of ['lecture', '職訓', '國家圖書館']) {
+  // 從文章網址直接進站：同樣第 2 秒看不到、第 3.5 秒浮現
+  {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    const p = await ctx.newPage();
+    await p.goto(`${ORIGIN}${BASE}articles/batch5-harassment-three-laws.html`, { waitUntil: 'domcontentloaded' });
+    await at(p, 2000); const s2 = await calState(p);
+    await at(p, 3500); const s35 = await calState(p);
+    if (s2.vis !== 'hidden' || s35.vis !== 'visible') calProblems.push(`直接開文章 ${JSON.stringify([s2, s35])}`);
+    await ctx.close();
+  }
+  check('全站小日曆（320／375／390px）：首次進站第 0、2 秒看不到，第 3.5 秒浮現、第 8 秒仍在（44～80px 小巧、在畫面內）；之後讀利、文章、向光、城市、搜尋、支援頁一載入就直接顯示、不重播；整頁捲動時不蓋住求助電話、有急事、切換畫面、搜尋框、表單與按鈕，其他連結仍點得到；可取得焦點；點擊進活動頁；減少動態設定時無位移與過渡；從文章直接進站也延遲約 3 秒', calProblems.length === 0, calProblems.slice(0, 4).join('；'));
+
+  // 已結束的活動：訪客瀏覽時依臺灣日期自動隱藏（不必重新部署），搜尋結果也一併剔除
+  const expiry = [];
+  for (const [when, expectIds] of [['2027-02-01T09:00:00+08:00', notices.items.filter((n) => n.visibleUntil >= '2027-02-01').map((n) => n.id)], ['2027-07-26T00:30:00+08:00', []]]) {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    const p = await ctx.newPage();
+    await p.clock.setFixedTime(new Date(when));
+    await p.goto(`${ORIGIN}${BASE}activities.html`);
+    const r = await p.evaluate(() => ({ ids: [...document.querySelectorAll('.notice')].filter((n) => !n.hidden && n.getBoundingClientRect().height > 0).map((n) => n.id), empty: !document.getElementById('notices-empty').hidden }));
+    if (JSON.stringify(r.ids) !== JSON.stringify(notices.items.filter((n) => expectIds.includes(n.id)).map((n) => n.id)) || r.empty !== (expectIds.length === 0)) expiry.push(`${when} ${JSON.stringify(r)}`);
+    await p.goto(`${ORIGIN}${BASE}search.html`);
+    await p.fill('[data-search] input', '科學節');
+    await p.waitForTimeout(150);
+    if (await p.locator('[data-search] a[href="activities.html#notice-taiwan-science-festival-2026"]').count()) expiry.push(`${when} 搜尋仍找得到已結束的科學節`);
+    await ctx.close();
+  }
+  check('過期活動：模擬臺灣時間 2027-02-01 時只隱藏已結束的科學節與國圖講座；2027-07-26 時全部隱藏並顯示「目前沒有」說明；搜尋也找不到已結束活動', expiry.length === 0, expiry.join('；'));
+
+  const searchAct = [];
+  for (const kw of ['lecture', '職訓', '國家圖書館', '科學節', '書展']) {
     await page.goto(`${ORIGIN}${BASE}search.html`);
     await page.fill('[data-search] input', kw);
     await page.waitForTimeout(150);
-    if (!(await page.locator('[data-search] a[href*="activities.html"]').count())) actEntryProblems.push(`搜尋「${kw}」找不到活動頁項目`);
+    if (!(await page.locator('[data-search] a[href*="activities.html"]').count())) searchAct.push(`搜尋「${kw}」找不到活動頁項目`);
   }
-  check('首頁活動與講座動態櫥窗（320／375／390px）：在快捷入口下方、高度 44–220px、無溢位，三張紙卡在首輪 3 秒後仍持續交替（6–9 秒一輪、無限循環），文字與區塊尺寸不動；可點進活動頁（頁面連結高度 ≥ 44px）；減少動態設定時無任何動畫、保留三張靜態紙卡；搜尋 lecture／職訓／國家圖書館 可找到', actEntryProblems.length === 0, actEntryProblems.slice(0, 4).join('；'));
+  check('搜尋 lecture／職訓／國家圖書館／科學節／書展 可找到活動頁項目', searchAct.length === 0, searchAct.join('；'));
 
   // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
   const jumpProblems = [];

@@ -68,19 +68,29 @@ try {
   await page.tap('#toward-women-center a[href="articles/batch6-women-center-services.html"]');
   await page.waitForURL('**/articles/batch6-women-center-services.html');
   check('WebKit 390px 向光：八個索引都能點開（入口維持原欄位），文章連結齊全且高度 ≥ 44px；婦女中心課程第一篇可開啟', bad.length === 0, bad.join('；'));
-  await page.goto(`${origin}${base}index.html`);
-  const entry = await page.$eval('.act-entry', (e) => Math.round(e.getBoundingClientRect().height));
-  // WebKit 也要真的在動：首輪 3 秒後取樣約 2.8 秒，紙卡 transform／opacity 要改變，標題位置不動
-  const actSample = () => page.$eval('.act-entry', (e) => [...e.querySelectorAll('.act-card')].map((c) => { const s = getComputedStyle(c); return `${s.transform}|${Number(s.opacity).toFixed(2)}`; }).join(';') + `#${Math.round(e.querySelector('strong').getBoundingClientRect().top)}`);
-  await page.waitForTimeout(3200);
-  const actSigs = [];
-  for (let i = 0; i < 8; i++) { actSigs.push(await actSample()); await page.waitForTimeout(400); }
-  const actTexts = new Set(actSigs.map((x) => x.split('#')[1])).size;
-  check('WebKit 390px 首頁「活動與講座」紙卡在首輪 3 秒後仍持續交替，標題位置不動', new Set(actSigs).size >= 3 && actTexts === 1, `取樣 ${new Set(actSigs).size} 種狀態；標題位置 ${actTexts} 種`);
-  await page.tap('.act-entry');
-  await page.waitForURL('**/activities.html');
-  const actCount = await page.locator('.act-item a[target="_blank"][rel="noopener noreferrer"]').count();
-  check('WebKit 390px 首頁「活動與講座」入口可點進活動頁，官方入口連結另開新分頁並帶 noopener', entry >= 44 && actCount >= 10, `入口高度 ${entry}px；連結 ${actCount} 筆`);
+  // 全站小日曆：新分頁首次進站第 2 秒看不到、第 3.5 秒浮現；點進活動頁；換到讀利、向光、文章仍直接顯示
+  {
+    const c2 = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+    const p = await c2.newPage();
+    const st = () => p.evaluate(() => { const e = document.querySelector('.act-entry'); const s = getComputedStyle(e); const b = e.getBoundingClientRect(); const sw = document.querySelector('[data-switch-screen]').getBoundingClientRect(); return { t: Math.round(performance.now()), vis: s.visibility, op: parseFloat(s.opacity), h: Math.round(b.height), inView: b.bottom <= innerHeight && b.right <= innerWidth, clearOfSwitch: b.top >= sw.bottom }; });
+    const at = (ms) => p.waitForFunction((x) => performance.now() >= x, ms, { polling: 50 });
+    await p.goto(`${origin}${base}index.html`, { waitUntil: 'domcontentloaded' });
+    await at(2000); const s2 = await st();
+    await at(3500); const s35 = await st();
+    await at(4500); const s45 = await st();
+    const later = [];
+    for (const f of ['quiet-power.html', 'toward-light.html', 'articles/batch6-welfare-overview.html']) {
+      await p.goto(`${origin}${base}${f}`, { waitUntil: 'domcontentloaded' });
+      const s = await st();
+      if (s.t > 2000 || s.vis !== 'visible' || s.op !== 1) later.push(`${f} ${JSON.stringify(s)}`);
+    }
+    await p.tap('.act-entry');
+    await p.waitForURL('**/activities.html');
+    const n = await p.locator('.notice:not([hidden]) a.notice-link[target="_blank"][rel="noopener noreferrer"]').count();
+    const portals = await p.locator('.act-item a[target="_blank"][rel="noopener noreferrer"]').count();
+    check('WebKit 390px 全站小日曆：首次進站第 2 秒看不到、第 3.5 秒浮現並常駐（≥ 44px、在畫面內、不蓋住切換畫面）；換到讀利、向光、文章直接顯示；點進活動頁列出具體活動官方公告（另開新分頁＋noopener）與 12 個長期入口', s2.vis === 'hidden' && s35.vis === 'visible' && s45.op === 1 && s45.h >= 44 && s45.inView && s45.clearOfSwitch && later.length === 0 && n >= 4 && portals === 12, JSON.stringify({ s2, s35, s45, later, n, portals }));
+    await c2.close();
+  }
   await page.goto(`${origin}${base}city.html`);
   const order = await page.evaluate(() => document.getElementById('benefits').getBoundingClientRect().top < document.getElementById('finder').getBoundingClientRect().top && document.querySelectorAll('#benefits .story').length === 6);
   check('WebKit 390px 城市與福利：「先了解有哪些福利」六篇在縣市選擇之前', order);

@@ -16,7 +16,7 @@ import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadBatch6Articles } from './lib/qa-batch6.mjs';
-import { loadQaActivities } from './lib/qa-activities.mjs';
+import { loadQaActivities, loadQaNotices } from './lib/qa-activities.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
 import { resolveTowardEditorial } from './lib/toward-light-editorial.mjs';
 
@@ -85,6 +85,7 @@ const qaBatch3 = IS_QA ? await loadBatch3OpenAccess(ROOT) : { resources: [], art
 const qaBatch45 = IS_QA ? await loadBatch45Articles(ROOT, categories) : [];
 const qaBatch6 = IS_QA ? await loadBatch6Articles(ROOT, categories) : [];
 const qaActivities = IS_QA ? await loadQaActivities(ROOT) : null;
+const qaNotices = IS_QA ? await loadQaNotices(ROOT) : null;
 const seen = new Set();
 const seenUrls = new Map();
 for (const r of [...resourceData.items, ...qaResources, ...qaBatch3.resources]) {
@@ -170,16 +171,8 @@ function icon(name, cls = 'icon') {
 }
 
 const AREAS = ['北部', '中部', '南部', '東部', '離島'];
-// 活動與講座首頁入口的日曆圖示：直接內嵌，不新增 src/icons 檔案，避免正式版與一般預覽的資產改變。
-// 首頁「活動與講座」動態櫥窗：三張原創抽象紙卡（課程／展演／學習），不含任何活動名稱、日期或名額
-const ACT_CARD_SVGS = [
-  // 課程：日曆頁
-  '<rect class="pg" x="1" y="1" width="70" height="90" rx="7"/><path class="band band-a" d="M1 8a7 7 0 0 1 7-7h56a7 7 0 0 1 7 7v12H1z"/><path class="ring" d="M20 -2v9M52 -2v9"/><g class="cell"><rect x="11" y="31" width="10" height="9" rx="2"/><rect x="31" y="31" width="10" height="9" rx="2"/><rect x="51" y="31" width="10" height="9" rx="2"/><rect x="11" y="47" width="10" height="9" rx="2"/><rect x="51" y="47" width="10" height="9" rx="2"/><rect x="11" y="63" width="10" height="9" rx="2"/><rect x="31" y="63" width="10" height="9" rx="2"/></g><rect class="mark-a" x="31" y="47" width="10" height="9" rx="2"/><path class="dash" d="M11 81h50"/>',
-  // 展演：拱形舞台
-  '<rect class="pg" x="1" y="1" width="70" height="90" rx="7"/><path class="band band-b" d="M1 8a7 7 0 0 1 7-7h56a7 7 0 0 1 7 7v12H1z"/><path class="arch" d="M18 62V46a18 18 0 0 1 36 0v16"/><circle class="mark-b" cx="36" cy="49" r="5"/><path class="line" d="M12 62h48"/><path class="dash" d="M12 72h48M12 81h30"/>',
-  // 學習：翻開的書
-  '<rect class="pg" x="1" y="1" width="70" height="90" rx="7"/><path class="band band-c" d="M1 8a7 7 0 0 1 7-7h56a7 7 0 0 1 7 7v12H1z"/><path class="book" d="M36 38c-6-4-14-5-22-4v24c8-1 16 0 22 4M36 38c6-4 14-5 22-4v24c-8-1-16 0-22 4M36 38v24"/><path class="line" d="M14 72h44"/><path class="dash" d="M14 81h28"/>',
-].map((inner, i) => `<span class="act-card act-card-${i + 1}"><svg viewBox="0 -3 72 95" width="72" height="95" fill="none" aria-hidden="true" focusable="false">${inner}</svg></span>`).join('');
+// QA 全站小日曆的圖示：直接內嵌，不新增 src/icons 檔案，避免正式版與一般預覽的資產改變。
+const CALENDAR_SVG = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path class="act-cal-dot" d="M8 13.5h2.5v2.5H8z" fill="currentColor" stroke="none"/></svg>';
 const qaBadge = (x) => (x?.qa ? '<span class="badge badge-qa">未核准測試內容</span>' : '');
 const statusBadge = (status) => {
   const map = { 已確認: ['badge-ok', '已確認'], 待確認: ['badge-pending', '待查核'], 需要修正: ['badge-fix', '需要修正'] };
@@ -407,7 +400,8 @@ ${robots}<title>${esc(fullTitle)}</title>
 <link rel="icon" href="${base}assets/icons/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${base}assets/css/main.css?v=20261015search-clear-v2">
 <script src="${base}assets/js/main.js"></script>
-${scripts.map((s) => `<script src="${base}${s}${s === 'assets/js/search.js' ? '?v=20261015search-clear-v2' : ''}" defer></script>`).join('\n')}
+${IS_QA ? `<script src="${base}assets/js/qa-calendar.js"></script>
+` : ''}${scripts.map((s) => `<script src="${base}${s}${s === 'assets/js/search.js' ? '?v=20261015search-clear-v2' : ''}" defer></script>`).join('\n')}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
 <a class="skip-link" href="#main">跳到主要內容</a>
@@ -429,7 +423,7 @@ ${previewBar}${noticeBar}
 <main id="main" tabindex="-1">
 ${body}
 </main>
-<footer class="site-footer">
+<footer class="site-footer${IS_QA ? ' has-cal' : ''}">
   <div class="wrap">
     <p class="footer-name">${brandLockup()}</p>
     <div class="footer-legal">
@@ -438,7 +432,7 @@ ${body}
     </div>
   </div>
 </footer>
-</body>
+${IS_QA ? `${activitiesEntry(base, active)}\n` : ''}</body>
 </html>
 `;
 }
@@ -541,20 +535,23 @@ function supportEntry(prefix = '') {
 <section class="section quick-section" aria-labelledby="quick-title">
   <div class="wrap">
     <h2 id="quick-title" class="visually-hidden">快捷入口</h2>
-    <ul class="quick-grid">${quick.join('')}</ul>${IS_QA ? activitiesEntry() : ''}
+    <ul class="quick-grid">${quick.join('')}</ul>
   </div>
 </section>`;
   pages.push({ file: 'index.html', html: layout({ title: '', active: 'home', body, bodyClass: 'home', scripts: ['assets/data/search-index.js', 'assets/js/search.js'] }) });
   addIndex('頁面', '首頁', site.description, 'index.html', `${site.name} ${site.englishName} 首頁`);
 }
 
-// ---------- 活動與講座（QA）：首頁小入口＋官方公告與查詢入口頁 ----------
-function activitiesEntry() {
-  return `
-    <a class="act-entry" href="activities.html"><span class="act-entry-text"><strong>活動與講座</strong><small>探索理財、職涯、健康、藝文與各種生活學習活動。</small><span class="act-entry-cta">查看活動資訊<span class="act-entry-arrow" aria-hidden="true">→</span></span></span><span class="act-stage" aria-hidden="true">${ACT_CARD_SVGS}</span></a>`;
+// ---------- 近期活動與講座（QA）：全站小日曆＋已公布活動消息頁 ----------
+// 小日曆由 layout() 放進每一個 QA 頁面（正式版、一般預覽沒有）。首次進站約 3 秒後浮現、之後同一分頁跨頁常駐，
+// 由 src/qa-assets/js/qa-calendar.js 控制；沒有 JavaScript 時直接顯示。
+function activitiesEntry(base = '', active = '') {
+  return `<a class="act-entry" href="${base}activities.html" aria-label="近期活動與講座：查看已公布的活動消息"${active === 'activities' ? ' aria-current="page"' : ''}><span class="act-entry-icon">${CALENDAR_SVG}</span><span class="act-entry-label">近期活動</span></a>`;
 }
+const zhDate = (d) => { const [y, m, day] = d.split('-').map(Number); return `${y} 年 ${m} 月 ${day} 日`; };
 if (IS_QA) {
   const { groups, items, checkedOn } = qaActivities;
+  const notices = qaNotices.items;
   const gid = (g) => `act-group-${groups.indexOf(g) + 1}`;
   const itemHtml = (it) => `<li class="act-item" id="${esc(it.id)}">
         <a class="act-name" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span class="visually-hidden">（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
@@ -562,28 +559,55 @@ if (IS_QA) {
         <p class="act-purpose">${esc(it.purpose)}</p>
         <p class="act-caution">${esc(it.caution)}</p>
       </li>`;
+  const noticeHtml = (n) => `<li class="notice" id="${esc(n.id)}" data-act-until="${esc(n.visibleUntil)}">
+        <p class="notice-meta"><span class="notice-type${n.announcementType === 'plan' ? ' is-plan' : ''}">${esc(n.typeLabel)}</span><span class="notice-cat">${esc(n.category)}</span></p>
+        <h3 class="notice-title">${esc(n.title)}</h3>
+        <dl class="notice-facts">
+          <div><dt>日期</dt><dd>${n.startDate ? `<time datetime="${esc(n.startDate)}">${esc(n.dateLabel)}</time>` : esc(n.dateLabel)}</dd></div>
+          <div><dt>地區</dt><dd>${esc(n.region)}</dd></div>
+          <div><dt>主辦</dt><dd>${esc(n.organizer)}</dd></div>${n.publishedAt ? `
+          <div><dt>公告</dt><dd><time datetime="${esc(n.publishedAt)}">${zhDate(n.publishedAt)}</time>官方公布</dd></div>` : ''}
+        </dl>
+        <p class="notice-summary">${esc(n.summary)}</p>
+        <p class="notice-caution">${esc(n.eligibilityCaution)}</p>
+        <a class="notice-link" href="${esc(n.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看官方公告<span class="visually-hidden">：${esc(n.title)}（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
+      </li>`;
+  const lead = '2026 年 11 月至 2027 年底，政府、公立場館與正式機構已公布的活動、講座、展覽與課程消息。';
   const body = `
 <section class="page-head act-head" aria-labelledby="page-title">
   <div class="wrap">
-    <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">活動與講座</li></ol></nav>
-    <h1 id="page-title">活動與講座</h1>
-    <p class="lead">探索理財、職涯、健康、藝文與各種生活學習活動。</p>
-    <p class="act-intro">這裡整理政府與公共機構長期提供的官方查詢入口，點進原網站即可查到最新的課程、講座與活動。活動日期、費用、參與條件與報名狀態，請以主辦單位最新公告為準；需要報名時，會在原網站依其規定辦理，《由己》不代為報名，也不蒐集任何資料。</p>
-    <p class="act-intro"><span class="badge badge-qa">未核准測試內容</span> 來源核對：${esc(checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</p>
-    <nav class="act-groups" aria-label="活動主題"><ul>${groups.map((g) => `<li><a href="#${gid(g)}">${esc(g)}</a></li>`).join('')}</ul></nav>
+    <nav class="breadcrumb" aria-label="頁面位置"><ol><li><a href="index.html">首頁</a></li><li aria-current="page">近期活動與講座</li></ol></nav>
+    <h1 id="page-title">近期活動與講座</h1>
+    <p class="lead">${lead}</p>
+    <p class="act-intro">每一則都附官方公告連結。日期、費用、參加方式與資格以主辦單位最新公告為準；官方還沒公布的細節會標「詳情待公告」。《由己》不代為報名，也不蒐集任何資料。已結束的活動會在你瀏覽時自動隱藏。</p>
+    <p class="act-intro"><span class="badge badge-qa">未核准測試內容</span> 來源核對：${esc(qaNotices.checkedAt)}（AI 編輯查核，尚未經網站擁有人核准）</p>
   </div>
 </section>
-<section class="section act-list" aria-label="官方查詢入口">
+<section class="section act-list" aria-labelledby="notices-title">
   <div class="wrap">
+    <h2 id="notices-title" class="notices-title">已公布的活動消息</h2>
+    <ol class="notice-list" data-act-list>
+      ${notices.map(noticeHtml).join('\n      ')}
+    </ol>
+    <p class="notice-empty" id="notices-empty"${notices.length ? ' hidden' : ''}>目前沒有尚未結束的已公布活動；查到新的官方公告後會再加入。</p>
+    <p class="notice-more">其他月份目前查無正式公告，所以先不列出，也不會預先猜測日期。</p>
+  </div>
+</section>
+<section class="section act-list act-portals" aria-labelledby="portals-title">
+  <div class="wrap">
+    <h2 id="portals-title">想自己查更多：長期官方查詢入口</h2>
+    <p class="act-intro">以下是政府與公共機構持續更新的課程、講座與活動查詢網站，不是特定場次；來源核對：${esc(checkedOn)}。</p>
+    <nav class="act-groups" aria-label="查詢入口主題"><ul>${groups.map((g) => `<li><a href="#${gid(g)}">${esc(g)}</a></li>`).join('')}</ul></nav>
     ${groups.map((g) => `<section class="act-group" aria-labelledby="${gid(g)}">
-      <h2 id="${gid(g)}">${esc(g)}</h2>
+      <h3 id="${gid(g)}">${esc(g)}</h3>
       <ul class="act-items">${items.filter((it) => it.group === g).map(itemHtml).join('')}</ul>
     </section>`).join('\n    ')}
     <p class="act-back"><a href="index.html">← 回到首頁</a></p>
   </div>
 </section>`;
-  pages.push({ file: 'activities.html', html: layout({ title: '活動與講座', description: '探索理財、職涯、健康、藝文與各種生活學習活動。', body, bodyClass: 'activities' }) });
-  addIndex('頁面', '活動與講座', '探索理財、職涯、健康、藝文與各種生活學習活動。', 'activities.html', '活動 講座 課程 研習 展覽 activities events lectures workshops courses finance career health arts culture library family learning');
+  pages.push({ file: 'activities.html', html: layout({ title: '近期活動與講座', description: lead, active: 'activities', body, bodyClass: 'activities', scripts: ['assets/js/qa-activities.js'] }) });
+  addIndex('頁面', '近期活動與講座', lead, 'activities.html', '活動 講座 課程 研習 展覽 書展 科學節 日曆 activities events lectures workshops courses exhibitions calendar finance career health arts culture library family learning');
+  for (const n of notices) searchIndex.push({ type: '活動消息', title: n.title, text: `${n.dateLabel}｜${n.organizer}｜${n.region}`, url: `activities.html#${n.id}`, keywords: `${n.category} ${n.typeLabel} 活動 講座 展覽`, until: n.visibleUntil, order: order++ });
   for (const it of items) addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, `activities.html#${it.id}`, `${it.group} 官方查詢入口 ${it.region} ${it.keywordsEn || ''}`);
 }
 
@@ -1109,6 +1133,8 @@ await rm(OUT, { recursive: true, force: true });
 await mkdir(path.join(OUT, 'articles'), { recursive: true });
 await copyDir(path.join(ROOT, 'src/assets'), path.join(OUT, 'assets'));
 await copyDir(path.join(ROOT, 'src/icons'), path.join(OUT, 'assets/icons'));
+// QA 限定腳本（全站小日曆、活動消息依臺灣日期隱藏）：只複製到 dist-qa，正式版與一般預覽不會有這些檔案。
+if (IS_QA) await copyDir(path.join(ROOT, 'src/qa-assets'), path.join(OUT, 'assets'));
 if (existsSync(PHOTO_DIR)) await copyDir(PHOTO_DIR, path.join(OUT, 'assets/photos'));
 if (!IS_PREVIEW) {
   // 只保留已核准且每一個輸出檔均與核准版本完全一致的圖片。
@@ -1116,10 +1142,12 @@ if (!IS_PREVIEW) {
     if (!approvedPhotoAssetNames.has(file)) await rm(path.join(OUT, 'assets/photos', file));
   }
 }
+// QA：搜尋索引載入時依臺灣日期剔除已結束的活動消息（有 until 欄位者），不必重新部署。
+const QA_SEARCH_EXPIRY = "window.MLM_SEARCH_INDEX = window.MLM_SEARCH_INDEX.filter(function (x) { return !x.until || x.until >= new Date(Date.now() + 288e5).toISOString().slice(0, 10); });\n";
 await mkdir(path.join(OUT, 'assets/data'), { recursive: true });
 await writeFile(
   path.join(OUT, 'assets/data/search-index.js'),
-  `window.MLM_SEARCH_INDEX = ${JSON.stringify(searchIndex)};\n`,
+  `window.MLM_SEARCH_INDEX = ${JSON.stringify(searchIndex)};\n${IS_QA ? QA_SEARCH_EXPIRY : ''}`,
 );
 for (const p of pages) await writeFile(path.join(OUT, p.file), p.html);
 await writeFile(path.join(OUT, '.nojekyll'), '');
