@@ -15,7 +15,7 @@
 
 - [Issue #6](https://github.com/daycool858000-hue/morning-light-magazine/issues/6)：「向光」原八索引改成**直接導向實質文章**，精簡官方與城市入口。
 - [PR #5](https://github.com/daycool858000-hue/morning-light-magazine/pull/5)，功能分支：`feature/toward-open-skies-editorial-v1`。截至 2026-10-16，該 PR 的程式已完成第一版且獨立 CI 通過，但**仍為 draft，未合併開發分支，未公開部署**。
-- 編輯規格：[向光整合歸檔](../blob/feature/toward-open-skies-editorial-v1/docs/TOWARD-OPEN-SKIES-EDITORIAL-QA-IMPLEMENTATION-2026-10-16.md)。
+- 編輯規格：[向光整合歸檔](https://github.com/daycool858000-hue/morning-light-magazine/blob/feature/toward-open-skies-editorial-v1/docs/TOWARD-OPEN-SKIES-EDITORIAL-QA-IMPLEMENTATION-2026-10-16.md)。
 - 編輯原則必須同時保留站主前兩次確認：**六大主題是需求開口；讀利與向光是文章閱讀的兩大目錄**。讀利偏完整知識與生活制度；向光偏學習、藝文、文化、公益、女性經營、技能與探索。文章只有一個 slug，不做兩份資料。
 - 原八索引保留：婦女中心課程、就業培訓、創業講座、家庭教育、育兒與親職課程、生活技能、免費或公開報名的進修活動、地方政府教育及福利活動。每個索引都有站內可讀文章，不能只有機構或其他分類連結。
 - 向光的 22 縣市冗長按鈕撤下，保留一個小型「城市與福利」連結；底部大型重複資源卡改成精簡正式入口；不要更改原已驗收的「城市與福利」頁。
@@ -24,10 +24,10 @@
 
 ## 3. 新的成人文章候選：目前僅存 docs，不在任何公開 QA
 
-- [第七批修訂｜女性創業與食物銀行公益 2 篇](../blob/feature/toward-open-skies-editorial-v1/docs/BATCH7-ADULT-STORIES-PUBLIC-GOOD-WOMEN-ENTREPRENEURSHIP-2026-10-16.md)。
-- [第八批｜音樂表演藝術與衣物材料 2 篇](../blob/feature/toward-open-skies-editorial-v1/docs/BATCH8-MUSIC-LIFE-MATERIALS-ADULT-GUIDES-2026-10-16.md)。
-- [第九批｜婦女中心、家庭教育、青少年親職、地方活動、AI 資訊查證、日常創作共 6 篇](../blob/feature/toward-open-skies-editorial-v1/docs/BATCH9-TOWARD-ADULT-READING-WOMEN-FAMILY-DIGITAL-CREATION-2026-10-16.md)。
-- [第九批官方來源查核／對應索引](../blob/feature/toward-open-skies-editorial-v1/docs/BATCH9-SOURCE-AUDIT-AND-ARTICLE-MAPPING-2026-10-16.md)。
+- [第七批修訂｜女性創業與食物銀行公益 2 篇](https://github.com/daycool858000-hue/morning-light-magazine/blob/feature/toward-open-skies-editorial-v1/docs/BATCH7-ADULT-STORIES-PUBLIC-GOOD-WOMEN-ENTREPRENEURSHIP-2026-10-16.md)。
+- [第八批｜音樂表演藝術與衣物材料 2 篇](https://github.com/daycool858000-hue/morning-light-magazine/blob/feature/toward-open-skies-editorial-v1/docs/BATCH8-MUSIC-LIFE-MATERIALS-ADULT-GUIDES-2026-10-16.md)。
+- [第九批｜婦女中心、家庭教育、青少年親職、地方活動、AI 資訊查證、日常創作共 6 篇](https://github.com/daycool858000-hue/morning-light-magazine/blob/feature/toward-open-skies-editorial-v1/docs/BATCH9-TOWARD-ADULT-READING-WOMEN-FAMILY-DIGITAL-CREATION-2026-10-16.md)。
+- [第九批官方來源查核／對應索引](https://github.com/daycool858000-hue/morning-light-magazine/blob/feature/toward-open-skies-editorial-v1/docs/BATCH9-SOURCE-AUDIT-AND-ARTICLE-MAPPING-2026-10-16.md)。
 
 **十篇成人文章為新增候選，不代表已核准進公開 QA。** 必須先經站主閱讀與範圍同意，再逐批加到 QA，不得讓 Claude 將 docs 自動全數匯入。
 
