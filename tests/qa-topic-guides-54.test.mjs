@@ -30,6 +30,8 @@ check('AI編輯資料仍未核准公開QA及正式發布',data.ownerApproved===f
  data.importToPublicQa===false && data.productionApproved===false);
 check('連結有機關名稱、實際用途與原始HTTPS網址',data.topics.every(t=>t.links?.length>=1 &&
  t.links.every(l=>/^https:\/\//.test(l.url)&&l.name&&l.agency&&l.purpose)));
+check('婦女中心單一地方頁標為高雄地方示例，不冒充全國名錄',guidemap['women-centers'].links[0].name.includes('地方服務示例') && guidemap['women-centers'].caution.includes('高雄'));
+check('更年期衛教資料不混用未核實的年份',!/(?:2017|2024|2025)年/.test([guidemap.hormones.links[0].purpose,guidemap.hormones.links[0].evidenceType,guidemap.hormones.caution].join(' ')));
 check('只對容易混淆的12項加一句',data.topics.filter(t=>t.clarification).length===12);
 const modes=data.topics.reduce((o,t)=>(o[t.displayMode]=(o[t.displayMode]||0)+1,o),{});
 check('已適合的11項保留，另4項補一個直達入口、39項修正或填空；孕產仍由PR15處理',modes.keep===11&&modes.supplement===4&&modes.replace===39);
