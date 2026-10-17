@@ -15,3 +15,8 @@ dist-qa-staging-nine/
 docs/.qa-expansion-test-closed.generated.json
 
 dist-qa-closed-legacy/
+
+# 54主題入口獨立 staging（不部署）
+dist-qa-topic54/
+dist-qa-topic54-base/
+artifacts/
