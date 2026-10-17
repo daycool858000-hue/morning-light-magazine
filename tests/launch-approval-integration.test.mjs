@@ -133,7 +133,7 @@ try {
   const towardResources=await readFile(path.join(fullFeaturesOut,'toward-light.html'),'utf8');
   assert.equal((cityResources.match(/class="res-card"/g)||[]).length,51,'正式版需有原有16個核准資源和批次35個官方候選入口');
   for(const id of ['qa-en-nia','qa-en-ifi','qa-en-1990']) assert.ok(cityResources.includes('id="res-'+id+'"'),'多語官方資源缺少 '+id);
-  assert.ok(towardResources.includes('open-culture-iculture'),'向光原本的官方延伸入口需要保留');
+  assert.ok(towardResources.includes('href="https://cloud.culture.tw/"'),'向光原本的文化部官方延伸入口需要保留');
   assert.ok(learning.includes('id="res-open-culture-events"'),'課程與活動的同網址既有卡片應重用');
   assert.ok(!cityResources.includes('未核准測試內容'),'正式資源卡不得留測試標示');
   const allSitemap=await readFile(path.join(fullFeaturesOut,'sitemap.xml'),'utf8');
