@@ -12,6 +12,7 @@ const file = path.join(root, 'content/launch-approvals.json');
 const out = path.join(root, 'dist-launch-fixture');
 const badOut = path.join(root, 'dist-launch-bad-snapshot');
 const cityOut = path.join(root, 'dist-launch-city-fixture');
+const fullOut = path.join(root, 'dist-launch-44-fixture');
 const prior = await readFile(file, 'utf8');
 const template = JSON.parse(prior);
 const releaseCandidate = JSON.parse(await readFile(path.join(root, 'artifacts/launch-article-batch.json'), 'utf8'));
@@ -66,6 +67,25 @@ try {
   assert.ok(!cityOneApproved.includes('articles/batch6-income-support-emergency-aid.html'));
   delete template.approvedArticles[cityArticle.slug];
 
+  // 全44篇已簽核時，真正的 production 必須沿用 QA 已驗收的讀利26／向光18版面，不把44篇全部塞在讀利。
+  template.approvedArticles = Object.fromEntries(releaseCandidate.articles.map(a => [a.slug, sign(a.sha256)]));
+  await writeFile(file,JSON.stringify(template,null,2)+'\n');
+  build(fullOut);
+  const files44 = (await readdir(path.join(fullOut,'articles'))).filter(x=>x.endsWith('.html'));
+  assert.equal(files44.length,44, '全44篇都有相符指紋，應全數輸出');
+  const readli44 = await readFile(path.join(fullOut,'quiet-power.html'),'utf8');
+  const toward44 = await readFile(path.join(fullOut,'toward-light.html'),'utf8');
+  const sitemap44 = await readFile(path.join(fullOut,'sitemap.xml'),'utf8');
+  assert.equal((readli44.match(/<h3><a href="articles\//g)||[]).length,26,'正式版讀利需保留26篇');
+  assert.equal((toward44.match(/class="toward-reading-card"/g)||[]).length,18,'正式版向光需保留18篇');
+  assert.equal((toward44.match(/class="toward-toggle"/g)||[]).length,8,'正式版向光需保留八個分類入口');
+  assert.ok(!toward44.includes('undefined'),'向光不能因未核准的新官方連結而顯示錯誤');
+  assert.ok(!readli44.includes('未核准測試內容')&&!toward44.includes('未核准測試內容'));
+  for(const a of releaseCandidate.articles) assert.ok(sitemap44.includes('articles/'+a.slug+'.html'),'sitemap 缺少 '+a.slug);
+  assert.ok(!sitemap44.includes('exp-compare-everyday-experiments'),'撤稿不可出現在正式 sitemap');
+  assert.ok(!existsSync(path.join(fullOut,'activities.html')),'未核准活動不得偷跑到正式版');
+  template.approvedArticles = {'batch2-01':sign(chosen.sha256)};
+
   // 故意把 sha256 改錯，證明舊批准不會套用在修改後的文章。
   template.approvedArticles['batch2-01'] = sign(chosen.sha256.slice(0,-1)+(chosen.sha256.endsWith('0')?'1':'0'));
   await writeFile(file, JSON.stringify(template,null,2)+'\n');
@@ -73,9 +93,9 @@ try {
   assert.ok(!existsSync(path.join(badOut,'articles/batch2-01.html')), '內容指紋不符的文章不得輸出');
   const badIndex = await readFile(path.join(badOut,'assets/data/search-index.js'),'utf8');
   assert.ok(!badIndex.includes('articles/batch2-01.html'), '不符內容不可在搜尋中出現');
-  console.log('正式版模擬完成：單篇批准、單篇城市福利批准、其餘文章隔離；日曆隔離、修改後舊核准失效。');
+  console.log('正式版模擬完成：1篇、城市福利2篇、完整44篇（讀利26／向光18）皆正確；未核准資料隔離，修改後舊核准失效。');
 } finally {
   // 不論成功或失敗都先還原原核准檔；測試產物不部署，不寫回 git。
   await writeFile(file,prior);
-  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true})]);
+  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true}),rm(fullOut,{recursive:true,force:true})]);
 }
