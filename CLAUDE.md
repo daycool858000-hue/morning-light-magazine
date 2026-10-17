@@ -55,6 +55,7 @@
 - 分支 `claude/pr16-qa-integration-sjzq42`（基於 `qa/public-nine-articles-20261017` @ `54f96b6`），草稿 PR 目標為該 QA 分支，**未合併、未部署公開 QA**。
 - 只移植 PR #16 的 54 入口改動（11 維持、4 補充、39 修正、12 條提醒）；`pregnancy` 主題沿用 PR #17 懷孕與生育閱讀區。54 入口只在 `QA_TOPIC_GUIDES_STAGING=1` 建置到 `dist-qa-topic54`，公開 QA（`dist-qa`）與正式版都不載入。
 - 測試：`tests/qa-topic-guides-54.test.mjs`（靜態＋新版相容）、`tests/qa-topic-guides-54-browser.test.mjs`（Chromium／WebKit）、小日曆避讓（`--dist=dist-qa-topic54`）。報告：`docs/QA-TOPIC54-INTEGRATION-REPORT-2026-10-17.md`。
+- CI（`e00c329`）push `39016687039`、pull_request `39016699540` success（含 WebKit 54 入口 32 項、小日曆 WebKit）；連結稽核 `39016699547`：37 筆正常 32／受阻 5／失效 0。草稿 **PR #18**。
 - 待確認：39 項「修正」會取代 23 個主題原有的站內資源跳轉連結（PR #16 原設計）；內容需 ChatGPT 驗收、站主決定是否公開。
 
 ## 最新工作｜2026-10-17 第一輪 QA 試讀回饋整合（上一節之前的最新）

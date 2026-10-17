@@ -26,10 +26,12 @@
 |---|---|
 | 與 PR #16 原輸出逐字比對 54 個主題區塊 | 53 個完全相同；唯一差異 `pregnancy`，為依設計沿用 PR #17 |
 | PR #16 原有靜態檢查＋新版相容（共 34 項） | 全過：44 篇不變、exp-12 未重新上架、孕產閱讀區與主題 01 原樣、小日曆、未核准標示／noindex、搜尋索引、讀利、向光未變；`dist`、`dist-production` 無 54 入口 |
-| `tests/qa-topic-guides-54-browser.test.mjs`（320／375／390／1280px） | Chromium 本機 32 項全過；WebKit 由 CI 執行 |
-| 小日曆避讓（既有測試，指向 staging 六大主題頁） | Chromium 本機 16 項全過；WebKit 由 CI 執行 |
+| `tests/qa-topic-guides-54-browser.test.mjs`（320／375／390／1280px） | Chromium 本機 32 項全過；WebKit CI 32 項全過 |
+| 小日曆避讓（既有測試，指向 staging 六大主題頁） | Chromium 本機 16 項全過；CI `calendar` 工作（Chromium＋WebKit）success |
 | 完整 `npm test` | 本機通過 |
 | 公開 QA 建置（`dist-qa`，不帶 staging 變數） | 44 篇，無任何 54 入口連結或提醒 |
+
+**CI（提交 `e00c329`）**：push run `39016687039`、pull_request run `39016699540`（`test`＋`calendar`）全部 success；PR #16 原有連結稽核 run `39016699547` 隨 PR 自動執行：37 個網址中正常 32、海外逾時／受阻 5、確定失效 0。受阻 5 筆：`sme.gov.tw/women/article-women-3327-18767`（Cloudflare 403）、`twbaby.sfaa.gov.tw`、`familyedu.moe.gov.tw`（既知海外逾時，站主已確認臺灣可開）、`laws.mol.gov.tw` 職場霸凌準則、`women.kcg.gov.tw`；不刪除、不替換，待臺灣網路確認。
 
 外部網址開啟結果沿用 PR #16 的 Chromium 稽核（35 個網址，29 正常、6 外站限制／海外逾時、0 確認失效），本輪未重新逐筆研究。
 
@@ -46,6 +48,6 @@
 
 1. **「修正」39 項會取代原主題下的站內跳轉連結**（PR #16 原設計，整合版輸出與 PR #16 相同）：其中 16 項原為「官方入口整理與查核中」，23 項原本有站內資源卡跳轉（例：法律 01 原「勞動部、婦女新知基金會」改為「性別平等工作法權益整理 ↗」；`family-finance`、`official-complaints` 各原有 4 個）。原資源卡仍在同頁下方「官方與正式機構入口」，未刪除。是否接受此取代方式，請 ChatGPT／站主確認。
 2. 54 入口資料仍為 `qa-candidate-not-approved`，內容（資格、金額、用途說明）屬 AI 編輯整理，需 ChatGPT 驗收與站主決定。
-3. PR #16 稽核中 6 個外站受限／海外逾時網址，需臺灣 Safari 人工點開確認。
+3. 本輪連結稽核 5 個海外逾時／受阻網址（見上），除 familyedu 外需臺灣 Safari 人工點開確認。
 4. WebKit 只是模擬 Safari，不等於真正 iPhone；畫面觀感須站主實機確認。
 5. 若決定公開：需另行修改公開 QA 部署流程讓 QA 建置載入 54 入口（目前刻意不載入），並取得站主明確同意後才能部署。
