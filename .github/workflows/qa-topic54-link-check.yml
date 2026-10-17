@@ -1,0 +1,41 @@
+# 54主題入口研究連結查核，只有讀取外部來源，不部署、不改main或核准資料。
+name: 由己｜54主題入口官方連結核對
+
+on:
+  push:
+    branches:
+      - claude/verified-all-54-topic-guides-20261017
+  pull_request:
+    paths:
+      - 'docs/QA-TOPIC-ENTRANCES-54-SOURCE-GUIDES-2026-10-17.json'
+      - 'scripts/check-links-topic54.mjs'
+      - '.github/workflows/qa-topic54-link-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝 Chromium 外連檢查工具
+        run: |
+          npm ci
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: 核對54主題中有新增與修正的來源網址
+        run: node scripts/check-links-topic54.mjs
+      - name: 保留逐網址稽核報告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-topic54-link-results
+          path: artifacts/qa-topic54-link-results.json
+          retention-days: 14

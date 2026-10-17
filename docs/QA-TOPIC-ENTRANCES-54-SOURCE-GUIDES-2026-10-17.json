@@ -1,0 +1,1130 @@
+{
+  "name": "由己｜54個主題索引用途與對外入口",
+  "date": "2026-10-17",
+  "status": "qa-candidate-not-approved",
+  "ownerApproved": false,
+  "productionApproved": false,
+  "importToPublicQa": false,
+  "reviewProvenance": "ChatGPT（AI）逐主題內容與官方用途整理；不是站主人工逐頁查核。當期網址請由CI Chromium/WebKit + 站主Safari補驗。",
+  "guideline": "外站可能要求個資、登入、申請文件或費用；本站只提供原創導讀及官方原頁連結。不承諾外站零資料收集或所有活動免費。",
+  "count": 54,
+  "topics": [
+    {
+      "id": "pregnancy",
+      "intro": "從公費產檢、生育給付到產假與出生登記，可以依生活階段查詢。完整四段指南已另由 PR #15 製作，整合時沿用該版，避免重複。",
+      "links": [
+        {
+          "name": "公費產前檢查項目",
+          "agency": "衛福部國民健康署",
+          "url": "https://www.hpa.gov.tw/194/s",
+          "purpose": "先查公費檢查的項目與說明；其他給付、假別請看同頁完整指南。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "公費項目不代表所有自費檢查免費；PR #15 指南優先，不能另做重複的完整章節。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "childcare",
+      "intro": "育兒津貼與托育補助分屬不同制度，先查孩子年齡、照顧安排及對應的政府申請說明。",
+      "links": [
+        {
+          "name": "未滿2歲育兒津貼線上申辦與資訊",
+          "agency": "衛福部社會及家庭署",
+          "url": "https://twbaby.sfaa.gov.tw/home/index",
+          "purpose": "查閱未滿2歲育兒津貼申請方式，必要時前往政府正式申辦系統。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "育兒津貼不等於托育補助，實際條件以孩子年齡、照顧形式及當期規定為準。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "育兒津貼與托育補助是不同制度，請依孩子年齡及照顧方式查詢。"
+    },
+    {
+      "id": "daycare",
+      "intro": "想找托嬰中心、公共托育家園或準公共機構，可以先認識不同托育型態，再依居住縣市查當期資訊。",
+      "links": [
+        {
+          "name": "全國公共托嬰中心與托育家園查詢整理",
+          "agency": "我的E政府（衛福部及地方政府資料）",
+          "url": "https://www.gov.tw/News_Content_26_877023",
+          "purpose": "列各縣市公共托嬰與托育家園官方入口及報名查詢方式。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "這是2026年度整理頁；招生期間、名額、是否符合準公共補助請進地方主管機關最新公告。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "查得到托育據點，不代表有名額或已符合補助資格。"
+    },
+    {
+      "id": "parenting",
+      "intro": "親職教育可以從孩子年齡與家庭生活問題出發，先找公開教材，需要課程再查地方家庭教育中心。",
+      "links": [
+        {
+          "name": "各縣市家庭教育中心與學習資源",
+          "agency": "教育部家庭教育資源網",
+          "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+          "purpose": "由網站選擇所在地的家庭教育中心或社會大眾學習資源。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "公開教材可供自主閱讀，地方課程是否招生、是否收費依承辦單位公告。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "single-parent",
+      "intro": "單親家庭可以查育兒、福利、社會福利服務中心及特殊境遇扶助，但不代表所有單親家庭都符合同一補助資格。",
+      "links": [
+        {
+          "name": "單親與特殊境遇家庭扶助整理",
+          "agency": "我的E政府（各地方政府）",
+          "url": "https://www.gov.tw/News_Content_26_694361",
+          "purpose": "對照各縣市相關福利及申辦入口，另有全國社福中心名錄。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "家庭狀況、設籍及收入等條件會影響各項補助資格；本站不代為判定。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "supplement",
+      "clarification": ""
+    },
+    {
+      "id": "special-circumstances",
+      "intro": "特殊境遇家庭扶助包含不同情境與收入條件，可先確認制度種類，再到所在地政府辦理。",
+      "links": [
+        {
+          "name": "特殊境遇家庭扶助與各縣市申請窗口",
+          "agency": "我的E政府（各地方政府）",
+          "url": "https://www.gov.tw/News_Content_26_694361",
+          "purpose": "查詢扶助類型、申請資料及各縣市正式入口。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "單親不必然等於符合法律上的特殊境遇扶助資格。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "單親家庭不一定符合「特殊境遇家庭扶助」的法定條件。"
+    },
+    {
+      "id": "family-finance",
+      "intro": "家庭面臨突發經濟困難，可以先分辨急難救助、社會救助與育兒福利，不需要從與需求無關的保護專線尋找。",
+      "links": [
+        {
+          "name": "急難救助與地方申請方法",
+          "agency": "衛生福利部",
+          "url": "https://www.mohw.gov.tw/cp-190-226-1.html",
+          "purpose": "查突發變故的救助制度、地方申請管道及1957福利諮詢專線。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "救助須經正式機關評估，不保證符合資格或即刻核發。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "急難救助與家庭一般補助分屬不同制度。"
+    },
+    {
+      "id": "long-term-care",
+      "intro": "需要長期照顧家人時，可先了解長照服務種類與評估步驟，再找家庭照顧者支持資源。",
+      "links": [
+        {
+          "name": "如何申請長照服務",
+          "agency": "衛福部長照專區",
+          "url": "https://1966.gov.tw/LTC/cp-6533-70777-207.html",
+          "purpose": "查1966申請方式、照管評估、擬定計畫及各類服務。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        },
+        {
+          "name": "家庭照顧者支持服務",
+          "agency": "衛福部長照專區",
+          "url": "https://1966.gov.tw/LTC/lp-6455-207.html",
+          "purpose": "了解家照據點、照顧技巧及情緒支持等資訊。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "長照對象及服務仍須評估；聘僱家庭看護工的家庭也有部分可用服務。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "長照申請須經正式評估，與家庭照顧者支持服務可分別查詢。"
+    },
+    {
+      "id": "respite",
+      "intro": "喘息服務讓照顧者在一定時間內由專業服務接手照顧，可先看居家、機構與社區三種方式。",
+      "links": [
+        {
+          "name": "喘息服務內容與申請流程",
+          "agency": "衛福部長照專區（1966）",
+          "url": "https://1966.gov.tw/LTC/cp-6454-70075-207.html",
+          "purpose": "閱讀三種喘息服務型態，並依居住地向照管中心洽詢評估。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "有申請需求不代表直接取得服務；是否符合條件及可使用額度由正式評估判定。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "喘息服務須依照管評估安排，不保證提出申請即可取得服務。"
+    },
+    {
+      "id": "local-family",
+      "intro": "各地社會福利服務中心提供家庭與社福資源連結，請先選擇居住縣市，再確認該中心的實際服務範圍。",
+      "links": [
+        {
+          "name": "全國社會福利服務中心縣市名錄",
+          "agency": "衛生福利部社會安全網",
+          "url": "https://topics.mohw.gov.tw/SS/lp-4528-204.html",
+          "purpose": "依縣市查各區社福中心，並由地方政府確認最新聯絡方式。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "中央名錄部分條目初建於2019年，應再向地方政府確認最新地址與服務時間；民間基金會不等於全縣官方服務中心。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "請依所在縣市確認服務中心，不要用單一民間機構代替各地官方服務。"
+    },
+    {
+      "id": "job-seeking",
+      "intro": "找工作可先查正式徵才平台，注意工作地點、薪資、工時及雇主資訊。",
+      "links": [
+        {
+          "name": "台灣就業通找工作",
+          "agency": "勞動部勞動力發展署",
+          "url": "https://www.taiwanjobs.gov.tw/",
+          "purpose": "瀏覽政府就業服務平台的徵才及就業服務。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "個別職缺會變動，申請求職媒合可能需在外部平台提供資料。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "re-employment",
+      "intro": "曾離開職場的人可查政府再就業方案與求職登記資訊；2026年婦女再就業計畫已有規定調整。",
+      "links": [
+        {
+          "name": "2026婦女再就業計畫修正說明",
+          "agency": "勞動部",
+          "url": "https://www.mol.gov.tw/1607/1632/1633/89893/",
+          "purpose": "查婦女再就業獎勵條件、參與方式及2026年度修正方向。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "不是只要離職就能領獎勵；需依申請期間與計畫條件認定。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "vocational-training",
+      "intro": "職訓課程可以依所在地、職類與是否在職選擇，先查政府整合課程資料。",
+      "links": [
+        {
+          "name": "職業訓練整合網課程查詢",
+          "agency": "勞動部勞動力發展署",
+          "url": "https://course.taiwanjobs.gov.tw/course/search-training?kv=default",
+          "purpose": "依地區、職類、開課日期及訓練計畫查班別。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "課程查詢公開，實際報名、補助資格或費用依班別規定。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "employment-centers",
+      "intro": "需要求職媒合、失業認定或就業諮詢時，先找附近的公立就業服務中心或服務台。",
+      "links": [
+        {
+          "name": "就業服務據點地圖查詢",
+          "agency": "台灣就業通／勞動部勞動力發展署",
+          "url": "https://job.taiwanjobs.gov.tw/internet/index/service_location_map.aspx",
+          "purpose": "依縣市與據點類型查地址、電話及不同服務。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "不同據點提供的服務不一定相同，出發前確認當期時間。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "entrepreneurship",
+      "intro": "女性創業可查政府提供的課程、諮詢、加速器及輔導計畫，不同階段有不同申請條件。",
+      "links": [
+        {
+          "name": "協助女性創業計畫總覽",
+          "agency": "經濟部中小及新創企業署",
+          "url": "https://www.sme.gov.tw/article-tw-2891-13903",
+          "purpose": "分辨飛雁創業課程、企業輔導及其他支援。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "部分輔導只適用特定設立年限或企業類型，不能視為全民無條件申請。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "startup-training",
+      "intro": "想學創業財稅、行銷或商業模式，可以先查看官方女性創業課程目錄，再核對當期開課。",
+      "links": [
+        {
+          "name": "女性創業飛雁計畫｜找課程",
+          "agency": "經濟部中小及新創企業署",
+          "url": "https://www.sme.gov.tw/women/article-women-3327-18767",
+          "purpose": "尋找課程與學習主題，辨別歷史和目前可報名場次。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "同一網址已用於活動查詢，本站重用文字連結，不另做重複機構卡。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "startup-guidance",
+      "intro": "需要專家輔導或資源鏈結，可先了解政府對不同創業階段的輔導方式。",
+      "links": [
+        {
+          "name": "女性創業輔導資源",
+          "agency": "經濟部中小及新創企業署",
+          "url": "https://www.sme.gov.tw/article-tw-2891-13903",
+          "purpose": "查看女性創業飛雁計畫、加速器及申請對象。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "不同計畫的名額、資格與徵件期間另見正式公告。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "startup-loans",
+      "intro": "創業融資須分清政策貸款類型與資格，貸款是否核准仍由承貸金融機構審核。",
+      "links": [
+        {
+          "name": "青年創業貸款制度及申請條件",
+          "agency": "經濟部中小及新創企業署",
+          "url": "https://www.sme.gov.tw/article-tw-2893-13917",
+          "purpose": "查適用年齡、企業設立年限與貸款申請方向。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        },
+        {
+          "name": "青年創業貸款最新文件及表單",
+          "agency": "經濟部中小及新創企業署",
+          "url": "https://www.sme.gov.tw/article-tw-2570-4238",
+          "purpose": "查最新貸款要點、FAQ及文件範本。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "青創貸款不是專為女性、也不是每位女性創業者都能申請。請勿以本站提供的資訊當成授信保證。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "青年創業貸款有年齡、企業等條件，並非所有女性創業者都適用。"
+    },
+    {
+      "id": "workplace-skills",
+      "intro": "在職想補強職場能力，可用職訓查詢平台依職類、時間、地點找學習資源。",
+      "links": [
+        {
+          "name": "政府職訓課程查詢",
+          "agency": "勞動部勞動力發展署",
+          "url": "https://course.taiwanjobs.gov.tw/course/search-training?kv=default",
+          "purpose": "選在職課程及需要的技能領域，再看個別班別。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "個別培訓可能有身分、費用或名額條件。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "womens-health",
+      "intro": "女性健康包含預防保健、身體症狀、篩檢及就醫，以下先提供可查實際服務的官方資訊。",
+      "links": [
+        {
+          "name": "女性子宮頸癌公費篩檢項目",
+          "agency": "衛福部國民健康署",
+          "url": "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=198",
+          "purpose": "查現行公費篩檢對象及項目。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "此入口先涵蓋子宮頸篩檢，不能代表所有女性健康檢查；不取代醫師診療。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "menstrual",
+      "intro": "經痛、經期變化或不適可先閱讀正式醫療院所的衛教，再依症狀決定是否就醫。",
+      "links": [
+        {
+          "name": "經痛的預防保健",
+          "agency": "中國醫藥大學附設醫院（醫療院所衛教）",
+          "url": "https://www.cmuh.cmu.edu.tw/HealthEdus/Detail?no=4982",
+          "purpose": "閱讀經痛常見情形與自我觀察；不是政府法定制度或個別醫囑。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "這是醫院自行提供的公開衛教，並非政府主管機關；持續或異常疼痛仍應就醫。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "hormones",
+      "intro": "荷爾蒙變化涉及不同人生階段，先以衛福部更年期衛教理解部分常見症狀，不自行推論診斷。",
+      "links": [
+        {
+          "name": "更年期荷爾蒙變化與健康照護",
+          "agency": "衛生福利部國民健康署",
+          "url": "https://www.mohw.gov.tw/cp-2704-84238-1.html",
+          "purpose": "閱讀2025年更新的更年期荷爾蒙變化及代謝健康衛教，不當作所有荷爾蒙疾病的診斷依據。",
+          "evidenceType": "ChatGPT（AI）核對衛福部2025官方頁內文；待QA Chromium與WebKit逐筆連結回歸"
+        }
+      ],
+      "caution": "此頁是2017年衛教（2024年更新），只涵蓋更年期，不等於所有荷爾蒙問題。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "本入口目前提供更年期相關衛教，其他荷爾蒙問題應另依症狀向合格醫療院所查詢。"
+    },
+    {
+      "id": "bodily-autonomy",
+      "intro": "身體自主包含獲知醫療處置的資訊，以及依法律作成醫療選擇。可先閱讀正式法規的基本權利。",
+      "links": [
+        {
+          "name": "身體界線與親密接觸的尊重（青少年衛教）",
+          "agency": "衛福部國民健康署",
+          "url": "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=4878&pid=18825",
+          "purpose": "閱讀自主同意、表達界線及尊重他人感受的健康教育；原稿主對象為青少年。",
+          "evidenceType": "ChatGPT（AI）直接核對國健署2025-02-12原始官方頁；待QA瀏覽器連結回歸"
+        },
+        {
+          "name": "醫療知情權與選擇權（法條）",
+          "agency": "法務部全國法規資料庫",
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0020189",
+          "purpose": "查病人自主權利法第4至6條的知情及醫療選擇權；不代表所有身體自主議題。",
+          "evidenceType": "ChatGPT（AI）核對現行病人自主權利法第4至6條；待QA瀏覽器連結回歸"
+        }
+      ],
+      "caution": "此入口先介紹醫療自主的一個面向；其他身體自主議題與不同法律情境需分別查證。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "身體界線與醫療知情同意屬於不同情境。此處提供對應的正式原頁，不替任何個案判斷法律權利。"
+    },
+    {
+      "id": "boundaries",
+      "intro": "在家庭、感情與工作關係中，可以先閱讀官方心理健康文章理解溝通與個人界線。",
+      "links": [
+        {
+          "name": "心理健康文章專區",
+          "agency": "衛福部心快活",
+          "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+          "purpose": "按人際、情緒及家庭關係找到公開閱讀的文章。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "心理健康資訊不是個案診斷，特殊互動或課程可能有外站登入條件。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "stress",
+      "intro": "壓力感受可以先從日常心理健康資訊理解，再依需要查正式服務或學習資源。",
+      "links": [
+        {
+          "name": "心理健康促進資訊",
+          "agency": "衛福部心理健康司",
+          "url": "https://dep.mohw.gov.tw/domhaoh/np-326-107.html",
+          "purpose": "查官方心理健康衛教、心理支持方案及服務入口。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "不能將一般衛教當作醫師或諮商師個人治療。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "mental-support",
+      "intro": "想找可實際諮詢的心理健康服務，可以依地區查社區心理諮商資源。",
+      "links": [
+        {
+          "name": "各縣市社區心理諮商服務",
+          "agency": "衛福部心理健康司",
+          "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html",
+          "purpose": "查看22縣市心理服務窗口及正式資源。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "各窗口的收費、資格與服務時間各不相同，非所有據點24小時提供服務。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "counseling",
+      "intro": "心理諮商與醫療是不同服務形式，先依所在地查正式社區諮商窗口及是否有補助。",
+      "links": [
+        {
+          "name": "社區心理諮商資源一覽",
+          "agency": "衛福部心理健康司",
+          "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html",
+          "purpose": "按縣市查正式心理諮商與衛生行政窗口。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "不能因列在名冊中就保證當期有名額、免費或即刻提供服務。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "supplement",
+      "clarification": ""
+    },
+    {
+      "id": "support-programs",
+      "intro": "正式心理健康支持方案有特定對象和期間，先從衛福部的官方資源總表查目前適用項目。",
+      "links": [
+        {
+          "name": "心理健康促進與支持方案",
+          "agency": "衛福部心理健康司",
+          "url": "https://dep.mohw.gov.tw/domhaoh/np-326-107.html",
+          "purpose": "查青壯世代心理支持方案及相關官方內容。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "方案可能隨年度調整；不能把歷史補助金額當2026年現行額度。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "supplement",
+      "clarification": ""
+    },
+    {
+      "id": "gender-equality-work",
+      "intro": "職場性別平等包含反歧視、產假與家庭照顧假，先了解法律權益及提出申訴的正式管道。",
+      "links": [
+        {
+          "name": "性別平等工作法權益整理",
+          "agency": "我的E政府（勞動部資料）",
+          "url": "https://www.gov.tw/News_Content_26_530022",
+          "purpose": "查假別、勞動權益與申訴方向，並連回勞動部原機關。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "法律對不同身分、適用條件有差異，本站不代為判定個案。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "workplace-harassment",
+      "intro": "職場性騷擾的內部、外部申訴程序不同，先看勞動部整理的被害人權益。",
+      "links": [
+        {
+          "name": "職場性騷擾被害人權益與申訴",
+          "agency": "勞動部就業平等網",
+          "url": "https://eeweb.mol.gov.tw/genderZone/harassment_14.html",
+          "purpose": "了解向雇主及地方主管機關提出申訴的情況。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "性騷擾和職場霸凌不是同一法規；是否成立及如何處理需由主管機關按個案事實判定。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "職場性騷擾的申訴與一般職場霸凌適用程序不同。"
+    },
+    {
+      "id": "workplace-bullying",
+      "intro": "職場霸凌與勞資爭議的法律程序不同；可以先看正式規定，不將任何工作不愉快都直接稱作違法。",
+      "links": [
+        {
+          "name": "職場霸凌防治措施準則",
+          "agency": "勞動部勞動法令查詢系統",
+          "url": "https://laws.mol.gov.tw/FLAW/FLAWDOC01.aspx?flno=8&id=FL106701",
+          "purpose": "查霸凌申訴、防治及雇主處理程序規定。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "2026年法規涉及不同身分、申訴對象與程序；本站只作一般導覽。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "parental-leave",
+      "intro": "產假、陪產檢及陪產假與育嬰留職停薪各有不同規定，請依適用身分查法定條件。",
+      "links": [
+        {
+          "name": "育嬰留職停薪條件與期間",
+          "agency": "勞動部",
+          "url": "https://www.mol.gov.tw/1607/28690/2282/2284/2320/7371/",
+          "purpose": "查育嬰留停期間、申請方式與2026彈性規則。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "申請育嬰留停、津貼及產假依實際僱用／保險身分與新法規辦理。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "pregnancy-protection",
+      "intro": "懷孕期間的勞動保障包含產檢假、產假及工作平等，請依正式權益整理查適用條件。",
+      "links": [
+        {
+          "name": "懷孕與性別平等工作權益",
+          "agency": "我的E政府（勞動部資料）",
+          "url": "https://www.gov.tw/News_Content_26_530022",
+          "purpose": "查孕期假別與工作保障的官方整理。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "醫療與生育給付另見生活家庭主題，避免把保險給付和勞動假別混為同一制度。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "dismissal",
+      "intro": "資遣與自願離職的權益不同，先看勞動部對資遣是否合法及資遣費的實際說明。",
+      "links": [
+        {
+          "name": "資遣解僱類型與規定",
+          "agency": "勞動部",
+          "url": "https://www.mol.gov.tw/1607/28162/28296/81778/81784/81912/post",
+          "purpose": "查勞動基準法資遣條件與權益。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "不能只靠一個因素判斷解僱是否合法；需依個案事實及實際法規。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "legal-aid",
+      "intro": "需要法律諮詢或法扶律師時，可以先查分會及申請方式，不必先告訴《由己》案件細節。",
+      "links": [
+        {
+          "name": "法律扶助全國分會與服務據點",
+          "agency": "財團法人法律扶助基金會",
+          "url": "https://www.laf.org.tw/place",
+          "purpose": "按地區查法扶分會和法律諮詢服務。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "法扶律師申請可能需要審查資格；本網站不處理個案。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "intimate-images",
+      "intro": "遭遇性影像散布時，可以先查正式專責處理中心的證據保存、下架與申訴資訊。",
+      "links": [
+        {
+          "name": "性影像處理中心服務",
+          "agency": "衛福部性影像處理中心",
+          "url": "https://siarc.mohw.gov.tw/service.php",
+          "purpose": "了解保存證據、協助平台下架與正式轉介服務。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "正式申訴可能需提供個資或證據，請由專責官網辦理；不要傳送影像給本站。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "official-complaints",
+      "intro": "不同爭議須找不同主管機關，不能以單一電話處理所有法律、消費與職場申訴。",
+      "links": [
+        {
+          "name": "消費爭議申訴與調解步驟",
+          "agency": "行政院消費者保護會",
+          "url": "https://appeal.cpc.ey.gov.tw/www/step_explanation.aspx",
+          "purpose": "有購物、服務或預付費爭議時，查消費申訴流程。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        },
+        {
+          "name": "職場性騷擾的內外部申訴",
+          "agency": "勞動部就業平等網",
+          "url": "https://eeweb.mol.gov.tw/genderZone/harassment_14.html",
+          "purpose": "職場性騷擾事件依勞動主管機關與雇主程序處理。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "外部政府網站可能要求姓名與案件事實；《由己》不收申訴資料。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "購物、勞動與人身安全事件應使用不同主管機關的管道。"
+    },
+    {
+      "id": "women-centers",
+      "intro": "婦女中心提供的服務依縣市與實際委辦內容不同，可從目前已確認來源的具體地方中心開始查。",
+      "links": [
+        {
+          "name": "高雄市婦女館服務與活動",
+          "agency": "高雄市政府社會局",
+          "url": "https://women.kcg.gov.tw/",
+          "purpose": "查看婦女館的場域使用、女性培力及活動資訊。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "高雄婦女館僅為高雄當地服務示例，不能寫成全國婦女中心名錄；其他縣市需按所在地查。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "empowerment-centers",
+      "intro": "婦女培力空間可提供工作技能、學習與交流，但各館舍課程、費用與開館情形可能不同。",
+      "links": [
+        {
+          "name": "高雄市婦女館｜培力與公共空間",
+          "agency": "高雄市政府社會局",
+          "url": "https://women.kcg.gov.tw/",
+          "purpose": "了解女性培力課程、展覽及婦女館服務。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "目前具體示例為高雄，其他縣市尚在逐點核驗，不能說所有22縣市均有同樣服務。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "legal-aid-offices",
+      "intro": "法扶分會的服務方式與地點可在單一正式名錄查詢，避免自行維護容易過時的地址清單。",
+      "links": [
+        {
+          "name": "法律扶助全國據點",
+          "agency": "法律扶助基金會",
+          "url": "https://www.laf.org.tw/place",
+          "purpose": "按縣市查服務分會、聯絡方式和申請資訊。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "到訪前依基金會最新公告確認預約與服務時間。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "social-affairs",
+      "intro": "各縣市社會局、社會處的業務不同；可先選縣市，再轉至主管機關或社福中心的正式資料。",
+      "links": [
+        {
+          "name": "全國社會福利服務中心縣市名錄",
+          "agency": "衛福部社會安全網",
+          "url": "https://topics.mohw.gov.tw/SS/lp-4528-204.html",
+          "purpose": "依縣市與轄區查看社福中心；本站已有各縣市政府社福主管機關入口。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "中央名錄與地方最新資料可能存在時間差，個別電話與辦公地點依地方主管機關確認。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "health-bureaus",
+      "intro": "地方衛生局與社區心理衛生中心用途不同，若要找心理健康服務可先使用衛福部全國名冊。",
+      "links": [
+        {
+          "name": "全國社區心理衛生中心通訊錄",
+          "agency": "衛福部心理健康司",
+          "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-7412-70356-107.html",
+          "purpose": "查各縣市社區心理衛生中心所在地與官方附檔。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "心理衛生名冊不等於全部衛生局業務資料；醫療、公共衛生及防疫另依各地衛生局。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "labor-offices",
+      "intro": "地方勞動主管機關負責工作權益等行政事項，公立就業中心則提供媒合及職訓轉介，需分開查。",
+      "links": [
+        {
+          "name": "各縣市政府勞工網站目錄",
+          "agency": "台灣就業通／勞動部勞動力發展署",
+          "url": "https://job.taiwanjobs.gov.tw/Internet/Index/DocDetail.aspx?docid=6649&uk=2759",
+          "purpose": "按縣市開啟地方勞工局處原始網站。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "各縣市主管機關與就服據點可能不是同一機構，請按需求選擇。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "family-welfare",
+      "intro": "家庭福利包含社福中心、托育、育兒及特殊境遇等，請先分清全國制度與各地服務。",
+      "links": [
+        {
+          "name": "社會福利服務中心全國縣市目錄",
+          "agency": "衛福部社會安全網",
+          "url": "https://topics.mohw.gov.tw/SS/lp-4528-204.html",
+          "purpose": "按居住地查看社福中心及家庭服務轄區。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "地方額外福利、申辦方式與資格可能有差異，不以某一縣市金額代表全臺。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "supplement",
+      "clarification": ""
+    },
+    {
+      "id": "ltc-support",
+      "intro": "需要查附近的長照服務單位，可以直接使用官方鄰近服務查詢，並先了解申請與評估流程。",
+      "links": [
+        {
+          "name": "查詢附近長照服務",
+          "agency": "衛福部長照專區（1966）",
+          "url": "https://1966.gov.tw/LTC/cp-6532-71700-207.html",
+          "purpose": "依需要選擇附近提供長照服務的單位。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        },
+        {
+          "name": "全國家庭照顧者支持據點",
+          "agency": "衛福部長照專區（1966）",
+          "url": "https://1966.gov.tw/LTC/cp-6455-86147-207.html",
+          "purpose": "查家照據點、支持與諮詢資源。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "查到據點不等於直接取得給付；請依資格與正式評估辦理。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "ngo-services",
+      "intro": "民間組織的服務項目各不相同，這裡先提供有公開分區據點資料的組織，並清楚標示其服務類別。",
+      "links": [
+        {
+          "name": "勵馨基金會服務項目與各地據點",
+          "agency": "勵馨基金會（民間組織）",
+          "url": "https://www.goh.org.tw/services/",
+          "purpose": "按家庭、移住者及性別暴力等實際服務類型查詢，再看各地據點。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "兩個組織不代表所有非營利機構；個別委辦或補助仍依政府和該機構公告。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "women-center-courses",
+      "intro": "各地婦女中心可能提供生活、創業、藝文或職涯課程；先到該館官方課程頁查當期公告。",
+      "links": [
+        {
+          "name": "高雄市婦女館｜婦女培力與課程資訊",
+          "agency": "高雄市政府社會局",
+          "url": "https://women.kcg.gov.tw/",
+          "purpose": "由館方正式網站查課程、學習及場地資訊。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "高雄婦女館是單一地方例子，不代表全國；各地課程需各別查時間與是否有費用。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "job-training",
+      "intro": "想查各縣市職訓，請用政府整合網依訓練地點、班別與開課日期篩選。",
+      "links": [
+        {
+          "name": "政府職訓分區課程查詢",
+          "agency": "勞動部勞動力發展署",
+          "url": "https://course.taiwanjobs.gov.tw/course/area",
+          "purpose": "依分署與縣市查看班別、課程和報名規定。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "開課時間、報名與費用可能變動，本站只連到原查詢平臺。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "startup-talks",
+      "intro": "女性創業講座可從飛雁計畫找長期課程入口，是否仍能報名請看各場最新時間。",
+      "links": [
+        {
+          "name": "女性創業飛雁｜找課程",
+          "agency": "經濟部中小及新創企業署",
+          "url": "https://www.sme.gov.tw/women/article-women-3327-18767",
+          "purpose": "查看創業講座與課程資訊，分清往年活動與當期場次。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "不得將已截止的單次活動標成現在招生。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "family-education",
+      "intro": "想探索親職、婚姻及家庭互動，可以在家庭教育網站找教材或所在地中心。",
+      "links": [
+        {
+          "name": "教育部家庭教育網｜各縣市中心",
+          "agency": "教育部",
+          "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+          "purpose": "從地方家庭教育中心選單找公開資料與活動公告。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "課程報名與資格仍依承辦地方政府，教材可先自主閱讀。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "parenting-courses",
+      "intro": "親職課程可能是公開講座、線上教材或地方學習活動，可由正式家庭教育中心查詢。",
+      "links": [
+        {
+          "name": "各縣市家庭教育中心與親職學習",
+          "agency": "教育部家庭教育資源網",
+          "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+          "purpose": "依縣市進入家庭教育中心，區分公開教材和當期報名課程。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "網站列出的歷史課程不代表仍在招生，不能保證課程免費。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
+    },
+    {
+      "id": "life-skills",
+      "intro": "生活技能可從終身學習資源依地區及課程類型搜尋；詳細時間與費用由主辦單位公告。",
+      "links": [
+        {
+          "name": "終身學習資源平臺｜課程查詢",
+          "agency": "教育部",
+          "url": "https://lle.moe.edu.tw/lesson-resource/",
+          "purpose": "查看公開終身學習課程及學習資源。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "平台可免費查詢，不代表所有第三方課程免費。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "open-learning",
+      "intro": "公開學習及活動可從教育部課程資源、文化部展演目錄依實際興趣查詢。",
+      "links": [
+        {
+          "name": "終身學習資源平臺",
+          "agency": "教育部",
+          "url": "https://lle.moe.edu.tw/lesson-resource/",
+          "purpose": "查看可查詢的終身學習課程。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "免費瀏覽網站不代表參與活動免費或不需報名。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    },
+    {
+      "id": "local-events",
+      "intro": "各地活動日期經常變動，選擇主辦單位持續更新的正式活動目錄較能避免過期資訊。",
+      "links": [
+        {
+          "name": "文化部藝文活動查詢平台",
+          "agency": "文化部",
+          "url": "https://event.culture.tw/",
+          "purpose": "依藝文活動、館所及地區查看官方活動。",
+          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+        }
+      ],
+      "caution": "是否開放報名、收費及入場方式一律以活動原頁最新公告為準。",
+      "reviewedAt": "2026-10-17",
+      "reviewedBy": "ChatGPT（AI）",
+      "ownerApproved": false,
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
+    }
+  ],
+  "presentationPolicy": "已正確對應的入口不動。其他39項補一或兩個具體原頁；4個原有入口只添一個有用的官方直達／備援連結。孕產入口沿用Claude PR#15，不重做。全站只對12個容易混淆的項目加一句提醒。",
+  "clarificationCount": 12
+}
