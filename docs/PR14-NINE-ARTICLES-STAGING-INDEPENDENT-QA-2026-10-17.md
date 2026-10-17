@@ -28,7 +28,7 @@
 - exp-12 `https://www.ntsec.gov.tw/article/FileAtt.ashx?id=6193` 已在 GitHub runner 確認 HTTP 200、application/pdf、約3MB；ChatGPT 網頁工具也可識別其為16頁科教館PDF。
 - B4 法務部歷史參考 `https://www.moj.gov.tw/2204/2473/2492/11362/`：新版 CI 一次 200 但標題 Error；舊 CI 曾正常。ChatGPT 網頁原頁可得標題及網站內容，但再次擷取時也會逾時。**屬穩定性／外站存取風險，非已證實404，主要法規證據仍由經濟部法規原文支持**。可暫保留，公開QA試讀前可重新核對；不要把偶發海外受阻直接當作壞連結。
 - A2 `familyedu.moe.gov.tw/faqList.aspx` 美國機房逾時；已有歷次臺灣使用者 iPhone 可開啟家教網站的報告，個別FAQ仍建議臺灣環境再驗。
-- 經濟部現行 `https://law.moea.gov.tw/LawContent.aspx?id=GL000482` 原文第七點載115? **更正：民國112年5月18日（2023-05-18）**生效，原 B4 日期正確，「自行訂製服裝」已依第二點修正。
+- 經濟部現行 `https://law.moea.gov.tw/LawContent.aspx?id=GL000482` 原文第七點明載**民國112年5月18日（2023-05-18）**生效，原 B4 日期正確，「自行訂製服裝」已依第二點修正。
 - A1與B5出處及原文複核詳 `docs/EXPANSION-A1-B5-B4-INDEPENDENT-PRIMARY-SOURCE-RECHECK-2026-10-17.md`，都已免除舊版待修疑義。
 
 ## 公開 QA 的新部署前必做事項（工程已通過，但尚未執行）
@@ -40,7 +40,7 @@
 - 應先由 Claude 設計最小變更、保存舊版與發布規範，將 gate 配合新 QA 明確改為45篇、向光19、讀利26，查九篇+11入口、來源、搜尋、noindex、原36不變及 production 隔離。**不得只為通過 CI 刪除 gate。**
 - `docs/QA-EXPANSION-IMPORT-QUEUE.json` 僅在正式取得站主 **公開 QA 與必要整合/部署操作** 授權後，才可為指定九篇寫 `source-checked`、日期、可追溯證據與 `importToQa: true`。
 - 公開 QA 任何知道網址的人都能閱讀，`noindex` 不等於私人測試環境。正式上線 `content/release-approvals.json` 仍無授權，保持不變。
-- 尚有 PR #11 最新地方研究四批14/22、41原始URL及A3/B1/B2/B3來源審核，PR #14 沒有帶入；日後整合不能直接覆寫編輯分支 `CLAUDE.md` 或漏資料。
+- 尚有 PR #11 最新地方研究已達14／22縣市、41個原始候選URL及A3/B1/B2/B3來源審核，PR #14 沒有帶入；日後整合不能直接覆寫編輯分支 `CLAUDE.md` 或漏資料。
 
 ## 查核結論
 
