@@ -31,6 +31,6 @@ export function approvedLaunchArticle(article, launchApprovals) {
 }
 
 export function approvedLaunchFeature(name, source, launchApprovals) {
-  if (!['calendar', 'activities', 'pregnancy', 'topic54'].includes(name)) return false;
+  if (!['calendar', 'activities', 'pregnancy', 'topic54', 'resourceCatalog'].includes(name)) return false;
   return approvedLaunchRecord(source, launchApprovals?.approvedFeatures?.[name]);
 }
