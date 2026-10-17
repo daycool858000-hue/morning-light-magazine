@@ -26,8 +26,8 @@
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
       "publishMode": "qa-candidate-only",
-      "displayMode": "supplement",
-      "clarification": ""
+      "displayMode": "keep",
+      "clarification": "PR #15 已完成四段孕產資訊導覽，待整合時沿用，不在54入口批次重做。"
     },
     {
       "id": "childcare",
@@ -448,11 +448,11 @@
       "intro": "荷爾蒙變化涉及不同人生階段，先以衛福部更年期衛教理解部分常見症狀，不自行推論診斷。",
       "links": [
         {
-          "name": "更年期症狀與生活照護",
-          "agency": "衛生福利部／國民健康署",
-          "url": "https://www.mohw.gov.tw/cp-3567-37788-1.html",
-          "purpose": "了解更年期常見健康議題及生活注意事項。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+          "name": "更年期荷爾蒙變化與健康照護",
+          "agency": "衛生福利部國民健康署",
+          "url": "https://www.mohw.gov.tw/cp-2704-84238-1.html",
+          "purpose": "閱讀2025年更新的更年期荷爾蒙變化及代謝健康衛教，不當作所有荷爾蒙疾病的診斷依據。",
+          "evidenceType": "ChatGPT（AI）核對衛福部2025官方頁內文；待QA Chromium與WebKit逐筆連結回歸"
         }
       ],
       "caution": "此頁是2017年衛教（2024年更新），只涵蓋更年期，不等於所有荷爾蒙問題。",
@@ -461,18 +461,25 @@
       "ownerApproved": false,
       "publishMode": "qa-candidate-only",
       "displayMode": "replace",
-      "clarification": "這是更年期衛教，不能代表所有荷爾蒙問題的診斷。"
+      "clarification": "本入口目前提供更年期相關衛教，其他荷爾蒙問題應另依症狀向合格醫療院所查詢。"
     },
     {
       "id": "bodily-autonomy",
       "intro": "身體自主包含獲知醫療處置的資訊，以及依法律作成醫療選擇。可先閱讀正式法規的基本權利。",
       "links": [
         {
-          "name": "病人自主權利法｜知情與醫療選擇",
-          "agency": "全國法規資料庫",
+          "name": "身體界線與親密接觸的尊重（青少年衛教）",
+          "agency": "衛福部國民健康署",
+          "url": "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=4878&pid=18825",
+          "purpose": "閱讀自主同意、表達界線及尊重他人感受的健康教育；原稿主對象為青少年。",
+          "evidenceType": "ChatGPT（AI）直接核對國健署2025-02-12原始官方頁；待QA瀏覽器連結回歸"
+        },
+        {
+          "name": "醫療知情權與選擇權（法條）",
+          "agency": "法務部全國法規資料庫",
           "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0020189",
-          "purpose": "查看病人知情、醫療選項及知情同意的法律規定。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
+          "purpose": "查病人自主權利法第4至6條的知情及醫療選擇權；不代表所有身體自主議題。",
+          "evidenceType": "ChatGPT（AI）核對現行病人自主權利法第4至6條；待QA瀏覽器連結回歸"
         }
       ],
       "caution": "此入口先介紹醫療自主的一個面向；其他身體自主議題與不同法律情境需分別查證。",
@@ -481,7 +488,7 @@
       "ownerApproved": false,
       "publishMode": "qa-candidate-only",
       "displayMode": "replace",
-      "clarification": ""
+      "clarification": "身體界線與醫療知情同意屬於不同情境。此處提供對應的正式原頁，不替任何個案判斷法律權利。"
     },
     {
       "id": "boundaries",
