@@ -35,7 +35,8 @@
       "P1": 37,
       "P2": 11,
       "P0": 6
-    }
+    },
+    "proposedWithOriginalGovernmentUrls": 25
   },
   "topics": [
     {
@@ -279,9 +280,9 @@
       ],
       "classification": "mismatch",
       "priority": "P0",
-      "findings": "主題談地方家庭支持，卻僅連勵馨基金會全國首頁；應改用縣市社福中心名錄和地方政府網站，勵馨只按其實際服務用途附註。",
-      "proposedOfficialUrl": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html",
-      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+      "findings": "主題談地方家庭支持，卻僅連勵馨基金會全國首頁；應轉到城市與福利縣市選擇，再依所選縣市提供具體地方社福中心，勵馨只按實際服務用途附註。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "必須依訪客自行選擇的縣市提供該縣政府或區域社福中心目錄；單一縣份名錄不可當全國通用"
     },
     {
       "category": "職涯與創業",
@@ -1517,5 +1518,6 @@
       "proposedOfficialUrl": null,
       "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
     }
-  ]
+  ],
+  "auditMethod": "基於GitHub最新版已部署QA分支之54主題原始索引、共50個基本／第二／第三批候選資源record的topics關聯，另對照QA活動入口及PR15未部署的pregnancy工程；部分政策原頁另行網路核對。只屬路由／內容語義查核，不等於逐筆外站真實瀏覽器全部驗證。"
 }
