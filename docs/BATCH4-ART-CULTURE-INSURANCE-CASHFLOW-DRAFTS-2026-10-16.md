@@ -133,7 +133,6 @@
 
 **官方來源（2026-10-16 核對）：**
 - [經濟部新創圓夢網｜財務報表有好多種，怎麼分辨？（2026-07-31）](https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=198)
-- [經濟部新創圓夢網｜盤點營運資金與應收帳款、庫存](https://startup.sme.gov.tw/home/modules/news/detial.php?sId=1343) — 歷史文章，只用作一般觀念，不能把當年時局視為現況
 - [經濟部新創圓夢網｜創業資金與計畫書](https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=243)
 
 **待核准事項：** 文章示例、術語、資料更新年月、實際外站連線、站主發布許可。本站不提供會計簽證、報稅代辦或個別融資建議。
