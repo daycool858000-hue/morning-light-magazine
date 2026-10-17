@@ -958,7 +958,7 @@ function pregnancyGuideSection(c) {
   return `<section class="section preg-guide" id="${esc(g.anchor)}" aria-labelledby="${esc(g.anchor)}-title">
   <div class="wrap">
     ${sectionHead('Pregnancy &amp; Birth', `${esc(g.anchor)}-title`, esc(g.title), esc(g.intro))}
-    <p class="preg-guide-qa">${IS_QA ? '<span class="badge badge-qa">未核准測試內容</span> ' : ''}來源查核：${esc(g.checkedOn)}（AI 協助）${IS_QA ? '，尚未經網站擁有人核准' : '；已依網站擁有人確認的版本公開'}</p>
+    <p class="preg-guide-qa">${IS_QA ? `<span class="badge badge-qa">未核准測試內容</span> 來源查核：${esc(g.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）` : `來源查核：${esc(g.checkedOn)}（AI 協助）；已依網站擁有人確認的版本公開`}</p>
     <ol class="preg-steps">
       ${g.steps
         .map((s) => `<li class="preg-step">
