@@ -139,6 +139,15 @@ export async function loadQaExpansion(root, ctx) {
     if (!x.id || seenIds.has(x.id)) problems.push(`佇列 id 缺少或重複：${x.id}`);
     seenIds.add(x.id);
     if (x.ownerPublicationApproval === true || x.productionApproved === true) problems.push(`${x.id} 不可在 QA 佇列標成已核准；正式核准另走 release-approvals 流程`);
+    // 站主撤稿：保留原稿與查核歷史，但不得再被（自動）匯入 QA
+    if (x.qaWithdrawal !== undefined) {
+      const w = x.qaWithdrawal;
+      if (w?.status !== 'withdrawn-by-owner' || !isDate(w.decidedOn) || w.doNotReimport !== true ||
+          typeof w.record !== 'string' || !w.record.startsWith(fileRoot) || !existsSync(path.join(root, w.record))) {
+        problems.push(`${x.id} qaWithdrawal 需有 status=withdrawn-by-owner、decidedOn、doNotReimport=true 與 ${fileRoot} 內的撤稿紀錄`);
+      }
+      if (x.importToQa !== false) problems.push(`${x.id} 已由站主撤稿（qaWithdrawal），importToQa 必須是 false，不可重新匯入 QA`);
+    }
   }
   const ready = (x) => {
     if (x.importToQa !== true) return false;

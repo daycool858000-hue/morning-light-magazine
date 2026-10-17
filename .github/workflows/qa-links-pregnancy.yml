@@ -1,0 +1,32 @@
+# 生活與家庭「孕期與生育資訊整理」九個官方原頁的瀏覽器開頁檢查：只讀取、只印出狀態與標題，不建置、不部署、不修改資料。
+# 結果只代表 GitHub 美國機房當下能否開啟，不等於臺灣 iPhone／Chrome 實機結果，也不是站主核准。
+name: 孕期與生育官方連結瀏覽器檢查（不部署）
+
+on:
+  push:
+    paths:
+      - docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-2026-10-17.json
+      - scripts/lib/qa-pregnancy-guide.mjs
+      - .github/workflows/qa-links-pregnancy.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pregnancy-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝測試用瀏覽器（不會打包進網站）
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: 以 Chromium 開啟九個官方原頁（只有真正失效才讓此步驟失敗）
+        run: node scripts/check-links-browser.mjs --set=pregnancy --fail-on-broken

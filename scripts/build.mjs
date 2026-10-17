@@ -21,6 +21,7 @@ import { resolveQaPortalRouting } from './lib/qa-portal-routing.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
 import { resolveTowardEditorial, TOWARD_READING_SLUGS } from './lib/toward-light-editorial.mjs';
 import { loadQaExpansion } from './lib/qa-expansion.mjs';
+import { loadQaPregnancyGuide } from './lib/qa-pregnancy-guide.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -154,6 +155,8 @@ const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources, ...qaExpansion.cityResources];
 const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
 const qaPortalRouting = IS_QA ? resolveQaPortalRouting(qaActivities.items, resources) : { primary: [], reused: [] };
+// QA-only：生活與家庭 01「懷孕與生育相關福利」的四段導覽（未核准，不進 preview／production）
+const qaPregnancyGuide = IS_QA ? await loadQaPregnancyGuide(ROOT, resources) : null;
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -194,6 +197,32 @@ const statusBadge = (status) => {
   const [cls, label] = map[status] || ['', status];
   return `<span class="badge ${cls}">${label}</span>`;
 };
+// QA-only：預覽沿用的「待查核」依實際證據分成三層說明。只改 QA 畫面的說明文字，
+// 不改任何 status／review／checkedAt，也不改 content/release-approvals.json 或正式版的發布閘門。
+//   一、已依既有程序確認：通過與正式版相同的 approvedRecord 快照閘門（網站發起人 2026-10-15 整批發布核准＋AI 官方來源核對）
+//   二、AI 已核對官方來源，但尚未經站主審閱（有 AI 查核紀錄，且結果不是「讀取受阻／保持待確認」）
+//   三、尚未完成來源查核（沒有查核紀錄，或 AI 曾嘗試但讀取受阻）→ 維持「待查核」
+const releaseApprovedIds = {
+  resource: new Set(resourceData.items.filter((r) => approvedRecord(r, approvals.resources, 'official-entry')).map((r) => r.id)),
+  hotline: new Set(hotlineData.items.filter((h) => approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours')).map((h) => h.id)),
+  channel: new Set(hotlineData.channels.filter((h) => approvedRecord(h, approvals.channels, 'official-channel')).map((h) => h.id)),
+};
+const RELEASE_LABEL = {
+  resource: ['官方入口已核對（AI 協助）', `站主已整批核准入口與基本簡介（${release.approvedAt}）｜電話、資格與時段等細節仍以官方公告為準`],
+  hotline: ['專線用途與時間已核對（AI 協助）', `站主已整批核准號碼、用途與服務時間（${release.approvedAt}）`],
+  channel: ['官方入口已核對（AI 協助）', `站主已整批核准官方說明連結（${release.approvedAt}）`],
+};
+const aiSourceChecked = (x) => /AI/.test(x?.review?.by || '') && !/受阻|保持待確認/.test(x?.review?.result || '');
+function qaReviewMeta(item, kind) {
+  if (item.status !== '待確認') return statusBadge(item.status);
+  if (!item.qa && releaseApprovedIds[kind].has(item.id)) {
+    const [badge, note] = RELEASE_LABEL[kind];
+    return `<span class="badge badge-ok">${badge}</span><span>${esc(note)}</span>`;
+  }
+  if (aiSourceChecked(item)) return `<span class="badge badge-ai">AI 已核對來源</span><span>核對：${esc(item.review.date)}｜尚未經站主審閱</span>`;
+  const tried = item.review?.date && /受阻/.test(item.review.result || '') ? `（AI 曾於 ${esc(item.review.date)} 嘗試核對，官方頁讀取受阻）` : '';
+  return `${statusBadge(item.status)}<span>尚未完成來源查核${tried}</span>`;
+}
 const extLink = (href, label, cls = '') =>
   `<a href="${esc(href)}" class="ext ${cls}" rel="noopener noreferrer">${label}<span class="visually-hidden">（外部網站）</span></a>`;
 
@@ -311,7 +340,7 @@ function resourceCard(r, { anchor = true } = {}) {
   ${englishSummary}
   <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${r.usage ? `<dt>使用方式</dt><dd class="res-usage">${esc(r.usage)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
-    <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : `${qaBadge(r)}${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
+    <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : IS_QA ? `${qaBadge(r)}${qaReviewMeta(r, 'resource')}` : `${qaBadge(r)}${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
     <div class="res-actions">${extLink(r.url, '前往官方網站')}${englishLink}${phones}</div>
   </footer>
 </article>`;
@@ -413,7 +442,7 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
     .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
   const previewBar = IS_QA
-    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀、第六批 6 篇城市福利導讀、最新擴充 9 篇生活／學習文章與 11 筆不同網址的長期官方查詢入口，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
+    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀、第六批 6 篇城市福利導讀、最新擴充 8 篇生活／學習文章與 11 筆不同網址的長期官方查詢入口，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
     : IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
     : '';
@@ -845,6 +874,8 @@ function topicsSection(c) {
       ${c.topics
         .map((t, i) => {
           const related = resources.filter((r) => r.topics.includes(t.id));
+          const guide = qaPregnancyGuide && c.id === qaPregnancyGuide.category && t.id === qaPregnancyGuide.topic ? qaPregnancyGuide : null;
+          if (guide) return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(guide.topicText)}</p><p class="topic-guide-link"><a href="#${esc(guide.anchor)}">${esc(guide.topicLinkText)}<span aria-hidden="true">&nbsp;→</span></a></p></div></li>`;
           const list = related.length
             ? `<ul class="topic-links">${related.map((r) => `<li><a href="#res-${esc(r.id)}">${esc(r.name)}</a></li>`).join('')}</ul>`
             : `<p class="pending">官方入口整理與查核中。</p>`;
@@ -852,6 +883,35 @@ function topicsSection(c) {
         })
         .join('\n')}
     </ol>
+  </div>
+</section>`;
+}
+
+// QA-only：主題 01 的精簡閱讀區。四段文字＋原頁官方連結（附用途），不做資源卡、不收任何資料。
+function pregnancyGuideSection(c) {
+  const g = qaPregnancyGuide;
+  if (!g || c.id !== g.category) return '';
+  const ext = (l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.name)}<span aria-hidden="true">↗</span><span class="visually-hidden">（外部網站，另開新視窗）</span></a><p>${esc(l.purpose)}</p><small>${esc(l.org)}｜${esc(l.level)}</small></li>`;
+  const inner = (l) => `<li><a href="${esc(l.href)}">${esc(l.text)}<span aria-hidden="true">&nbsp;→</span></a></li>`;
+  return `<section class="section preg-guide" id="${esc(g.anchor)}" aria-labelledby="${esc(g.anchor)}-title">
+  <div class="wrap">
+    ${sectionHead('Pregnancy &amp; Birth', `${esc(g.anchor)}-title`, esc(g.title), esc(g.intro))}
+    <p class="preg-guide-qa"><span class="badge badge-qa">未核准測試內容</span> 來源查核：${esc(g.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</p>
+    <ol class="preg-steps">
+      ${g.steps
+        .map((s) => `<li class="preg-step">
+        ${[
+          `<h3><span class="preg-no" aria-hidden="true">${esc(s.no)}</span>${esc(s.title)}</h3>`,
+          s.body.map((p) => `<p>${esc(p)}</p>`).join(''),
+          `<ul class="preg-links" aria-label="${esc(s.title)}｜官方原頁">${s.links.map(ext).join('')}</ul>`,
+          s.afterLinks ? `<p class="preg-after">${esc(s.afterLinks)}</p>` : '',
+          s.internal.length ? `<ul class="preg-inner" aria-label="${esc(s.title)}｜站內延伸">${s.internal.map(inner).join('')}</ul>` : '',
+        ].filter(Boolean).join('\n        ')}
+      </li>`)
+        .join('\n      ')}
+    </ol>
+    <ul class="preg-inner preg-next" aria-label="同頁其他主題">${g.next.map(inner).join('')}<li><a href="#${esc(g.topic)}">回到主題索引<span aria-hidden="true">&nbsp;↑</span></a></li></ul>
+    <p class="preg-closing">${esc(g.closing)}</p>
   </div>
 </section>`;
 }
@@ -897,7 +957,8 @@ ${IS_QA ? articlesSection(catArticles) : ''}
     ${needList(c.needs.map((n) => ({ text: n.text, href: `#${n.topic}` })))}
   </div>
 </section>
-${topicsSection(c)}
+${topicsSection(c)}${pregnancyGuideSection(c) && `
+${pregnancyGuideSection(c)}`}
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
     ${sectionHead('Official Resources', 'res-title', '官方與正式機構入口', '點擊「前往官方網站」會直接進入原始機構網站。服務內容、資格與時間請以各機構公告為準。')}
@@ -1018,6 +1079,11 @@ for (const c of categories) {
   addIndex('生活主題', c.title, c.short, c.slug, [c.kicker, c.tagline, c.intro, ...c.needs.map((n) => n.text)].join(' '));
   for (const t of c.topics) addIndex(`${c.title}・主題`, t.title, t.text, `${c.slug}#${t.id}`);
 }
+if (qaPregnancyGuide) {
+  const g = qaPregnancyGuide;
+  addIndex('生活與家庭・整理', '孕期與生育資訊整理', g.topicText, `${catById[g.category].slug}#${g.anchor}`,
+    ['懷孕 生育 孕婦 產檢 產前檢查 衛教 生育給付 生育補助 10萬 勞保 國保 產假 產檢假 陪產假 育嬰留停 出生登記 生育獎勵', ...g.steps.map((s) => s.title)].join(' '));
+}
 
 // ---------- 支援資源（緊急求助） ----------
 {
@@ -1035,7 +1101,7 @@ for (const c of categories) {
 
 <section class="section" aria-labelledby="hot-title">
   <div class="wrap">
-    ${sectionHead('Hotlines', 'hot-title', '可直接撥打的專線', `服務時間與內容以各主管機關公告為準${IS_PREVIEW ? '；標示「待查核」者尚未完成官方來源核對' : ''}。`)}
+    ${sectionHead('Hotlines', 'hot-title', '可直接撥打的專線', `服務時間與內容以各主管機關公告為準${IS_QA ? '；標示「待查核」者尚未完成官方來源核對，「AI 已核對來源」者尚未經站主審閱' : IS_PREVIEW ? '；標示「待查核」者尚未完成官方來源核對' : ''}。`)}
     ${
       hotlines.length
         ? `<div class="hotline-grid">${hotlines
@@ -1046,7 +1112,7 @@ for (const c of categories) {
           <h3>${esc(h.number)} ${esc(h.title)}</h3>
           <p>${esc(h.purpose)}</p>
           <p class="hotline-meta">服務時間：${esc(h.hours)}${h.source ? `　來源：${extLink(h.source.url, esc(h.source.title))}` : ''}</p>
-          <div class="meta">${IS_PREVIEW ? statusBadge(h.status) : `<span class="badge badge-ok">專線用途與時間已核對（AI 協助）</span><span>核對：${esc(h.review.date)}</span>`}</div>
+          <div class="meta">${IS_QA ? qaReviewMeta(h, 'hotline') : IS_PREVIEW ? statusBadge(h.status) : `<span class="badge badge-ok">專線用途與時間已核對（AI 協助）</span><span>核對：${esc(h.review.date)}</span>`}</div>
         </div>
         <a class="call" href="tel:${esc(h.tel)}">撥打 ${esc(h.number)}</a>
       </article>`,
@@ -1062,7 +1128,7 @@ for (const c of categories) {
     ${sectionHead('Other Channels', 'ch-title', '不方便通話時')}
     ${channels.length ? `<div class="res-grid">${channels
       .map(
-        (ch) => `<article class="res-card"><header class="res-head">${icon('page', 'res-icon')}<div class="res-title"><h3>${esc(ch.title)}</h3></div></header><p class="res-summary">${esc(ch.text)}</p><footer class="res-foot"><div class="meta">${IS_PREVIEW ? statusBadge(ch.status) : `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(ch.review.date)}</span>`}</div><div class="res-actions">${extLink(ch.url, esc(ch.linkLabel))}</div></footer></article>`,
+        (ch) => `<article class="res-card"><header class="res-head">${icon('page', 'res-icon')}<div class="res-title"><h3>${esc(ch.title)}</h3></div></header><p class="res-summary">${esc(ch.text)}</p><footer class="res-foot"><div class="meta">${IS_QA ? qaReviewMeta(ch, 'channel') : IS_PREVIEW ? statusBadge(ch.status) : `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(ch.review.date)}</span>`}</div><div class="res-actions">${extLink(ch.url, esc(ch.linkLabel))}</div></footer></article>`,
       )
       .join('\n')}</div>` : emptyBox('簡訊與視訊報案資訊正在依官方來源查核中。')}
   </div>

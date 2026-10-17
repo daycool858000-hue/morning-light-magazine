@@ -543,7 +543,8 @@ try {
     const max = document.documentElement.scrollHeight - innerHeight;
     for (let y = 0; ; y = Math.min(max, y + 250)) {
       window.scrollTo(0, y);
-      await new Promise((r) => setTimeout(r, 40));
+      // 小日曆在捲動停下約 0.12 秒後才調整位置（避免邊捲邊跳），等它就位再檢查
+      await new Promise((r) => setTimeout(r, 260));
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       const chip = document.querySelector('.act-entry');
       const c = chip.getBoundingClientRect();

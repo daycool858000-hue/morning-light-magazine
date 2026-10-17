@@ -1,0 +1,93 @@
+{
+  "id": "life-family-pregnancy-guide",
+  "status": "candidate-not-approved",
+  "ownerPublicationApproval": false,
+  "productionApproved": false,
+  "editorialSource": "PR #11 editorial/youji-full-six-topics-expansion-20261016：docs/LIFE-FAMILY-PREGNANCY-OFFICIAL-ENTRY-EDITORIAL-PLAN-2026-10-17.md",
+  "sourceCheck": "ChatGPT（AI）2026-10-17 網頁來源核查；Claude 工程分支未能從雲端容器連線 .gov.tw（代理 403），外站可開性改由 GitHub Actions Chromium 檢查補記，見 docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-ACCEPTANCE-2026-10-17.md",
+  "checkedOn": "2026-10-17",
+  "category": "life-family",
+  "topic": "pregnancy",
+  "anchor": "pregnancy-guide",
+  "topicText": "從產前檢查、生育給付到產假與出生登記，依不同需要找到正式說明。",
+  "topicLinkText": "查看孕期與生育資訊整理",
+  "title": "懷孕與生育，可以先查哪些資訊？",
+  "intro": "從懷孕到孩子出生，會接觸醫療照護、保險給付、職場假別與出生登記。這些事項分屬不同機關，申請資格也不完全相同。以下按生活階段整理正式入口，方便自行查閱，不需要在本站留下身分或家庭資料。",
+  "steps": [
+    {
+      "no": "01",
+      "title": "懷孕期間的產檢與健康照護",
+      "body": [
+        "國民健康署提供公費產前檢查與孕期衛教的項目、時程說明，包含 14 次產檢及相關檢驗與超音波補助。",
+        "公費補助以公告的檢查項目為限，不代表所有自費項目都免費；本站不提供醫療建議，個人身體狀況請與產檢醫療院所討論。"
+      ],
+      "links": [
+        { "id": "PG01", "name": "國民健康署｜孕婦產前檢查項目及補助金額", "org": "衛生福利部國民健康署", "level": "中央", "purpose": "查公費產前檢查的次數、週數、檢查項目與補助金額。", "url": "https://www.hpa.gov.tw/194/s" },
+        { "id": "PG02", "name": "國民健康署｜孕婦產前健康照護衛教指導服務", "org": "衛生福利部國民健康署", "level": "中央", "purpose": "查孕期衛教指導服務的內容與提供時程。", "url": "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=195" }
+      ],
+      "internal": []
+    },
+    {
+      "no": "02",
+      "title": "生育給付：先分清楚自己的保險類型",
+      "body": [
+        "2026 年 1 月 1 日起，有生育給付／生育補助「合計」補足每胎新臺幣 10 萬元的相關規定。這是把原有給付與補助加總補足，不是每個人另外再領 10 萬元，也不是勞保、國保各領一次 10 萬元。",
+        "實際適用哪一種，要看勞保、國保、未參加相關社會保險，或其他社會保險與身分條件；同一生育事故不得重複請領相同性質的給付。本站不替你判定可領金額。"
+      ],
+      "links": [
+        { "id": "PG03", "name": "勞保局｜勞工生育補助 Q&A", "org": "勞動部勞工保險局", "level": "中央｜勞保", "purpose": "有勞保者：查勞保資格、申辦方式與補足相關事項。", "url": "https://www.bli.gov.tw/0109643.html" },
+        { "id": "PG04", "name": "勞保局｜國保生育給付暨加給補助 Q&A", "org": "勞動部勞工保險局", "level": "中央｜國保", "purpose": "國民年金保險被保險人：查國保生育給付與加給補助。", "url": "https://www.bli.gov.tw/0109942.html" },
+        { "id": "PG05", "name": "勞保局｜未參加相關社會保險者生育補助 Q&A", "org": "勞動部勞工保險局", "level": "中央｜無保別", "purpose": "未參加相關社會保險者：查生母生育補助及我國籍新生兒等適用條件。", "url": "https://www.bli.gov.tw/0109943.html" }
+      ],
+      "afterLinks": "需要辦理時，請前往原機關的正式申辦服務，勿透過本站上傳資料。",
+      "internal": []
+    },
+    {
+      "no": "03",
+      "title": "正在工作：產檢假、產假與育嬰留停",
+      "body": [
+        "受僱者的產檢假、產假、陪產檢及陪產假等有法定制度，部分規定依適用法規與身分而異。2026 年另有育嬰留職停薪以日申請等彈性措施。",
+        "這裡只整理方向與正式入口；詳細權益請看「法律與權益」主題。"
+      ],
+      "links": [
+        { "id": "PG06", "name": "勞動部｜促進工作平等措施常見問答", "org": "勞動部", "level": "中央", "purpose": "查產檢假、產假、陪產檢及陪產假的規定與常見問題。", "url": "https://www.mol.gov.tw/1607/28162/28166/28268/28270/29101" },
+        { "id": "PG07", "name": "勞動部｜育嬰留停照顧彈性化 Q&A", "org": "勞動部", "level": "中央", "purpose": "查 2026 年育嬰留職停薪以日申請等彈性化措施。", "url": "https://www.mol.gov.tw/1607/28162/28166/28284/28294/84873/post" }
+      ],
+      "internal": [
+        { "text": "法律與權益｜產假及育嬰留職停薪", "href": "law.html#parental-leave" },
+        { "text": "法律與權益｜懷孕相關勞動保障", "href": "law.html#pregnancy-protection" }
+      ]
+    },
+    {
+      "no": "04",
+      "title": "孩子出生後：出生登記與地方生育獎勵",
+      "body": [
+        "出生登記是正式戶政事項。地方政府的生育獎勵金與中央社會保險生育給付不同，可能有不同的設籍、申請期限及新生兒戶籍規定。",
+        "不同縣市的補助額度不能當作全國通用；地方性補助待查到具體縣市的正式頁面後再補充。"
+      ],
+      "links": [
+        { "id": "PG08", "name": "我的 E 政府｜出生登記", "org": "內政部戶政司（我的 E 政府申辦導航）", "level": "中央｜戶政", "purpose": "查出生登記的說明，以及線上與臨櫃辦理的差異。", "url": "https://www.gov.tw/News_Content_2_371547" },
+        { "id": "PG09", "name": "我的 E 政府｜安心懷孕及友善生養的措施與設施", "org": "我的 E 政府（整理各部會制度）", "level": "中央與地方", "purpose": "看中央與地方生養措施的區分，再前往各制度入口。", "url": "https://www.gov.tw/News_Content_26_635581" }
+      ],
+      "internal": [
+        { "text": "城市與福利｜依縣市查詢官方入口", "href": "city.html" }
+      ]
+    }
+  ],
+  "next": [
+    { "text": "出生後想查育兒津貼", "href": "#childcare" },
+    { "text": "想找托育與幼兒照顧", "href": "#daycare" }
+  ],
+  "closing": "資訊核對日期：2026 年 10 月。給付條件、保險身分、出生日期與地方設籍規定可能影響申請結果。實際辦理、文件、期限及最新金額，請以各主管機關公告為準；由己不收個資，也不代辦申請。",
+  "sourceRecords": [
+    { "id": "PG01", "aiEvidence": "官方搜尋索引取得頁面全文片段；ChatGPT 本輪 open 曾回 internal error", "linkStatus": "pending-verification" },
+    { "id": "PG02", "aiEvidence": "官方索引可讀，2026-07-13 更新；Chrome／Safari 仍待驗", "linkStatus": "pending-verification" },
+    { "id": "PG03", "aiEvidence": "原頁可直接開啟，顯示 2026-07-08 更新", "linkStatus": "ai-opened" },
+    { "id": "PG04", "aiEvidence": "官方原頁可讀，顯示 2026-06-22 更新", "linkStatus": "ai-opened" },
+    { "id": "PG05", "aiEvidence": "官方原頁可讀；仍須核當期適用條件", "linkStatus": "ai-opened" },
+    { "id": "PG06", "aiEvidence": "原頁可直接開啟", "linkStatus": "ai-opened" },
+    { "id": "PG07", "aiEvidence": "原頁可讀，2026-03-20 更新", "linkStatus": "ai-opened" },
+    { "id": "PG08", "aiEvidence": "原頁可直接開啟", "linkStatus": "ai-opened" },
+    { "id": "PG09", "aiEvidence": "原頁可直接開啟；逐項地方獎勵日期未核對", "linkStatus": "ai-opened" }
+  ]
+}

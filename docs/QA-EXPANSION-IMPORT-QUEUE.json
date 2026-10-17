@@ -11,7 +11,8 @@
     "官方資源網址與既有卡片完全相同 → 只在原卡補充文字；網址不同的全國性入口 → 主題頁簡潔文字入口；regions 為縣市 → 城市頁縣市篩選（需 serviceTypes 與 entryType）。",
     "本檔不是正式發布核准，不得加入 ownerPublicationApproval／productionApproved；正式版只讀 content/release-approvals.json。",
     "第一批 QA 試讀（EXP-QA-01-20261017，見 docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md）：exp-01、exp-08 → readli；exp-11、exp-12 → toward，並於首次 QA 前改用新 slug（previousUnpublishedSlug 只供追溯，未曾上線，不建 redirect）。此四篇仍 importToQa=false／pending，須站主另行明確同意才開啟；暫存模擬只用 docs/QA-EXPANSION-STAGING-FIRST-FOUR-2026-10-17.json。",
-    "第二批（EXP-QA-02-20261017）目錄依站主 2026-10-17 指示：B4 → readli；A1、A2、A4、B5 → toward。五篇仍 importToQa=false／pending；九篇整合暫存模擬只用 docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json。"
+    "第二批（EXP-QA-02-20261017）目錄依站主 2026-10-17 指示：B4 → readli；A1、A2、A4、B5 → toward。五篇仍 importToQa=false／pending；九篇整合暫存模擬只用 docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json。",
+    "站主撤稿（qaWithdrawal）：有 qaWithdrawal 的項目一律 importToQa=false，建置時若被改回 true 會直接失敗；原稿、查核紀錄與曾上公開 QA 的歷史都保留，不刪除。2026-10-17 站主撤下 exp-12（exp-compare-everyday-experiments），紀錄見 docs/QA-EXP-12-OWNER-WITHDRAWAL-2026-10-17.md。"
   ],
   "sourceFiles": {
     "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md": {
@@ -201,7 +202,16 @@
       "sourceCheck": "source-checked",
       "sourceCheckedOn": "2026-10-17",
       "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
-      "importToQa": true
+      "importToQa": false,
+      "qaWithdrawal": {
+        "status": "withdrawn-by-owner",
+        "decidedBy": "站主（網站擁有人）",
+        "decidedOn": "2026-10-17",
+        "reason": "站主完成第一輪公開 QA 試讀後主動撤稿：已閱讀全文，確認不需要保留。屬編輯決定，不是來源查核失敗。",
+        "previouslyOnPublicQa": true,
+        "record": "docs/QA-EXP-12-OWNER-WITHDRAWAL-2026-10-17.md",
+        "doNotReimport": true
+      }
     },
     {
       "id": "A1",
