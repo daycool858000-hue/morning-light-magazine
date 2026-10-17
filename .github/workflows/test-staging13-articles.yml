@@ -7,6 +7,7 @@ on:
     paths:
       - 'docs/STAGING13-*'
       - 'scripts/test-staging13-ci.mjs'
+      - 'tests/staging13-mobile-browser.test.mjs'
       - '.github/workflows/test-staging13-articles.yml'
   workflow_dispatch:
 
@@ -21,18 +22,27 @@ jobs:
   article-staging:
     name: 44篇原稿不變＋13篇模擬增加＋撤稿保護
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: 安裝 Chromium 與 WebKit 測試瀏覽器（不加入正式網站）
+        run: |
+          npm ci
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
       - name: 全程只在隔離 GitHub runner 產生 QA 測試輸出
         run: node scripts/test-staging13-ci.mjs
+      - name: 13篇新增閱讀版 Chromium／WebKit 手機版排版查核
+        run: node tests/staging13-mobile-browser.test.mjs
       - name: 保留隔離 HTML 測試成果（非公開網站）
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: youji-13-article-staging-html-only
-          path: dist-qa-staging13/
+          path: |
+            dist-qa-staging13/
+            test-results/staging13/
           retention-days: 7
