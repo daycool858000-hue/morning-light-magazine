@@ -180,6 +180,10 @@ const events = eventData.items
   .sort((a, b) => a.startDate.localeCompare(b.startDate));
 const editorialArticleCandidates = [...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6, ...qaExpansion.articles];
 const signedEditorialArticles = IS_QA ? editorialArticleCandidates : editorialArticleCandidates.filter(a => approvedLaunchArticle(a, launchApprovals));
+// 全部44篇均有逐字版本簽核時，正式版才沿用站主已驗收的「讀利26／向光18」完整編輯式版面。
+// 少於44篇的局部發布維持舊版布局，避免留下只有一半內容的向光索引。
+const RELEASE_EDITORIAL_LAYOUT = MODE === 'production' && editorialArticleCandidates.length === 44 && signedEditorialArticles.length === 44;
+const SHOW_EDITORIAL_LAYOUT = IS_QA || RELEASE_EDITORIAL_LAYOUT;
 const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...signedEditorialArticles]
   .sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
 // 城市福利六篇 QA 原稿可被載入以供版本比對，但 production 只准顯示逐篇簽核的版本。
@@ -567,7 +571,7 @@ const QA_DIRECTORY_COPY = {
     lead: '從學習、藝文、創業到生活技能與各種活動，循著興趣探索不同主題，閱讀文章並認識更多可能的學習機會。',
   },
 };
-const dirFor = (id) => (IS_QA && QA_DIRECTORY_COPY[id] ? { ...dirById[id], lead: QA_DIRECTORY_COPY[id].lead } : dirById[id]);
+const dirFor = (id) => (SHOW_EDITORIAL_LAYOUT && QA_DIRECTORY_COPY[id] ? { ...dirById[id], lead: QA_DIRECTORY_COPY[id].lead } : dirById[id]);
 
 /** 兩個目錄頁共用：放在頁面最前面的「支援資源」入口（連往同一個既有支援資源頁） */
 function supportEntry(prefix = '') {
@@ -729,29 +733,29 @@ const readliPriority = new Map(READLI_PRIORITY.map((slug, i) => [slug, i]));
 const towardReadingSet = new Set(TOWARD_READING_SLUGS);
 // 擴充文章不自動進讀利／向光：只有佇列 directory 明確指定時才接在原有清單之後，原 36 篇順序不變。
 const directoryArticles = articles.filter(a => !a.expansion);
-const readliBase = IS_QA ? directoryArticles.filter(a => !towardReadingSet.has(a.slug)).sort((a, b) =>
+const readliBase = SHOW_EDITORIAL_LAYOUT ? directoryArticles.filter(a => !towardReadingSet.has(a.slug)).sort((a, b) =>
   (readliPriority.get(a.slug) ?? Infinity) - (readliPriority.get(b.slug) ?? Infinity)
 ) : articles;
-const readliArticles = [...readliBase, ...(IS_QA ? qaExpansion.articles.filter(a => a.directory === 'readli') : [])];
-const towardExtra = IS_QA ? qaExpansion.articles.filter(a => a.directory === 'toward') : [];
-if (IS_QA && (directoryArticles.length !== readliBase.length + towardReadingSet.size ||
+const readliArticles = [...readliBase, ...(SHOW_EDITORIAL_LAYOUT ? qaExpansion.articles.filter(a => a.directory === 'readli') : [])];
+const towardExtra = SHOW_EDITORIAL_LAYOUT ? qaExpansion.articles.filter(a => a.directory === 'toward') : [];
+if (SHOW_EDITORIAL_LAYOUT && (directoryArticles.length !== readliBase.length + towardReadingSet.size ||
   TOWARD_READING_SLUGS.some(slug => !articles.some(a => a.slug === slug)) ||
   READLI_PRIORITY.some(slug => towardReadingSet.has(slug)))) {
   throw new Error('讀利／向光分流出現缺篇、重複或跨目錄混入');
 }
-if (IS_QA && READLI_PRIORITY.some((slug) => !articles.some((a) => a.slug === slug))) {
+if (SHOW_EDITORIAL_LAYOUT && READLI_PRIORITY.some((slug) => !articles.some((a) => a.slug === slug))) {
   throw new Error('讀利優先文章有不存在的 slug');
 }
 {
   const d = dirFor('quiet-power');
   const needs = categories.flatMap((c) => c.needs.map((n) => ({ text: n.text, cat: c.title, href: `${c.slug}#${n.topic === 'finder' ? 'finder' : n.topic}` })));
   const body = `
-${dirHead(d, IS_QA ? QA_DIRECTORY_COPY['quiet-power'].tip : '依照自己的需要選擇生活主題，也可以直接搜尋關鍵字。找到相關資源後，點選連結前往官方網站。', IS_QA ? `
+${dirHead(d, SHOW_EDITORIAL_LAYOUT ? QA_DIRECTORY_COPY['quiet-power'].tip : '依照自己的需要選擇生活主題，也可以直接搜尋關鍵字。找到相關資源後，點選連結前往官方網站。', SHOW_EDITORIAL_LAYOUT ? `
     <p class="dir-jump"><a href="#needs-title">從你想了解的事開始<span aria-hidden="true">&nbsp;↓</span></a></p>` : '')}
 ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   <div class="wrap">
     ${sectionHead('Reading', 'articles-title', '導讀文章')}
-    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '', { readli: IS_QA })).join('\n')}</div>
+    <div class="story-grid">${readliArticles.map((a) => articleCard(a, '', { readli: SHOW_EDITORIAL_LAYOUT })).join('\n')}</div>
   </div>
 </section>` : ''}
 <section class="section needs" aria-labelledby="needs-title">
@@ -772,7 +776,7 @@ ${articles.length ? `<section class="section" aria-labelledby="articles-title">
     </ul>
   </div>
 </section>`;
-  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: IS_QA ? 'dir-page readli-reading' : 'dir-page' }) });
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: SHOW_EDITORIAL_LAYOUT ? 'dir-page readli-reading' : 'dir-page' }) });
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
 }
 
@@ -792,9 +796,9 @@ function towardRows(topics) {
 {
   const d = dirFor('toward-light');
   const learning = catById.learning;
-  const editorial = IS_QA ? resolveTowardEditorial(articles, resources) : null;
+  const editorial = SHOW_EDITORIAL_LAYOUT ? resolveTowardEditorial(articles, resources, { requireOfficialLinks: IS_QA }) : null;
   const featured = FEATURED_RESOURCE_IDS.map((id) => resources.find((r) => r.id === id)).filter(Boolean);
-  const body = IS_QA ? `
+  const body = SHOW_EDITORIAL_LAYOUT ? `
 ${dirHead(d)}
 <section class="section toward-index" aria-labelledby="toward-index-title">
   <div class="wrap">
@@ -822,12 +826,12 @@ ${dirHead(d)}
     </div>
   </div>
 </section>
-<section class="section toward-official" aria-labelledby="toward-official-title">
+${editorial.official.length ? `<section class="section toward-official" aria-labelledby="toward-official-title">
   <div class="wrap">
     ${sectionHead('Official Links', 'toward-official-title', '延伸官方入口', '活動日期、報名資格與費用請以主辦機構當期公告為準。')}
     <ul class="toward-official-links">${editorial.official.map(r=>`<li><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(r.name)}</span><span aria-hidden="true">↗</span></a></li>`).join('')}</ul>
   </div>
-</section>` : `
+</section>` : ''}` : `
 ${dirHead(d)}
 <section class="section feature reverse" aria-labelledby="learn-title">
   <div class="wrap feature-grid">
@@ -861,8 +865,8 @@ ${dirHead(d)}
     ${featured.length ? `<div class="res-grid">${featured.map((r) => resourceCard(r, { anchor: false })).join('\n')}</div>` : emptyBox('官方資源正在查核中，完成後會陸續公開。')}
   </div>
 </section>`;
-  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: IS_QA ? 'dir-page toward-reading' : 'dir-page' }) });
-  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, IS_QA ? '向光 學習 活動 課程 生活探索 文章 藝文 文化 創業 親職 婦女中心 就業培訓 家庭教育 生活技能 公開課程' : '向光 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
+  pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: SHOW_EDITORIAL_LAYOUT ? 'dir-page toward-reading' : 'dir-page' }) });
+  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, SHOW_EDITORIAL_LAYOUT ? '向光 學習 活動 課程 生活探索 文章 藝文 文化 創業 親職 婦女中心 就業培訓 家庭教育 生活技能 公開課程' : '向光 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
 }
 
 // ---------- 分類頁共用 ----------
@@ -875,7 +879,7 @@ function categoryHero(c) {
       <p class="cat-hero-kicker">${icon(c.icon, 'cat-hero-icon')}<span>No.${c.no} · ${esc(c.kicker)}</span></p>
       <h1 id="page-title">${esc(c.title)}</h1>
       <p class="lead">${esc(c.intro)}</p>
-      ${IS_QA && c.id !== 'city' ? `<p class="cat-hero-jump"><a href="${c.id === 'learning' ? '#topics-title' : '#need-title'}">${c.id === 'learning' ? '直接探索學習主題' : '從你想了解的事開始'}<span aria-hidden="true">&nbsp;↓</span></a></p>` : ''}
+      ${SHOW_EDITORIAL_LAYOUT && c.id !== 'city' ? `<p class="cat-hero-jump"><a href="${c.id === 'learning' ? '#topics-title' : '#need-title'}">${c.id === 'learning' ? '直接探索學習主題' : '從你想了解的事開始'}<span aria-hidden="true">&nbsp;↓</span></a></p>` : ''}
     </div>
     <p class="note" role="note">${esc(c.notice)}</p>
   </div>
@@ -981,7 +985,7 @@ for (const c of categories) {
   const catArticles = articles.filter((a) => a.category === c.id);
   const body = `
 ${categoryHero(c)}
-${IS_QA ? articlesSection(catArticles) : ''}
+${SHOW_EDITORIAL_LAYOUT ? articlesSection(catArticles) : ''}
 <section class="section needs" aria-labelledby="need-title">
   <div class="wrap needs-grid">
     <div class="needs-intro"><span class="kicker">Start Here</span><h2 id="need-title">從需求開始</h2></div>
@@ -996,7 +1000,7 @@ ${pregnancyGuideSection(c)}`}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}${expansionEntries(c.id)}
   </div>
 </section>
-${IS_QA ? '' : articlesSection(catArticles)}
+${SHOW_EDITORIAL_LAYOUT ? '' : articlesSection(catArticles)}
 ${qaPortalSection(c.id)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: c.id, body, bodyClass: `cat-${c.id}` }) });
 }
@@ -1082,7 +1086,7 @@ ${IS_QA ? articlesSection(articles.filter((a) => a.category === 'city' && !qaBat
     .join('\n');
   const body = `
 ${categoryHero(c)}
-${IS_QA && catArticles.length ? articlesSection(catArticles) : ''}
+${SHOW_EDITORIAL_LAYOUT && catArticles.length ? articlesSection(catArticles) : ''}
 <section class="section" aria-labelledby="events-title">
   <div class="wrap">
     ${sectionHead('Upcoming', 'events-title', '近期活動', '名額與報名狀態以主辦機構公告為準。活動結束後會自動從這裡隱藏，但不代表活動已取消。')}
@@ -1101,7 +1105,7 @@ ${topicsSection(c)}
     ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}${expansionEntries(c.id)}
   </div>
 </section>
-${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}
+${!SHOW_EDITORIAL_LAYOUT && catArticles.length ? articlesSection(catArticles) : ''}
 ${qaPortalSection(c.id)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: [IS_QA ? 'assets/js/qa-activities.js' : 'assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
