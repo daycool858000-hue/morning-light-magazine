@@ -57,7 +57,7 @@
 - 編輯權威：PR #11 `docs/LIFE-FAMILY-PREGNANCY-OFFICIAL-ENTRY-EDITORIAL-PLAN-2026-10-17.md`（未合併到 QA 分支，只讀取）。資料轉成 `docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-2026-10-17.json`（`candidate-not-approved`），載入器 `scripts/lib/qa-pregnancy-guide.mjs`。
 - 前台（只在 QA）：主題 01 保留標題與 `#pregnancy`，「整理中」改為「查看孕期與生育資訊整理 →」連到同頁 `#pregnancy-guide`；閱讀區四段（產檢 PG01–02、生育給付 勞保/國保/無保別 PG03–05、工作權益 PG06–07、出生登記與地方補助 PG08–09），育兒津貼／托育／產假詳細制度用 `#childcare`、`#daycare`、`law.html#parental-leave`、`law.html#pregnancy-protection`、`city.html` 站內連結。無新卡片、圖片、表單、分類。preview／production HTML 與搜尋索引逐位元組不變。
 - 測試：新增 `tests/qa-pregnancy-guide.test.mjs`（16 項，已加入 `npm test`）、`tests/qa-pregnancy-browser.test.mjs`（Chromium 在 `npm test`、WebKit 在 `test:webkit-qa`，320／375／390／1280 各 12 項）；CI 上傳截圖 artifact `qa-pregnancy-guide-screenshots`。外站連結檢查：`node scripts/check-links-browser.mjs --set=pregnancy`，工作流程 `.github/workflows/qa-links-pregnancy.yml`。
-- **尚未核對的外部連結**：Claude 容器被代理擋下 `.gov.tw`，本機一筆都沒開成。PG01、PG02（國健署）在 ChatGPT 端也未完整開啟，維持「待驗」；九筆都未經站主臺灣實機點開。GitHub Actions 結果與截圖見 `docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-ACCEPTANCE-2026-10-17.md`。地方生育獎勵未逐縣市核對。
+- **尚未核對的外部連結**：Claude 容器被代理擋下 `.gov.tw`，本機一筆都沒開成。PG01、PG02（國健署）在 ChatGPT 端也未完整開啟，維持「待驗」；九筆都未經站主臺灣實機點開。GitHub Actions run `39000239040`（美國機房 Chromium）九筆都 200、標題相符，但不等於臺灣實機或站主核對；報告見 `docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-ACCEPTANCE-2026-10-17.md`。CI（`cae89bc`）push `39000238984`、pull_request `39000254287` success，WebKit 48 項通過；草稿 PR #15（base 為 QA 分支）。地方生育獎勵未逐縣市核對。
 - **下一步：停止，等 ChatGPT 工程驗收與站主同意**後才更新公開 QA（修改 `qa-public-preview.yml` 觸發）；正式發布另走 release-approvals 流程。
 
 ## 最新權威狀態｜2026-10-17 九篇全部進暫存（45 篇）更正版（上一節之前的最新狀態）

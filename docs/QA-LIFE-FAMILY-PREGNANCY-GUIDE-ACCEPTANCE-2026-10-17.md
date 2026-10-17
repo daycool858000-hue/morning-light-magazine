@@ -43,7 +43,7 @@
 | 原有 `npm test`（site 44、release-gate、qa-batch2 51、擴充 19／9／9、公開 QA 雙驗收 8） | 本機全部通過，未刪改任何既有測試 |
 | 新增 `tests/qa-pregnancy-guide.test.mjs`（靜態 16 項） | 本機通過 |
 | 新增 `tests/qa-pregnancy-browser.test.mjs --browser=chromium`（320／375／390／1280，48 項） | 本機通過 |
-| 同一測試 `--browser=webkit` | 本機沒有 WebKit，由 CI `npm run test:webkit-qa` 執行，結果見下方 CI 紀錄 |
+| 同一測試 `--browser=webkit` | 本機沒有 WebKit，由 CI 執行：48 項全部通過 |
 
 瀏覽器測試每個寬度都檢查：`#pregnancy` 直接開啟不被頁首遮住、十項索引排列不變、點擊跳到 `#pregnancy-guide`、九個官方連結可見且點擊區 ≥ 44px 不超出畫面、站內延伸連結 ≥ 44px、無水平捲動、點勞保局連結另開分頁前往原網址（以攔截方式確認，不連外站）、`#childcare`／回到索引／`law.html#parental-leave` 導覽、搜尋「產檢」點擊後到達 `#pregnancy-guide`、無 JavaScript 錯誤。
 
@@ -53,23 +53,32 @@
 - 閱讀區全段：`docs/qa-media/pregnancy-guide-chromium-320-2026-10-17.png`、`…-390-…`、`…-1280-…`；手機第一畫面 `…-390-viewport-…`
 - WebKit 四種寬度截圖：CI artifact `qa-pregnancy-guide-screenshots`（保存 14 天）
 
+## CI 紀錄（提交 `cae89bc`）
+
+| 工作 | Run | 結果 |
+|---|---|---|
+| 檢查與測試（push）：`npm test`＋WebKit 原有手機驗收＋`test:webkit-qa`（含孕期 WebKit 48 項） | `39000238984` | success |
+| 檢查與測試（pull_request，草稿 PR #15） | `39000254287` | success |
+| 孕期與生育官方連結瀏覽器檢查（Chromium，GitHub 美國機房） | `39000239040` | success：正常開啟 9、下載型 0、海外逾時／受阻 0、真正失效 0 |
+| WebKit／Chromium 四種寬度截圖 artifact `qa-pregnancy-guide-screenshots`（24 張，保存至 2026-10-31） | `39000238984` | 已上傳 |
+
 ## 五、外部官方連結查核（不得虛構成功）
 
 Claude 雲端容器的網路政策擋下 `.gov.tw`（代理回 403），**Claude 本機未能開啟任何一個官方網址**。下表 AI 證據欄是 PR #11 中 ChatGPT 的紀錄；CI 欄是 GitHub Actions（美國機房）Chromium 的結果，只代表當下能否開啟，不等於臺灣 iPhone／Chrome 實機結果。
 
 | ID | 網址 | ChatGPT 紀錄 | GitHub Actions Chromium | 狀態 |
 |---|---|---|---|---|
-| PG01 | https://www.hpa.gov.tw/194/s | 官方索引片段；open 曾 internal error | 待 CI | **待驗** |
-| PG02 | https://www.hpa.gov.tw/Pages/List.aspx?nodeid=195 | 官方索引可讀；Chrome／Safari 待驗 | 待 CI | **待驗** |
-| PG03 | https://www.bli.gov.tw/0109643.html | 原頁可開，2026-07-08 更新 | 待 CI | AI 已開啟 |
-| PG04 | https://www.bli.gov.tw/0109942.html | 原頁可讀，2026-06-22 更新 | 待 CI | AI 已開啟 |
-| PG05 | https://www.bli.gov.tw/0109943.html | 原頁可讀；當期適用條件仍須核 | 待 CI | AI 已開啟 |
-| PG06 | https://www.mol.gov.tw/1607/28162/28166/28268/28270/29101 | 原頁可開 | 待 CI | AI 已開啟 |
-| PG07 | https://www.mol.gov.tw/1607/28162/28166/28284/28294/84873/post | 原頁可讀，2026-03-20 更新 | 待 CI | AI 已開啟 |
-| PG08 | https://www.gov.tw/News_Content_2_371547 | 原頁可開 | 待 CI | AI 已開啟 |
-| PG09 | https://www.gov.tw/News_Content_26_635581 | 原頁可開；逐項地方獎勵日期未核對 | 待 CI | AI 已開啟 |
+| PG01 | https://www.hpa.gov.tw/194/s | 官方索引片段；open 曾 internal error | 200｜國民健康署 - 孕婦產前檢查項目及補助金額 | CI 可開；**臺灣手機 Safari／Chrome 待驗** |
+| PG02 | https://www.hpa.gov.tw/Pages/List.aspx?nodeid=195 | 官方索引可讀；Chrome／Safari 待驗 | 200｜國民健康署 - 孕婦產前健康照護衛教指導服務 | CI 可開；**臺灣手機 Safari／Chrome 待驗** |
+| PG03 | https://www.bli.gov.tw/0109643.html | 原頁可開，2026-07-08 更新 | 200｜勞保局 FAQ 生育給付「19. 勞工生…」 | AI＋CI 可開；站主未驗 |
+| PG04 | https://www.bli.gov.tw/0109942.html | 原頁可讀，2026-06-22 更新 | 200｜勞保局 國民年金 生育給付「12. 國民…」 | AI＋CI 可開；站主未驗 |
+| PG05 | https://www.bli.gov.tw/0109943.html | 原頁可讀；當期適用條件仍須核 | 200｜勞保局 國民年金 生育給付「13. 未參…」 | AI＋CI 可開；站主未驗 |
+| PG06 | https://www.mol.gov.tw/1607/28162/28166/28268/28270/29101 | 原頁可開 | 200｜促進工作平等措施－勞動部 | AI＋CI 可開；站主未驗 |
+| PG07 | https://www.mol.gov.tw/1607/28162/28166/28284/28294/84873/post | 原頁可讀，2026-03-20 更新 | 200｜「育嬰留停照顧彈性化」相關問答Q&A－勞動部 | AI＋CI 可開；站主未驗 |
+| PG08 | https://www.gov.tw/News_Content_2_371547 | 原頁可開 | 200｜我的E政府－申辦服務－出生登記 | AI＋CI 可開；站主未驗 |
+| PG09 | https://www.gov.tw/News_Content_26_635581 | 原頁可開；逐項地方獎勵日期未核對 | 200｜我的E政府－主題策展－安心懷孕及友善生養的措施與設施 | AI＋CI 可開；站主未驗 |
 
-**全部九筆都尚未經站主臺灣手機或電腦實際點開確認**；PG01、PG02 另有 AI 端無法完整開啟的紀錄。地方生育獎勵未逐縣市核對，頁面也未列任何縣市金額。
+GitHub Actions 這次九筆都回 200 且頁面標題與連結名稱相符，PG01、PG02 也已開啟；但 ChatGPT 端曾無法完整開啟 PG01、PG02，資料檔中的 AI 紀錄維持「pending-verification」不改。**全部九筆都尚未經站主臺灣手機或電腦實際點開確認**，頁面內容（金額、條件、更新日期）也未由 Claude 逐字比對。地方生育獎勵未逐縣市核對，頁面也未列任何縣市金額。
 
 ## 六、視覺規範符合程度
 
