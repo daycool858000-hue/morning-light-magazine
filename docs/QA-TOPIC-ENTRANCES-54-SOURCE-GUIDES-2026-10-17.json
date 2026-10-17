@@ -25,7 +25,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "supplement",
+      "clarification": ""
     },
     {
       "id": "childcare",
@@ -37,20 +39,15 @@
           "url": "https://twbaby.sfaa.gov.tw/home/index",
           "purpose": "查閱未滿2歲育兒津貼申請方式，必要時前往政府正式申辦系統。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "弱勢兒少及育兒相關補助整理",
-          "agency": "我的E政府（主要資料來源衛福部）",
-          "url": "https://www.gov.tw/News_Content_26_530026",
-          "purpose": "查詢不同兒童及家庭扶助制度與地方申請窗口。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "育兒津貼不等於托育補助，實際條件以孩子年齡、照顧形式及當期規定為準。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "育兒津貼與托育補助是不同制度，請依孩子年齡及照顧方式查詢。"
     },
     {
       "id": "daycare",
@@ -68,7 +65,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "查得到托育據點，不代表有名額或已符合補助資格。"
     },
     {
       "id": "parenting",
@@ -86,7 +85,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "single-parent",
@@ -104,7 +105,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "special-circumstances",
@@ -122,7 +125,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "單親家庭不一定符合「特殊境遇家庭扶助」的法定條件。"
     },
     {
       "id": "family-finance",
@@ -140,7 +145,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "急難救助與家庭一般補助分屬不同制度。"
     },
     {
       "id": "long-term-care",
@@ -165,7 +172,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "長照申請須經正式評估，與家庭照顧者支持服務可分別查詢。"
     },
     {
       "id": "respite",
@@ -183,7 +192,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "喘息服務須依照管評估安排，不保證提出申請即可取得服務。"
     },
     {
       "id": "local-family",
@@ -201,7 +212,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "請依所在縣市確認服務中心，不要用單一民間機構代替各地官方服務。"
     },
     {
       "id": "job-seeking",
@@ -219,7 +232,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "re-employment",
@@ -237,7 +252,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "vocational-training",
@@ -255,7 +272,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "employment-centers",
@@ -273,7 +292,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "entrepreneurship",
@@ -291,7 +312,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "startup-training",
@@ -309,7 +332,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "startup-guidance",
@@ -327,7 +352,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "startup-loans",
@@ -352,7 +379,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "青年創業貸款有年齡、企業等條件，並非所有女性創業者都適用。"
     },
     {
       "id": "workplace-skills",
@@ -370,7 +399,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "womens-health",
@@ -388,7 +419,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "menstrual",
@@ -406,7 +439,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "hormones",
@@ -424,7 +459,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "這是更年期衛教，不能代表所有荷爾蒙問題的診斷。"
     },
     {
       "id": "bodily-autonomy",
@@ -442,7 +479,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "boundaries",
@@ -460,7 +499,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "stress",
@@ -472,20 +513,15 @@
           "url": "https://dep.mohw.gov.tw/domhaoh/np-326-107.html",
           "purpose": "查官方心理健康衛教、心理支持方案及服務入口。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "心理健康文章閱讀",
-          "agency": "衛福部心快活",
-          "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
-          "purpose": "閱讀家庭、人際及情緒調適文章。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "不能將一般衛教當作醫師或諮商師個人治療。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "mental-support",
@@ -503,7 +539,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "counseling",
@@ -521,7 +559,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "support-programs",
@@ -539,7 +579,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "gender-equality-work",
@@ -557,7 +599,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "workplace-harassment",
@@ -575,7 +619,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "職場性騷擾的申訴與一般職場霸凌適用程序不同。"
     },
     {
       "id": "workplace-bullying",
@@ -587,20 +633,15 @@
           "url": "https://laws.mol.gov.tw/FLAW/FLAWDOC01.aspx?flno=8&id=FL106701",
           "purpose": "查霸凌申訴、防治及雇主處理程序規定。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "資遣與勞動爭議權益",
-          "agency": "勞動部",
-          "url": "https://www.mol.gov.tw/1607/28162/28296/81778/81784/81912/post",
-          "purpose": "另行查詢被資遣相關的法定權益，避免與霸凌概念混淆。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "2026年法規涉及不同身分、申訴對象與程序；本站只作一般導覽。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "parental-leave",
@@ -612,20 +653,15 @@
           "url": "https://www.mol.gov.tw/1607/28690/2282/2284/2320/7371/",
           "purpose": "查育嬰留停期間、申請方式與2026彈性規則。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "工作平等相關假別",
-          "agency": "我的E政府（勞動部）",
-          "url": "https://www.gov.tw/News_Content_26_530022",
-          "purpose": "查產假、產檢假及陪產假等制度。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "申請育嬰留停、津貼及產假依實際僱用／保險身分與新法規辦理。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "pregnancy-protection",
@@ -643,7 +679,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "dismissal",
@@ -655,20 +693,15 @@
           "url": "https://www.mol.gov.tw/1607/28162/28296/81778/81784/81912/post",
           "purpose": "查勞動基準法資遣條件與權益。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "資遣費給付標準",
-          "agency": "勞動部",
-          "url": "https://www.mol.gov.tw/1607/28162/28296/81778/81793/81935/",
-          "purpose": "查不同年資、適用法規的資遣費說明。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "不能只靠一個因素判斷解僱是否合法；需依個案事實及實際法規。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "legal-aid",
@@ -686,7 +719,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "intimate-images",
@@ -704,7 +739,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "official-complaints",
@@ -729,7 +766,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "購物、勞動與人身安全事件應使用不同主管機關的管道。"
     },
     {
       "id": "women-centers",
@@ -741,20 +780,15 @@
           "url": "https://women.kcg.gov.tw/",
           "purpose": "查看婦女館的場域使用、女性培力及活動資訊。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "各地政府社福主管機關",
-          "agency": "衛福部社會安全網",
-          "url": "https://topics.mohw.gov.tw/SS/lp-4528-204.html",
-          "purpose": "先按縣市找到在地官方社福服務入口。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "高雄婦女館僅為高雄當地服務示例，不能寫成全國婦女中心名錄；其他縣市需按所在地查。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "empowerment-centers",
@@ -772,7 +806,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "legal-aid-offices",
@@ -790,7 +826,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "social-affairs",
@@ -808,7 +846,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "health-bureaus",
@@ -820,20 +860,15 @@
           "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-7412-70356-107.html",
           "purpose": "查各縣市社區心理衛生中心所在地與官方附檔。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "各縣市社區心理諮商服務",
-          "agency": "衛福部心理健康司",
-          "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html",
-          "purpose": "直接查看縣市心理服務與諮詢窗口。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "心理衛生名冊不等於全部衛生局業務資料；醫療、公共衛生及防疫另依各地衛生局。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "labor-offices",
@@ -845,20 +880,15 @@
           "url": "https://job.taiwanjobs.gov.tw/Internet/Index/DocDetail.aspx?docid=6649&uk=2759",
           "purpose": "按縣市開啟地方勞工局處原始網站。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "公立就業服務據點地圖",
-          "agency": "台灣就業通",
-          "url": "https://job.taiwanjobs.gov.tw/internet/index/service_location_map.aspx",
-          "purpose": "查公立就業中心地點、服務項目與聯絡方式。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "各縣市主管機關與就服據點可能不是同一機構，請按需求選擇。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "family-welfare",
@@ -870,20 +900,15 @@
           "url": "https://topics.mohw.gov.tw/SS/lp-4528-204.html",
           "purpose": "按居住地查看社福中心及家庭服務轄區。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "單親與特殊境遇家庭福利",
-          "agency": "我的E政府",
-          "url": "https://www.gov.tw/News_Content_26_694361",
-          "purpose": "查看全國制度與縣市申辦連結。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "地方額外福利、申辦方式與資格可能有差異，不以某一縣市金額代表全臺。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "ltc-support",
@@ -908,7 +933,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": "找到長照服務據點不代表已通過補助或照顧需求評估。"
     },
     {
       "id": "ngo-services",
@@ -920,20 +947,15 @@
           "url": "https://www.goh.org.tw/services/",
           "purpose": "按家庭、移住者及性別暴力等實際服務類型查詢，再看各地據點。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "現代婦女基金會全國服務據點",
-          "agency": "現代婦女基金會（民間組織）",
-          "url": "https://www.38.org.tw/about/location",
-          "purpose": "查該基金會本部、工作站與法律／保護服務據點。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "兩個組織不代表所有非營利機構；個別委辦或補助仍依政府和該機構公告。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "women-center-courses",
@@ -951,7 +973,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "job-training",
@@ -969,7 +993,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "startup-talks",
@@ -987,7 +1013,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "family-education",
@@ -1005,7 +1033,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "parenting-courses",
@@ -1023,7 +1053,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "replace",
+      "clarification": ""
     },
     {
       "id": "life-skills",
@@ -1041,7 +1073,9 @@
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "open-learning",
@@ -1053,20 +1087,15 @@
           "url": "https://lle.moe.edu.tw/lesson-resource/",
           "purpose": "查看可查詢的終身學習課程。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "文化部 iCulture 藝文活動與文化空間",
-          "agency": "文化部",
-          "url": "https://cloud.culture.tw/",
-          "purpose": "查公開展覽、演出及文化場館資訊。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "免費瀏覽網站不代表參與活動免費或不需報名。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     },
     {
       "id": "local-events",
@@ -1078,20 +1107,17 @@
           "url": "https://event.culture.tw/",
           "purpose": "依藝文活動、館所及地區查看官方活動。",
           "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
-        },
-        {
-          "name": "終身學習課程與地方活動查詢",
-          "agency": "教育部",
-          "url": "https://lle.moe.edu.tw/lesson-resource/",
-          "purpose": "查各地公開課程與資源。",
-          "evidenceType": "官方或機構本身公開的原始服務／查詢頁；原文用途已由AI研究，仍須CI逐筆外連回歸"
         }
       ],
       "caution": "是否開放報名、收費及入場方式一律以活動原頁最新公告為準。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
-      "publishMode": "qa-candidate-only"
+      "publishMode": "qa-candidate-only",
+      "displayMode": "keep",
+      "clarification": ""
     }
-  ]
+  ],
+  "presentationPolicy": "已有合適入口照舊；空白或連到錯誤／總首頁者只補1–2個直接入口。保留既有主題說明文字。僅對容易混淆的12項加1句提醒。完整機關、用途、AI查核證據保存於資料JSON而不在手機畫面重複。",
+  "clarificationCount": 12
 }
