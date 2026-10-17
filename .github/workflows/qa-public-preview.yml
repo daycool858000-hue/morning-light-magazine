@@ -56,6 +56,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: 建置已授權的45篇公開QA和獨立正式版快照
         run: |
+          node scripts/build.mjs --mode=preview --out=dist
           node scripts/build.mjs --mode=production --out=dist-production
           node scripts/build.mjs --mode=qa --out=dist-qa
           node tests/site.test.mjs
