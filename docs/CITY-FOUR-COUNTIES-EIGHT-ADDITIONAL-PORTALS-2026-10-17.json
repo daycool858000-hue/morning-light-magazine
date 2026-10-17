@@ -1,0 +1,184 @@
+{
+  "title": "《由己》四縣市新增八筆在地服務原頁研究候選（基隆、新竹市、宜蘭、苗栗）",
+  "asOf": "2026-10-17",
+  "auditedBy": "ChatGPT（AI 官方網頁用途初核；非人工或 Safari 驗收）",
+  "documentType": "editorial-local-resource-candidates",
+  "status": "research-only-unpublished",
+  "ownerApproved": false,
+  "importToQa": false,
+  "qaDeployed": false,
+  "productionApproved": false,
+  "scope": "四縣市八個不同網址，對應六縣市17筆之外的新增閱讀與查詢線索；其中同中心的延伸頁只能作副連結，不新增重複大卡。僅為局部服務深度，不代表縣市五層完整驗收。",
+  "regionGroups": [
+    {
+      "region": "keelung",
+      "government": "基隆市政府社會處",
+      "entries": [
+        {
+          "id": "kl-women-children-center",
+          "name": "基隆市婦幼福利服務中心",
+          "url": "https://www.klcg.gov.tw/tw/social/3604.html",
+          "entryLevel": "specific-facility-government-page",
+          "serviceTypes": [
+            "婦女福利",
+            "育兒與家庭",
+            "教育與學習"
+          ],
+          "purpose": "了解安樂區婦幼福利中心的休閒、閱讀、親子與生活學習空間。",
+          "sourcePublished": "2021-09-08",
+          "sourceLastUpdated": "2022-08-11",
+          "caution": "官方頁最後更新在2022，不能當作2026目前開館、場地與電話已確認；如正式顯示時段，須另查主管機關。",
+          "display": "單一中心文字入口，暫不列舊時段或電話",
+          "sourceReview": "government-direct-page-read-older-service-details-needs-recheck"
+        },
+        {
+          "id": "kl-international-family-center",
+          "name": "基隆市國際（新住民）家庭服務中心",
+          "url": "https://www.klcg.gov.tw/tw/social/2767-304576.html",
+          "entryLevel": "specific-service-center-government-page",
+          "serviceTypes": [
+            "社會福利",
+            "新住民服務",
+            "教育與學習"
+          ],
+          "purpose": "新住民家庭生活資訊、資源轉介、支持性活動及課程的正式服務介紹。",
+          "sourcePublished": "2025-07-29",
+          "sourceLastUpdated": "2025-10-30",
+          "caution": "同一政府原頁中文服務地點寫麥金路482號5樓，越文段落為428號；不得擅自選一個當確認地址。請先由主管機關核對，活動與服務時段仍需確認。",
+          "display": "新住民在地中心文字入口，暫隱藏有衝突的地址",
+          "sourceReview": "government-direct-page-read-cross-language-conflict"
+        }
+      ]
+    },
+    {
+      "region": "hsinchu-city",
+      "government": "新竹市政府社會處／新竹市婦女館",
+      "entries": [
+        {
+          "id": "hccg-women-house",
+          "name": "新竹市婦女館",
+          "url": "https://wpcw.hccg.gov.tw/",
+          "entryLevel": "municipal-women-center-portal",
+          "serviceTypes": [
+            "婦女福利",
+            "教育與學習",
+            "藝文活動"
+          ],
+          "purpose": "女性成長學習、館舍服務、藝文活動及主題課程公告。",
+          "caution": "只能稱長期官方查詢入口；2026年10月公告不代表往後可報名，也不能宣稱全部免費。",
+          "display": "婦女館單一主要入口",
+          "sourceReview": "official-center-portal-read-2026-current-news"
+        },
+        {
+          "id": "hccg-women-courses",
+          "name": "新竹市婦女館課程查詢與報名",
+          "url": "https://wpcw.hccg.gov.tw/course/",
+          "entryLevel": "specific-course-booking-page",
+          "serviceTypes": [
+            "教育與學習",
+            "藝文活動"
+          ],
+          "purpose": "直接查看館內各月份課程、條件、報名方式與材料費資訊。",
+          "caution": "此頁明確要求部分委辦課程到外部網站註冊會員及線上報名，可能有材料費及居住、年齡資格限制；《由己》自己不收資料，不能把外站誤寫為免註冊免費。當期名額屬動態資訊。",
+          "display": "婦女館主要入口的附屬文字連結，不再複製第二大卡",
+          "sourceReview": "official-course-page-read-current-month"
+        },
+        {
+          "id": "hccg-immigrant-family-center",
+          "name": "新竹市新住民家庭服務中心",
+          "url": "https://www.hsfs.org.tw/about/",
+          "entryLevel": "local-government-commissioned-center-operator-page",
+          "serviceTypes": [
+            "新住民服務",
+            "育兒與家庭",
+            "教育與學習"
+          ],
+          "purpose": "中心提供新住民諮詢、生活適應、資源連結與家庭成長活動介紹。",
+          "caution": "中心站是委辦單位域名而非gov.tw；與新竹市社會處新住民家庭服務官方清單交叉佐證。課程當期名額、收費、接待時段仍須確認。",
+          "corroboratingGovernmentUrl": "https://society.hccg.gov.tw/ch/home.jsp?id=110&parentpath=0%2C3%2C23",
+          "display": "當地新住民中心獨立文字入口",
+          "sourceReview": "operator-direct-page-read-government-corroborated"
+        }
+      ]
+    },
+    {
+      "region": "yilan",
+      "government": "宜蘭縣政府社會處",
+      "entries": [
+        {
+          "id": "il-women-immigrant-family-center",
+          "name": "宜蘭縣婦女暨新住民家庭服務中心",
+          "url": "https://sntroot.e-land.gov.tw/cp.aspx?n=10392&s=1782",
+          "entryLevel": "specific-center-government-page",
+          "serviceTypes": [
+            "婦女福利",
+            "新住民服務",
+            "育兒與家庭"
+          ],
+          "purpose": "查詢婦女與新住民家庭的福利資訊、通譯、成長活動及資源連結。",
+          "caution": "此頁列有中心聯絡及服務時段，但未以電話或現場驗證2026-10當天實際接待；活動課程以當期公告為準。婦女與新住民服務共用本頁，勿拆兩張同網址卡。",
+          "display": "婦女暨新住民中心單一文字入口",
+          "sourceReview": "government-direct-service-page-read"
+        }
+      ]
+    },
+    {
+      "region": "miaoli",
+      "government": "苗栗縣政府社會處",
+      "entries": [
+        {
+          "id": "ml-women-center-growth",
+          "name": "苗栗縣婦女福利服務中心｜婦女成長與空間",
+          "url": "https://www.miaoli.gov.tw/News_Content.aspx?n=5615&s=260664",
+          "entryLevel": "specific-center-government-page",
+          "serviceTypes": [
+            "婦女福利",
+            "教育與學習",
+            "藝文活動"
+          ],
+          "purpose": "查詢婦女成長課程、婦嗑電影院及空間使用規定的正式介紹。",
+          "sourceLastUpdated": "2026-08-31",
+          "caution": "場地借用可能涉及管理和收費規定；2026公告不代表所有活動免費或仍有名額。新住民服務 NI-13 的官方總入口已有候選，不重複加入。",
+          "display": "苗栗婦女中心主要文字入口",
+          "sourceReview": "government-direct-page-read"
+        },
+        {
+          "id": "ml-women-center-resources",
+          "name": "苗栗縣婦女福利服務中心｜服務與培力內容",
+          "url": "https://www.miaoli.gov.tw/News_Content.aspx?n=5615&s=698494",
+          "entryLevel": "specific-center-service-description",
+          "serviceTypes": [
+            "婦女福利",
+            "職涯與創業",
+            "教育與學習"
+          ],
+          "purpose": "說明婦女中心的專業諮詢、婦女團體培力、成長及閱讀／電影活動的服務範圍。",
+          "sourceLastUpdated": "2026-09-06",
+          "caution": "同一苗栗婦女中心服務詳細介紹，不另設第二張大卡；頁內回顧過去兩年的活動，不能將過往個案或活動寫成當期招生。場地部分免費條件有限定。",
+          "display": "苗栗婦女中心下的服務介紹延伸連結",
+          "sourceReview": "government-direct-page-read"
+        }
+      ]
+    }
+  ],
+  "checksToComplete": [
+    "iPhone Safari 逐一開啟 8 個不同網址，以及新竹市官方委辦交叉頁。",
+    "基隆國際家庭中心中文及越南文地址 482／428 衝突須向主管機關確認；未確認前不顯示完整地點。",
+    "基隆婦幼福利中心政府頁最後更新2022年，查核2026目前開放狀態；不可照舊頁直接填營業時間。",
+    "新竹市婦女館課程外站註冊及可能收取材料費，應與《由己》免登入的本站服務區隔。",
+    "苗栗婦女中心2026政府主頁與苗栗新住民資訊網的過時聯絡資訊需區分，NI-13 不增加同用途重複卡。",
+    "確認八個連結用途與既有 city、NI 候選 URL 完全重複情形；主卡／副連結區分。",
+    "活動與課程更新日不等於開放報名日；不得當作2027年當期公告。"
+  ],
+  "totals": {
+    "countiesWithNewPartialDepth": 4,
+    "distinctCandidateUrls": 8,
+    "earlierCountiesWithPartialDepth": 6,
+    "earlierDistinctUrls": 17,
+    "cumulativeCountiesWithPartialDepth": 10,
+    "cumulativeDistinctUrlsIfNoNewOverlap": 25,
+    "fullyAuditedCounties": 0,
+    "qaImportedEntries": 0
+  },
+  "auditPolicy": "來源用途 AI 初核，僅寫入 PR #11 內容分支。不得更動 content/release-approvals.json、匯入 QA、合併 main 或部署 GitHub Pages。"
+}
