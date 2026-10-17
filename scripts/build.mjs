@@ -853,15 +853,23 @@ function topicsSection(c) {
         .map((t, i) => {
           const guide = qaTopicGuides.byId[t.id];
           const related = resources.filter((r) => r.topics.includes(t.id));
-          const list = guide
+          const existing = related.length
+            ? `<ul class="topic-links">${related.map((r) => `<li><a href="#res-${esc(r.id)}">${esc(r.name)}</a></li>`).join('')}</ul>`
+            : `<p class="pending">官方入口整理與查核中。</p>`;
+          // 實際已經有合適連結就保持舊版；只修空白及連結不精確的主題。
+          const minimalLinks = guide && guide.displayMode !== 'keep'
             ? `<ul class="topic-links topic-guide-links">${guide.links.map((link) => `<li>
-              <a href="${esc(link.url)}" target="_blank" rel="noopener noreferrer">${esc(link.name)} <span aria-hidden="true">↗</span></a>
-              <span class="topic-guide-purpose">${esc(link.agency)}｜${esc(link.purpose)}</span>
-            </li>`).join('')}</ul><p class="topic-guide-caution">${esc(guide.caution)}</p>`
-            : related.length
-              ? `<ul class="topic-links">${related.map((r) => `<li><a href="#res-${esc(r.id)}">${esc(r.name)}</a></li>`).join('')}</ul>`
-              : `<p class="pending">官方入口整理與查核中。</p>`;
-          return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(guide ? guide.intro : t.text)}</p>${list}</div></li>`;
+              <a href="${esc(link.url)}" target="_blank" rel="noopener noreferrer">${esc(link.name)}<span aria-hidden="true"> ↗</span></a>
+            </li>`).join('')}</ul>`
+            : '';
+          const list = !guide || guide.displayMode === 'keep'
+            ? existing
+            : guide.displayMode === 'supplement' && related.length
+              ? existing + minimalLinks
+              : minimalLinks;
+          const clarification = guide?.clarification
+            ? `<p class="topic-guide-clarification">${esc(guide.clarification)}</p>` : '';
+          return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${list}${clarification}</div></li>`;
         })
         .join('\n')}
     </ol>
