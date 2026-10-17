@@ -30,11 +30,14 @@ check('AI編輯資料仍未核准公開QA及正式發布',data.ownerApproved===f
  data.importToPublicQa===false && data.productionApproved===false);
 check('連結有機關名稱、實際用途與原始HTTPS網址',data.topics.every(t=>t.links?.length>=1 &&
  t.links.every(l=>/^https:\/\//.test(l.url)&&l.name&&l.agency&&l.purpose)));
+check('育兒津貼移除私人申辦網址，改沿用原有官方機關',guidemap.childcare.displayMode==='keep' &&
+ guidemap.childcare.links[0].url==='https://www.sfaa.gov.tw/' &&
+ !JSON.stringify(guidemap.childcare).includes('twbaby.sfaa.gov.tw'));
 check('婦女中心單一地方頁標為高雄地方示例，不冒充全國名錄',guidemap['women-centers'].links[0].name.includes('地方服務示例') && guidemap['women-centers'].caution.includes('高雄'));
 check('更年期衛教資料不混用未核實的年份',!/(?:2017|2024|2025)年/.test([guidemap.hormones.links[0].purpose,guidemap.hormones.links[0].evidenceType,guidemap.hormones.caution].join(' ')));
 check('只對容易混淆的12項加一句',data.topics.filter(t=>t.clarification).length===12);
 const modes=data.topics.reduce((o,t)=>(o[t.displayMode]=(o[t.displayMode]||0)+1,o),{});
-check('已適合的11項保留，另4項補一個直達入口、39項修正或填空；孕產仍由PR15處理',modes.keep===11&&modes.supplement===4&&modes.replace===39);
+check('原有11項保留，育兒津貼改回原入口，另4項補充、38項修正或填空；孕產仍由PR15處理',modes.keep===12&&modes.supplement===4&&modes.replace===38);
 
 let guard=false;
 try{execFileSync(process.execPath,['scripts/build.mjs','--mode=qa','--out=dist-qa'],{
@@ -51,17 +54,25 @@ execFileSync(process.execPath,['scripts/build.mjs','--mode=qa','--out=dist-qa-to
  cwd:ROOT,env:{...process.env,QA_TOPIC_GUIDES_STAGING:'1'},stdio:'inherit'
 });
 
-let preserved=0,repaired=0,shownLinks=0,notes=0,retainedTopics=0,retainedAnchors=0;
+let preserved=0,originalKeep=0,repaired=0,shownLinks=0,notes=0,retainedTopics=0,retainedAnchors=0;
 for(const cat of cats){
  const current=await read('dist-qa-topic54-base/'+cat.id+'.html');
  const candidate=await read('dist-qa-topic54/'+cat.id+'.html');
  check(cat.title+'所有原有錨點及主題說明仍在'+(cat.id==='life-family'?'（主題 01 沿用 PR #17 孕產導覽）':''),cat.topics.every(t=>
  candidate.includes('id="'+t.id+'"')&&(t.id==='pregnancy'||candidate.includes('<p>'+escape(t.text)+'</p>'))));
- check(cat.title+'39項待補主題不再顯示空白；孕產交由PR15避免重複',cat.topics.filter(t=>t.id!=='pregnancy').every(t=>!topicArea(candidate,t.id).includes('官方入口整理與查核中')));
+ check(cat.title+'38項待補主題不再顯示空白；孕產交由PR15避免重複',cat.topics.filter(t=>t.id!=='pregnancy').every(t=>!topicArea(candidate,t.id).includes('官方入口整理與查核中')));
  for (const t of cat.topics){
   const row=guidemap[t.id],before=topicArea(current,t.id),after=topicArea(candidate,t.id);
   if(row.displayMode==='keep'){
-   if(before!==after)throw Error('原本正確的入口被更動 '+t.id);
+   if(t.id==='childcare'){
+     // 站主確認原私人申辦網址無法公開瀏覽：回原有社家署站內資源卡，加簡潔制度提醒。
+     if(!before.includes('href="#res-sfaa"') || !after.includes('href="#res-sfaa"') ||
+        !after.includes(escape(row.clarification)) || after.includes('twbaby.sfaa.gov.tw'))
+       throw Error('育兒津貼原有公開機關入口未保留，或出現私人網址');
+   }else{
+     if(before!==after)throw Error('原本正確的入口被更動 '+t.id);
+     originalKeep++;
+   }
    preserved++;
    continue;
   }
@@ -90,9 +101,9 @@ for(const cat of cats){
   repaired++;
  }
 }
-check('原有23主題的站內資源跳轉均未被新的外部直達入口取代',retainedTopics===23 && retainedAnchors>=23);
-check('11個已合適的入口原HTML片段完全不變',preserved===11);
-check('43項精確改善（39修補、4補充），原有主題文案保留',repaired===43 && shownLinks>=43);
+check('其餘22個原有站內跳轉都未被新官方原頁取代',retainedTopics===22 && retainedAnchors>=22);
+check('原11個正常入口不變、育兒津貼回原機關入口並補說明',preserved===12 && originalKeep===11);
+check('42項精確改善（38修補、4補充），原有主題文案保留',repaired===42 && shownLinks>=42);
 check('12條必要提醒只出現在修補主題',notes<=12 && notes>=10);
 const old=(await readdir(path.join(ROOT,'dist-qa-topic54-base/articles'))).filter(x=>x.endsWith('.html')).sort();
 const now=(await readdir(path.join(ROOT,'dist-qa-topic54/articles'))).filter(x=>x.endsWith('.html')).sort();
