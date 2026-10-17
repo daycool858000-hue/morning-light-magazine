@@ -16,12 +16,15 @@
 # 僅由單獨 QA 分支修改此 workflow 檔案時發布，避免其他研究提交意外公開。
 name: 由己｜公開測試預覽（非正式網站）
 
+# 《由己》正式公開後仍使用同一 GitHub Pages 網址，禁止任何普通 QA push 自動把正式版蓋掉。
+# 要在同一網址重新發布 QA，須站主知道會取代當前正式站並在 Actions 手動輸入確認字串。
 on:
-  push:
-    branches:
-      - qa/public-nine-articles-20261017
-    paths:
-      - .github/workflows/qa-public-preview.yml
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: '警告：會覆蓋目前公開網站，請輸入「我確認覆蓋目前網站」'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -34,7 +37,7 @@ concurrency:
 
 jobs:
   preview:
-    if: ${{ github.ref == 'refs/heads/qa/public-nine-articles-20261017' }}
+    if: ${{ github.ref == 'refs/heads/qa/public-nine-articles-20261017' && github.event.inputs.confirm == '我確認覆蓋目前網站' }}
     environment:
       name: qa-public-preview
       url: ${{ steps.deploy.outputs.page_url }}
