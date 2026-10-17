@@ -1,0 +1,366 @@
+{
+  "date": "2026-10-17 (Asia/Taipei)",
+  "type": "Owner-reported link openability retest",
+  "testLocation": "Taiwan device as reported by site owner; browser specifics and source text not independently inspected",
+  "ownerReport": "『剛剛30個連結都能點喔，3個異常也能點，E01你顯示要下架我沒有點』",
+  "meaning": "33筆此前在GitHub美國Chromium被擋／錯誤頁的網址，站主回報皆可點開；此確認僅代表站主所述的可點開狀態，不表示逐條逐字核對頁內最新政策、機構服務或法律條件。",
+  "counts": {
+    "overseasPreviouslyBlockedOwnerCanOpen": 30,
+    "anomalyPagesPreviouslyReturnedErrorsOwnerCanOpen": 3,
+    "totalOwnerReportedOpenable": 33,
+    "downloadNotTested": 1
+  },
+  "originalEvidence": {
+    "source": "docs/SITE-AUDIT-2026-10-17-177-ACTUAL-QA-OUTBOUND-URL-RESULTS.json",
+    "runId": 39008335766,
+    "retainOriginalCiStatuses": true
+  },
+  "publisherDecisions": {
+    "B04": "2021舊創業公告參考移除，不因可開而恢復",
+    "B11": "保留現行服飾標示基準法律依據",
+    "C02": "保留故宮典藏檢索，保留故宮導讀文章",
+    "C03": "移除Open Data和過度具體的授權敘述",
+    "E01": "exp-12撤稿同步移除附件引用，站主未測試"
+  },
+  "urls": [
+    {
+      "url": "https://www.sme.gov.tw/women/article-women-3327-18767",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://ktec.kcg.gov.tw/News_Content.aspx?n=375B9007450F0834&s=6C5B13906870DE0A&sms=6019AE33FC9987A2",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=198",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://startup.sme.gov.tw/home/modules/news/detial.php?sId=1343",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=243",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://findbiz.nat.gov.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://digitalarchive.npm.gov.tw/Collection",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://digitalarchive.npm.gov.tw/opendata/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://www.npm.gov.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://startup.sme.gov.tw/home/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://startup.sme.gov.tw/home/modules/rproject/detail/?sId=38",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://ocw.aca.ntu.edu.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://ocw.aca.ntu.edu.tw/faqs",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://insprod.tii.org.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://laws.mol.gov.tw/FLAW/FLAWDAT0202.aspx?id=FL015154&ldate=20240117",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://pip.moi.gov.tw/Publicize/Info/B1020?n=34813&sms=0",
+      "previousGitHubUsChromeStatus": "returned-error-or-rejection-page",
+      "previousGitHubHttpStatus": 200,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://pip.moi.gov.tw/Publicize/Info/B5020?mode=P4",
+      "previousGitHubUsChromeStatus": "returned-error-or-rejection-page",
+      "previousGitHubHttpStatus": 200,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://law.moea.gov.tw/LawContent.aspx?id=GL000482",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://www.moea.gov.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://sps.mohw.gov.tw/mhs",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://www.sfaa.gov.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://social.yunlin.gov.tw/Default.aspx",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": 403,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://sa.hl.gov.tw/",
+      "previousGitHubUsChromeStatus": "returned-error-or-rejection-page",
+      "previousGitHubHttpStatus": 500,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://social.hsinchu.gov.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://www.pthg.gov.tw/PlanJdp/default.aspx",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://welfare.nantou.gov.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://www.penghu.gov.tw/Society/index.jsp",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    },
+    {
+      "url": "https://ifi.immigration.gov.tw/",
+      "previousGitHubUsChromeStatus": "overseas-blocked",
+      "previousGitHubHttpStatus": null,
+      "ownerReportedOpenable": true,
+      "contentVerifiedByOwner": false,
+      "contentVerifiedOnTaiwanDevice": false,
+      "needsFurtherOpenabilityRetest": false,
+      "needsContentAndCurrencyVerificationWhereRelevant": true
+    }
+  ],
+  "untestedDownloads": [
+    {
+      "url": "https://www.ntsec.gov.tw/article/FileAtt.ashx?id=6193",
+      "originalKind": "download",
+      "ownerTested": false,
+      "disposition": "exp-12 withdrawn from QA on next authorized integration; retain historical research only"
+    }
+  ],
+  "releaseBoundary": "Only an editorial research record. No live QA deployment, no formal article approvals, no modification to existing historical CI results. AI review is not owner fact-by-fact approval."
+}

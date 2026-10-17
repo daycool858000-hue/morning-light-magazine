@@ -1,0 +1,409 @@
+{
+  "documentType": "editorial-qa-candidate-data",
+  "title": "由己新住民及多語資訊 13 項正式來源候選",
+  "researchDate": "2026-10-16",
+  "status": "research-pending-source-recheck",
+  "ownerRequestedScope": "全部 13 項保留並逐一核對；只有 URL 完全相同才共用原卡，網址不同即各自以簡潔文字入口呈現，同機構不表示必須合併",
+  "ownerPublicationApproval": false,
+  "sourceDocuments": [
+    "editorial/batch7-9-source-review-20261016/docs/NEW-IMMIGRANT-ROUND2-OFFICIAL-PRIMARY-SOURCES-AND-LANGUAGE-STATUS-2026-10-16.md",
+    "editorial/batch7-9-source-review-20261016/docs/NEW-IMMIGRANT-MULTILINGUAL-RESOURCE-AUDIT-AND-ENGLISH-EXPANSION-2026-10-16.md"
+  ],
+  "existingQaImmigrationResources": [
+    "qa-en-nia",
+    "qa-en-ifi",
+    "qa-en-1990"
+  ],
+  "legalStatusWarning": "新住民基本法若涉尚未生效條文，不能稱為已全面施行。",
+  "items": [
+    {
+      "id": "NI-01",
+      "name": "我的 E 政府｜新住民照顧服務總覽",
+      "url": "https://www.gov.tw/News_Content_26_805862",
+      "category": "life-family",
+      "region": "national",
+      "purpose": "生活、醫療、教育、就業及地方服務的跨部會官方入口",
+      "caution": "原總覽可能含舊年度資格或金額；本站不重製補助表",
+      "display": "own-text-entry",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "我的 E 政府跨部會新住民入口原頁可讀；總覽更新 2025-03-31，內文舊年金額與資格不可引用為 2026 現行規則",
+        "source": "https://www.gov.tw/News_Content_26_805862",
+        "status": "official-page-verified-purpose-only"
+      }
+    },
+    {
+      "id": "NI-02",
+      "name": "台灣就業通｜新住民求職、職訓專區",
+      "url": "https://job.taiwanjobs.gov.tw/Internet/special2/foreignspouse/index.aspx",
+      "category": "career",
+      "region": "national",
+      "purpose": "求職登記、職訓、就業權益及創業資源入口",
+      "caution": "職缺數與開課日期需以原站即時公告為準",
+      "display": "own-text-entry",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "勞動部台灣就業通新住民專區原頁可讀；求職、就業權益、職訓、技能與創業分類確認，職缺數即時變動不可搬本站",
+        "source": "https://job.taiwanjobs.gov.tw/Internet/special2/foreignspouse/index.aspx",
+        "status": "official-page-verified-purpose-only"
+      }
+    },
+    {
+      "id": "NI-03",
+      "name": "勞動部｜多語新住民就業資源簡介",
+      "url": "https://www.wda.gov.tw/News_Content.aspx?n=156&s=18648",
+      "category": "career",
+      "region": "national",
+      "purpose": "中文、越南語、印尼語、英語、泰語就業文宣入口（依前輪研究）",
+      "caution": "逐語文件年度、連結與可下載狀態須再核對；不轉載 PDF",
+      "display": "own-compact-text-link",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "勞動部勞動力發展署正式頁可見中文、越文、印文、英文、泰文 PDF 清單；尚未逐一下載開啟檔案",
+        "source": "https://www.wda.gov.tw/News_Content.aspx?n=156&s=18648",
+        "status": "official-language-index-verified-file-unopened"
+      }
+    },
+    {
+      "id": "NI-04",
+      "name": "新住民子女教育資訊網",
+      "url": "https://mkm.k12ea.gov.tw/",
+      "category": "learning",
+      "region": "national",
+      "purpose": "新住民語文教材、親子共讀及教育正式資訊",
+      "caution": "學校端與一般家庭服務對象不同，不可宣稱任何課程均可報名",
+      "display": "own-text-entry",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "教育部國教署新住民子女教育資訊網首頁可讀，確認語文教材、研習、公開資訊、跨國銜轉及親子共讀公告；個別服務／活動資格尚未驗證",
+        "source": "https://mkm.k12ea.gov.tw/",
+        "status": "official-page-verified-purpose-only"
+      }
+    },
+    {
+      "id": "NI-05",
+      "name": "國健署｜孕媽咪健康手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+      "category": "health",
+      "region": "national",
+      "purpose": "2026 中文及 2025 年部分外語孕期健康手冊官方入口",
+      "caution": "不能假設中文與外語版本更新同步；核對個別語言及出版年",
+      "display": "own-compact-text-link",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "2026-10-17 回查國健署同頁搜尋索引，中文115年6月版，英文／越南／印尼／柬埔寨／泰語114年9月版；URL官方搜尋索引可見，但研究工具直接讀取EBook頁遭遇錯誤，尚未逐本下載PDF。不得推論所有語言更新同步、完整閱讀成功或課程免費。",
+        "source": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+        "status": "official-government-index-visible-deep-page-tool-blocked-pdf-not-opened",
+        "evidence": [
+          "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+          "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=4842"
+        ],
+        "still": "國健署原深層頁及每個語種PDF實際下載／Safari開啟仍待確認"
+      }
+    },
+    {
+      "id": "NI-06",
+      "name": "國健署｜孕媽咪衛教手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4839",
+      "category": "health",
+      "region": "national",
+      "purpose": "孕產、產後健康官方衛教手冊；含前輪已核對多語版本",
+      "caution": "與 NI-05 同機構不同手冊網址，放在同一區塊文字延伸而非當同一 URL",
+      "display": "own-compact-text-link",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "2026-10-17 回查國健署同頁搜尋索引，中文115年6月版，英文／越南／印尼／柬埔寨／泰語114年9月版；URL官方搜尋索引可見，但研究工具直接讀取EBook頁遭遇錯誤，尚未逐本下載PDF。不得推論所有語言更新同步、完整閱讀成功或課程免費。",
+        "source": "https://www.hpa.gov.tw/Pages/TopicList.aspx?nodeid=4840",
+        "status": "official-government-index-visible-deep-page-tool-blocked-pdf-not-opened",
+        "evidence": [
+          "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4839",
+          "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=4839"
+        ],
+        "still": "國健署原深層頁及每個語種PDF實際下載／Safari開啟仍待確認"
+      }
+    },
+    {
+      "id": "NI-07",
+      "name": "移民署｜新住民數位資訊 e 網",
+      "url": "https://nit.immigration.gov.tw/",
+      "category": "learning",
+      "region": "national",
+      "purpose": "數位學習、課程與多語資訊官方入口",
+      "caution": "課程當期名額與收費依公告；與既有移民署卡同機構但不同網址",
+      "display": "short-learning-entry",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "scope": "移民署新住民數位資訊e網首頁原頁可讀；可見中文、English、越、印、泰、柬語選單與公開試讀課程；實際課程報名、費用與每種語言內容仍需逐頁確認",
+        "source": "https://nit.immigration.gov.tw/",
+        "status": "official-page-verified-purpose-only"
+      }
+    },
+    {
+      "id": "NI-08",
+      "name": "新北｜新住民家庭暨婦女服務中心",
+      "url": "https://ntni.tw/index.php",
+      "category": "city",
+      "region": "new-taipei",
+      "purpose": "在地新住民及婦女中心資訊、社區資源",
+      "caution": "站域非 gov.tw；需以新北市社會局官方委辦或中心資訊驗證：https://www.sw.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=202efb1cf9659f1122fae42302892988&id=4ee902eba1348b6f",
+      "display": "county-only",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "status": "primary-government-corroborated",
+        "scope": "已直接閱讀新北新住民家庭暨婦女服務中心站及新北市政府社會局官方說明；市府明列板橋與三重服務中心、地址、分區及原 ntni.tw 網址，非 .gov.tw 專站可由主管機關對照。2026-10 原站有活動公告，但不能保證現在尚有名額。",
+        "evidence": [
+          "https://ntni.tw/index.php",
+          "https://www.sw.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=202efb1cf9659f1122fae42302892988&id=4ee902eba1348b6f"
+        ],
+        "still": "外語選單每個子頁內容及各中心實際接待時段未逐項驗"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "new-taipei"
+        ],
+        "serviceTypes": [
+          "婦女福利",
+          "社會福利"
+        ],
+        "entryType": "新北市政府委辦的新住民家庭暨婦女服務中心入口",
+        "reason": "政府社會局與中心專站可相互核對；區別於社會局一般總頁",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
+      }
+    },
+    {
+      "id": "NI-09",
+      "name": "臺北｜新住民專區",
+      "url": "https://nit.taipei/Default.aspx",
+      "category": "city",
+      "region": "taipei",
+      "purpose": "臺北新住民工作、家庭、衛生與藝文活動官方入口",
+      "caution": "外語內容更新可能不同步，逐頁核對可讀性",
+      "display": "county-only",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "status": "official-direct-page-verified",
+        "scope": "臺北市新住民專區原頁可讀，清楚顯示工作、社福、衛生保健、學習與場館、家庭服務中心及其他語言版本入口；同頁有 2026-10 公告。",
+        "evidence": [
+          "https://nit.taipei/Default.aspx"
+        ],
+        "still": "各外語版本翻譯完備程度及單項活動報名資格未逐頁驗"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "taipei"
+        ],
+        "serviceTypes": [
+          "綜合政府服務",
+          "社會福利"
+        ],
+        "entryType": "臺北市新住民跨主題官方資訊專區",
+        "reason": "市府全領域總覽，不是單一據點",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
+      }
+    },
+    {
+      "id": "NI-10",
+      "name": "桃園市婦幼發展局｜新住民服務",
+      "url": "https://dowcd.tycg.gov.tw/cl.aspx?n=16359",
+      "category": "city",
+      "region": "taoyuan",
+      "purpose": "中心、培力、通譯及地方多語服務官方入口",
+      "caution": "地方性服務不適用全國；相近的桃園專站不重複做第二大卡",
+      "display": "county-only",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "status": "official-direct-page-verified",
+        "scope": "桃園市政府婦幼發展局原頁直接列出多國語言、經濟補助、社區關懷服務據點、家庭服務中心、培力中心與通譯服務等子項，確為地方性新住民服務。",
+        "evidence": [
+          "https://dowcd.tycg.gov.tw/cl.aspx?n=16359"
+        ],
+        "still": "子服務個別目前辦理時段及外語內容完整性未逐頁確認"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "taoyuan"
+        ],
+        "serviceTypes": [
+          "婦女福利",
+          "社會福利"
+        ],
+        "entryType": "桃園市政府婦幼發展局新住民專門服務索引",
+        "reason": "跨中心、通譯、培力及支持服務",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
+      }
+    },
+    {
+      "id": "NI-11",
+      "name": "臺中市｜新住民資訊網",
+      "url": "https://www.taichung.gov.tw/1961691/",
+      "category": "city",
+      "region": "taichung",
+      "purpose": "生活、就業、文化與課程官方資料",
+      "caution": "有多語入口不代表所有中文頁已翻譯",
+      "display": "county-only",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "status": "official-search-index-and-secondary-government-page-verified",
+        "scope": "本次直接擷取臺中官方主入口曾回傳工具錯誤；官方公開索引可讀到新住民資訊網頁面及更新 2026-09-21，另臺中市民政局專區介紹多語版本與新住民生活、就業、家庭、社福等分類，支持站點存在與用途，惟不得宣稱本次主頁直接成功開啟。",
+        "evidence": [
+          "https://www.taichung.gov.tw/1961691/",
+          "https://www.civil.taichung.gov.tw/2013355/Lpsimplelist",
+          "https://www.taichung.gov.tw/1961693/1966308/1966510/2315315/post"
+        ],
+        "still": "主站 Safari 真正開啟、各語種子頁是否齊全及過期活動清理仍待"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "taichung"
+        ],
+        "serviceTypes": [
+          "綜合政府服務",
+          "教育與學習"
+        ],
+        "entryType": "臺中市政府新住民綜合資訊網站",
+        "reason": "資訊分類含教育與學習，主頁 Safari 尚待驗",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
+      }
+    },
+    {
+      "id": "NI-12",
+      "name": "臺南市｜新住民家庭服務中心",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21363&s=4378270",
+      "category": "city",
+      "region": "tainan",
+      "purpose": "臺南市社會局中心及服務說明",
+      "caution": "不以舊單次課程表示現行招生",
+      "display": "county-only",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "status": "official-direct-page-verified",
+        "scope": "臺南市政府社會局『新住民家庭服務中心簡介』官方原頁可讀，屬中心簡介與服務入口，不是 2027 年當期課程公告。",
+        "evidence": [
+          "https://sab.tainan.gov.tw/News_Content.aspx?n=21363&s=4378270"
+        ],
+        "still": "中心今日聯絡資訊、開放時段、個別課程與名額尚待新公告確認"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "tainan"
+        ],
+        "serviceTypes": [
+          "社會福利",
+          "育兒與家庭"
+        ],
+        "entryType": "臺南市政府社會局新住民家庭服務中心介紹",
+        "reason": "地方家庭中心正式介紹，不宣稱目前招生",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
+      }
+    },
+    {
+      "id": "NI-13",
+      "name": "苗栗縣｜新住民照顧輔導資訊網",
+      "url": "https://new-inhabitants.miaoli.gov.tw/",
+      "category": "city",
+      "region": "miaoli",
+      "purpose": "生活適應、就業、醫療、教育與家庭資源",
+      "caution": "英、越、印尼語介面存在仍須逐子頁確認",
+      "display": "county-only",
+      "status": "來源用途已初核－待逐頁和人工確認",
+      "published": false,
+      "checkedAt": null,
+      "qa": false,
+      "review": {
+        "date": "2026-10-17",
+        "by": "ChatGPT（AI）",
+        "status": "official-direct-page-verified-language-menu",
+        "scope": "苗栗縣『新住民照顧輔導資訊網』原頁可讀，列生活適應、醫療保健、就業、教育、育兒、人身安全等服務分類；頂端可見 English、越語及印尼語選單。",
+        "evidence": [
+          "https://new-inhabitants.miaoli.gov.tw/"
+        ],
+        "still": "英／越／印各子頁完整翻譯與個別活動是否仍可參與尚未逐一查核"
+      },
+      "qaMappingCandidate": {
+        "regions": [
+          "miaoli"
+        ],
+        "serviceTypes": [
+          "綜合政府服務",
+          "社會福利"
+        ],
+        "entryType": "苗栗縣新住民照顧輔導官方資訊專區",
+        "reason": "跨生活適應、福利、就業與教育之正式索引",
+        "sourceCheck": "initial-purpose-review-only-not-qa-approved",
+        "importToQa": false
+      }
+    }
+  ],
+  "round3": {
+    "asOf": "2026-10-17",
+    "initialOfficialPageChecks": 13,
+    "remainingCandidatesWithoutInitialSourceCheck": 0,
+    "scope": "13/13 皆有初輪官方來源證據；NI-11 主頁僅由官方搜尋索引及民政局官網交叉佐證；PDF 逐份下載、各外語頁與手機 Safari 未完整驗收，全部仍未獲發佈核准。",
+    "qaMappingNote": "NI-08~13 的 entryType 及 serviceTypes 現有具體編輯初步建議；Claude 需比對現有正式 serviceTypes，不能用一律『綜合政府服務（層級待查核）』的佇列暫存值直接公開。NI-11 網站原頁仍待瀏覽器開啟；所有候選維持關閉。"
+  }
+}

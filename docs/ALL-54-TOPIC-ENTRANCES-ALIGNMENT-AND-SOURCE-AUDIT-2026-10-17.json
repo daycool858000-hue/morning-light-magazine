@@ -1,0 +1,1523 @@
+{
+  "title": "《由己》公開QA六大主題54個索引入口逐筆對應與來源精確度審查",
+  "auditDate": "2026-10-17",
+  "auditedBy": "ChatGPT (AI)",
+  "baseBranch": "qa/public-nine-articles-20261017",
+  "scope": "54個主題索引對現有基本資源18筆＋第二批地方資源23筆＋第三批公開資源9筆共50筆之關聯、用途與應補內容",
+  "scopeLimitation": [
+    "本審核使用GitHub原始內容資料及部分官方網頁正文作證據；不等於逐一啟動所有54個入口的手機真實點擊。",
+    "本站只定義54個主題入口；PR15的pregnancy導覽已在草稿測試而未部署，不可誤算成已完成公開QA。",
+    "第二批22縣市主管機關與研究60個地方候選網址是不同概念；不能因記錄存在就當前台完成。",
+    "本次 proposedOfficialUrl 供下一批工程／編輯提案，只有進一步開頁、核現行條件和站主授權，才能上架。",
+    "AI 研究與所有使用者正式核准快照嚴格分開。"
+  ],
+  "status": "editorial-research-only-not-qa-approved",
+  "importToQa": false,
+  "ownerPublicationApproval": false,
+  "productionApproved": false,
+  "stats": {
+    "topicCount": 54,
+    "categoryCount": 6,
+    "baseResourcesChecked": 18,
+    "batch2ResourcesChecked": 23,
+    "batch3ResourcesChecked": 9,
+    "unmapped": 17,
+    "classification": {
+      "missing-planned": 1,
+      "overbroad": 20,
+      "missing": 16,
+      "partial": 3,
+      "mismatch": 3,
+      "usable": 9,
+      "access-risk": 2
+    },
+    "priority": {
+      "P1": 37,
+      "P2": 11,
+      "P0": 6
+    },
+    "proposedWithOriginalGovernmentUrls": 25
+  },
+  "topics": [
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 1,
+      "topicId": "pregnancy",
+      "title": "懷孕與生育相關福利",
+      "description": "整理孕期、生產與生育相關給付及補助的官方說明入口。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing-planned",
+      "priority": "P1",
+      "findings": "PR #15 已有四段＋九來源，尚未部署；整批移到 QA 前不要另做第二份入口。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 2,
+      "topicId": "childcare",
+      "title": "育兒津貼",
+      "description": "認識育兒相關津貼的主管機關、適用對象說明與申請管道。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "sfaa",
+          "name": "衛生福利部社會及家庭署",
+          "url": "https://www.sfaa.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "社家署總首頁過於寬泛；加未滿二歲育兒津貼具體官方制度／申辦入口，並標示資格與出生時間依原頁。",
+      "proposedOfficialUrl": "https://twbaby.sfaa.gov.tw/home/index",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 3,
+      "topicId": "daycare",
+      "title": "托育與幼兒照顧",
+      "description": "公共托育、居家托育與幼兒照顧服務的官方查詢入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "sfaa",
+          "name": "衛生福利部社會及家庭署",
+          "url": "https://www.sfaa.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "社家署總首頁未直接說明公共化／準公共托育。請查官方托育服務查詢與補助制度的正式原頁，不能把育兒津貼當托育補助。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 4,
+      "topicId": "parenting",
+      "title": "親職教育",
+      "description": "家庭教育與親職學習資源，連結至正式機關與服務中心。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "連教育部家庭教育網親職課程／各縣市家教中心索引；教材與報名活動分開。",
+      "proposedOfficialUrl": "https://familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 5,
+      "topicId": "single-parent",
+      "title": "單親家庭支持",
+      "description": "單親家庭可了解的福利服務與地方支持資源入口。",
+      "currentResourceCount": 2,
+      "currentResources": [
+        {
+          "id": "sfaa",
+          "name": "衛生福利部社會及家庭署",
+          "url": "https://www.sfaa.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "goh",
+          "name": "勵馨基金會",
+          "url": "https://www.goh.org.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "partial",
+      "priority": "P2",
+      "findings": "社家署與勵馨可為起點，但要補與單親育兒／家庭支持真正相符的制度或服務頁；民間機構不能代替全國服務。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 6,
+      "topicId": "special-circumstances",
+      "title": "特殊境遇家庭扶助",
+      "description": "特殊境遇家庭扶助制度的法規與申請窗口說明入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "sfaa",
+          "name": "衛生福利部社會及家庭署",
+          "url": "https://www.sfaa.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "特殊境遇家庭扶助應連對應社家署制度條件頁及地方申請窗口，不能只有社家署首頁。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 7,
+      "topicId": "family-finance",
+      "title": "家庭經濟與福利資源",
+      "description": "社會福利、經濟扶助相關制度的官方說明與查詢入口。",
+      "currentResourceCount": 4,
+      "currentResources": [
+        {
+          "id": "mohw-113",
+          "name": "衛生福利部 113 保護專線",
+          "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "mohw",
+          "name": "衛生福利部",
+          "url": "https://www.mohw.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "sfaa",
+          "name": "衛生福利部社會及家庭署",
+          "url": "https://www.sfaa.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "gov-tw",
+          "name": "我的E政府",
+          "url": "https://www.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "mismatch",
+      "priority": "P1",
+      "findings": "「113保護專線」不是一般家庭經濟補助的直接入口，不應用它當理財福利資源；另查社救與福利制度頁。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 8,
+      "topicId": "long-term-care",
+      "title": "長照與家庭照顧者支持",
+      "description": "長期照顧服務與家庭照顧者支持資源的正式入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "mohw",
+          "name": "衛生福利部",
+          "url": "https://www.mohw.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P0",
+      "findings": "改採衛福部1966專門申請流程，並可附家庭照顧者據點索引；原衛福部總首頁可降為延伸。",
+      "proposedOfficialUrl": "https://1966.gov.tw/LTC/cp-6533-70777-207.html",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 9,
+      "topicId": "respite",
+      "title": "喘息服務",
+      "description": "讓照顧者有休息時間的喘息服務，連結官方申請說明。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P0",
+      "findings": "使用衛福部1966喘息服務專頁，說明居家／機構／社區與先經評估的流程，不宣稱人人可即時申請。",
+      "proposedOfficialUrl": "https://1966.gov.tw/LTC/cp-6454-70075-207.html",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "生活與家庭",
+      "categoryId": "life-family",
+      "number": 10,
+      "topicId": "local-family",
+      "title": "地方家庭支持資源",
+      "description": "各縣市家庭服務據點，可至「城市與福利」依縣市查詢。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "goh",
+          "name": "勵馨基金會",
+          "url": "https://www.goh.org.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "mismatch",
+      "priority": "P0",
+      "findings": "主題談地方家庭支持，卻僅連勵馨基金會全國首頁；應轉到城市與福利縣市選擇，再依所選縣市提供具體地方社福中心，勵馨只按實際服務用途附註。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "必須依訪客自行選擇的縣市提供該縣政府或區域社福中心目錄；單一縣份名錄不可當全國通用"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 1,
+      "topicId": "job-seeking",
+      "title": "女性求職",
+      "description": "公立就業服務的求職登記、職缺查詢與就業諮詢入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "taiwanjobs",
+          "name": "台灣就業通",
+          "url": "https://www.taiwanjobs.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "台灣就業通確實可尋職；可補工作條件辨識或職訓直接入口，但不需另造大卡。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 2,
+      "topicId": "re-employment",
+      "title": "重新就業與二度就業",
+      "description": "離開職場一段時間後重返工作，可了解的官方就業協助。",
+      "currentResourceCount": 2,
+      "currentResources": [
+        {
+          "id": "mol",
+          "name": "勞動部",
+          "url": "https://www.mol.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "taiwanjobs",
+          "name": "台灣就業通",
+          "url": "https://www.taiwanjobs.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "勞動部總首頁無法直接理解2026婦女再就業獎勵；補具體2026計畫制度頁和台灣就業通登記用途。",
+      "proposedOfficialUrl": "https://www.mol.gov.tw/1607/1632/1633/89893/",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 3,
+      "topicId": "vocational-training",
+      "title": "職業訓練",
+      "description": "政府辦理或補助的職業訓練課程查詢與報名入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "taiwanjobs",
+          "name": "台灣就業通",
+          "url": "https://www.taiwanjobs.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "台灣就業通首頁雖相關，但正式職訓課程查詢頁更直接。",
+      "proposedOfficialUrl": "https://course.taiwanjobs.gov.tw/course/conditions",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 4,
+      "topicId": "employment-centers",
+      "title": "就業服務據點",
+      "description": "各地就業中心與服務站，可依縣市查詢正式據點。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "taiwanjobs",
+          "name": "台灣就業通",
+          "url": "https://www.taiwanjobs.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "就業通總首頁可找工作，非地方就業服務中心名錄；請找全國就服據點定位查詢頁，不應以職訓搜尋頁代替。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 5,
+      "topicId": "entrepreneurship",
+      "title": "女性創業資源",
+      "description": "政府針對創業者提供的輔導、課程與資訊平台入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "moea",
+          "name": "經濟部",
+          "url": "https://www.moea.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "女性創業用經濟部中小及新創企業署專案，而非經濟部總首頁；分清課程、輔導和融資。",
+      "proposedOfficialUrl": "https://www.sme.gov.tw/article-tw-2891-13903",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 6,
+      "topicId": "startup-training",
+      "title": "創業培訓",
+      "description": "創業講座與培訓課程的官方公告與報名管道。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "沿用現有 PR#10「女性創業飛雁計畫：找課程」官方入口 act-03；避免同網址新增第二張卡，需核對當期招生。",
+      "proposedOfficialUrl": "https://www.sme.gov.tw/women/article-women-3327-18767",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 7,
+      "topicId": "startup-guidance",
+      "title": "政府創業輔導",
+      "description": "經濟部與勞動部等機關的創業輔導服務說明。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "moea",
+          "name": "經濟部",
+          "url": "https://www.moea.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "用女性創業飛雁計畫整合輔導頁替代經濟部總首頁，注意創業年數等各方案條件。",
+      "proposedOfficialUrl": "https://www.sme.gov.tw/article-tw-2891-13903",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 8,
+      "topicId": "startup-loans",
+      "title": "創業融資及貸款制度入口",
+      "description": "只提供官方貸款制度說明與資格入口，不做借貸建議。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "moea",
+          "name": "經濟部",
+          "url": "https://www.moea.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "經濟部總首頁不能作貸款條件證據；先找官方特定創業融資與審核資訊，未核對利率額度前不要填數字。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "職涯與創業",
+      "categoryId": "career",
+      "number": 9,
+      "topicId": "workplace-skills",
+      "title": "職場技能課程",
+      "description": "數位、語言與專業技能等公開課程的正式入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "taiwanjobs",
+          "name": "台灣就業通",
+          "url": "https://www.taiwanjobs.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P2",
+      "findings": "可連職業訓練整合網依縣市、在職／職前篩選，與職訓主題共享單一機構入口。",
+      "proposedOfficialUrl": "https://course.taiwanjobs.gov.tw/course/conditions",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 1,
+      "topicId": "womens-health",
+      "title": "女性身體健康",
+      "description": "女性健康相關的官方衛教資訊與預防保健入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "mohw",
+          "name": "衛生福利部",
+          "url": "https://www.mohw.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "衛福部首頁太廣；補國健署女性預防保健、篩檢及醫療院所衛教之具體入口，醫療建議保持一般性。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 2,
+      "topicId": "menstrual",
+      "title": "生理期及婦科衛教",
+      "description": "生理期與常見婦科議題的一般衛教，以官方或醫療機構資料為主。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "國健署經痛衛教原頁與健康九九經期教材可作具體入口；不能只挑一篇巧克力闢謠就宣稱涵蓋所有婦科。",
+      "proposedOfficialUrl": "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=127&pid=13511",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 3,
+      "topicId": "hormones",
+      "title": "荷爾蒙健康常識",
+      "description": "不同生命階段的荷爾蒙變化，一般性知識的正式來源。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "先用衛福部國健署更年期衛教說明，註明只涵蓋生命階段的部分荷爾蒙知識，不以單頁代替整類診療。",
+      "proposedOfficialUrl": "https://www.mohw.gov.tw/cp-3567-37788-1.html",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 4,
+      "topicId": "bodily-autonomy",
+      "title": "身體自主",
+      "description": "認識自己的身體與健康決定，連結官方衛教說明。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "目前沒有直接且已驗證、能涵蓋身體自主與醫療知情同意的單一官方來源；需另尋衛福部醫療選擇／同意權正式說明，先不湊總首頁。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 5,
+      "topicId": "boundaries",
+      "title": "關係與個人界線",
+      "description": "在關係中照顧自己的感受與界線，一般知識與支持入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "open-mind-articles",
+          "name": "衛福部心快活｜心理健康文章專區",
+          "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "已有衛福部心快活公開文章入口，主題相符；應附文章範圍說明與是否需外站登入的差異。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 6,
+      "topicId": "stress",
+      "title": "情緒壓力",
+      "description": "日常壓力調適的一般知識，以及需要時可以聯繫的資源。",
+      "currentResourceCount": 4,
+      "currentResources": [
+        {
+          "id": "mohw-domhaoh",
+          "name": "衛生福利部心理健康司",
+          "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "1980",
+          "name": "張老師基金會",
+          "url": "https://www.1980.org.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "open-mind-articles",
+          "name": "衛福部心快活｜心理健康文章專區",
+          "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        },
+        {
+          "id": "open-mind-courses",
+          "name": "衛福部心快活｜心理健康學習課程",
+          "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "已有心理健康司、張老師及衛福部心快活，需維持公共衛教與真人服務區別及服務時段。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 7,
+      "topicId": "mental-support",
+      "title": "心理健康支持",
+      "description": "政府與經查證民間機構提供的心理支持管道。",
+      "currentResourceCount": 3,
+      "currentResources": [
+        {
+          "id": "mohw-domhaoh",
+          "name": "衛生福利部心理健康司",
+          "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "1980",
+          "name": "張老師基金會",
+          "url": "https://www.1980.org.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "open-mind-courses",
+          "name": "衛福部心快活｜心理健康學習課程",
+          "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "既有正式與民間入口提供心理支持，不要把任何非24小時機構誤稱全天。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 8,
+      "topicId": "counseling",
+      "title": "心理諮商及醫療資源",
+      "description": "心理諮商、身心科醫療與各縣市心理衛生中心入口。",
+      "currentResourceCount": 2,
+      "currentResources": [
+        {
+          "id": "mohw-domhaoh",
+          "name": "衛生福利部心理健康司",
+          "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "mohw-sps",
+          "name": "青壯世代心理健康支持方案合作機構查詢",
+          "url": "https://sps.mohw.gov.tw/mhs",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "access-risk",
+      "priority": "P1",
+      "findings": "合作機構查詢 sps.mohw.gov.tw/mhs 仍在外部工具逾時，未證實失效；補現行可讀官方公告作後備。",
+      "proposedOfficialUrl": "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "身心健康",
+      "categoryId": "health",
+      "number": 9,
+      "topicId": "support-programs",
+      "title": "正式心理健康支持方案",
+      "description": "政府心理健康支持方案，將標示適用年度、條件與官方來源。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "mohw-sps",
+          "name": "青壯世代心理健康支持方案合作機構查詢",
+          "url": "https://sps.mohw.gov.tw/mhs",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "access-risk",
+      "priority": "P1",
+      "findings": "合作機構網站的實際可用性未完成，不能僅用政府公告稱已驗即時名額；應加計畫公告／備援入口。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 1,
+      "topicId": "gender-equality-work",
+      "title": "性別平等工作法相關權益",
+      "description": "認識性別平等工作法的主要內容與主管機關說明。",
+      "currentResourceCount": 2,
+      "currentResources": [
+        {
+          "id": "mol",
+          "name": "勞動部",
+          "url": "https://www.mol.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "awakening",
+          "name": "婦女新知基金會",
+          "url": "https://www.awakening.org.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "勞動部首頁＋婦女新知並非直接法規／雇主義務頁；改用勞動部就業平等網法規與用途連結。",
+      "proposedOfficialUrl": "https://www.gov.tw/News_Content_26_530022",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 2,
+      "topicId": "workplace-harassment",
+      "title": "職場性騷擾制度",
+      "description": "職場性騷擾的防治、申訴與調查制度官方說明入口。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P0",
+      "findings": "新增勞動部職場性騷擾防治專區及被害人權益／內外部申訴流程；別把職場性騷與一般性騷申訴混為一談。",
+      "proposedOfficialUrl": "https://eeweb.mol.gov.tw/genderZone/harassment_14.html",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 3,
+      "topicId": "workplace-bullying",
+      "title": "職場霸凌及勞動爭議",
+      "description": "勞動爭議處理與相關申訴、調解管道的正式入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "mol",
+          "name": "勞動部",
+          "url": "https://www.mol.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "勞動部總首頁無法分流霸凌與一般勞資爭議；須確認適用現行法規、申訴與調解機關，不做個案認定。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 4,
+      "topicId": "parental-leave",
+      "title": "產假及育嬰留職停薪",
+      "description": "產假、陪產檢及育嬰留職停薪等制度的官方說明。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "mol",
+          "name": "勞動部",
+          "url": "https://www.mol.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "勞動部總首頁不夠直接；使用工作平等措施FAQ和育嬰留停新制原頁。",
+      "proposedOfficialUrl": "https://www.mol.gov.tw/1607/28162/28166/28268/28270/29101",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 5,
+      "topicId": "pregnancy-protection",
+      "title": "懷孕相關勞動保障",
+      "description": "懷孕期間的勞動保護規定與主管機關資訊。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "mol",
+          "name": "勞動部",
+          "url": "https://www.mol.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "以勞動部孕期工作權益／性別平等工作法專頁代替總首頁，並與PR#15互連不複製全文。",
+      "proposedOfficialUrl": "https://www.gov.tw/News_Content_26_530022",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 6,
+      "topicId": "dismissal",
+      "title": "資遣與離職權益",
+      "description": "資遣、離職與相關給付制度的官方說明入口。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "mol",
+          "name": "勞動部",
+          "url": "https://www.mol.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "勞動部首頁不等同資遣與離職權益的完整查詢；找勞動部資遣／預告／資遣費直達頁。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 7,
+      "topicId": "legal-aid",
+      "title": "法律扶助",
+      "description": "法律扶助申請條件與服務據點，以基金會公告為準。",
+      "currentResourceCount": 2,
+      "currentResources": [
+        {
+          "id": "laf",
+          "name": "財團法人法律扶助基金會",
+          "url": "https://www.laf.org.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "38-org",
+          "name": "現代婦女基金會",
+          "url": "https://www.38.org.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "法扶基金會與現代婦女基金會用途可區分；申請法扶與一般法律諮詢不等同，需提示資格。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 8,
+      "topicId": "intimate-images",
+      "title": "性影像外流之正式處理資源",
+      "description": "僅提供正式處理機構入口。本站不接收任何影像或個案資料。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "siarc",
+          "name": "性影像處理中心",
+          "url": "https://siarc.mohw.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "衛福部性影像處理中心官方入口相符；不接受影像上傳本站，並清楚與一般照片申訴分流。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "法律與權益",
+      "categoryId": "law",
+      "number": 9,
+      "topicId": "official-complaints",
+      "title": "官方法律說明與申訴入口",
+      "description": "政府機關提供的法規查詢與申訴管道彙整。",
+      "currentResourceCount": 4,
+      "currentResources": [
+        {
+          "id": "npa",
+          "name": "內政部警政署",
+          "url": "https://www.npa.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "open-cpc-faq",
+          "name": "行政院消保會｜生活消費Q&A",
+          "url": "https://cpc.ey.gov.tw/Page/98915573CEA4451D",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        },
+        {
+          "id": "open-cpc-antifraud",
+          "name": "行政院消保會｜防詐知識專區",
+          "url": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        },
+        {
+          "id": "open-police-selfdefense",
+          "name": "警政署婦幼抱抱｜安全宣導與簡易防身影片",
+          "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        }
+      ],
+      "classification": "mismatch",
+      "priority": "P1",
+      "findings": "此索引混有警政、消費爭議、防詐及自我防護，並非單一『法律說明與申訴』類別；需改簡介或按用途分組，不能任意讓政府消保會代表所有法律申訴。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 1,
+      "topicId": "women-centers",
+      "title": "婦女福利服務中心",
+      "description": "各縣市婦女福利服務中心與相關據點。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "sfaa",
+          "name": "衛生福利部社會及家庭署",
+          "url": "https://www.sfaa.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "社家署首頁無法直接查婦女福利服務中心；從PR#11已研究的縣市實際中心／政府名錄分層導入。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 2,
+      "topicId": "empowerment-centers",
+      "title": "婦女培力中心",
+      "description": "地方婦女培力與學習據點。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "PR#11已有高雄婦女館、新北婦女服務中心、各縣市具體館舍候選；分縣市列真正培力服務，不以社福主管機關總頁代替。",
+      "proposedOfficialUrl": "https://women.kcg.gov.tw/",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 3,
+      "topicId": "legal-aid-offices",
+      "title": "法律扶助據點",
+      "description": "各地法律扶助分會與服務據點。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P0",
+      "findings": "法扶基金會全國服務據點頁有分會地址、電話、服務類型與地圖，適合直接接城市與福利入口。",
+      "proposedOfficialUrl": "https://www.laf.org.tw/place",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 4,
+      "topicId": "social-affairs",
+      "title": "地方社會局、社會處",
+      "description": "縣市社會福利主管機關。",
+      "currentResourceCount": 21,
+      "currentResources": [
+        {
+          "id": "gov-tw",
+          "name": "我的E政府",
+          "url": "https://www.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "batch2-keelung-social-affairs",
+          "name": "基隆市政府社會處",
+          "url": "https://www.klcg.gov.tw/tw/social/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-taipei-social-affairs",
+          "name": "臺北市政府社會局",
+          "url": "https://dosw.gov.taipei/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-new-taipei-social-affairs",
+          "name": "新北市政府社會局",
+          "url": "https://www.sw.ntpc.gov.tw/index.jsp",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-taoyuan-social-affairs",
+          "name": "桃園市政府社會局",
+          "url": "https://sab.tycg.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-hsinchu-city-social-affairs",
+          "name": "新竹市政府社會處",
+          "url": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-hsinchu-county-social-affairs",
+          "name": "新竹縣政府社會處",
+          "url": "https://social.hsinchu.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-yilan-social-affairs",
+          "name": "宜蘭縣政府社會處",
+          "url": "https://sntroot.e-land.gov.tw/default.aspx",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-miaoli-social-affairs",
+          "name": "苗栗縣政府社會處",
+          "url": "https://www.miaoli.gov.tw/social_affairs/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-taichung-social-affairs",
+          "name": "臺中市政府社會局",
+          "url": "https://www.society.taichung.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-changhua-social-affairs",
+          "name": "彰化縣政府社會處",
+          "url": "https://www.chcg.gov.tw/DTO/social/00home/index01.aspx",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-nantou-social-affairs",
+          "name": "南投縣政府社會及勞動局社會福利資訊網",
+          "url": "https://welfare.nantou.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-yunlin-social-affairs",
+          "name": "雲林縣政府社會處",
+          "url": "https://social.yunlin.gov.tw/Default.aspx",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-tainan-social-affairs",
+          "name": "臺南市政府社會局",
+          "url": "https://sab.tainan.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-pingtung-social-affairs",
+          "name": "屏東縣政府社會處",
+          "url": "https://www.pthg.gov.tw/PlanJdp/default.aspx",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-hualien-social-affairs",
+          "name": "花蓮縣政府社會處",
+          "url": "https://sa.hl.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-taitung-social-affairs",
+          "name": "臺東縣政府社會處",
+          "url": "https://ttcd.taitung.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-penghu-social-affairs",
+          "name": "澎湖縣政府社會處",
+          "url": "https://www.penghu.gov.tw/Society/index.jsp",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-kinmen-social-affairs",
+          "name": "金門縣政府社會處",
+          "url": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-chiayi-city-welfare-directory",
+          "name": "嘉義市政府—社福救助與社會處入口",
+          "url": "https://www.chiayi.gov.tw/",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-kaohsiung-welfare-directory",
+          "name": "高雄市政府—社會福利服務目錄",
+          "url": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        }
+      ],
+      "classification": "partial",
+      "priority": "P1",
+      "findings": "第二批已有22縣市主管機關候選入口，但有嘉義市等只連市府首頁，須補社會處直達頁並複查22縣服務層次，不等於服務中心全面查完。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 5,
+      "topicId": "health-bureaus",
+      "title": "衛生局及心理衛生中心",
+      "description": "地方衛生與心理健康服務窗口。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "衛福部心理健康司列全國22縣市社區心理衛生窗口可作部分需求入口；若標題涵蓋全部衛生局，另補22局官方原頁。",
+      "proposedOfficialUrl": "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 6,
+      "topicId": "labor-offices",
+      "title": "勞動及就業服務據點",
+      "description": "地方勞動主管機關與就業服務站。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "另核全國地方勞工局／就業中心名錄；不可用『就業通職訓課程』冒充地方勞動行政據點。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 7,
+      "topicId": "family-welfare",
+      "title": "育兒與家庭福利",
+      "description": "地方育兒、托育與家庭福利窗口。",
+      "currentResourceCount": 3,
+      "currentResources": [
+        {
+          "id": "batch2-chiayi-county-service-center-roster",
+          "name": "衛福部—嘉義縣社會福利服務中心通訊錄",
+          "url": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-chiayi-city-service-center-roster",
+          "name": "衛福部—嘉義市社會福利服務中心通訊錄",
+          "url": "https://topics.mohw.gov.tw/SS/cp-4528-48225-204.html",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        },
+        {
+          "id": "batch2-lienchiang-service-center-roster",
+          "name": "衛福部—連江縣社會福利服務中心通訊錄",
+          "url": "https://topics.mohw.gov.tw/SS/cp-4528-48205-204.html",
+          "recordSource": "qa-batch2",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）官方資訊候選查核；非網站擁有人親自逐頁核對"
+        }
+      ],
+      "classification": "partial",
+      "priority": "P1",
+      "findings": "目前只有嘉義縣／市與連江三個中央社福中心通訊錄，不能讓訪客誤認22縣服務皆齊；配合22縣主管機關入口與PR#11深度名錄補完。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 8,
+      "topicId": "ltc-support",
+      "title": "長照支持",
+      "description": "地方長照管理中心與照顧者支持據點。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P0",
+      "findings": "用長照1966『查詢附近服務』與家照據點中央清單，依實際使用地區選擇；不能只放衛福部總頁。",
+      "proposedOfficialUrl": "https://1966.gov.tw/LTC/np-6532-207.html",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "城市與福利",
+      "categoryId": "city",
+      "number": 9,
+      "topicId": "ngo-services",
+      "title": "民間團體正式服務",
+      "description": "具有正式服務資訊的民間團體據點。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "NGO服務要按縣市、特定服務而非整站列一家基金會；先建立機構與服務對照，核對各地實際據點再上架。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 1,
+      "topicId": "women-center-courses",
+      "title": "婦女中心課程",
+      "description": "各地婦女中心公開課程與講座。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "用各地婦女中心的官方課程公告或長期學習查詢頁；先選PR#11已驗證的中心，不可使用過期單次課程當現在招生。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 2,
+      "topicId": "job-training",
+      "title": "就業培訓",
+      "description": "政府辦理的職業訓練與就業準備課程。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "taiwanjobs",
+          "name": "台灣就業通",
+          "url": "https://www.taiwanjobs.gov.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "台灣就業通首頁可以用，但已有職訓整合網直接按地區、類別查詢，建議加文字入口而非新卡。",
+      "proposedOfficialUrl": "https://course.taiwanjobs.gov.tw/course/conditions",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 3,
+      "topicId": "startup-talks",
+      "title": "創業講座",
+      "description": "創業知識與經營管理的公開講座。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "重用活動目錄女性創業飛雁 act-03，另外若有短期講座必須檢查報名期限。",
+      "proposedOfficialUrl": "https://www.sme.gov.tw/women/article-women-3327-18767",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 4,
+      "topicId": "family-education",
+      "title": "家庭教育",
+      "description": "家庭教育中心辦理的課程與活動。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "edu",
+          "name": "教育部",
+          "url": "https://www.edu.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        }
+      ],
+      "classification": "overbroad",
+      "priority": "P1",
+      "findings": "教育部總首頁不夠清楚；使用家庭教育網與各縣市中心，清楚區分教材和當期課程。",
+      "proposedOfficialUrl": "https://familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 5,
+      "topicId": "parenting-courses",
+      "title": "育兒與親職課程",
+      "description": "育兒知識與親子互動課程。",
+      "currentResourceCount": 0,
+      "currentResources": [],
+      "classification": "missing",
+      "priority": "P1",
+      "findings": "使用家庭教育網親職教材及各地中心活動查詢，開課報名依當期公告，勿把2024年講座說成仍能報名。",
+      "proposedOfficialUrl": "https://familyedu.moe.gov.tw/docDetail.aspx?docid=192873&pid=8870&uid=8871",
+      "proposedUrlEvidenceLevel": "本輪有官方頁證據或此前PR#11記錄；仍需完整Chromium/WebKit實開及適用時間核對"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 6,
+      "topicId": "life-skills",
+      "title": "生活技能",
+      "description": "理財常識、數位工具、健康生活等實用課程。",
+      "currentResourceCount": 1,
+      "currentResources": [
+        {
+          "id": "open-learn-directory",
+          "name": "教育部終身學習資源平臺｜課程與資源查詢",
+          "url": "https://lle.moe.edu.tw/lesson-resource/",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "教育部終身學習資源平臺具備課程與資源入口，需逐期看是否有費用或報名限制。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 7,
+      "topicId": "open-learning",
+      "title": "免費或公開報名的進修活動",
+      "description": "社區大學、公開課程與線上學習平台入口。",
+      "currentResourceCount": 3,
+      "currentResources": [
+        {
+          "id": "edu",
+          "name": "教育部",
+          "url": "https://www.edu.tw/",
+          "recordSource": "base",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT 獨立來源查核（AI，非使用者人工簽核）"
+        },
+        {
+          "id": "open-learn-directory",
+          "name": "教育部終身學習資源平臺｜課程與資源查詢",
+          "url": "https://lle.moe.edu.tw/lesson-resource/",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        },
+        {
+          "id": "open-culture-iculture",
+          "name": "文化部 iCulture｜藝文活動與文化空間",
+          "url": "https://cloud.culture.tw/",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "終身學習平臺與文化部入口具體；教育部總首頁屬冗餘，保留單一查詢清單即可。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    },
+    {
+      "category": "學習與活動",
+      "categoryId": "learning",
+      "number": 8,
+      "topicId": "local-events",
+      "title": "地方政府教育及福利活動",
+      "description": "縣市政府公開辦理的教育與福利活動。",
+      "currentResourceCount": 3,
+      "currentResources": [
+        {
+          "id": "open-learn-directory",
+          "name": "教育部終身學習資源平臺｜課程與資源查詢",
+          "url": "https://lle.moe.edu.tw/lesson-resource/",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        },
+        {
+          "id": "open-culture-iculture",
+          "name": "文化部 iCulture｜藝文活動與文化空間",
+          "url": "https://cloud.culture.tw/",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        },
+        {
+          "id": "open-culture-events",
+          "name": "文化部藝文活動平台｜展演與導覽",
+          "url": "https://event.culture.tw/",
+          "recordSource": "qa-batch3",
+          "publicationStatus": "待確認",
+          "reviewProvenance": "ChatGPT（AI）查核公開官方頁面；非網站擁有人人工逐頁確認"
+        }
+      ],
+      "classification": "usable",
+      "priority": "P2",
+      "findings": "文化部與終身學習平臺提供長期更新入口；活動截止、票價和地區應依各外部頁顯示，不宣稱免費。",
+      "proposedOfficialUrl": null,
+      "proposedUrlEvidenceLevel": "尚未選定充分證據的精確網址，禁止虛構"
+    }
+  ],
+  "auditMethod": "基於GitHub最新版已部署QA分支之54主題原始索引、共50個基本／第二／第三批候選資源record的topics關聯，另對照QA活動入口及PR15未部署的pregnancy工程；部分政策原頁另行網路核對。只屬路由／內容語義查核，不等於逐筆外站真實瀏覽器全部驗證。"
+}

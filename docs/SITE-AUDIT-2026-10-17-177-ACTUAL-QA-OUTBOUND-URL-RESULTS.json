@@ -1,0 +1,1271 @@
+{
+  "date": "2026-10-17",
+  "workflowRun": 39008335766,
+  "jobId": 117325291958,
+  "branch": "audit/qa-site-wide-readiness-20261017",
+  "scope": "已部署QA原始45篇所產生62個HTML頁面；全站內外連結。無重複外網址，只儲存原始網址開頁狀態與頁標題",
+  "stats": {
+    "htmlPages": 62,
+    "internalAnchors": 1305,
+    "distinctExternalURLs": 177,
+    "externalURLUses": 337,
+    "specialTelephoneSmsAndOtherSchemes": 138,
+    "internalMissing": 0,
+    "missingHrefs": 0,
+    "externalBlankRelMissingNoopener": 0,
+    "normalOpened": 143,
+    "blockedOrTimedOut": 30,
+    "errorOrRejectedPage": 3,
+    "download": 1,
+    "confirmedBroken": 0
+  },
+  "limitations": [
+    "Chromium美國機房Cloudflare403、海外逾時或Request Rejected，未必代表網址在臺灣失效",
+    "HTTP200只表示頁面可開，不能證明文章所有資訊、活動資格或福利細節百分之百正確",
+    "已出現明確拒絕頁的pip.moi兩網址和花蓮社會處首頁另經公開搜尋索引查到官方內容；仍應在正式公開前決定是否補穩定備用入口",
+    "站主尚未授權撤稿exp-12已部署成功；此報告依45篇公開QA快照，不涵蓋下一版44篇",
+    "未涵蓋PR#15及PR#16尚未上線的新增連結；該部分有獨立CI及專門驗收",
+    "單次外站檢查不能取代長期檢查，某些官方網頁會動態調整反機器人保護"
+  ],
+  "rows": [
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.google.com/",
+      "observedPageTitleOrError": "Google",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.tibe.org.tw/",
+      "observedPageTitleOrError": "TiBE 台北國際書展",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://www.sme.gov.tw/women/article-women-3327-18767",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://if.tabf.org.tw/lectureList",
+      "observedPageTitleOrError": "全民金融教育網 - 我要上課",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.zoo.gov.taipei/News_Content.aspx?n=1040A0BA6520CA48&s=5CAD911AC8C57C04&sms=67D26248A5724B42",
+      "observedPageTitleOrError": "臺北市立動物園-特展-看你什麼嘴臉？昆蟲頭等大事特展",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.wdasec.gov.tw/News_Content.aspx?n=BD34663BD4EC9F4C&s=AEBA0907E929B76D&sms=535E01AC52EFB5A7",
+      "observedPageTitleOrError": "【計畫公告】「116年度全國技能競賽實施計畫」",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.taiwan.net.tw/m1.aspx?page=1&sno=0001019",
+      "observedPageTitleOrError": "觀光活動 > 交通部觀光署",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://web.ncl.edu.tw/event/FMEvents/Cont?SId=0Q208581657878048173",
+      "observedPageTitleOrError": "[冬季閱讀講座]西洋文學經典的跨界閱讀——《愛麗絲夢遊仙境》 | 國家圖書館 活動報名系統",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.moe.gov.tw/News_Content.aspx?n=9E7AC85F1954DDA8&s=85A25BD61A118DEB&sms=169B8E91BB75571F",
+      "observedPageTitleOrError": "「2026 第七屆臺灣科學節」起跑：科學共享 永續啟航",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://course.taiwanjobs.gov.tw/course/conditions",
+      "observedPageTitleOrError": "課程查詢 | 職訓課程查詢 | 職業訓練整合網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://event.culture.tw/",
+      "observedPageTitleOrError": "文化部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.foi.org.tw/Article.aspx?Arti=55&Lang=1",
+      "observedPageTitleOrError": "活動資訊-中心訊息-財團法人金融消費評議中心",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://web.ncl.edu.tw/event/Home",
+      "observedPageTitleOrError": "首頁 | 國家圖書館 活動報名系統",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://wellbeing.mohw.gov.tw/nor/main",
+      "observedPageTitleOrError": "心快活心理健康學習平台",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://mental-health.gov.taipei/ActiveList.aspx?n=6CCBECECB36BFE4E&sms=F62510C10F2670B1",
+      "observedPageTitleOrError": "臺北市政府衛生局社區心理衛生中心-講座/活動",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.gov.tw/News_Content_26_694361",
+      "observedPageTitleOrError": "我的E政府-主題策展-照顧單親、特殊境遇家庭，政府提供各項扶助措施及補助！",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.gov.tw/News_Content_26_635581",
+      "observedPageTitleOrError": "我的E政府-主題策展-安心懷孕及友善生養的措施與設施",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://job.taiwanjobs.gov.tw/",
+      "observedPageTitleOrError": "台灣就業通 - 找工作",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://lle.tp.edu.tw/course",
+      "observedPageTitleOrError": "課程查詢 - 臺北市終身學習網站",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://activity.nlpi.edu.tw/",
+      "observedPageTitleOrError": "國立公共資訊圖書館活動資訊服務平台",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050075",
+      "observedPageTitleOrError": "特殊境遇家庭扶助條例-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mol.gov.tw/1607/1632/1633/89893/",
+      "observedPageTitleOrError": "重返職場 我們挺妳──婦女再就業計畫大升級！門檻降低、獎勵加碼、支持更到位！-勞動部全球資訊網中文網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://course.taiwanjobs.gov.tw/course/area",
+      "observedPageTitleOrError": "課程查詢 | 分區課程查詢 | 職業訓練整合網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.taiwanjobs.gov.tw/",
+      "observedPageTitleOrError": "台灣就業通 -- 首頁",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://course.taiwanjobs.gov.tw/learningMap",
+      "observedPageTitleOrError": "人才職涯學習地圖 | 職業訓練整合網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.wda.gov.tw/News_Content.aspx?n=66&s=16340",
+      "observedPageTitleOrError": "婦女再就業計畫申請表單",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/fp-189-210-1.html",
+      "observedPageTitleOrError": "健康促進- 衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html",
+      "observedPageTitleOrError": "各縣市社區心理諮商服務一覽表- 心理健康司",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://eeweb.mol.gov.tw/genderZone/harassment_14.html",
+      "observedPageTitleOrError": "職場性騷擾防治專區 | 工作場所性騷擾事件被害人權益說明",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.hpa.gov.tw/Home/Index.aspx",
+      "observedPageTitleOrError": "衛生福利部國民健康署",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://siarc.mohw.gov.tw/",
+      "observedPageTitleOrError": "首頁 - 衛生福利部｜性影像處理中心",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030014",
+      "observedPageTitleOrError": "性別平等工作法-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030029",
+      "observedPageTitleOrError": "地方主管機關受理工作場所性騷擾事件申訴處理辦法-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://siarc.mohw.gov.tw/appeal.php",
+      "observedPageTitleOrError": "我要申訴 - 衛生福利部｜性影像處理中心",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://siarc.mohw.gov.tw/service.php",
+      "observedPageTitleOrError": "服務介紹 - 衛生福利部｜性影像處理中心",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/cp-190-225-1.html",
+      "observedPageTitleOrError": "婦女福利- 衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://course.taiwanjobs.gov.tw/",
+      "observedPageTitleOrError": "職業訓練整合網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://ktec.kcg.gov.tw/News_Content.aspx?n=375B9007450F0834&s=6C5B13906870DE0A&sms=6019AE33FC9987A2",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dep.mohw.gov.tw/DOMHAOH/fp-4906-54077-107.html",
+      "observedPageTitleOrError": "1925安心專線（依舊愛我）- 心理健康司",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html",
+      "observedPageTitleOrError": "嘉義縣社會福利服務中心通訊錄- 社會安全網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://cpc.ey.gov.tw/Page/98915573CEA4451D",
+      "observedPageTitleOrError": "行政院消費者保護會-消保Q&A",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B",
+      "observedPageTitleOrError": "行政院消費者保護會-防詐專區",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://cpc.ey.gov.tw/Page/71E988F034956960",
+      "observedPageTitleOrError": "行政院消費者保護會-消費爭議處理程序",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=1409",
+      "observedPageTitleOrError": "中華民國內政部消防署全球資訊網 > 預防災害 > 住宅防火",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://cloud.culture.tw/",
+      "observedPageTitleOrError": "文化部 iCulture | 全台藝文活動、展覽、文化景點一站式查詢",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.nfa.gov.tw/cht/",
+      "observedPageTitleOrError": "中華民國內政部消防署全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://lle.moe.edu.tw/lesson-resource/",
+      "observedPageTitleOrError": "終身學習資源平臺-課程與資源",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=198",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://startup.sme.gov.tw/home/modules/news/detial.php?sId=1343",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=243",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://findbiz.nat.gov.tw/",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+      "observedPageTitleOrError": "文章專區 - 心快活心理健康學習平台",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+      "observedPageTitleOrError": "心快活心理健康學習平台",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.ntmofa.gov.tw/",
+      "observedPageTitleOrError": "國立臺灣美術館",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.etax.nat.gov.tw/etwmain/tax-info/network-transaction-taxtation-area/q-and-a",
+      "observedPageTitleOrError": "網路交易課徵營業稅Q&A-財政部稅務入口網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-knowledge/QVRxbL5",
+      "observedPageTitleOrError": "設立公司-財政部稅務入口網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.tfam.museum/",
+      "observedPageTitleOrError": "首頁 | 臺北市立美術館",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.gov.tw/News_Content_26_524819",
+      "observedPageTitleOrError": "我的E政府-主題策展-勞工退休時有幾筆保障？帶您看懂勞保、國保老年給付和勞工退休金！",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.tii.org.tw/tii/insurance/insurance7/index.html",
+      "observedPageTitleOrError": "保障型保險專區-財團法人保險事業發展中心",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.tii.org.tw/tii/comsumer/what/index.html",
+      "observedPageTitleOrError": "認識保險-財團法人保險事業發展中心",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.fsc.gov.tw/",
+      "observedPageTitleOrError": "金融監督管理委員會主管法規共用系統-最新訊息",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://digitalarchive.npm.gov.tw/Collection",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://digitalarchive.npm.gov.tw/opendata/",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://www.npm.gov.tw/",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.nlpi.edu.tw/StaticPage/one-pass-digital",
+      "observedPageTitleOrError": "數位資源一證通 - 國立公共資訊圖書館",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://startup.sme.gov.tw/home/",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.nlpi.edu.tw/StaticPage/resources-intro",
+      "observedPageTitleOrError": "數位資源介紹 - 國立公共資訊圖書館",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.gov.tw/News_Content_2_376930",
+      "observedPageTitleOrError": "我的E政府-申辦服務-新創圓夢網-創業諮詢申請",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://startup.sme.gov.tw/home/modules/rproject/detail/?sId=38",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.sme.gov.tw/article-tw-2891-13903",
+      "observedPageTitleOrError": "協助女性創業 - 計畫總覽 - 經濟部中小及新創企業署",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.bli.gov.tw/0017387.html",
+      "observedPageTitleOrError": "勞動部勞工保險局全球資訊網-便民服務-FAQ-熱門問答-13.勞工退休金與勞保老年給付大不同",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.bli.gov.tw/0019436.htm",
+      "observedPageTitleOrError": "勞動部勞工保險局全球資訊網-便民服務-FAQ-熱門問答-20.勞工的勞保、職保投保資料及勞工退休金個人專戶有哪些查詢方式？",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=H0080067",
+      "observedPageTitleOrError": "性別平等教育法-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050074",
+      "observedPageTitleOrError": "性騷擾防治法-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://moneywise.fsc.gov.tw/",
+      "observedPageTitleOrError": "金融智慧網-金融監督管理委員會",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://ocw.aca.ntu.edu.tw/",
+      "observedPageTitleOrError": "Just a moment...",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://ocw.aca.ntu.edu.tw/faqs",
+      "observedPageTitleOrError": "Just a moment...",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://insprod.tii.org.tw/",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://support.apple.com/zh-tw/guide/iphone/iph3c99374c/27/ios/27",
+      "observedPageTitleOrError": "在 iPhone 上使用 SOS 聯絡緊急服務中心 - Apple 支援 (台灣)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.moe.gov.tw/News_Content.aspx?n=9E7AC85F1954DDA8&s=7FEB297AC73E822E&sms=169B8E91BB75571F",
+      "observedPageTitleOrError": "一窺教育部磨課師風采 通往線上悠遊學習的入口",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://support.apple.com/zh-tw/guide/iphone/iph08022b192/27/ios/27",
+      "observedPageTitleOrError": "設定和檢視「醫療卡」 - Apple 支援 (台灣)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://moocs.moe.edu.tw/",
+      "observedPageTitleOrError": "edu磨課師+｜教育部線上學習平臺",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://ocw.nycu.edu.tw/?faq=common-faq",
+      "observedPageTitleOrError": "一般問題 - NYCU OCW",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://ocw.nycu.edu.tw/?openedu=copyright-declaration",
+      "observedPageTitleOrError": "開放式課程使用聲明 - NYCU OCW",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://support.apple.com/zh-tw/105072",
+      "observedPageTitleOrError": "在 iPhone 上的「健康」App 中設定「醫療卡」 - Apple 支援 (台灣)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://support.google.com/android/answer/9319337?hl=zh-Hant",
+      "observedPageTitleOrError": "發生緊急事件時使用 Android 手機求助 - Android說明",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/cp-2704-80948-1.html",
+      "observedPageTitleOrError": "健康臺灣-114年起擴大癌症篩檢 您的健康政府來顧- 衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/cp-7183-81302-1.html",
+      "observedPageTitleOrError": "擴大癌症篩檢 「健康台灣」迎新年- 衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.gov.tw/News_Content_26_677435",
+      "observedPageTitleOrError": "我的E政府-主題策展-帶您看身心障礙證明申請流程、身心障礙者支持服務與措施",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=127&pid=19970",
+      "observedPageTitleOrError": "衛生福利部國民健康署 - 沒症狀就不用做成人健康檢查？",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=189",
+      "observedPageTitleOrError": "衛生福利部國民健康署 - 成人預防保健",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=612&pid=19989&sid=1102",
+      "observedPageTitleOrError": "衛生福利部國民健康署 - 22縣市癌症篩檢活動專區",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0050050",
+      "observedPageTitleOrError": "身心障礙者福利與服務需求評估及證明核發辦法-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://1966.gov.tw/LTC/cp-6533-70777-207.html",
+      "observedPageTitleOrError": "申請長照服務- 衛福部 長照專區(1966專線)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dep.mohw.gov.tw/DOSAASW/cp-572-5035-103.html",
+      "observedPageTitleOrError": "常見問答- 社會救助及社工司",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://laws.mol.gov.tw/FLAW/FLAWDAT0202.aspx?id=FL015154&ldate=20240117",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dep.mohw.gov.tw/dosaasw/lp-566-103.html",
+      "observedPageTitleOrError": "最新消息- 社會救助及社工司",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.gov.tw/News_Content_26_586833",
+      "observedPageTitleOrError": "我的E政府-主題策展-幫您省錢包，租屋、購屋、建屋補助方案報您知！",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "returned-error-or-rejection-page",
+      "httpCode": 200,
+      "url": "https://pip.moi.gov.tw/Publicize/Info/B1020?n=34813&sms=0",
+      "observedPageTitleOrError": "Request Rejected",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "returned-error-or-rejection-page",
+      "httpCode": 200,
+      "url": "https://pip.moi.gov.tw/Publicize/Info/B5020?mode=P4",
+      "observedPageTitleOrError": "Request Rejected",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://1966.gov.tw/LTC/cp-6454-70075-207.html",
+      "observedPageTitleOrError": "喘息服務- 衛福部 長照專區(1966專線)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://1966.gov.tw/LTC/cp-6460-69943-207.html",
+      "observedPageTitleOrError": "聘僱外看家庭可使用長照服務- 衛福部 長照專區(1966專線)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/cp-190-226-1.html",
+      "observedPageTitleOrError": "急難救助- 衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/cp-88-79005-1.html",
+      "observedPageTitleOrError": "低收入戶及中低收入戶- 衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://epaper.naer.edu.tw/edm?content_no=4565&edm_no=270&grp_no=4",
+      "observedPageTitleOrError": "國家教育研究院電子報 - 第270期 - 數位時代的媒體素養課",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/cp-7183-81286-1.html",
+      "observedPageTitleOrError": "全年無休 春節不打烊--1957福利諮詢專線服務您- 衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://law.moea.gov.tw/LawContent.aspx?id=GL000482",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://lle.moe.edu.tw/site-map/",
+      "observedPageTitleOrError": "終身學習資源平臺-網站導覽",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "download",
+      "httpCode": null,
+      "url": "https://www.ntsec.gov.tw/article/FileAtt.ashx?id=6193",
+      "observedPageTitleOrError": "page.goto: Download is starting",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.edu.tw/News_Content.aspx?n=9E7AC85F1954DDA8&s=122831B533599EFA",
+      "observedPageTitleOrError": "媒體素養扎根國中小 國教署補助41所基地學校",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.moj.gov.tw/2204/2473/2492/11362/",
+      "observedPageTitleOrError": "保障消費者權益，標準檢驗局修訂紡織品洗滌標識國家標準(經濟部標準檢驗局)-法務部全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0080050",
+      "observedPageTitleOrError": "家庭教育法-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0080057",
+      "observedPageTitleOrError": "家庭教育法施行細則-全國法規資料庫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.moi.gov.tw/News_Content.aspx?n=8&s=335297&sms=9224",
+      "observedPageTitleOrError": "澄清：社會住宅與租金補貼不得同時申請 呼籲民眾勿信網路謠言",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.ntsec.gov.tw/index.aspx",
+      "observedPageTitleOrError": "首頁 - 國立臺灣科學教育館",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://event.culture.tw/indexsitemap.jsp",
+      "observedPageTitleOrError": "文化部 藝文活動平台 網站導覽",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://moneywise.fsc.gov.tw/home.jsp?id=6&parentpath=0",
+      "observedPageTitleOrError": "生活指南- 金融監督管理委員會金融智慧網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://wellbeing.mohw.gov.tw/nor/info/intro",
+      "observedPageTitleOrError": "心快活心理健康學習平台",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://wellbeing.mohw.gov.tw/nor/main/",
+      "observedPageTitleOrError": "心快活心理健康學習平台",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://estore.ntsec.gov.tw/classes.aspx?CTC=0010&TYPE2=1&pid=13&uid=49",
+      "observedPageTitleOrError": "實驗室課程 - 科教館服務整合網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.taoyuanwdc.org/NewsList.aspx?pIndex=1&pSize=50",
+      "observedPageTitleOrError": "桃園市北區婦女中心",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.wfwp.org.tw/index.php/bulletin/news/919-2026-10-02-15-49-06",
+      "observedPageTitleOrError": "桃園女力行動派共識營~找到價值‧走出創新之路",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16357&s=1601755",
+      "observedPageTitleOrError": "桃園市政府婦幼發展局115-116年度婦女福利與權益工作計畫",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://www.moea.gov.tw/",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16342&s=1890721",
+      "observedPageTitleOrError": "公告「115年10-12月桃園市北區/南區婦女中心活動一覽表」",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16345&s=1802318",
+      "observedPageTitleOrError": "「桃園女力行動派」持續培育女性創新能量 首採「先培力、再提案」 8月20日徵選說明會 邀在地團隊將好點子變成行動",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mol.gov.tw/",
+      "observedPageTitleOrError": "勞動部全球資訊網中文網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mol.gov.tw/21003/",
+      "observedPageTitleOrError": "MINISTRY OF LABOR REPUBLIC OF CHINA(TAIWAN) - 勞動部全球資訊網英文網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+      "observedPageTitleOrError": "110聽語障人士報案專線-內政部警政署全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.laf.org.tw/",
+      "observedPageTitleOrError": "財團法人法律扶助基金會",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/",
+      "observedPageTitleOrError": "衛生福利部",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.npa.gov.tw/",
+      "observedPageTitleOrError": "內政部警政署全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.laf.org.tw/en/",
+      "observedPageTitleOrError": "Legal Aid Foundation of Taiwan",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+      "observedPageTitleOrError": "心理健康司",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.1980.org.tw/",
+      "observedPageTitleOrError": "財團法人張老師基金會",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.goh.org.tw/",
+      "observedPageTitleOrError": "勵馨基金會-致力預防與終止性別暴力 創造性別平權的台灣NGO組織",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+      "observedPageTitleOrError": "113保護專線介紹- 保護服務司",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.38.org.tw/",
+      "observedPageTitleOrError": "現代婦女基金會",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.gov.tw/",
+      "observedPageTitleOrError": "我的E政府",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.mohw.gov.tw/EN/np-183-2.html",
+      "observedPageTitleOrError": "MOHW- Ministry of Health and Welfare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.awakening.org.tw/",
+      "observedPageTitleOrError": "婦女新知基金會 | 女性權益，我們倡議 Fight for Gender Equality",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.edu.tw/",
+      "observedPageTitleOrError": "教育部全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://english.moe.gov.tw/mp-1.html",
+      "observedPageTitleOrError": "Ministry of Education Republic of China (Taiwan)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dosw.gov.taipei/",
+      "observedPageTitleOrError": "臺北市政府社會局",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0",
+      "observedPageTitleOrError": "Just a moment...",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.klcg.gov.tw/tw/social/",
+      "observedPageTitleOrError": "基隆市政府社會處",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://sab.tycg.gov.tw/",
+      "observedPageTitleOrError": "桃園市政府社會局",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://sntroot.e-land.gov.tw/default.aspx",
+      "observedPageTitleOrError": "宜蘭縣政府-社會處",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://sps.mohw.gov.tw/mhs",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.sw.ntpc.gov.tw/index.jsp",
+      "observedPageTitleOrError": "新北市政府社會局",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.miaoli.gov.tw/social_affairs/",
+      "observedPageTitleOrError": "社會處",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://www.sfaa.gov.tw/",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": 403,
+      "url": "https://social.yunlin.gov.tw/Default.aspx",
+      "observedPageTitleOrError": "Attention Required! | Cloudflare",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://sab.tainan.gov.tw/",
+      "observedPageTitleOrError": "臺南市政府社會局",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "returned-error-or-rejection-page",
+      "httpCode": 500,
+      "url": "https://sa.hl.gov.tw/",
+      "observedPageTitleOrError": "The URL you requested has been blocked",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.chcg.gov.tw/DTO/social/00home/index01.aspx",
+      "observedPageTitleOrError": "彰化縣政府全球資訊網-社會處",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.society.taichung.gov.tw/",
+      "observedPageTitleOrError": "臺中市政府社會局全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://social.hsinchu.gov.tw/",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://ttcd.taitung.gov.tw/",
+      "observedPageTitleOrError": "臺東縣政府社會處",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://www.pthg.gov.tw/PlanJdp/default.aspx",
+      "observedPageTitleOrError": "page.goto: net::ERR_CONNECTION_REFUSED at https://www.pthg.gov.tw/PlanJdp/default.aspx",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://welfare.nantou.gov.tw/",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48225-204.html",
+      "observedPageTitleOrError": "嘉義市社會福利服務中心通訊錄- 社會安全網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.chiayi.gov.tw/",
+      "observedPageTitleOrError": "嘉義市政府全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48205-204.html",
+      "observedPageTitleOrError": "連江縣社會福利服務中心通訊錄- 社會安全網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://www.penghu.gov.tw/Society/index.jsp",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.immigration.gov.tw/5475/",
+      "observedPageTitleOrError": "National Immigration Agency, R.O.C. (Taiwan)",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.immigration.gov.tw/5475/5478/6928/6940/204896/204917/",
+      "observedPageTitleOrError": "National Immigration Agency, R.O.C. (Taiwan) - Foreigners In Taiwan Hotline: 1990",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726",
+      "observedPageTitleOrError": "婦幼專區列表-「婦幼抱抱」（NPA Care U）Youtube宣導平臺連結-內政部警政署保安警察第七總隊全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=66",
+      "observedPageTitleOrError": "中華民國內政部消防署全球資訊網 > 119報案 > 119、112",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html",
+      "observedPageTitleOrError": "1925安心專線（依舊愛我）- 心理健康司",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950",
+      "observedPageTitleOrError": "110報案-內政部警政署全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "opened-ok",
+      "httpCode": 200,
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=18753&serno=04f72711-214c-4f29-881d-5764aa3cf10a",
+      "observedPageTitleOrError": "110視訊報案APP隱私權政策-內政部警政署全球資訊網",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    },
+    {
+      "status": "overseas-blocked",
+      "httpCode": null,
+      "url": "https://ifi.immigration.gov.tw/",
+      "observedPageTitleOrError": "page.goto: Timeout 13000ms exceeded.",
+      "source": "GitHub US Chromium 2026-10-17 14:01-14:03 Asia/Taipei"
+    }
+  ]
+}

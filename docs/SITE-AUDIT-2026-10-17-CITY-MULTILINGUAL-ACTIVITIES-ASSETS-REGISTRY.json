@@ -1,0 +1,876 @@
+{
+  "asOf": "2026-10-17 Taiwan",
+  "scope": "官方地方服務深度研究與13個新住民來源；不代表已可上QA、全部目前營運或服務窗口已核實",
+  "counts": {
+    "countyCandidateURLs": 60,
+    "countyUniqueURL": 60,
+    "countiesWithSomeResearch": 22,
+    "countyFullyAuditedAllLayers": 0,
+    "NIresearch": 13,
+    "qaEnglishHelperResources": 3,
+    "activityNotices": 6,
+    "ongoingOfficialPortals": 12,
+    "approvedPhotos": 9,
+    "unapprovedOptionalPhotos": 1,
+    "overlapWith50AndNI": 0
+  },
+  "countyCandidateOriginalURLs": [
+    {
+      "id": "cg-women-dream-center",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2412&data_id=20193&topsn=2390",
+      "name": null,
+      "county": "changhua",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "cg-women-tianzhong-center",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2412&data_id=11396&topsn=2390",
+      "name": null,
+      "county": "changhua",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "cg-women-passport",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=8133&data_id=28418&topsn=2390",
+      "name": null,
+      "county": "changhua",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "cg-immigrant-family-center",
+      "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2414&data_id=11305&topsn=2390",
+      "name": null,
+      "county": "changhua",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "ntpc-women-center",
+      "url": "https://wedid.ntpc.gov.tw/Governance/Detail/7RApPkVDve64",
+      "name": null,
+      "county": "new-taipei",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "ntpc-women-university",
+      "url": "https://www.sw.ntpc.gov.tw/home.jsp?dataserno=201802050029&id=193&mcustomize=multimessages_view.jsp&mserno=201711200013&parentpath=0%2C4&t=null",
+      "name": null,
+      "county": "new-taipei",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "ntpc-social-welfare-centers",
+      "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=dcb8a590a4a5dad6",
+      "name": null,
+      "county": "new-taipei",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tp-women-support-centers-directory",
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=91F35523B74F69AC&s=98B35313083A645F&sms=87415A8B9CE81B16",
+      "name": null,
+      "county": "taipei",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tp-women-center-hours",
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=630D5097D05EB317&s=E9A8512594C64D8C",
+      "name": null,
+      "county": "taipei",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tp-women-center-activities",
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=630D5097D05EB317&s=4E989AC312681257&sms=12009A93B2FA491B",
+      "name": null,
+      "county": "taipei",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "ty-women-empowerment-center",
+      "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16357&s=1177886&sms=18011",
+      "name": null,
+      "county": "taoyuan",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "ty-women-north-south-oct-dec-2026",
+      "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16342&s=1890721",
+      "name": null,
+      "county": "taoyuan",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tc-women-newimmigrant-centers",
+      "url": "https://www.society.taichung.gov.tw/1224394/post",
+      "name": null,
+      "county": "taichung",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tc-women-services-directory",
+      "url": "https://www.society.taichung.gov.tw/13710/13735/13762/13768?PageSize=30&type=%E7%A6%8F%E5%88%A9%E6%9C%8D%E5%8B%99%E6%A9%9F%E6%A7%8B",
+      "name": null,
+      "county": "taichung",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tn-women-centers-services",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21219&s=4780899",
+      "name": null,
+      "county": "tainan",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tn-women-centers-directory",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21219&s=4780903",
+      "name": null,
+      "county": "tainan",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "tn-women-centers-four-modes",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=17856&s=8727057",
+      "name": null,
+      "county": "tainan",
+      "sourceLevel": "review per original research file",
+      "fromResearch": "city17"
+    },
+    {
+      "id": "kl-maternal-child-welfare-center",
+      "url": "https://www.klcg.gov.tw/tw/social/3604.html",
+      "name": "基隆市婦幼福利服務中心",
+      "county": "基隆市",
+      "sourceLevel": "official-page-direct-open",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "kl-social-welfare-centers-list",
+      "url": "https://www.klcg.gov.tw/tw/social/2830.html",
+      "name": "基隆市四處社會福利服務中心聯絡名錄",
+      "county": "基隆市",
+      "sourceLevel": "official-page-direct-open",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "kl-new-immigrant-family-center",
+      "url": "https://www.klcg.gov.tw/tw/social/2767-304576.html",
+      "name": "基隆市國際（新住民）家庭服務中心",
+      "county": "基隆市",
+      "sourceLevel": "official-page-direct-open",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "hcc-womens-center",
+      "url": "https://wpcw.hccg.gov.tw/about_us/",
+      "name": "新竹市婦女館",
+      "county": "新竹市",
+      "sourceLevel": "official-page-direct-open",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "hcc-new-immigrant-family-service",
+      "url": "https://society.hccg.gov.tw/ch/home.jsp?id=110&parentpath=0%2C3%2C23",
+      "name": "新竹市新住民家庭服務官方入口",
+      "county": "新竹市",
+      "sourceLevel": "official-page-direct-open",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "hcc-family-education-center-work",
+      "url": "https://dep-family.hccg.gov.tw/ch/home.jsp?id=9&parentpath=0%2C5",
+      "name": "新竹市家庭教育中心業務與學習服務",
+      "county": "新竹市",
+      "sourceLevel": "official-search-result-only-direct-open-error",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "hch-north-south-womens-centers",
+      "url": "https://social.hsinchu.gov.tw/News_Content.aspx?n=204&s=201016",
+      "name": "新竹縣南北區婦女福利服務中心",
+      "county": "新竹縣",
+      "sourceLevel": "official-search-result-only-direct-open-error",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "hch-new-immigrant-family-center",
+      "url": "https://social.hsinchu.gov.tw/News_Content.aspx?n=204&s=3779",
+      "name": "新竹縣新住民家庭服務中心與關懷據點",
+      "county": "新竹縣",
+      "sourceLevel": "official-search-result-only-direct-open-error",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "il-women-newimmigrant-center",
+      "url": "https://sntroot.e-land.gov.tw/cp.aspx?n=10392&s=1782",
+      "name": "宜蘭縣婦女暨新住民家庭服務中心",
+      "county": "宜蘭縣",
+      "sourceLevel": "official-search-result-only-direct-open-error",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "il-social-welfare-five-centers",
+      "url": "https://sntroot.e-land.gov.tw/cp.aspx?n=10392&s=1776",
+      "name": "宜蘭縣五處社會福利服務中心及分區",
+      "county": "宜蘭縣",
+      "sourceLevel": "official-search-result-only-direct-open-error",
+      "fromResearch": "city10"
+    },
+    {
+      "id": "nt-women-centers-official-list",
+      "url": "https://www.nantou.gov.tw/ge/list.php?cid=3857",
+      "name": "南投縣四區婦女服務中心官方索引",
+      "county": "南投縣",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "nt-women-centers-open-data",
+      "url": "https://data.nantou.gov.tw/dataset/6b77b528-e8bc-11e8-b9d9-0050568f6268",
+      "name": "南投縣婦女福利服務中心政府開放資料",
+      "county": "南投縣",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "nt-family-education",
+      "url": "https://ntc.familyedu.moe.gov.tw/mainList.aspx?pid=3363&uid=3365",
+      "name": "南投縣家庭教育中心活動公告入口",
+      "county": "南投縣",
+      "sourceLevel": "official-search-result-body",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "yl-women-center-about",
+      "url": "https://social.yunlin.gov.tw/News_Content.aspx?n=16861&s=416680",
+      "name": "雲林縣婦女福利服務中心介紹",
+      "county": "雲林縣",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "yl-women-course-announcements",
+      "url": "https://social.yunlin.gov.tw/News.aspx?n=16861&sms=19151",
+      "name": "雲林縣婦女中心當期與歷年公告列表",
+      "county": "雲林縣",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "yl-family-education-window",
+      "url": "https://family.yunlin.gov.tw/cp.aspx?n=962",
+      "name": "雲林縣家庭教育中心業務聯絡與學習領域",
+      "county": "雲林縣",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycity-women-center",
+      "url": "https://social.chiayi.gov.tw/cp.aspx?n=418",
+      "name": "嘉義市婦女福利服務中心服務與場地資訊",
+      "county": "嘉義市",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycity-immigrant-center",
+      "url": "https://social.chiayi.gov.tw/imm/",
+      "name": "嘉義市新住民家庭服務中心官方網站",
+      "county": "嘉義市",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycity-immigrant-service-detail",
+      "url": "https://social.chiayi.gov.tw/imm/cp.aspx?n=4194",
+      "name": "嘉義市新住民中心服務項目專頁",
+      "county": "嘉義市",
+      "sourceLevel": "official-direct-open",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycity-immigrant-vietnamese-intro",
+      "url": "https://social.chiayi.gov.tw/imm/cp.aspx?n=4836",
+      "name": "嘉義市新住民中心越語服務介紹",
+      "county": "嘉義市",
+      "sourceLevel": "official-direct-open-full-vietnamese-body",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycounty-women-center",
+      "url": "https://sabcc.cyhg.gov.tw/cp.aspx?n=7778",
+      "name": "嘉義縣婦女福利服務中心",
+      "county": "嘉義縣",
+      "sourceLevel": "official-search-index-direct-open-timeout",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycounty-immigrant-center",
+      "url": "https://sabcc.cyhg.gov.tw/cp.aspx?n=10881",
+      "name": "嘉義縣新住民家庭服務中心（山區／海區）",
+      "county": "嘉義縣",
+      "sourceLevel": "official-search-index-plus-nia-crosscheck",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycounty-dayan-social-center",
+      "url": "https://sabcc.cyhg.gov.tw/cp.aspx?n=7777",
+      "name": "嘉義縣日安社會福利服務中心",
+      "county": "嘉義縣",
+      "sourceLevel": "official-search-index-direct-open-timeout",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "cycounty-family-education",
+      "url": "https://cic.familyedu.moe.gov.tw/",
+      "name": "嘉義縣家庭教育中心",
+      "county": "嘉義縣",
+      "sourceLevel": "official-url-confirmed-by-gov-family-doc-and-school",
+      "fromResearch": "city14"
+    },
+    {
+      "id": "ml-womens-welfare-learning",
+      "url": "https://www.miaoli.gov.tw/News_Content.aspx?n=5615&s=260664",
+      "name": "苗栗縣婦女福利服務中心—婦女成長與場地",
+      "county": "苗栗縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "ml-immigrant-center-contacts",
+      "url": "https://new-inhabitants.miaoli.gov.tw/web/ContentA/ContentA.aspx?c0=455",
+      "name": "苗栗縣苗南／苗北新住民家庭服務中心聯絡入口",
+      "county": "苗栗縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "kh-women-center",
+      "url": "https://women.kcg.gov.tw/",
+      "name": "高雄市政府社會局婦女館",
+      "county": "高雄市",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "kh-immigrant-centers-directory",
+      "url": "https://fr6c.kcg.gov.tw/News_Content.aspx?n=408E824F5B87284A&s=A570EA8BDD32F8A2&sms=976E95C721BB34BA",
+      "name": "高雄市新住民家庭服務中心用途及聯絡查詢",
+      "county": "高雄市",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "pt-female-dream-center",
+      "url": "https://socmap.pthg.gov.tw/pt1w/app/map?objid=268436396",
+      "name": "屏東縣女性夢想館官方服務地圖",
+      "county": "屏東縣",
+      "sourceLevel": "official-search-index-open-tool-error",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "pt-immigrant-family-centers",
+      "url": "https://www.pthg.gov.tw/planjdp/cp.aspx?n=EEF68ADD2DBFA5E7&s=5B5BD0B3D5EC4642",
+      "name": "屏東縣新住民家庭服務中心官方服務項目",
+      "county": "屏東縣",
+      "sourceLevel": "official-search-index-open-tool-error",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "hl-new-immigrant-family",
+      "url": "https://sa.hl.gov.tw/Detail_sp/d8bbba8318c6401c9fb13afb81896090",
+      "name": "花蓮縣新住民家庭服務",
+      "county": "花蓮縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "hl-women-welfare-notices",
+      "url": "https://sa.hl.gov.tw/List_sp/6b22697437644bc380dcd32168ee6ead",
+      "name": "花蓮縣社會處婦女福利政策與服務公告",
+      "county": "花蓮縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "hl-women-employment",
+      "url": "https://labor.hl.gov.tw/cl.aspx?n=23624",
+      "name": "花蓮縣政府女性創就業專區",
+      "county": "花蓮縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "tt-new-immigrant-center-current",
+      "url": "https://ifi.immigration.gov.tw/wSite/ct?ctNode=37635&mp=1&xItem=8811",
+      "name": "臺東縣新住民家庭服務中心（2026年起新委辦資訊）",
+      "county": "臺東縣",
+      "sourceLevel": "official-search-index-direct-open-timeout",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "tt-social-welfare-regional-directory",
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48220-204.html",
+      "name": "臺東縣四區社會福利服務中心通訊錄",
+      "county": "臺東縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "ph-women-center",
+      "url": "https://www.penghu.gov.tw/society/home.jsp?id=436",
+      "name": "澎湖縣婦女福利服務中心官方業務專頁",
+      "county": "澎湖縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "ph-immigrant-center-index",
+      "url": "https://www.penghu.gov.tw/society/home.jsp?id=137",
+      "name": "澎湖縣新住民家庭服務中心業務索引",
+      "county": "澎湖縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "ph-immigrant-vietnamese-indonesian-files",
+      "url": "https://www.penghu.gov.tw/society/home.jsp?act=view&dataserno=201511030031&id=137",
+      "name": "澎湖縣新住民中心多國語言簡介頁",
+      "county": "澎湖縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "km-women-center",
+      "url": "https://social.kinmen.gov.tw/Content_List.aspx?n=31D868C2AFAA1979",
+      "name": "金門縣婦女福利服務中心",
+      "county": "金門縣",
+      "sourceLevel": "official-search-result-page-retry-error",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "km-immigrant-welfare-index",
+      "url": "https://social.kinmen.gov.tw/Content_List.aspx?n=07E013BF6DAC8E2D",
+      "name": "金門縣新住民福利專區",
+      "county": "金門縣",
+      "sourceLevel": "official-search-result-page-retry-error",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "km-immigrant-location",
+      "url": "https://social.kinmen.gov.tw/News_Content.aspx?Create=1&n=100FF2EA665D3910&s=16D36AF80360CCC1&sms=B675900615BB79BF",
+      "name": "金門縣新住民家庭服務中心據點FAQ",
+      "county": "金門縣",
+      "sourceLevel": "official-search-result-visible",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "lc-immigrant-family-center",
+      "url": "https://www.matsu.gov.tw/chhtml/content/371030000A0001/6099",
+      "name": "連江縣新住民家庭服務中心",
+      "county": "連江縣",
+      "sourceLevel": "official-page-open",
+      "fromResearch": "city19"
+    },
+    {
+      "id": "lc-women-welfare-document-index",
+      "url": "https://www.matsu.gov.tw/chhtml/download/371030000A0001/5981",
+      "name": "連江縣婦女福利施政與權益計畫文件入口",
+      "county": "連江縣",
+      "sourceLevel": "official-search-index-direct-open-timeout",
+      "fromResearch": "city19"
+    }
+  ],
+  "duplicateCountyURLs": [],
+  "duplicatesAgainstExistingQA50AndNI13": [],
+  "newImmigrant13": [
+    {
+      "id": "NI-01",
+      "name": "我的 E 政府｜新住民照顧服務總覽",
+      "url": "https://www.gov.tw/News_Content_26_805862",
+      "region": "national",
+      "category": "life-family",
+      "reviewScope": "我的 E 政府跨部會新住民入口原頁可讀；總覽更新 2025-03-31，內文舊年金額與資格不可引用為 2026 現行規則",
+      "reviewStatus": "official-page-verified-purpose-only",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-02",
+      "name": "台灣就業通｜新住民求職、職訓專區",
+      "url": "https://job.taiwanjobs.gov.tw/Internet/special2/foreignspouse/index.aspx",
+      "region": "national",
+      "category": "career",
+      "reviewScope": "勞動部台灣就業通新住民專區原頁可讀；求職、就業權益、職訓、技能與創業分類確認，職缺數即時變動不可搬本站",
+      "reviewStatus": "official-page-verified-purpose-only",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-03",
+      "name": "勞動部｜多語新住民就業資源簡介",
+      "url": "https://www.wda.gov.tw/News_Content.aspx?n=156&s=18648",
+      "region": "national",
+      "category": "career",
+      "reviewScope": "勞動部勞動力發展署正式頁可見中文、越文、印文、英文、泰文 PDF 清單；尚未逐一下載開啟檔案",
+      "reviewStatus": "official-language-index-verified-file-unopened",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-04",
+      "name": "新住民子女教育資訊網",
+      "url": "https://mkm.k12ea.gov.tw/",
+      "region": "national",
+      "category": "learning",
+      "reviewScope": "教育部國教署新住民子女教育資訊網首頁可讀，確認語文教材、研習、公開資訊、跨國銜轉及親子共讀公告；個別服務／活動資格尚未驗證",
+      "reviewStatus": "official-page-verified-purpose-only",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-05",
+      "name": "國健署｜孕媽咪健康手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+      "region": "national",
+      "category": "health",
+      "reviewScope": "國健署孕媽咪健康手冊官方頁可見中文 115 年 6 月、英／越／印／柬／泰文 114 年 9 月；尚未逐份開啟 PDF",
+      "reviewStatus": "official-language-index-verified-file-unopened",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-06",
+      "name": "國健署｜孕媽咪衛教手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4839",
+      "region": "national",
+      "category": "health",
+      "reviewScope": "國健署孕媽咪衛教手冊直接 EBook 原頁在工具擷取逾時，但官方 TopicList 子頁及搜尋結果顯示114年外語版；需再逐語瀏覽及實機核對",
+      "reviewStatus": "official-list-visible-deep-page-unverified",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-07",
+      "name": "移民署｜新住民數位資訊 e 網",
+      "url": "https://nit.immigration.gov.tw/",
+      "region": "national",
+      "category": "learning",
+      "reviewScope": "移民署新住民數位資訊e網首頁原頁可讀；可見中文、English、越、印、泰、柬語選單與公開試讀課程；實際課程報名、費用與每種語言內容仍需逐頁確認",
+      "reviewStatus": "official-page-verified-purpose-only",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-08",
+      "name": "新北｜新住民家庭暨婦女服務中心",
+      "url": "https://ntni.tw/index.php",
+      "region": "new-taipei",
+      "category": "city",
+      "reviewScope": "已直接閱讀新北新住民家庭暨婦女服務中心站及新北市政府社會局官方說明；市府明列板橋與三重服務中心、地址、分區及原 ntni.tw 網址，非 .gov.tw 專站可由主管機關對照。2026-10 原站有活動公告，但不能保證現在尚有名額。",
+      "reviewStatus": "primary-government-corroborated",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-09",
+      "name": "臺北｜新住民專區",
+      "url": "https://nit.taipei/Default.aspx",
+      "region": "taipei",
+      "category": "city",
+      "reviewScope": "臺北市新住民專區原頁可讀，清楚顯示工作、社福、衛生保健、學習與場館、家庭服務中心及其他語言版本入口；同頁有 2026-10 公告。",
+      "reviewStatus": "official-direct-page-verified",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-10",
+      "name": "桃園市婦幼發展局｜新住民服務",
+      "url": "https://dowcd.tycg.gov.tw/cl.aspx?n=16359",
+      "region": "taoyuan",
+      "category": "city",
+      "reviewScope": "桃園市政府婦幼發展局原頁直接列出多國語言、經濟補助、社區關懷服務據點、家庭服務中心、培力中心與通譯服務等子項，確為地方性新住民服務。",
+      "reviewStatus": "official-direct-page-verified",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-11",
+      "name": "臺中市｜新住民資訊網",
+      "url": "https://www.taichung.gov.tw/1961691/",
+      "region": "taichung",
+      "category": "city",
+      "reviewScope": "本次直接擷取臺中官方主入口曾回傳工具錯誤；官方公開索引可讀到新住民資訊網頁面及更新 2026-09-21，另臺中市民政局專區介紹多語版本與新住民生活、就業、家庭、社福等分類，支持站點存在與用途，惟不得宣稱本次主頁直接成功開啟。",
+      "reviewStatus": "official-search-index-and-secondary-government-page-verified",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-12",
+      "name": "臺南市｜新住民家庭服務中心",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21363&s=4378270",
+      "region": "tainan",
+      "category": "city",
+      "reviewScope": "臺南市政府社會局『新住民家庭服務中心簡介』官方原頁可讀，屬中心簡介與服務入口，不是 2027 年當期課程公告。",
+      "reviewStatus": "official-direct-page-verified",
+      "qaEnabled": false,
+      "ownerApproved": false
+    },
+    {
+      "id": "NI-13",
+      "name": "苗栗縣｜新住民照顧輔導資訊網",
+      "url": "https://new-inhabitants.miaoli.gov.tw/",
+      "region": "miaoli",
+      "category": "city",
+      "reviewScope": "苗栗縣『新住民照顧輔導資訊網』原頁可讀，列生活適應、醫療保健、就業、教育、育兒、人身安全等服務分類；頂端可見 English、越語及印尼語選單。",
+      "reviewStatus": "official-direct-page-verified-language-menu",
+      "qaEnabled": false,
+      "ownerApproved": false
+    }
+  ],
+  "qaEnglishResources": [
+    {
+      "id": "qa-en-nia",
+      "name": "內政部移民署｜在臺生活與居留資訊",
+      "url": "https://www.immigration.gov.tw/5475/"
+    },
+    {
+      "id": "qa-en-ifi",
+      "name": "新住民培力發展資訊網｜多語生活資源",
+      "url": "https://ifi.immigration.gov.tw/"
+    },
+    {
+      "id": "qa-en-1990",
+      "name": "1990 外來人士在臺生活諮詢服務",
+      "url": "https://www.immigration.gov.tw/5475/5478/6928/6940/204896/204917/"
+    }
+  ],
+  "officialActivityPortals": [
+    {
+      "id": "act-03",
+      "name": "女性創業飛雁計畫：找課程",
+      "url": "https://www.sme.gov.tw/women/article-women-3327-18767",
+      "group": "理財與創業"
+    },
+    {
+      "id": "act-04",
+      "name": "全民金融教育網：我要上課",
+      "url": "https://if.tabf.org.tw/lectureList",
+      "group": "理財與創業"
+    },
+    {
+      "id": "act-05",
+      "name": "金融消費評議中心：活動資訊",
+      "url": "https://www.foi.org.tw/Article.aspx?Arti=55&Lang=1",
+      "group": "理財與創業"
+    },
+    {
+      "id": "act-01",
+      "name": "勞動部職訓課程查詢",
+      "url": "https://course.taiwanjobs.gov.tw/course/conditions",
+      "group": "工作與技能"
+    },
+    {
+      "id": "act-02",
+      "name": "台灣就業通：職缺與徵才活動",
+      "url": "https://job.taiwanjobs.gov.tw/",
+      "group": "工作與技能"
+    },
+    {
+      "id": "act-06",
+      "name": "臺北市社區心理衛生中心：講座與活動",
+      "url": "https://mental-health.gov.taipei/ActiveList.aspx?n=6CCBECECB36BFE4E&sms=F62510C10F2670B1",
+      "group": "健康與心理"
+    },
+    {
+      "id": "act-07",
+      "name": "心快活：心理健康學習平台",
+      "url": "https://wellbeing.mohw.gov.tw/nor/main",
+      "group": "健康與心理"
+    },
+    {
+      "id": "act-09",
+      "name": "文化部共構藝文活動平台",
+      "url": "https://event.culture.tw/",
+      "group": "藝文與閱讀"
+    },
+    {
+      "id": "act-10",
+      "name": "國家圖書館：活動報名系統",
+      "url": "https://web.ncl.edu.tw/event/Home",
+      "group": "藝文與閱讀"
+    },
+    {
+      "id": "act-11",
+      "name": "國立公共資訊圖書館：活動資訊",
+      "url": "https://activity.nlpi.edu.tw/",
+      "group": "藝文與閱讀"
+    },
+    {
+      "id": "act-08",
+      "name": "教育部家庭教育資源網",
+      "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+      "group": "家庭與生活學習"
+    },
+    {
+      "id": "act-12",
+      "name": "臺北市終身學習課程查詢",
+      "url": "https://lle.tp.edu.tw/course",
+      "group": "家庭與生活學習"
+    }
+  ],
+  "datedNotices": [
+    {
+      "id": "notice-taiwan-science-festival-2026",
+      "title": "2026 第七屆臺灣科學節",
+      "sourceUrl": "https://www.moe.gov.tw/News_Content.aspx?n=9E7AC85F1954DDA8&s=85A25BD61A118DEB&sms=169B8E91BB75571F",
+      "startDate": "2026-11-07",
+      "endDate": "2026-11-15",
+      "visibleUntil": "2026-11-15",
+      "activeAtRecordDate": true,
+      "dateBasis": "exact",
+      "approvalStatus": "candidate-not-approved"
+    },
+    {
+      "id": "notice-ncl-alice-2026-2027",
+      "title": "國家圖書館冬季閱讀講座：《愛麗絲夢遊仙境》跨界閱讀",
+      "sourceUrl": "https://web.ncl.edu.tw/event/FMEvents/Cont?SId=0Q208581657878048173",
+      "startDate": "2026-11-14",
+      "endDate": "2027-01-16",
+      "visibleUntil": "2027-01-16",
+      "activeAtRecordDate": true,
+      "dateBasis": "exact",
+      "approvalStatus": "candidate-not-approved"
+    },
+    {
+      "id": "notice-tibe-2027",
+      "title": "2027 第 35 屆台北國際書展",
+      "sourceUrl": "https://www.tibe.org.tw/",
+      "startDate": "2027-02-16",
+      "endDate": "2027-02-21",
+      "visibleUntil": "2027-02-21",
+      "activeAtRecordDate": true,
+      "dateBasis": "exact",
+      "approvalStatus": "candidate-not-approved"
+    },
+    {
+      "id": "notice-taipei-zoo-insect-exhibition-2027",
+      "title": "臺北市立動物園：《看你什麼嘴臉？昆蟲頭等大事》特展",
+      "sourceUrl": "https://www.zoo.gov.taipei/News_Content.aspx?n=1040A0BA6520CA48&s=5CAD911AC8C57C04&sms=67D26248A5724B42",
+      "startDate": "2025-10-18",
+      "endDate": "2027-04-30",
+      "visibleUntil": "2027-04-30",
+      "activeAtRecordDate": true,
+      "dateBasis": "exact",
+      "approvalStatus": "candidate-not-approved"
+    },
+    {
+      "id": "notice-taiwan-hot-spring-2026-2027",
+      "title": "2026–2027 台灣好湯溫泉美食嘉年華",
+      "sourceUrl": "https://www.taiwan.net.tw/m1.aspx?page=1&sno=0001019",
+      "startDate": "2026-09-04",
+      "endDate": "2027-06-30",
+      "visibleUntil": "2027-06-30",
+      "activeAtRecordDate": true,
+      "dateBasis": "exact",
+      "approvalStatus": "candidate-not-approved"
+    },
+    {
+      "id": "notice-national-skills-2027-plan",
+      "title": "2027 全國技能競賽實施計畫",
+      "sourceUrl": "https://www.wdasec.gov.tw/News_Content.aspx?n=BD34663BD4EC9F4C&s=AEBA0907E929B76D&sms=535E01AC52EFB5A7",
+      "startDate": null,
+      "endDate": null,
+      "visibleUntil": "2027-07-25",
+      "activeAtRecordDate": true,
+      "dateBasis": "planned",
+      "approvalStatus": "candidate-not-approved"
+    }
+  ],
+  "images": [
+    {
+      "id": "home-hero",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "cat-life-family",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "cat-career",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "cat-health",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "cat-law",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "cat-city",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "cat-learning",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "home-city-band",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "home-learning-band",
+      "status": "待檢查",
+      "usage": "source image listed; 9 already content approved",
+      "manualCheckedAt": null
+    },
+    {
+      "id": "article-how-to-use",
+      "status": "待補",
+      "usage": "optional source absent and not required",
+      "manualCheckedAt": null
+    }
+  ],
+  "knownUnresolved": [
+    "22縣市各婦女中心是否實際開館、課程是否招生，仍須按縣市逐項核",
+    "屏東女性夢想館有疑似關館或服務調整資訊，未核新公告前不標為目前可到訪",
+    "臺東新住民中心2026委辦更換，舊聯絡頁可能過時",
+    "高雄新住民服務名錄部分內文停在2022，不把頁腳新版日期當名錄更新",
+    "澎湖／金門多語PDF實檔未一一開啟",
+    "活動是6筆具體公告＋12筆長期官方查詢，活動會過期需依台灣日期停止顯示",
+    "圖片九張既有AI自製並獲限定用途發布核准；第10張可選照片待補，不阻擋網站使用"
+  ]
+}
