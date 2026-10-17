@@ -38,3 +38,15 @@
 - 本輪未改 Claude 工作分支、`main`、`content/release-approvals.json`，未將 `docs/QA-EXPANSION-IMPORT-QUEUE.json` 任一篇設為 true。
 - Claude PR #13 是獨立暫存，內含截至 `c9a5111` 的 PR #11 舊版；本編輯分支在之後加入城市研究與本次勘誤，**重新整合前應比對最新 PR #11，避免覆寫新文件或重設 CLAUDE.md。**
 - 建議實作順序：先核對連結 CI 具體失敗網址，將 B4 精確用語與 A1 來源標籤接入 QA；修正 Claude 舊來源查核紀錄與阻擋註記；再做九篇或指定篇數暫存全測。網站公開 QA 要另取得站主明確授權。
+
+## GitHub 連結工作流程結果（補核 2026-10-17）
+
+對應 run `38990419022`、job `117271368041`。工作流程及所有步驟顯示 `success`，但**原始日志仍存在未開啟項目**；目前的 `scripts/check-links-browser.mjs` 僅列印失敗，不會因 `rows.some(!ok)` 設定非零 exit code，不能用整個流程 success 取代逐筆審閱。
+
+- `--set=expansion9`：**23 個不同來源網址，21 個顯示 HTTP 200／可開啟，2 個未被分類為可開啟**。A1 **6／6** 可開啟；B5 **2／2** 可開啟；B4 **2／2** 可開啟。
+- exp-12 `https://www.ntsec.gov.tw/article/FileAtt.ashx?id=6193`：Playwright 報 `Download is starting`，實際屬檔案下載流程，**不能直接當作壞連結**；仍須辨識檔案類型、能否完整下載及內容。
+- A2 `https://familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072`：美國 runner 超時。歷史使用者已回報臺灣 iPhone 可正常開啟家庭教育資源網，**不應據海外 timeout 刪除**；個別頁面內容核對仍須記錄。
+- `--set=activities`：18 個網址，17 個可開啟；家庭教育資源網 `https://familyedu.moe.gov.tw/front.aspx/index.aspx` 同樣在海外 runner 超時。這和 A2 可能是同一域名的連線問題。
+- 完整鏈結檢查的其他組別亦有少數海外頁面拒絕或超時，與本輪新文章來源不可混為同一個待修清單。
+
+**接軌建議**：Claude 下一步先做九篇完整暫存與準確的來源報表。若改善連結檢查器，須區分 HTML 可開啟、檔案下載、海外超時／防護頁及真實失效（404／410 等），不可把所有海外 timeout 當作失效，也不能把總流程成功稱為所有來源成功。來源確切支持文章敘述，仍以原頁逐句核對為準。
