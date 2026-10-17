@@ -1,5 +1,5 @@
-// 《由己｜向光》編輯式閱讀索引；只供 QA 頁面使用。
-// 八個索引保持既有兩欄四排，頁面下方的文章格一次展示所有屬於「向光」的閱讀內容。
+// 《由己｜向望》編輯式閱讀索引；只供 QA 頁面使用。
+// 八個索引保持既有兩欄四排，頁面下方的文章格一次展示所有屬於「向望」的閱讀內容。
 // 與「讀利」採互斥展示：此清單的文章不會再列在讀利，但原始文章、六大分類及搜尋均不更動。
 export const TOWARD_READING_SLUGS = Object.freeze([
   'batch4-art-museum-first-visit',
@@ -41,10 +41,10 @@ export function resolveTowardEditorial(articles, resources) {
   const missing = [];
   const topicIds = new Set();
   const readingSet = new Set(TOWARD_READING_SLUGS);
-  if (readingSet.size !== TOWARD_READING_SLUGS.length) missing.push('向光文章格有重複文章 slug');
+  if (readingSet.size !== TOWARD_READING_SLUGS.length) missing.push('向望文章格有重複文章 slug');
   const gallery = TOWARD_READING_SLUGS.map(slug => {
     const a = bySlug.get(slug);
-    if (!a) missing.push('向光文章不存在 ' + slug);
+    if (!a) missing.push('向望文章不存在 ' + slug);
     return a;
   }).filter(Boolean);
   const topics = TOWARD_TOPICS.map(t => {
@@ -65,6 +65,6 @@ export function resolveTowardEditorial(articles, resources) {
     return item;
   }).filter(Boolean);
   if (topics.length !== 8) missing.push('原有八個學習與活動索引不完整');
-  if (missing.length) throw new Error('向光 QA 編輯索引未能完成：\n- ' + missing.join('\n- '));
+  if (missing.length) throw new Error('向望 QA 編輯索引未能完成：\n- ' + missing.join('\n- '));
   return { topics, gallery, official };
 }

@@ -34,7 +34,7 @@ export const SOURCE_LABELS = [
 const LABEL = `(?:${SOURCE_LABELS.join('|')})(?:（[^）]*）)?`;
 // 清單式（下一行起為「- [名稱](網址) 說明」）：**正式來源（日期）：** 或 ### 官方來源與延伸閱讀
 const SOURCE_HEADER = new RegExp(`^(?:\\*\\*${LABEL}：\\*\\*|#{2,3}\\s+${LABEL})$`);
-// 原稿給編輯看的對應說明（例如 **編輯對應：向光／…** 、**建議閱讀入口：…**、**建議歸類：向光／…**），不進正文
+// 原稿給編輯看的對應說明（例如 **編輯對應：向望／…** 、**建議閱讀入口：…**、**建議歸類：向望／…**），不進正文
 const INTERNAL_LINE = /^\*\*(?:編輯對應|建議閱讀入口|建議歸類)：.*\*\*$/;
 // 單行來源：**正式來源**：[名稱](網址)；[名稱](網址)。補充說明
 const SOURCE_INLINE = new RegExp(`^\\*\\*${LABEL}\\*\\*：(.+)$`);
@@ -171,7 +171,7 @@ export async function loadQaExpansion(root, ctx) {
     if (!/^exp-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(x.slug || '')) { problems.push(`${label} slug 必須是 exp- 開頭的小寫英數與 -`); continue; }
     if (existingSlugs.has(x.slug)) { problems.push(`${label} slug 與既有文章重複：${x.slug}`); continue; }
     if (!catTitle[x.category]) { problems.push(`${label} 分類 ${x.category} 不在六大分類中`); continue; }
-    if (!DIRECTORIES.includes(x.directory)) { problems.push(`${label} directory 必須是 ${DIRECTORIES.join('／')}（讀利／向光是否收錄需明確指定）`); continue; }
+    if (!DIRECTORIES.includes(x.directory)) { problems.push(`${label} directory 必須是 ${DIRECTORIES.join('／')}（讀利／向望是否收錄需明確指定）`); continue; }
     if (!/^\d\d$/.test(x.heading || '')) { problems.push(`${label} heading 必須是兩位數編號`); continue; }
     if (typeof x.sourceFile !== 'string' || !x.sourceFile.startsWith(fileRoot) || !existsSync(path.join(root, x.sourceFile))) { problems.push(`${label} 原稿不存在或不在 ${fileRoot}`); continue; }
     if (!fileCache.has(x.sourceFile)) fileCache.set(x.sourceFile, await readFile(path.join(root, x.sourceFile), 'utf8'));
