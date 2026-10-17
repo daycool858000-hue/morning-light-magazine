@@ -14,6 +14,22 @@ const OUT=path.join(ROOT,requested||'dist-production');
 const str=p=>readFile(path.join(ROOT,p),'utf8');
 const json=async p=>JSON.parse(await str(p));
 const out=p=>readFile(path.join(OUT,p),'utf8');
+
+// 不可讓舊「向光」和已被站主確認不可公開使用的育兒津貼私人網址進入正式發布。
+// 僅隔離的單元測試可使用 LAUNCH_TEST_ONLY=1 檢查歷史版功能；真正的正式部署不可跳過。
+if (process.env.LAUNCH_TEST_ONLY !== '1') {
+  const brand=await json('config/site.json');
+  const column=brand.directories?.find(d=>d.id==='toward-light');
+  assert.equal(column?.zh,'向望','正式版本仍保留舊名稱「向光」：先整合已驗收的向望 QA，不可部署');
+  assert.equal(column?.en,'TOWARD OPEN SKIES','正式版向望英文名稱與已驗收版本不一致');
+  const topicGuides=await json('docs/QA-TOPIC-ENTRANCES-54-SOURCE-GUIDES-2026-10-17.json');
+  const childcare=topicGuides.topics?.find(t=>t.id==='childcare');
+  assert.ok(childcare && childcare.displayMode==='keep' &&
+    childcare.links?.every(l=>l.url!=='https://twbaby.sfaa.gov.tw/home/index') &&
+    childcare.links?.some(l=>l.url==='https://www.sfaa.gov.tw/'),
+    '育兒津貼仍指向站主確認無法公開使用的私人申辦網址：先採用原社家署官方入口後才可部署');
+}
+
 const articleFiles=(await readdir(path.join(OUT,'articles'))).filter(x=>x.endsWith('.html'));
 assert.equal(articleFiles.length,44,'正式版文章不足44篇：停止發布，不允許覆蓋目前網站');
 const candidate=JSON.parse(await str('artifacts/launch-article-batch.json'));

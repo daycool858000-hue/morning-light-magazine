@@ -22,6 +22,12 @@
   6. `https://job.taiwanjobs.gov.tw/Internet/Index/DocDetail.aspx?docid=6649&uk=2759`（地方勞工網站目錄：timeout）
 - 6個非可達結果不能等同失效。不能把這批 54 主題全部視為人工查核或正式核准。
 
+## 2026-10-18 正式發布前置安全檢查（額外的工程硬閘）
+- `scripts/assert-production-ready.mjs` 新增防呆：真正執行正式部署時，必須沿用站主已驗收的「向望｜TOWARD OPEN SKIES」，且54入口候選的育兒津貼不可以含私人申辦網址，須改為原社家署官方機關入口。
+- 目前此 PR #19 基於舊「向光」且保留舊的育兒候選來源，所以**正式部署將被預期攔下**。這是阻止錯版覆蓋，不是代表所有工作完工，也不是站主已批准上線。
+- 舊的 CI 模擬測試使用 `LAUNCH_TEST_ONLY=1` 於獨立資料夾驗證精確核准機制，不等於正式 Pages 可以跳過安全檢查。
+- 仍須另完成正式版對最新 QA 的整合、核准範圍分批發布閘門及站主最後正式切換授權。
+
 ## 2026-10-18 新增：育兒津貼來源修正與最新實際驗證
 - 站主在 iPhone 確認 `https://twbaby.sfaa.gov.tw/home/index` 為無法公開使用的私人入口；**該網址不得列入正式版或公開 QA 候選**。PR #24 提交 `c0194e3` 改回原本的衛生福利部社會及家庭署卡片 `#res-sfaa` 與 `https://www.sfaa.gov.tw/`，補公開制度說明。
 - 54主題候選總數仍54（keep12／supplement4／replace38），同一校驗版本新增或調整的36個網址：[Actions 39074828426](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39074828426) 31可開／5受阻或逾時／0明確失效。
