@@ -49,7 +49,7 @@ execFileSync(process.execPath,['scripts/build.mjs','--mode=qa','--out=dist-qa-to
  cwd:ROOT,env:{...process.env,QA_TOPIC_GUIDES_STAGING:'1'},stdio:'inherit'
 });
 
-let preserved=0,repaired=0,shownLinks=0,notes=0;
+let preserved=0,repaired=0,shownLinks=0,notes=0,retainedTopics=0,retainedAnchors=0;
 for(const cat of cats){
  const current=await read('dist-qa-topic54-base/'+cat.id+'.html');
  const candidate=await read('dist-qa-topic54/'+cat.id+'.html');
@@ -65,6 +65,17 @@ for(const cat of cats){
   }
   if(row.displayMode==='replace' && after.includes('官方入口整理與查核中。'))
     throw Error('應修補的入口仍是整理中 '+t.id);
+  // 23個已有站內資源的主題：新外部連結只能補充，不能刪去原有 #res- 錨點。
+  if(row.displayMode==='replace'){
+    const internalLinks=[...before.matchAll(/href="#res-[^"]+"/g)].map(m=>m[0]);
+    if(internalLinks.length){
+      for(const href of internalLinks){
+        if(!after.includes(href))throw Error('原有站內機構跳轉被移除 '+t.id+' '+href);
+        retainedAnchors++;
+      }
+      retainedTopics++;
+    }
+  }
   for(const link of row.links){
    if(!after.includes('href="'+escape(link.url)+'"')||!after.includes(escape(link.name)))
     throw Error('缺入口原網址 '+t.id+' '+link.url);
@@ -77,6 +88,7 @@ for(const cat of cats){
   repaired++;
  }
 }
+check('原有23主題的站內資源跳轉均未被新的外部直達入口取代',retainedTopics===23 && retainedAnchors>=23);
 check('11個已合適的入口原HTML片段完全不變',preserved===11);
 check('43項精確改善（39修補、4補充），原有主題文案保留',repaired===43 && shownLinks>=43);
 check('12條必要提醒只出現在修補主題',notes<=12 && notes>=10);
