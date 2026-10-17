@@ -64,3 +64,15 @@
 
 
 **公開 QA 分支的一般 CI 尚需版本兼容修正（已定位，不影響完成的 Pages deploy gate）**：run `38995630418` 的一般「檢查與測試」在 `tests/qa-expansion.test.mjs` 有 2／20 項失敗；一項原樣預期真實佇列全部 `importToQa: false`，另一項原樣要求 `health.html` 在樣本來源切換時逐位元組不變。這些斷言適用於尚未公開任何九篇的工程暫存，但在合法開啟九篇的獨立公開 QA 分支已不成立。**不能把這兩項測試失敗冒稱為網站已部署頁面故障，也不能以刪除測試方式遮掩**；後續應使測試能嚴格區分「尚未獲准公開九篇」與「僅 QA 獲准公開九篇」兩種模式，保留所有安全限制。同時 PR #14 原審核版 CI 仍為成功，實際 Pages deploy 前安全 gate `38995630481` 已成功。
+
+
+## 2026-10-17｜公開 QA 分支兩項歷史測試失敗已修復（最終結果，取代前述「尚需修正」）
+
+GitHub Actions \`38996846522\`，分支 \`qa/public-nine-articles-20261017\`，提交 \`15a46217e0e62c7a5636424d6b39c2299e7cbcde\`：**整個 CI 已完成且 success**。原始日誌逐組成功：正式／一般站台 44；既有 QA 51；擴充機制 20；第一批四篇暫存 10；九篇暫存 10；新增「公開 QA／歷史模式雙驗收」8；WebKit 通用 15；WebKit QA 28。這八組均**零失敗**。
+
+修正方式沒有刪除任何舊測試、沒有放寬 production 隔離：
+1. 新增 \`tests/prepare-public-qa-legacy.mjs\`：只在測試時從現有已同意公開的九篇佇列，**複製產生九篇暫時關閉的模擬測試基線** \`dist-qa-closed-legacy\`；不修改實際佇列與公開網站。
+2. 原 \`tests/qa-expansion.test.mjs\`、\`tests/qa-expansion-first-four.test.mjs\`、\`tests/qa-expansion-nine.test.mjs\` 仍完整測試舊版關閉狀態、匯入、全文、搜尋、不同螢幕、隔離。
+3. 新增 \`tests/qa-public-nine.test.mjs\` 八項驗證：實際公開 QA 只開指定九篇、另外13篇與13筆多語資料不開、原有36篇不變、讀利26／向光19、九篇有未核准及 noindex、11＋1官方查詢入口去重、production 與正式核准快照沒有九篇。
+
+因此原本「兩項 CI 失敗」已解決；仍有效的已部署網站是 \`https://daycool858000-hue.github.io/morning-light-magazine/\`，部署 run \`38995630481\` success。本輪測試修正**沒有重新部署**、沒有合併 main，也未修改任何正式核准資料。網站上的資源「待查核」仍屬另一個內容狀態議題，不會由 CI 修正自動改成「已確認」。
