@@ -11,6 +11,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const file = path.join(root, 'content/launch-approvals.json');
 const out = path.join(root, 'dist-launch-fixture');
 const badOut = path.join(root, 'dist-launch-bad-snapshot');
+const cityOut = path.join(root, 'dist-launch-city-fixture');
 const prior = await readFile(file, 'utf8');
 const template = JSON.parse(prior);
 const releaseCandidate = JSON.parse(await readFile(path.join(root, 'artifacts/launch-article-batch.json'), 'utf8'));
@@ -48,6 +49,22 @@ try {
   assert.ok(!html.includes('noindex, nofollow'), 'production 頁面需符合正式索引設定');
   assert.ok(index.includes('articles/batch2-01.html') && !index.includes('articles/batch2-02.html'), '搜尋只能找到已簽核的版本');
   assert.ok(!existsSync(path.join(out,'assets/js/qa-calendar.js')), '不可以順便把未核准日曆資產帶進正式版');
+  const cityNoApproval = await readFile(path.join(out, 'city.html'),'utf8');
+  assert.ok(!cityNoApproval.includes('id="benefits"'), '未核准的六篇城市福利卡片不可自行顯示在正式城市頁');
+  assert.ok(!cityNoApproval.includes('articles/batch6-welfare-overview.html'), '城市頁不能偷帶未核准福利文章連結');
+
+  // 額外在隔離資料內虛擬核准一篇城市福利，確保只出現已核准的一張卡，不會把其他五張一起輸出。
+  const cityArticle = releaseCandidate.articles.find(x => x.slug === 'batch6-welfare-overview');
+  assert.ok(cityArticle?.sha256);
+  template.approvedArticles[cityArticle.slug] = sign(cityArticle.sha256);
+  await writeFile(file, JSON.stringify(template,null,2)+'\n');
+  build(cityOut);
+  assert.equal((await readdir(path.join(cityOut,'articles'))).filter(x=>x.endsWith('.html')).length,2);
+  const cityOneApproved = await readFile(path.join(cityOut,'city.html'),'utf8');
+  assert.ok(cityOneApproved.includes('articles/batch6-welfare-overview.html'));
+  assert.ok(!cityOneApproved.includes('articles/batch6-long-term-care-services.html'));
+  assert.ok(!cityOneApproved.includes('articles/batch6-income-support-emergency-aid.html'));
+  delete template.approvedArticles[cityArticle.slug];
 
   // 故意把 sha256 改錯，證明舊批准不會套用在修改後的文章。
   template.approvedArticles['batch2-01'] = sign(chosen.sha256.slice(0,-1)+(chosen.sha256.endsWith('0')?'1':'0'));
@@ -56,9 +73,9 @@ try {
   assert.ok(!existsSync(path.join(badOut,'articles/batch2-01.html')), '內容指紋不符的文章不得輸出');
   const badIndex = await readFile(path.join(badOut,'assets/data/search-index.js'),'utf8');
   assert.ok(!badIndex.includes('articles/batch2-01.html'), '不符內容不可在搜尋中出現');
-  console.log('正式版模擬完成：只輸出 1 篇假想已核准文章；其餘 43 篇隔離、日曆隔離、修改後舊核准失效。');
+  console.log('正式版模擬完成：單篇批准、單篇城市福利批准、其餘文章隔離；日曆隔離、修改後舊核准失效。');
 } finally {
   // 不論成功或失敗都先還原原核准檔；測試產物不部署，不寫回 git。
   await writeFile(file,prior);
-  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true})]);
+  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true})]);
 }
