@@ -8,6 +8,7 @@ on:
       - 'content/launch-approvals.json'
       - 'scripts/lib/launch-approval.mjs'
       - 'scripts/prepare-launch-article-batch.mjs'
+      - 'scripts/prepare-launch-feature-batch.mjs'
       - 'tests/launch-approval.test.mjs'
       - 'tests/launch-approval-integration.test.mjs'
       - 'scripts/build.mjs'
@@ -31,6 +32,8 @@ jobs:
         run: node tests/launch-approval.test.mjs
       - name: 從現有原稿產生44篇文章精確版本清單
         run: node scripts/prepare-launch-article-batch.mjs
+      - name: 盤點現有功能與新增35筆官方資源的真實原稿版本（不發布）
+        run: node scripts/prepare-launch-feature-batch.mjs
       - name: 使用一篇假想已核准文章，測試正式版不會洩漏其他43篇
         run: node tests/launch-approval-integration.test.mjs
       - name: 檢查清單未冒充站主核准
@@ -47,5 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: youji-launch-article-candidate-fingerprints
-          path: artifacts/launch-article-batch.json
+          path: |
+            artifacts/launch-article-batch.json
+            artifacts/launch-feature-batch.json
           retention-days: 14
