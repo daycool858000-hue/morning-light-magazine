@@ -57,7 +57,8 @@
 
 
 **正式來源（2026-10-17 查閱）：**
-- [勞動部｜部分工時與工讀生勞動條件基準](https://www.mol.gov.tw/1607/28690/87756/87780/nodelist)
+- [勞動部｜部分工時與工讀生權益完整入口（含工作契約、工資、工時）](https://www.mol.gov.tw/1607/28690/87756/)
+- [勞動部｜部分工時與工讀生勞動條件基準（細項）](https://www.mol.gov.tw/1607/28690/87756/87780/nodelist)
 - [勞動部台灣就業通｜求職防騙教戰守則](https://job.taiwanjobs.gov.tw/Internet/special2/freshman2/docDetail.aspx?docid=141&uk=1922)
 - [勞動部｜全球資訊網](https://www.mol.gov.tw/)
 
@@ -86,6 +87,7 @@
 稅務與保險仍是另一層問題，收入樣態、營業方式與工作身分不同，不能靠著作權約定反推報稅或勞動身分。《由己》不收契約、身份證件，也不提供報稅計算。
 
 **正式來源（2026-10-17 查閱）：**
+- [經濟部智慧財產局｜著作權法第12條官方條文](https://www.tipo.gov.tw/tw/copyright/694-17729.html)
 - [經濟部智慧財產局｜出資聘請他人完成作品的著作權歸屬](https://www.tipo.gov.tw/tw/copyright/692-12987.html)
 - [經濟部智慧財產局｜委託創作的權利約定問題](https://www.tipo.gov.tw/tw/copyright/692-16438.html)
 - [財政部稅務入口網](https://www.etax.nat.gov.tw/)
