@@ -5,13 +5,14 @@ import assert from 'node:assert/strict';
 import {readFile,readdir,stat} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {approvedLaunchFeature} from './lib/launch-approval.mjs';
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const OUT=path.join(ROOT,'dist-production');
+// 正式部署不可更動檢驗目標；只有隔離的單元測試明確設定 LAUNCH_TEST_ONLY 才能檢查模擬資料夾。
+const requested=process.argv.find(x=>x.startsWith('--out='))?.slice(6);
+assert.ok(!requested || (process.env.LAUNCH_TEST_ONLY==='1' && /^dist-launch-[a-z0-9-]+$/.test(requested)),
+  '正式部署僅允許預設 dist-production；測試目錄需隔離並明確啟用');
+const OUT=path.join(ROOT,requested||'dist-production');
 const str=p=>readFile(path.join(ROOT,p),'utf8');
-const json=async p=>JSON.parse(await str(p));
 const out=p=>readFile(path.join(OUT,p),'utf8');
-const a=await json('content/launch-approvals.json');
 const articleFiles=(await readdir(path.join(OUT,'articles'))).filter(x=>x.endsWith('.html'));
 assert.equal(articleFiles.length,44,'正式版文章不足44篇：停止發布，不允許覆蓋目前網站');
 const candidate=JSON.parse(await str('artifacts/launch-article-batch.json'));
