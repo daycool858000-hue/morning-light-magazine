@@ -364,7 +364,7 @@ function resourceCard(r, { anchor = true } = {}) {
   const cat = catById[r.categories[0]];
   const iconName = cat ? cat.icon : 'support';
   // 基本入口核准僅含機構與服務入口資訊，不連帶核准個人適用資格及詳細通話時段。
-  const basicOnly = !IS_PREVIEW && r.review?.level === 'official-entry';
+  const basicOnly = !IS_PREVIEW && (r.review?.level === 'official-entry' || (APPROVED_CATALOG && r.qa));
   const phones = basicOnly ? '' : r.phones
     .map((p) => `<a class="tel" href="tel:${esc(p.number)}">撥打 ${esc(p.number)}</a>`)
     .join('');
@@ -387,7 +387,7 @@ function resourceCard(r, { anchor = true } = {}) {
   ${englishSummary}
   <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${r.usage ? `<dt>使用方式</dt><dd class="res-usage">${esc(r.usage)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
-    <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review.date)}｜僅入口與基本簡介</span>` : IS_QA ? `${qaBadge(r)}${qaReviewMeta(r, 'resource')}` : `${qaBadge(r)}${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
+    <div class="meta">${basicOnly ? `<span class="badge badge-ok">官方入口已核對（AI 協助）</span><span>核對：${esc(r.review?.date || 'AI 查核紀錄')}｜僅入口與基本簡介</span>` : IS_QA ? `${qaBadge(r)}${qaReviewMeta(r, 'resource')}` : `${qaBadge(r)}${statusBadge(r.status)}<span>最後查核：${r.checkedAt ? esc(r.checkedAt) : '尚未查核'}</span>`}</div>
     <div class="res-actions">${extLink(r.url, '前往官方網站')}${englishLink}${phones}</div>
   </footer>
 </article>`;
