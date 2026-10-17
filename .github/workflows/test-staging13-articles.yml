@@ -1,0 +1,38 @@
+name: 由己｜未上架13篇文章隔離QA建置（絕不部署）
+
+on:
+  push:
+    branches:
+      - editorial/youji-13-articles-isolated-qa-20261017
+    paths:
+      - 'docs/STAGING13-*'
+      - 'scripts/test-staging13-ci.mjs'
+      - '.github/workflows/test-staging13-articles.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: staging13-articles
+  cancel-in-progress: true
+
+jobs:
+  article-staging:
+    name: 44篇原稿不變＋13篇模擬增加＋撤稿保護
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 全程只在隔離 GitHub runner 產生 QA 測試輸出
+        run: node scripts/test-staging13-ci.mjs
+      - name: 保留隔離 HTML 測試成果（非公開網站）
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youji-13-article-staging-html-only
+          path: dist-qa-staging13/
+          retention-days: 7
