@@ -106,7 +106,7 @@
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
       "publishMode": "qa-candidate-only",
-      "displayMode": "keep",
+      "displayMode": "supplement",
       "clarification": ""
     },
     {
@@ -567,7 +567,7 @@
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
       "publishMode": "qa-candidate-only",
-      "displayMode": "keep",
+      "displayMode": "supplement",
       "clarification": ""
     },
     {
@@ -587,7 +587,7 @@
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
       "publishMode": "qa-candidate-only",
-      "displayMode": "keep",
+      "displayMode": "supplement",
       "clarification": ""
     },
     {
@@ -914,7 +914,7 @@
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
       "publishMode": "qa-candidate-only",
-      "displayMode": "keep",
+      "displayMode": "supplement",
       "clarification": ""
     },
     {
@@ -1125,6 +1125,6 @@
       "clarification": ""
     }
   ],
-  "presentationPolicy": "已有合適入口照舊；空白或連到錯誤／總首頁者只補1–2個直接入口。保留既有主題說明文字。僅對容易混淆的12項加1句提醒。完整機關、用途、AI查核證據保存於資料JSON而不在手機畫面重複。",
+  "presentationPolicy": "已正確對應的入口不動。其他39項補一或兩個具體原頁；4個原有入口只添一個有用的官方直達／備援連結。孕產入口沿用Claude PR#15，不重做。全站只對12個容易混淆的項目加一句提醒。",
   "clarificationCount": 12
 }
