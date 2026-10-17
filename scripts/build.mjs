@@ -697,7 +697,7 @@ function dirHead(d, tip = '', extra = '') {
 }
 
 // ---------- 讀利專欄｜THE CONSIDERED PAGE（文章、常見需求、各主題閱讀方向） ----------
-// 讀利／向光分別展示不同文章，既有六大分類和搜尋仍連到同一原始文章。
+// 讀利／向望分別展示不同文章，既有六大分類和搜尋仍連到同一原始文章。
 // 讀利優先呈現福利、法律、安全、健康及個人財務，避免以「同一天更新」決定閱讀重要性。
 const READLI_PRIORITY = [
   'batch6-welfare-overview',
@@ -711,7 +711,7 @@ const READLI_PRIORITY = [
 ];
 const readliPriority = new Map(READLI_PRIORITY.map((slug, i) => [slug, i]));
 const towardReadingSet = new Set(TOWARD_READING_SLUGS);
-// 擴充文章不自動進讀利／向光：只有佇列 directory 明確指定時才接在原有清單之後，原 36 篇順序不變。
+// 擴充文章不自動進讀利／向望：只有佇列 directory 明確指定時才接在原有清單之後，原 36 篇順序不變。
 const directoryArticles = articles.filter(a => !a.expansion);
 const readliBase = IS_QA ? directoryArticles.filter(a => !towardReadingSet.has(a.slug)).sort((a, b) =>
   (readliPriority.get(a.slug) ?? Infinity) - (readliPriority.get(b.slug) ?? Infinity)
@@ -721,7 +721,7 @@ const towardExtra = qaExpansion.articles.filter(a => a.directory === 'toward');
 if (IS_QA && (directoryArticles.length !== readliBase.length + towardReadingSet.size ||
   TOWARD_READING_SLUGS.some(slug => !articles.some(a => a.slug === slug)) ||
   READLI_PRIORITY.some(slug => towardReadingSet.has(slug)))) {
-  throw new Error('讀利／向光分流出現缺篇、重複或跨目錄混入');
+  throw new Error('讀利／向望分流出現缺篇、重複或跨目錄混入');
 }
 if (IS_QA && READLI_PRIORITY.some((slug) => !articles.some((a) => a.slug === slug))) {
   throw new Error('讀利優先文章有不存在的 slug');
@@ -760,7 +760,7 @@ ${articles.length ? `<section class="section" aria-labelledby="articles-title">
   addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, '讀利 專欄 文章 閱讀 知識 常見需求 支援資源');
 }
 
-// ---------- 向光｜TOWARD OPEN SKIES ----------
+// ---------- 向望｜TOWARD OPEN SKIES ----------
 // 八索引固定兩欄四排：每排兩個入口後面接該排的文章清單（預設收起）。用核取方塊＋label 切換，不需 JavaScript；
 // 打開時清單出現在該排正下方、橫跨兩欄，八個入口的位置不會互換或單獨落到上一排。
 function towardRows(topics) {
@@ -846,7 +846,7 @@ ${dirHead(d)}
   </div>
 </section>`;
   pages.push({ file: d.href, html: layout({ title: `${d.zh}｜${d.en}`, description: d.lead, active: d.id, body, bodyClass: IS_QA ? 'dir-page toward-reading' : 'dir-page' }) });
-  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, IS_QA ? '向光 學習 活動 課程 生活探索 文章 藝文 文化 創業 親職 婦女中心 就業培訓 家庭教育 生活技能 公開課程' : '向光 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
+  addIndex('目錄', `${d.zh}｜${d.en}`, d.lead, d.href, IS_QA ? '向望 學習 活動 課程 生活探索 文章 藝文 文化 創業 親職 婦女中心 就業培訓 家庭教育 生活技能 公開課程' : '向望 學習 活動 課程 生活探索 城市 縣市 官方資源 支援資源');
 }
 
 // ---------- 分類頁共用 ----------

@@ -261,7 +261,7 @@ try {
   {
     const DIRS = [
       { href: 'quiet-power.html', zh: '讀利專欄', en: 'THE CONSIDERED PAGE' },
-      { href: 'toward-light.html', zh: '向光', en: 'TOWARD OPEN SKIES' },
+      { href: 'toward-light.html', zh: '向望', en: 'TOWARD OPEN SKIES' },
     ];
     // 1、2、11：手機頁首直接看到兩個目錄（中英文正確），且頁首元素不重疊、無水平溢位
     const headerProblems = [];
@@ -317,7 +317,7 @@ try {
       }
       await c.close();
     }
-    check('頁首：手機 320／375／390px 不開選單即可看到「讀利專欄 THE CONSIDERED PAGE」「向光 TOWARD OPEN SKIES」與切換畫面；品牌文字、選單、切換畫面、兩個目錄互不重疊、不超出畫面、點擊區 ≥ 44px、無水平溢位（含捲動後與選單開啟時）', headerProblems.length === 0, headerProblems.slice(0, 6).join('；'));
+    check('頁首：手機 320／375／390px 不開選單即可看到「讀利專欄 THE CONSIDERED PAGE」「向望 TOWARD OPEN SKIES」與切換畫面；品牌文字、選單、切換畫面、兩個目錄互不重疊、不超出畫面、點擊區 ≥ 44px、無水平溢位（含捲動後與選單開啟時）', headerProblems.length === 0, headerProblems.slice(0, 6).join('；'));
 
     // 3、4：點擊兩個目錄前往正確頁面；兩個目錄頁都在前段提供同一個支援資源頁入口
     const dirProblems = [];
@@ -354,16 +354,16 @@ try {
       const html = await readFile(path.join(DIST, f), 'utf8');
       if (/<h1[^>]*>支援資源<\/h1>/.test(html)) supportPages.push(f);
     }
-    check('讀利專欄、向光：點擊頁首目錄前往正確頁面；兩頁前段都有小型「支援資源」入口（肌肉圖示、高度 44–72px），連往同一個既有支援資源頁（全站只有一個支援資源頁）', dirProblems.length === 0 && supportPages.length === 1 && supportPages[0] === 'support.html', [...dirProblems, `支援資源頁：${supportPages.join('、')}`].join('；'));
+    check('讀利專欄、向望：點擊頁首目錄前往正確頁面；兩頁前段都有小型「支援資源」入口（肌肉圖示、高度 44–72px），連往同一個既有支援資源頁（全站只有一個支援資源頁）', dirProblems.length === 0 && supportPages.length === 1 && supportPages[0] === 'support.html', [...dirProblems, `支援資源頁：${supportPages.join('、')}`].join('；'));
 
-    // 頁首與手機選單不再有獨立的「支援資源」入口（只保留在讀利專欄與向光頁內）
+    // 頁首與手機選單不再有獨立的「支援資源」入口（只保留在讀利專欄與向望頁內）
     const navSupport = [];
     for (const f of pages) {
       const html = await readFile(path.join(DIST, f), 'utf8');
       const header = (/<header class="site-header">[\s\S]*?<\/header>/.exec(html) || [''])[0];
       if (header.includes('support.html')) navSupport.push(f);
     }
-    check('頁首與手機選單：不再有獨立的「支援資源」入口（支援資源只從讀利專欄、向光頁內進入）', navSupport.length === 0, navSupport.join('、'));
+    check('頁首與手機選單：不再有獨立的「支援資源」入口（支援資源只從讀利專欄、向望頁內進入）', navSupport.length === 0, navSupport.join('、'));
 
     // 支援資源頁更名：主標題、瀏覽器標題、站內搜尋顯示名稱皆為「支援資源」，原有專線不變
     const sup = await readFile(path.join(DIST, 'support.html'), 'utf8');
@@ -383,11 +383,11 @@ try {
     for (const f of pages) if ((await readFile(path.join(DIST, f), 'utf8')).includes('href="articles/') || f.startsWith('articles/')) movedProblems.push(`${f} 仍有已撤下文章`);
     if (/"type":"文章"/.test(idx)) movedProblems.push('搜尋索引仍有已撤下文章');
     if ((qp.match(/class="need-list"/g) || []).length !== 1 || (qp.match(/class="need-no"/g) || []).length < 8) movedProblems.push('讀利缺少常見需求');
-    if ((tl.match(/class="county-chip" href="city\.html#county=/g) || []).length !== 22) movedProblems.push('向光缺少 22 縣市入口');
-    for (const name of ['台灣就業通', '衛生福利部社會及家庭署', '財團法人法律扶助基金會', '衛生福利部心理健康司']) if (!tl.includes(`<h3>${name}</h3>`)) movedProblems.push(`向光缺少官方資源 ${name}`);
-    if (!tl.includes('href="learning.html"') || !tl.includes('href="learning.html#events-title"')) movedProblems.push('向光缺少學習與活動入口');
+    if ((tl.match(/class="county-chip" href="city\.html#county=/g) || []).length !== 22) movedProblems.push('向望缺少 22 縣市入口');
+    for (const name of ['台灣就業通', '衛生福利部社會及家庭署', '財團法人法律扶助基金會', '衛生福利部心理健康司']) if (!tl.includes(`<h3>${name}</h3>`)) movedProblems.push(`向望缺少官方資源 ${name}`);
+    if (!tl.includes('href="learning.html"') || !tl.includes('href="learning.html#events-title"')) movedProblems.push('向望缺少學習與活動入口');
     for (const f of ['disclaimer.html', 'privacy.html', 'verification.html']) if (!about.includes(`href="${f}"`)) movedProblems.push(`關於由己缺少 ${f}`);
-    check('原首頁內容仍可抵達：常見需求與操作提示→讀利專欄（使用指南卡片已撤下）；城市入口（22 縣市）、官方資源推薦、學習活動→向光；關於、免責、隱私、查核→關於由己', movedProblems.length === 0, movedProblems.join('；'));
+    check('原首頁內容仍可抵達：常見需求與操作提示→讀利專欄（使用指南卡片已撤下）；城市入口（22 縣市）、官方資源推薦、學習活動→向望；關於、免責、隱私、查核→關於由己', movedProblems.length === 0, movedProblems.join('；'));
 
     // 6：首頁六大主題卡全部可開啟
     const home = await readFile(path.join(DIST, 'index.html'), 'utf8');
@@ -403,10 +403,10 @@ try {
     // 7：首頁底部快捷入口只有四個且順序正確
     const quick = [...home.matchAll(/<a class="quick[^"]*" href="([^"]+)">([\s\S]*?)<\/a>/g)].map((m) => ({ href: m[1], zh: (/<span class="quick-zh">([^<]+)<\/span>/.exec(m[2]) || [])[1], en: (/<span class="quick-en">([^<]+)<\/span>/.exec(m[2]) || [])[1], inner: m[2] }));
     const quickOk = quick.length === 4
-      && quick.map((q) => q.zh).join('|') === '有急事|讀利專欄|向光|關於由己'
+      && quick.map((q) => q.zh).join('|') === '有急事|讀利專欄|向望|關於由己'
       && quick[1].en === 'THE CONSIDERED PAGE' && quick[2].en === 'TOWARD OPEN SKIES'
       && quick.map((q) => q.href).join('|') === 'tel:110|quiet-power.html|toward-light.html|about.html';
-    check('首頁快捷入口恰好 4 個，依序為：有急事、讀利專欄 THE CONSIDERED PAGE、向光 TOWARD OPEN SKIES、關於由己', quickOk, quick.map((q) => `${q.zh}→${q.href}`).join('、'));
+    check('首頁快捷入口恰好 4 個，依序為：有急事、讀利專欄 THE CONSIDERED PAGE、向望 TOWARD OPEN SKIES、關於由己', quickOk, quick.map((q) => `${q.zh}→${q.href}`).join('、'));
 
     // 8、9：有急事只有手電筒圖示；為單一 tel:110 連結，不經過網站自製頁面或彈窗，畫面上不顯示電話號碼
     const urgent = quick[0] || { inner: '' };
