@@ -21,6 +21,7 @@ import { resolveQaPortalRouting } from './lib/qa-portal-routing.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
 import { resolveTowardEditorial, TOWARD_READING_SLUGS } from './lib/toward-light-editorial.mjs';
 import { loadQaExpansion } from './lib/qa-expansion.mjs';
+import { loadQaPregnancyGuide } from './lib/qa-pregnancy-guide.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -154,6 +155,8 @@ const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources, ...qaExpansion.cityResources];
 const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
 const qaPortalRouting = IS_QA ? resolveQaPortalRouting(qaActivities.items, resources) : { primary: [], reused: [] };
+// QA-only：生活與家庭 01「懷孕與生育相關福利」的四段導覽（未核准，不進 preview／production）
+const qaPregnancyGuide = IS_QA ? await loadQaPregnancyGuide(ROOT, resources) : null;
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -845,6 +848,8 @@ function topicsSection(c) {
       ${c.topics
         .map((t, i) => {
           const related = resources.filter((r) => r.topics.includes(t.id));
+          const guide = qaPregnancyGuide && c.id === qaPregnancyGuide.category && t.id === qaPregnancyGuide.topic ? qaPregnancyGuide : null;
+          if (guide) return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(guide.topicText)}</p><p class="topic-guide-link"><a href="#${esc(guide.anchor)}">${esc(guide.topicLinkText)}<span aria-hidden="true">&nbsp;→</span></a></p></div></li>`;
           const list = related.length
             ? `<ul class="topic-links">${related.map((r) => `<li><a href="#res-${esc(r.id)}">${esc(r.name)}</a></li>`).join('')}</ul>`
             : `<p class="pending">官方入口整理與查核中。</p>`;
@@ -852,6 +857,35 @@ function topicsSection(c) {
         })
         .join('\n')}
     </ol>
+  </div>
+</section>`;
+}
+
+// QA-only：主題 01 的精簡閱讀區。四段文字＋原頁官方連結（附用途），不做資源卡、不收任何資料。
+function pregnancyGuideSection(c) {
+  const g = qaPregnancyGuide;
+  if (!g || c.id !== g.category) return '';
+  const ext = (l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.name)}<span aria-hidden="true">↗</span><span class="visually-hidden">（外部網站，另開新視窗）</span></a><p>${esc(l.purpose)}</p><small>${esc(l.org)}｜${esc(l.level)}</small></li>`;
+  const inner = (l) => `<li><a href="${esc(l.href)}">${esc(l.text)}<span aria-hidden="true">&nbsp;→</span></a></li>`;
+  return `<section class="section preg-guide" id="${esc(g.anchor)}" aria-labelledby="${esc(g.anchor)}-title">
+  <div class="wrap">
+    ${sectionHead('Pregnancy &amp; Birth', `${esc(g.anchor)}-title`, esc(g.title), esc(g.intro))}
+    <p class="preg-guide-qa"><span class="badge badge-qa">未核准測試內容</span> 來源查核：${esc(g.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</p>
+    <ol class="preg-steps">
+      ${g.steps
+        .map((s) => `<li class="preg-step">
+        ${[
+          `<h3><span class="preg-no" aria-hidden="true">${esc(s.no)}</span>${esc(s.title)}</h3>`,
+          s.body.map((p) => `<p>${esc(p)}</p>`).join(''),
+          `<ul class="preg-links" aria-label="${esc(s.title)}｜官方原頁">${s.links.map(ext).join('')}</ul>`,
+          s.afterLinks ? `<p class="preg-after">${esc(s.afterLinks)}</p>` : '',
+          s.internal.length ? `<ul class="preg-inner" aria-label="${esc(s.title)}｜站內延伸">${s.internal.map(inner).join('')}</ul>` : '',
+        ].filter(Boolean).join('\n        ')}
+      </li>`)
+        .join('\n      ')}
+    </ol>
+    <ul class="preg-inner preg-next" aria-label="同頁其他主題">${g.next.map(inner).join('')}<li><a href="#${esc(g.topic)}">回到主題索引<span aria-hidden="true">&nbsp;↑</span></a></li></ul>
+    <p class="preg-closing">${esc(g.closing)}</p>
   </div>
 </section>`;
 }
@@ -897,7 +931,8 @@ ${IS_QA ? articlesSection(catArticles) : ''}
     ${needList(c.needs.map((n) => ({ text: n.text, href: `#${n.topic}` })))}
   </div>
 </section>
-${topicsSection(c)}
+${topicsSection(c)}${pregnancyGuideSection(c) && `
+${pregnancyGuideSection(c)}`}
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
     ${sectionHead('Official Resources', 'res-title', '官方與正式機構入口', '點擊「前往官方網站」會直接進入原始機構網站。服務內容、資格與時間請以各機構公告為準。')}
@@ -1017,6 +1052,11 @@ ${qaPortalSection(c.id)}`;
 for (const c of categories) {
   addIndex('生活主題', c.title, c.short, c.slug, [c.kicker, c.tagline, c.intro, ...c.needs.map((n) => n.text)].join(' '));
   for (const t of c.topics) addIndex(`${c.title}・主題`, t.title, t.text, `${c.slug}#${t.id}`);
+}
+if (qaPregnancyGuide) {
+  const g = qaPregnancyGuide;
+  addIndex('生活與家庭・整理', '孕期與生育資訊整理', g.topicText, `${catById[g.category].slug}#${g.anchor}`,
+    ['懷孕 生育 孕婦 產檢 產前檢查 衛教 生育給付 生育補助 10萬 勞保 國保 產假 產檢假 陪產假 育嬰留停 出生登記 生育獎勵', ...g.steps.map((s) => s.title)].join(' '));
 }
 
 // ---------- 支援資源（緊急求助） ----------

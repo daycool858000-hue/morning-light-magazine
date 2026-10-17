@@ -8,6 +8,7 @@
 //       node scripts/check-links-browser.mjs --set=batch6　 只檢查第六批城市與福利 6 篇文章的參考來源（Issue #3）
 //       node scripts/check-links-browser.mjs --set=activities　只檢查「近期活動與講座」頁的官方公告與長期查詢入口
 //       node scripts/check-links-browser.mjs --set=expansion9　只檢查九篇擴充文章（暫存佇列）的參考來源
+//       node scripts/check-links-browser.mjs --set=pregnancy　只檢查生活與家庭「孕期與生育資訊整理」的九個官方原頁
 //       加上 --fail-on-broken：只有「真正失效」（404／410、網域不存在等）才以 exit 1 結束；
 //       下載型連結、海外逾時／連線受阻、防護頁都不算失效，但會逐筆分類列出。
 // 結果分四類：正常開啟、下載型連結（檔案直接下載，另以 HTTP 讀取狀態與檔案類型）、海外逾時／受阻、真正失效。
@@ -20,6 +21,7 @@ import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadBatch6Articles } from './lib/qa-batch6.mjs';
 import { loadQaActivities, loadQaNotices } from './lib/qa-activities.mjs';
 import { extractSection, parseExpansionArticle } from './lib/qa-expansion.mjs';
+import { PREGNANCY_GUIDE_FILE } from './lib/qa-pregnancy-guide.mjs';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
@@ -32,6 +34,9 @@ const targets = new Map();
 if (process.argv.includes('--set=activities')) {
   for (const it of (await loadQaActivities(ROOT)).items) targets.set(it.url, `活動與講座 ${it.id}`);
   for (const it of (await loadQaNotices(ROOT)).all) targets.set(it.sourceUrl, `近期活動消息 ${it.id}`);
+} else if (process.argv.includes('--set=pregnancy')) {
+  const guide = JSON.parse(await readFile(path.join(ROOT, PREGNANCY_GUIDE_FILE), 'utf8'));
+  for (const s of guide.steps) for (const l of s.links) targets.set(l.url, `孕期與生育 ${l.id}`);
 } else if (process.argv.includes('--set=expansion9')) {
   // 九篇擴充候選（docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json）的文章來源。
   // 直接解析原稿，不經 importToQa 開關，暫存未開啟的文章也會一併實際開啟。

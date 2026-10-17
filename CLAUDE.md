@@ -50,7 +50,17 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
-## 最新權威狀態｜2026-10-17 九篇全部進暫存（45 篇）更正版（本節最新，優先於以下所有段落）
+## 最新工作｜2026-10-17 生活與家庭 01「懷孕與生育相關福利」實質內容（QA-only 工程暫存，本節最新）
+
+**分支 `claude/pregnancy-benefits-content-8sjgqh`，以已部署公開 QA 的 `qa/public-nine-articles-20261017`（`15a4621`）為基礎，草稿 PR 的 base 也是該 QA 分支。未部署公開 QA、未合併 main、未修改 `content/release-approvals.json`、未覆寫 PR #11。查核都是 AI（ChatGPT 編輯＋Claude 工程），不是站主核准。**
+
+- 編輯權威：PR #11 `docs/LIFE-FAMILY-PREGNANCY-OFFICIAL-ENTRY-EDITORIAL-PLAN-2026-10-17.md`（未合併到 QA 分支，只讀取）。資料轉成 `docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-2026-10-17.json`（`candidate-not-approved`），載入器 `scripts/lib/qa-pregnancy-guide.mjs`。
+- 前台（只在 QA）：主題 01 保留標題與 `#pregnancy`，「整理中」改為「查看孕期與生育資訊整理 →」連到同頁 `#pregnancy-guide`；閱讀區四段（產檢 PG01–02、生育給付 勞保/國保/無保別 PG03–05、工作權益 PG06–07、出生登記與地方補助 PG08–09），育兒津貼／托育／產假詳細制度用 `#childcare`、`#daycare`、`law.html#parental-leave`、`law.html#pregnancy-protection`、`city.html` 站內連結。無新卡片、圖片、表單、分類。preview／production HTML 與搜尋索引逐位元組不變。
+- 測試：新增 `tests/qa-pregnancy-guide.test.mjs`（16 項，已加入 `npm test`）、`tests/qa-pregnancy-browser.test.mjs`（Chromium 在 `npm test`、WebKit 在 `test:webkit-qa`，320／375／390／1280 各 12 項）；CI 上傳截圖 artifact `qa-pregnancy-guide-screenshots`。外站連結檢查：`node scripts/check-links-browser.mjs --set=pregnancy`，工作流程 `.github/workflows/qa-links-pregnancy.yml`。
+- **尚未核對的外部連結**：Claude 容器被代理擋下 `.gov.tw`，本機一筆都沒開成。PG01、PG02（國健署）在 ChatGPT 端也未完整開啟，維持「待驗」；九筆都未經站主臺灣實機點開。GitHub Actions 結果與截圖見 `docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-ACCEPTANCE-2026-10-17.md`。地方生育獎勵未逐縣市核對。
+- **下一步：停止，等 ChatGPT 工程驗收與站主同意**後才更新公開 QA（修改 `qa-public-preview.yml` 觸發）；正式發布另走 release-approvals 流程。
+
+## 最新權威狀態｜2026-10-17 九篇全部進暫存（45 篇）更正版（上一節之前的最新狀態）
 
 **工程分支 `claude/nine-articles-portal-qa-6i6jys`（承接 PR #13 `52685ab`），草稿 PR #14。未部署 GitHub Pages、未合併 main、未修改 `content/release-approvals.json`、正式匯入佇列 `docs/QA-EXPANSION-IMPORT-QUEUE.json` 九篇全部仍 `importToQa: false`／`pending`。全部查核為 AI（Claude＋ChatGPT）完成，不是站主審閱；CI 成功不等於內容核准。**
 

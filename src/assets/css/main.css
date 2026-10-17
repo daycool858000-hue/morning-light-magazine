@@ -579,6 +579,31 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 /* 手機點擊區：文字外觀不變，點擊範圍高度至少 44px */
 .topic-links a { display: inline-flex; align-items: center; min-height: 44px; }
 .topic .pending { font-size: 0.85rem; color: var(--muted); margin: 0; }
+.topic .topic-guide-link { margin: 0; font-size: 0.9rem; }
+.topic-guide-link a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--terracotta-dark); }
+
+/* QA：生活與家庭 01 懷孕與生育的精簡閱讀區（單欄文字，不做資源卡） */
+.preg-guide { padding-top: clamp(22px, 4vw, 40px); }
+.preg-guide .section-head p, .preg-guide-qa, .preg-steps, .preg-next, .preg-closing { max-width: 760px; }
+.preg-guide-qa { font-size: 0.78rem; line-height: 1.6; color: var(--muted); margin: 0 0 8px; }
+.preg-guide-qa .badge-qa { font-size: 0.7rem; vertical-align: baseline; }
+.preg-steps { list-style: none; margin: 0; padding: 0; }
+.preg-step { padding: 20px 0 14px; border-top: 1px solid var(--line); min-width: 0; }
+.preg-step h3 { display: flex; align-items: baseline; gap: 10px; font-size: 1.12rem; margin-bottom: 8px; }
+.preg-no { font-family: var(--serif); font-size: 1.05rem; color: var(--terracotta); flex: none; }
+.preg-step > p { font-size: 0.95rem; line-height: 1.75; margin: 0 0 8px; }
+.preg-links { list-style: none; margin: 6px 0 0; padding: 0 0 0 14px; border-left: 2px solid var(--terracotta-soft); }
+.preg-links li { padding: 2px 0 8px; min-width: 0; }
+/* 行內排列：長名稱換行時箭頭緊接文字；上下內距讓點擊區至少 44px */
+.preg-links a { display: inline-block; min-height: 44px; padding: 10px 0; line-height: 1.5; font-size: 0.98rem; font-weight: 650; color: var(--ink); overflow-wrap: anywhere; }
+.preg-links a span[aria-hidden] { margin-left: 4px; color: var(--terracotta-dark); font-size: 0.86rem; white-space: nowrap; }
+.preg-links p { font-size: 0.9rem; line-height: 1.55; color: var(--muted); margin: 0 0 2px; }
+.preg-links small { display: block; font-size: 0.78rem; line-height: 1.6; color: var(--muted); }
+.preg-after { font-size: 0.85rem; color: var(--muted); margin: 4px 0 0; }
+.preg-inner { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 18px; font-size: 0.9rem; }
+.preg-inner a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--terracotta-dark); }
+.preg-next { padding-top: 10px; border-top: 1px solid var(--line); }
+.preg-closing { font-size: 0.85rem; line-height: 1.7; color: var(--muted); margin: 8px 0 0; padding: 14px 16px; background: var(--sand); border-radius: var(--radius-sm); }
 
 /* ---------- 一般頁首（說明頁、文章、搜尋、求助） ---------- */
 .page-head { padding-block: clamp(36px, 6vw, 72px) clamp(24px, 4vw, 40px); border-bottom: 1px solid var(--line); background: var(--paper); }
