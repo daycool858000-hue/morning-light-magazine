@@ -124,5 +124,4 @@
 - [教育部家庭教育資源網｜113 學年家長日宣導手冊與 AI 時代正向教養（2024 年歷史公告；部分環境可能連線逾時）](https://familyedu.moe.gov.tw/docDetail.aspx?docid=307524&pid=27&uid=3159)
 - [新北市家庭教育網｜家長教養影音與親職教育教材備用入口](https://ntpc.familyedu.moe.gov.tw/mainList.aspx?pid=3149&uid=3149)
 - [教育部家庭教育資源網｜家庭教育範圍與各縣市中心](https://familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072)
-- [新北市家庭教育網｜親職教育影音與公開資源](https://ntpc.familyedu.moe.gov.tw/mainList.aspx?pid=3149&uid=3149)
 
