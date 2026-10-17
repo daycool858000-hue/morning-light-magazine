@@ -451,11 +451,11 @@
           "name": "更年期荷爾蒙變化與健康照護",
           "agency": "衛生福利部國民健康署",
           "url": "https://www.mohw.gov.tw/cp-2704-84238-1.html",
-          "purpose": "閱讀2025年更新的更年期荷爾蒙變化及代謝健康衛教，不當作所有荷爾蒙疾病的診斷依據。",
-          "evidenceType": "ChatGPT（AI）核對衛福部2025官方頁內文；待QA Chromium與WebKit逐筆連結回歸"
+          "purpose": "閱讀更年期荷爾蒙變化及代謝健康衛教，實際更新日期以官方原頁為準；不能作為所有荷爾蒙疾病的診斷依據。",
+          "evidenceType": "ChatGPT（AI）依衛福部公開資訊整理；原頁更新日期待重新核對，仍須QA Chromium與WebKit連結回歸"
         }
       ],
-      "caution": "此頁是2017年衛教（2024年更新），只涵蓋更年期，不等於所有荷爾蒙問題。",
+      "caution": "本入口僅涵蓋更年期衛教，不代表全部荷爾蒙健康議題；正式發布前應核對官方頁日期。",
       "reviewedAt": "2026-10-17",
       "reviewedBy": "ChatGPT（AI）",
       "ownerApproved": false,
@@ -782,7 +782,7 @@
       "intro": "婦女中心提供的服務依縣市與實際委辦內容不同，可從目前已確認來源的具體地方中心開始查。",
       "links": [
         {
-          "name": "高雄市婦女館服務與活動",
+          "name": "高雄市婦女館｜地方服務示例",
           "agency": "高雄市政府社會局",
           "url": "https://women.kcg.gov.tw/",
           "purpose": "查看婦女館的場域使用、女性培力及活動資訊。",
