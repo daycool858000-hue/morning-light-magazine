@@ -1,3 +1,4 @@
+# 2026-10-17｜整合準備（尚未部署，待 ChatGPT 確認與站主同意後才併入 QA 分支）：站主撤下 exp-12 → 公開QA 44 篇（讀利26／向光18）；小日曆避讓長連結文字；懷孕與生育閱讀區；QA「待查核」三層說明。仍保留 noindex 與未核准標示。
 # 2026-10-16｜本輪手機 QA：向光改單欄淡色、讀利改緊湊列表；五主題導讀前移並增加小型跳轉，學習活動共用小日曆六筆真實活動。程式 CI 38883712598 已成功，仍保留 noindex 與未核准標示。
 # 2026-10-16｜站主已要求將讀利與向光文章分流（23／13）並讓向光 13 篇直接顯示成手機兩欄文章格；以 CI 38880426841 全數通過為基礎，僅更新公開 QA，仍保留 noindex 與未核准標示。
 # 2026-10-16｜站主同意將所有現有 QA 功能（含全站浮動小日曆、六筆具體活動）公開部署，並將工程合併 main。此 workflow 只發布 QA，保留所有未核准標示與 noindex；不可將候選資料自動核准。
@@ -54,7 +55,7 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
-      - name: 建置已授權的45篇公開QA和獨立正式版快照
+      - name: 建置已授權的44篇公開QA（exp-12 站主撤稿）和獨立正式版快照
         run: |
           node scripts/build.mjs --mode=preview --out=dist
           node scripts/build.mjs --mode=production --out=dist-production
@@ -68,14 +69,16 @@ jobs:
           test -f dist-qa/index.html
           test -f dist-qa/city.html
           test -f dist-qa/articles/batch2-01.html
-          # 此分支是站主同意的公開QA試讀，僅開啟九篇（正式發布仍為未核准）
+          # 此分支是站主同意的公開QA試讀，開啟八篇；exp-12 已由站主撤稿（正式發布仍為未核准）
           test "$(git hash-object content/release-approvals.json)" = "5c4d0532d87581383045f5e017fe4ddef4d81df9"
           node --input-type=module - <<'NODE'
           import { readFileSync } from 'node:fs';
           const real = JSON.parse(readFileSync('docs/QA-EXPANSION-IMPORT-QUEUE.json','utf8'));
-          const names = ['exp-01','exp-08','exp-11','exp-12','A1','A2','A4','B4','B5'];
+          const names = ['exp-01','exp-08','exp-11','A1','A2','A4','B4','B5'];
           const on = real.articles.filter(x=>x.importToQa);
-          if (on.length!==9 || names.some(id=>!on.some(x=>x.id===id && x.sourceCheck==='source-checked' && x.sourceCheckedOn==='2026-10-17' && x.sourceCheckRecord))) process.exit(1);
+          const gone = real.articles.find(x=>x.id==='exp-12');
+          if (!gone || gone.importToQa!==false || gone.qaWithdrawal?.status!=='withdrawn-by-owner' || gone.qaWithdrawal?.doNotReimport!==true) process.exit(1);
+          if (on.length!==8 || names.some(id=>!on.some(x=>x.id===id && x.sourceCheck==='source-checked' && x.sourceCheckedOn==='2026-10-17' && x.sourceCheckRecord))) process.exit(1);
           if (real.articles.length!==22 || (real.resources||[]).some(x=>x.importToQa)) process.exit(1);
           const ids = new Set(on.map(x=>x.slug));
           const index = readFileSync('dist-qa/assets/data/search-index.js','utf8');
@@ -89,7 +92,8 @@ jobs:
             if (prodIndex.includes(slug)) process.exit(1);
           }
           if ((readli.match(/<h3><a href="articles\//g)||[]).length!==26) process.exit(1);
-          if ((toward.match(/class="toward-reading-card"/g)||[]).length!==19) process.exit(1);
+          if ((toward.match(/class="toward-reading-card"/g)||[]).length!==18) process.exit(1);
+          if (index.includes(gone.slug) || readli.includes(gone.slug) || toward.includes(gone.slug)) process.exit(1);
           let count=0;
           for (const page of ['life-family','career','health','law','learning']) {
             const h = readFileSync('dist-qa/'+page+'.html','utf8');
@@ -99,7 +103,8 @@ jobs:
           if (!toward.includes('id="toward-women-center"')) process.exit(1);
           const learning=readFileSync('dist-qa/learning.html','utf8');
           if (!learning.includes('res-open-culture-events') || learning.includes('id="portal-act-09"')) process.exit(1);
-          console.log('45篇QA／九篇未核准／讀利26／向光19／官方查詢11＋1／production隔離通過');
+          if (learning.includes(gone.slug)) process.exit(1);
+          console.log('44篇QA／八篇未核准（exp-12 站主撤稿）／讀利26／向光18／官方查詢11＋1／production隔離通過');
           NODE
           grep -q '未核准測試內容' dist-qa/index.html
           grep -q '未核准測試內容' dist-qa/city.html
@@ -113,9 +118,9 @@ jobs:
           grep -q '未核准測試內容' dist-qa/city.html
           # 第四／五批文章來源勘誤已進入 QA 生成頁，保留未核准標示。
           grep -q '跨縣市查找藝文活動' dist-qa/articles/batch4-art-museum-first-visit.html
-          ! grep -q '原 QA 已有入口' dist-qa/articles/batch4-art-museum-first-visit.html
+          ! grep -q '原 QA 已有入口' dist-qa/articles/batch4-art-museum-first-visit.html || exit 1
           grep -q '22 縣市癌症篩檢活動專區' dist-qa/articles/batch5-preventive-health-screening.html
-          ! grep -q 'escreening.hpa.gov.tw/Home' dist-qa/articles/batch5-preventive-health-screening.html
+          ! grep -q 'escreening.hpa.gov.tw/Home' dist-qa/articles/batch5-preventive-health-screening.html || exit 1
           grep -q 'noindex' dist-qa/articles/batch5-harassment-three-laws.html
           grep -q 'id="benefits"' dist-qa/city.html
           grep -q '先了解有哪些福利' dist-qa/city.html
@@ -124,28 +129,28 @@ jobs:
           grep -q 'class="dir-jump"><a href="#needs-title">' dist-qa/quiet-power.html
           grep -q 'id="toward-women-center"' dist-qa/toward-light.html
           grep -q 'href="articles/batch6-women-center-services.html"' dist-qa/toward-light.html
-          ! grep -q 'class="county-areas"' dist-qa/toward-light.html
+          ! grep -q 'class="county-areas"' dist-qa/toward-light.html || exit 1
           test "$(grep -o 'class="toward-toggle"' dist-qa/toward-light.html | wc -l)" -eq 8
           grep -q '整理生活中值得了解的知識、制度與公共資源' dist-qa/quiet-power.html
           grep -q '循著興趣探索不同主題' dist-qa/toward-light.html
           # 讀利／向光文章分流，36 篇原稿仍保留，向光文章格直接露出 13 篇。
           grep -q 'class="toward-reading-grid"' dist-qa/toward-light.html
-          test "$(grep -o 'class="toward-reading-card"' dist-qa/toward-light.html | wc -l)" -eq 19
+          test "$(grep -o 'class="toward-reading-card"' dist-qa/toward-light.html | wc -l)" -eq 18
           grep -q 'href="articles/batch6-welfare-overview.html"' dist-qa/quiet-power.html
-          ! grep -q 'href="articles/batch4-art-museum-first-visit.html"' dist-qa/quiet-power.html
+          ! grep -q 'href="articles/batch4-art-museum-first-visit.html"' dist-qa/quiet-power.html || exit 1
           # 六大分類：其餘五個頁面的導讀先於需求／主題及官方入口，城市福利保留原架構。
           for page in life-family career health law learning; do
             grep -q 'id="art-title"' "dist-qa/$page.html"
             grep -q 'class="cat-hero-jump"' "dist-qa/$page.html"
           done
-          ! grep -q 'class="cat-hero-jump"' dist-qa/city.html
+          ! grep -q 'class="cat-hero-jump"' dist-qa/city.html || exit 1
           grep -q 'href="#need-title"' dist-qa/life-family.html
           grep -q 'href="#topics-title"' dist-qa/learning.html
           # 活動與小日曆共用六筆公告，不是空白活動頁。
           test "$(grep -o 'class="notice"' dist-qa/learning.html | wc -l)" -eq 6
           grep -q 'assets/js/qa-activities.js' dist-qa/learning.html
           grep -q '2027 第 35 屆台北國際書展' dist-qa/learning.html
-          ! grep -q '在地資源索引' dist-qa/toward-light.html
+          ! grep -q '在地資源索引' dist-qa/toward-light.html || exit 1
           # 全站小日曆及六筆已公告活動：僅限 QA，不能變成 production 正式核准內容。
           test -f dist-qa/activities.html
           test -f dist-qa/assets/js/qa-calendar.js
@@ -161,9 +166,17 @@ jobs:
           test "$(grep -o 'class="notice"' dist-qa/activities.html | wc -l)" -eq 6
           test "$(grep -o 'class="act-item"' dist-qa/activities.html | wc -l)" -eq 12
           node -e "const d=require('./docs/QA-ACTIVITIES-NOTICES-2026Q4-2027-2026-10-16.json'); if(d.status!=='candidate-not-approved'||d.ownerPublicationApproval!==false||d.items.length!==6) process.exit(1)"
-          ! grep -q 'act-entry' dist-production/index.html
-          ! test -f dist-production/activities.html
-          test "$(ls dist-qa/articles/*.html | wc -l)" -eq 45
+          ! grep -q 'act-entry' dist-production/index.html || exit 1
+          ! test -f dist-production/activities.html || exit 1
+          test "$(ls dist-qa/articles/*.html | wc -l)" -eq 44
+          # exp-12 站主撤稿：文章網址、搜尋與任何頁面都不再提供
+          test ! -f dist-qa/articles/exp-compare-everyday-experiments.html
+          ! grep -rq 'exp-compare-everyday-experiments' dist-qa || exit 1
+          ! grep -rq '同一個生活實驗' dist-qa || exit 1
+          # 懷孕與生育閱讀區：不再顯示整理中，九筆官方入口保留，只在 QA
+          grep -q 'id="pregnancy-guide"' dist-qa/life-family.html
+          test "$(grep -o 'class="preg-step"' dist-qa/life-family.html | wc -l)" -eq 4
+          ! grep -q 'pregnancy-guide' dist-production/life-family.html || exit 1
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
           echo "已確認只會部署未核准 QA 測試頁。"

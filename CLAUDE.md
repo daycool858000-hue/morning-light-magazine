@@ -39,18 +39,29 @@
 | `docs/` | 規格、報告、ChatGPT 撰寫的候選文章與資料（QA 載入器只讀指定檔案） |
 | `scripts/build.mjs` | 建置主程式（所有頁面樣板） |
 | `scripts/lib/qa-*.mjs` | 各批 QA 候選內容載入器：batch2、batch3、batch45、batch6、english、activities（`loadQaNotices` 具體活動＋`loadQaActivities` 12 個長期入口）、expansion（六大主題擴充分批匯入，只讀 `docs/QA-EXPANSION-IMPORT-QUEUE.json`，說明見 `docs/QA-EXPANSION-IMPORT-GUIDE-2026-10-16.md`） |
-| `src/qa-assets/js/` | **只複製到 dist-qa** 的腳本：`qa-calendar.js`（全站小日曆）、`qa-activities.js`（活動依臺灣日期隱藏） |
+| `src/qa-assets/js/` | **只複製到 dist-qa** 的腳本：`qa-calendar.js`（全站小日曆；避開關鍵操作與連結每一行文字，捲動停下後才調整）、`qa-activities.js`（活動依臺灣日期隱藏） |
 | `scripts/lib/toward-light-editorial.mjs` | 向光八索引與延伸閱讀的文章對應 |
 | `scripts/check-links-browser.mjs` | Chromium 外站連結檢查（`--set=batch45`、`batch6`、`activities`、`expansion9`）；結果分四類：正常開啟／下載型連結／海外逾時或受阻／真正失效，`--fail-on-broken` 只在真正失效時 exit 1。**工作流程 success 不等於每個網址都通過，要逐筆看分類** |
 | `src/assets/css/main.css` | 全站樣式；`src/icons/` 圖示 |
-| `tests/` | `site.test.mjs`（正式版 44 項）、`release-gate.test.mjs`、`qa-batch2.test.mjs`（QA 全部檢查，只核對原 36 篇）、`qa-expansion.test.mjs`（擴充匯入機制，用 `tests/fixtures/qa-expansion/` 範例佇列）、`qa-expansion-first-four.test.mjs`（第一批四篇暫存模擬）、`qa-expansion-nine.test.mjs`（九篇 45 篇整合暫存模擬，CI 另跑 WebKit）、`mobile-webkit.test.mjs`、`qa-webkit.test.mjs` |
+| `tests/` | `site.test.mjs`（正式版 44 項）、`release-gate.test.mjs`、`qa-batch2.test.mjs`（QA 全部檢查，只核對原 36 篇）、`qa-expansion.test.mjs`（擴充匯入機制，用 `tests/fixtures/qa-expansion/` 範例佇列）、`qa-expansion-first-four.test.mjs`（第一批四篇暫存模擬）、`qa-expansion-nine.test.mjs`（九篇 45 篇整合暫存模擬，CI 另跑 WebKit）、`qa-public-nine.test.mjs`（目前公開 QA：八篇擴充＋exp-12 撤稿、44 篇）、`qa-review-labels.test.mjs`（QA 查核三層標示）、`qa-calendar-avoid.test.mjs`（小日曆避讓，`npm run test:calendar`）、`mobile-webkit.test.mjs`、`qa-webkit.test.mjs` |
 
 ### 常用指令
 - 全部測試：`npm test`（WebKit 本機沒有安裝，由 CI 執行）
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
-## 最新工作｜2026-10-17 生活與家庭 01「懷孕與生育相關福利」實質內容（QA-only 工程暫存，本節最新）
+## 最新工作｜2026-10-17 第一輪 QA 試讀回饋整合（本節最新，優先於下方各節）
+
+**分支 `claude/morning-light-qa-integration-kd06lm`（以 PR #15 `7c921a5` 為基礎，含懷孕與生育入口），草稿 PR 的 base 是 `qa/public-nine-articles-20261017`。未部署公開 QA、未合併 main、未修改 `content/release-approvals.json`、未動 PR #11、未匯入其他 13 篇或 60 筆城市候選。不要回頭使用 PR #13、#14。** 報告：`docs/QA-INTEGRATION-ROUND1-FEEDBACK-REPORT-2026-10-17.md`。
+
+- **exp-12 站主撤稿**（`exp-compare-everyday-experiments`）：佇列 `importToQa:false`＋`qaWithdrawal`（`doNotReimport`），載入器擋下重新匯入；紀錄 `docs/QA-EXP-12-OWNER-WITHDRAWAL-2026-10-17.md`。公開 QA 現為 **44 篇＝讀利 26／向光 18**；原稿與歷史查核保留。歷史暫存測試（四篇、九篇 45 篇）保留原斷言，只在隔離資料夾模擬。
+- **小日曆避讓**（`src/qa-assets/js/qa-calendar.js`）：一般連結避開每一行實際文字（含長官方連結右側），捲動中不動、停下 0.12 秒後一次調整；外觀與 3 秒進場不變。測試 `tests/qa-calendar-avoid.test.mjs`（`npm run test:calendar`，CI 並行工作 `calendar`，Chromium＋WebKit 四寬度）。修正前 Chromium 320／375／390／1280 蓋住 61／66／55／4 處 → 0。對照圖 `docs/qa-media/calendar-avoid-2026-10-17/`。
+- **「待查核」三層說明（QA-only）**：③ 已依既有程序確認 21（與正式版同一道 approvedRecord 快照閘門）、② AI 已核對待站主審閱 35、① 尚未完成來源查核 3。只改 QA 畫面文字，不改 status／release-approvals；盤點 `docs/QA-REVIEW-STATUS-LABEL-INVENTORY-2026-10-17.md`，測試 `tests/qa-review-labels.test.mjs`。
+- **部署檢查** `qa-public-preview.yml` 已更新為 8 篇／44 篇／向光 18、exp-12 不存在、懷孕閱讀區只在 QA；並修正 `! grep` 在 `set -e` 下不生效的問題。**此檔有改動：一旦併入 QA 分支就會觸發公開部署，必須等 ChatGPT 確認＋站主同意。**
+- 本機 `npm test` 215 項、`qa-calendar-avoid` Chromium 16 項全過；CI 結果見報告。
+- **下一步：停止，等 ChatGPT 最後確認本輪整合與站主同意**後才合併草稿 PR（＝更新公開 QA）。正式發布另走 release-approvals 流程。
+
+## 最新工作｜2026-10-17 生活與家庭 01「懷孕與生育相關福利」實質內容（QA-only 工程暫存，已併入上一節整合分支）
 
 **分支 `claude/pregnancy-benefits-content-8sjgqh`，以已部署公開 QA 的 `qa/public-nine-articles-20261017`（`15a4621`）為基礎，草稿 PR 的 base 也是該 QA 分支。未部署公開 QA、未合併 main、未修改 `content/release-approvals.json`、未覆寫 PR #11。查核都是 AI（ChatGPT 編輯＋Claude 工程），不是站主核准。**
 
