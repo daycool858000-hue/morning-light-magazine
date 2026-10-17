@@ -9,6 +9,8 @@ on:
       - 'scripts/lib/launch-approval.mjs'
       - 'scripts/prepare-launch-article-batch.mjs'
       - 'tests/launch-approval.test.mjs'
+      - 'tests/launch-approval-integration.test.mjs'
+      - 'scripts/build.mjs'
       - '.github/workflows/launch-article-batch-preflight.yml'
 
 permissions:
@@ -29,6 +31,8 @@ jobs:
         run: node tests/launch-approval.test.mjs
       - name: 從現有原稿產生44篇文章精確版本清單
         run: node scripts/prepare-launch-article-batch.mjs
+      - name: 使用一篇假想已核准文章，測試正式版不會洩漏其他43篇
+        run: node tests/launch-approval-integration.test.mjs
       - name: 檢查清單未冒充站主核准
         run: |
           node --input-type=module - <<'NODE'
