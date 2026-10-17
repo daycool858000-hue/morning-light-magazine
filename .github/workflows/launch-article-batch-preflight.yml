@@ -12,6 +12,7 @@ on:
       - 'tests/launch-approval.test.mjs'
       - 'tests/launch-approval-integration.test.mjs'
       - 'scripts/build.mjs'
+      - 'scripts/assert-production-ready.mjs'
       - '.github/workflows/launch-article-batch-preflight.yml'
 
 permissions:
