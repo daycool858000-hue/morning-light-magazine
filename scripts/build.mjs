@@ -80,14 +80,21 @@ const calendarInputs = featureDecisions.calendar ? {
 } : null;
 const pregnancyInputs = featureDecisions.pregnancy ? await readJson('docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-2026-10-17.json') : null;
 const topic54Inputs = featureDecisions.topic54 ? await readJson('docs/QA-TOPIC-ENTRANCES-54-SOURCE-GUIDES-2026-10-17.json') : null;
+const resourceCatalogInputs = featureDecisions.resourceCatalog ? {
+  county: await readJson('docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json'),
+  open: await readJson('docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json'),
+  english: await readJson('docs/QA-ENGLISH-RESOURCE-DISCOVERY-2026-10-16.json'),
+} : null;
 const APPROVED_ACTIVITIES = MODE === 'production' && approvedLaunchFeature('activities',activityInputs,launchApprovals);
 const APPROVED_PREGNANCY = MODE === 'production' && approvedLaunchFeature('pregnancy',pregnancyInputs,launchApprovals);
 const APPROVED_TOPIC54 = MODE === 'production' && approvedLaunchFeature('topic54',topic54Inputs,launchApprovals);
+const APPROVED_CATALOG = MODE === 'production' && approvedLaunchFeature('resourceCatalog',resourceCatalogInputs,launchApprovals);
 const APPROVED_CALENDAR = APPROVED_ACTIVITIES && approvedLaunchFeature('calendar',calendarInputs,launchApprovals);
 const SHOW_ACTIVITIES = IS_QA || APPROVED_ACTIVITIES;
 const SHOW_CALENDAR = IS_QA || APPROVED_CALENDAR;
 const SHOW_PREGNANCY = IS_QA || APPROVED_PREGNANCY;
 const SHOW_TOPIC54 = IS_TOPIC_GUIDES_STAGING || APPROVED_TOPIC54;
+const SHOW_CATALOG = IS_QA || APPROVED_CATALOG;
 
 async function readMarkdownDir(dir) {
   const full = path.join(ROOT, dir);
@@ -113,9 +120,9 @@ const serviceTypes = new Set(resourceData.serviceTypes);
 const isDate = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
 const isHttps = (v) => typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v);
 
-const qaResources = IS_QA || HAS_LAUNCH_ARTICLE_APPROVALS ? await loadBatch2Resources(ROOT) : [];
+const qaResources = SHOW_CATALOG || HAS_LAUNCH_ARTICLE_APPROVALS ? await loadBatch2Resources(ROOT) : [];
 const qaArticles = LOAD_EDITORIAL_CANDIDATES ? await loadBatch2Articles(ROOT, categories) : [];
-const qaBatch3 = LOAD_EDITORIAL_CANDIDATES || SHOW_ACTIVITIES ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
+const qaBatch3 = LOAD_EDITORIAL_CANDIDATES || SHOW_ACTIVITIES || SHOW_CATALOG ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
 const qaBatch45 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch45Articles(ROOT, categories) : [];
 const qaBatch6 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch6Articles(ROOT, categories) : [];
 const qaActivities = SHOW_ACTIVITIES ? await loadQaActivities(ROOT) : null;
@@ -184,8 +191,8 @@ const isPublic = (status, published = true) =>
 
 const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
-  : approvedRecord(r, approvals.resources, 'official-entry')), ...(IS_QA ? [...qaResources, ...qaBatch3.resources, ...qaExpansion.cityResources] : [])];
-const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
+  : approvedRecord(r, approvals.resources, 'official-entry')), ...(SHOW_CATALOG ? [...qaResources, ...qaBatch3.resources] : []).concat(IS_QA ? qaExpansion.cityResources : [])];
+const resources = SHOW_CATALOG ? await loadQaEnglishResources(ROOT,baseResources,{allowMissingOverrides:!IS_QA}) : baseResources;
 const qaPortalRouting = SHOW_ACTIVITIES ? resolveQaPortalRouting(qaActivities.items, IS_QA ? resources : [...resources, ...qaBatch3.resources]) : { primary: [], reused: [] };
 // QA-only：生活與家庭 01「懷孕與生育相關福利」的四段導覽（未核准，不進 preview／production）
 const qaPregnancyGuide = SHOW_PREGNANCY ? await loadQaPregnancyGuide(ROOT, resources) : null;
