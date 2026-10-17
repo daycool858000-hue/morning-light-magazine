@@ -413,7 +413,7 @@ function layout({ title, description, active = '', body, scripts = [], prefix = 
     .join('');
   const robots = IS_PREVIEW ? '<meta name="robots" content="noindex, nofollow">\n' : '';
   const previewBar = IS_QA
-    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀、第六批 6 篇城市福利導讀，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
+    ? `<div class="preview-bar qa-bar" role="note">未核准測試內容｜第二批 23 筆地方入口與 12 篇導讀、第三批 9 筆自主學習／生活資訊入口與 5 篇原創導讀、第四及第五批 13 篇導讀、第六批 6 篇城市福利導讀、最新擴充 9 篇生活／學習文章與 11 筆不同網址的長期官方查詢入口，均供公開測試，尚未核准正式發布；部分外站報名另有條件。</div>`
     : IS_PREVIEW
     ? `<div class="preview-bar" role="note">預覽版本｜內容查核中，尚未正式公開。標示「待查核」的資料請以官方網站為準。</div>`
     : '';
