@@ -50,6 +50,18 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 最新權威狀態｜2026-10-17 九篇文章＋PR #10 入口整合暫存（本節最新，優先於以下所有段落）
+
+**工程分支 `claude/qa-nine-articles-portals-staging-20261017`：已把 PR #10（官方查詢入口）、PR #11（編輯原稿與來源紀錄）、PR #12（V2 解析器與分批匯入）及第一批四篇暫存工程合併到同一個暫存環境。未部署 GitHub Pages、未合併 main、未修改 `content/release-approvals.json`、正式匯入佇列仍全部 `importToQa: false`／`pending`。**
+
+- **合併結果**：PR #10 自動合併無衝突；PR #11 只有 `CLAUDE.md` 衝突，已**保留雙方最新段落**（PR #10 的 12 筆入口決定段 ＋ PR #11 的六段編輯進度），未用舊檔覆蓋。`claude/first-four-articles-qa-staging-l0ntyf`（`37a3cc8`）已含 PR #12 全部提交，第一批四篇工程原封保留。PR #11 的五份原稿與 22 篇 manifest 與編輯分支最新版**逐位元組相同**。
+- **暫存共 43 篇**（不是 45 篇）＝原 36 篇 ＋ 第一批 4 篇 ＋ 第二批 **3 篇**（A2 家庭教育、A4 地方活動、B4 衣物洗標）。
+- **A1（婦女中心課程）與 B5（AI 查證）列入待修、不進本輪暫存**：A1 三個桃園市婦幼發展局引用網址與「2027 年 1 月成果發表」無法確認，且「官方來源」清單含兩個非政府網站；B5 國教院電子報第 270 期的引述對應與國教署新聞稿網址／發布單位無法確認。詳細問題與修法建議：`docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md`。**不得為了湊滿 45 篇把這兩篇標成 source-checked。**
+- **第二批五篇暫定目錄**：正式佇列 A1／A2／A4／B4／B5 的 `directory` 改為 `toward`（向光），`importToQa` 仍 false；分類保留原本六大分類（A2、B4 生活與家庭；A1、A4、B5 學習與活動）。向光原八索引與既有 13 篇順序完全不動，新文章只接在文章卡最後（13→18 張）；讀利 23→25。
+- **本次環境限制（重要）**：這個雲端容器的網路政策只開放 GitHub 與套件來源，**所有 `*.gov.tw`、`event.culture.tw`、`epaper.naer.edu.tw` 都被代理擋下（403）**，無法在本機實際開啟官方連結。改以伺服器端搜尋複核敘述，並新增 `node scripts/check-links-browser.mjs --set=expansion9`，由 `qa-links-browser.yml`（GitHub runner）實際開啟九篇全部來源網址（含未匯入的 A1、B5）。
+- **新增／修改檔案**：`docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json`（暫存佇列，`stagingOnly`）、`docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md`（第二批來源查核紀錄）、`docs/NINE-ARTICLE-PORTAL-INTEGRATION-QA-STAGING-REPORT-2026-10-17.md`（整合報告）、`tests/qa-expansion-nine.test.mjs`（已加入 `npm test`）、`scripts/lib/qa-expansion.mjs`（`建議歸類` 歸類行不進正文）、`scripts/check-links-browser.mjs`、`.github/workflows/qa-links-browser.yml`、`docs/QA-EXPANSION-IMPORT-QUEUE.json`（只改第二批五篇的 directory 與 editorNote）、`tests/qa-expansion.test.mjs`、`tests/qa-expansion-first-four.test.mjs`（第二批目錄斷言）、`package.json`、`.gitignore`。
+- **下一步只等站主確認**：①A2／A4／B4 是否適合放向光（B4 屬生活技能，也可改放讀利）；②A1、B5 交回編輯依查核紀錄修稿；③站主同意後才把正式佇列對應文章改 `source-checked`／`importToQa: true`，再另行同意部署公開 QA。正式發布仍須另走 release-approvals 流程。
+
 ## 12 筆長期查詢入口第二階段｜站主決定與 QA 工作中（2026-10-16）
 
 - 站主最新規則：「有相同網址的就不用再新增；可以改成文字敘述在同一個格子裡面；如果不是的話就不用」。**只以完整 URL 字串是否相同判定資料去重**，不同網址即使同品牌也不用硬塞同格。

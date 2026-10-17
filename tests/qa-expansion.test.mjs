@@ -106,7 +106,7 @@ for (const a of on) {
   if (!t.includes(`<a href="../${cat.slug}">${cat.title}</a>`)) articleProblems.push(`${a.slug} 麵包屑分類不符`);
   const src = (/<div class="sources"><h2>參考來源<\/h2>[\s\S]*?<\/div>/.exec(t) || [''])[0];
   if (!/class="ext" rel="noopener noreferrer"/.test(src)) articleProblems.push(`${a.slug} 參考來源缺少外部連結`);
-  if (/編輯對應|建議分類|範例檔尾說明|stopAt/.test(t)) articleProblems.push(`${a.slug} 編輯用文字進入網頁`);
+  if (/編輯對應|建議分類|建議歸類|範例檔尾說明|stopAt/.test(t)) articleProblems.push(`${a.slug} 編輯用文字進入網頁`);
   if (!(await read(OUT, cat.slug)).includes(`href="articles/${a.slug}.html"`)) articleProblems.push(`${a.slug} 分類頁沒有連結`);
   if (!idx.includes(`"url":"articles/${a.slug}.html"`)) articleProblems.push(`${a.slug} 不在搜尋索引`);
   for (const rel of a.related) if (!t.includes(`href="../articles/${rel}.html"`)) articleProblems.push(`${a.slug} 相關閱讀缺 ${rel}`);
@@ -264,6 +264,16 @@ for (const h of listHeads) {
 check('來源標題解析：「用公開官方入口延伸探索」「官方入口怎麼選？」等正文小標保留在正文；「正式參考來源（日期）」「官方來源與延伸閱讀」等文末清單才切入參考來源',
   headProblems.length === 0, headProblems.join('；'));
 
+// 給編輯看的歸類行一律不進正文（第二批原稿用的是「建議歸類」）
+const internalProblems = [];
+for (const h of ['**編輯對應：向光／婦女中心課程；六大主題／學習與活動。候選，未核准。**',
+  '**建議閱讀入口：向光／生活技能與生活材料；交叉顯示於讀利和「生活與家庭」。**',
+  '**建議歸類：向光／地方政府教育及福利活動；可交叉連至「學習與活動」。**']) {
+  const a = parseExpansionArticle('內部行', `${h}\n\n正文第一段，不可遺失。\n\n**正式來源（2026-10-17 查閱）：**${item}`);
+  if (a.body.includes('向光') || !a.body.includes('正文第一段，不可遺失。') || a.sources.length !== 1 || a.problems.length) internalProblems.push(`「${h.slice(2, 16)}」未被排除`);
+}
+check('編輯用歸類行解析：編輯對應、建議閱讀入口、建議歸類三種寫法都不進正文，正文與來源不受影響', internalProblems.length === 0, internalProblems.join('；'));
+
 // 用真實原稿（12 篇 V2＋原有十篇）在記憶體中全部試開；只供測試，正式佇列檔案不改。
 // sourceCheckRecord 借用既有 docs 檔滿足存在性檢查，不代表任何一篇已完成查核。
 const existingTitles = await Promise.all(oldSlugs.map(async (slug) => ({ slug, title: (/<h1>([^<]+)<\/h1>/.exec(await read('dist-qa', `articles/${slug}.html`)) || [])[1] })));
@@ -273,7 +283,7 @@ for (const a of trial.articles) Object.assign(a, { importToQa: true, sourceCheck
 let trialResult = null;
 let trialError = '';
 try { trialResult = await loadQaExpansion(ROOT, { ...realCtx, queue: trial }); } catch (e) { trialError = e.message.slice(0, 300); }
-const LEAK = /QA 編輯狀態|本批編輯校核門檻|十二篇共通的 QA 前查核清單|建議分類|建議閱讀入口|編輯對應/;
+const LEAK = /QA 編輯狀態|本批編輯校核門檻|十二篇共通的 QA 前查核清單|建議分類|建議歸類|建議閱讀入口|編輯對應/;
 const isListHead = (t) => SOURCE_LABELS.includes(t.replace(/^#{2,3}\s+|^\*\*|：?\*\*$|：$/g, '').replace(/（[^）]*）$/, ''));
 const lossProblems = [];
 const fileText = new Map();
@@ -290,7 +300,7 @@ for (const x of trial.articles) {
   if (a.sourcesList.some((s) => !/^https:\/\//.test(s.url) || !s.title.trim())) lossProblems.push(`${x.id} 來源格式錯誤`);
   // 原稿每一行非空內容都必須在正文或來源中出現；只有分類行、編輯對應行、分隔線與來源標題可以不進正文
   for (const line of raw.split('\n').map((l) => l.trim()).filter(Boolean)) {
-    if (line === '---' || /^\*\*(?:建議分類：|分類)/.test(line) || /^\*\*(?:編輯對應|建議閱讀入口)：/.test(line) || isListHead(line)) continue;
+    if (line === '---' || /^\*\*(?:建議分類：|分類)/.test(line) || /^\*\*(?:編輯對應|建議閱讀入口|建議歸類)：/.test(line) || isListHead(line)) continue;
     const m = /^-\s+\[[^\]]+\]\((https?:\/\/[^)\s]+)\)/.exec(line);
     if (m && srcUrls.has(m[1])) continue;
     if (!a.body.includes(line)) { lossProblems.push(`${x.id} 遺失：${line.slice(0, 30)}`); break; }

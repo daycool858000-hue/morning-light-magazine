@@ -209,13 +209,14 @@
       "category": "learning",
       "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
       "heading": "01",
-      "directory": "none",
+      "directory": "toward",
       "related": [],
       "sourceCheck": "pending",
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
       "importToQa": false,
-      "editorNote": "第三輪版本優先（覆蓋第二輪）"
+      "editorNote": "第三輪版本優先（覆蓋第二輪）；待修：桃園三個網址與 2027 年 1 月成果發表未確認，見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "secondQaBatch": "EXP-QA-02-20261017"
     },
     {
       "id": "A2",
@@ -224,13 +225,14 @@
       "category": "life-family",
       "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
       "heading": "02",
-      "directory": "none",
+      "directory": "toward",
       "related": [],
       "sourceCheck": "pending",
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
       "importToQa": false,
-      "editorNote": "第三輪版本優先（覆蓋第二輪）"
+      "editorNote": "第三輪版本優先（覆蓋第二輪）",
+      "secondQaBatch": "EXP-QA-02-20261017"
     },
     {
       "id": "A3",
@@ -254,13 +256,14 @@
       "category": "learning",
       "sourceFile": "docs/BATCH9-FIRST-FOUR-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
       "heading": "04",
-      "directory": "none",
+      "directory": "toward",
       "related": [],
       "sourceCheck": "pending",
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
       "importToQa": false,
-      "editorNote": "暫緩：活動網站導覽相同 URL 列兩次，需修稿去重後再查核"
+      "editorNote": "第二輪已完成文化部網址去重（docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md），不重做",
+      "secondQaBatch": "EXP-QA-02-20261017"
     },
     {
       "id": "B1",
@@ -312,12 +315,13 @@
       "category": "life-family",
       "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
       "heading": "04",
-      "directory": "none",
+      "directory": "toward",
       "related": [],
       "sourceCheck": "pending",
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
-      "importToQa": false
+      "importToQa": false,
+      "secondQaBatch": "EXP-QA-02-20261017"
     },
     {
       "id": "B5",
@@ -326,12 +330,14 @@
       "category": "learning",
       "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
       "heading": "05",
-      "directory": "none",
+      "directory": "toward",
       "related": [],
       "sourceCheck": "pending",
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
-      "importToQa": false
+      "importToQa": false,
+      "secondQaBatch": "EXP-QA-02-20261017",
+      "editorNote": "待修：國教院第 270 期引述與國教署新聞稿網址未確認，見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
     },
     {
       "id": "B6",

@@ -7,6 +7,7 @@
 //       node scripts/check-links-browser.mjs --set=batch45　只檢查第四、五批 13 篇文章的參考來源（Issue #2）
 //       node scripts/check-links-browser.mjs --set=batch6　 只檢查第六批城市與福利 6 篇文章的參考來源（Issue #3）
 //       node scripts/check-links-browser.mjs --set=activities　只檢查「近期活動與講座」頁的官方公告與長期查詢入口
+//       node scripts/check-links-browser.mjs --set=expansion9　只檢查九篇擴充候選文章的參考來源（含來源待修、未匯入的兩篇）
 import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
@@ -15,6 +16,7 @@ import { loadBatch2Articles, BATCH2_RESOURCES } from './lib/qa-batch2.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadBatch6Articles } from './lib/qa-batch6.mjs';
 import { loadQaActivities, loadQaNotices } from './lib/qa-activities.mjs';
+import { extractSection, parseExpansionArticle } from './lib/qa-expansion.mjs';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
@@ -27,6 +29,18 @@ const targets = new Map();
 if (process.argv.includes('--set=activities')) {
   for (const it of (await loadQaActivities(ROOT)).items) targets.set(it.url, `活動與講座 ${it.id}`);
   for (const it of (await loadQaNotices(ROOT)).all) targets.set(it.sourceUrl, `近期活動消息 ${it.id}`);
+} else if (process.argv.includes('--set=expansion9')) {
+  // 九篇擴充候選（docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json）的文章來源。
+  // 直接解析原稿，不經 importToQa 開關，所以來源待修、尚未匯入的 A1、B5 也會一併實際開啟。
+  const queue = JSON.parse(await readFile(path.join(ROOT, 'docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json'), 'utf8'));
+  for (const x of queue.articles) {
+    const text = await readFile(path.join(ROOT, x.sourceFile), 'utf8');
+    const stop = queue.sourceFiles[x.sourceFile]?.stopAt;
+    const [section] = extractSection(text, x.heading, stop ? text.indexOf(stop) : -1);
+    if (!section) { console.log(`✘ ${x.id}｜原稿找不到第 ${x.heading} 篇｜${x.sourceFile}`); continue; }
+    const label = `${x.id}${x.importToQa ? '' : '（來源待修，未匯入）'}`;
+    for (const s of parseExpansionArticle(x.id, section.raw).sources) if (!targets.has(s.url)) targets.set(s.url, `${label} 來源`);
+  }
 } else if (process.argv.includes('--set=batch45') || process.argv.includes('--set=batch6')) {
   const list = process.argv.includes('--set=batch6') ? await loadBatch6Articles(ROOT, categories) : await loadBatch45Articles(ROOT, categories);
   for (const a of list) for (const s of a.sourcesList) if (!targets.has(s.url)) targets.set(s.url, `${a.slug} 來源`);
