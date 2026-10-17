@@ -182,6 +182,8 @@ const editorialArticleCandidates = [...qaArticles, ...qaBatch3.articles, ...qaBa
 const signedEditorialArticles = IS_QA ? editorialArticleCandidates : editorialArticleCandidates.filter(a => approvedLaunchArticle(a, launchApprovals));
 const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...signedEditorialArticles]
   .sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
+// 城市福利六篇 QA 原稿可被載入以供版本比對，但 production 只准顯示逐篇簽核的版本。
+const benefitArticles = IS_QA ? qaBatch6 : qaBatch6.filter(a => approvedLaunchArticle(a, launchApprovals));
 
 const catById = Object.fromEntries(categories.map((c) => [c.id, c]));
 const countyById = Object.fromEntries(counties.map((c) => [c.id, c]));
@@ -1004,10 +1006,10 @@ ${qaPortalSection(c.id)}`;
   const c = catById.city;
   const body = `
 ${categoryHero(c)}
-${qaBatch6.length ? `<section class="section benefits-intro" aria-labelledby="benefits-title" id="benefits">
+${benefitArticles.length ? `<section class="section benefits-intro" aria-labelledby="benefits-title" id="benefits">
   <div class="wrap">
     ${sectionHead('Benefits', 'benefits-title', '先了解有哪些福利', '先認識福利名稱、服務內容與常見條件差異，再到下方選擇縣市，開啟官方機構入口。文章只說明制度，不判定個人資格。')}
-    <div class="story-grid">${qaBatch6.map((a) => articleCard(a, '')).join('\n')}</div>
+    <div class="story-grid">${benefitArticles.map((a) => articleCard(a, '')).join('\n')}</div>
     <p class="benefits-next"><a href="#finder">讀完後，往下選擇縣市與官方入口</a></p>
   </div>
 </section>
