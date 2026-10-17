@@ -1,0 +1,89 @@
+{
+  "documentType": "qa-expansion-import-queue",
+  "stagingOnly": true,
+  "title": "由己六大主題擴充｜第一批四篇 QA 暫存模擬（不是正式匯入佇列）",
+  "updatedOn": "2026-10-17",
+  "approvalStatus": "not-approved",
+  "rules": [
+    "本檔只供自動化測試以 QA_EXPANSION_QUEUE 建置獨立暫存版 dist-qa-staging-first-four，模擬第一批四篇開啟後的樣子；公開 QA 部署固定讀 docs/QA-EXPANSION-IMPORT-QUEUE.json，不讀本檔。build.mjs 會拒絕把 stagingOnly 佇列輸出到 dist-qa。",
+    "此處 importToQa=true／source-checked 只代表「AI 來源初核完成，暫存試讀」（見 sourceCheckRecord），不是站主同意部署公開 QA，也不是正式發布核准。正式佇列的四篇仍是 importToQa=false／pending。",
+    "slug、title、category、sourceFile、heading、directory 必須與正式佇列完全相同（測試會比對），修改時兩邊一起改。"
+  ],
+  "sourceFiles": {
+    "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md": {
+      "stopAt": "**QA 編輯狀態："
+    },
+    "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md": {
+      "stopAt": "## 本批編輯校核門檻"
+    }
+  },
+  "articles": [
+    {
+      "id": "exp-01",
+      "slug": "exp-household-shared-budget",
+      "title": "一起生活，家庭共同費用與自己的錢怎麼分開記？",
+      "originalDraftTitle": "住在同一個家，生活費一定要全部放在同一個帳戶嗎？",
+      "category": "life-family",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "01",
+      "directory": "readli",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
+    },
+    {
+      "id": "exp-08",
+      "slug": "exp-personal-boundaries",
+      "title": "朋友、家人和工作夥伴之間，界線可以怎麼說清楚？",
+      "originalDraftTitle": "在人際關係中，什麼時候可以說出自己的界線？",
+      "category": "health",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "08",
+      "directory": "readli",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
+    },
+    {
+      "id": "exp-11",
+      "slug": "exp-choosing-open-courses",
+      "previousUnpublishedSlug": "exp-open-course-certificates",
+      "title": "一門免費課程適不適合自己？可以先試學一小段",
+      "originalDraftTitle": "免費公開課程、觀看影片、完成證書，為什麼會是不同的事情？",
+      "category": "learning",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "heading": "11",
+      "directory": "toward",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
+    },
+    {
+      "id": "exp-12",
+      "slug": "exp-compare-everyday-experiments",
+      "previousUnpublishedSlug": "exp-reading-popular-science",
+      "title": "同一個生活實驗，換了條件，結果還能直接比較嗎？",
+      "originalDraftTitle": "想看生活中的科學知識，要怎麼判斷一篇科普文章講得夠不夠清楚？",
+      "category": "learning",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "12",
+      "directory": "toward",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
+    }
+  ],
+  "resources": []
+}

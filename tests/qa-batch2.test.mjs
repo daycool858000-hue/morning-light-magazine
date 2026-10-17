@@ -147,8 +147,10 @@ const expectedReadingFirst = [
   'batch5-preventive-health-screening', 'batch6-income-support-emergency-aid',
   'batch4-labor-insurance-pension', 'batch2-08', 'batch2-02',
 ];
-const readliLinks = [...qp.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
-const towardGalleryLinks = [...towardHtml.matchAll(/<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+// 六大主題擴充文章（exp-）由 tests/qa-expansion.test.mjs 另行驗收；本檔只核對原有 36 篇維持原狀。
+const isOriginal = (slug) => !slug.startsWith('exp-');
+const readliLinks = [...qp.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]).filter(isOriginal);
+const towardGalleryLinks = [...towardHtml.matchAll(/<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]).filter(isOriginal);
 const allReadingArticles = [...arts, ...third.articles, ...fourth, ...sixth].map(a => a.slug);
 const towardSlugs = new Set(TOWARD_READING_SLUGS);
 check('讀利與向光：讀利 23 篇、向光 13 篇，兩邊完整不重複，讀利首八篇以福利、權益、健康、安全及生活需求為優先',
@@ -159,7 +161,7 @@ check('讀利與向光：讀利 23 篇、向光 13 篇，兩邊完整不重複�
   JSON.stringify(readliLinks.slice(0, 8)) === JSON.stringify(expectedReadingFirst) &&
   allReadingArticles.length === 36 && allReadingArticles.every(slug => readliLinks.includes(slug) !== towardSlugs.has(slug)));
 // 城市頁原本「先了解有哪些福利」的六篇與縣市篩選不動，再補兩篇既有城市資源導讀。
-const cityArticleLinks = [...city.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]);
+const cityArticleLinks = [...city.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map((m) => m[1]).filter(isOriginal);
 check('城市與福利：第六批六篇保留原有順序，另可閱讀既有 batch2-09、batch2-10 兩篇社福窗口導讀，無重複',
   cityArticleLinks.length === 8 && new Set(cityArticleLinks).size === 8 &&
   JSON.stringify(cityArticleLinks.slice(0, 6)) === JSON.stringify(sixth.map((x) => x.slug)) &&
@@ -248,11 +250,46 @@ if (!learningQa.includes('id="events-title"') || !learningQa.includes('id="notic
 // 次要參考：12 個長期官方查詢入口（資料與連結不變）
 const actItems = [...actHtml.matchAll(/<li class="act-item" id="([^"]+)">\s*<a class="act-name" href="([^"]+)" target="_blank" rel="noopener noreferrer">/g)];
 if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal') || actItems.length !== 12) actProblems.push(`長期官方查詢入口應維持 12 筆（資料 ${acts.items.length}／頁面 ${actItems.length}）`);
+const portalCategory = {
+  'act-01': 'career', 'act-02': 'career', 'act-03': 'career',
+  'act-04': 'life-family', 'act-05': 'law', 'act-06': 'health',
+  'act-07': 'health', 'act-08': 'life-family', 'act-09': 'learning',
+  'act-10': 'learning', 'act-11': 'learning', 'act-12': 'learning',
+};
 for (const it of acts.items) {
   if (!actItems.some((m) => m[1] === it.id && m[2] === it.url.replace(/&/g, '&amp;'))) actProblems.push(`${it.id} 缺少或連結錯誤`);
-  if (!idx.includes(`activities.html#${it.id}`)) actProblems.push(`${it.id} 不在搜尋索引`);
+  const routed = it.id === 'act-09' ? 'learning.html#res-open-culture-events' : `${portalCategory[it.id]}.html#portal-${it.id}`;
+  if (!idx.includes(`"url":"${routed}"`)) actProblems.push(`${it.id} 搜尋沒有連到所屬主題`);
 }
 if ((actHtml.match(/<h3 id="act-group-\d">/g) || []).length !== acts.groups.length) actProblems.push('查詢入口主題標題數不符');
+// 站主的去重原則：網址完全相同沿用原卡補一句，其他 11 筆不同網址各自是文字入口。
+for (const it of acts.items) {
+  const category = portalCategory[it.id];
+  const html = await read(QA, category + '.html');
+  if (it.id === 'act-09') {
+    if (html.includes('id="portal-act-09"') || !html.includes('id="res-open-culture-events"') ||
+        !html.includes('也能從此入口查詢展演、講座')) actProblems.push('文化部同網址未沿用原卡');
+  } else {
+    const open = '<li id="portal-' + it.id + '">';
+    const start = html.indexOf(open);
+    const row = start < 0 ? '' : html.slice(start, html.indexOf('</li>', start) + 5);
+    if (!row.includes('href="' + it.url.replace(/&/g, '&amp;') + '"') ||
+        !row.includes(it.region) || !row.includes('未核准測試內容')) {
+      actProblems.push(it.id + ' 官方短文字入口網址、地區或 QA 標示缺漏');
+    }
+  }
+}
+for (const category of ['life-family', 'career', 'health', 'law', 'learning']) {
+  const html = await read(QA, category + '.html');
+  const slugs = [...html.matchAll(/<li id="portal-(act-\d+)">/g)].map(m => m[1]);
+  const expected = acts.items.filter(it => it.id !== 'act-09' && portalCategory[it.id] === category).map(it => it.id);
+  if (JSON.stringify(slugs) !== JSON.stringify(expected)) actProblems.push(category + ' 入口未全部顯示或順序錯誤');
+}
+if ((await read(QA, 'city.html')).includes('class="qa-portal-section"')) actProblems.push('城市分類不應出現不合適的入口');
+for (const folder of ['dist','dist-production']) {
+  if ((await read(path.join(ROOT,folder), 'learning.html')).includes('class="qa-portal-section"'))
+    actProblems.push(folder + ' 不得出現 QA 官方入口');
+}
 // 全站 QA 提示列維持 a49b80a 原文，不因活動頁而改（活動頁自己的說明放在頁首）
 const qaBarText = (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(actHtml) || [])[1] || '';
 if (qaBarText !== (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(qp) || [])[1] || qaBarText.includes('活動')) actProblems.push('QA 提示列被改動');
@@ -350,7 +387,7 @@ const tableHtml = await read(QA, 'articles/batch5-harassment-three-laws.html');
 if ((tableHtml.match(/<table>[\s\S]*?<\/table>/) || [''])[0].split('<tr>').length - 1 !== 4) fourthProblems.push('三部性騷擾法規文章的比較表未轉為 1 列表頭＋3 列內容');
 const allSlugs = [...arts, ...third.articles, ...fourth, ...sixth].map((a) => a.slug);
 const qaArticleFiles = (await readdir(path.join(QA, 'articles'))).filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, ''));
-const extra = qaArticleFiles.filter((f) => !allSlugs.includes(f));
+const extra = qaArticleFiles.filter((f) => !allSlugs.includes(f) && isOriginal(f));
 if (new Set(allSlugs).size !== allSlugs.length || allSlugs.length !== 36) fourthProblems.push(`QA 文章 slug 數 ${allSlugs.length}，應為 36 且不重複`);
 if (extra.length) fourthProblems.push(`QA 出現不在範圍內的文章：${extra.join('、')}`);
 const byCat = Object.fromEntries(categories.map((c) => [c.id, fourth.filter((a) => a.category === c.id).length]));
@@ -367,7 +404,7 @@ for (const c of categories) {
   const html = await read(QA, c.slug);
   const reading = qaArticleByCategory.filter(a => a.category === c.id);
   if (reading.length !== expectedTopicCounts[c.id]) topicReadingProblems.push(`${c.title} 分類原稿數量不符：${reading.length}`);
-  const hrefs = [...html.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map(m => m[1]);
+  const hrefs = [...html.matchAll(/<h3><a href="articles\/([^"]+)\.html">/g)].map(m => m[1]).filter(isOriginal);
   if (hrefs.length !== expectedTopicCounts[c.id] || new Set(hrefs).size !== hrefs.length ||
       !reading.every(a => hrefs.includes(a.slug))) topicReadingProblems.push(`${c.title} 文章入口不完整或重複：${hrefs.length}`);
   if (c.id !== 'city') {
@@ -587,13 +624,21 @@ try {
   check('過期活動：模擬臺灣時間 2027-02-01 時只隱藏已結束的科學節與國圖講座；2027-07-26 時全部隱藏並顯示「目前沒有」說明；搜尋也找不到已結束活動', expiry.length === 0, expiry.join('；'));
 
   const searchAct = [];
-  for (const kw of ['lecture', '職訓', '國家圖書館', '科學節', '書展']) {
+  const expectedSearch = [
+    ['lecture', 'learning.html#portal-act-10'],
+    ['職訓', 'career.html#portal-act-01'],
+    ['國家圖書館', 'learning.html#portal-act-10'],
+    ['科學節', 'activities.html#notice-taiwan-science-festival-2026'],
+    ['書展', 'activities.html#notice-tibe-2027'],
+  ];
+  for (const [kw, href] of expectedSearch) {
     await page.goto(`${ORIGIN}${BASE}search.html`);
     await page.fill('[data-search] input', kw);
     await page.waitForTimeout(150);
-    if (!(await page.locator('[data-search] a[href*="activities.html"]').count())) searchAct.push(`搜尋「${kw}」找不到活動頁項目`);
+    if (!(await page.locator(`[data-search] a[href="${href}"]`).count()))
+      searchAct.push(`搜尋「${kw}」找不到對應官方入口 ${href}`);
   }
-  check('搜尋 lecture／職訓／國家圖書館／科學節／書展 可找到活動頁項目', searchAct.length === 0, searchAct.join('；'));
+  check('搜尋 lecture／職訓／國家圖書館導向六大主題；科學節／書展仍導向活動公告', searchAct.length === 0, searchAct.join('；'));
 
   // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
   const jumpProblems = [];
@@ -700,7 +745,8 @@ try {
     await page.selectOption('#service-type', '');
     const shown = await page.$$eval('#local-results [data-res]:not([hidden])', (els) => els.map((e) => ({ id: e.id.replace('res-', ''), regions: e.dataset.regions })));
     const expected = cand.filter((r) => r.regions.includes(c.id)).map((r) => r.id).sort();
-    const ids = shown.map((s) => s.id).sort();
+    // 擴充佇列的縣市入口（qa-x-）由 qa-expansion 測試驗收；這裡核對原 23 筆地方入口，下一行仍檢查全部卡片不混入他縣市
+    const ids = shown.map((s) => s.id).filter((id) => !id.startsWith('qa-x-')).sort();
     if (JSON.stringify(ids) !== JSON.stringify(expected)) countyProblems.push(`${c.name} 顯示 ${ids.length} 筆，應為 ${expected.length} 筆`);
     if (shown.some((s) => !s.regions.split(' ').includes(c.id))) countyProblems.push(`${c.name} 混入其他縣市`);
     const nat = await page.$$eval('#national-results [data-res]:not([hidden])', (els) => els.length);
@@ -769,7 +815,7 @@ try {
 
   // 讀利與向光各自保留主題相符的文章；原始文章全部存在於六大分類與搜尋
   await page.goto(`${ORIGIN}${BASE}quiet-power.html`);
-  const qpLinks = await page.$$eval('#articles-title ~ .story-grid a, .story-grid h3 a', (as) => [...new Set(as.map((a) => a.getAttribute('href')))]);
+  const qpLinks = (await page.$$eval('#articles-title ~ .story-grid a, .story-grid h3 a', (as) => [...new Set(as.map((a) => a.getAttribute('href')))])).filter((h) => !h.startsWith('articles/exp-'));
   const entry = await page.$eval('.dir-head .support-entry', (e) => ({ href: e.getAttribute('href'), h: Math.round(e.getBoundingClientRect().height) }));
   check('讀利專欄：23 篇實用資訊文章獨立展示，與向光 13 篇互斥；💪 支援資源小型入口維持原狀', qpLinks.length === 23 && allReadingArticles.filter(a => !towardSlugs.has(a)).every(slug => qpLinks.includes(`articles/${slug}.html`)) && entry.href === 'support.html' && entry.h >= 44, `文章連結 ${qpLinks.length}；入口 ${JSON.stringify(entry)}`);
   check('測試預覽操作過程沒有 JavaScript 錯誤', errors.length === 0, errors.slice(0, 2).join('；'));

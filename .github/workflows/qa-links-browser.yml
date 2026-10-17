@@ -41,3 +41,5 @@ jobs:
         run: node scripts/check-links-browser.mjs --set=batch6
       - name: 以 Chromium 開啟首頁「活動與講座」的官方入口
         run: node scripts/check-links-browser.mjs --set=activities
+      - name: 以 Chromium 開啟九篇擴充文章的參考來源（分類：正常／下載型／海外逾時／真正失效；只有真正失效才讓此步驟失敗）
+        run: node scripts/check-links-browser.mjs --set=expansion9 --fail-on-broken

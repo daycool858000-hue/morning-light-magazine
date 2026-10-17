@@ -1,0 +1,38 @@
+{
+  "documentType": "qa-expansion-import-queue",
+  "title": "自動化測試用範例佇列（不是網站內容）",
+  "updatedOn": "2026-10-16",
+  "approvalStatus": "not-approved",
+  "sourceFiles": {
+    "tests/fixtures/qa-expansion/SAMPLE-ARTICLES.md": { "stopAt": "## 範例檔尾說明" }
+  },
+  "articles": [
+    { "id": "fx-01", "slug": "exp-fixture-household-list", "title": "測試範例：把每月固定支出列成一張可討論的清單", "category": "life-family",
+      "sourceFile": "tests/fixtures/qa-expansion/SAMPLE-ARTICLES.md", "heading": "01", "directory": "readli", "related": ["batch4-savings-emergency-fund"],
+      "sourceCheck": "source-checked", "sourceCheckedOn": "2026-10-16", "sourceCheckRecord": "tests/fixtures/qa-expansion/SOURCE-CHECK-SAMPLE.md", "importToQa": true },
+    { "id": "fx-02", "slug": "exp-fixture-local-notice", "title": "測試範例：參加地方講座前，可以先看哪些公告欄位", "category": "learning",
+      "sourceFile": "tests/fixtures/qa-expansion/SAMPLE-ARTICLES.md", "heading": "02", "directory": "none", "related": [],
+      "sourceCheck": "source-checked", "sourceCheckedOn": "2026-10-15", "sourceCheckRecord": "tests/fixtures/qa-expansion/SOURCE-CHECK-SAMPLE.md", "importToQa": true },
+    { "id": "fx-03", "slug": "exp-fixture-course-complete", "title": "測試範例：線上課程的「完成」有幾種不同意思", "category": "learning",
+      "sourceFile": "tests/fixtures/qa-expansion/SAMPLE-ARTICLES.md", "heading": "03", "directory": "toward", "related": [],
+      "sourceCheck": "source-checked", "sourceCheckedOn": "2026-10-16", "sourceCheckRecord": "tests/fixtures/qa-expansion/SOURCE-CHECK-SAMPLE.md", "importToQa": true },
+    { "id": "fx-04", "slug": "exp-fixture-unchecked", "title": "測試範例：尚未完成來源查核的文章不應出現", "category": "law",
+      "sourceFile": "tests/fixtures/qa-expansion/SAMPLE-ARTICLES.md", "heading": "04", "directory": "none", "related": [],
+      "sourceCheck": "pending", "sourceCheckedOn": null, "sourceCheckRecord": null, "importToQa": false }
+  ],
+  "resources": [
+    { "id": "FX-SAME", "name": "勞動部（同網址範例）", "url": "https://www.mol.gov.tw/", "category": "career", "regions": ["national"],
+      "purpose": "範例補充：同網址只在原卡補一句用途說明，不新增第二張卡。", "caution": "",
+      "sourceCheck": "source-checked", "sourceCheckedOn": "2026-10-16", "sourceCheckRecord": "tests/fixtures/qa-expansion/SOURCE-CHECK-SAMPLE.md", "importToQa": true },
+    { "id": "FX-NAT", "name": "我的 E 政府｜新住民照顧服務總覽（範例）", "url": "https://www.gov.tw/News_Content_26_805862", "category": "life-family", "regions": ["national"],
+      "purpose": "範例：網址不同的全國性入口，以簡潔文字列呈現。", "caution": "原總覽可能含舊年度資格或金額", "languages": ["中文", "English"],
+      "sourceCheck": "source-checked", "sourceCheckedOn": "2026-10-16", "sourceCheckRecord": "tests/fixtures/qa-expansion/SOURCE-CHECK-SAMPLE.md", "importToQa": true },
+    { "id": "FX-TPE", "name": "臺北市新住民服務入口（範例）", "url": "https://nit.taipei/Default.aspx", "category": "city", "regions": ["taipei"],
+      "serviceTypes": ["綜合政府服務"], "entryType": "縣市新住民服務入口（範例）",
+      "purpose": "範例：只服務特定縣市的入口，進城市頁縣市篩選。", "caution": "依原站公告為準",
+      "sourceCheck": "source-checked", "sourceCheckedOn": "2026-10-16", "sourceCheckRecord": "tests/fixtures/qa-expansion/SOURCE-CHECK-SAMPLE.md", "importToQa": true },
+    { "id": "FX-PENDING", "name": "尚未查核的範例入口", "url": "https://mkm.k12ea.gov.tw/", "category": "learning", "regions": ["national"],
+      "purpose": "這筆不應出現在任何頁面。", "caution": "",
+      "sourceCheck": "pending", "sourceCheckedOn": null, "sourceCheckRecord": null, "importToQa": false }
+  ]
+}

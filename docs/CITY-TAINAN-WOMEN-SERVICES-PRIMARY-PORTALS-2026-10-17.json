@@ -1,0 +1,78 @@
+{
+  "title": "《由己》臺南市婦女／地方學習官方來源深度候選",
+  "county": "tainan",
+  "reviewedOn": "2026-10-17",
+  "reviewedBy": "ChatGPT（AI）",
+  "status": "official-source-purpose-initial-review",
+  "ownerApproved": false,
+  "published": false,
+  "qaImported": false,
+  "notes": [
+    "同一官方網址只用一個入口；不同 URL 可依用途保留各自簡潔文字連結",
+    "不是逐場活動或電話核准檢查，不代表全部服務都免費或可立即使用",
+    "當期或日期性活動須有明確失效日期，不和長期名錄混在一起"
+  ],
+  "items": [
+    {
+      "id": "tn-women-centers-services",
+      "name": "臺南市婦女福利服務中心｜服務內容介紹",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21219&s=4780899",
+      "type": "婦女福利中心官方服務介紹",
+      "serviceTypes": [
+        "婦女福利",
+        "社會福利"
+      ],
+      "purpose": "臺南市政府社會局說明婦女福利服務中心的學習與成長、福利資源連結、支持服務，以及依制度安排的法律與心理諮詢。",
+      "evidence": "官方原頁直接可讀，內容更新標示113-09-13；個別資格及預約條件仍應查看最新公告。",
+      "remaining": "不可直接稱每個人無條件免費接受心理諮商。",
+      "regions": [
+        "tainan"
+      ],
+      "sourceAgency": "臺南市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    },
+    {
+      "id": "tn-women-centers-directory",
+      "name": "臺南市婦女福利服務中心｜永華、曾文、南瀛、玉井聯絡入口",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21219&s=4780903",
+      "type": "婦女福利中心聯絡名錄",
+      "serviceTypes": [
+        "婦女福利"
+      ],
+      "purpose": "臺南市社會局官方 FAQ 列永華、曾文、南瀛、玉井等婦女福利中心聯絡方式及對外資訊入口，適合先查所在地中心。",
+      "evidence": "官方原頁更新114-04-29；僅為名錄與聯絡入口，沒有當天致電驗證。",
+      "remaining": "最新服務時間須以當期公告為準；名錄中的不同中心不複製相同 FAQ URL。",
+      "regions": [
+        "tainan"
+      ],
+      "sourceAgency": "臺南市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    },
+    {
+      "id": "tn-women-centers-four-modes",
+      "name": "臺南市四處婦女中心｜定點與行動服務形式說明",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=17856&s=8727057",
+      "type": "地方服務形式歷史官方新聞",
+      "serviceTypes": [
+        "婦女福利"
+      ],
+      "purpose": "市府114年新聞說明永華、南瀛中心提供定點服務，曾文、玉井也設有行動式及定點服務安排，幫助理解不同區域的服務形式。",
+      "evidence": "這是114年歷史措施說明，應保留發布年份，不能自行保證115年每日服務時段仍相同。",
+      "remaining": "待與115年最新服務時間與地點再次交叉核對後才適合作當期服務引導。",
+      "regions": [
+        "tainan"
+      ],
+      "sourceAgency": "臺南市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    }
+  ]
+}

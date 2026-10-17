@@ -1,0 +1,580 @@
+{
+  "documentType": "qa-expansion-import-queue",
+  "title": "由己六大主題擴充｜QA 分批匯入佇列",
+  "updatedOn": "2026-10-17",
+  "approvalStatus": "not-approved",
+  "rules": [
+    "只有 importToQa=true 且 sourceCheck=source-checked、填寫 sourceCheckedOn 與 sourceCheckRecord（docs/ 內查核紀錄）的項目會進入 QA 測試版；其他一律不顯示。",
+    "一次只把要上 QA 的一篇或一小批改成 importToQa=true；不要一次開啟全部。",
+    "sourceFile 必須是 docs/ 內實際存在的原稿；heading 對應原稿「# 01｜標題」的兩位數編號，title 必須與原稿標題完全相同。",
+    "directory：none（只出現在六大主題、文章頁與搜尋）、readli（另加入讀利文章列表末端）、toward（另加入向光文章格末端）；未經站主確認一律 none。",
+    "官方資源網址與既有卡片完全相同 → 只在原卡補充文字；網址不同的全國性入口 → 主題頁簡潔文字入口；regions 為縣市 → 城市頁縣市篩選（需 serviceTypes 與 entryType）。",
+    "本檔不是正式發布核准，不得加入 ownerPublicationApproval／productionApproved；正式版只讀 content/release-approvals.json。",
+    "第一批 QA 試讀（EXP-QA-01-20261017，見 docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md）：exp-01、exp-08 → readli；exp-11、exp-12 → toward，並於首次 QA 前改用新 slug（previousUnpublishedSlug 只供追溯，未曾上線，不建 redirect）。此四篇仍 importToQa=false／pending，須站主另行明確同意才開啟；暫存模擬只用 docs/QA-EXPANSION-STAGING-FIRST-FOUR-2026-10-17.json。",
+    "第二批（EXP-QA-02-20261017）目錄依站主 2026-10-17 指示：B4 → readli；A1、A2、A4、B5 → toward。五篇仍 importToQa=false／pending；九篇整合暫存模擬只用 docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json。"
+  ],
+  "sourceFiles": {
+    "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md": {
+      "stopAt": "**QA 編輯狀態："
+    },
+    "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md": {
+      "stopAt": "## 本批編輯校核門檻"
+    }
+  },
+  "articles": [
+    {
+      "id": "exp-01",
+      "slug": "exp-household-shared-budget",
+      "title": "一起生活，家庭共同費用與自己的錢怎麼分開記？",
+      "originalDraftTitle": "住在同一個家，生活費一定要全部放在同一個帳戶嗎？",
+      "category": "life-family",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "01",
+      "directory": "readli",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-02",
+      "slug": "exp-consumer-dispute-records",
+      "title": "預付課程、訂閱服務或網購發生爭議，先留下哪些資料？",
+      "category": "life-family",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "heading": "02",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-03",
+      "slug": "exp-family-care-handover",
+      "title": "照顧家人時，如果要請別人幫忙，事情怎麼交接？",
+      "category": "life-family",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "heading": "03",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-04",
+      "slug": "exp-career-gap-resume",
+      "title": "離開職場幾年，履歷上的空白可以怎麼介紹？",
+      "category": "career",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "heading": "04",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-05",
+      "slug": "exp-first-interview-questions",
+      "title": "面試時除了問薪水，還有哪幾個工作條件值得確認？",
+      "originalDraftTitle": "第一次面試一份新工作，除了薪水還可以問什麼？",
+      "category": "career",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "05",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-06",
+      "slug": "exp-freelance-agreements",
+      "title": "接案前把交付內容寫清楚，可以少掉哪些誤會？",
+      "originalDraftTitle": "開始接案或做個人工作者，要先把哪些事情談清楚？",
+      "category": "career",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "06",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-07",
+      "slug": "exp-sleep-habits-health",
+      "title": "常常睡不好，生活情境能提供哪些觀察線索？",
+      "originalDraftTitle": "睡得不好時，怎麼分辨是生活作息還是需要多了解的健康問題？",
+      "category": "health",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "07",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-08",
+      "slug": "exp-personal-boundaries",
+      "title": "朋友、家人和工作夥伴之間，界線可以怎麼說清楚？",
+      "originalDraftTitle": "在人際關係中，什麼時候可以說出自己的界線？",
+      "category": "health",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "08",
+      "directory": "readli",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-09",
+      "slug": "exp-stalking-legal-info",
+      "title": "被反覆跟蹤、傳訊或監看時，正式法律資訊可以怎麼找？",
+      "category": "law",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "heading": "09",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-10",
+      "slug": "exp-digital-safety-three-risks",
+      "title": "手機帳號、定位分享和照片外流，是三種不同的數位安全問題",
+      "category": "law",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "heading": "10",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-11",
+      "slug": "exp-choosing-open-courses",
+      "previousUnpublishedSlug": "exp-open-course-certificates",
+      "title": "一門免費課程適不適合自己？可以先試學一小段",
+      "originalDraftTitle": "免費公開課程、觀看影片、完成證書，為什麼會是不同的事情？",
+      "category": "learning",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "heading": "11",
+      "directory": "toward",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "exp-12",
+      "slug": "exp-compare-everyday-experiments",
+      "previousUnpublishedSlug": "exp-reading-popular-science",
+      "title": "同一個生活實驗，換了條件，結果還能直接比較嗎？",
+      "originalDraftTitle": "想看生活中的科學知識，要怎麼判斷一篇科普文章講得夠不夠清楚？",
+      "category": "learning",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "heading": "12",
+      "directory": "toward",
+      "firstQaBatch": "EXP-QA-01-20261017",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "A1",
+      "slug": "exp-women-center-courses",
+      "title": "婦女中心有什麼課可以學？體驗、講座與培力的差別",
+      "category": "learning",
+      "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "01",
+      "directory": "toward",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "editorNote": "第三輪版本優先（覆蓋第二輪）；先前兩項待修理由已由 2026-10-17 獨立原始來源複核撤銷（見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md）。正式佇列仍未開啟。",
+      "secondQaBatch": "EXP-QA-02-20261017"
+    },
+    {
+      "id": "A2",
+      "slug": "exp-family-education-adults",
+      "title": "家庭教育只談教養孩子嗎？成年家人之間也有要學的事",
+      "category": "life-family",
+      "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "02",
+      "directory": "toward",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "editorNote": "第三輪版本優先（覆蓋第二輪）",
+      "secondQaBatch": "EXP-QA-02-20261017"
+    },
+    {
+      "id": "A3",
+      "slug": "exp-parenting-courses-by-age",
+      "title": "孩子慢慢長大，親職課程也要換題目嗎？",
+      "category": "life-family",
+      "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "03",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "editorNote": "第三輪版本優先（覆蓋第二輪）"
+    },
+    {
+      "id": "A4",
+      "slug": "exp-local-events-formats",
+      "title": "地方活動不只有節慶：走進展覽、講座與工作坊，各能帶回什麼？",
+      "category": "learning",
+      "sourceFile": "docs/BATCH9-FIRST-FOUR-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "04",
+      "directory": "toward",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "editorNote": "第二輪已完成文化部網址去重（docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md），不重做",
+      "secondQaBatch": "EXP-QA-02-20261017"
+    },
+    {
+      "id": "B1",
+      "slug": "exp-woman-founder-client-trust",
+      "title": "一家公司如何讓客戶願意長期合作？從女性創業者蔡娟娟的經營歷程談起",
+      "category": "career",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "01",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "editorNote": "真實人物報導：需確認姓名使用與來源"
+    },
+    {
+      "id": "B2",
+      "slug": "exp-food-bank-logistics",
+      "title": "一箱物資捐出去以後，誰負責讓它安全抵達？食物銀行的物流與管理",
+      "category": "learning",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "02",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "B3",
+      "slug": "exp-performing-arts-first-time",
+      "title": "音樂會、舞蹈與戲劇，第一次怎麼挑？從幕後的工作看一場演出",
+      "category": "learning",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "03",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "B4",
+      "slug": "exp-clothing-labels",
+      "title": "「棉 100%」就一定好穿嗎？看懂衣物成分與洗標的兩種用途",
+      "category": "life-family",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "04",
+      "directory": "readli",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "secondQaBatch": "EXP-QA-02-20261017"
+    },
+    {
+      "id": "B5",
+      "slug": "exp-ai-answer-verification",
+      "title": "AI 回答得很完整，為什麼來源仍要自己打開？從一則生活資訊談查證",
+      "category": "learning",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "05",
+      "directory": "toward",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "secondQaBatch": "EXP-QA-02-20261017",
+      "editorNote": "先前 1 句待修理由已由 2026-10-17 獨立原始來源複核撤銷（見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md）。正式佇列仍未開啟。"
+    },
+    {
+      "id": "B6",
+      "slug": "exp-everyday-creative-works",
+      "title": "把日常留成自己的作品：照片、文字與聲音，從哪裡開始？",
+      "category": "learning",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "heading": "06",
+      "directory": "none",
+      "related": [],
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false,
+      "editorNote": "暫緩：照片著作權、肖像、個資與公開權利需分開校稿"
+    }
+  ],
+  "resources": [
+    {
+      "id": "NI-01",
+      "name": "我的 E 政府｜新住民照顧服務總覽",
+      "url": "https://www.gov.tw/News_Content_26_805862",
+      "category": "life-family",
+      "regions": [
+        "national"
+      ],
+      "purpose": "生活、醫療、教育、就業及地方服務的跨部會官方入口",
+      "caution": "原總覽可能含舊年度資格或金額；本站不重製補助表",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-02",
+      "name": "台灣就業通｜新住民求職、職訓專區",
+      "url": "https://job.taiwanjobs.gov.tw/Internet/special2/foreignspouse/index.aspx",
+      "category": "career",
+      "regions": [
+        "national"
+      ],
+      "purpose": "求職登記、職訓、就業權益及創業資源入口",
+      "caution": "職缺數與開課日期需以原站即時公告為準",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-03",
+      "name": "勞動部｜多語新住民就業資源簡介",
+      "url": "https://www.wda.gov.tw/News_Content.aspx?n=156&s=18648",
+      "category": "career",
+      "regions": [
+        "national"
+      ],
+      "purpose": "中文、越南語、印尼語、英語、泰語就業文宣入口（依前輪研究）",
+      "caution": "逐語文件年度、連結與可下載狀態須再核對；不轉載 PDF",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-04",
+      "name": "新住民子女教育資訊網",
+      "url": "https://mkm.k12ea.gov.tw/",
+      "category": "learning",
+      "regions": [
+        "national"
+      ],
+      "purpose": "新住民語文教材、親子共讀及教育正式資訊",
+      "caution": "學校端與一般家庭服務對象不同，不可宣稱任何課程均可報名",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-05",
+      "name": "國健署｜孕媽咪健康手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+      "category": "health",
+      "regions": [
+        "national"
+      ],
+      "purpose": "2026 中文及 2025 年部分外語孕期健康手冊官方入口",
+      "caution": "不能假設中文與外語版本更新同步；核對個別語言及出版年",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-06",
+      "name": "國健署｜孕媽咪衛教手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4839",
+      "category": "health",
+      "regions": [
+        "national"
+      ],
+      "purpose": "孕產、產後健康官方衛教手冊；含前輪已核對多語版本",
+      "caution": "與 NI-05 同機構不同手冊網址，放在同一區塊文字延伸而非當同一 URL",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-07",
+      "name": "移民署｜新住民數位資訊 e 網",
+      "url": "https://nit.immigration.gov.tw/",
+      "category": "learning",
+      "regions": [
+        "national"
+      ],
+      "purpose": "數位學習、課程與多語資訊官方入口",
+      "caution": "課程當期名額與收費依公告；與既有移民署卡同機構但不同網址",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-08",
+      "name": "新北｜新住民家庭暨婦女服務中心",
+      "url": "https://ntni.tw/index.php",
+      "category": "city",
+      "regions": [
+        "new-taipei"
+      ],
+      "purpose": "在地新住民及婦女中心資訊、社區資源",
+      "caution": "站域非 gov.tw；需以新北市社會局官方委辦或中心資訊驗證：https://www.sw.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=202efb1cf9659f1122fae42302892988&id=4ee902eba1348b6f",
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "entryType": "縣市新住民服務入口（層級待查核）",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-09",
+      "name": "臺北｜新住民專區",
+      "url": "https://nit.taipei/Default.aspx",
+      "category": "city",
+      "regions": [
+        "taipei"
+      ],
+      "purpose": "臺北新住民工作、家庭、衛生與藝文活動官方入口",
+      "caution": "外語內容更新可能不同步，逐頁核對可讀性",
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "entryType": "縣市新住民服務入口（層級待查核）",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-10",
+      "name": "桃園市婦幼發展局｜新住民服務",
+      "url": "https://dowcd.tycg.gov.tw/cl.aspx?n=16359",
+      "category": "city",
+      "regions": [
+        "taoyuan"
+      ],
+      "purpose": "中心、培力、通譯及地方多語服務官方入口",
+      "caution": "地方性服務不適用全國；相近的桃園專站不重複做第二大卡",
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "entryType": "縣市新住民服務入口（層級待查核）",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-11",
+      "name": "臺中市｜新住民資訊網",
+      "url": "https://www.taichung.gov.tw/1961691/",
+      "category": "city",
+      "regions": [
+        "taichung"
+      ],
+      "purpose": "生活、就業、文化與課程官方資料",
+      "caution": "有多語入口不代表所有中文頁已翻譯",
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "entryType": "縣市新住民服務入口（層級待查核）",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-12",
+      "name": "臺南市｜新住民家庭服務中心",
+      "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21363&s=4378270",
+      "category": "city",
+      "regions": [
+        "tainan"
+      ],
+      "purpose": "臺南市社會局中心及服務說明",
+      "caution": "不以舊單次課程表示現行招生",
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "entryType": "縣市新住民服務入口（層級待查核）",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    },
+    {
+      "id": "NI-13",
+      "name": "苗栗縣｜新住民照顧輔導資訊網",
+      "url": "https://new-inhabitants.miaoli.gov.tw/",
+      "category": "city",
+      "regions": [
+        "miaoli"
+      ],
+      "purpose": "生活適應、就業、醫療、教育與家庭資源",
+      "caution": "英、越、印尼語介面存在仍須逐子頁確認",
+      "serviceTypes": [
+        "綜合政府服務"
+      ],
+      "entryType": "縣市新住民服務入口（層級待查核）",
+      "sourceCheck": "pending",
+      "sourceCheckedOn": null,
+      "sourceCheckRecord": null,
+      "importToQa": false
+    }
+  ]
+}
