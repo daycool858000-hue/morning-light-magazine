@@ -15,6 +15,7 @@ const badOut = path.join(root, 'dist-launch-bad-snapshot');
 const cityOut = path.join(root, 'dist-launch-city-fixture');
 const fullOut = path.join(root, 'dist-launch-44-fixture');
 const fullFeaturesOut = path.join(root, 'dist-launch-feature-fixture');
+const qaParityOut = path.join(root, 'dist-qa-release-parity-fixture');
 const prior = await readFile(file, 'utf8');
 const template = JSON.parse(prior);
 const releaseCandidate = JSON.parse(await readFile(path.join(root, 'artifacts/launch-article-batch.json'), 'utf8'));
@@ -73,6 +74,23 @@ try {
   template.approvedArticles = Object.fromEntries(releaseCandidate.articles.map(a => [a.slug, sign(a.sha256)]));
   await writeFile(file,JSON.stringify(template,null,2)+'\n');
   build(fullOut);
+  // 原稿完全同一份：驗證 QA 44 篇的正文、引用來源與正式版逐字一致，避免轉版時遺失段落。
+  execFileSync(process.execPath, ['scripts/build.mjs','--mode=qa','--out='+path.basename(qaParityOut)], {
+    cwd:root,stdio:'pipe',
+  });
+  const articleContent=(html)=>{
+    const start=html.indexOf('<div class="section section-tight"><div class="wrap"><div class="prose">');
+    assert.ok(start>=0,'文章正文容器不存在');
+    const end=html.indexOf('</div></div></div>\n</article>',start);
+    assert.ok(end>start,'文章正文結尾不存在');
+    return html.slice(start,end);
+  };
+  for(const a of releaseCandidate.articles) {
+    const fileName='articles/'+a.slug+'.html';
+    const qa=await readFile(path.join(qaParityOut,fileName),'utf8');
+    const prod=await readFile(path.join(fullOut,fileName),'utf8');
+    assert.equal(articleContent(prod),articleContent(qa),'同一原稿正式版正文／引用遭到改寫：'+a.slug);
+  }
   const files44 = (await readdir(path.join(fullOut,'articles'))).filter(x=>x.endsWith('.html'));
   assert.equal(files44.length,44, '全44篇都有相符指紋，應全數輸出');
   const readli44 = await readFile(path.join(fullOut,'quiet-power.html'),'utf8');
@@ -139,9 +157,9 @@ try {
   assert.ok(!existsSync(path.join(badOut,'articles/batch2-01.html')), '內容指紋不符的文章不得輸出');
   const badIndex = await readFile(path.join(badOut,'assets/data/search-index.js'),'utf8');
   assert.ok(!badIndex.includes('articles/batch2-01.html'), '不符內容不可在搜尋中出現');
-  console.log('正式版模擬完成：1篇、城市福利2篇、44篇（讀利26／向光18）、小日曆、六筆活動、十二筆長期入口、孕期四段、54主題與搜尋／sitemap 均已逐項驗證。');
+  console.log('正式版模擬完成：44篇正文與QA逐字一致、讀利26／向光18、小日曆、六筆活動、十二筆長期入口、孕期四段、54主題與搜尋／sitemap 均已逐項驗證。');
 } finally {
   // 不論成功或失敗都先還原原核准檔；測試產物不部署，不寫回 git。
   await writeFile(file,prior);
-  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true}),rm(fullOut,{recursive:true,force:true}),rm(fullFeaturesOut,{recursive:true,force:true})]);
+  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true}),rm(fullOut,{recursive:true,force:true}),rm(fullFeaturesOut,{recursive:true,force:true}),rm(qaParityOut,{recursive:true,force:true})]);
 }
