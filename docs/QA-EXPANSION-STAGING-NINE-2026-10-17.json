@@ -99,7 +99,7 @@
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
       "importToQa": false,
-      "stagingBlocker": "待修：桃園市婦幼發展局三個引用網址與「2027 年 1 月成果發表」未能確認；來源清單標為官方卻含兩個非政府網站。詳見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
+      "stagingBlocker": "待修 2 項：2027 年 1 月預定成果發表僅有受託團體公告、內文未逐字確認；來源區標題寫「官方來源」卻含兩個非政府網站。六筆網址經 CI run 38990419022 實際開頁證實存在。詳見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
     },
     {
       "id": "A2",
@@ -160,7 +160,7 @@
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
       "importToQa": false,
-      "stagingBlocker": "待修：國家教育研究院電子報第 270 期與「錯置脈絡」敘述的對應未確認；教育部國教署新聞稿網址與發布單位未確認。詳見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
+      "stagingBlocker": "待修 1 句：國教院電子報第 270 期該篇內文是否含「真實片段／錯置脈絡」待逐字核對。篇名、期數與國教署新聞稿網址經 CI run 38990419022 實際開頁證實。詳見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
     }
   ],
   "resources": []

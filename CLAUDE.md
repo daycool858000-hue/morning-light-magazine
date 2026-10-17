@@ -56,10 +56,14 @@
 
 - **合併結果**：PR #10 自動合併無衝突；PR #11 只有 `CLAUDE.md` 衝突，已**保留雙方最新段落**（PR #10 的 12 筆入口決定段 ＋ PR #11 的六段編輯進度），未用舊檔覆蓋。`claude/first-four-articles-qa-staging-l0ntyf`（`37a3cc8`）已含 PR #12 全部提交，第一批四篇工程原封保留。PR #11 的五份原稿與 22 篇 manifest 與編輯分支最新版**逐位元組相同**。
 - **暫存共 43 篇**（不是 45 篇）＝原 36 篇 ＋ 第一批 4 篇 ＋ 第二批 **3 篇**（A2 家庭教育、A4 地方活動、B4 衣物洗標）。
-- **A1（婦女中心課程）與 B5（AI 查證）列入待修、不進本輪暫存**：A1 三個桃園市婦幼發展局引用網址與「2027 年 1 月成果發表」無法確認，且「官方來源」清單含兩個非政府網站；B5 國教院電子報第 270 期的引述對應與國教署新聞稿網址／發布單位無法確認。詳細問題與修法建議：`docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md`。**不得為了湊滿 45 篇把這兩篇標成 source-checked。**
+- **A1（婦女中心課程）與 B5（AI 查證）列入待修、不進本輪暫存**，但**待修項目已因 CI 實際開頁而縮小**：
+  - A1 剩 2 項：①「2027 年 1 月預定成果發表」只有受託團體 `wfwp.org.tw` 公告，內文未能逐字確認；②來源區標題寫「官方來源」卻含兩個非政府網站（`wfwp.org.tw`、`taoyuanwdc.org`）。**三個桃園網址經 CI 開頁證實存在且標題相符**（115-116 年度婦女福利與權益工作計畫、115 年 10-12 月婦女中心活動一覽表、先培力再提案），原先「網址無法確認」的判斷已更正。
+  - B5 剩 1 句：第 270 期該篇內文是否含「真實片段／錯置脈絡」待逐字核對。**篇名、期數與國教署新聞稿網址經 CI 開頁全部證實**，原先「發布單位應為教育部」的判斷已更正。
+  - 詳細問題與修法建議：`docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md`。**不得為了湊滿 45 篇把這兩篇標成 source-checked。**
 - **第二批五篇暫定目錄**：正式佇列 A1／A2／A4／B4／B5 的 `directory` 改為 `toward`（向光），`importToQa` 仍 false；分類保留原本六大分類（A2、B4 生活與家庭；A1、A4、B5 學習與活動）。向光原八索引與既有 13 篇順序完全不動，新文章只接在文章卡最後（13→18 張）；讀利 23→25。
-- **本次環境限制（重要）**：這個雲端容器的網路政策只開放 GitHub 與套件來源，**所有 `*.gov.tw`、`event.culture.tw`、`epaper.naer.edu.tw` 都被代理擋下（403）**，無法在本機實際開啟官方連結。改以伺服器端搜尋複核敘述，並新增 `node scripts/check-links-browser.mjs --set=expansion9`，由 `qa-links-browser.yml`（GitHub runner）實際開啟九篇全部來源網址（含未匯入的 A1、B5）。
+- **本次環境限制（重要）**：這個雲端容器的網路政策只開放 GitHub 與套件來源，**所有 `*.gov.tw`、`event.culture.tw`、`epaper.naer.edu.tw` 都被代理擋下（403）**，無法在本機實際開啟官方連結。改以伺服器端搜尋複核敘述，並新增 `node scripts/check-links-browser.mjs --set=expansion9`，由 `qa-links-browser.yml`（GitHub runner）實際開啟九篇全部來源網址（含未匯入的 A1、B5）。**run `38990419022` success：23 個網址中 21 個 200 可開啟**；未開啟的兩個是 exp-12 的科教館 PDF（直接下載，非失效）與 A2 的 `familyedu.moe.gov.tw`（海外逾時，既知狀況，不重查、不替換）。
 - **新增／修改檔案**：`docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json`（暫存佇列，`stagingOnly`）、`docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md`（第二批來源查核紀錄）、`docs/NINE-ARTICLE-PORTAL-INTEGRATION-QA-STAGING-REPORT-2026-10-17.md`（整合報告）、`tests/qa-expansion-nine.test.mjs`（已加入 `npm test`）、`scripts/lib/qa-expansion.mjs`（`建議歸類` 歸類行不進正文）、`scripts/check-links-browser.mjs`、`.github/workflows/qa-links-browser.yml`、`docs/QA-EXPANSION-IMPORT-QUEUE.json`（只改第二批五篇的 directory 與 editorNote）、`tests/qa-expansion.test.mjs`、`tests/qa-expansion-first-four.test.mjs`（第二批目錄斷言）、`package.json`、`.gitignore`。
+- **CI**：`38990378606`（push）success、`38990412620`（pull_request）success、`38990419022`（連結檢查）success；草稿 PR #13。
 - **下一步只等站主確認**：①A2／A4／B4 是否適合放向光（B4 屬生活技能，也可改放讀利）；②A1、B5 交回編輯依查核紀錄修稿；③站主同意後才把正式佇列對應文章改 `source-checked`／`importToQa: true`，再另行同意部署公開 QA。正式發布仍須另走 release-approvals 流程。
 
 ## 12 筆長期查詢入口第二階段｜站主決定與 QA 工作中（2026-10-16）
