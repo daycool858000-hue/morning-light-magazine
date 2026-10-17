@@ -84,6 +84,23 @@ try {
       learningState.activities === 6 && learningState.sources === 6 &&
       learningState.firstArticleBeforeActivities && learningState.noHorizontalScroll,
       JSON.stringify(learningState));
+    // 新階段：12 筆長期查詢入口中，同網址 act-09 不建立第二張卡；
+    // 其餘 11 筆各在自己主題的最下方以容易點擊的文字列呈現。
+    const portalResult = [];
+    for (const [file, expected] of [['life-family.html', 2], ['career.html', 3],
+      ['health.html', 2], ['law.html', 1], ['learning.html', 3]]) {
+      await page.goto(`${origin}${base}${file}`);
+      const state = await page.locator('.qa-portal-list > li').evaluateAll(rows =>
+        rows.map(row => { const a=row.querySelector('a'), rect=a.getBoundingClientRect(); return {
+          href:a.getAttribute('href'), h:Math.round(rect.height),
+          target:a.target, rel:a.rel, overflow:document.documentElement.scrollWidth > innerWidth
+        }; })
+      );
+      if (state.length !== expected || state.some(x => x.h < 44 || !x.href?.startsWith('https://') ||
+          x.target !== '_blank' || !x.rel.includes('noopener') || x.overflow)) portalResult.push(file + ' ' + JSON.stringify(state));
+    }
+    check(`WebKit ${width}px 官方入口：11 筆不同網址以輕量文字列在五個主題顯示，44px 可點、HTTPS、無橫向溢位`,
+      portalResult.length === 0, portalResult.join('；'));
     // 網站內容增加後，五個主題可以直接跳到需求／索引，無須把整頁滑到底。
     const jumpFailures = [];
     for (const [file, target] of [

@@ -50,6 +50,14 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 12 筆長期查詢入口第二階段｜站主決定與 QA 工作中（2026-10-16）
+
+- 站主最新規則：「有相同網址的就不用再新增；可以改成文字敘述在同一個格子裡面；如果不是的話就不用」。**只以完整 URL 字串是否相同判定資料去重**，不同網址即使同品牌也不用硬塞同格。
+- 原來源 `docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json` 12 筆原值不改；唯一完全同網址的是 `act-09` 文化部藝文活動平台，沿用 `open-culture-events` 卡，QA 中補一句用途。其他 11 筆依各自主要分類以小型文字列呈現，不增加巨型機構卡。
+- 新程式在 `feature/qa-portal-single-url-20261016`：`scripts/lib/qa-portal-routing.mjs` 為 ID／分類唯一映射、`scripts/build.mjs` 只在 QA 生成文字入口且更新搜尋索引，`src/assets/css/main.css` 限定新文字列樣式；QA、WebKit 測試新增必要斷言。
+- 文章與八索引、已驗收的手機桌機畫面、六筆活動及全站小日曆都不更動；preview／production 無新資料，原始 release-approvals.json 不得修改。
+- **這一階段尚未公開 QA 部署或合併 main**；先跑 CI，通過後依站主確認的發佈流程處理，不可宣稱網頁已變動。
+
 ## 最新權威狀態｜2026-10-16（優先於下方歷史工作紀錄）
 
 **本輪手機與電腦功能已驗收通過，公開 QA 部署完成，工程已合併 main。不要因下方舊紀錄的「尚未部署／等待驗收」而重做或撤回已完成工作。**

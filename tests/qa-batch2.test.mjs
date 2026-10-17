@@ -250,11 +250,46 @@ if (!learningQa.includes('id="events-title"') || !learningQa.includes('id="notic
 // 次要參考：12 個長期官方查詢入口（資料與連結不變）
 const actItems = [...actHtml.matchAll(/<li class="act-item" id="([^"]+)">\s*<a class="act-name" href="([^"]+)" target="_blank" rel="noopener noreferrer">/g)];
 if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal') || actItems.length !== 12) actProblems.push(`長期官方查詢入口應維持 12 筆（資料 ${acts.items.length}／頁面 ${actItems.length}）`);
+const portalCategory = {
+  'act-01': 'career', 'act-02': 'career', 'act-03': 'career',
+  'act-04': 'life-family', 'act-05': 'law', 'act-06': 'health',
+  'act-07': 'health', 'act-08': 'life-family', 'act-09': 'learning',
+  'act-10': 'learning', 'act-11': 'learning', 'act-12': 'learning',
+};
 for (const it of acts.items) {
   if (!actItems.some((m) => m[1] === it.id && m[2] === it.url.replace(/&/g, '&amp;'))) actProblems.push(`${it.id} 缺少或連結錯誤`);
-  if (!idx.includes(`activities.html#${it.id}`)) actProblems.push(`${it.id} 不在搜尋索引`);
+  const routed = it.id === 'act-09' ? 'learning.html#res-open-culture-events' : `${portalCategory[it.id]}.html#portal-${it.id}`;
+  if (!idx.includes(`"url":"${routed}"`)) actProblems.push(`${it.id} 搜尋沒有連到所屬主題`);
 }
 if ((actHtml.match(/<h3 id="act-group-\d">/g) || []).length !== acts.groups.length) actProblems.push('查詢入口主題標題數不符');
+// 站主的去重原則：網址完全相同沿用原卡補一句，其他 11 筆不同網址各自是文字入口。
+for (const it of acts.items) {
+  const category = portalCategory[it.id];
+  const html = await read(QA, category + '.html');
+  if (it.id === 'act-09') {
+    if (html.includes('id="portal-act-09"') || !html.includes('id="res-open-culture-events"') ||
+        !html.includes('也能從此入口查詢展演、講座')) actProblems.push('文化部同網址未沿用原卡');
+  } else {
+    const open = '<li id="portal-' + it.id + '">';
+    const start = html.indexOf(open);
+    const row = start < 0 ? '' : html.slice(start, html.indexOf('</li>', start) + 5);
+    if (!row.includes('href="' + it.url.replace(/&/g, '&amp;') + '"') ||
+        !row.includes(it.region) || !row.includes('未核准測試內容')) {
+      actProblems.push(it.id + ' 官方短文字入口網址、地區或 QA 標示缺漏');
+    }
+  }
+}
+for (const category of ['life-family', 'career', 'health', 'law', 'learning']) {
+  const html = await read(QA, category + '.html');
+  const slugs = [...html.matchAll(/<li id="portal-(act-\d+)">/g)].map(m => m[1]);
+  const expected = acts.items.filter(it => it.id !== 'act-09' && portalCategory[it.id] === category).map(it => it.id);
+  if (JSON.stringify(slugs) !== JSON.stringify(expected)) actProblems.push(category + ' 入口未全部顯示或順序錯誤');
+}
+if ((await read(QA, 'city.html')).includes('class="qa-portal-section"')) actProblems.push('城市分類不應出現不合適的入口');
+for (const folder of ['dist','dist-production']) {
+  if ((await read(path.join(ROOT,folder), 'learning.html')).includes('class="qa-portal-section"'))
+    actProblems.push(folder + ' 不得出現 QA 官方入口');
+}
 // 全站 QA 提示列維持 a49b80a 原文，不因活動頁而改（活動頁自己的說明放在頁首）
 const qaBarText = (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(actHtml) || [])[1] || '';
 if (qaBarText !== (/<div class="preview-bar qa-bar" role="note">([^<]*)<\/div>/.exec(qp) || [])[1] || qaBarText.includes('活動')) actProblems.push('QA 提示列被改動');
@@ -589,13 +624,21 @@ try {
   check('過期活動：模擬臺灣時間 2027-02-01 時只隱藏已結束的科學節與國圖講座；2027-07-26 時全部隱藏並顯示「目前沒有」說明；搜尋也找不到已結束活動', expiry.length === 0, expiry.join('；'));
 
   const searchAct = [];
-  for (const kw of ['lecture', '職訓', '國家圖書館', '科學節', '書展']) {
+  const expectedSearch = [
+    ['lecture', 'learning.html#portal-act-10'],
+    ['職訓', 'career.html#portal-act-01'],
+    ['國家圖書館', 'learning.html#portal-act-10'],
+    ['科學節', 'activities.html#notice-taiwan-science-festival-2026'],
+    ['書展', 'activities.html#notice-tibe-2027'],
+  ];
+  for (const [kw, href] of expectedSearch) {
     await page.goto(`${ORIGIN}${BASE}search.html`);
     await page.fill('[data-search] input', kw);
     await page.waitForTimeout(150);
-    if (!(await page.locator('[data-search] a[href*="activities.html"]').count())) searchAct.push(`搜尋「${kw}」找不到活動頁項目`);
+    if (!(await page.locator(`[data-search] a[href="${href}"]`).count()))
+      searchAct.push(`搜尋「${kw}」找不到對應官方入口 ${href}`);
   }
-  check('搜尋 lecture／職訓／國家圖書館／科學節／書展 可找到活動頁項目', searchAct.length === 0, searchAct.join('；'));
+  check('搜尋 lecture／職訓／國家圖書館導向六大主題；科學節／書展仍導向活動公告', searchAct.length === 0, searchAct.join('；'));
 
   // 讀利專欄：點「從你想了解的事開始 ↓」跳到既有 START HERE 區塊，標題不被固定頁首遮住（320／375／390px）
   const jumpProblems = [];
