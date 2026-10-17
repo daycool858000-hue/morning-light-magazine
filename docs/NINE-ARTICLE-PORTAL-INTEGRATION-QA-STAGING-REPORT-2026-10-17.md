@@ -64,6 +64,8 @@
 | 海外逾時／受阻 | 1 | A2 `familyedu.moe.gov.tw/faqList.aspx?pid=1071&uid=1072`：美國 runner 逾時；臺灣 iPhone 曾驗收可正常開啟家庭教育資源網，**不刪除、不替換** |
 | 真正失效 | 0 | — |
 
+**本分支新版檢查器重跑（run `38992645473` success）**：23 個網址＝正常開啟 20、下載型 1（exp-12 PDF：HTTP 200、application/pdf、約 3,022 KB）、海外逾時／受阻 2（A2 familyedu 逾時；**B4 第二筆 `moj.gov.tw/2204/2473/2492/11362/` 回 200 但標題「Error」**，前次正常）、真正失效 0。B4 第二筆是原稿標「歷史參考」的次要來源，主要依據的經濟部原文正常開啟；不刪除、不替換，請在臺灣網路再確認。活動頁組 18 筆＝正常 17、familyedu 逾時 1。
+
 **舊版檢查器即使有未開啟網址仍 exit 0，所以該 run 的 success 不代表 23 個網址全部通過。** 本輪修正 `scripts/check-links-browser.mjs`：
 - 每筆標示 ✔ 正常開啟／⇩ 下載型連結／… 海外逾時或受阻／✘ 真正失效，結尾列四類數量。
 - 下載型連結改用 HTTP 讀取狀態、檔案類型與大小（不輸出內容）。
@@ -83,7 +85,9 @@
 | `tests/qa-expansion-nine.test.mjs` | 九篇 45 篇整合暫存（見下） | ✔ 9／9 |
 | WebKit（`test:webkit`、`test:webkit-qa`、九篇測試的 WebKit 段） | Safari 模擬 | 由 CI 執行（本機無 WebKit） |
 
-本機 `npm test` 合計 **133 項全部通過（exit 0）**。CI 結果見草稿 PR。
+本機 `npm test` 合計 **133 項全部通過（exit 0）**。
+
+**CI（提交 `8f99457`）**：push `38992640310` success、pull_request `38992663319` success。CI 的 `npm test` 另含九篇測試的 WebKit 段（九篇測試 10／10），加上 `test:webkit` 15／15、`test:webkit-qa` 28／28，CI 合計 **177 項全部通過**。
 
 `qa-expansion-nine.test.mjs` 涵蓋：
 1. 九篇正文與最新原稿逐行一致（A1／A2 第三輪、A4／B4／B5 第二輪、exp 四篇 V2），並確認 A1「非政府網域」標示、B4「自行訂製服裝」與「2023 年 5 月 18 日生效」原樣出現。
@@ -114,5 +118,5 @@
 **下一步（全部需站主或 ChatGPT 先確認）**：
 1. ChatGPT 獨立驗收本暫存與截圖。
 2. 站主試讀並明確同意後，才把正式佇列對應文章改為 `source-checked`／`importToQa: true`；部署公開 QA 另行同意。
-3. 臺灣 iPhone 實際開啟 exp-12 PDF 下載與 A2 家庭教育資源網。
+3. 臺灣 iPhone 實際開啟 exp-12 PDF 下載、A2 家庭教育資源網與 B4 第二筆法務部歷史參考頁。
 4. 若要合併 PR #11 與本分支，先核對城市研究新增檔與 CLAUDE.md。

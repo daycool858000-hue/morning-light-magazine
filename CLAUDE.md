@@ -52,13 +52,13 @@
 
 ## 最新權威狀態｜2026-10-17 九篇全部進暫存（45 篇）更正版（本節最新，優先於以下所有段落）
 
-**工程分支 `claude/nine-articles-portal-qa-6i6jys`（承接 PR #13 `52685ab`），草稿 PR 見下方。未部署 GitHub Pages、未合併 main、未修改 `content/release-approvals.json`、正式匯入佇列 `docs/QA-EXPANSION-IMPORT-QUEUE.json` 九篇全部仍 `importToQa: false`／`pending`。全部查核為 AI（Claude＋ChatGPT）完成，不是站主審閱；CI 成功不等於內容核准。**
+**工程分支 `claude/nine-articles-portal-qa-6i6jys`（承接 PR #13 `52685ab`），草稿 PR #14。未部署 GitHub Pages、未合併 main、未修改 `content/release-approvals.json`、正式匯入佇列 `docs/QA-EXPANSION-IMPORT-QUEUE.json` 九篇全部仍 `importToQa: false`／`pending`。全部查核為 AI（Claude＋ChatGPT）完成，不是站主審閱；CI 成功不等於內容核准。**
 
 - **來源查核更正**：ChatGPT 直接開啟官方原文的獨立複核（`docs/EXPANSION-A1-B5-B4-INDEPENDENT-PRIMARY-SOURCE-RECHECK-2026-10-17.md`，編輯分支 `d5fe0ae`／`1190f1e`）推翻 PR #13 對 A1、B5 的待修判斷與對 B4 日期的修改建議：A1 受託團體原頁明載「預定於116年1月」成果發表及展示（屬受託單位預定計畫，不是政府確定開放的一般民眾活動，文章已如此界定）；B5 國教院第 270 期第 2 段確有真實片段錯置的敘述、新聞稿發布單位確為國教署；B4《服飾標示基準》第七點明載 2023-05-18 生效，**原稿日期正確，不改**。`docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md` 已全面改寫，不保留被原文推翻的待修理由。Claude 容器仍無法連外直開原文，紀錄中已誠實註明。
 - **暫存 45 篇**（`docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json`，`stagingOnly`）：讀利 **26**＝原 23＋exp-01、exp-08、**B4**；向光 **19**＝原 13＋exp-11、exp-12、A1、A2、A4、B5。B4 由向光改到讀利（正式佇列 `directory` 同步改，仍未開啟）。六大分類不變；向光八索引與原文章順序不變；桌機向光最後一列 3 張屬正常排列。
 - **同步的編輯版本**：只 cherry-pick PR #11 的 `f8e4f3a`（A1 第三輪 taoyuanwdc 標「非政府網域」）、`7abb900`（B4「自行訂製服裝」）、`d5fe0ae`、`1190f1e`（查核紀錄）。**未同步** PR #11 新增的城市研究（`66f6443` 四縣十筆入口、`02e265e` 22 縣市追蹤表），所以兩分支**不再逐位元組相同**；日後合併須核對城市資料、文章修正與 CLAUDE.md，不得互相覆寫。
-- **連結檢查**（run `38990419022`）：23 個不同網址＝正常開啟 21、下載型 1（exp-12 科教館 PDF）、海外逾時 1（A2 家庭教育資源網，臺灣 iPhone 曾驗收可開，不刪）、真正失效 0。檢查器已改為四類分類並加 `--fail-on-broken`。
-- **測試**：本機 `npm test` 133 項全部通過（Chromium）；CI 另跑 WebKit。截圖 `docs/qa-media/nine-staging-45-2026-10-17/`（A1、A2、A4、B4、B5 文章頁 390／1280px，讀利／向光新增卡片段）。報告 `docs/NINE-ARTICLE-PORTAL-INTEGRATION-QA-STAGING-REPORT-2026-10-17.md`。
+- **連結檢查**：前次 run `38990419022`＝正常 21、下載型 1、海外逾時 1、失效 0。本分支新版四類檢查器重跑 run `38992645473`＝正常 20、下載型 1（exp-12 PDF，HTTP 200、application/pdf、約 3 MB）、海外逾時／受阻 2（A2 familyedu 逾時；B4 第二筆法務部「歷史參考」頁回 200 但標題 Error，前次正常）、真正失效 0。兩筆都不刪除、不替換，待臺灣網路再確認。
+- **測試**：本機 `npm test` 133 項全部通過（Chromium）；CI（提交 `8f99457`）push `38992640310`、pull_request `38992663319` success，含 WebKit 合計 177 項全部通過。草稿 **PR #14**（承接 PR #13，不合併）。截圖 `docs/qa-media/nine-staging-45-2026-10-17/`（A1、A2、A4、B4、B5 文章頁 390／1280px，讀利／向光新增卡片段）。報告 `docs/NINE-ARTICLE-PORTAL-INTEGRATION-QA-STAGING-REPORT-2026-10-17.md`。
 - **下一步：停止，等 ChatGPT 獨立驗收與站主授權。** 站主同意後才開正式佇列、才部署公開 QA；正式發布另走 release-approvals 流程。
 
 ## （已被上一節取代，歷史保留）2026-10-17 九篇文章＋PR #10 入口整合暫存（43 篇版）
