@@ -38,7 +38,10 @@ const categories = await readJson('content/categories.json');
 const counties = await readJson('content/counties.json');
 const resourceData = await readJson('content/resources.json');
 const fixture = await readJson(FIXTURE);
-const realQueue = await readJson(QA_EXPANSION_QUEUE);
+// 歷史暫存安全回歸：在隔離產物中模擬九篇尚未公開；不讀取／修改真實公開QA佇列。
+const LEGACY_QA = 'dist-qa-closed-legacy';
+const LEGACY_QUEUE = 'docs/.qa-expansion-test-closed.generated.json';
+const realQueue = await readJson(LEGACY_QUEUE);
 const BASE = site.basePath;
 
 const results = [];
@@ -66,7 +69,7 @@ check('真實佇列：維持 not-approved，開啟匯入的項目全部已完成
   [...realArticles, ...realResources].every((x) => x.sourceCheck === 'source-checked' && /^\d{4}-\d{2}-\d{2}$/.test(x.sourceCheckedOn) && existsSync(path.join(ROOT, x.sourceCheckRecord || '-'))) &&
   [...realQueue.articles, ...realQueue.resources].every((x) => x.ownerPublicationApproval !== true && x.productionApproved !== true),
   `佇列文章 ${realQueue.articles.length} 篇（開啟 ${realArticles.length}）、資源 ${realQueue.resources.length} 筆（開啟 ${realResources.length}）`);
-const qaFiles = (await readdir(path.join(ROOT, 'dist-qa/articles'))).map((f) => f.replace(/\.html$/, ''));
+const qaFiles = (await readdir(path.join(ROOT, LEGACY_QA, 'articles'))).map((f) => f.replace(/\.html$/, ''));
 const unexpected = qaFiles.filter((s) => s.startsWith('exp-') && !realArticles.some((x) => x.slug === s));
 check('真實佇列：dist-qa 只出現已開啟的擴充文章，未開啟的 22 篇候選不會出現', unexpected.length === 0, unexpected.join('、'));
 
@@ -134,9 +137,9 @@ for (const r of fixture.resources.filter((x) => !x.importToQa)) {
 check('範例佇列：未完成來源查核（pending）的文章與資源完全不出現（文章頁、分類、搜尋皆無）', offLeaks.length === 0, offLeaks.join('；'));
 
 // 讀利／向光：原有 23／13 篇順序不變，只在 directory 指定時接在最後
-const qaQp = await read('dist-qa', 'quiet-power.html');
+const qaQp = await read(LEGACY_QA, 'quiet-power.html');
 const qxQp = await read(OUT, 'quiet-power.html');
-const qaToward = await read('dist-qa', 'toward-light.html');
+const qaToward = await read(LEGACY_QA, 'toward-light.html');
 const qxToward = await read(OUT, 'toward-light.html');
 const readliRe = /<h3><a href="articles\/([^"]+)\.html">/g;
 const towardRe = /<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g;
@@ -186,7 +189,7 @@ check('官方資源：同網址只在原卡補文字（不另建卡、搜尋可�
 const oldSlugs = qaFiles.filter((s) => !s.startsWith('exp-'));
 const changed = [];
 for (const s of oldSlugs) {
-  const a = await read('dist-qa', `articles/${s}.html`);
+  const a = await read(LEGACY_QA, `articles/${s}.html`);
   const b = await read(OUT, `articles/${s}.html`).catch(() => '');
   if (a !== b) changed.push(s);
 }
@@ -194,7 +197,7 @@ check('既有 36 篇：範例匯入後全部保留，文章頁內容與未匯入
 const untouched = [];
 // law.html 也有勞動部卡（同時屬職涯與法律），會一起顯示同網址補充文字，故不列入
 for (const f of ['index.html', 'support.html', 'activities.html', 'search.html', 'health.html']) {
-  if ((await read('dist-qa', f)) !== (await read(OUT, f))) untouched.push(f);
+  if ((await read(LEGACY_QA, f)) !== (await read(OUT, f))) untouched.push(f);
 }
 check('首頁、支援資源、活動頁、搜尋頁及沒有範例內容的主題頁 HTML 與未匯入時完全相同（含全站小日曆）', untouched.length === 0, untouched.join('、'));
 
@@ -243,7 +246,7 @@ for (const m of manifest.newArticles) {
   if (!realQueue.sourceFiles[x.sourceFile]?.stopAt) queueProblems.push(`${m.id} 原稿沒有設定 stopAt`);
 }
 if (expQueue.length !== 12 || expQueue.some((x) => x.sourceFile === V1_FILE) || realQueue.sourceFiles[V1_FILE]) queueProblems.push('佇列仍引用 V1 舊稿');
-if (realQueue.articles.some((x) => x.importToQa !== false || x.sourceCheck !== 'pending') || realQueue.resources.some((x) => x.importToQa !== false || x.sourceCheck !== 'pending')) queueProblems.push('正式佇列有項目被開啟或標成已查核');
+if (realQueue.articles.some((x) => x.importToQa !== false || x.sourceCheck !== 'pending') || realQueue.resources.some((x) => x.importToQa !== false || x.sourceCheck !== 'pending')) queueProblems.push('隔離的歷史基線佇列出現非預期開啟項目');
 check('真實佇列：exp-01～12 全部改讀 2026-10-17 兩份 V2 原稿，標題、編號、分類與 manifest 一致（7 篇改題保留 V1 原標題），22 篇與 13 項資源全部仍為 importToQa=false／pending',
   queueProblems.length === 0 && expQueue.filter((x) => x.originalDraftTitle).length === 7, queueProblems.join('；'));
 
@@ -276,7 +279,7 @@ check('編輯用歸類行解析：編輯對應、建議閱讀入口、建議歸�
 
 // 用真實原稿（12 篇 V2＋原有十篇）在記憶體中全部試開；只供測試，正式佇列檔案不改。
 // sourceCheckRecord 借用既有 docs 檔滿足存在性檢查，不代表任何一篇已完成查核。
-const existingTitles = await Promise.all(oldSlugs.map(async (slug) => ({ slug, title: (/<h1>([^<]+)<\/h1>/.exec(await read('dist-qa', `articles/${slug}.html`)) || [])[1] })));
+const existingTitles = await Promise.all(oldSlugs.map(async (slug) => ({ slug, title: (/<h1>([^<]+)<\/h1>/.exec(await read(LEGACY_QA, `articles/${slug}.html`)) || [])[1] })));
 const realCtx = { ...ctx, existingArticles: existingTitles, queueFile: QA_EXPANSION_QUEUE };
 const trial = JSON.parse(JSON.stringify(realQueue));
 for (const a of trial.articles) Object.assign(a, { importToQa: true, sourceCheck: 'source-checked', sourceCheckedOn: '2026-10-17', sourceCheckRecord: 'docs/QA-EXPANSION-IMPORT-GUIDE-2026-10-16.md' });
