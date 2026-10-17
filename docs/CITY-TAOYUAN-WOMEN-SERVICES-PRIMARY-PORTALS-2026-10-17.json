@@ -1,0 +1,61 @@
+{
+  "title": "《由己》桃園市婦女／地方學習官方來源深度候選",
+  "county": "taoyuan",
+  "reviewedOn": "2026-10-17",
+  "reviewedBy": "ChatGPT（AI）",
+  "status": "official-source-purpose-initial-review",
+  "ownerApproved": false,
+  "published": false,
+  "qaImported": false,
+  "notes": [
+    "同一官方網址只用一個入口；不同 URL 可依用途保留各自簡潔文字連結",
+    "不是逐場活動或電話核准檢查，不代表全部服務都免費或可立即使用",
+    "當期或日期性活動須有明確失效日期，不和長期名錄混在一起"
+  ],
+  "items": [
+    {
+      "id": "ty-women-empowerment-center",
+      "name": "桃園市婦女培力中心｜服務與職涯支持",
+      "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16357&s=1177886&sms=18011",
+      "type": "婦女培力中心官方介紹",
+      "serviceTypes": [
+        "婦女福利",
+        "勞動與就業"
+      ],
+      "purpose": "桃園市政府婦幼發展局說明社福諮詢轉介、技能實作培力與職涯轉銜等服務，另有特定適用對象與優先資格。",
+      "evidence": "市府官方原頁直接可讀；頁面明示設籍或居住桃園市的婦女及服務優先順序，不概稱全國皆適用。",
+      "remaining": "目前每一期課程與是否接受報名需再確認，不能以中心介紹當成當期活動。",
+      "regions": [
+        "taoyuan"
+      ],
+      "sourceAgency": "桃園市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    },
+    {
+      "id": "ty-women-north-south-oct-dec-2026",
+      "name": "桃園市北區、南區婦女中心｜115年10–12月活動公告",
+      "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16342&s=1890721",
+      "type": "具日期有效期的地方活動官方公告",
+      "serviceTypes": [
+        "婦女福利",
+        "教育與學習"
+      ],
+      "purpose": "官方115-10-06 公布桃園北區、南區婦女中心115年10–12月課程與活動的公告入口，包含講座、展覽、女路培力和社團活動，詳細場次在公告附件。",
+      "evidence": "桃園市政府婦幼發展局原頁直接可讀；本次未逐場打開附屬 PDF 及核對剩餘名額。",
+      "remaining": "2026-12-31 後不應作為「近期活動」顯示；每場日期、是否免費、資格與報名以官方附件／主辦單位為準。",
+      "validThrough": "2026-12-31",
+      "timeBound": true,
+      "regions": [
+        "taoyuan"
+      ],
+      "sourceAgency": "桃園市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    }
+  ]
+}

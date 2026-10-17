@@ -17,8 +17,10 @@ import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
 import { loadBatch6Articles } from './lib/qa-batch6.mjs';
 import { loadQaActivities, loadQaNotices } from './lib/qa-activities.mjs';
+import { resolveQaPortalRouting } from './lib/qa-portal-routing.mjs';
 import { loadQaEnglishResources } from './lib/qa-english.mjs';
 import { resolveTowardEditorial, TOWARD_READING_SLUGS } from './lib/toward-light-editorial.mjs';
+import { loadQaExpansion } from './lib/qa-expansion.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -86,6 +88,18 @@ const qaBatch45 = IS_QA ? await loadBatch45Articles(ROOT, categories) : [];
 const qaBatch6 = IS_QA ? await loadBatch6Articles(ROOT, categories) : [];
 const qaActivities = IS_QA ? await loadQaActivities(ROOT) : null;
 const qaNotices = IS_QA ? await loadQaNotices(ROOT) : null;
+// 六大主題擴充（PR #11）：只匯入佇列中已完成來源查核、且明確開啟的單篇或小批內容。
+// QA_EXPANSION_QUEUE 只供自動化測試指定範例佇列；QA 部署工作流程不設定，固定讀 docs/QA-EXPANSION-IMPORT-QUEUE.json。
+const qaExpansion = IS_QA ? await loadQaExpansion(ROOT, {
+  categories, counties, serviceTypes: resourceData.serviceTypes,
+  existingResources: [...resourceData.items, ...qaResources, ...qaBatch3.resources],
+  existingArticles: [...articlesAll, ...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6],
+  queueFile: process.env.QA_EXPANSION_QUEUE,
+}) : { articles: [], entries: [], cityResources: [], supplements: new Map() };
+// 暫存模擬佇列（stagingOnly）只能輸出到獨立資料夾，不可進入公開 QA 部署所用的 dist-qa
+if (qaExpansion.stagingOnly && path.basename(OUT) === 'dist-qa') {
+  throw new Error(`${qaExpansion.queueFile} 是暫存模擬佇列，不可建置到 dist-qa；請用 --out 指定獨立資料夾`);
+}
 const seen = new Set();
 const seenUrls = new Map();
 for (const r of [...resourceData.items, ...qaResources, ...qaBatch3.resources]) {
@@ -137,8 +151,9 @@ const isPublic = (status, published = true) =>
 
 const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
-  : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources];
+  : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources, ...qaExpansion.cityResources];
 const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
+const qaPortalRouting = IS_QA ? resolveQaPortalRouting(qaActivities.items, resources) : { primary: [], reused: [] };
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -148,7 +163,7 @@ const channels = hotlineData.channels.filter((h) => IS_PREVIEW
 const events = eventData.items
   .filter((e) => isPublic(e.status))
   .sort((a, b) => a.startDate.localeCompare(b.startDate));
-const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6]
+const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6, ...qaExpansion.articles]
   .sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
 
 const catById = Object.fromEntries(categories.map((c) => [c.id, c]));
@@ -281,7 +296,7 @@ function resourceCard(r, { anchor = true } = {}) {
     ? `<dt>電話</dt><dd>${r.phones.map((p) => `${esc(p.label)}（服務時間：${esc(p.hours)}）`).join('<br>')}</dd>`
     : '';
   const englishName = r.nameEn ? `<p class="res-title-en" lang="en">${esc(r.nameEn)}</p>` : '';
-  const englishSummary = r.summaryEn ? `<p class="res-summary-en" lang="en">${esc(r.summaryEn)}</p>` : '';
+  const englishSummary = (r.summaryEn ? `<p class="res-summary-en" lang="en">${esc(r.summaryEn)}</p>` : '') + expansionSupplement(r);
   const englishLink = r.officialEnglishUrl && r.officialEnglishUrl !== r.url ? extLink(r.officialEnglishUrl, 'English official information', 'res-english-link') : '';
   return `<article class="res-card"${anchor ? ` id="res-${esc(r.id)}"` : ''} data-res data-regions="${esc(r.regions.join(' '))}" data-types="${esc(r.serviceTypes.join('|'))}">
   <header class="res-head">
@@ -292,7 +307,7 @@ function resourceCard(r, { anchor = true } = {}) {
       <p class="res-types">${r.serviceTypes.map(esc).join('・')}</p>
     </div>
   </header>
-  <p class="res-summary">${esc(r.summary)}</p>
+  <p class="res-summary">${esc(r.summary)}${IS_QA && r.id === 'open-culture-events' ? ' 也能從此入口查詢展演、講座、導覽預約與活動報名，費用及資格依主辦公告。' : ''}</p>
   ${englishSummary}
   <dl class="res-dl">${basicOnly ? '' : `<dt>對象</dt><dd>${esc(r.audience)}</dd>`}<dt>地區</dt><dd>${esc(regionLabel(r.regions))}</dd>${r.entryType ? `<dt>入口類型</dt><dd>${esc(r.entryType)}</dd>` : ''}${r.usage ? `<dt>使用方式</dt><dd class="res-usage">${esc(r.usage)}</dd>` : ''}${phoneInfo}<dt>來源</dt><dd>${r.sources.map((s) => esc(s.title)).join('、')}</dd></dl>
   <footer class="res-foot">
@@ -300,6 +315,27 @@ function resourceCard(r, { anchor = true } = {}) {
     <div class="res-actions">${extLink(r.url, '前往官方網站')}${englishLink}${phones}</div>
   </footer>
 </article>`;
+}
+
+// 擴充佇列中與這張卡片同網址的官方資源：不建第二張卡，只在原卡補一段用途說明。
+function expansionSupplement(r) {
+  const notes = IS_QA ? qaExpansion.supplements.get(r.id) : null;
+  if (!notes?.length) return '';
+  return notes.map((n) => `<p class="res-summary-qa" data-expansion="${esc(n.id)}">補充：${esc(n.text)} <span class="badge badge-qa">未核准測試內容</span></p>`).join('');
+}
+
+// 擴充佇列中網址不同的全國性官方入口：在所屬主題頁以簡潔文字列呈現，不新增大型機構卡。
+function expansionEntries(categoryId) {
+  const items = IS_QA ? qaExpansion.entries.filter((x) => x.category === categoryId) : [];
+  if (!items.length) return '';
+  return `<div class="qa-x-links">
+      <h3 id="qa-x-${esc(categoryId)}-title">更多官方入口</h3>
+      <ul class="qa-x-list">${items.map((x) => `<li id="qa-x-${esc(x.id)}">
+        ${extLink(x.url, esc(x.name), 'qa-x-name')}
+        <p>${esc(x.purpose)}</p>
+        <small>${esc(regionLabel(x.regions))}${x.languages.length ? `｜語言：${esc(x.languages.join('、'))}` : ''}${x.caution ? `｜${esc(x.caution)}` : ''}｜來源查核：${esc(x.checkedOn)} ${qaBadge(x)}</small>
+      </li>`).join('')}</ul>
+    </div>`;
 }
 
 function articleImageId(a) {
@@ -610,7 +646,12 @@ if (IS_QA) {
   pages.push({ file: 'activities.html', html: layout({ title: '近期活動與講座', description: lead, active: 'activities', body, bodyClass: 'activities', scripts: ['assets/js/qa-activities.js'] }) });
   addIndex('頁面', '近期活動與講座', lead, 'activities.html', '活動 講座 課程 研習 展覽 書展 科學節 日曆 activities events lectures workshops courses exhibitions calendar finance career health arts culture library family learning');
   for (const n of notices) searchIndex.push({ type: '活動消息', title: n.title, text: `${n.dateLabel}｜${n.organizer}｜${n.region}`, url: `activities.html#${n.id}`, keywords: `${n.category} ${n.typeLabel} 活動 講座 展覽`, until: n.visibleUntil, order: order++ });
-  for (const it of items) addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, `activities.html#${it.id}`, `${it.group} 官方查詢入口 ${it.region} ${it.keywordsEn || ''}`);
+  for (const it of items) {
+    const reused = qaPortalRouting.reused.find((r) => r.id === it.id);
+    const category = qaPortalRouting.primary.find((r) => r.id === it.id)?.category;
+    const dest = reused ? `learning.html#res-${reused.existingResourceId}` : `${catById[category].slug}#portal-${it.id}`;
+    addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, dest, `${it.group} 官方查詢入口 ${it.region} ${it.keywordsEn || ''}`);
+  }
 }
 
 // extra：放在支援資源入口正下方的額外內容（目前只有 QA 讀利專欄的「從你想了解的事開始」跳轉）
@@ -641,10 +682,14 @@ const READLI_PRIORITY = [
 ];
 const readliPriority = new Map(READLI_PRIORITY.map((slug, i) => [slug, i]));
 const towardReadingSet = new Set(TOWARD_READING_SLUGS);
-const readliArticles = IS_QA ? articles.filter(a => !towardReadingSet.has(a.slug)).sort((a, b) =>
+// 擴充文章不自動進讀利／向光：只有佇列 directory 明確指定時才接在原有清單之後，原 36 篇順序不變。
+const directoryArticles = articles.filter(a => !a.expansion);
+const readliBase = IS_QA ? directoryArticles.filter(a => !towardReadingSet.has(a.slug)).sort((a, b) =>
   (readliPriority.get(a.slug) ?? Infinity) - (readliPriority.get(b.slug) ?? Infinity)
 ) : articles;
-if (IS_QA && (articles.length !== readliArticles.length + towardReadingSet.size ||
+const readliArticles = [...readliBase, ...qaExpansion.articles.filter(a => a.directory === 'readli')];
+const towardExtra = qaExpansion.articles.filter(a => a.directory === 'toward');
+if (IS_QA && (directoryArticles.length !== readliBase.length + towardReadingSet.size ||
   TOWARD_READING_SLUGS.some(slug => !articles.some(a => a.slug === slug)) ||
   READLI_PRIORITY.some(slug => towardReadingSet.has(slug)))) {
   throw new Error('讀利／向光分流出現缺篇、重複或跨目錄混入');
@@ -718,7 +763,7 @@ ${dirHead(d)}
 <section class="section toward-featured" aria-labelledby="toward-featured-title">
   <div class="wrap">
     ${sectionHead('Explore Reading', 'toward-featured-title', '探索文章', '藝文、公開學習、培訓及創業等文章都可以直接從下方打開閱讀。')}
-    <div class="toward-reading-grid">${editorial.gallery.map((a) => `<article class="toward-reading-card">
+    <div class="toward-reading-grid">${[...editorial.gallery, ...towardExtra].map((a) => `<article class="toward-reading-card">
       <a href="articles/${esc(a.slug)}.html"><span class="toward-reading-kind">${esc(categoryLabel(a.category))}</span><h3>${esc(a.title)}</h3><span class="toward-reading-go">閱讀文章 <span aria-hidden="true">→</span></span></a>
     </article>`).join('\n')}</div>
   </div>
@@ -820,6 +865,24 @@ function articlesSection(list) {
 </section>`;
 }
 
+// 12 筆官方查詢入口已由原始資料判斷相同 URL；同網址的 act-09 沿用既有卡片。
+// 其餘僅提供輕量文字列，不新增與既有機構卡相同的格子。
+function qaPortalSection(category) {
+  if (!IS_QA) return '';
+  const items = qaPortalRouting.primary.filter(it => it.category === category);
+  if (!items.length) return '';
+  return `<section class="section qa-portal-section" aria-labelledby="qa-portals-title">
+  <div class="wrap">
+    ${sectionHead('Official Learning Links', 'qa-portals-title', '更多官方查詢入口', '以下是可以查詢課程或公開活動的原始網站；是否免費、需預約及參加資格，以各主辦單位公告為準。')}
+    <ul class="qa-portal-list">${items.map(it => `<li id="portal-${esc(it.id)}">
+      <a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span aria-hidden="true">↗</span></a>
+      <p>${esc(it.purpose)}</p>
+      <small>${esc(it.region)}｜${esc(it.caution)}　<span class="badge badge-qa">未核准測試內容</span></small>
+    </li>`).join('\n')}</ul>
+  </div>
+</section>`;
+}
+
 // ---------- 四個一般分類頁 ----------
 for (const c of categories) {
   if (c.id === 'city' || c.id === 'learning') continue; // 這兩頁有專屬版面
@@ -838,10 +901,11 @@ ${topicsSection(c)}
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
     ${sectionHead('Official Resources', 'res-title', '官方與正式機構入口', '點擊「前往官方網站」會直接進入原始機構網站。服務內容、資格與時間請以各機構公告為準。')}
-    ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}
+    ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('此主題的官方資源正在查核中，完成後會陸續公開。')}${expansionEntries(c.id)}
   </div>
 </section>
-${IS_QA ? '' : articlesSection(catArticles)}`;
+${IS_QA ? '' : articlesSection(catArticles)}
+${qaPortalSection(c.id)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: c.id, body, bodyClass: `cat-${c.id}` }) });
 }
 
@@ -899,7 +963,7 @@ ${qaBatch6.length ? `<section class="section benefits-intro" aria-labelledby="be
       <div class="empty" id="national-empty" hidden><p>這個服務類型目前沒有已收錄的全國性資源。</p></div>
       <div class="res-grid" id="national-results">
         ${resources.map((r) => resourceCard(r)).join('\n')}
-      </div>
+      </div>${expansionEntries('city')}
     </div>
   </div>
 </section>
@@ -942,10 +1006,11 @@ ${topicsSection(c)}
 <section class="section" aria-labelledby="res-title">
   <div class="wrap">
     ${sectionHead('Official Lists', 'res-title', '官方課程與活動列表入口')}
-    ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}
+    ${catResources.length ? `<div class="res-grid">${catResources.map((r) => resourceCard(r)).join('\n')}</div>` : emptyBox('官方活動列表入口正在查核中。')}${expansionEntries(c.id)}
   </div>
 </section>
-${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}`;
+${!IS_QA && catArticles.length ? articlesSection(catArticles) : ''}
+${qaPortalSection(c.id)}`;
   pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: [IS_QA ? 'assets/js/qa-activities.js' : 'assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
@@ -1112,6 +1177,13 @@ for (const r of resources) {
   const url = cat && cat.id !== 'city' ? `${cat.slug}#res-${r.id}` : r.categories.length ? `city.html#res-${r.id}` : 'support.html';
   addIndex('機構與資源', r.name, [r.summary, r.nameEn || '', r.summaryEn || ''].join(' '), url, IS_PREVIEW ? [r.serviceTypes.join(' '), regionLabel(r.regions), r.audience, r.phones.map((p) => p.number).join(' '), (r.keywordsEn || []).join(' ')].join(' ') : [r.serviceTypes.join(' '), regionLabel(r.regions)].join(' '));
 }
+// 擴充佇列：簡潔文字入口連到主題頁對應列；同網址補充文字併入原卡的搜尋關鍵字。
+for (const x of qaExpansion.entries) {
+  addIndex('機構與資源', x.name, x.purpose, `${catById[x.category].slug}#qa-x-${x.id}`, [regionLabel(x.regions), x.languages.join(' '), '官方入口'].join(' '));
+}
+for (const [id, notes] of qaExpansion.supplements) {
+  for (const entry of searchIndex.filter((e) => e.type === '機構與資源' && e.url.endsWith(`#res-${id}`))) entry.keywords += ` ${notes.map((n) => n.text).join(' ')}`;
+}
 for (const c of counties) {
   addIndex('縣市資源', `${c.name}的生活資源`, `依縣市查詢${c.name}可使用的正式服務據點。`, `city.html#county=${c.id}`, c.area);
 }
@@ -1205,4 +1277,5 @@ const pending = resourceData.items.filter((r) => r.status !== '已確認' && r.s
 const photoMissing = photoData.items.filter((p) => !generated[p.id]).length;
 console.log(`建置完成（${MODE}）：${pages.length} 個頁面 → ${path.relative(ROOT, OUT) || '.'}`);
 console.log(`資源：公開 ${resources.length} 筆／全部 ${resourceData.items.length} 筆${IS_QA ? `（含第二批未核准測試候選 ${qaResources.length} 筆）` : ""}（原人工查核狀態仍待確認 ${pending} 筆，AI 來源查核與作者發布核准另記）；文章 ${articles.length} 篇；活動 ${events.length} 筆`);
+if (IS_QA) console.log(`六大主題擴充佇列（${qaExpansion.queueFile}）：匯入文章 ${qaExpansion.articles.length} 篇、主題頁官方入口 ${qaExpansion.entries.length} 筆、縣市入口 ${qaExpansion.cityResources.length} 筆、同網址補充 ${[...qaExpansion.supplements.values()].flat().length} 筆；未開啟或待查核 ${qaExpansion.pending} 筆不顯示`);
 console.log(`攝影素材：已處理 ${photoData.items.length - photoMissing} 張／清單 ${photoData.items.length} 張（尚缺 ${photoMissing} 張，執行 npm run images 查看清單）`);
