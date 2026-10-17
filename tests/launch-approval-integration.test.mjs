@@ -159,6 +159,25 @@ try {
   assert.ok(!existsSync(path.join(fullOut,'activities.html')),'只有文章批准、不含功能批准時，正式版仍不得顯示活動頁');
   assert.ok(!existsSync(path.join(fullOut,'assets/js/qa-calendar.js')),'只有文章批准不能順便發布日曆');
 
+  // 最後部署的保險絲也要真的測試：精確版本全部存在會放行；缺一組功能則會阻擋。
+  const refreshFingerprints=()=>{
+    for(const script of ['scripts/prepare-launch-article-batch.mjs','scripts/prepare-launch-feature-batch.mjs'])
+      execFileSync(process.execPath,[script],{cwd:root,stdio:'pipe'});
+  };
+  const checkReadiness=()=>{
+    return execFileSync(process.execPath,
+      ['scripts/assert-production-ready.mjs','--out='+path.basename(fullFeaturesOut)],
+      {cwd:root,env:{...process.env,LAUNCH_TEST_ONLY:'1'},stdio:'pipe'}).toString('utf8');
+  };
+  refreshFingerprints();
+  assert.ok(checkReadiness().includes('正式部署硬閘通過'),'備妥44篇及全部功能時應准許正式發布');
+  delete template.approvedFeatures.calendar;
+  await writeFile(file,JSON.stringify(template,null,2)+'\\n');
+  refreshFingerprints();
+  assert.throws(checkReadiness,/./,'少一項功能批准就應停止正式部署');
+  template.approvedFeatures.calendar=sign(snapshotHash(inputs.calendar));
+  await writeFile(file,JSON.stringify(template,null,2)+'\\n');
+
   template.approvedFeatures = {};
   template.approvedArticles = {'batch2-01':sign(chosen.sha256)};
 
@@ -173,5 +192,8 @@ try {
 } finally {
   // 不論成功或失敗都先還原原核准檔；測試產物不部署，不寫回 git。
   await writeFile(file,prior);
+  // 避免把隔離測試的虛擬簽核清單留下成真正的 GitHub Actions 附件。
+  for(const script of ['scripts/prepare-launch-article-batch.mjs','scripts/prepare-launch-feature-batch.mjs'])
+    execFileSync(process.execPath,[script],{cwd:root,stdio:'pipe'});
   await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true}),rm(fullOut,{recursive:true,force:true}),rm(fullFeaturesOut,{recursive:true,force:true}),rm(qaParityOut,{recursive:true,force:true})]);
 }
