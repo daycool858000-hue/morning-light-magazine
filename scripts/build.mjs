@@ -205,7 +205,7 @@ function icon(name, cls = 'icon') {
 const AREAS = ['北部', '中部', '南部', '東部', '離島'];
 // QA 全站小日曆的圖示：直接內嵌，不新增 src/icons 檔案，避免正式版與一般預覽的資產改變。
 const CALENDAR_SVG = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path class="act-cal-dot" d="M8 13.5h2.5v2.5H8z" fill="currentColor" stroke="none"/></svg>';
-const qaBadge = (x) => (x?.qa ? '<span class="badge badge-qa">未核准測試內容</span>' : '');
+const qaBadge = (x) => (IS_QA && x?.qa ? '<span class="badge badge-qa">未核准測試內容</span>' : '');
 const statusBadge = (status) => {
   const map = { 已確認: ['badge-ok', '已確認'], 待確認: ['badge-pending', '待查核'], 需要修正: ['badge-fix', '需要修正'] };
   const [cls, label] = map[status] || ['', status];
@@ -1252,7 +1252,9 @@ for (const a of articles) {
       <h1>${esc(a.title)}</h1>
       ${a.qa ? '' /* 第二批文章的摘要取自正文第一段，頁首不重複顯示 */ : `<p class="lead">${esc(a.summary)}</p>`}
       <p class="article-meta">${a.qa
-        ? `<span>來源查核：${esc(a.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</span>${qaBadge(a)}`
+        ? IS_QA
+          ? `<span>來源查核：${esc(a.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</span>${qaBadge(a)}`
+          : `<span>來源核對：${esc(a.checkedOn)}（AI 協助）</span><span>網站擁有人已同意公開此原稿版本</span>`
         : `<span>發布：${esc(a.published)}</span><span>最後實質更新：${esc(a.updated)}</span>${statusBadge(a.status)}`}</p>
     </div>
   </header>
