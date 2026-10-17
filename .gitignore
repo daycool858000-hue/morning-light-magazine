@@ -9,3 +9,9 @@ dist-qa-expansion/
 qa-preview-url.txt
 dist-qa-staging-first-four/
 dist-qa-staging-nine/
+
+
+# 僅供本地／CI 的歷史未發布模擬，不應提交正式內容檔案
+docs/.qa-expansion-test-closed.generated.json
+
+dist-qa-closed-legacy/
