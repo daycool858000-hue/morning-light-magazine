@@ -580,6 +580,14 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 .topic-links a { display: inline-flex; align-items: center; min-height: 44px; }
 .topic .pending { font-size: 0.85rem; color: var(--muted); margin: 0; }
 
+/* 54主題入口：延續原有直列樣式，補充用途與機關，不新增機構大卡。 */
+.topic-guide-links { display: grid; gap: 3px; }
+.topic-guide-links li { min-width: 0; max-width: 100%; }
+.topic-guide-links a { display: inline-flex; min-height: 44px; flex-wrap: wrap; gap: 4px; align-items: center; max-width: 100%; overflow-wrap: anywhere; }
+.topic-guide-links .topic-guide-purpose { display: block; font-size: 0.82rem; line-height: 1.7; color: var(--muted); overflow-wrap: anywhere; }
+.topic .topic-guide-caution { margin: 9px 0 0; font-size: 0.8rem; line-height: 1.65; color: var(--muted); overflow-wrap: anywhere; }
+
+
 /* ---------- 一般頁首（說明頁、文章、搜尋、求助） ---------- */
 .page-head { padding-block: clamp(36px, 6vw, 72px) clamp(24px, 4vw, 40px); border-bottom: 1px solid var(--line); background: var(--paper); }
 .page-head h1 { max-width: 20em; }
