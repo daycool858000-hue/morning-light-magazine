@@ -282,6 +282,8 @@ check('編輯用歸類行解析：編輯對應、建議閱讀入口、建議歸�
 const existingTitles = await Promise.all(oldSlugs.map(async (slug) => ({ slug, title: (/<h1>([^<]+)<\/h1>/.exec(await read(LEGACY_QA, `articles/${slug}.html`)) || [])[1] })));
 const realCtx = { ...ctx, existingArticles: existingTitles, queueFile: QA_EXPANSION_QUEUE };
 const trial = JSON.parse(JSON.stringify(realQueue));
+// 僅記憶體解析試跑：站主撤稿（qaWithdrawal）的原稿仍保留在 docs/，一併檢查解析；不代表重新匯入
+for (const a of trial.articles) delete a.qaWithdrawal;
 for (const a of trial.articles) Object.assign(a, { importToQa: true, sourceCheck: 'source-checked', sourceCheckedOn: '2026-10-17', sourceCheckRecord: 'docs/QA-EXPANSION-IMPORT-GUIDE-2026-10-16.md' });
 let trialResult = null;
 let trialError = '';
