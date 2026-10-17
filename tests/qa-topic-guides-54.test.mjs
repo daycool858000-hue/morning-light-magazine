@@ -32,7 +32,7 @@ check('連結有機關名稱、實際用途與原始HTTPS網址',data.topics.eve
  t.links.every(l=>/^https:\/\//.test(l.url)&&l.name&&l.agency&&l.purpose)));
 check('只對容易混淆的12項加一句',data.topics.filter(t=>t.clarification).length===12);
 const modes=data.topics.reduce((o,t)=>(o[t.displayMode]=(o[t.displayMode]||0)+1,o),{});
-check('保留14項已可用入口，修補39項，孕產僅作獨立候選',modes.keep===14&&modes.replace===39&&modes.supplement===1);
+check('已設置的15個入口原樣保留（包含PR15另行處理的孕產），只修補39項',modes.keep===15&&modes.replace===39&&!modes.supplement);
 
 let guard=false;
 try{execFileSync(process.execPath,['scripts/build.mjs','--mode=qa','--out=dist-qa'],{
@@ -50,7 +50,7 @@ for(const cat of cats){
  const candidate=await read('dist-qa-topic54/'+cat.id+'.html');
  check(cat.title+'所有原有錨點及主題說明仍在',cat.topics.every(t=>
  candidate.includes('id="'+t.id+'"')&&candidate.includes('<p>'+escape(t.text)+'</p>')));
- check(cat.title+'修補後無空白主題',!candidate.includes('<p class="pending">官方入口整理與查核中。</p>'));
+ check(cat.title+'39項待補主題不再顯示空白；孕產交由PR15避免重複',cat.topics.filter(t=>t.id!=='pregnancy').every(t=>!topicArea(candidate,t.id).includes('官方入口整理與查核中')));
  for (const t of cat.topics){
   const row=guidemap[t.id],before=topicArea(current,t.id),after=topicArea(candidate,t.id);
   if(row.displayMode==='keep'){
@@ -72,8 +72,8 @@ for(const cat of cats){
   repaired++;
  }
 }
-check('14個已合適的入口原HTML片段完全不變',preserved===14);
-check('40個有問題／空白入口有補充，原用戶文案不被覆寫',repaired===40 && shownLinks>=40);
+check('15個原有入口原HTML片段完全不變',preserved===15);
+check('39個有問題／空白入口已補精確網址，原文案保留',repaired===39 && shownLinks>=39);
 check('12條必要提醒只出現在修補主題',notes<=12 && notes>=10);
 const old=(await readdir(path.join(ROOT,'dist-qa/articles'))).filter(x=>x.endsWith('.html')).sort();
 const now=(await readdir(path.join(ROOT,'dist-qa-topic54/articles'))).filter(x=>x.endsWith('.html')).sort();
