@@ -607,6 +607,12 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 .preg-next { padding-top: 10px; border-top: 1px solid var(--line); }
 .preg-closing { font-size: 0.85rem; line-height: 1.7; color: var(--muted); margin: 8px 0 0; padding: 14px 16px; background: var(--sand); border-radius: var(--radius-sm); }
 
+/* 54 主題官方連結：僅在隔離 staging 有資料時產生。 */
+.topic-guide-links { display: flex; flex-wrap: wrap; gap: 0 14px; }
+.topic-guide-links li { min-width: 0; max-width: 100%; }
+.topic-guide-links a { display: inline-flex; align-items: center; gap: 3px; max-width: 100%; min-height: 44px; overflow-wrap: anywhere; }
+.topic .topic-guide-clarification { margin: 6px 0 0; font-size: 0.82rem; line-height: 1.65; color: var(--muted); overflow-wrap: anywhere; }
+
 /* ---------- 一般頁首（說明頁、文章、搜尋、求助） ---------- */
 .page-head { padding-block: clamp(36px, 6vw, 72px) clamp(24px, 4vw, 40px); border-bottom: 1px solid var(--line); background: var(--paper); }
 .page-head h1 { max-width: 20em; }

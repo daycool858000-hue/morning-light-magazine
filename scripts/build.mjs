@@ -22,6 +22,7 @@ import { loadQaEnglishResources } from './lib/qa-english.mjs';
 import { resolveTowardEditorial, TOWARD_READING_SLUGS } from './lib/toward-light-editorial.mjs';
 import { loadQaExpansion } from './lib/qa-expansion.mjs';
 import { loadQaPregnancyGuide } from './lib/qa-pregnancy-guide.mjs';
+import { loadQaTopicGuides } from './lib/qa-topic-guides.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(
@@ -35,6 +36,11 @@ const IS_QA = MODE === 'qa';
 const OUT = path.resolve(ROOT, args.out || (IS_QA ? 'dist-qa' : 'dist'));
 // qa 是 preview 的延伸：與預覽版相同的顯示規則，再加上未核准的第二批候選內容
 const IS_PREVIEW = MODE === 'preview' || IS_QA;
+// 站主尚未核准54個新入口進公開 QA：只能建置到獨立staging資料夾。
+const IS_TOPIC_GUIDES_STAGING = IS_QA && process.env.QA_TOPIC_GUIDES_STAGING === '1';
+if (IS_TOPIC_GUIDES_STAGING && ['dist', 'dist-qa', 'dist-production'].includes(path.relative(ROOT, OUT))) {
+  throw new Error('54入口尚未核准公開QA，必須指定獨立staging輸出資料夾');
+}
 // 防呆：測試內容不得輸出到一般預覽或正式版資料夾
 if (IS_QA && ['dist', 'dist-production'].includes(path.relative(ROOT, OUT))) {
   console.error('qa 模式不得輸出到 dist／dist-production，請使用 dist-qa。');
@@ -89,6 +95,7 @@ const qaBatch45 = IS_QA ? await loadBatch45Articles(ROOT, categories) : [];
 const qaBatch6 = IS_QA ? await loadBatch6Articles(ROOT, categories) : [];
 const qaActivities = IS_QA ? await loadQaActivities(ROOT) : null;
 const qaNotices = IS_QA ? await loadQaNotices(ROOT) : null;
+const qaTopicGuides = IS_TOPIC_GUIDES_STAGING ? await loadQaTopicGuides(ROOT, categories) : { byId: {}, count: 0 };
 // 六大主題擴充（PR #11）：只匯入佇列中已完成來源查核、且明確開啟的單篇或小批內容。
 // QA_EXPANSION_QUEUE 只供自動化測試指定範例佇列；QA 部署工作流程不設定，固定讀 docs/QA-EXPANSION-IMPORT-QUEUE.json。
 const qaExpansion = IS_QA ? await loadQaExpansion(ROOT, {
@@ -874,12 +881,28 @@ function topicsSection(c) {
       ${c.topics
         .map((t, i) => {
           const related = resources.filter((r) => r.topics.includes(t.id));
+          // PR #17 懷孕與生育閱讀區優先：主題 01 沿用既有導覽，不受54入口資料覆蓋。
           const guide = qaPregnancyGuide && c.id === qaPregnancyGuide.category && t.id === qaPregnancyGuide.topic ? qaPregnancyGuide : null;
           if (guide) return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(guide.topicText)}</p><p class="topic-guide-link"><a href="#${esc(guide.anchor)}">${esc(guide.topicLinkText)}<span aria-hidden="true">&nbsp;→</span></a></p></div></li>`;
-          const list = related.length
+          const topicGuide = qaTopicGuides.byId[t.id];
+          const existing = related.length
             ? `<ul class="topic-links">${related.map((r) => `<li><a href="#res-${esc(r.id)}">${esc(r.name)}</a></li>`).join('')}</ul>`
             : `<p class="pending">官方入口整理與查核中。</p>`;
-          return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${list}</div></li>`;
+          // 實際已經有合適連結就保持舊版；只修空白及連結不精確的主題。
+          const minimalLinks = topicGuide && topicGuide.displayMode !== 'keep'
+            ? `<ul class="topic-links topic-guide-links">${topicGuide.links.map((link) => `<li>
+              <a href="${esc(link.url)}" target="_blank" rel="noopener noreferrer">${esc(link.name)}<span aria-hidden="true"> ↗</span></a>
+            </li>`).join('')}</ul>`
+            : '';
+          // 有既有機構卡的主題，保留原站內錨點，再補原頁連結；不讓54入口候選消掉舊導覽。
+          const list = !topicGuide || topicGuide.displayMode === 'keep'
+            ? existing
+            : related.length
+              ? existing + minimalLinks
+              : minimalLinks;
+          const clarification = topicGuide?.clarification
+            ? `<p class="topic-guide-clarification">${esc(topicGuide.clarification)}</p>` : '';
+          return `<li class="topic" id="${esc(t.id)}"><span class="topic-no">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${list}${clarification}</div></li>`;
         })
         .join('\n')}
     </ol>

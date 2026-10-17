@@ -28,7 +28,7 @@ jobs:
         run: npm test
       - name: 使用 WebKit 模擬 Safari 進行手機功能與版面驗收
         run: npm run test:webkit
-      - name: 使用 WebKit 模擬 Safari 檢查 QA 測試版新增功能（讀利跳轉、向光索引、城市福利、孕期與生育閱讀區）
+      - name: 使用 WebKit 模擬 Safari 檢查 QA 測試版新增功能（讀利跳轉、向望索引、城市福利、孕期與生育閱讀區、54主題入口 staging）
         run: npm run test:webkit-qa
       - name: 保存孕期與生育閱讀區 Chromium／WebKit 320／375／390／1280px 截圖（14 天，只供驗收）
         if: always()
@@ -55,7 +55,7 @@ jobs:
           npm ci
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium webkit
-      - name: 小日曆不遮擋文章、主題頁、官方連結、搜尋結果、讀利、向光與懷孕生育閱讀區
+      - name: 小日曆不遮擋文章、主題頁、官方連結、搜尋結果、讀利、向望、懷孕生育閱讀區與54主題入口 staging
         run: npm run test:calendar
       - name: 保存小日曆避讓截圖（14 天，只供驗收）
         if: always()
