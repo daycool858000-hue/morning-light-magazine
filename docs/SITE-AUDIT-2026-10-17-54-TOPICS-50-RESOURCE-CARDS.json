@@ -1,0 +1,2600 @@
+{
+  "asOf": "2026-10-17 Taiwan",
+  "baseQA": "qa/public-nine-articles-20261017",
+  "editorialSource": "editorial/youji-full-six-topics-expansion-20261016",
+  "staging": "PR #16 draft SHA 4e402634cf; all CI success run 39006712751; no public QA deployment",
+  "stats": {
+    "topics": 54,
+    "emptyInDeployedQA": 17,
+    "basicCards": 18,
+    "qaCountyCards": 23,
+    "qaOpenCards": 9,
+    "approvedBasic": 16,
+    "basicNotApproved": [
+      "mohw-sps",
+      "sfaa"
+    ],
+    "duplicateFullUrlsAcross50": [],
+    "proposalModes": {
+      "keep": 11,
+      "replace": 39,
+      "supplement": 4
+    },
+    "proposedNotes": 12
+  },
+  "topics54": [
+    {
+      "id": "pregnancy",
+      "title": "懷孕與生育相關福利",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing-planned",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": true
+      }
+    },
+    {
+      "id": "childcare",
+      "title": "育兒津貼",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部社會及家庭署",
+            "url": "https://www.sfaa.gov.tw/",
+            "id": "sfaa"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "未滿2歲育兒津貼線上申辦與資訊",
+            "agency": "衛福部社會及家庭署",
+            "url": "https://twbaby.sfaa.gov.tw/home/index",
+            "purpose": "查閱未滿2歲育兒津貼申請方式，必要時前往政府正式申辦系統。"
+          }
+        ],
+        "shortClarification": "育兒津貼與托育補助是不同制度，請依孩子年齡及照顧方式查詢。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "daycare",
+      "title": "托育與幼兒照顧",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部社會及家庭署",
+            "url": "https://www.sfaa.gov.tw/",
+            "id": "sfaa"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "全國公共托嬰中心與托育家園查詢整理",
+            "agency": "我的E政府（衛福部及地方政府資料）",
+            "url": "https://www.gov.tw/News_Content_26_877023",
+            "purpose": "列各縣市公共托嬰與托育家園官方入口及報名查詢方式。"
+          }
+        ],
+        "shortClarification": "查得到托育據點，不代表有名額或已符合補助資格。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "parenting",
+      "title": "親職教育",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "各縣市家庭教育中心與學習資源",
+            "agency": "教育部家庭教育資源網",
+            "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+            "purpose": "由網站選擇所在地的家庭教育中心或社會大眾學習資源。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "single-parent",
+      "title": "單親家庭支持",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部社會及家庭署",
+            "url": "https://www.sfaa.gov.tw/",
+            "id": "sfaa"
+          },
+          {
+            "name": "勵馨基金會",
+            "url": "https://www.goh.org.tw/",
+            "id": "goh"
+          }
+        ],
+        "classification": "partial",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "supplement",
+        "proposedLinks": [
+          {
+            "name": "單親與特殊境遇家庭扶助整理",
+            "agency": "我的E政府（各地方政府）",
+            "url": "https://www.gov.tw/News_Content_26_694361",
+            "purpose": "對照各縣市相關福利及申辦入口，另有全國社福中心名錄。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "special-circumstances",
+      "title": "特殊境遇家庭扶助",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部社會及家庭署",
+            "url": "https://www.sfaa.gov.tw/",
+            "id": "sfaa"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "特殊境遇家庭扶助與各縣市申請窗口",
+            "agency": "我的E政府（各地方政府）",
+            "url": "https://www.gov.tw/News_Content_26_694361",
+            "purpose": "查詢扶助類型、申請資料及各縣市正式入口。"
+          }
+        ],
+        "shortClarification": "單親家庭不一定符合「特殊境遇家庭扶助」的法定條件。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "family-finance",
+      "title": "家庭經濟與福利資源",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部 113 保護專線",
+            "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+            "id": "mohw-113"
+          },
+          {
+            "name": "衛生福利部",
+            "url": "https://www.mohw.gov.tw/",
+            "id": "mohw"
+          },
+          {
+            "name": "衛生福利部社會及家庭署",
+            "url": "https://www.sfaa.gov.tw/",
+            "id": "sfaa"
+          },
+          {
+            "name": "我的E政府",
+            "url": "https://www.gov.tw/",
+            "id": "gov-tw"
+          }
+        ],
+        "classification": "mismatch",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "急難救助與地方申請方法",
+            "agency": "衛生福利部",
+            "url": "https://www.mohw.gov.tw/cp-190-226-1.html",
+            "purpose": "查突發變故的救助制度、地方申請管道及1957福利諮詢專線。"
+          }
+        ],
+        "shortClarification": "急難救助與家庭一般補助分屬不同制度。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "long-term-care",
+      "title": "長照與家庭照顧者支持",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部",
+            "url": "https://www.mohw.gov.tw/",
+            "id": "mohw"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "如何申請長照服務",
+            "agency": "衛福部長照專區",
+            "url": "https://1966.gov.tw/LTC/cp-6533-70777-207.html",
+            "purpose": "查1966申請方式、照管評估、擬定計畫及各類服務。"
+          },
+          {
+            "name": "家庭照顧者支持服務",
+            "agency": "衛福部長照專區",
+            "url": "https://1966.gov.tw/LTC/lp-6455-207.html",
+            "purpose": "了解家照據點、照顧技巧及情緒支持等資訊。"
+          }
+        ],
+        "shortClarification": "長照申請須經正式評估，與家庭照顧者支持服務可分別查詢。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "respite",
+      "title": "喘息服務",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "喘息服務內容與申請流程",
+            "agency": "衛福部長照專區（1966）",
+            "url": "https://1966.gov.tw/LTC/cp-6454-70075-207.html",
+            "purpose": "閱讀三種喘息服務型態，並依居住地向照管中心洽詢評估。"
+          }
+        ],
+        "shortClarification": "喘息服務須依照管評估安排，不保證提出申請即可取得服務。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "local-family",
+      "title": "地方家庭支持資源",
+      "category": "生活與家庭",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "勵馨基金會",
+            "url": "https://www.goh.org.tw/",
+            "id": "goh"
+          }
+        ],
+        "classification": "mismatch",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "全國社會福利服務中心縣市名錄",
+            "agency": "衛生福利部社會安全網",
+            "url": "https://topics.mohw.gov.tw/SS/lp-4528-204.html",
+            "purpose": "依縣市查各區社福中心，並由地方政府確認最新聯絡方式。"
+          }
+        ],
+        "shortClarification": "請依所在縣市確認服務中心，不要用單一民間機構代替各地官方服務。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "job-seeking",
+      "title": "女性求職",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "台灣就業通",
+            "url": "https://www.taiwanjobs.gov.tw/",
+            "id": "taiwanjobs"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "re-employment",
+      "title": "重新就業與二度就業",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "勞動部",
+            "url": "https://www.mol.gov.tw/",
+            "id": "mol"
+          },
+          {
+            "name": "台灣就業通",
+            "url": "https://www.taiwanjobs.gov.tw/",
+            "id": "taiwanjobs"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "2026婦女再就業計畫修正說明",
+            "agency": "勞動部",
+            "url": "https://www.mol.gov.tw/1607/1632/1633/89893/",
+            "purpose": "查婦女再就業獎勵條件、參與方式及2026年度修正方向。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "vocational-training",
+      "title": "職業訓練",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "台灣就業通",
+            "url": "https://www.taiwanjobs.gov.tw/",
+            "id": "taiwanjobs"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "職業訓練整合網課程查詢",
+            "agency": "勞動部勞動力發展署",
+            "url": "https://course.taiwanjobs.gov.tw/course/search-training?kv=default",
+            "purpose": "依地區、職類、開課日期及訓練計畫查班別。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "employment-centers",
+      "title": "就業服務據點",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "台灣就業通",
+            "url": "https://www.taiwanjobs.gov.tw/",
+            "id": "taiwanjobs"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "就業服務據點地圖查詢",
+            "agency": "台灣就業通／勞動部勞動力發展署",
+            "url": "https://job.taiwanjobs.gov.tw/internet/index/service_location_map.aspx",
+            "purpose": "依縣市與據點類型查地址、電話及不同服務。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "entrepreneurship",
+      "title": "女性創業資源",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "經濟部",
+            "url": "https://www.moea.gov.tw/",
+            "id": "moea"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "協助女性創業計畫總覽",
+            "agency": "經濟部中小及新創企業署",
+            "url": "https://www.sme.gov.tw/article-tw-2891-13903",
+            "purpose": "分辨飛雁創業課程、企業輔導及其他支援。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "startup-training",
+      "title": "創業培訓",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "女性創業飛雁計畫｜找課程",
+            "agency": "經濟部中小及新創企業署",
+            "url": "https://www.sme.gov.tw/women/article-women-3327-18767",
+            "purpose": "尋找課程與學習主題，辨別歷史和目前可報名場次。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "startup-guidance",
+      "title": "政府創業輔導",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "經濟部",
+            "url": "https://www.moea.gov.tw/",
+            "id": "moea"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "女性創業輔導資源",
+            "agency": "經濟部中小及新創企業署",
+            "url": "https://www.sme.gov.tw/article-tw-2891-13903",
+            "purpose": "查看女性創業飛雁計畫、加速器及申請對象。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "startup-loans",
+      "title": "創業融資及貸款制度入口",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "經濟部",
+            "url": "https://www.moea.gov.tw/",
+            "id": "moea"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "青年創業貸款制度及申請條件",
+            "agency": "經濟部中小及新創企業署",
+            "url": "https://www.sme.gov.tw/article-tw-2893-13917",
+            "purpose": "查適用年齡、企業設立年限與貸款申請方向。"
+          },
+          {
+            "name": "青年創業貸款最新文件及表單",
+            "agency": "經濟部中小及新創企業署",
+            "url": "https://www.sme.gov.tw/article-tw-2570-4238",
+            "purpose": "查最新貸款要點、FAQ及文件範本。"
+          }
+        ],
+        "shortClarification": "青年創業貸款有年齡、企業等條件，並非所有女性創業者都適用。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "workplace-skills",
+      "title": "職場技能課程",
+      "category": "職涯與創業",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "台灣就業通",
+            "url": "https://www.taiwanjobs.gov.tw/",
+            "id": "taiwanjobs"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "政府職訓課程查詢",
+            "agency": "勞動部勞動力發展署",
+            "url": "https://course.taiwanjobs.gov.tw/course/search-training?kv=default",
+            "purpose": "選在職課程及需要的技能領域，再看個別班別。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "womens-health",
+      "title": "女性身體健康",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部",
+            "url": "https://www.mohw.gov.tw/",
+            "id": "mohw"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "女性子宮頸癌公費篩檢項目",
+            "agency": "衛福部國民健康署",
+            "url": "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=198",
+            "purpose": "查現行公費篩檢對象及項目。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "menstrual",
+      "title": "生理期及婦科衛教",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "經痛的預防保健",
+            "agency": "中國醫藥大學附設醫院（醫療院所衛教）",
+            "url": "https://www.cmuh.cmu.edu.tw/HealthEdus/Detail?no=4982",
+            "purpose": "閱讀經痛常見情形與自我觀察；不是政府法定制度或個別醫囑。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "hormones",
+      "title": "荷爾蒙健康常識",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "更年期荷爾蒙變化與健康照護",
+            "agency": "衛生福利部國民健康署",
+            "url": "https://www.mohw.gov.tw/cp-2704-84238-1.html",
+            "purpose": "閱讀2025年更新的更年期荷爾蒙變化及代謝健康衛教，不當作所有荷爾蒙疾病的診斷依據。"
+          }
+        ],
+        "shortClarification": "本入口目前提供更年期相關衛教，其他荷爾蒙問題應另依症狀向合格醫療院所查詢。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "bodily-autonomy",
+      "title": "身體自主",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "身體界線與親密接觸的尊重（青少年衛教）",
+            "agency": "衛福部國民健康署",
+            "url": "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=4878&pid=18825",
+            "purpose": "閱讀自主同意、表達界線及尊重他人感受的健康教育；原稿主對象為青少年。"
+          },
+          {
+            "name": "醫療知情權與選擇權（法條）",
+            "agency": "法務部全國法規資料庫",
+            "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0020189",
+            "purpose": "查病人自主權利法第4至6條的知情及醫療選擇權；不代表所有身體自主議題。"
+          }
+        ],
+        "shortClarification": "身體界線與醫療知情同意屬於不同情境。此處提供對應的正式原頁，不替任何個案判斷法律權利。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "boundaries",
+      "title": "關係與個人界線",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛福部心快活｜心理健康文章專區",
+            "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+            "id": "open-mind-articles"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "stress",
+      "title": "情緒壓力",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部心理健康司",
+            "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+            "id": "mohw-domhaoh"
+          },
+          {
+            "name": "張老師基金會",
+            "url": "https://www.1980.org.tw/",
+            "id": "1980"
+          },
+          {
+            "name": "衛福部心快活｜心理健康文章專區",
+            "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+            "id": "open-mind-articles"
+          },
+          {
+            "name": "衛福部心快活｜心理健康學習課程",
+            "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+            "id": "open-mind-courses"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "mental-support",
+      "title": "心理健康支持",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部心理健康司",
+            "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+            "id": "mohw-domhaoh"
+          },
+          {
+            "name": "張老師基金會",
+            "url": "https://www.1980.org.tw/",
+            "id": "1980"
+          },
+          {
+            "name": "衛福部心快活｜心理健康學習課程",
+            "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+            "id": "open-mind-courses"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "counseling",
+      "title": "心理諮商及醫療資源",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部心理健康司",
+            "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+            "id": "mohw-domhaoh"
+          },
+          {
+            "name": "青壯世代心理健康支持方案合作機構查詢",
+            "url": "https://sps.mohw.gov.tw/mhs",
+            "id": "mohw-sps"
+          }
+        ],
+        "classification": "access-risk",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "supplement",
+        "proposedLinks": [
+          {
+            "name": "社區心理諮商資源一覽",
+            "agency": "衛福部心理健康司",
+            "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html",
+            "purpose": "按縣市查正式心理諮商與衛生行政窗口。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "support-programs",
+      "title": "正式心理健康支持方案",
+      "category": "身心健康",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "青壯世代心理健康支持方案合作機構查詢",
+            "url": "https://sps.mohw.gov.tw/mhs",
+            "id": "mohw-sps"
+          }
+        ],
+        "classification": "access-risk",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "supplement",
+        "proposedLinks": [
+          {
+            "name": "心理健康促進與支持方案",
+            "agency": "衛福部心理健康司",
+            "url": "https://dep.mohw.gov.tw/domhaoh/np-326-107.html",
+            "purpose": "查青壯世代心理支持方案及相關官方內容。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "gender-equality-work",
+      "title": "性別平等工作法相關權益",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "勞動部",
+            "url": "https://www.mol.gov.tw/",
+            "id": "mol"
+          },
+          {
+            "name": "婦女新知基金會",
+            "url": "https://www.awakening.org.tw/",
+            "id": "awakening"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "性別平等工作法權益整理",
+            "agency": "我的E政府（勞動部資料）",
+            "url": "https://www.gov.tw/News_Content_26_530022",
+            "purpose": "查假別、勞動權益與申訴方向，並連回勞動部原機關。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "workplace-harassment",
+      "title": "職場性騷擾制度",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "職場性騷擾被害人權益與申訴",
+            "agency": "勞動部就業平等網",
+            "url": "https://eeweb.mol.gov.tw/genderZone/harassment_14.html",
+            "purpose": "了解向雇主及地方主管機關提出申訴的情況。"
+          }
+        ],
+        "shortClarification": "職場性騷擾的申訴與一般職場霸凌適用程序不同。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "workplace-bullying",
+      "title": "職場霸凌及勞動爭議",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "勞動部",
+            "url": "https://www.mol.gov.tw/",
+            "id": "mol"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "職場霸凌防治措施準則",
+            "agency": "勞動部勞動法令查詢系統",
+            "url": "https://laws.mol.gov.tw/FLAW/FLAWDOC01.aspx?flno=8&id=FL106701",
+            "purpose": "查霸凌申訴、防治及雇主處理程序規定。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "parental-leave",
+      "title": "產假及育嬰留職停薪",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "勞動部",
+            "url": "https://www.mol.gov.tw/",
+            "id": "mol"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "育嬰留職停薪條件與期間",
+            "agency": "勞動部",
+            "url": "https://www.mol.gov.tw/1607/28690/2282/2284/2320/7371/",
+            "purpose": "查育嬰留停期間、申請方式與2026彈性規則。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "pregnancy-protection",
+      "title": "懷孕相關勞動保障",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "勞動部",
+            "url": "https://www.mol.gov.tw/",
+            "id": "mol"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "懷孕與性別平等工作權益",
+            "agency": "我的E政府（勞動部資料）",
+            "url": "https://www.gov.tw/News_Content_26_530022",
+            "purpose": "查孕期假別與工作保障的官方整理。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "dismissal",
+      "title": "資遣與離職權益",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "勞動部",
+            "url": "https://www.mol.gov.tw/",
+            "id": "mol"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "資遣解僱類型與規定",
+            "agency": "勞動部",
+            "url": "https://www.mol.gov.tw/1607/28162/28296/81778/81784/81912/post",
+            "purpose": "查勞動基準法資遣條件與權益。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "legal-aid",
+      "title": "法律扶助",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "財團法人法律扶助基金會",
+            "url": "https://www.laf.org.tw/",
+            "id": "laf"
+          },
+          {
+            "name": "現代婦女基金會",
+            "url": "https://www.38.org.tw/",
+            "id": "38-org"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "intimate-images",
+      "title": "性影像外流之正式處理資源",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "性影像處理中心",
+            "url": "https://siarc.mohw.gov.tw/",
+            "id": "siarc"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "official-complaints",
+      "title": "官方法律說明與申訴入口",
+      "category": "法律與權益",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "內政部警政署",
+            "url": "https://www.npa.gov.tw/",
+            "id": "npa"
+          },
+          {
+            "name": "行政院消保會｜生活消費Q&A",
+            "url": "https://cpc.ey.gov.tw/Page/98915573CEA4451D",
+            "id": "open-cpc-faq"
+          },
+          {
+            "name": "行政院消保會｜防詐知識專區",
+            "url": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B",
+            "id": "open-cpc-antifraud"
+          },
+          {
+            "name": "警政署婦幼抱抱｜安全宣導與簡易防身影片",
+            "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726",
+            "id": "open-police-selfdefense"
+          }
+        ],
+        "classification": "mismatch",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "消費爭議申訴與調解步驟",
+            "agency": "行政院消費者保護會",
+            "url": "https://appeal.cpc.ey.gov.tw/www/step_explanation.aspx",
+            "purpose": "有購物、服務或預付費爭議時，查消費申訴流程。"
+          },
+          {
+            "name": "職場性騷擾的內外部申訴",
+            "agency": "勞動部就業平等網",
+            "url": "https://eeweb.mol.gov.tw/genderZone/harassment_14.html",
+            "purpose": "職場性騷擾事件依勞動主管機關與雇主程序處理。"
+          }
+        ],
+        "shortClarification": "購物、勞動與人身安全事件應使用不同主管機關的管道。",
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "women-centers",
+      "title": "婦女福利服務中心",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛生福利部社會及家庭署",
+            "url": "https://www.sfaa.gov.tw/",
+            "id": "sfaa"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "高雄市婦女館服務與活動",
+            "agency": "高雄市政府社會局",
+            "url": "https://women.kcg.gov.tw/",
+            "purpose": "查看婦女館的場域使用、女性培力及活動資訊。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "empowerment-centers",
+      "title": "婦女培力中心",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "高雄市婦女館｜培力與公共空間",
+            "agency": "高雄市政府社會局",
+            "url": "https://women.kcg.gov.tw/",
+            "purpose": "了解女性培力課程、展覽及婦女館服務。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "legal-aid-offices",
+      "title": "法律扶助據點",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "法律扶助全國據點",
+            "agency": "法律扶助基金會",
+            "url": "https://www.laf.org.tw/place",
+            "purpose": "按縣市查服務分會、聯絡方式和申請資訊。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "social-affairs",
+      "title": "地方社會局、社會處",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "我的E政府",
+            "url": "https://www.gov.tw/",
+            "id": "gov-tw"
+          },
+          {
+            "name": "基隆市政府社會處",
+            "url": "https://www.klcg.gov.tw/tw/social/",
+            "id": "batch2-keelung-social-affairs"
+          },
+          {
+            "name": "臺北市政府社會局",
+            "url": "https://dosw.gov.taipei/",
+            "id": "batch2-taipei-social-affairs"
+          },
+          {
+            "name": "新北市政府社會局",
+            "url": "https://www.sw.ntpc.gov.tw/index.jsp",
+            "id": "batch2-new-taipei-social-affairs"
+          },
+          {
+            "name": "桃園市政府社會局",
+            "url": "https://sab.tycg.gov.tw/",
+            "id": "batch2-taoyuan-social-affairs"
+          },
+          {
+            "name": "新竹市政府社會處",
+            "url": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0",
+            "id": "batch2-hsinchu-city-social-affairs"
+          },
+          {
+            "name": "新竹縣政府社會處",
+            "url": "https://social.hsinchu.gov.tw/",
+            "id": "batch2-hsinchu-county-social-affairs"
+          },
+          {
+            "name": "宜蘭縣政府社會處",
+            "url": "https://sntroot.e-land.gov.tw/default.aspx",
+            "id": "batch2-yilan-social-affairs"
+          },
+          {
+            "name": "苗栗縣政府社會處",
+            "url": "https://www.miaoli.gov.tw/social_affairs/",
+            "id": "batch2-miaoli-social-affairs"
+          },
+          {
+            "name": "臺中市政府社會局",
+            "url": "https://www.society.taichung.gov.tw/",
+            "id": "batch2-taichung-social-affairs"
+          },
+          {
+            "name": "彰化縣政府社會處",
+            "url": "https://www.chcg.gov.tw/DTO/social/00home/index01.aspx",
+            "id": "batch2-changhua-social-affairs"
+          },
+          {
+            "name": "南投縣政府社會及勞動局社會福利資訊網",
+            "url": "https://welfare.nantou.gov.tw/",
+            "id": "batch2-nantou-social-affairs"
+          },
+          {
+            "name": "雲林縣政府社會處",
+            "url": "https://social.yunlin.gov.tw/Default.aspx",
+            "id": "batch2-yunlin-social-affairs"
+          },
+          {
+            "name": "臺南市政府社會局",
+            "url": "https://sab.tainan.gov.tw/",
+            "id": "batch2-tainan-social-affairs"
+          },
+          {
+            "name": "屏東縣政府社會處",
+            "url": "https://www.pthg.gov.tw/PlanJdp/default.aspx",
+            "id": "batch2-pingtung-social-affairs"
+          },
+          {
+            "name": "花蓮縣政府社會處",
+            "url": "https://sa.hl.gov.tw/",
+            "id": "batch2-hualien-social-affairs"
+          },
+          {
+            "name": "臺東縣政府社會處",
+            "url": "https://ttcd.taitung.gov.tw/",
+            "id": "batch2-taitung-social-affairs"
+          },
+          {
+            "name": "澎湖縣政府社會處",
+            "url": "https://www.penghu.gov.tw/Society/index.jsp",
+            "id": "batch2-penghu-social-affairs"
+          },
+          {
+            "name": "金門縣政府社會處",
+            "url": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36",
+            "id": "batch2-kinmen-social-affairs"
+          },
+          {
+            "name": "嘉義市政府—社福救助與社會處入口",
+            "url": "https://www.chiayi.gov.tw/",
+            "id": "batch2-chiayi-city-welfare-directory"
+          },
+          {
+            "name": "高雄市政府—社會福利服務目錄",
+            "url": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A",
+            "id": "batch2-kaohsiung-welfare-directory"
+          }
+        ],
+        "classification": "partial",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "health-bureaus",
+      "title": "衛生局及心理衛生中心",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "全國社區心理衛生中心通訊錄",
+            "agency": "衛福部心理健康司",
+            "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-7412-70356-107.html",
+            "purpose": "查各縣市社區心理衛生中心所在地與官方附檔。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "labor-offices",
+      "title": "勞動及就業服務據點",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "各縣市政府勞工網站目錄",
+            "agency": "台灣就業通／勞動部勞動力發展署",
+            "url": "https://job.taiwanjobs.gov.tw/Internet/Index/DocDetail.aspx?docid=6649&uk=2759",
+            "purpose": "按縣市開啟地方勞工局處原始網站。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "family-welfare",
+      "title": "育兒與家庭福利",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "衛福部—嘉義縣社會福利服務中心通訊錄",
+            "url": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html",
+            "id": "batch2-chiayi-county-service-center-roster"
+          },
+          {
+            "name": "衛福部—嘉義市社會福利服務中心通訊錄",
+            "url": "https://topics.mohw.gov.tw/SS/cp-4528-48225-204.html",
+            "id": "batch2-chiayi-city-service-center-roster"
+          },
+          {
+            "name": "衛福部—連江縣社會福利服務中心通訊錄",
+            "url": "https://topics.mohw.gov.tw/SS/cp-4528-48205-204.html",
+            "id": "batch2-lienchiang-service-center-roster"
+          }
+        ],
+        "classification": "partial",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "supplement",
+        "proposedLinks": [
+          {
+            "name": "社會福利服務中心全國縣市目錄",
+            "agency": "衛福部社會安全網",
+            "url": "https://topics.mohw.gov.tw/SS/lp-4528-204.html",
+            "purpose": "按居住地查看社福中心及家庭服務轄區。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "ltc-support",
+      "title": "長照支持",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "查詢附近長照服務",
+            "agency": "衛福部長照專區（1966）",
+            "url": "https://1966.gov.tw/LTC/cp-6532-71700-207.html",
+            "purpose": "依需要選擇附近提供長照服務的單位。"
+          },
+          {
+            "name": "全國家庭照顧者支持據點",
+            "agency": "衛福部長照專區（1966）",
+            "url": "https://1966.gov.tw/LTC/cp-6455-86147-207.html",
+            "purpose": "查家照據點、支持與諮詢資源。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "ngo-services",
+      "title": "民間團體正式服務",
+      "category": "城市與福利",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "勵馨基金會服務項目與各地據點",
+            "agency": "勵馨基金會（民間組織）",
+            "url": "https://www.goh.org.tw/services/",
+            "purpose": "按家庭、移住者及性別暴力等實際服務類型查詢，再看各地據點。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "women-center-courses",
+      "title": "婦女中心課程",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "高雄市婦女館｜婦女培力與課程資訊",
+            "agency": "高雄市政府社會局",
+            "url": "https://women.kcg.gov.tw/",
+            "purpose": "由館方正式網站查課程、學習及場地資訊。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "job-training",
+      "title": "就業培訓",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "台灣就業通",
+            "url": "https://www.taiwanjobs.gov.tw/",
+            "id": "taiwanjobs"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "政府職訓分區課程查詢",
+            "agency": "勞動部勞動力發展署",
+            "url": "https://course.taiwanjobs.gov.tw/course/area",
+            "purpose": "依分署與縣市查看班別、課程和報名規定。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "startup-talks",
+      "title": "創業講座",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "女性創業飛雁｜找課程",
+            "agency": "經濟部中小及新創企業署",
+            "url": "https://www.sme.gov.tw/women/article-women-3327-18767",
+            "purpose": "查看創業講座與課程資訊，分清往年活動與當期場次。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "family-education",
+      "title": "家庭教育",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "教育部",
+            "url": "https://www.edu.tw/",
+            "id": "edu"
+          }
+        ],
+        "classification": "overbroad",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "教育部家庭教育網｜各縣市中心",
+            "agency": "教育部",
+            "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+            "purpose": "從地方家庭教育中心選單找公開資料與活動公告。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "parenting-courses",
+      "title": "育兒與親職課程",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [],
+        "classification": "missing",
+        "noSpecificPortal": true
+      },
+      "pr16": {
+        "change": "replace",
+        "proposedLinks": [
+          {
+            "name": "各縣市家庭教育中心與親職學習",
+            "agency": "教育部家庭教育資源網",
+            "url": "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+            "purpose": "依縣市進入家庭教育中心，區分公開教材和當期報名課程。"
+          }
+        ],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "life-skills",
+      "title": "生活技能",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "教育部終身學習資源平臺｜課程與資源查詢",
+            "url": "https://lle.moe.edu.tw/lesson-resource/",
+            "id": "open-learn-directory"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "open-learning",
+      "title": "免費或公開報名的進修活動",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "教育部",
+            "url": "https://www.edu.tw/",
+            "id": "edu"
+          },
+          {
+            "name": "教育部終身學習資源平臺｜課程與資源查詢",
+            "url": "https://lle.moe.edu.tw/lesson-resource/",
+            "id": "open-learn-directory"
+          },
+          {
+            "name": "文化部 iCulture｜藝文活動與文化空間",
+            "url": "https://cloud.culture.tw/",
+            "id": "open-culture-iculture"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    },
+    {
+      "id": "local-events",
+      "title": "地方政府教育及福利活動",
+      "category": "學習與活動",
+      "activePublicQa": {
+        "linkedResources": [
+          {
+            "name": "教育部終身學習資源平臺｜課程與資源查詢",
+            "url": "https://lle.moe.edu.tw/lesson-resource/",
+            "id": "open-learn-directory"
+          },
+          {
+            "name": "文化部 iCulture｜藝文活動與文化空間",
+            "url": "https://cloud.culture.tw/",
+            "id": "open-culture-iculture"
+          },
+          {
+            "name": "文化部藝文活動平台｜展演與導覽",
+            "url": "https://event.culture.tw/",
+            "id": "open-culture-events"
+          }
+        ],
+        "classification": "usable",
+        "noSpecificPortal": false
+      },
+      "pr16": {
+        "change": "keep",
+        "proposedLinks": [],
+        "shortClarification": null,
+        "stillPendingSeparatePR": false
+      }
+    }
+  ],
+  "resources50": [
+    {
+      "id": "npa",
+      "name": "內政部警政署",
+      "url": "https://www.npa.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "official-complaints"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "npa-110-sms",
+      "name": "警政署 110 簡訊報案資訊",
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+      "layer": "basic",
+      "topics": [],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "mohw-113",
+      "name": "衛生福利部 113 保護專線",
+      "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+      "layer": "basic",
+      "topics": [
+        "family-finance"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "mohw",
+      "name": "衛生福利部",
+      "url": "https://www.mohw.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "womens-health",
+        "family-finance",
+        "long-term-care"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "siarc",
+      "name": "性影像處理中心",
+      "url": "https://siarc.mohw.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "intimate-images"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "laf",
+      "name": "財團法人法律扶助基金會",
+      "url": "https://www.laf.org.tw/",
+      "layer": "basic",
+      "topics": [
+        "legal-aid"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "mol",
+      "name": "勞動部",
+      "url": "https://www.mol.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "gender-equality-work",
+        "parental-leave",
+        "workplace-bullying",
+        "pregnancy-protection",
+        "dismissal",
+        "re-employment"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "taiwanjobs",
+      "name": "台灣就業通",
+      "url": "https://www.taiwanjobs.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "job-seeking",
+        "re-employment",
+        "vocational-training",
+        "employment-centers",
+        "job-training",
+        "workplace-skills"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "mohw-domhaoh",
+      "name": "衛生福利部心理健康司",
+      "url": "https://dep.mohw.gov.tw/DOMHAOH/",
+      "layer": "basic",
+      "topics": [
+        "mental-support",
+        "counseling",
+        "stress"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "mohw-sps",
+      "name": "青壯世代心理健康支持方案合作機構查詢",
+      "url": "https://sps.mohw.gov.tw/mhs",
+      "layer": "basic",
+      "topics": [
+        "support-programs",
+        "counseling"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "1980",
+      "name": "張老師基金會",
+      "url": "https://www.1980.org.tw/",
+      "layer": "basic",
+      "topics": [
+        "mental-support",
+        "stress"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "sfaa",
+      "name": "衛生福利部社會及家庭署",
+      "url": "https://www.sfaa.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "childcare",
+        "daycare",
+        "single-parent",
+        "special-circumstances",
+        "family-finance",
+        "women-centers"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "38-org",
+      "name": "現代婦女基金會",
+      "url": "https://www.38.org.tw/",
+      "layer": "basic",
+      "topics": [
+        "legal-aid"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "goh",
+      "name": "勵馨基金會",
+      "url": "https://www.goh.org.tw/",
+      "layer": "basic",
+      "topics": [
+        "single-parent",
+        "local-family"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "awakening",
+      "name": "婦女新知基金會",
+      "url": "https://www.awakening.org.tw/",
+      "layer": "basic",
+      "topics": [
+        "gender-equality-work"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "moea",
+      "name": "經濟部",
+      "url": "https://www.moea.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "entrepreneurship",
+        "startup-guidance",
+        "startup-loans"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "gov-tw",
+      "name": "我的E政府",
+      "url": "https://www.gov.tw/",
+      "layer": "basic",
+      "topics": [
+        "family-finance",
+        "social-affairs"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "edu",
+      "name": "教育部",
+      "url": "https://www.edu.tw/",
+      "layer": "basic",
+      "topics": [
+        "family-education",
+        "open-learning"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": true,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-keelung-social-affairs",
+      "name": "基隆市政府社會處",
+      "url": "https://www.klcg.gov.tw/tw/social/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "keelung"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-taipei-social-affairs",
+      "name": "臺北市政府社會局",
+      "url": "https://dosw.gov.taipei/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taipei"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-new-taipei-social-affairs",
+      "name": "新北市政府社會局",
+      "url": "https://www.sw.ntpc.gov.tw/index.jsp",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "new-taipei"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-taoyuan-social-affairs",
+      "name": "桃園市政府社會局",
+      "url": "https://sab.tycg.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taoyuan"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-hsinchu-city-social-affairs",
+      "name": "新竹市政府社會處",
+      "url": "https://society.hccg.gov.tw/ch/home.jsp?id=1&parentpath=0",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "hsinchu-city"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-hsinchu-county-social-affairs",
+      "name": "新竹縣政府社會處",
+      "url": "https://social.hsinchu.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "hsinchu-county"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-yilan-social-affairs",
+      "name": "宜蘭縣政府社會處",
+      "url": "https://sntroot.e-land.gov.tw/default.aspx",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "yilan"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-miaoli-social-affairs",
+      "name": "苗栗縣政府社會處",
+      "url": "https://www.miaoli.gov.tw/social_affairs/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "miaoli"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-taichung-social-affairs",
+      "name": "臺中市政府社會局",
+      "url": "https://www.society.taichung.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taichung"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-changhua-social-affairs",
+      "name": "彰化縣政府社會處",
+      "url": "https://www.chcg.gov.tw/DTO/social/00home/index01.aspx",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "changhua"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-nantou-social-affairs",
+      "name": "南投縣政府社會及勞動局社會福利資訊網",
+      "url": "https://welfare.nantou.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "nantou"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-yunlin-social-affairs",
+      "name": "雲林縣政府社會處",
+      "url": "https://social.yunlin.gov.tw/Default.aspx",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "yunlin"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-tainan-social-affairs",
+      "name": "臺南市政府社會局",
+      "url": "https://sab.tainan.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "tainan"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-pingtung-social-affairs",
+      "name": "屏東縣政府社會處",
+      "url": "https://www.pthg.gov.tw/PlanJdp/default.aspx",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "pingtung"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-hualien-social-affairs",
+      "name": "花蓮縣政府社會處",
+      "url": "https://sa.hl.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "hualien"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-taitung-social-affairs",
+      "name": "臺東縣政府社會處",
+      "url": "https://ttcd.taitung.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "taitung"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-penghu-social-affairs",
+      "name": "澎湖縣政府社會處",
+      "url": "https://www.penghu.gov.tw/Society/index.jsp",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "penghu"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-kinmen-social-affairs",
+      "name": "金門縣政府社會處",
+      "url": "https://social.kinmen.gov.tw/cp.aspx?n=75656E810C5FCA36",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "kinmen"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-chiayi-city-welfare-directory",
+      "name": "嘉義市政府—社福救助與社會處入口",
+      "url": "https://www.chiayi.gov.tw/",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "chiayi-city"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-kaohsiung-welfare-directory",
+      "name": "高雄市政府—社會福利服務目錄",
+      "url": "https://www.kcg.gov.tw/MainThemeDetail.aspx?eservicemaincategory=80&n=114AAE178CD95D4C&sms=02036FE10C1B5C8A",
+      "layer": "county-official",
+      "topics": [
+        "social-affairs"
+      ],
+      "regions": [
+        "kaohsiung"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-chiayi-county-service-center-roster",
+      "name": "衛福部—嘉義縣社會福利服務中心通訊錄",
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html",
+      "layer": "county-official",
+      "topics": [
+        "family-welfare"
+      ],
+      "regions": [
+        "chiayi-county"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-chiayi-city-service-center-roster",
+      "name": "衛福部—嘉義市社會福利服務中心通訊錄",
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48225-204.html",
+      "layer": "county-official",
+      "topics": [
+        "family-welfare"
+      ],
+      "regions": [
+        "chiayi-city"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "batch2-lienchiang-service-center-roster",
+      "name": "衛福部—連江縣社會福利服務中心通訊錄",
+      "url": "https://topics.mohw.gov.tw/SS/cp-4528-48205-204.html",
+      "layer": "county-official",
+      "topics": [
+        "family-welfare"
+      ],
+      "regions": [
+        "lienchiang"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "official-entry",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-mind-articles",
+      "name": "衛福部心快活｜心理健康文章專區",
+      "url": "https://wellbeing.mohw.gov.tw/nor/pstunt/1",
+      "layer": "open-access",
+      "topics": [
+        "stress",
+        "boundaries"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-mind-courses",
+      "name": "衛福部心快活｜心理健康學習課程",
+      "url": "https://wellbeing.mohw.gov.tw/nor/elearn/8",
+      "layer": "open-access",
+      "topics": [
+        "stress",
+        "mental-support"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-learn-directory",
+      "name": "教育部終身學習資源平臺｜課程與資源查詢",
+      "url": "https://lle.moe.edu.tw/lesson-resource/",
+      "layer": "open-access",
+      "topics": [
+        "open-learning",
+        "life-skills",
+        "local-events"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-culture-iculture",
+      "name": "文化部 iCulture｜藝文活動與文化空間",
+      "url": "https://cloud.culture.tw/",
+      "layer": "open-access",
+      "topics": [
+        "local-events",
+        "open-learning"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-culture-events",
+      "name": "文化部藝文活動平台｜展演與導覽",
+      "url": "https://event.culture.tw/",
+      "layer": "open-access",
+      "topics": [
+        "local-events"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-cpc-faq",
+      "name": "行政院消保會｜生活消費Q&A",
+      "url": "https://cpc.ey.gov.tw/Page/98915573CEA4451D",
+      "layer": "open-access",
+      "topics": [
+        "official-complaints"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-cpc-antifraud",
+      "name": "行政院消保會｜防詐知識專區",
+      "url": "https://cpc.ey.gov.tw/Page/9AA2FA2344D5955B",
+      "layer": "open-access",
+      "topics": [
+        "official-complaints"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-fire-home",
+      "name": "消防署｜住宅防火與居家安全知識",
+      "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=1409",
+      "layer": "open-access",
+      "topics": [],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    },
+    {
+      "id": "open-police-selfdefense",
+      "name": "警政署婦幼抱抱｜安全宣導與簡易防身影片",
+      "url": "https://www.7spc.npa.gov.tw/ch/app/data/view?id=18429&module=publicizearea&serno=fb843779-1950-47d0-ab6d-b33757001726",
+      "layer": "open-access",
+      "topics": [
+        "official-complaints"
+      ],
+      "regions": [
+        "national"
+      ],
+      "originalSourceReview": "2026-10-15",
+      "reviewClass": "QA editorial candidate",
+      "formalApprovedSnapshot": false,
+      "state": "待確認",
+      "availableInPublicQa": true
+    }
+  ],
+  "hotlines": [
+    {
+      "id": "110",
+      "title": "警察緊急報案",
+      "tel": "110",
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=1048&serno=e3ad2889-4dee-41cf-aef8-9b9d26dc6950",
+      "reviewDate": "2026-10-15",
+      "sourceStatus": "待確認",
+      "scope": "專線號碼、用途、官方來源及服務時間",
+      "ownerApproved": true
+    },
+    {
+      "id": "119",
+      "title": "消防與緊急救護",
+      "tel": "119",
+      "url": "https://www.nfa.gov.tw/cht/index.php?code=list&ids=66",
+      "reviewDate": "2026-10-15",
+      "sourceStatus": "待確認",
+      "scope": "專線號碼、用途、官方來源及服務時間",
+      "ownerApproved": true
+    },
+    {
+      "id": "113",
+      "title": "保護專線",
+      "tel": "113",
+      "url": "https://dep.mohw.gov.tw/DOPs/cp-1183-6499-105.html",
+      "reviewDate": "2026-10-15",
+      "sourceStatus": "待確認",
+      "scope": "專線號碼、用途、官方來源及服務時間",
+      "ownerApproved": true
+    },
+    {
+      "id": "1925",
+      "title": "安心專線",
+      "tel": "1925",
+      "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-4906-54077-107.html",
+      "reviewDate": "2026-10-15",
+      "sourceStatus": "待確認",
+      "scope": "專線號碼、用途、官方來源及服務時間",
+      "ownerApproved": true
+    }
+  ],
+  "otherChannels": [
+    {
+      "id": "sms-110",
+      "title": "110 簡訊報案（聽語障人士及一般民眾）",
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?id=808&module=artwebsite&serno=d08673f4-0775-4a09-b4d8-d47c2c4edca2",
+      "sourceStatus": "待確認",
+      "ownerApproved": true
+    },
+    {
+      "id": "video-110",
+      "title": "110 視訊報案 App",
+      "url": "https://www.npa.gov.tw/ch/app/artwebsite/view?module=artwebsite&id=18753&serno=04f72711-214c-4f29-881d-5764aa3cf10a",
+      "sourceStatus": "待確認",
+      "ownerApproved": false
+    }
+  ],
+  "qaLinkEvidence": {
+    "testedDistinctNewUrls": 35,
+    "openedWithMatchingTitle": 29,
+    "overseasBlockedOrTimeout": 6,
+    "confirmed404Or410": 0,
+    "workflowSuccessRun": 39006712817,
+    "meaning": "HTTP200只是該次網頁可開，不證明現行資格或免費及全部臺灣Safari正常"
+  },
+  "releaseGuard": "已核准的16筆只限經記錄的基本機構名稱、網址、簡介；全部18筆原始status仍是待確認，不能改稱人工逐頁查核。"
+}
