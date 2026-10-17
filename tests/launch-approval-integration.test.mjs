@@ -6,6 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { snapshotHash } from '../scripts/lib/launch-approval.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const file = path.join(root, 'content/launch-approvals.json');
@@ -13,6 +14,7 @@ const out = path.join(root, 'dist-launch-fixture');
 const badOut = path.join(root, 'dist-launch-bad-snapshot');
 const cityOut = path.join(root, 'dist-launch-city-fixture');
 const fullOut = path.join(root, 'dist-launch-44-fixture');
+const fullFeaturesOut = path.join(root, 'dist-launch-feature-fixture');
 const prior = await readFile(file, 'utf8');
 const template = JSON.parse(prior);
 const releaseCandidate = JSON.parse(await readFile(path.join(root, 'artifacts/launch-article-batch.json'), 'utf8'));
@@ -84,6 +86,50 @@ try {
   for(const a of releaseCandidate.articles) assert.ok(sitemap44.includes('articles/'+a.slug+'.html'),'sitemap 缺少 '+a.slug);
   assert.ok(!sitemap44.includes('exp-compare-everyday-experiments'),'撤稿不可出現在正式 sitemap');
   assert.ok(!existsSync(path.join(fullOut,'activities.html')),'未核准活動不得偷跑到正式版');
+  // 模擬站主針對相同既有功能原稿「整批同意發布」。
+  // 此記錄只存在隔離 Actions checkout，最終一律還原，不會產生真實站主簽核。
+  const json = async f => JSON.parse(await readFile(path.join(root,f),'utf8'));
+  const inputs = {
+    activities: {
+      portals: await json('docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json'),
+      notices: await json('docs/QA-ACTIVITIES-NOTICES-2026Q4-2027-2026-10-16.json'),
+      script: await readFile(path.join(root,'src/qa-assets/js/qa-activities.js'),'utf8'),
+    },
+    calendar: {script: await readFile(path.join(root,'src/qa-assets/js/qa-calendar.js'),'utf8')},
+    pregnancy: await json('docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-2026-10-17.json'),
+    topic54: await json('docs/QA-TOPIC-ENTRANCES-54-SOURCE-GUIDES-2026-10-17.json'),
+  };
+  template.approvedFeatures = Object.fromEntries(Object.entries(inputs).map(([name, value]) => [name,sign(snapshotHash(value))]));
+  await writeFile(file,JSON.stringify(template,null,2)+'\n');
+  build(fullFeaturesOut);
+  const activitiesHtml=await readFile(path.join(fullFeaturesOut,'activities.html'),'utf8');
+  const homepage=await readFile(path.join(fullFeaturesOut,'index.html'),'utf8');
+  const family=await readFile(path.join(fullFeaturesOut,'life-family.html'),'utf8');
+  const learning=await readFile(path.join(fullFeaturesOut,'learning.html'),'utf8');
+  const allSitemap=await readFile(path.join(fullFeaturesOut,'sitemap.xml'),'utf8');
+  assert.equal((activitiesHtml.match(/class="notice" id="notice-/g)||[]).length,6,'公告仍保留六筆');
+  assert.equal((activitiesHtml.match(/class="act-item" id="act-/g)||[]).length,12,'長期查詢入口仍保留十二筆');
+  assert.ok(activitiesHtml.includes('已依網站擁有人確認的版本公開'));
+  assert.ok(!activitiesHtml.includes('未核准測試內容'),'正式活動頁不得留測試標示');
+  assert.ok(homepage.includes('assets/js/qa-calendar.js') && homepage.includes('class="act-entry"'),'正式首頁應保留小日曆');
+  assert.ok(existsSync(path.join(fullFeaturesOut,'assets/js/qa-calendar.js')),'正式版必須有小日曆腳本');
+  assert.ok(existsSync(path.join(fullFeaturesOut,'assets/js/qa-activities.js')),'正式版必須有活動到期隱藏腳本');
+  assert.equal((family.match(/class="preg-step"/g)||[]).length,4,'孕期閱讀區應為四段');
+  assert.ok(family.includes('孕期與生育資訊整理')||family.includes('懷孕期間的產檢與健康照護'),'孕期閱讀區標題需存在');
+  assert.ok(!family.includes('未核准測試內容'),'正式孕期區不得留測試標示');
+  assert.ok(learning.includes('activities.html'),'學習與活動頁應連到正式活動頁');
+  const topicPages=['life-family','career','health','law','city','learning'];
+  let officialGuides=0;
+  for(const pageName of topicPages) {
+    const pageHtml=await readFile(path.join(fullFeaturesOut,pageName+'.html'),'utf8');
+    officialGuides+=(pageHtml.match(/class="topic-links topic-guide-links"/g)||[]).length;
+  }
+  assert.ok(officialGuides>=35,'六類54主題的補充/修正入口沒有完整保留');
+  assert.ok(allSitemap.includes('activities.html'),'正式 sitemap 應包含活動頁');
+  assert.ok(!existsSync(path.join(fullOut,'activities.html')),'只有文章批准、不含功能批准時，正式版仍不得顯示活動頁');
+  assert.ok(!existsSync(path.join(fullOut,'assets/js/qa-calendar.js')),'只有文章批准不能順便發布日曆');
+
+  template.approvedFeatures = {};
   template.approvedArticles = {'batch2-01':sign(chosen.sha256)};
 
   // 故意把 sha256 改錯，證明舊批准不會套用在修改後的文章。
@@ -93,9 +139,9 @@ try {
   assert.ok(!existsSync(path.join(badOut,'articles/batch2-01.html')), '內容指紋不符的文章不得輸出');
   const badIndex = await readFile(path.join(badOut,'assets/data/search-index.js'),'utf8');
   assert.ok(!badIndex.includes('articles/batch2-01.html'), '不符內容不可在搜尋中出現');
-  console.log('正式版模擬完成：1篇、城市福利2篇、完整44篇（讀利26／向光18）皆正確；未核准資料隔離，修改後舊核准失效。');
+  console.log('正式版模擬完成：1篇、城市福利2篇、44篇（讀利26／向光18）、小日曆、六筆活動、十二筆長期入口、孕期四段、54主題與搜尋／sitemap 均已逐項驗證。');
 } finally {
   // 不論成功或失敗都先還原原核准檔；測試產物不部署，不寫回 git。
   await writeFile(file,prior);
-  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true}),rm(fullOut,{recursive:true,force:true})]);
+  await Promise.all([rm(out,{recursive:true,force:true}),rm(badOut,{recursive:true,force:true}),rm(cityOut,{recursive:true,force:true}),rm(fullOut,{recursive:true,force:true}),rm(fullFeaturesOut,{recursive:true,force:true})]);
 }
