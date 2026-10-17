@@ -15,7 +15,16 @@
 # 不設定一般 push 自動發布；只在新增／修改此 workflow 本身時啟動，避免研究更新被意外公開。
 name: 由己｜公開測試預覽（非正式網站）
 
+# 在預設 main 分支登記手動觸發事件，讓 GitHub Actions 顯示 Run workflow。
+# 真正發佈 QA 時必須選 qa/public-nine-articles-20261017；該分支另有嚴格的 ref+確認字串雙重守門。
+# main 本身的 preview job 仍由下方分支條件限制，不會因手動觸發部署 main。
 on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: '警告：會覆蓋目前公開網站，請輸入「我確認覆蓋目前網站」'
+        required: true
+        type: string
   push:
     branches:
       - claude/morning-light-visual-v2
