@@ -1,0 +1,261 @@
+{
+  "title": "由己｜新增四縣市十個地方正式服務原頁：研究候選",
+  "asOf": "2026-10-17",
+  "reviewer": "ChatGPT (AI)",
+  "status": "editorial-candidate-unpublished",
+  "sourceReviewLevel": "政府／地方公部門官方網頁用途初核；部分頁面使用搜尋索引資訊而非完整直開",
+  "ownerApproved": false,
+  "importToQa": false,
+  "qaDeployed": false,
+  "productionApproved": false,
+  "baseResearch": "docs/CITY-SIX-COUNTIES-17-SERVICE-ENTRY-INDEX-2026-10-17.json",
+  "countyGroups": [
+    {
+      "county": "keelung",
+      "name": "基隆市",
+      "entries": [
+        {
+          "id": "kl-maternal-child-welfare-center",
+          "name": "基隆市婦幼福利服務中心",
+          "agency": "基隆市政府社會處",
+          "url": "https://www.klcg.gov.tw/tw/social/3604.html",
+          "serviceTypes": [
+            "婦女友善空間",
+            "親子活動與設施",
+            "教育諮詢"
+          ],
+          "entryLevel": "specific-center-official-page",
+          "originalUsage": "查閱婦幼福利中心場地、設施與據點介紹；部分空間適合日常學習及親子活動，個別活動應另查當期公告。",
+          "sourceMethod": "official-page-direct-open",
+          "pageLastUpdated": "2022-08-11",
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "頁面資訊較舊，開放時段及設施應再確認",
+            "Safari 實機未驗"
+          ]
+        },
+        {
+          "id": "kl-social-welfare-centers-list",
+          "name": "基隆市四處社會福利服務中心聯絡名錄",
+          "agency": "基隆市政府社會處",
+          "url": "https://www.klcg.gov.tw/tw/social/2830.html",
+          "serviceTypes": [
+            "地方社福服務據點",
+            "分區聯絡資訊"
+          ],
+          "entryLevel": "official-center-directory",
+          "originalUsage": "依基隆行政區查找四處社福服務中心的轄區及聯絡方式；屬單一名錄網址，不按四處據點拆成四張重複卡。",
+          "sourceMethod": "official-page-direct-open",
+          "pageLastUpdated": "2023-09-27",
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "頁面更新於2023年，地址電話需重新核實",
+            "不可誤稱婦女中心"
+          ]
+        },
+        {
+          "id": "kl-new-immigrant-family-center",
+          "name": "基隆市國際（新住民）家庭服務中心",
+          "agency": "基隆市政府社會處",
+          "url": "https://www.klcg.gov.tw/tw/social/2767-304576.html",
+          "serviceTypes": [
+            "新住民家庭生活資訊",
+            "支持性課程",
+            "資源轉介",
+            "多元文化"
+          ],
+          "entryLevel": "specific-service-center-official-page",
+          "originalUsage": "閱讀新住民家庭服務項目、服務對象及官方公布的聯絡方式；不預設所有課程持續開班。",
+          "sourceMethod": "official-page-direct-open",
+          "pageLastUpdated": "2025-10-30",
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "越文與其他語言段落應逐語版本另核",
+            "當期服務和開課狀況未聯繫確認"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "hsinchu-city",
+      "name": "新竹市",
+      "entries": [
+        {
+          "id": "hcc-womens-center",
+          "name": "新竹市婦女館",
+          "agency": "新竹市政府",
+          "url": "https://wpcw.hccg.gov.tw/about_us/",
+          "serviceTypes": [
+            "婦女生活與學習空間",
+            "講座",
+            "休閒與交流"
+          ],
+          "entryLevel": "specific-center-official-page",
+          "originalUsage": "瞭解婦女館提供的學習、活動與公共使用空間；課程報名條件應以各辦訓單位當期公告為準。",
+          "sourceMethod": "official-page-direct-open",
+          "pageLastUpdated": null,
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "當期課程報名及費用逐案確認",
+            "實際時段與場館臨時異動待驗"
+          ]
+        },
+        {
+          "id": "hcc-new-immigrant-family-service",
+          "name": "新竹市新住民家庭服務官方入口",
+          "agency": "新竹市政府社會處",
+          "url": "https://society.hccg.gov.tw/ch/home.jsp?id=110&parentpath=0%2C3%2C23",
+          "serviceTypes": [
+            "新住民家庭服務",
+            "福利資訊入口"
+          ],
+          "entryLevel": "official-topic-list",
+          "originalUsage": "由社會處新住民家庭服務專頁進入中心介紹及在地資源；此頁面是官方索引，不將舊文章等同當期開放條件。",
+          "sourceMethod": "official-page-direct-open",
+          "pageLastUpdated": null,
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "索引項目發表年份較舊",
+            "中心時段與地址尚未交叉驗證"
+          ]
+        },
+        {
+          "id": "hcc-family-education-center-work",
+          "name": "新竹市家庭教育中心業務與學習服務",
+          "agency": "新竹市家庭教育中心",
+          "url": "https://dep-family.hccg.gov.tw/ch/home.jsp?id=9&parentpath=0%2C5",
+          "serviceTypes": [
+            "家庭教育",
+            "親職教育",
+            "婚姻與家庭資源"
+          ],
+          "entryLevel": "official-service-description",
+          "originalUsage": "查詢家庭教育中心的親職、婚姻與社區家庭教育業務；此頁屬職掌說明，不視為可立即報名的課程頁。",
+          "sourceMethod": "official-search-result-only-direct-open-error",
+          "pageLastUpdated": null,
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "網頁直開在研究工具出現錯誤",
+            "詳細課程資訊及Safari瀏覽未驗"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "hsinchu-county",
+      "name": "新竹縣",
+      "entries": [
+        {
+          "id": "hch-north-south-womens-centers",
+          "name": "新竹縣南北區婦女福利服務中心",
+          "agency": "新竹縣政府社會處",
+          "url": "https://social.hsinchu.gov.tw/News_Content.aspx?n=204&s=201016",
+          "serviceTypes": [
+            "婦女福利諮詢",
+            "成長團體",
+            "福利方案與培力"
+          ],
+          "entryLevel": "official-two-centers-single-page",
+          "originalUsage": "官方同一頁介紹新竹縣北區與南區婦女福利服務中心及服務內容，應維持一個連結並在文字中區分兩地。",
+          "sourceMethod": "official-search-result-only-direct-open-error",
+          "pageLastUpdated": null,
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "網頁直開在研究工具出現錯誤",
+            "據點現行時段及當期活動未驗"
+          ]
+        },
+        {
+          "id": "hch-new-immigrant-family-center",
+          "name": "新竹縣新住民家庭服務中心與關懷據點",
+          "agency": "新竹縣政府社會處",
+          "url": "https://social.hsinchu.gov.tw/News_Content.aspx?n=204&s=3779",
+          "serviceTypes": [
+            "新住民家庭服務",
+            "生活適應與培力",
+            "社區關懷據點"
+          ],
+          "entryLevel": "official-center-and-site-directory",
+          "originalUsage": "查看官方列示的新住民家庭服務中心及各區關懷據點，避免將同一政府名錄複製成多張相同網址卡。",
+          "sourceMethod": "official-search-result-only-direct-open-error",
+          "pageLastUpdated": null,
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "網頁直開在研究工具出現錯誤",
+            "地址電話與委辦單位變動待驗",
+            "頁面提及的第三方社群連結未驗"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "yilan",
+      "name": "宜蘭縣",
+      "entries": [
+        {
+          "id": "il-women-newimmigrant-center",
+          "name": "宜蘭縣婦女暨新住民家庭服務中心",
+          "agency": "宜蘭縣政府社會處",
+          "url": "https://sntroot.e-land.gov.tw/cp.aspx?n=10392&s=1782",
+          "serviceTypes": [
+            "婦女成長活動",
+            "新住民家庭服務",
+            "通譯與社會福利諮詢"
+          ],
+          "entryLevel": "specific-center-official-page",
+          "originalUsage": "查找宜蘭縣婦女與新住民家庭服務中心的官方服務說明；通譯及課程有適用條件，不能概稱全部免申請或免費。",
+          "sourceMethod": "official-search-result-only-direct-open-error",
+          "pageLastUpdated": null,
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "研究工具直開受阻，搜尋結果有官方說明",
+            "電話、地址與現況仍待重核"
+          ]
+        },
+        {
+          "id": "il-social-welfare-five-centers",
+          "name": "宜蘭縣五處社會福利服務中心及分區",
+          "agency": "宜蘭縣政府社會處",
+          "url": "https://sntroot.e-land.gov.tw/cp.aspx?n=10392&s=1776",
+          "serviceTypes": [
+            "地方社福服務據點",
+            "家庭支持與親職團體",
+            "服務轉介"
+          ],
+          "entryLevel": "official-center-directory",
+          "originalUsage": "依官方單頁查詢礁溪、宜蘭、羅東、蘇澳及三星五處社福中心及服務分區；與婦女暨新住民中心職能不同。",
+          "sourceMethod": "official-search-result-only-direct-open-error",
+          "pageLastUpdated": null,
+          "timeBound": false,
+          "verifiedAt": "2026-10-17",
+          "needsReview": [
+            "頁面直開受阻",
+            "服務轄區、地址及電話仍待確認"
+          ]
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "newCountyGroups": 4,
+    "newDistinctUrlsWithinFile": 10,
+    "existingPartiallyStudiedCounties": 6,
+    "partialCountyCoverageAfterThisResearch": 10,
+    "fullDepthAuditedCounties": 0
+  },
+  "caveats": [
+    "本檔僅 AI 來源與用途初核，直開失敗的頁面不得標示為完整實測通過。",
+    "不同地區頁面 10 筆網址互不重複，尚未完成與全儲存庫所有資料逐網址交叉驗證。",
+    "2026 當期時段、報名、名額、費用、Safari 外站、外語版本均未完整驗證。",
+    "不得據本檔自動開啟 QA 佇列、合併 main 或修改 content/release-approvals.json。"
+  ]
+}
