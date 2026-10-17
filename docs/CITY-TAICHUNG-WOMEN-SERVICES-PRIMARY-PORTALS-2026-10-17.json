@@ -1,0 +1,58 @@
+{
+  "title": "《由己》臺中市婦女／地方學習官方來源深度候選",
+  "county": "taichung",
+  "reviewedOn": "2026-10-17",
+  "reviewedBy": "ChatGPT（AI）",
+  "status": "official-source-purpose-initial-review",
+  "ownerApproved": false,
+  "published": false,
+  "qaImported": false,
+  "notes": [
+    "同一官方網址只用一個入口；不同 URL 可依用途保留各自簡潔文字連結",
+    "不是逐場活動或電話核准檢查，不代表全部服務都免費或可立即使用",
+    "當期或日期性活動須有明確失效日期，不和長期名錄混在一起"
+  ],
+  "items": [
+    {
+      "id": "tc-women-newimmigrant-centers",
+      "name": "臺中市婦女及新住民培力中心｜分區據點名錄",
+      "url": "https://www.society.taichung.gov.tw/1224394/post",
+      "type": "婦女及新住民服務中心官方名錄",
+      "serviceTypes": [
+        "婦女福利",
+        "社會福利"
+      ],
+      "purpose": "臺中市政府社會局列西屯、北屯、南屯、大里、豐原、大甲、東勢、烏日等不同轄區婦女及新住民培力中心，以及培力平台與相關支持服務。",
+      "evidence": "原官方頁列中心地址、服務轄區、聯絡資訊及婦女成長、法律資訊、通譯或就業培力等項目；最後異動2025-04-29，不視為每日最新營運時刻。",
+      "remaining": "各中心當期活動、聯絡方式與中心營運狀態需另追蹤；一個綜合名錄不拆成九個相同 URL。",
+      "regions": [
+        "taichung"
+      ],
+      "sourceAgency": "臺中市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    },
+    {
+      "id": "tc-women-services-directory",
+      "name": "臺中市婦女福利服務機構｜官方分類名錄",
+      "url": "https://www.society.taichung.gov.tw/13710/13735/13762/13768?PageSize=30&type=%E7%A6%8F%E5%88%A9%E6%9C%8D%E5%8B%99%E6%A9%9F%E6%A7%8B",
+      "type": "婦女中心與女孩培力查詢",
+      "serviceTypes": [
+        "婦女福利"
+      ],
+      "purpose": "臺中社會局的婦女福利機構類別索引，區分大甲婦女館、婦女及新住民培力中心、女孩培力據點、女兒館等不同服務。",
+      "evidence": "官方分類頁可直接閱讀，與上述分區中心名錄是不同網址與不同查詢目的。",
+      "remaining": "網站原頁部分分類及活動可能需瀏覽器 JavaScript；各機構開放對象不同。",
+      "regions": [
+        "taichung"
+      ],
+      "sourceAgency": "臺中市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    }
+  ]
+}
