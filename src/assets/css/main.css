@@ -827,13 +827,13 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 }
 
 
-/* 《向光》QA 編輯式閱讀入口：既有八個索引直達文章；手機優先、無新增 JS。 */
+/* 《向望》QA 編輯式閱讀入口：既有八個索引直達文章；手機優先、無新增 JS。 */
 /* 八索引沿用舊版 .link-list 的兩欄文字樣式（粗體標題、右側 →、底部細線），固定兩欄四排。
    每排兩個入口之後接該排的文章清單；以核取方塊＋label 切換（無 JavaScript），清單出現在該排正下方、橫跨兩欄，入口位置不變。 */
 .toward-reading .dir-head { padding-block: 22px 18px; }
 .toward-reading .toward-index { padding-top: 24px; }
 .toward-reading .toward-featured { padding-top: 32px; }
-/* 向光文章格：手機每排兩張、寬螢幕每排四張；完整展示 13 篇文章，不再只露出兩篇精選。 */
+/* 向望文章格：手機每排兩張、寬螢幕每排四張；完整展示 13 篇文章，不再只露出兩篇精選。 */
 .toward-reading-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; align-items: stretch; }
 .toward-reading-card { min-width: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
 .toward-reading-card a { display: flex; flex-direction: column; gap: 8px; height: 100%; min-height: 166px; padding: 16px 12px; text-decoration: none; color: var(--ink); overflow-wrap: anywhere; }
@@ -842,7 +842,7 @@ main > .section:last-child { padding-bottom: clamp(48px, 7vw, 96px); }
 .toward-reading-kind { display: block; font-size: 0.74rem; color: var(--terracotta-dark); font-weight: 600; }
 .toward-reading-card h3 { font-size: clamp(0.92rem, 2.7vw, 1.06rem); line-height: 1.5; margin: 0; font-weight: 600; }
 .toward-reading-go { margin-top: auto; font-size: 0.79rem; color: var(--muted); font-weight: 600; }
-/* 手機文章閱讀：向光採單欄縱向滑動；每組四張輪替暖紙色、橄欖綠、淡陶土，
+/* 手機文章閱讀：向望採單欄縱向滑動；每組四張輪替暖紙色、橄欖綠、淡陶土，
    只用 CSS 的淡線紋理，不用圖片、動畫或額外外部資源。 */
 .readli-inline-kind { display: none; }
 @media (max-width: 699px) {
