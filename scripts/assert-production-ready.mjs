@@ -12,6 +12,7 @@ assert.ok(!requested || (process.env.LAUNCH_TEST_ONLY==='1' && /^dist-launch-[a-
   '正式部署僅允許預設 dist-production；測試目錄需隔離並明確啟用');
 const OUT=path.join(ROOT,requested||'dist-production');
 const str=p=>readFile(path.join(ROOT,p),'utf8');
+const json=async p=>JSON.parse(await str(p));
 const out=p=>readFile(path.join(OUT,p),'utf8');
 const articleFiles=(await readdir(path.join(OUT,'articles'))).filter(x=>x.endsWith('.html'));
 assert.equal(articleFiles.length,44,'正式版文章不足44篇：停止發布，不允許覆蓋目前網站');
