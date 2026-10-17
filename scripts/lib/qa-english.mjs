@@ -8,7 +8,7 @@ export const QA_ENGLISH_FILE = 'docs/QA-ENGLISH-RESOURCE-DISCOVERY-2026-10-16.js
 const LINK = /^https:\/\/[^\s<>"']+$/;
 const WORDS = /^[a-z0-9 ,.'()\-/]+$/i;
 
-export async function loadQaEnglishResources(root, baseResources) {
+export async function loadQaEnglishResources(root, baseResources, { allowMissingOverrides = false } = {}) {
   const record = JSON.parse(await readFile(path.join(root, QA_ENGLISH_FILE), 'utf8'));
   const faults = [];
   if (record.approvalStatus !== 'not-approved') faults.push('English candidate data must remain unapproved');
@@ -35,7 +35,7 @@ export async function loadQaEnglishResources(root, baseResources) {
     return { ...r, ...english, qaEnglish: true };
   });
   for (const key of Object.keys(record.overrides)) {
-    if (!existingIds.has(key)) faults.push('English overlay refers to unknown id: ' + key);
+    if (!existingIds.has(key) && !allowMissingOverrides) faults.push('English overlay refers to unknown id: ' + key);
   }
   for (const item of record.resources) {
     validateEnglish(item, item.id);
