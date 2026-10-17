@@ -6,7 +6,7 @@
 //   docs/EXPANSION-A1-B5-B4-INDEPENDENT-PRIMARY-SOURCE-RECHECK-2026-10-17.md 的獨立原始來源複核撤銷，九篇全部在暫存開啟（45 篇）。
 // 前置：npm test 已建好 dist-qa（真實佇列，九篇全部未開啟）。
 // 本測試以 docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json 建置獨立暫存版 dist-qa-staging-nine，檢查：
-//   一、暫存佇列與正式佇列欄位一致；正式佇列九篇仍 importToQa=false／pending；查核紀錄不再保留已撤銷的待修理由。
+//   一、暫存佇列與正式佇列欄位一致；隔離的歷史基線佇列九篇仍 importToQa=false／pending；查核紀錄不再保留已撤銷的待修理由。
 //   二、九篇全文逐行出現、來源筆數／標題／網址完整、分類、查核日期、未核准標示、noindex、搜尋索引，編輯用註記不外露；
 //       A1 第三輪、B4 第二輪的最新用字（非政府網域標示、自行訂製服裝）確實出現。
 //   三、舊的未上線 slug 不出現在任何頁面、搜尋索引或網站地圖；正式版與公開 QA 建置不含九篇。
@@ -63,7 +63,10 @@ const readJson = async (f) => JSON.parse(await readFile(path.join(ROOT, f), 'utf
 const site = await readJson('config/site.json');
 const categories = await readJson('content/categories.json');
 const staging = await readJson(STAGING);
-const realQueue = await readJson(QA_EXPANSION_QUEUE);
+// 歷史暫存安全回歸：在隔離產物中模擬九篇尚未公開；不讀取／修改真實公開QA佇列。
+const LEGACY_QA = 'dist-qa-closed-legacy';
+const LEGACY_QUEUE = 'docs/.qa-expansion-test-closed.generated.json';
+const realQueue = await readJson(LEGACY_QUEUE);
 const portals = await readJson(ACTIVITIES_FILE);
 const BASE = site.basePath;
 const enabled = staging.articles.filter((a) => a.importToQa === true);
@@ -114,7 +117,7 @@ for (const f of [REVIEW, RECHECK]) if (!existsSync(path.join(ROOT, f))) queuePro
 // 已被官方原文推翻的舊判斷不可再當成待修理由保留
 const reviewText = existsSync(path.join(ROOT, REVIEW)) ? await readFile(path.join(ROOT, REVIEW), 'utf8') : '';
 if (!reviewText.includes(RECHECK) || /不進本輪暫存|建議改為「洗標規定自 2023-05-18 施行」/.test(reviewText)) queueProblems.push('來源查核紀錄仍保留已撤銷的待修理由或未引用獨立複核');
-check('佇列：暫存依序含九篇且全部開啟、欄位與正式佇列一致（B4 讀利，A1／A2／A4／B5 向光）；查核紀錄引用獨立複核並撤銷舊待修理由；正式佇列九篇仍 importToQa=false／pending，其餘 13 篇維持 directory=none',
+check('佇列：暫存依序含九篇且全部開啟、欄位與正式佇列一致（B4 讀利，A1／A2／A4／B5 向光）；查核紀錄引用獨立複核並撤銷舊待修理由；隔離的歷史基線佇列九篇仍 importToQa=false／pending，其餘 13 篇維持 directory=none',
   queueProblems.length === 0, queueProblems.slice(0, 5).join('；'));
 
 // ---------- 二、暫存建置與九篇內容 ----------
@@ -200,7 +203,7 @@ for (const f of await listFiles(SX)) {
   for (const s of ['exp-open-course-certificates', 'exp-reading-popular-science']) if (t.includes(s)) leakHits.push(`${f}：舊 slug ${s}`);
 }
 // 正式版與公開 QA（讀正式佇列，九篇全部關閉）都不可含九篇任何一篇
-for (const dir of ['dist-production', 'dist-qa']) {
+for (const dir of ['dist-production', LEGACY_QA]) {
   if (!existsSync(path.join(ROOT, dir))) { leakHits.push(`${dir} 未建置`); continue; }
   for (const f of await listFiles(path.join(ROOT, dir))) {
     if (!/\.(html|js|xml|txt)$/.test(f)) continue;
@@ -210,12 +213,12 @@ for (const dir of ['dist-production', 'dist-qa']) {
 }
 const robots = await read(OUT, 'robots.txt').catch(() => '');
 if (!/Disallow:\s*\/\s*$/m.test(robots)) leakHits.push('暫存版 robots.txt 未全站 Disallow');
-check('發布隔離：舊的未上線 slug 不出現；正式版 dist-production 與公開 QA dist-qa 都不含九篇任何一篇；暫存版 robots 全站禁止索引', leakHits.length === 0, leakHits.slice(0, 3).join('；'));
+check('發布隔離：舊的未上線 slug 不出現；正式版 dist-production 與歷史關閉基線都不含九篇任何一篇；暫存版 robots 全站禁止索引', leakHits.length === 0, leakHits.slice(0, 3).join('；'));
 
 // ---------- 四、讀利／向光與既有內容 ----------
-const qaQp = await read('dist-qa', 'quiet-power.html');
+const qaQp = await read(LEGACY_QA, 'quiet-power.html');
 const sxQp = await read(OUT, 'quiet-power.html');
-const qaToward = await read('dist-qa', 'toward-light.html');
+const qaToward = await read(LEGACY_QA, 'toward-light.html');
 const sxToward = await read(OUT, 'toward-light.html');
 const readliRe = /<h3><a href="articles\/([^"]+)\.html">/g;
 const towardRe = /<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g;
@@ -230,13 +233,13 @@ check('讀利：原 23 篇順序不變，exp-01、exp-08、B4 接在最後（26 
   !READLI_NEW.some((id) => sxToward.includes(slug(id))) && !TOWARD_NEW.some((id) => sxQp.includes(slug(id))),
   `讀利 ${readliAfter.length}、向光 ${towardAfter.length}、八索引 ${sxToward.match(/toward-panel"/g)?.length}`);
 
-const qaArticles = (await readdir(path.join(ROOT, 'dist-qa/articles'))).filter((f) => f.endsWith('.html'));
+const qaArticles = (await readdir(path.join(ROOT, LEGACY_QA, 'articles'))).filter((f) => f.endsWith('.html'));
 const changed = [];
-for (const f of qaArticles) if ((await read('dist-qa', `articles/${f}`)) !== (await read(OUT, `articles/${f}`).catch(() => ''))) changed.push(f);
+for (const f of qaArticles) if ((await read(LEGACY_QA, `articles/${f}`)) !== (await read(OUT, `articles/${f}`).catch(() => ''))) changed.push(f);
 const sxArticles = (await readdir(path.join(SX, 'articles'))).filter((f) => f.endsWith('.html'));
 // 九篇分屬生活與家庭、身心健康、學習與活動；其餘頁面不得有任何差異
 for (const f of ['index.html', 'support.html', 'activities.html', 'search.html', 'city.html', 'career.html', 'law.html']) {
-  if ((await read('dist-qa', f)) !== (await read(OUT, f))) changed.push(f);
+  if ((await read(LEGACY_QA, f)) !== (await read(OUT, f))) changed.push(f);
 }
 check('既有內容：原 36 篇文章頁、首頁、支援、活動、搜尋頁與未收錄新篇的主題頁（城市、職涯、法律）和 dist-qa 完全相同；暫存版共 45 篇',
   qaArticles.length === 36 && sxArticles.length === 45 && changed.length === 0, `${sxArticles.length} 篇；差異 ${changed.slice(0, 5).join('、') || '無'}`);
