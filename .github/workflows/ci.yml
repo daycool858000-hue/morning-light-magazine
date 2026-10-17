@@ -38,3 +38,30 @@ jobs:
           path: test-results/pregnancy-*/
           if-no-files-found: ignore
           retention-days: 14
+
+  calendar:
+    # 全站小日曆避讓（QA-only）：Chromium＋WebKit 320／375／390／1280px 逐段捲動檢查，與主要測試並行。
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝建置工具與測試用瀏覽器（不會打包進網站）
+        run: |
+          npm ci
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: 小日曆不遮擋文章、主題頁、官方連結、搜尋結果、讀利、向光與懷孕生育閱讀區
+        run: npm run test:calendar
+      - name: 保存小日曆避讓截圖（14 天，只供驗收）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-calendar-avoid-screenshots
+          path: test-results/calendar-*/
+          if-no-files-found: ignore
+          retention-days: 14
