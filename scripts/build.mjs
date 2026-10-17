@@ -894,9 +894,10 @@ function topicsSection(c) {
               <a href="${esc(link.url)}" target="_blank" rel="noopener noreferrer">${esc(link.name)}<span aria-hidden="true"> ↗</span></a>
             </li>`).join('')}</ul>`
             : '';
+          // 有既有機構卡的主題，保留原站內錨點，再補原頁連結；不讓54入口候選消掉舊導覽。
           const list = !topicGuide || topicGuide.displayMode === 'keep'
             ? existing
-            : topicGuide.displayMode === 'supplement' && related.length
+            : related.length
               ? existing + minimalLinks
               : minimalLinks;
           const clarification = topicGuide?.clarification
