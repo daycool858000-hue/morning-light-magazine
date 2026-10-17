@@ -45,7 +45,7 @@
 | 1280px | 4 處 | 0（停點 159） |
 | 連續捲動中位置不變 | 320／375px 停下後仍蓋住 | 四種寬度皆不動、停下後不重疊 |
 
-另：`tests/qa-batch2.test.mjs` 原本捲動後只等 40ms 就檢查，配合「停下後才調整」改等 260ms（檢查條件不變）。WebKit 結果見下方 CI。
+另：`tests/qa-batch2.test.mjs` 原本捲動後只等 40ms 就檢查，配合「停下後才調整」改等 260ms（檢查條件不變）。WebKit（CI）四種寬度同樣 0 處。
 
 **截圖（同一連結、同一畫面高度，左＝修正前、右＝修正後，390px）**：`docs/qa-media/calendar-avoid-2026-10-17/`
 
@@ -58,7 +58,7 @@ CI 另上傳 Chromium／WebKit 各寬度懷孕閱讀區截圖（artifact `qa-cal
 
 ## 四、任務三：懷孕與生育入口
 
-沿用 PR #15 全部內容，未重寫。整合後檢查：主題 01「整理中」已改為「查看孕期與生育資訊整理 →」、點擊到 `#pregnancy-guide`；四段、九筆官方原頁連結（另開新視窗、附用途）保留；育兒津貼 `#childcare`、托育 `#daycare`、產假／孕婦保護 `law.html#…`、城市福利站內連結目標都存在；閱讀區無資源卡、圖片、表單；文章總數 44 不含任何新文章；preview／production 不含閱讀區。`tests/qa-pregnancy-guide.test.mjs` 16 項、`tests/qa-pregnancy-browser.test.mjs` Chromium 48 項全過（WebKit 見 CI）。外站連結沿用 PR #15 的 run `39000239040` 結果，本次未改連結。
+沿用 PR #15 全部內容，未重寫。整合後檢查：主題 01「整理中」已改為「查看孕期與生育資訊整理 →」、點擊到 `#pregnancy-guide`；四段、九筆官方原頁連結（另開新視窗、附用途）保留；育兒津貼 `#childcare`、托育 `#daycare`、產假／孕婦保護 `law.html#…`、城市福利站內連結目標都存在；閱讀區無資源卡、圖片、表單；文章總數 44 不含任何新文章；preview／production 不含閱讀區。`tests/qa-pregnancy-guide.test.mjs` 16 項、`tests/qa-pregnancy-browser.test.mjs` Chromium、WebKit 各 48 項全過。外站連結沿用 PR #15 的 run `39000239040` 結果，本次未改連結。
 
 ## 五、任務四：「待查核」標示
 
@@ -71,7 +71,10 @@ CI 另上傳 Chromium／WebKit 各寬度懷孕閱讀區截圖（artifact `qa-cal
 | `npm test`（本機 Chromium） | 215 項全過，exit 0（含 site 44、release-gate、qa-batch2 51、擴充 19、四篇 9、九篇 9、公開QA 12、懷孕 16、查核標示 6、懷孕瀏覽器 48） |
 | `qa-calendar-avoid`（本機 Chromium） | 16 項全過 |
 | QA 部署前檢查（本機模擬，不部署） | 通過；並修正 `! grep` 在 `set -e` 下不會讓步驟失敗的問題（加上 `|| exit 1`，已用假殘留檔確認會失敗） |
-| WebKit 320／375／390／1280 | 由 CI 執行（本機無 WebKit），結果見 CLAUDE.md 與 PR |
+| CI（提交 `9145c11`） | push run `39008617989`、pull_request run `39008621595` 皆 success：主要測試工作（`npm test`＋WebKit 手機版面＋WebKit QA，含懷孕閱讀區 WebKit 48 項）與 `calendar` 工作都通過 |
+| WebKit 小日曆 320／375／390／1280 | 16 項全過；四種寬度蓋住 0 處（停點 338／308／300／157，320px 暫縮 44px 1 次）；捲動中位置不變 |
+| CI 截圖 | artifact `qa-calendar-avoid-screenshots`（Chromium／WebKit 四寬度懷孕閱讀區）、`qa-pregnancy-guide-screenshots`，保存 14 天 |
+| 第一次 CI（`8b6527c`） | `calendar` 工作在 WebKit 手機寬度失敗：測試程式用 `mouse.wheel`，手機版 WebKit 不支援（避讓檢查本身已通過）。已改用頁面捲動（`9145c11`），未放寬任何檢查 |
 | production 隔離 | dist-production HTML 與修改前逐位元組相同（僅 main.css 多一個未使用的 `.badge-ai`）；release-approvals blob `5c4d0532…` 不變 |
 
 ## 七、視覺規範符合程度
@@ -83,4 +86,4 @@ CI 另上傳 Chromium／WebKit 各寬度懷孕閱讀區截圖（artifact `qa-cal
 
 ## 八、是否具備更新公開 QA 的條件
 
-工程面具備（待 CI 全綠）。**注意**：本分支修改了 `.github/workflows/qa-public-preview.yml`，一旦併入 `qa/public-nine-articles-20261017`，該工作流程就會觸發公開 QA 部署；因此必須等 ChatGPT 最後確認、站主明確同意後才能合併草稿 PR。
+工程面已具備：本機與 CI（Chromium＋WebKit）全綠。**注意**：本分支修改了 `.github/workflows/qa-public-preview.yml`，一旦併入 `qa/public-nine-articles-20261017`，該工作流程就會觸發公開 QA 部署；因此必須等 ChatGPT 最後確認、站主明確同意後才能合併草稿 PR。
