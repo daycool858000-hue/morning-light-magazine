@@ -211,6 +211,8 @@ main { display: block; }
 .badge-pending { background: #F4E8D2; color: var(--muted); }
 .badge-qa { background: #F6E3D6; color: #6E3519; }
 .badge-fix { background: var(--terracotta-soft); color: var(--terracotta-dark); }
+/* QA-only：AI 已核對官方來源、尚未經站主審閱（與「已確認」「待查核」區分） */
+.badge-ai { background: #E8ECE0; color: #4A5640; border: 1px dashed #A9B59A; }
 .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 0.8125rem; color: var(--muted); }
 .pill {
   display: inline-block; padding: 3px 12px; border-radius: 999px;

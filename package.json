@@ -15,11 +15,12 @@
     "phone-preview": "node scripts/build.mjs --mode=production --out=dist-production && node scripts/serve.mjs dist-production --lan",
     "qa-preview": "node scripts/build.mjs --mode=qa --out=dist-qa && node scripts/serve.mjs dist-qa",
     "qa-phone-preview": "node scripts/build.mjs --mode=qa --out=dist-qa && node scripts/serve.mjs dist-qa --lan",
-    "test": "node scripts/build.mjs --mode=preview && node scripts/build.mjs --mode=production --out=dist-production && node tests/site.test.mjs && node tests/release-gate.test.mjs && node scripts/build.mjs --mode=qa --out=dist-qa && node tests/qa-batch2.test.mjs && node tests/prepare-public-qa-legacy.mjs && node tests/qa-expansion.test.mjs && node tests/qa-expansion-first-four.test.mjs && node tests/qa-expansion-nine.test.mjs && node tests/qa-public-nine.test.mjs && node tests/qa-pregnancy-guide.test.mjs && node tests/qa-pregnancy-browser.test.mjs --browser=chromium --shots=test-results/pregnancy-chromium",
+    "test": "node scripts/build.mjs --mode=preview && node scripts/build.mjs --mode=production --out=dist-production && node tests/site.test.mjs && node tests/release-gate.test.mjs && node scripts/build.mjs --mode=qa --out=dist-qa && node tests/qa-batch2.test.mjs && node tests/prepare-public-qa-legacy.mjs && node tests/qa-expansion.test.mjs && node tests/qa-expansion-first-four.test.mjs && node tests/qa-expansion-nine.test.mjs && node tests/qa-public-nine.test.mjs && node tests/qa-pregnancy-guide.test.mjs && node tests/qa-review-labels.test.mjs && node tests/qa-pregnancy-browser.test.mjs --browser=chromium --shots=test-results/pregnancy-chromium",
     "check-links": "node scripts/check-links.mjs",
     "images": "node scripts/images.mjs",
     "test:webkit": "node tests/mobile-webkit.test.mjs",
-    "test:webkit-qa": "node tests/qa-webkit.test.mjs && node tests/qa-pregnancy-browser.test.mjs --browser=webkit --shots=test-results/pregnancy-webkit"
+    "test:webkit-qa": "node tests/qa-webkit.test.mjs && node tests/qa-pregnancy-browser.test.mjs --browser=webkit --shots=test-results/pregnancy-webkit",
+    "test:calendar": "node scripts/build.mjs --mode=qa --out=dist-qa && node tests/qa-calendar-avoid.test.mjs --browser=chromium --shots=test-results/calendar-chromium && node tests/qa-calendar-avoid.test.mjs --browser=webkit --shots=test-results/calendar-webkit"
   },
   "devDependencies": {
     "sharp": "0.35.5"
