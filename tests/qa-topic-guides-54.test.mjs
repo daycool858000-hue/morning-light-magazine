@@ -32,7 +32,7 @@ check('連結有機關名稱、實際用途與原始HTTPS網址',data.topics.eve
  t.links.every(l=>/^https:\/\//.test(l.url)&&l.name&&l.agency&&l.purpose)));
 check('只對容易混淆的12項加一句',data.topics.filter(t=>t.clarification).length===12);
 const modes=data.topics.reduce((o,t)=>(o[t.displayMode]=(o[t.displayMode]||0)+1,o),{});
-check('已設置的15個入口原樣保留（包含PR15另行處理的孕產），只修補39項',modes.keep===15&&modes.replace===39&&!modes.supplement);
+check('已適合的11項保留，另4項補一個直達入口、39項修正或填空；孕產仍由PR15處理',modes.keep===11&&modes.supplement===4&&modes.replace===39);
 
 let guard=false;
 try{execFileSync(process.execPath,['scripts/build.mjs','--mode=qa','--out=dist-qa'],{
@@ -72,8 +72,8 @@ for(const cat of cats){
   repaired++;
  }
 }
-check('15個原有入口原HTML片段完全不變',preserved===15);
-check('39個有問題／空白入口已補精確網址，原文案保留',repaired===39 && shownLinks>=39);
+check('11個已合適的入口原HTML片段完全不變',preserved===11);
+check('43項精確改善（39修補、4補充），原有主題文案保留',repaired===43 && shownLinks>=43);
 check('12條必要提醒只出現在修補主題',notes<=12 && notes>=10);
 const old=(await readdir(path.join(ROOT,'dist-qa/articles'))).filter(x=>x.endsWith('.html')).sort();
 const now=(await readdir(path.join(ROOT,'dist-qa-topic54/articles'))).filter(x=>x.endsWith('.html')).sort();
