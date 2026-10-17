@@ -28,8 +28,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: 從 GitHub 已確認原稿製作發布驗收清單（不可當作自行簽核）
+        run: |
+          node scripts/prepare-launch-article-batch.mjs
+          node scripts/prepare-launch-feature-batch.mjs
       - name: 建置正式版
         run: node scripts/build.mjs --mode=production --out=dist-production
+      - name: 正式版完整保留門檻（有缺篇、缺功能或版本不符就中止，不得覆蓋現有網站）
+        run: node scripts/assert-production-ready.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
