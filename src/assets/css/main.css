@@ -580,12 +580,11 @@ body.search-page-searching .section[aria-labelledby="browse-title"] { display: n
 .topic-links a { display: inline-flex; align-items: center; min-height: 44px; }
 .topic .pending { font-size: 0.85rem; color: var(--muted); margin: 0; }
 
-/* 54主題入口：延續原有直列樣式，補充用途與機關，不新增機構大卡。 */
-.topic-guide-links { display: grid; gap: 3px; }
+/* 54主題入口：已妥當的保留原樣，其他只增加簡潔原始連結。 */
+.topic-guide-links { display: flex; flex-wrap: wrap; gap: 0 14px; }
 .topic-guide-links li { min-width: 0; max-width: 100%; }
-.topic-guide-links a { display: inline-flex; min-height: 44px; flex-wrap: wrap; gap: 4px; align-items: center; max-width: 100%; overflow-wrap: anywhere; }
-.topic-guide-links .topic-guide-purpose { display: block; font-size: 0.82rem; line-height: 1.7; color: var(--muted); overflow-wrap: anywhere; }
-.topic .topic-guide-caution { margin: 9px 0 0; font-size: 0.8rem; line-height: 1.65; color: var(--muted); overflow-wrap: anywhere; }
+.topic-guide-links a { display: inline-flex; align-items: center; gap: 3px; max-width: 100%; min-height: 44px; overflow-wrap: anywhere; }
+.topic .topic-guide-clarification { margin: 6px 0 0; font-size: 0.82rem; line-height: 1.65; color: var(--muted); overflow-wrap: anywhere; }
 
 
 /* ---------- 一般頁首（說明頁、文章、搜尋、求助） ---------- */
