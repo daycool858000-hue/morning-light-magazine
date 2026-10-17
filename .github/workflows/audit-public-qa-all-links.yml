@@ -1,0 +1,43 @@
+# 只讀稽核已部署QA分支的完整網站內容，逐一查站內HTML鏈結及所有文章／資源的外連。
+# 僅在獨立稽核分支執行，不改網站、不部署、不核准任何資料。
+name: 由己｜公開QA全站實際連結總查核
+
+on:
+  push:
+    branches:
+      - audit/qa-site-wide-readiness-20261017
+    paths:
+      - scripts/audit-public-qa-site-links.mjs
+      - .github/workflows/audit-public-qa-all-links.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝瀏覽器測試環境
+        run: |
+          npm ci
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: 只建置現有公開 QA（不部署）
+        run: node scripts/build.mjs --mode=qa --out=dist-qa
+      - name: 檢查全部輸出頁的內連與外部正式入口
+        run: node scripts/audit-public-qa-site-links.mjs
+      - name: 保存原始逐筆報告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-qa-site-links-full-audit-20261017
+          path: artifacts/public-qa-site-links-full-audit.json
+          retention-days: 30
+          if-no-files-found: warn
