@@ -44,7 +44,7 @@
 - [桃園市政府婦幼發展局｜「桃園女力行動派」跨年度婦女團體培力計畫](https://dowcd.tycg.gov.tw/News_Content.aspx?n=16345&s=1802318)
 - [受託執行團體｜2027 年 1 月預定成果發表之說明（2026-10-02）](https://www.wfwp.org.tw/index.php/bulletin/news/919-2026-10-02-15-49-06)
 - [桃園市政府婦幼發展局｜2026 年第四季婦女中心活動一覽表](https://dowcd.tycg.gov.tw/News_Content.aspx?n=16342&s=1890721)
-- [桃園市北區婦女中心｜當期活動公告](https://www.taoyuanwdc.org/NewsList.aspx?pIndex=1&pSize=50)
+- [桃園市北區婦女中心網站｜活動資訊（非政府網域；報名請查當期公告）](https://www.taoyuanwdc.org/NewsList.aspx?pIndex=1&pSize=50)
 - [衛生福利部｜婦女福利及各地婦女服務資訊](https://www.mohw.gov.tw/cp-190-225-1.html)
 
 ---
