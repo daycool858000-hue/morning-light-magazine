@@ -45,3 +45,19 @@
 ## 查核結論
 
 **工程、暫存內容與視覺可進入公開 QA 準備階段**，但不等同九篇全部獲站主逐篇正式內容核准。公開 QA 前應獲使用者明確同意，並安排現行 workflow gate 的最小安全更新；部署後由站主 iPhone＋電腦讀稿驗收，再決定正式內容核准。本文僅為 PR #11 編輯分支研究歸檔，未修改 PR #14、main、任何正式核准檔或公開站點。
+
+
+## 2026-10-17｜站主同意公開 QA 後的實際部署結果（取代本檔先前的「待授權」階段）
+
+站主於對話明確同意九篇試讀與必要部署操作，並表示僅在確實必要時可合併 main。確認舊 Pages QA workflow 可以從獨立分支部署，**因此不需也沒有合併 main**。由 ChatGPT 透過 GitHub 連線執行以下步驟：
+
+- 從已驗收 PR #14 `fab25fbc2b5f3b9062c5deb474c0b9471362c847` 建立**獨立 QA 專用分支** `qa/public-nine-articles-20261017`。
+- 僅將指定九篇資料在該 QA 分支的真實佇列設為 `source-checked`、`importToQa: true`，保留 AI 查核日期與查核紀錄；原剩餘13篇與13項新住民候選全部關閉。
+- QA 頁首說明補充本批九篇及 11 筆長期官方查詢入口，仍顯示「未核准測試內容」。
+- 將 QA workflow 的舊觸發來源由舊開發分支改為 `qa/public-nine-articles-20261017`，舊 36 篇／13 卡的部署檢查對應更新 45 篇／向光19／讀利26，同時增設九篇來源記錄、正式版隔離及 `content/release-approvals.json` Git blob SHA 不變檢查。觸發仍限 workflow 檔變更，不會因一般編輯提交自行部署。
+- 第一次預部署試跑缺 Playwright；第二次缺建置 `dist` 的 preview 輸出；均在部署步驟前中止，未改公開網站。修正後第三次完整通過。
+- **最終部署成功**：GitHub Actions run `38995630481`（job `117287443426`），所有步驟含 production 獨立建置、QA 45 篇、九篇僅 QA 開啟、11＋1 官方入口、原站檢查、Pages artifact 與 `deploy-pages@v4` 均 success。部署工程 SHA `d13ee71bd4617a50c09887d50d85d37d3082e44f`。
+- GitHub Actions 輸出的公開網址：`https://daycool858000-hue.github.io/morning-light-magazine/`。GitHub 已回報部署成功；**ChatGPT 的外部網頁讀取工具暫時無法直接抓取該 GitHub Pages 域名，因此未冒稱已親自用 iPhone 或瀏覽器驗證線上畫面**。
+- PR #11、PR #14、main 及正式 `content/release-approvals.json` 均未改動；此次歸檔僅追加到 PR #11 編輯分支。正式發布及站主逐篇審稿仍未核准。
+
+**「待查核」狀態說明**：原 `content/resources.json` 的18筆基本資源在來源上已有 AI 核對／部分站主核准用途紀錄，但原始 `status` 仍全為「待確認」，QA 畫面因此顯示「待查核」。這不會隨公開 QA 或未來正式版自然變成「已確認」；應按原驗收規則分開更新資源的實際查核範圍、AI 查核與站主核准，不可為了改掉標籤就冒稱人工逐頁查驗。本輪**沒有改資源查核狀態**。
