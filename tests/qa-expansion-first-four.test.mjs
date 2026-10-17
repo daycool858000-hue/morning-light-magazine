@@ -3,7 +3,7 @@
 // 依 docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md：exp-01、exp-08 → 讀利；exp-11、exp-12 → 向光。
 // 前置：npm test 已建好 dist-qa（真實佇列，四篇仍未開啟）。
 // 本測試以 docs/QA-EXPANSION-STAGING-FIRST-FOUR-2026-10-17.json 建置獨立暫存版 dist-qa-staging-first-four，檢查：
-//   一、暫存佇列與正式佇列、manifest 編輯決策一致；正式佇列四篇仍 importToQa=false／pending。
+//   一、暫存佇列與正式佇列、manifest 編輯決策一致；隔離的歷史基線佇列四篇仍 importToQa=false／pending。
 //   二、兩份 V2 已同步：exp-11 的平台欄位修正、exp-12 新增的科教館 2022 年來源。
 //   三、四篇全文逐行出現、來源標題完整不截斷、分類、讀利／向光接續、搜尋索引、未核准標示與 noindex、正文只有一份。
 //   四、原 36 篇與未受影響頁面與 dist-qa 完全相同；舊的未上線 slug 不出現。
@@ -45,7 +45,10 @@ const readJson = async (f) => JSON.parse(await readFile(path.join(ROOT, f), 'utf
 const site = await readJson('config/site.json');
 const categories = await readJson('content/categories.json');
 const staging = await readJson(STAGING);
-const realQueue = await readJson(QA_EXPANSION_QUEUE);
+// 歷史暫存安全回歸：在隔離產物中模擬九篇尚未公開；不讀取／修改真實公開QA佇列。
+const LEGACY_QA = 'dist-qa-closed-legacy';
+const LEGACY_QUEUE = 'docs/.qa-expansion-test-closed.generated.json';
+const realQueue = await readJson(LEGACY_QUEUE);
 const manifest = await readJson('docs/CONTENT-EXPANSION-22-ARTICLE-MANIFEST-2026-10-16.json');
 const BASE = site.basePath;
 
@@ -97,9 +100,9 @@ for (const id of IDS) {
 // 第二批五篇已由站主指示：B4 讀利，A1、A2、A4、B5 向光；正式佇列仍全部關閉；其餘 13 篇維持 none
 const SECOND_BATCH = { A1: 'toward', A2: 'toward', A4: 'toward', B4: 'readli', B5: 'toward' };
 const others = realQueue.articles.filter((a) => !IDS.includes(a.id));
-if (others.some((a) => a.importToQa !== false)) queueProblems.push('第一批以外的文章被開啟');
+if (others.some((a) => a.importToQa !== false)) queueProblems.push('第一批暫存以外的歷史基線出現開啟文章');
 if (others.some((a) => a.directory !== (SECOND_BATCH[a.id] || 'none'))) queueProblems.push('第一批以外的文章目錄不符（第二批 B4 readli、其餘四篇 toward，其他 none）');
-check('佇列：暫存只含第一批四篇並與正式佇列欄位一致；exp-01／08 讀利、exp-11／12 向光且改用新 slug；正式佇列四篇仍 importToQa=false／pending，第二批五篇（B4 讀利、四篇向光）已定目錄但未開啟，其餘 13 篇維持 directory=none',
+check('佇列：暫存只含第一批四篇並與正式佇列欄位一致；exp-01／08 讀利、exp-11／12 向光且改用新 slug；隔離的歷史基線佇列四篇仍 importToQa=false／pending，第二批五篇（B4 讀利、四篇向光）已定目錄但未開啟，其餘 13 篇維持 directory=none',
   queueProblems.length === 0, queueProblems.slice(0, 5).join('；'));
 
 // ---------- 二、V2 同步 ----------
@@ -174,10 +177,10 @@ for (const x of staging.articles) {
 check('不重複正文：四篇各只有一份文章頁，讀利／向光／分類頁只連結不複製正文', dupProblems.length === 0, dupProblems.slice(0, 3).join('；'));
 
 // 讀利／向光
-const qaQp = await read('dist-qa', 'quiet-power.html');
+const qaQp = await read(LEGACY_QA, 'quiet-power.html');
 const sxQp = await read(OUT, 'quiet-power.html');
 const sxToward = await read(OUT, 'toward-light.html');
-const qaToward = await read('dist-qa', 'toward-light.html');
+const qaToward = await read(LEGACY_QA, 'toward-light.html');
 const readliRe = /<h3><a href="articles\/([^"]+)\.html">/g;
 const towardRe = /<article class="toward-reading-card">\s*<a href="articles\/([^"]+)\.html">/g;
 const readliBefore = links(qaQp, readliRe);
@@ -192,12 +195,12 @@ check('讀利：原 23 篇順序不變，exp-01、exp-08 接在最後；向光�
   `讀利 ${readliAfter.length}、向光 ${towardAfter.length}`);
 
 // ---------- 四、既有內容不變、舊 slug 不出現 ----------
-const qaArticles = (await readdir(path.join(ROOT, 'dist-qa/articles'))).filter((f) => f.endsWith('.html'));
+const qaArticles = (await readdir(path.join(ROOT, LEGACY_QA, 'articles'))).filter((f) => f.endsWith('.html'));
 const changed = [];
-for (const f of qaArticles) if ((await read('dist-qa', `articles/${f}`)) !== (await read(OUT, `articles/${f}`).catch(() => ''))) changed.push(f);
+for (const f of qaArticles) if ((await read(LEGACY_QA, `articles/${f}`)) !== (await read(OUT, `articles/${f}`).catch(() => ''))) changed.push(f);
 const sxArticles = (await readdir(path.join(SX, 'articles'))).filter((f) => f.endsWith('.html'));
 for (const f of ['index.html', 'support.html', 'activities.html', 'search.html', 'city.html', 'career.html', 'law.html']) {
-  if ((await read('dist-qa', f)) !== (await read(OUT, f))) changed.push(f);
+  if ((await read(LEGACY_QA, f)) !== (await read(OUT, f))) changed.push(f);
 }
 check('既有內容：原 36 篇文章頁、首頁、支援、活動、搜尋頁及未收錄新篇的主題頁與 dist-qa 完全相同；暫存版共 40 篇',
   qaArticles.length === 36 && sxArticles.length === 40 && changed.length === 0, changed.slice(0, 5).join('、'));
