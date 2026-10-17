@@ -35,7 +35,7 @@ export const TOWARD_OFFICIAL_LINK_IDS = Object.freeze([
   'open-culture-events',
 ]);
 
-export function resolveTowardEditorial(articles, resources) {
+export function resolveTowardEditorial(articles, resources, { requireOfficialLinks = true } = {}) {
   const bySlug = new Map(articles.map(a => [a.slug, a]));
   const byId = new Map(resources.map(r => [r.id, r]));
   const missing = [];
@@ -61,7 +61,7 @@ export function resolveTowardEditorial(articles, resources) {
   });
   const official = TOWARD_OFFICIAL_LINK_IDS.map(id => {
     const item = byId.get(id);
-    if (!item) missing.push('官方資源不存在 ' + id);
+    if (!item && requireOfficialLinks) missing.push('官方資源不存在 ' + id);
     return item;
   }).filter(Boolean);
   if (topics.length !== 8) missing.push('原有八個學習與活動索引不完整');
