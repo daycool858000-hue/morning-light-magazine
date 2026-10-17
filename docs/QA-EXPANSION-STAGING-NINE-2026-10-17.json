@@ -1,14 +1,15 @@
 {
   "documentType": "qa-expansion-import-queue",
   "stagingOnly": true,
-  "title": "由己六大主題擴充｜九篇 QA 暫存模擬（第一批四篇＋第二批五篇；不是正式匯入佇列）",
+  "title": "由己六大主題擴充｜九篇 QA 暫存模擬（第一批四篇＋第二批五篇全部開啟；不是正式匯入佇列）",
   "updatedOn": "2026-10-17",
   "approvalStatus": "not-approved",
   "rules": [
     "本檔只供自動化測試以 QA_EXPANSION_QUEUE 建置獨立暫存版 dist-qa-staging-nine，模擬第一批四篇與第二批已通過來源初核的文章開啟後的樣子；公開 QA 部署固定讀 docs/QA-EXPANSION-IMPORT-QUEUE.json，不讀本檔。build.mjs 會拒絕把 stagingOnly 佇列輸出到 dist-qa。",
     "此處 importToQa=true／source-checked 只代表「AI 來源初核完成，暫存試讀」（見 sourceCheckRecord），不是站主同意部署公開 QA，也不是正式發布核准。正式佇列的九篇仍是 importToQa=false／pending。",
-    "A1 與 B5 經 2026-10-17 來源複核仍有無法確認的敘述，本檔維持 importToQa=false（stagingBlocker 說明原因），不為了湊滿 45 篇而匯入。",
-    "slug、title、category、sourceFile、heading、directory 必須與正式佇列完全相同（測試會比對），修改時兩邊一起改。"
+    "2026-10-17 ChatGPT 獨立原始來源複核（docs/EXPANSION-A1-B5-B4-INDEPENDENT-PRIMARY-SOURCE-RECHECK-2026-10-17.md）撤銷 A1、B5 先前的待修理由，九篇全部在本暫存檔開啟（共 45 篇）；這仍只是 AI 來源初核，不是站主審閱或發布核准。",
+    "slug、title、category、sourceFile、heading、directory 必須與正式佇列完全相同（測試會比對），修改時兩邊一起改。",
+    "目錄：讀利＝exp-01、exp-08、B4；向光＝exp-11、exp-12、A1、A2、A4、B5（依站主 2026-10-17 指示；六大主題分類不因目錄調整而改變）。"
   ],
   "sourceFiles": {
     "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md": {
@@ -95,11 +96,10 @@
       "directory": "toward",
       "batch": "EXP-QA-02-20261017",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false,
-      "stagingBlocker": "待修 2 項：2027 年 1 月預定成果發表僅有受託團體公告、內文未逐字確認；來源區標題寫「官方來源」卻含兩個非政府網站。六筆網址經 CI run 38990419022 實際開頁證實存在。詳見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "importToQa": true
     },
     {
       "id": "A2",
@@ -138,7 +138,7 @@
       "category": "life-family",
       "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
       "heading": "04",
-      "directory": "toward",
+      "directory": "readli",
       "batch": "EXP-QA-02-20261017",
       "related": [],
       "sourceCheck": "source-checked",
@@ -156,11 +156,10 @@
       "directory": "toward",
       "batch": "EXP-QA-02-20261017",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false,
-      "stagingBlocker": "待修 1 句：國教院電子報第 270 期該篇內文是否含「真實片段／錯置脈絡」待逐字核對。篇名、期數與國教署新聞稿網址經 CI run 38990419022 實際開頁證實。詳見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "importToQa": true
     }
   ],
   "resources": []

@@ -41,16 +41,27 @@
 | `scripts/lib/qa-*.mjs` | 各批 QA 候選內容載入器：batch2、batch3、batch45、batch6、english、activities（`loadQaNotices` 具體活動＋`loadQaActivities` 12 個長期入口）、expansion（六大主題擴充分批匯入，只讀 `docs/QA-EXPANSION-IMPORT-QUEUE.json`，說明見 `docs/QA-EXPANSION-IMPORT-GUIDE-2026-10-16.md`） |
 | `src/qa-assets/js/` | **只複製到 dist-qa** 的腳本：`qa-calendar.js`（全站小日曆）、`qa-activities.js`（活動依臺灣日期隱藏） |
 | `scripts/lib/toward-light-editorial.mjs` | 向光八索引與延伸閱讀的文章對應 |
-| `scripts/check-links-browser.mjs` | Chromium 外站連結檢查（`--set=batch45`、`batch6`、`activities`） |
+| `scripts/check-links-browser.mjs` | Chromium 外站連結檢查（`--set=batch45`、`batch6`、`activities`、`expansion9`）；結果分四類：正常開啟／下載型連結／海外逾時或受阻／真正失效，`--fail-on-broken` 只在真正失效時 exit 1。**工作流程 success 不等於每個網址都通過，要逐筆看分類** |
 | `src/assets/css/main.css` | 全站樣式；`src/icons/` 圖示 |
-| `tests/` | `site.test.mjs`（正式版 44 項）、`release-gate.test.mjs`、`qa-batch2.test.mjs`（QA 全部檢查，只核對原 36 篇）、`qa-expansion.test.mjs`（擴充匯入機制，用 `tests/fixtures/qa-expansion/` 範例佇列）、`qa-expansion-first-four.test.mjs`（第一批四篇暫存模擬）、`mobile-webkit.test.mjs`、`qa-webkit.test.mjs` |
+| `tests/` | `site.test.mjs`（正式版 44 項）、`release-gate.test.mjs`、`qa-batch2.test.mjs`（QA 全部檢查，只核對原 36 篇）、`qa-expansion.test.mjs`（擴充匯入機制，用 `tests/fixtures/qa-expansion/` 範例佇列）、`qa-expansion-first-four.test.mjs`（第一批四篇暫存模擬）、`qa-expansion-nine.test.mjs`（九篇 45 篇整合暫存模擬，CI 另跑 WebKit）、`mobile-webkit.test.mjs`、`qa-webkit.test.mjs` |
 
 ### 常用指令
 - 全部測試：`npm test`（WebKit 本機沒有安裝，由 CI 執行）
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
-## 最新權威狀態｜2026-10-17 九篇文章＋PR #10 入口整合暫存（本節最新，優先於以下所有段落）
+## 最新權威狀態｜2026-10-17 九篇全部進暫存（45 篇）更正版（本節最新，優先於以下所有段落）
+
+**工程分支 `claude/nine-articles-portal-qa-6i6jys`（承接 PR #13 `52685ab`），草稿 PR 見下方。未部署 GitHub Pages、未合併 main、未修改 `content/release-approvals.json`、正式匯入佇列 `docs/QA-EXPANSION-IMPORT-QUEUE.json` 九篇全部仍 `importToQa: false`／`pending`。全部查核為 AI（Claude＋ChatGPT）完成，不是站主審閱；CI 成功不等於內容核准。**
+
+- **來源查核更正**：ChatGPT 直接開啟官方原文的獨立複核（`docs/EXPANSION-A1-B5-B4-INDEPENDENT-PRIMARY-SOURCE-RECHECK-2026-10-17.md`，編輯分支 `d5fe0ae`／`1190f1e`）推翻 PR #13 對 A1、B5 的待修判斷與對 B4 日期的修改建議：A1 受託團體原頁明載「預定於116年1月」成果發表及展示（屬受託單位預定計畫，不是政府確定開放的一般民眾活動，文章已如此界定）；B5 國教院第 270 期第 2 段確有真實片段錯置的敘述、新聞稿發布單位確為國教署；B4《服飾標示基準》第七點明載 2023-05-18 生效，**原稿日期正確，不改**。`docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md` 已全面改寫，不保留被原文推翻的待修理由。Claude 容器仍無法連外直開原文，紀錄中已誠實註明。
+- **暫存 45 篇**（`docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json`，`stagingOnly`）：讀利 **26**＝原 23＋exp-01、exp-08、**B4**；向光 **19**＝原 13＋exp-11、exp-12、A1、A2、A4、B5。B4 由向光改到讀利（正式佇列 `directory` 同步改，仍未開啟）。六大分類不變；向光八索引與原文章順序不變；桌機向光最後一列 3 張屬正常排列。
+- **同步的編輯版本**：只 cherry-pick PR #11 的 `f8e4f3a`（A1 第三輪 taoyuanwdc 標「非政府網域」）、`7abb900`（B4「自行訂製服裝」）、`d5fe0ae`、`1190f1e`（查核紀錄）。**未同步** PR #11 新增的城市研究（`66f6443` 四縣十筆入口、`02e265e` 22 縣市追蹤表），所以兩分支**不再逐位元組相同**；日後合併須核對城市資料、文章修正與 CLAUDE.md，不得互相覆寫。
+- **連結檢查**（run `38990419022`）：23 個不同網址＝正常開啟 21、下載型 1（exp-12 科教館 PDF）、海外逾時 1（A2 家庭教育資源網，臺灣 iPhone 曾驗收可開，不刪）、真正失效 0。檢查器已改為四類分類並加 `--fail-on-broken`。
+- **測試**：本機 `npm test` 133 項全部通過（Chromium）；CI 另跑 WebKit。截圖 `docs/qa-media/nine-staging-45-2026-10-17/`（A1、A2、A4、B4、B5 文章頁 390／1280px，讀利／向光新增卡片段）。報告 `docs/NINE-ARTICLE-PORTAL-INTEGRATION-QA-STAGING-REPORT-2026-10-17.md`。
+- **下一步：停止，等 ChatGPT 獨立驗收與站主授權。** 站主同意後才開正式佇列、才部署公開 QA；正式發布另走 release-approvals 流程。
+
+## （已被上一節取代，歷史保留）2026-10-17 九篇文章＋PR #10 入口整合暫存（43 篇版）
 
 **工程分支 `claude/qa-nine-articles-portals-staging-20261017`：已把 PR #10（官方查詢入口）、PR #11（編輯原稿與來源紀錄）、PR #12（V2 解析器與分批匯入）及第一批四篇暫存工程合併到同一個暫存環境。未部署 GitHub Pages、未合併 main、未修改 `content/release-approvals.json`、正式匯入佇列仍全部 `importToQa: false`／`pending`。**
 

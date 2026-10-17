@@ -94,12 +94,12 @@ for (const id of IDS) {
   if (r.importToQa !== false || r.sourceCheck !== 'pending' || r.sourceCheckedOn !== null || r.sourceCheckRecord !== null) queueProblems.push(`${id} 正式佇列被開啟或標成已查核`);
   if (s.importToQa !== true || s.sourceCheck !== 'source-checked' || s.sourceCheckedOn !== '2026-10-17' || s.sourceCheckRecord !== DECISION) queueProblems.push(`${id} 暫存佇列匯入欄位不符`);
 }
-// 第二批五篇（A1、A2、A4、B4、B5）已由站主指示暫定向光，正式佇列仍全部關閉；其餘 13 篇維持 none
-const SECOND_BATCH = ['A1', 'A2', 'A4', 'B4', 'B5'];
+// 第二批五篇已由站主指示：B4 讀利，A1、A2、A4、B5 向光；正式佇列仍全部關閉；其餘 13 篇維持 none
+const SECOND_BATCH = { A1: 'toward', A2: 'toward', A4: 'toward', B4: 'readli', B5: 'toward' };
 const others = realQueue.articles.filter((a) => !IDS.includes(a.id));
 if (others.some((a) => a.importToQa !== false)) queueProblems.push('第一批以外的文章被開啟');
-if (others.some((a) => a.directory !== (SECOND_BATCH.includes(a.id) ? 'toward' : 'none'))) queueProblems.push('第一批以外的文章目錄不符（第二批五篇暫定 toward，其餘 none）');
-check('佇列：暫存只含第一批四篇並與正式佇列欄位一致；exp-01／08 讀利、exp-11／12 向光且改用新 slug；正式佇列四篇仍 importToQa=false／pending，第二批五篇暫定向光但未開啟，其餘 13 篇維持 directory=none',
+if (others.some((a) => a.directory !== (SECOND_BATCH[a.id] || 'none'))) queueProblems.push('第一批以外的文章目錄不符（第二批 B4 readli、其餘四篇 toward，其他 none）');
+check('佇列：暫存只含第一批四篇並與正式佇列欄位一致；exp-01／08 讀利、exp-11／12 向光且改用新 slug；正式佇列四篇仍 importToQa=false／pending，第二批五篇（B4 讀利、四篇向光）已定目錄但未開啟，其餘 13 篇維持 directory=none',
   queueProblems.length === 0, queueProblems.slice(0, 5).join('；'));
 
 // ---------- 二、V2 同步 ----------

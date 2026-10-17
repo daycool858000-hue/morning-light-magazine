@@ -2,13 +2,15 @@
 // 九篇擴充文章＋PR #10 官方查詢入口的整合 QA 暫存模擬測試。
 // 依 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md：
 //   第一批 exp-01、exp-08 → 讀利；exp-11、exp-12 → 向光；
-//   第二批 A2、A4、B4 通過 AI 來源初核 → 向光；A1、B5 來源待修，暫存也不開啟（不湊滿 45 篇）。
+//   第二批 B4 → 讀利；A1、A2、A4、B5 → 向光。A1、B5 先前的待修理由已由
+//   docs/EXPANSION-A1-B5-B4-INDEPENDENT-PRIMARY-SOURCE-RECHECK-2026-10-17.md 的獨立原始來源複核撤銷，九篇全部在暫存開啟（45 篇）。
 // 前置：npm test 已建好 dist-qa（真實佇列，九篇全部未開啟）。
 // 本測試以 docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json 建置獨立暫存版 dist-qa-staging-nine，檢查：
-//   一、暫存佇列與正式佇列欄位一致；正式佇列九篇仍 importToQa=false／pending；A1、B5 附待修原因。
-//   二、七篇全文逐行出現、來源完整、分類、查核日期、未核准標示、noindex、搜尋索引，編輯用註記不外露。
-//   三、A1、B5 的 slug 不出現在任何頁面、搜尋索引或網站地圖。
-//   四、讀利 23→25、向光 13→18 且八索引不變；原 36 篇與未受影響頁面和 dist-qa 完全相同。
+//   一、暫存佇列與正式佇列欄位一致；正式佇列九篇仍 importToQa=false／pending；查核紀錄不再保留已撤銷的待修理由。
+//   二、九篇全文逐行出現、來源筆數／標題／網址完整、分類、查核日期、未核准標示、noindex、搜尋索引，編輯用註記不外露；
+//       A1 第三輪、B4 第二輪的最新用字（非政府網域標示、自行訂製服裝）確實出現。
+//   三、舊的未上線 slug 不出現在任何頁面、搜尋索引或網站地圖；正式版與公開 QA 建置不含九篇。
+//   四、讀利 23→26、向光 13→19 且八索引不變；原 36 篇與未受影響頁面和 dist-qa 完全相同。
 //   五、PR #10 的 11 筆文字入口與 act-09 同網址沿用在整合後仍正確，沒有重複建卡。
 //   六、320／375／390／1280px（Chromium，及 CI 中的 WebKit）無水平溢位、來源不超出畫面、搜尋可開啟。
 // 設定 NINE_SCREENSHOTS=<資料夾> 時，另存 390／1280px 截圖供站主驗收（CI 不設定）。
@@ -41,21 +43,21 @@ const DECISION = 'docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-
 const OUT = 'dist-qa-staging-nine';
 const SX = path.join(ROOT, OUT);
 const IDS = ['exp-01', 'exp-08', 'exp-11', 'exp-12', 'A1', 'A2', 'A4', 'B4', 'B5'];
-const BLOCKED = ['A1', 'B5'];
+const RECHECK = 'docs/EXPANSION-A1-B5-B4-INDEPENDENT-PRIMARY-SOURCE-RECHECK-2026-10-17.md';
 // 暫存預期：slug、目錄、分類、搜尋關鍵字（關鍵字取自各篇標題，用來驗證搜尋找得到）
 const WANT = {
   'exp-01': { slug: 'exp-household-shared-budget', directory: 'readli', category: 'life-family', search: '家庭共同費用' },
   'exp-08': { slug: 'exp-personal-boundaries', directory: 'readli', category: 'health', search: '界線可以怎麼說清楚' },
   'exp-11': { slug: 'exp-choosing-open-courses', directory: 'toward', category: 'learning', search: '試學一小段' },
   'exp-12': { slug: 'exp-compare-everyday-experiments', directory: 'toward', category: 'learning', search: '生活實驗' },
-  A1: { slug: 'exp-women-center-courses', directory: 'toward', category: 'learning' },
+  A1: { slug: 'exp-women-center-courses', directory: 'toward', category: 'learning', search: '婦女中心有什麼課' },
   A2: { slug: 'exp-family-education-adults', directory: 'toward', category: 'life-family', search: '成年家人' },
   A4: { slug: 'exp-local-events-formats', directory: 'toward', category: 'learning', search: '展覽、講座與工作坊' },
-  B4: { slug: 'exp-clothing-labels', directory: 'toward', category: 'life-family', search: '衣物成分與洗標' },
-  B5: { slug: 'exp-ai-answer-verification', directory: 'toward', category: 'learning' },
+  B4: { slug: 'exp-clothing-labels', directory: 'readli', category: 'life-family', search: '衣物成分與洗標' },
+  B5: { slug: 'exp-ai-answer-verification', directory: 'toward', category: 'learning', search: '來源仍要自己打開' },
 };
-const READLI_NEW = ['exp-01', 'exp-08'];
-const TOWARD_NEW = ['exp-11', 'exp-12', 'A2', 'A4', 'B4'];
+const READLI_NEW = ['exp-01', 'exp-08', 'B4'];
+const TOWARD_NEW = ['exp-11', 'exp-12', 'A1', 'A2', 'A4', 'B5'];
 
 const readJson = async (f) => JSON.parse(await readFile(path.join(ROOT, f), 'utf8'));
 const site = await readJson('config/site.json');
@@ -103,20 +105,19 @@ for (const id of IDS) {
   if (r.slug !== w.slug || r.directory !== w.directory || r.category !== w.category) queueProblems.push(`${id} slug／目錄／分類與本測試預期不符`);
   // 正式佇列（公開 QA 部署唯一讀取的檔）九篇一律維持關閉
   if (r.importToQa !== false || r.sourceCheck !== 'pending' || r.sourceCheckedOn !== null || r.sourceCheckRecord !== null) queueProblems.push(`${id} 正式佇列被開啟或標成已查核`);
-  if (BLOCKED.includes(id)) {
-    if (s.importToQa !== false || s.sourceCheck !== 'pending' || typeof s.stagingBlocker !== 'string' || !s.stagingBlocker.includes(REVIEW)) queueProblems.push(`${id} 來源待修，暫存也不可開啟，且須註明待修原因`);
-  } else {
-    const record = id.startsWith('exp-') ? DECISION : REVIEW;
-    if (s.importToQa !== true || s.sourceCheck !== 'source-checked' || s.sourceCheckedOn !== '2026-10-17' || s.sourceCheckRecord !== record) queueProblems.push(`${id} 暫存佇列匯入欄位不符`);
-  }
+  const record = id.startsWith('exp-') ? DECISION : REVIEW;
+  if (s.importToQa !== true || s.sourceCheck !== 'source-checked' || s.sourceCheckedOn !== '2026-10-17' || s.sourceCheckRecord !== record || 'stagingBlocker' in s) queueProblems.push(`${id} 暫存佇列匯入欄位不符`);
 }
 const others = realQueue.articles.filter((a) => !IDS.includes(a.id));
 if (others.length !== 13 || others.some((a) => a.directory !== 'none' || a.importToQa !== false)) queueProblems.push('九篇以外的 13 篇被指定目錄或開啟');
-if (!existsSync(path.join(ROOT, REVIEW))) queueProblems.push('缺少第二批來源查核紀錄');
-check('佇列：暫存依序含九篇且欄位與正式佇列一致；A2／A4／B4 開啟、A1／B5 標明待修不開啟；正式佇列九篇仍 importToQa=false／pending，其餘 13 篇維持 directory=none',
+for (const f of [REVIEW, RECHECK]) if (!existsSync(path.join(ROOT, f))) queueProblems.push(`缺少 ${f}`);
+// 已被官方原文推翻的舊判斷不可再當成待修理由保留
+const reviewText = existsSync(path.join(ROOT, REVIEW)) ? await readFile(path.join(ROOT, REVIEW), 'utf8') : '';
+if (!reviewText.includes(RECHECK) || /不進本輪暫存|建議改為「洗標規定自 2023-05-18 施行」/.test(reviewText)) queueProblems.push('來源查核紀錄仍保留已撤銷的待修理由或未引用獨立複核');
+check('佇列：暫存依序含九篇且全部開啟、欄位與正式佇列一致（B4 讀利，A1／A2／A4／B5 向光）；查核紀錄引用獨立複核並撤銷舊待修理由；正式佇列九篇仍 importToQa=false／pending，其餘 13 篇維持 directory=none',
   queueProblems.length === 0, queueProblems.slice(0, 5).join('；'));
 
-// ---------- 二、暫存建置與七篇內容 ----------
+// ---------- 二、暫存建置與九篇內容 ----------
 execFileSync(process.execPath, ['scripts/build.mjs', '--mode=qa', `--out=${OUT}`], { cwd: ROOT, env: { ...process.env, QA_EXPANSION_QUEUE: STAGING }, stdio: 'pipe' });
 let guarded = false;
 try {
@@ -162,12 +163,19 @@ for (const x of enabled) {
   if (!(await read(OUT, cat.slug)).includes(`href="articles/${x.slug}.html"`)) articleProblems.push(`${x.id} 分類頁沒有連結`);
   if (!idx.includes(`"title":"${x.title}"`) || !idx.includes(`"url":"articles/${x.slug}.html"`)) articleProblems.push(`${x.id} 不在搜尋索引`);
 }
-// 第二批三篇的來源筆數（A2 三筆法規與學習入口、A4 兩筆文化部、B4 兩筆標示基準）
-const SRC_COUNT = { A2: 3, A4: 2, B4: 2 };
+// 九篇來源筆數合計 23 個不同網址（與連結檢查 --set=expansion9 相同）
+const SRC_COUNT = { 'exp-01': 1, 'exp-08': 2, 'exp-11': 2, 'exp-12': 3, A1: 6, A2: 3, A4: 2, B4: 2, B5: 2 };
 for (const [id, n] of Object.entries(SRC_COUNT)) if (parsed[id]?.sources.length !== n) articleProblems.push(`${id} 來源應為 ${n} 筆，實得 ${parsed[id]?.sources.length}`);
+const allUrls = new Set(Object.values(parsed).flatMap((a) => a.sources.map((s) => s.url)));
+if (allUrls.size !== 23) articleProblems.push(`九篇不同來源網址應為 23 個，實得 ${allUrls.size}`);
 // 第二批原稿的內部歸類行不可成為正文第一段
-for (const id of ['A4', 'B4']) if (/^\*\*建議(歸類|閱讀入口)/.test(parsed[id]?.body || '')) articleProblems.push(`${id} 原稿的編輯歸類行被當成正文`);
-check(`七篇文章（${enabled.map((x) => x.id).join('、')}）：全文逐行出現、標題與分類正確、參考來源筆數與標題完整、查核日期、未核准標示、noindex、分類頁連結與搜尋索引，編輯用註記不外露`,
+for (const id of ['A1', 'A2', 'A4', 'B4', 'B5']) if (/^\*\*(建議(歸類|閱讀入口)|編輯對應)/.test(parsed[id]?.body || '')) articleProblems.push(`${id} 原稿的編輯歸類行被當成正文`);
+// PR #11 最新用字：A1 第三輪非政府網域標示、B4 第二輪法規用語
+const a1 = existsSync(path.join(SX, `articles/${WANT.A1.slug}.html`)) ? await read(OUT, `articles/${WANT.A1.slug}.html`) : '';
+const b4 = existsSync(path.join(SX, `articles/${WANT.B4.slug}.html`)) ? await read(OUT, `articles/${WANT.B4.slug}.html`) : '';
+if (!a1.includes('桃園市北區婦女中心網站｜活動資訊（非政府網域；報名請查當期公告）') || !a1.includes('受託執行團體')) articleProblems.push('A1 未同步第三輪非政府網域標示');
+if (!b4.includes('自行訂製服裝') || b4.includes('個別訂製服裝') || !b4.includes('2023 年 5 月 18 日生效')) articleProblems.push('B4 未同步「自行訂製服裝」或來源日期被改動');
+check(`九篇文章（${enabled.map((x) => x.id).join('、')}）：全文逐行出現、標題與分類正確、參考來源筆數與標題完整、查核日期、未核准標示、noindex、分類頁連結與搜尋索引，編輯用註記不外露`,
   articleProblems.length === 0, articleProblems.slice(0, 5).join('；'));
 
 // 正文只生成一份
@@ -182,17 +190,27 @@ for (const x of enabled) {
     if (where.length !== 1 || where[0] !== `articles/${x.slug}.html`) dupProblems.push(`${x.id} 段落出現在 ${where.join('、') || '無'}`);
   }
 }
-check('不重複正文：七篇各只有一份文章頁，讀利／向光／分類頁只放連結', dupProblems.length === 0, dupProblems.slice(0, 3).join('；'));
+check('不重複正文：九篇各只有一份文章頁，讀利／向光／分類頁只放連結', dupProblems.length === 0, dupProblems.slice(0, 3).join('；'));
 
-// ---------- 三、待修兩篇完全不出現 ----------
-const blockedHits = [];
+// ---------- 三、舊 slug 與發布隔離 ----------
+const leakHits = [];
 for (const f of await listFiles(SX)) {
   if (!/\.(html|js|xml|txt)$/.test(f)) continue;
   const t = await read(OUT, f);
-  for (const id of BLOCKED) if (t.includes(WANT[id].slug)) blockedHits.push(`${f}：${WANT[id].slug}`);
-  for (const s of ['exp-open-course-certificates', 'exp-reading-popular-science']) if (t.includes(s)) blockedHits.push(`${f}：舊 slug ${s}`);
+  for (const s of ['exp-open-course-certificates', 'exp-reading-popular-science']) if (t.includes(s)) leakHits.push(`${f}：舊 slug ${s}`);
 }
-check('來源待修的 A1、B5 與舊的未上線 slug 不出現在任何頁面、搜尋索引或網站地圖', blockedHits.length === 0, blockedHits.slice(0, 3).join('；'));
+// 正式版與公開 QA（讀正式佇列，九篇全部關閉）都不可含九篇任何一篇
+for (const dir of ['dist-production', 'dist-qa']) {
+  if (!existsSync(path.join(ROOT, dir))) { leakHits.push(`${dir} 未建置`); continue; }
+  for (const f of await listFiles(path.join(ROOT, dir))) {
+    if (!/\.(html|js|xml|txt)$/.test(f)) continue;
+    const t = await read(dir, f);
+    for (const id of IDS) if (t.includes(WANT[id].slug)) leakHits.push(`${dir}/${f}：${WANT[id].slug}`);
+  }
+}
+const robots = await read(OUT, 'robots.txt').catch(() => '');
+if (!/Disallow:\s*\/\s*$/m.test(robots)) leakHits.push('暫存版 robots.txt 未全站 Disallow');
+check('發布隔離：舊的未上線 slug 不出現；正式版 dist-production 與公開 QA dist-qa 都不含九篇任何一篇；暫存版 robots 全站禁止索引', leakHits.length === 0, leakHits.slice(0, 3).join('；'));
 
 // ---------- 四、讀利／向光與既有內容 ----------
 const qaQp = await read('dist-qa', 'quiet-power.html');
@@ -205,7 +223,7 @@ const readliBefore = links(qaQp, readliRe);
 const readliAfter = links(sxQp, readliRe);
 const towardAfter = links(sxToward, towardRe);
 const slug = (id) => WANT[id].slug;
-check('讀利：原 23 篇順序不變，exp-01、exp-08 接在最後（25 篇）；向光：原 13 篇與八索引不變，exp-11、exp-12、A2、A4、B4 接在最後（18 張）；兩目錄互不重複',
+check('讀利：原 23 篇順序不變，exp-01、exp-08、B4 接在最後（26 篇）；向光：原 13 篇與八索引不變，exp-11、exp-12、A1、A2、A4、B5 接在最後（19 張）；兩目錄互不重複',
   readliBefore.length === 23 && JSON.stringify(readliAfter) === JSON.stringify([...readliBefore, ...READLI_NEW.map(slug)]) &&
   JSON.stringify(towardAfter) === JSON.stringify([...TOWARD_READING_SLUGS, ...TOWARD_NEW.map(slug)]) &&
   qaToward.match(/toward-panel"/g)?.length === sxToward.match(/toward-panel"/g)?.length &&
@@ -216,12 +234,12 @@ const qaArticles = (await readdir(path.join(ROOT, 'dist-qa/articles'))).filter((
 const changed = [];
 for (const f of qaArticles) if ((await read('dist-qa', `articles/${f}`)) !== (await read(OUT, `articles/${f}`).catch(() => ''))) changed.push(f);
 const sxArticles = (await readdir(path.join(SX, 'articles'))).filter((f) => f.endsWith('.html'));
-// 七篇分屬生活與家庭、身心健康、學習與活動；其餘頁面不得有任何差異
+// 九篇分屬生活與家庭、身心健康、學習與活動；其餘頁面不得有任何差異
 for (const f of ['index.html', 'support.html', 'activities.html', 'search.html', 'city.html', 'career.html', 'law.html']) {
   if ((await read('dist-qa', f)) !== (await read(OUT, f))) changed.push(f);
 }
-check('既有內容：原 36 篇文章頁、首頁、支援、活動、搜尋頁與未收錄新篇的主題頁（城市、職涯、法律）和 dist-qa 完全相同；暫存版共 43 篇',
-  qaArticles.length === 36 && sxArticles.length === 43 && changed.length === 0, `${sxArticles.length} 篇；差異 ${changed.slice(0, 5).join('、') || '無'}`);
+check('既有內容：原 36 篇文章頁、首頁、支援、活動、搜尋頁與未收錄新篇的主題頁（城市、職涯、法律）和 dist-qa 完全相同；暫存版共 45 篇',
+  qaArticles.length === 36 && sxArticles.length === 45 && changed.length === 0, `${sxArticles.length} 篇；差異 ${changed.slice(0, 5).join('、') || '無'}`);
 
 // ---------- 五、PR #10 官方查詢入口整合 ----------
 const portalProblems = [];
@@ -264,6 +282,16 @@ await new Promise((ok) => server.listen(4339, '127.0.0.1', ok));
 const ORIGIN = 'http://127.0.0.1:4339';
 const SHOTS = process.env.NINE_SCREENSHOTS;
 if (SHOTS) await mkdir(SHOTS, { recursive: true });
+// 截圖：從倒數第 n＋1 張卡（最後一張原有卡）到最後一張新卡的範圍，讓所有新卡與原卡銜接處都在同一張圖裡
+async function shotTail(page, selector, n, file) {
+  const cards = page.locator(selector);
+  const total = await cards.count();
+  const first = await cards.nth(total - n - 1).boundingBox();
+  const last = await cards.nth(total - 1).boundingBox();
+  const vw = page.viewportSize().width;
+  const sy = await page.evaluate(() => scrollY);
+  await page.screenshot({ path: file, fullPage: true, clip: { x: 0, y: Math.max(0, first.y + sy - 24), width: vw, height: last.y + last.height - first.y + 48 } });
+}
 const engines = [['Chromium', chromium]];
 try { const b = await webkit.launch(); await b.close(); engines.push(['WebKit', webkit]); } catch { console.log('（本機沒有 WebKit，WebKit 版面由 CI 執行）'); }
 try {
@@ -292,34 +320,32 @@ try {
         if (m.portals) problems.push(`${w}px ${f} 官方查詢入口 ${m.portals} 筆超出畫面或不足 44px`);
         if (SHOTS && (w === 390 || w === 1280) && f.startsWith('articles/')) await page.screenshot({ path: path.join(SHOTS, `${name.toLowerCase()}-${w}-${path.basename(f, '.html')}.png`), fullPage: true });
       }
-      // 讀利：新兩篇與原卡同為精簡清單、標題可觸控
+      // 讀利：新三篇與原卡同為精簡清單、標題可觸控
       await page.goto(`${ORIGIN}${BASE}quiet-power.html`);
       const qp = await page.locator('.readli-reading .story-grid .story').evaluateAll((cards) => cards.map((c) => {
         const a = c.querySelector('h3 a');
         const b = c.getBoundingClientRect();
         return { slug: a.getAttribute('href'), h: Math.round(b.height), w: Math.round(b.width), linkH: Math.round(a.getBoundingClientRect().height) };
       }));
-      const qpNew = qp.slice(-2);
-      if (qp.length !== 25 || !qpNew.every((c, i) => c.slug.includes(slug(READLI_NEW[i]))) ||
+      const qpNew = qp.slice(-3);
+      if (qp.length !== 26 || !qpNew.every((c, i) => c.slug.includes(slug(READLI_NEW[i]))) ||
           qpNew.some((c) => c.w !== qp[0].w || c.linkH < 44 || (mobile && (c.h < 75 || c.h >= 240)))) problems.push(`${w}px 讀利新卡 ${JSON.stringify(qpNew)}`);
       if (SHOTS && (w === 390 || w === 1280)) {
-        await page.locator('.readli-reading .story-grid .story').nth(24).scrollIntoViewIfNeeded();
-        await page.screenshot({ path: path.join(SHOTS, `${name.toLowerCase()}-${w}-readli-tail.png`) });
+        await shotTail(page, '.readli-reading .story-grid .story', READLI_NEW.length, path.join(SHOTS, `${name.toLowerCase()}-${w}-readli-tail.png`));
       }
-      // 向光：新五張與原 13 張同寬、手機單欄對齊
+      // 向光：新六張與原 13 張同寬、手機單欄對齊
       await page.goto(`${ORIGIN}${BASE}toward-light.html`);
       const tw = await page.locator('.toward-reading-card').evaluateAll((cards) => cards.map((c) => {
         const b = c.getBoundingClientRect();
         return { href: c.querySelector('a').getAttribute('href'), x: Math.round(b.left), w: Math.round(b.width), h: Math.round(b.height), linkH: Math.round(c.querySelector('a').getBoundingClientRect().height) };
       }));
-      const twNew = tw.slice(-5);
-      if (tw.length !== 18 || !twNew.every((c, i) => c.href.includes(slug(TOWARD_NEW[i]))) ||
+      const twNew = tw.slice(-6);
+      if (tw.length !== 19 || !twNew.every((c, i) => c.href.includes(slug(TOWARD_NEW[i]))) ||
           twNew.some((c) => c.w !== tw[0].w || c.linkH < 44 || (mobile && (c.x !== tw[0].x || c.h < 106 || c.h >= 230)))) problems.push(`${w}px 向光新卡 ${JSON.stringify(twNew)}`);
       if (SHOTS && (w === 390 || w === 1280)) {
-        await page.locator('.toward-reading-card').nth(13).scrollIntoViewIfNeeded();
-        await page.screenshot({ path: path.join(SHOTS, `${name.toLowerCase()}-${w}-toward-tail.png`) });
+        await shotTail(page, '.toward-reading-card', TOWARD_NEW.length, path.join(SHOTS, `${name.toLowerCase()}-${w}-toward-tail.png`));
       }
-      // 搜尋：七篇都能以標題關鍵字找到並開啟
+      // 搜尋：九篇都能以標題關鍵字找到並開啟
       for (const x of enabled) {
         await page.goto(`${ORIGIN}${BASE}search.html`);
         await page.fill('[data-search] input', WANT[x.id].search);
@@ -333,7 +359,7 @@ try {
       await ctxB.close();
     }
     await browser.close();
-    check(`${name} 320／375／390／1280px：七篇文章、讀利、向光、三個主題頁與城市頁無水平溢位，內文 ≥ 15px，來源、表格與官方查詢入口不超出畫面且可觸控 ≥ 44px；讀利 25／向光 18 的新卡與原卡尺寸一致；搜尋可找到並開啟七篇；無 JavaScript 錯誤`,
+    check(`${name} 320／375／390／1280px：九篇文章、讀利、向光、三個主題頁與城市頁無水平溢位，內文 ≥ 15px，來源、表格與官方查詢入口不超出畫面且可觸控 ≥ 44px；讀利 26／向光 19 的新卡與原卡尺寸一致；搜尋可找到並開啟九篇；無 JavaScript 錯誤`,
       problems.length === 0 && jsErrors.length === 0, [...problems, ...jsErrors].slice(0, 5).join('；'));
   }
 } finally {

@@ -10,7 +10,8 @@
     "directory：none（只出現在六大主題、文章頁與搜尋）、readli（另加入讀利文章列表末端）、toward（另加入向光文章格末端）；未經站主確認一律 none。",
     "官方資源網址與既有卡片完全相同 → 只在原卡補充文字；網址不同的全國性入口 → 主題頁簡潔文字入口；regions 為縣市 → 城市頁縣市篩選（需 serviceTypes 與 entryType）。",
     "本檔不是正式發布核准，不得加入 ownerPublicationApproval／productionApproved；正式版只讀 content/release-approvals.json。",
-    "第一批 QA 試讀（EXP-QA-01-20261017，見 docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md）：exp-01、exp-08 → readli；exp-11、exp-12 → toward，並於首次 QA 前改用新 slug（previousUnpublishedSlug 只供追溯，未曾上線，不建 redirect）。此四篇仍 importToQa=false／pending，須站主另行明確同意才開啟；暫存模擬只用 docs/QA-EXPANSION-STAGING-FIRST-FOUR-2026-10-17.json。"
+    "第一批 QA 試讀（EXP-QA-01-20261017，見 docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md）：exp-01、exp-08 → readli；exp-11、exp-12 → toward，並於首次 QA 前改用新 slug（previousUnpublishedSlug 只供追溯，未曾上線，不建 redirect）。此四篇仍 importToQa=false／pending，須站主另行明確同意才開啟；暫存模擬只用 docs/QA-EXPANSION-STAGING-FIRST-FOUR-2026-10-17.json。",
+    "第二批（EXP-QA-02-20261017）目錄依站主 2026-10-17 指示：B4 → readli；A1、A2、A4、B5 → toward。五篇仍 importToQa=false／pending；九篇整合暫存模擬只用 docs/QA-EXPANSION-STAGING-NINE-2026-10-17.json。"
   ],
   "sourceFiles": {
     "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md": {
@@ -215,7 +216,7 @@
       "sourceCheckedOn": null,
       "sourceCheckRecord": null,
       "importToQa": false,
-      "editorNote": "第三輪版本優先（覆蓋第二輪）；待修 2 項：2027 年 1 月成果發表僅受託團體公告未逐字確認、來源區含兩個非政府網站（網址經 CI 開頁證實存在），見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "editorNote": "第三輪版本優先（覆蓋第二輪）；先前兩項待修理由已由 2026-10-17 獨立原始來源複核撤銷（見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md）。正式佇列仍未開啟。",
       "secondQaBatch": "EXP-QA-02-20261017"
     },
     {
@@ -315,7 +316,7 @@
       "category": "life-family",
       "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
       "heading": "04",
-      "directory": "toward",
+      "directory": "readli",
       "related": [],
       "sourceCheck": "pending",
       "sourceCheckedOn": null,
@@ -337,7 +338,7 @@
       "sourceCheckRecord": null,
       "importToQa": false,
       "secondQaBatch": "EXP-QA-02-20261017",
-      "editorNote": "待修 1 句：國教院第 270 期內文是否含「真實片段／錯置脈絡」待逐字核對（篇名與國教署新聞稿網址經 CI 開頁證實），見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md"
+      "editorNote": "先前 1 句待修理由已由 2026-10-17 獨立原始來源複核撤銷（見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md）。正式佇列仍未開啟。"
     },
     {
       "id": "B6",
