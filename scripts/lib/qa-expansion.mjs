@@ -238,5 +238,5 @@ export async function loadQaExpansion(root, ctx) {
   }
   if (problems.length) throw new Error(`六大主題擴充 QA 匯入檢查失敗（${queueFile}）：\n- ${problems.join('\n- ')}`);
   const pending = (queue.articles || []).length + (queue.resources || []).length - articles.length - entries.length - cityResources.length - [...supplements.values()].flat().length;
-  return { articles, entries, cityResources, supplements, pending, queueFile };
+  return { articles, entries, cityResources, supplements, pending, queueFile, stagingOnly: queue.stagingOnly === true };
 }

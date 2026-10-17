@@ -173,6 +173,7 @@
 **正式來源（2026-10-17 查閱）：**
 - [國立臺灣科學教育館｜官網與臺灣網路科教館入口](https://www.ntsec.gov.tw/index.aspx)
 - [國立臺灣科學教育館｜活動與實驗課程查詢](https://estore.ntsec.gov.tw/classes.aspx?CTC=0010&TYPE2=1&pid=13&uid=49)
+- [國立臺灣科學教育館｜《科學研習》2022 年控制變因與科學思考教育討論](https://www.ntsec.gov.tw/article/FileAtt.ashx?id=6193)
 
 ---
 

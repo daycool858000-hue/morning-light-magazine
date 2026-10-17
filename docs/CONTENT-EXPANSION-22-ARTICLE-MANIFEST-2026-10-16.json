@@ -25,7 +25,19 @@
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
       "originalDraftTitle": "住在同一個家，生活費一定要全部放在同一個帳戶嗎？",
-      "latestReviewedHeading": "01"
+      "latestReviewedHeading": "01",
+      "firstQaBatchEditorial": {
+        "batchId": "EXP-QA-01-20261017",
+        "priority": 1,
+        "proposedSlug": "exp-household-shared-budget",
+        "directory": "readli",
+        "previousUnpublishedSlug": null,
+        "sourceReviewStatus": "AI official-source-and-paragraph-check-recorded; not owner-approved; not deployed",
+        "sourceReviewRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+        "checkedOn": "2026-10-17",
+        "qaEnabled": false,
+        "ownerPublicationApproval": false
+      }
     },
     {
       "id": "exp-02",
@@ -141,7 +153,19 @@
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
       "originalDraftTitle": "在人際關係中，什麼時候可以說出自己的界線？",
-      "latestReviewedHeading": "08"
+      "latestReviewedHeading": "08",
+      "firstQaBatchEditorial": {
+        "batchId": "EXP-QA-01-20261017",
+        "priority": 2,
+        "proposedSlug": "exp-personal-boundaries",
+        "directory": "readli",
+        "previousUnpublishedSlug": null,
+        "sourceReviewStatus": "AI official-source-and-paragraph-check-recorded; not owner-approved; not deployed",
+        "sourceReviewRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+        "checkedOn": "2026-10-17",
+        "qaEnabled": false,
+        "ownerPublicationApproval": false
+      }
     },
     {
       "id": "exp-09",
@@ -190,7 +214,19 @@
       "reviewDate": "2026-10-17",
       "reviewScope": "官方來源與關鍵程序第一輪交叉核對；仍需逐句、連結及人工審閱",
       "originalDraftTitle": "免費公開課程、觀看影片、完成證書，為什麼會是不同的事情？",
-      "latestReviewedHeading": "11"
+      "latestReviewedHeading": "11",
+      "firstQaBatchEditorial": {
+        "batchId": "EXP-QA-01-20261017",
+        "priority": 3,
+        "proposedSlug": "exp-choosing-open-courses",
+        "directory": "toward",
+        "previousUnpublishedSlug": "exp-open-course-certificates",
+        "sourceReviewStatus": "AI official-source-and-paragraph-check-recorded; not owner-approved; not deployed",
+        "sourceReviewRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+        "checkedOn": "2026-10-17",
+        "qaEnabled": false,
+        "ownerPublicationApproval": false
+      }
     },
     {
       "id": "exp-12",
@@ -207,7 +243,19 @@
       "latestReviewedFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
       "reviewDate": "2026-10-17",
       "originalDraftTitle": "想看生活中的科學知識，要怎麼判斷一篇科普文章講得夠不夠清楚？",
-      "latestReviewedHeading": "12"
+      "latestReviewedHeading": "12",
+      "firstQaBatchEditorial": {
+        "batchId": "EXP-QA-01-20261017",
+        "priority": 4,
+        "proposedSlug": "exp-compare-everyday-experiments",
+        "directory": "toward",
+        "previousUnpublishedSlug": "exp-reading-popular-science",
+        "sourceReviewStatus": "AI official-source-and-paragraph-check-recorded; not owner-approved; not deployed",
+        "sourceReviewRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+        "checkedOn": "2026-10-17",
+        "qaEnabled": false,
+        "ownerPublicationApproval": false
+      }
     }
   ],
   "olderArticles": [
@@ -369,6 +417,31 @@
     "qaImportedNew": 0,
     "ownerArticleApprovals": 0,
     "remarks": "12篇有V2，不代表逐句或實機驗收／正式上架。",
-    "manifestTitlesUse": "V2 正式候選標題；originalDraftTitle 只供追溯 10/16 V1，後台佇列要以 title 最新值與 V2 真正原稿比對"
+    "manifestTitlesUse": "V2 正式候選標題；originalDraftTitle 只供追溯 10/16 V1，後台佇列要以 title 最新值與 V2 真正原稿比對",
+    "firstQaEditorialChoice": {
+      "ids": [
+        "exp-01",
+        "exp-08",
+        "exp-11",
+        "exp-12"
+      ],
+      "readingSections": {
+        "readli": [
+          "exp-01",
+          "exp-08"
+        ],
+        "toward": [
+          "exp-11",
+          "exp-12"
+        ]
+      },
+      "newSlugsFor": [
+        "exp-11",
+        "exp-12"
+      ],
+      "sourceReviewDoc": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "actualQAImportedCount": 0,
+      "requiresSeparateOwnerQaDeploymentAgreement": true
+    }
   }
 }

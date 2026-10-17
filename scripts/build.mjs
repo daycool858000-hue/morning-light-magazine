@@ -95,6 +95,10 @@ const qaExpansion = IS_QA ? await loadQaExpansion(ROOT, {
   existingArticles: [...articlesAll, ...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6],
   queueFile: process.env.QA_EXPANSION_QUEUE,
 }) : { articles: [], entries: [], cityResources: [], supplements: new Map() };
+// 暫存模擬佇列（stagingOnly）只能輸出到獨立資料夾，不可進入公開 QA 部署所用的 dist-qa
+if (qaExpansion.stagingOnly && path.basename(OUT) === 'dist-qa') {
+  throw new Error(`${qaExpansion.queueFile} 是暫存模擬佇列，不可建置到 dist-qa；請用 --out 指定獨立資料夾`);
+}
 const seen = new Set();
 const seenUrls = new Map();
 for (const r of [...resourceData.items, ...qaResources, ...qaBatch3.resources]) {
