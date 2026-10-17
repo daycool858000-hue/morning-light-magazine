@@ -12,6 +12,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml as esc, parseFrontMatter, renderMarkdown } from './lib/markdown.mjs';
 import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from './lib/release.mjs';
+import { approvedLaunchArticle } from './lib/launch-approval.mjs';
 import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
@@ -63,6 +64,10 @@ const hotlineData = await readJson('content/hotlines.json');
 const eventData = await readJson('content/events.json');
 const release = await readJson('content/release-approvals.json');
 const approvals = release;
+// 只有網站擁有人明確簽核的文章原稿指紋才有資格進正式版；空清單時維持既有正式版不變。
+const launchApprovals = await readJson('content/launch-approvals.json');
+const HAS_LAUNCH_ARTICLE_APPROVALS = MODE === 'production' && Object.keys(launchApprovals.approvedArticles || {}).length > 0;
+const LOAD_EDITORIAL_CANDIDATES = IS_QA || HAS_LAUNCH_ARTICLE_APPROVALS;
 
 async function readMarkdownDir(dir) {
   const full = path.join(ROOT, dir);
@@ -88,17 +93,17 @@ const serviceTypes = new Set(resourceData.serviceTypes);
 const isDate = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
 const isHttps = (v) => typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v);
 
-const qaResources = IS_QA ? await loadBatch2Resources(ROOT) : [];
-const qaArticles = IS_QA ? await loadBatch2Articles(ROOT, categories) : [];
-const qaBatch3 = IS_QA ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
-const qaBatch45 = IS_QA ? await loadBatch45Articles(ROOT, categories) : [];
-const qaBatch6 = IS_QA ? await loadBatch6Articles(ROOT, categories) : [];
+const qaResources = IS_QA || HAS_LAUNCH_ARTICLE_APPROVALS ? await loadBatch2Resources(ROOT) : [];
+const qaArticles = LOAD_EDITORIAL_CANDIDATES ? await loadBatch2Articles(ROOT, categories) : [];
+const qaBatch3 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
+const qaBatch45 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch45Articles(ROOT, categories) : [];
+const qaBatch6 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch6Articles(ROOT, categories) : [];
 const qaActivities = IS_QA ? await loadQaActivities(ROOT) : null;
 const qaNotices = IS_QA ? await loadQaNotices(ROOT) : null;
 const qaTopicGuides = IS_TOPIC_GUIDES_STAGING ? await loadQaTopicGuides(ROOT, categories) : { byId: {}, count: 0 };
 // 六大主題擴充（PR #11）：只匯入佇列中已完成來源查核、且明確開啟的單篇或小批內容。
 // QA_EXPANSION_QUEUE 只供自動化測試指定範例佇列；QA 部署工作流程不設定，固定讀 docs/QA-EXPANSION-IMPORT-QUEUE.json。
-const qaExpansion = IS_QA ? await loadQaExpansion(ROOT, {
+const qaExpansion = LOAD_EDITORIAL_CANDIDATES ? await loadQaExpansion(ROOT, {
   categories, counties, serviceTypes: resourceData.serviceTypes,
   existingResources: [...resourceData.items, ...qaResources, ...qaBatch3.resources],
   existingArticles: [...articlesAll, ...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6],
@@ -159,7 +164,7 @@ const isPublic = (status, published = true) =>
 
 const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
-  : approvedRecord(r, approvals.resources, 'official-entry')), ...qaResources, ...qaBatch3.resources, ...qaExpansion.cityResources];
+  : approvedRecord(r, approvals.resources, 'official-entry')), ...(IS_QA ? [...qaResources, ...qaBatch3.resources, ...qaExpansion.cityResources] : [])];
 const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
 const qaPortalRouting = IS_QA ? resolveQaPortalRouting(qaActivities.items, resources) : { primary: [], reused: [] };
 // QA-only：生活與家庭 01「懷孕與生育相關福利」的四段導覽（未核准，不進 preview／production）
@@ -173,7 +178,9 @@ const channels = hotlineData.channels.filter((h) => IS_PREVIEW
 const events = eventData.items
   .filter((e) => isPublic(e.status))
   .sort((a, b) => a.startDate.localeCompare(b.startDate));
-const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6, ...qaExpansion.articles]
+const editorialArticleCandidates = [...qaArticles, ...qaBatch3.articles, ...qaBatch45, ...qaBatch6, ...qaExpansion.articles];
+const signedEditorialArticles = IS_QA ? editorialArticleCandidates : editorialArticleCandidates.filter(a => approvedLaunchArticle(a, launchApprovals));
+const articles = [...articlesAll.filter((a) => a.visibility === 'public' && isPublic(a.status)), ...signedEditorialArticles]
   .sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
 
 const catById = Object.fromEntries(categories.map((c) => [c.id, c]));
@@ -723,8 +730,8 @@ const directoryArticles = articles.filter(a => !a.expansion);
 const readliBase = IS_QA ? directoryArticles.filter(a => !towardReadingSet.has(a.slug)).sort((a, b) =>
   (readliPriority.get(a.slug) ?? Infinity) - (readliPriority.get(b.slug) ?? Infinity)
 ) : articles;
-const readliArticles = [...readliBase, ...qaExpansion.articles.filter(a => a.directory === 'readli')];
-const towardExtra = qaExpansion.articles.filter(a => a.directory === 'toward');
+const readliArticles = [...readliBase, ...(IS_QA ? qaExpansion.articles.filter(a => a.directory === 'readli') : [])];
+const towardExtra = IS_QA ? qaExpansion.articles.filter(a => a.directory === 'toward') : [];
 if (IS_QA && (directoryArticles.length !== readliBase.length + towardReadingSet.size ||
   TOWARD_READING_SLUGS.some(slug => !articles.some(a => a.slug === slug)) ||
   READLI_PRIORITY.some(slug => towardReadingSet.has(slug)))) {
@@ -1266,10 +1273,10 @@ for (const r of resources) {
   addIndex('機構與資源', r.name, [r.summary, r.nameEn || '', r.summaryEn || ''].join(' '), url, IS_PREVIEW ? [r.serviceTypes.join(' '), regionLabel(r.regions), r.audience, r.phones.map((p) => p.number).join(' '), (r.keywordsEn || []).join(' ')].join(' ') : [r.serviceTypes.join(' '), regionLabel(r.regions)].join(' '));
 }
 // 擴充佇列：簡潔文字入口連到主題頁對應列；同網址補充文字併入原卡的搜尋關鍵字。
-for (const x of qaExpansion.entries) {
+for (const x of (IS_QA ? qaExpansion.entries : [])) {
   addIndex('機構與資源', x.name, x.purpose, `${catById[x.category].slug}#qa-x-${x.id}`, [regionLabel(x.regions), x.languages.join(' '), '官方入口'].join(' '));
 }
-for (const [id, notes] of qaExpansion.supplements) {
+for (const [id, notes] of (IS_QA ? qaExpansion.supplements : new Map())) {
   for (const entry of searchIndex.filter((e) => e.type === '機構與資源' && e.url.endsWith(`#res-${id}`))) entry.keywords += ` ${notes.map((n) => n.text).join(' ')}`;
 }
 for (const c of counties) {
