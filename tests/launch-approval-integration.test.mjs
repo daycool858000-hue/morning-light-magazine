@@ -116,6 +116,11 @@ try {
     calendar: {script: await readFile(path.join(root,'src/qa-assets/js/qa-calendar.js'),'utf8')},
     pregnancy: await json('docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-2026-10-17.json'),
     topic54: await json('docs/QA-TOPIC-ENTRANCES-54-SOURCE-GUIDES-2026-10-17.json'),
+    resourceCatalog: {
+      county: await json('docs/BATCH2-23-RESOURCE-CANDIDATES-2026-10-15.json'),
+      open: await json('docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json'),
+      english: await json('docs/QA-ENGLISH-RESOURCE-DISCOVERY-2026-10-16.json'),
+    },
   };
   template.approvedFeatures = Object.fromEntries(Object.entries(inputs).map(([name, value]) => [name,sign(snapshotHash(value))]));
   await writeFile(file,JSON.stringify(template,null,2)+'\n');
@@ -124,6 +129,13 @@ try {
   const homepage=await readFile(path.join(fullFeaturesOut,'index.html'),'utf8');
   const family=await readFile(path.join(fullFeaturesOut,'life-family.html'),'utf8');
   const learning=await readFile(path.join(fullFeaturesOut,'learning.html'),'utf8');
+  const cityResources=await readFile(path.join(fullFeaturesOut,'city.html'),'utf8');
+  const towardResources=await readFile(path.join(fullFeaturesOut,'toward-light.html'),'utf8');
+  assert.equal((cityResources.match(/class="res-card"/g)||[]).length,51,'正式版需有原有16個核准資源和批次35個官方候選入口');
+  for(const id of ['qa-en-nia','qa-en-ifi','qa-en-1990']) assert.ok(cityResources.includes('id="res-'+id+'"'),'多語官方資源缺少 '+id);
+  assert.ok(towardResources.includes('open-culture-iculture'),'向光原本的官方延伸入口需要保留');
+  assert.ok(learning.includes('id="res-open-culture-events"'),'課程與活動的同網址既有卡片應重用');
+  assert.ok(!cityResources.includes('未核准測試內容'),'正式資源卡不得留測試標示');
   const allSitemap=await readFile(path.join(fullFeaturesOut,'sitemap.xml'),'utf8');
   assert.equal((activitiesHtml.match(/class="notice" id="notice-/g)||[]).length,6,'公告仍保留六筆');
   assert.equal((activitiesHtml.match(/class="act-item" id="act-/g)||[]).length,12,'長期查詢入口仍保留十二筆');
@@ -157,7 +169,7 @@ try {
   assert.ok(!existsSync(path.join(badOut,'articles/batch2-01.html')), '內容指紋不符的文章不得輸出');
   const badIndex = await readFile(path.join(badOut,'assets/data/search-index.js'),'utf8');
   assert.ok(!badIndex.includes('articles/batch2-01.html'), '不符內容不可在搜尋中出現');
-  console.log('正式版模擬完成：44篇正文與QA逐字一致、讀利26／向光18、小日曆、六筆活動、十二筆長期入口、孕期四段、54主題與搜尋／sitemap 均已逐項驗證。');
+  console.log('正式版模擬完成：44篇正文與QA逐字一致、讀利26／向光18、小日曆、六筆活動、十二筆長期入口、35筆新增官方資源及多語連結、孕期四段、54主題與搜尋／sitemap 均已逐項驗證。');
 } finally {
   // 不論成功或失敗都先還原原核准檔；測試產物不部署，不寫回 git。
   await writeFile(file,prior);
