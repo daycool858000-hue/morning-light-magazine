@@ -12,7 +12,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml as esc, parseFrontMatter, renderMarkdown } from './lib/markdown.mjs';
 import { approvedRecord, approvedPhotoMetadata, gitBlobSha } from './lib/release.mjs';
-import { approvedLaunchArticle } from './lib/launch-approval.mjs';
+import { approvedLaunchArticle, approvedLaunchFeature } from './lib/launch-approval.mjs';
 import { loadBatch2Resources, loadBatch2Articles } from './lib/qa-batch2.mjs';
 import { loadBatch3OpenAccess } from './lib/qa-batch3.mjs';
 import { loadBatch45Articles } from './lib/qa-batch45.mjs';
@@ -68,6 +68,26 @@ const approvals = release;
 const launchApprovals = await readJson('content/launch-approvals.json');
 const HAS_LAUNCH_ARTICLE_APPROVALS = MODE === 'production' && Object.keys(launchApprovals.approvedArticles || {}).length > 0;
 const LOAD_EDITORIAL_CANDIDATES = IS_QA || HAS_LAUNCH_ARTICLE_APPROVALS;
+// 已驗收功能直接使用原有 QA 原稿、動畫和連結；正式版需要對應資料版本的發布紀錄。
+const featureDecisions = MODE === 'production' ? (launchApprovals.approvedFeatures || {}) : {};
+const activityInputs = featureDecisions.activities ? {
+  portals: await readJson('docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json'),
+  notices: await readJson('docs/QA-ACTIVITIES-NOTICES-2026Q4-2027-2026-10-16.json'),
+  script: await readFile(path.join(ROOT,'src/qa-assets/js/qa-activities.js'),'utf8'),
+} : null;
+const calendarInputs = featureDecisions.calendar ? {
+  script: await readFile(path.join(ROOT,'src/qa-assets/js/qa-calendar.js'),'utf8'),
+} : null;
+const pregnancyInputs = featureDecisions.pregnancy ? await readJson('docs/QA-LIFE-FAMILY-PREGNANCY-GUIDE-2026-10-17.json') : null;
+const topic54Inputs = featureDecisions.topic54 ? await readJson('docs/QA-TOPIC-ENTRANCES-54-SOURCE-GUIDES-2026-10-17.json') : null;
+const APPROVED_ACTIVITIES = MODE === 'production' && approvedLaunchFeature('activities',activityInputs,launchApprovals);
+const APPROVED_PREGNANCY = MODE === 'production' && approvedLaunchFeature('pregnancy',pregnancyInputs,launchApprovals);
+const APPROVED_TOPIC54 = MODE === 'production' && approvedLaunchFeature('topic54',topic54Inputs,launchApprovals);
+const APPROVED_CALENDAR = APPROVED_ACTIVITIES && approvedLaunchFeature('calendar',calendarInputs,launchApprovals);
+const SHOW_ACTIVITIES = IS_QA || APPROVED_ACTIVITIES;
+const SHOW_CALENDAR = IS_QA || APPROVED_CALENDAR;
+const SHOW_PREGNANCY = IS_QA || APPROVED_PREGNANCY;
+const SHOW_TOPIC54 = IS_TOPIC_GUIDES_STAGING || APPROVED_TOPIC54;
 
 async function readMarkdownDir(dir) {
   const full = path.join(ROOT, dir);
@@ -95,12 +115,12 @@ const isHttps = (v) => typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v);
 
 const qaResources = IS_QA || HAS_LAUNCH_ARTICLE_APPROVALS ? await loadBatch2Resources(ROOT) : [];
 const qaArticles = LOAD_EDITORIAL_CANDIDATES ? await loadBatch2Articles(ROOT, categories) : [];
-const qaBatch3 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
+const qaBatch3 = LOAD_EDITORIAL_CANDIDATES || SHOW_ACTIVITIES ? await loadBatch3OpenAccess(ROOT) : { resources: [], articles: [] };
 const qaBatch45 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch45Articles(ROOT, categories) : [];
 const qaBatch6 = LOAD_EDITORIAL_CANDIDATES ? await loadBatch6Articles(ROOT, categories) : [];
-const qaActivities = IS_QA ? await loadQaActivities(ROOT) : null;
-const qaNotices = IS_QA ? await loadQaNotices(ROOT) : null;
-const qaTopicGuides = IS_TOPIC_GUIDES_STAGING ? await loadQaTopicGuides(ROOT, categories) : { byId: {}, count: 0 };
+const qaActivities = SHOW_ACTIVITIES ? await loadQaActivities(ROOT) : null;
+const qaNotices = SHOW_ACTIVITIES ? await loadQaNotices(ROOT) : null;
+const qaTopicGuides = SHOW_TOPIC54 ? await loadQaTopicGuides(ROOT, categories) : { byId: {}, count: 0 };
 // 六大主題擴充（PR #11）：只匯入佇列中已完成來源查核、且明確開啟的單篇或小批內容。
 // QA_EXPANSION_QUEUE 只供自動化測試指定範例佇列；QA 部署工作流程不設定，固定讀 docs/QA-EXPANSION-IMPORT-QUEUE.json。
 const qaExpansion = LOAD_EDITORIAL_CANDIDATES ? await loadQaExpansion(ROOT, {
@@ -166,9 +186,9 @@ const baseResources = [...resourceData.items.filter((r) => IS_PREVIEW
   ? isPublic(r.status, r.published)
   : approvedRecord(r, approvals.resources, 'official-entry')), ...(IS_QA ? [...qaResources, ...qaBatch3.resources, ...qaExpansion.cityResources] : [])];
 const resources = IS_QA ? await loadQaEnglishResources(ROOT, baseResources) : baseResources;
-const qaPortalRouting = IS_QA ? resolveQaPortalRouting(qaActivities.items, resources) : { primary: [], reused: [] };
+const qaPortalRouting = SHOW_ACTIVITIES ? resolveQaPortalRouting(qaActivities.items, IS_QA ? resources : [...resources, ...qaBatch3.resources]) : { primary: [], reused: [] };
 // QA-only：生活與家庭 01「懷孕與生育相關福利」的四段導覽（未核准，不進 preview／production）
-const qaPregnancyGuide = IS_QA ? await loadQaPregnancyGuide(ROOT, resources) : null;
+const qaPregnancyGuide = SHOW_PREGNANCY ? await loadQaPregnancyGuide(ROOT, resources) : null;
 const hotlines = hotlineData.items.filter((h) => IS_PREVIEW
   ? isPublic(h.status)
   : approvedRecord(h, approvals.hotlines, 'hotline-purpose-hours'));
@@ -486,7 +506,7 @@ ${robots}<title>${esc(fullTitle)}</title>
 <link rel="icon" href="${base}assets/icons/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${base}assets/css/main.css?v=20261015search-clear-v2">
 <script src="${base}assets/js/main.js"></script>
-${IS_QA ? `<script src="${base}assets/js/qa-calendar.js"></script>
+${SHOW_CALENDAR ? `<script src="${base}assets/js/qa-calendar.js"></script>
 ` : ''}${scripts.map((s) => `<script src="${base}${s}${s === 'assets/js/search.js' ? '?v=20261015search-clear-v2' : ''}" defer></script>`).join('\n')}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
@@ -509,7 +529,7 @@ ${previewBar}${noticeBar}
 <main id="main" tabindex="-1">
 ${body}
 </main>
-<footer class="site-footer${IS_QA ? ' has-cal' : ''}">
+<footer class="site-footer${SHOW_CALENDAR ? ' has-cal' : ''}">
   <div class="wrap">
     <p class="footer-name">${brandLockup()}</p>
     <div class="footer-legal">
@@ -518,7 +538,7 @@ ${body}
     </div>
   </div>
 </footer>
-${IS_QA ? `${activitiesEntry(base, active)}\n` : ''}</body>
+${SHOW_CALENDAR ? `${activitiesEntry(base, active)}\n` : ''}</body>
 </html>
 `;
 }
@@ -649,7 +669,7 @@ const noticeHtml = (n) => `<li class="notice" id="${esc(n.id)}" data-act-until="
         <a class="notice-link" href="${esc(n.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看官方公告<span class="visually-hidden">：${esc(n.title)}（外部網站，另開新分頁）</span><span class="act-ext" aria-hidden="true">↗</span></a>
       </li>`;
 
-if (IS_QA) {
+if (SHOW_ACTIVITIES) {
   const { groups, items, checkedOn } = qaActivities;
   const notices = qaNotices.items;
   const gid = (g) => `act-group-${groups.indexOf(g) + 1}`;
@@ -667,7 +687,7 @@ if (IS_QA) {
     <h1 id="page-title">近期活動與講座</h1>
     <p class="lead">${lead}</p>
     <p class="act-intro">每一則都附官方公告連結。日期、費用、參加方式與資格以主辦單位最新公告為準；官方還沒公布的細節會標「詳情待公告」。《由己》不代為報名，也不蒐集任何資料。已結束的活動會在你瀏覽時自動隱藏。</p>
-    <p class="act-intro"><span class="badge badge-qa">未核准測試內容</span> 來源核對：${esc(qaNotices.checkedAt)}（AI 編輯查核，尚未經網站擁有人核准）</p>
+    <p class="act-intro">${IS_QA ? '<span class="badge badge-qa">未核准測試內容</span> ' : ''}來源核對：${esc(qaNotices.checkedAt)}（AI 協助）${IS_QA ? '，尚未經網站擁有人核准' : '；已依網站擁有人確認的版本公開'}</p>
   </div>
 </section>
 <section class="section act-list" aria-labelledby="notices-title">
@@ -698,7 +718,7 @@ if (IS_QA) {
   for (const it of items) {
     const reused = qaPortalRouting.reused.find((r) => r.id === it.id);
     const category = qaPortalRouting.primary.find((r) => r.id === it.id)?.category;
-    const dest = reused ? `learning.html#res-${reused.existingResourceId}` : `${catById[category].slug}#portal-${it.id}`;
+    const dest = reused && resources.some(r=>r.id===reused.existingResourceId) ? `learning.html#res-${reused.existingResourceId}` : reused ? `activities.html#${it.id}` : `${catById[category].slug}#portal-${it.id}`;
     addIndex('活動與講座', it.name, `${it.org}｜${it.purpose}`, dest, `${it.group} 官方查詢入口 ${it.region} ${it.keywordsEn || ''}`);
   }
 }
@@ -931,7 +951,7 @@ function pregnancyGuideSection(c) {
   return `<section class="section preg-guide" id="${esc(g.anchor)}" aria-labelledby="${esc(g.anchor)}-title">
   <div class="wrap">
     ${sectionHead('Pregnancy &amp; Birth', `${esc(g.anchor)}-title`, esc(g.title), esc(g.intro))}
-    <p class="preg-guide-qa"><span class="badge badge-qa">未核准測試內容</span> 來源查核：${esc(g.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</p>
+    <p class="preg-guide-qa">${IS_QA ? '<span class="badge badge-qa">未核准測試內容</span> ' : ''}來源查核：${esc(g.checkedOn)}（AI 協助）${IS_QA ? '，尚未經網站擁有人核准' : '；已依網站擁有人確認的版本公開'}</p>
     <ol class="preg-steps">
       ${g.steps
         .map((s) => `<li class="preg-step">
@@ -963,7 +983,7 @@ function articlesSection(list) {
 // 12 筆官方查詢入口已由原始資料判斷相同 URL；同網址的 act-09 沿用既有卡片。
 // 其餘僅提供輕量文字列，不新增與既有機構卡相同的格子。
 function qaPortalSection(category) {
-  if (!IS_QA) return '';
+  if (!SHOW_ACTIVITIES) return '';
   const items = qaPortalRouting.primary.filter(it => it.category === category);
   if (!items.length) return '';
   return `<section class="section qa-portal-section" aria-labelledby="qa-portals-title">
@@ -972,7 +992,7 @@ function qaPortalSection(category) {
     <ul class="qa-portal-list">${items.map(it => `<li id="portal-${esc(it.id)}">
       <a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.name)}<span aria-hidden="true">↗</span></a>
       <p>${esc(it.purpose)}</p>
-      <small>${esc(it.region)}｜${esc(it.caution)}　<span class="badge badge-qa">未核准測試內容</span></small>
+      <small>${esc(it.region)}｜${esc(it.caution)}${IS_QA ? '　<span class="badge badge-qa">未核准測試內容</span>' : ''}</small>
     </li>`).join('\n')}</ul>
   </div>
 </section>`;
@@ -1090,7 +1110,7 @@ ${SHOW_EDITORIAL_LAYOUT && catArticles.length ? articlesSection(catArticles) : '
 <section class="section" aria-labelledby="events-title">
   <div class="wrap">
     ${sectionHead('Upcoming', 'events-title', '近期活動', '名額與報名狀態以主辦機構公告為準。活動結束後會自動從這裡隱藏，但不代表活動已取消。')}
-    ${IS_QA ? `<p class="act-intro">以下與全站小日曆共用同一批已公布公告。活動日期與參加方式請以原主辦單位為準；此區為未核准測試資訊，不代表本站提供報名。</p>
+    ${SHOW_ACTIVITIES ? `<p class="act-intro">以下與近期活動頁共用同一批已公布公告。活動日期與參加方式請以原主辦單位為準；${IS_QA ? '此區為未核准測試資訊；' : ''}本站不提供報名。</p>
     <ol class="notice-list" data-act-list>${qaNotices.items.map(noticeHtml).join('\n')}</ol>
     <p class="notice-empty" id="notices-empty"${qaNotices.items.length ? ' hidden' : ''}>目前沒有尚未結束的已公布活動；新消息整理後會更新。</p>
     <p class="notice-more"><a href="activities.html">查看活動與講座完整資訊及長期官方查詢入口 →</a></p>`
@@ -1107,7 +1127,7 @@ ${topicsSection(c)}
 </section>
 ${!SHOW_EDITORIAL_LAYOUT && catArticles.length ? articlesSection(catArticles) : ''}
 ${qaPortalSection(c.id)}`;
-  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: [IS_QA ? 'assets/js/qa-activities.js' : 'assets/js/events.js'], bodyClass: 'cat-learning' }) });
+  pages.push({ file: c.slug, html: layout({ title: c.title, description: c.short, active: 'learning', body, scripts: [SHOW_ACTIVITIES ? 'assets/js/qa-activities.js' : 'assets/js/events.js'], bodyClass: 'cat-learning' }) });
 }
 
 for (const c of categories) {
@@ -1348,6 +1368,11 @@ await copyDir(path.join(ROOT, 'src/assets'), path.join(OUT, 'assets'));
 await copyDir(path.join(ROOT, 'src/icons'), path.join(OUT, 'assets/icons'));
 // QA 限定腳本（全站小日曆、活動消息依臺灣日期隱藏）：只複製到 dist-qa，正式版與一般預覽不會有這些檔案。
 if (IS_QA) await copyDir(path.join(ROOT, 'src/qa-assets'), path.join(OUT, 'assets'));
+else if (SHOW_ACTIVITIES || SHOW_CALENDAR) {
+  await mkdir(path.join(OUT, 'assets/js'),{recursive:true});
+  if (SHOW_ACTIVITIES) await copyFile(path.join(ROOT,'src/qa-assets/js/qa-activities.js'),path.join(OUT,'assets/js/qa-activities.js'));
+  if (SHOW_CALENDAR) await copyFile(path.join(ROOT,'src/qa-assets/js/qa-calendar.js'),path.join(OUT,'assets/js/qa-calendar.js'));
+}
 if (existsSync(PHOTO_DIR)) await copyDir(PHOTO_DIR, path.join(OUT, 'assets/photos'));
 if (!IS_PREVIEW) {
   // 只保留已核准且每一個輸出檔均與核准版本完全一致的圖片。
@@ -1360,7 +1385,7 @@ const QA_SEARCH_EXPIRY = "window.MLM_SEARCH_INDEX = window.MLM_SEARCH_INDEX.filt
 await mkdir(path.join(OUT, 'assets/data'), { recursive: true });
 await writeFile(
   path.join(OUT, 'assets/data/search-index.js'),
-  `window.MLM_SEARCH_INDEX = ${JSON.stringify(searchIndex)};\n${IS_QA ? QA_SEARCH_EXPIRY : ''}`,
+  `window.MLM_SEARCH_INDEX = ${JSON.stringify(searchIndex)};\n${SHOW_ACTIVITIES ? QA_SEARCH_EXPIRY : ''}`,
 );
 for (const p of pages) await writeFile(path.join(OUT, p.file), p.html);
 await writeFile(path.join(OUT, '.nojekyll'), '');
