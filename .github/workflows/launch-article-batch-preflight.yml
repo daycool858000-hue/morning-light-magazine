@@ -1,0 +1,47 @@
+# 只盤點 44 篇 QA 文章的精確版本，檢查日後正式發布閘門；不部署任何網站。
+name: 由己｜正式上線文章版本檢查（不發布）
+
+on:
+  push:
+    branches: [release/youji-production-promotion-prep-20261017]
+    paths:
+      - 'content/launch-approvals.json'
+      - 'scripts/lib/launch-approval.mjs'
+      - 'scripts/prepare-launch-article-batch.mjs'
+      - 'tests/launch-approval.test.mjs'
+      - '.github/workflows/launch-article-batch-preflight.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 發布核准防呆測試
+        run: node tests/launch-approval.test.mjs
+      - name: 從現有原稿產生44篇文章精確版本清單
+        run: node scripts/prepare-launch-article-batch.mjs
+      - name: 檢查清單未冒充站主核准
+        run: |
+          node --input-type=module - <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const j=JSON.parse(readFileSync('artifacts/launch-article-batch.json','utf8'));
+          if(j.qaArticleCount!==44||j.readliCount!==26||j.towardCount!==18||
+             j.ownerPublicationApproved!==false||j.articles.some(x=>x.currentlyApprovedForProduction)||
+             j.articles.some(x=>x.slug==='exp-compare-everyday-experiments'))process.exit(1);
+          console.log('44篇文章完整、26／18目錄正確、無任何文章被自動正式核准。');
+          NODE
+      - name: 留存候選清單（不公開部署）
+        uses: actions/upload-artifact@v4
+        with:
+          name: youji-launch-article-candidate-fingerprints
+          path: artifacts/launch-article-batch.json
+          retention-days: 14
