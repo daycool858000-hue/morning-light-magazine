@@ -12,13 +12,13 @@
 # 本次依使用者 GitHub Pages 設定畫面已選 GitHub Actions，重新啟動 QA 部署（2026-10-15）。
 # 僅部署已經以 QA 模式生成的「未核准測試內容」供站主手機驗收。
 # 發布到公開 GitHub Pages；不合併 main，不匯入正式 content，不新增核准紀錄。
-# 不設定一般 push 自動發布；只在新增／修改此 workflow 本身時啟動，避免研究更新被意外公開。
+# 僅由單獨 QA 分支修改此 workflow 檔案時發布，避免其他研究提交意外公開。
 name: 由己｜公開測試預覽（非正式網站）
 
 on:
   push:
     branches:
-      - claude/morning-light-visual-v2
+      - qa/public-nine-articles-20261017
     paths:
       - .github/workflows/qa-public-preview.yml
 
@@ -33,14 +33,14 @@ concurrency:
 
 jobs:
   preview:
-    if: ${{ github.ref == 'refs/heads/claude/morning-light-visual-v2' }}
+    if: ${{ github.ref == 'refs/heads/qa/public-nine-articles-20261017' }}
     environment:
       name: qa-public-preview
       url: ${{ steps.deploy.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: 下載開發分支（不修改 main）
+      - name: 下載公開QA隔離分支（不修改 main）
         uses: actions/checkout@v4
         with:
           persist-credentials: false
@@ -50,8 +50,12 @@ jobs:
           node-version: 22
       - name: 安裝建置所需工具
         run: npm ci
-      - name: 建置含 23 地方入口與 12 導讀的公開測試版
-        run: node scripts/build.mjs --mode=qa --out=dist-qa
+      - name: 建置已授權的45篇公開QA和獨立正式版快照
+        run: |
+          node scripts/build.mjs --mode=production --out=dist-production
+          node scripts/build.mjs --mode=qa --out=dist-qa
+          node tests/site.test.mjs
+          node tests/release-gate.test.mjs
       - name: 確認發布內容是 QA 而非正式版
         shell: bash
         run: |
@@ -59,6 +63,39 @@ jobs:
           test -f dist-qa/index.html
           test -f dist-qa/city.html
           test -f dist-qa/articles/batch2-01.html
+          # 此分支是站主同意的公開QA試讀，僅開啟九篇（正式發布仍為未核准）
+          test "$(git hash-object content/release-approvals.json)" = "5c4d0532d87581383045f5e017fe4ddef4d81df9"
+          node --input-type=module - <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const real = JSON.parse(readFileSync('docs/QA-EXPANSION-IMPORT-QUEUE.json','utf8'));
+          const names = ['exp-01','exp-08','exp-11','exp-12','A1','A2','A4','B4','B5'];
+          const on = real.articles.filter(x=>x.importToQa);
+          if (on.length!==9 || names.some(id=>!on.some(x=>x.id===id && x.sourceCheck==='source-checked' && x.sourceCheckedOn==='2026-10-17' && x.sourceCheckRecord))) process.exit(1);
+          if (real.articles.length!==22 || (real.resources||[]).some(x=>x.importToQa)) process.exit(1);
+          const ids = new Set(on.map(x=>x.slug));
+          const index = readFileSync('dist-qa/assets/data/search-index.js','utf8');
+          const prodIndex=readFileSync('dist-production/assets/data/search-index.js','utf8');
+          const readli = readFileSync('dist-qa/quiet-power.html','utf8');
+          const toward = readFileSync('dist-qa/toward-light.html','utf8');
+          for (const slug of ids) {
+            if (!index.includes('articles/'+slug+'.html')) process.exit(1);
+            const html = readFileSync('dist-qa/articles/'+slug+'.html','utf8');
+            if (!html.includes('未核准測試內容') || !html.includes('noindex, nofollow')) process.exit(1);
+            if (prodIndex.includes(slug)) process.exit(1);
+          }
+          if ((readli.match(/<h3><a href="articles\//g)||[]).length!==26) process.exit(1);
+          if ((toward.match(/class="toward-reading-card"/g)||[]).length!==19) process.exit(1);
+          let count=0;
+          for (const page of ['life-family','career','health','law','learning']) {
+            const h = readFileSync('dist-qa/'+page+'.html','utf8');
+            count += (h.match(/id="portal-act-/g)||[]).length;
+          }
+          if (count!==11) process.exit(1);
+          if (!toward.includes('id="toward-women-center"')) process.exit(1);
+          const learning=readFileSync('dist-qa/learning.html','utf8');
+          if (!learning.includes('res-open-culture-events') || learning.includes('id="portal-act-09"')) process.exit(1);
+          console.log('45篇QA／九篇未核准／讀利26／向光19／官方查詢11＋1／production隔離通過');
+          NODE
           grep -q '未核准測試內容' dist-qa/index.html
           grep -q '未核准測試內容' dist-qa/city.html
           grep -q '未核准測試內容' dist-qa/articles/batch2-01.html
@@ -88,7 +125,7 @@ jobs:
           grep -q '循著興趣探索不同主題' dist-qa/toward-light.html
           # 讀利／向光文章分流，36 篇原稿仍保留，向光文章格直接露出 13 篇。
           grep -q 'class="toward-reading-grid"' dist-qa/toward-light.html
-          test "$(grep -o 'class="toward-reading-card"' dist-qa/toward-light.html | wc -l)" -eq 13
+          test "$(grep -o 'class="toward-reading-card"' dist-qa/toward-light.html | wc -l)" -eq 19
           grep -q 'href="articles/batch6-welfare-overview.html"' dist-qa/quiet-power.html
           ! grep -q 'href="articles/batch4-art-museum-first-visit.html"' dist-qa/quiet-power.html
           # 六大分類：其餘五個頁面的導讀先於需求／主題及官方入口，城市福利保留原架構。
@@ -121,7 +158,7 @@ jobs:
           node -e "const d=require('./docs/QA-ACTIVITIES-NOTICES-2026Q4-2027-2026-10-16.json'); if(d.status!=='candidate-not-approved'||d.ownerPublicationApproval!==false||d.items.length!==6) process.exit(1)"
           ! grep -q 'act-entry' dist-production/index.html
           ! test -f dist-production/activities.html
-          test "$(ls dist-qa/articles/*.html | wc -l)" -eq 36
+          test "$(ls dist-qa/articles/*.html | wc -l)" -eq 45
           grep -q 'Disallow: /' dist-qa/robots.txt
           test ! -f dist-qa/sitemap.xml
           echo "已確認只會部署未核准 QA 測試頁。"
