@@ -1,0 +1,440 @@
+{
+  "title": "由己｜剩餘八縣市婦女、新住民與生活學習具體官方入口研究",
+  "date": "2026-10-17",
+  "researchBy": "ChatGPT AI (not owner review)",
+  "status": "editorial-candidate-unpublished",
+  "importToQa": false,
+  "ownerApproved": false,
+  "productionApproved": false,
+  "sourceVerificationScope": "原始公部門官網或政府資料官方頁查詢與用途初核；各筆 evidence 明列直開、索引可見或連線受阻。並非全部已在 iPhone/Safari 開啟。",
+  "dedup": {
+    "withinBatchDistinctUrls": 19,
+    "exactOverlapAcrossPrevious41AndNi13AndOriginalResources": 0,
+    "notAuditedAgainstEntireHistoricQaArchive": true
+  },
+  "groups": [
+    {
+      "county": "miaoli",
+      "name": "苗栗縣",
+      "entries": [
+        {
+          "id": "ml-womens-welfare-learning",
+          "name": "苗栗縣婦女福利服務中心—婦女成長與場地",
+          "url": "https://www.miaoli.gov.tw/News_Content.aspx?n=5615&s=260664",
+          "agency": "苗栗縣政府社會處",
+          "level": "specific-center-official-description",
+          "types": [
+            "婦女成長課程",
+            "女性公共空間",
+            "場地申請"
+          ],
+          "purpose": "縣府正式介紹婦女福利服務中心的成長課程、電影院活動與場地借用方式；不是當期課程報名表。",
+          "evidence": "official-page-open",
+          "updated": "2026-08-31",
+          "cautions": [
+            "場地租借有程序與收費標準，不可概稱免費",
+            "當期活動主要由另個社群公告，未逐場驗證"
+          ]
+        },
+        {
+          "id": "ml-immigrant-center-contacts",
+          "name": "苗栗縣苗南／苗北新住民家庭服務中心聯絡入口",
+          "url": "https://new-inhabitants.miaoli.gov.tw/web/ContentA/ContentA.aspx?c0=455",
+          "agency": "苗栗縣政府原住民族及族群發展處",
+          "level": "official-multiple-centers-contact-directory",
+          "types": [
+            "新住民家庭服務",
+            "華語學習窗口",
+            "地方中心聯絡"
+          ],
+          "purpose": "縣府專區列出苗南、苗北兩處新住民家庭服務中心與教育、戶政業務聯絡窗口；同網址只做一個目錄入口。",
+          "evidence": "official-page-open",
+          "updated": "2025-04-17",
+          "cautions": [
+            "與 NI-13 的苗栗新住民入口屬同一網站的詳細聯絡頁，應作既有 NI-13 補充文字",
+            "2025名錄電話與現行服務時段待覆核"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "kaohsiung",
+      "name": "高雄市",
+      "entries": [
+        {
+          "id": "kh-women-center",
+          "name": "高雄市政府社會局婦女館",
+          "url": "https://women.kcg.gov.tw/",
+          "agency": "高雄市政府社會局",
+          "level": "official-specific-women-center-site",
+          "types": [
+            "婦女公共空間",
+            "女性培力與經濟方案",
+            "展覽與活動資訊"
+          ],
+          "purpose": "查詢婦女館服務項目、婦女培力與經濟方案、場地使用及館方活動。",
+          "evidence": "official-page-open",
+          "updated": null,
+          "cautions": [
+            "活動簡訊與租借需查當期條件",
+            "場地／方案可能收費，勿將所有活動稱免費"
+          ]
+        },
+        {
+          "id": "kh-immigrant-centers-directory",
+          "name": "高雄市新住民家庭服務中心用途及聯絡查詢",
+          "url": "https://fr6c.kcg.gov.tw/News_Content.aspx?n=408E824F5B87284A&s=A570EA8BDD32F8A2&sms=976E95C721BB34BA",
+          "agency": "高雄市政府民政局／社會局",
+          "level": "official-centers-directory",
+          "types": [
+            "新住民家庭服務",
+            "多語通譯",
+            "福利與法律資訊轉介"
+          ],
+          "purpose": "政府新住民多語網站介紹各分區服務中心、通譯與家庭支持用途；單頁多據點，不逐據點複製同網址卡。",
+          "evidence": "official-page-open",
+          "updated": "2026-09-29 website footer; content 2022-08-10",
+          "cautions": [
+            "正文資料時間為2022-08-10，部分中心名單與電話可能異動；不得把網站頁尾更新日期當該名錄已重驗",
+            "外語選單存在，不等於每一子頁完整翻譯",
+            "名錄只作候選，現行據點可先以社會局最新公布為準"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "pingtung",
+      "name": "屏東縣",
+      "entries": [
+        {
+          "id": "pt-female-dream-center",
+          "name": "屏東縣女性夢想館官方服務地圖",
+          "url": "https://socmap.pthg.gov.tw/pt1w/app/map?objid=268436396",
+          "agency": "屏東縣政府社會處",
+          "level": "specific-center-official-map-listing",
+          "types": [
+            "女性培力",
+            "地方活動與展演",
+            "婦女服務場域"
+          ],
+          "purpose": "利用屏東縣社福e點靈官方機構資料查找女性夢想館的服務範圍與相關資訊。",
+          "evidence": "official-search-index-open-tool-error",
+          "updated": null,
+          "cautions": [
+            "社群搜尋顯示可能有場館關閉／服務形式調整公告，**不得在未核當期前標示目前開館**",
+            "地圖頁直開在研究工具失敗，待 Chromium/Safari 與社會處公告交叉核對",
+            "舊社家署介紹不代表當前活動仍提供"
+          ]
+        },
+        {
+          "id": "pt-immigrant-family-centers",
+          "name": "屏東縣新住民家庭服務中心官方服務項目",
+          "url": "https://www.pthg.gov.tw/planjdp/cp.aspx?n=EEF68ADD2DBFA5E7&s=5B5BD0B3D5EC4642",
+          "agency": "屏東縣政府社會處",
+          "level": "official-specific-service-description",
+          "types": [
+            "新住民家庭服務",
+            "福利諮詢",
+            "家庭支持及轉介"
+          ],
+          "purpose": "依屏東縣社會處服務說明，了解新住民家庭關懷、諮詢及服務範圍；不作當期課程或預約保證。",
+          "evidence": "official-search-index-open-tool-error",
+          "updated": null,
+          "cautions": [
+            "研究工具直開受阻，需官方頁實開",
+            "中心承辦、分區與時間須依最新資料再查"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "hualien",
+      "name": "花蓮縣",
+      "entries": [
+        {
+          "id": "hl-new-immigrant-family",
+          "name": "花蓮縣新住民家庭服務",
+          "url": "https://sa.hl.gov.tw/Detail_sp/d8bbba8318c6401c9fb13afb81896090",
+          "agency": "花蓮縣政府社會處",
+          "level": "official-specific-service-description",
+          "types": [
+            "新住民家庭服務",
+            "多元文化活動",
+            "福利與生活諮詢"
+          ],
+          "purpose": "查看花蓮縣政府對新住民家庭服務中心的正式介紹與可使用服務型態；活動仍看當期公告。",
+          "evidence": "official-page-open",
+          "updated": "2026-08-05",
+          "cautions": [
+            "時間、承辦單位及活動名額待中心現況核對"
+          ]
+        },
+        {
+          "id": "hl-women-welfare-notices",
+          "name": "花蓮縣社會處婦女福利政策與服務公告",
+          "url": "https://sa.hl.gov.tw/List_sp/6b22697437644bc380dcd32168ee6ead",
+          "agency": "花蓮縣政府社會處",
+          "level": "official-women-benefit-notice-index",
+          "types": [
+            "婦女福利政策",
+            "女性家庭生活支持",
+            "服務資訊查詢"
+          ],
+          "purpose": "查看花蓮縣115–116婦女福利施政計畫、婦女服務及家庭支持公告；這是官方索引，不等於現場婦女中心已完成營運驗收。",
+          "evidence": "official-page-open",
+          "updated": "2026-08-11 for 115-116 plan",
+          "cautions": [
+            "部分舊活動、場地頁明寫暫停，不能作當期可用入口",
+            "婦女中心委辦官網須確認和社會處現行委辦關係"
+          ]
+        },
+        {
+          "id": "hl-women-employment",
+          "name": "花蓮縣政府女性創就業專區",
+          "url": "https://labor.hl.gov.tw/cl.aspx?n=23624",
+          "agency": "花蓮縣政府勞工處",
+          "level": "official-women-employment-topic-index",
+          "types": [
+            "女性重返職場",
+            "創業課程",
+            "職訓與獎勵資訊"
+          ],
+          "purpose": "查詢女性就業、政府創業課程與獎勵政策的官方連結，作為『職涯與創業』『向光』跨主題延伸；不同課程當期時限須再查。",
+          "evidence": "official-page-open",
+          "updated": "2026-07-08",
+          "cautions": [
+            "連到不同部會的外站可能有各自資格，未逐項核對"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "taitung",
+      "name": "臺東縣",
+      "entries": [
+        {
+          "id": "tt-new-immigrant-center-current",
+          "name": "臺東縣新住民家庭服務中心（2026年起新委辦資訊）",
+          "url": "https://ifi.immigration.gov.tw/wSite/ct?ctNode=37635&mp=1&xItem=8811",
+          "agency": "內政部移民署新住民培力發展資訊網／臺東縣政府社會處",
+          "level": "official-current-provider-notice",
+          "types": [
+            "新住民家庭服務",
+            "新委辦單位資料",
+            "中心現況交叉確認"
+          ],
+          "purpose": "移民署正式頁明示2026年1月1日起承辦單位調整，可作為核對中心聯絡與服務入口的當期線索。",
+          "evidence": "official-search-index-direct-open-timeout",
+          "updated": "2026-01-01 new contract noted",
+          "cautions": [
+            "正式網頁直開在研究工具逾時，Safari須重驗",
+            "不可沿用舊手冊2018年的承辦與2023聯絡地址；新資料需核對正文完整性"
+          ]
+        },
+        {
+          "id": "tt-social-welfare-regional-directory",
+          "name": "臺東縣四區社會福利服務中心通訊錄",
+          "url": "https://topics.mohw.gov.tw/SS/cp-4528-48220-204.html",
+          "agency": "衛生福利部社會及家庭署",
+          "level": "official-four-centers-directory",
+          "types": [
+            "區域社會福利服務中心",
+            "家庭支持及社福轉介"
+          ],
+          "purpose": "依官方服務轄區查找海岸線、南迴線、臺東市區、縱谷線四處社福中心；適用包括離島鄉鎮。",
+          "evidence": "official-page-open",
+          "updated": "2026-06-13",
+          "cautions": [
+            "這是一般社會福利中心，不可寫成婦女專門中心",
+            "中央名錄與臺東官方托育頁的部分地址不同，不能合併標成單一確定地址；電話／地點優先最新官方確認"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "penghu",
+      "name": "澎湖縣",
+      "entries": [
+        {
+          "id": "ph-women-center",
+          "name": "澎湖縣婦女福利服務中心官方業務專頁",
+          "url": "https://www.penghu.gov.tw/society/home.jsp?id=436",
+          "agency": "澎湖縣政府社會處",
+          "level": "official-specific-center-records",
+          "types": [
+            "婦女福利服務中心",
+            "場地使用與借用",
+            "婦女成長活動查詢"
+          ],
+          "purpose": "查閱婦女中心場地設備、使用申請及收費標準；未見當期活動列表，不能說目前正在招生。",
+          "evidence": "official-page-open",
+          "updated": "2026-06-15 page footer; content 2025 and older",
+          "cautions": [
+            "場地使用有收費規範",
+            "中心介紹與當期營運時段未逐項核"
+          ]
+        },
+        {
+          "id": "ph-immigrant-center-index",
+          "name": "澎湖縣新住民家庭服務中心業務索引",
+          "url": "https://www.penghu.gov.tw/society/home.jsp?id=137",
+          "agency": "澎湖縣政府社會處",
+          "level": "official-center-directory",
+          "types": [
+            "新住民家庭支持",
+            "多語介紹索引",
+            "課程與社區服務"
+          ],
+          "purpose": "官方單一索引整合中心簡介、服務項目、多國語言資料、借閱與活動公告；應顯示為一個中心及延伸連結。",
+          "evidence": "official-page-open",
+          "updated": "2026-05-12 page footer; some entries 2015",
+          "cautions": [
+            "內頁多為2015年資料，不能視為2026年開放時間或當期課表"
+          ]
+        },
+        {
+          "id": "ph-immigrant-vietnamese-indonesian-files",
+          "name": "澎湖縣新住民中心多國語言簡介頁",
+          "url": "https://www.penghu.gov.tw/society/home.jsp?act=view&dataserno=201511030031&id=137",
+          "agency": "澎湖縣政府社會處",
+          "level": "same-center-language-subpage",
+          "types": [
+            "中文簡介",
+            "越南語簡介",
+            "印尼語簡介"
+          ],
+          "purpose": "官方列出中文、越南文、印尼文簡介檔案，適合掛在同一新住民中心下供語言查詢，不另外製作新機構卡。",
+          "evidence": "official-page-open",
+          "updated": "2024-11-01 page update, originally 2015",
+          "cautions": [
+            "僅已核對多語文件清單存在，三語實際PDF尚未下載驗證",
+            "頁面沒有宣稱整個網站三語完整提供"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "kinmen",
+      "name": "金門縣",
+      "entries": [
+        {
+          "id": "km-women-center",
+          "name": "金門縣婦女福利服務中心",
+          "url": "https://social.kinmen.gov.tw/Content_List.aspx?n=31D868C2AFAA1979",
+          "agency": "金門縣政府社會處",
+          "level": "official-specific-women-center-page",
+          "types": [
+            "婦女服務與培力",
+            "法律與福利諮詢",
+            "成長活動與公共空間"
+          ],
+          "purpose": "縣府公布婦女福利服務中心對象、福利諮詢、培力與活動等服務；服務時段需以最新中心公告確認。",
+          "evidence": "official-search-result-page-retry-error",
+          "updated": "2026-07-28",
+          "cautions": [
+            "本輪原頁搜尋片段完整，但開啟重試失敗，需Safari/Chrome直開",
+            "不要把諮商服務當成無限制免付費"
+          ]
+        },
+        {
+          "id": "km-immigrant-welfare-index",
+          "name": "金門縣新住民福利專區",
+          "url": "https://social.kinmen.gov.tw/Content_List.aspx?n=07E013BF6DAC8E2D",
+          "agency": "金門縣政府社會處",
+          "level": "official-immigrant-directory",
+          "types": [
+            "新住民家庭支持",
+            "服務資源手冊",
+            "多語資料入口"
+          ],
+          "purpose": "依官方單頁查找新住民家庭服務中心及中、英、印尼語、越南語資料手冊；各語PDF仍要逐件確認。",
+          "evidence": "official-search-result-page-retry-error",
+          "updated": null,
+          "cautions": [
+            "四種語言的下載連結未各別開啟",
+            "同一中心不按語言複製四張卡"
+          ]
+        },
+        {
+          "id": "km-immigrant-location",
+          "name": "金門縣新住民家庭服務中心據點FAQ",
+          "url": "https://social.kinmen.gov.tw/News_Content.aspx?Create=1&n=100FF2EA665D3910&s=16D36AF80360CCC1&sms=B675900615BB79BF",
+          "agency": "金門縣政府社會處",
+          "level": "same-center-location-faq",
+          "types": [
+            "新住民中心地點",
+            "政府聯絡資訊"
+          ],
+          "purpose": "利用政府115年6月12日更新的FAQ核對新住民中心據點，不將此FAQ另外做機構大卡。",
+          "evidence": "official-search-result-visible",
+          "updated": "2026-06-12",
+          "cautions": [
+            "2026地點可用於核對，但現行時段尚未驗證",
+            "與新住民福利專區同中心，不重複前台卡"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "lienchiang",
+      "name": "連江縣",
+      "entries": [
+        {
+          "id": "lc-immigrant-family-center",
+          "name": "連江縣新住民家庭服務中心",
+          "url": "https://www.matsu.gov.tw/chhtml/content/371030000A0001/6099",
+          "agency": "連江縣政府民政社會處",
+          "level": "official-specific-center-page",
+          "types": [
+            "新住民家庭支持",
+            "生活適應與諮詢",
+            "培力及社區活動"
+          ],
+          "purpose": "正式說明連江四鄉新住民家庭服務內容，包括關懷、家庭訪視、諮詢及生活學習；不是本站個案服務。",
+          "evidence": "official-page-open",
+          "updated": "website footer 2026-10-14; content date unspecified",
+          "cautions": [
+            "中心實際聯繫電話及社會處地址須另做2026現況交叉驗證",
+            "頁面有1990不同語言服務時段，可能變動，不在本站照抄"
+          ]
+        },
+        {
+          "id": "lc-women-welfare-document-index",
+          "name": "連江縣婦女福利施政與權益計畫文件入口",
+          "url": "https://www.matsu.gov.tw/chhtml/download/371030000A0001/5981",
+          "agency": "連江縣政府民政社會處",
+          "level": "official-women-welfare-document-index",
+          "types": [
+            "婦女福利政策",
+            "婦女服務及培力規劃",
+            "年度文件下載"
+          ],
+          "purpose": "從正式下載目錄查閱連江婦女福利及權益工作計畫，包含115–116年計畫線索；這是政策文件索引，不能代替現場婦女中心可使用性的證據。",
+          "evidence": "official-search-index-direct-open-timeout",
+          "updated": "2026-2027 plan listed",
+          "cautions": [
+            "工具直開超時，須下載檔案與當期附件重核",
+            "政策提及婦女福利中心不等於營運據點已實測",
+            "不得將過去年度婦女活動視為近期活動"
+          ]
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "additionalCounties": 8,
+    "additionalOriginalUrls": 19,
+    "previousCountiesPartiallyResearched": 14,
+    "countyCoveragePartiallyResearched": 22,
+    "oldOriginalUrls": 41,
+    "combinedOriginalUrls": 60,
+    "fullFiveLayerAuditedCounties": 0
+  },
+  "limitations": [
+    "22／22僅代表有局部深度研究，絕不等於22縣五層服務完整驗收。",
+    "資料頁數與中心實體數、公開網站需建立的卡片數是不同概念，同中心下的語言頁／FAQ掛為延伸資訊。",
+    "部分外部頁面只能透過官方網頁搜尋索引可見，需由CI及臺灣Safari確認；即使本輪可直開也未驗現場營運時間。",
+    "離島與東部舊名錄常與新委辦資料混存，若有牴觸應優先現行機關資料並保留差異待驗。",
+    "所有資料暫存PR#11編輯分支，禁止自動匯入QA、main或正式版。"
+  ]
+}
