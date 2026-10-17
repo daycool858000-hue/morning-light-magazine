@@ -50,6 +50,10 @@ jobs:
           node-version: 22
       - name: 安裝建置所需工具
         run: npm ci
+      - name: 安裝 QA 驗收用 Chromium（不打包進網站）
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
       - name: 建置已授權的45篇公開QA和獨立正式版快照
         run: |
           node scripts/build.mjs --mode=production --out=dist-production
