@@ -164,7 +164,8 @@ try {
     // 一般捲動與點擊：小日曆本身可點、仍連到活動頁
     await page.goto(`${origin}${base}articles/exp-choosing-open-courses.html`, { waitUntil: 'load' });
     const y0 = await page.evaluate(() => scrollY);
-    if (mobile) await page.mouse.wheel(0, 600); else await page.mouse.wheel(0, 600);
+    // 手機版 WebKit 不支援滑鼠滾輪，改用頁面捲動；電腦版用滾輪
+    if (mobile) await page.evaluate(() => window.scrollBy(0, 600)); else await page.mouse.wheel(0, 600);
     await settle(page);
     const y1 = await page.evaluate(() => scrollY);
     await page.click('.act-entry');
