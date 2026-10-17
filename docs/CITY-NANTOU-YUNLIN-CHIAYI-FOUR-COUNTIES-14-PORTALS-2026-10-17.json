@@ -1,0 +1,336 @@
+{
+  "title": "由己｜南投、雲林、嘉義市、嘉義縣地方具體服務與成人學習入口研究",
+  "asOf": "2026-10-17",
+  "reviewedBy": "ChatGPT (AI)",
+  "status": "editorial-candidate-unpublished",
+  "ownerApproved": false,
+  "importToQa": false,
+  "qaDeployed": false,
+  "productionApproved": false,
+  "lineage": [
+    "docs/CITY-SIX-COUNTIES-17-SERVICE-ENTRY-INDEX-2026-10-17.json",
+    "docs/CITY-FOUR-ADDITIONAL-COUNTIES-TEN-OFFICIAL-PORTALS-2026-10-17.json"
+  ],
+  "sourceChecks": {
+    "withinBatchDuplicateUrls": 0,
+    "exactUrlOverlapWithExisting17Plus10AndNI13AndOriginalResources": 0,
+    "hasNotRecheckedAllOlderQaLocalResourceUrls": true,
+    "safariChecked": false
+  },
+  "countyGroups": [
+    {
+      "county": "nantou",
+      "countyName": "南投縣",
+      "entries": [
+        {
+          "id": "nt-women-centers-official-list",
+          "name": "南投縣四區婦女服務中心官方索引",
+          "url": "https://www.nantou.gov.tw/ge/list.php?cid=3857",
+          "agency": "南投縣政府性別平等專區",
+          "types": [
+            "婦女成長",
+            "在地學習",
+            "婦女服務據點"
+          ],
+          "level": "official-center-directory",
+          "usage": "從縣府性別平等專區找南投、草屯、埔里及竹鹿四區婦女服務中心的個別連結；各服務據點的近期課程要另查當期資料。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "同一縣府名錄四個連結只算一筆政府名錄",
+            "其中外連包含民間網站、社群與 Google Sites，尚未逐一測試",
+            "據點開館時間未逐點確認"
+          ]
+        },
+        {
+          "id": "nt-women-centers-open-data",
+          "name": "南投縣婦女福利服務中心政府開放資料",
+          "url": "https://data.nantou.gov.tw/dataset/6b77b528-e8bc-11e8-b9d9-0050568f6268",
+          "agency": "南投縣政府社會及勞動局",
+          "types": [
+            "婦女服務據點資料",
+            "主管機關開放資料"
+          ],
+          "level": "official-open-dataset",
+          "usage": "使用南投縣政府整理的婦女中心資料集，查詢中心名稱、聯絡欄位與更新資訊；資料更新頻率不定期，不能視為即時服務名錄。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "資料不定期更新",
+            "歷史預覽筆次有2023資料",
+            "不將資料集CSV視為獨立服務中心"
+          ]
+        },
+        {
+          "id": "nt-family-education",
+          "name": "南投縣家庭教育中心活動公告入口",
+          "url": "https://ntc.familyedu.moe.gov.tw/mainList.aspx?pid=3363&uid=3365",
+          "agency": "南投縣家庭教育中心",
+          "types": [
+            "親職教育",
+            "成人家庭教育",
+            "地方活動查詢"
+          ],
+          "level": "official-family-education-notice-index",
+          "usage": "查詢地方家庭教育中心的親職、代間與家人關係學習公告。列表包含歷史月份，不保證目前有招生或免報名。",
+          "sourceMethod": "official-search-result-body",
+          "timeBound": false,
+          "limits": [
+            "目前可見索引有2024/2025歷史公告",
+            "家庭教育網在海外機房可能逾時",
+            "2026年活動需另查當期公告"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "yunlin",
+      "countyName": "雲林縣",
+      "entries": [
+        {
+          "id": "yl-women-center-about",
+          "name": "雲林縣婦女福利服務中心介紹",
+          "url": "https://social.yunlin.gov.tw/News_Content.aspx?n=16861&s=416680",
+          "agency": "雲林縣政府社會處",
+          "types": [
+            "婦女公共空間",
+            "婦女成長課程",
+            "社會參與"
+          ],
+          "level": "specific-center-official-description",
+          "usage": "閱讀中心所提供的婦女閱覽及休憩空間、展覽、成長活動等介紹；不將服務介紹視為所有活動當期開放。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "個別場地租借與課程有不同規定",
+            "最新開放時段未電話核對"
+          ]
+        },
+        {
+          "id": "yl-women-course-announcements",
+          "name": "雲林縣婦女中心當期與歷年公告列表",
+          "url": "https://social.yunlin.gov.tw/News.aspx?n=16861&sms=19151",
+          "agency": "雲林縣政府社會處",
+          "types": [
+            "婦女課程查詢",
+            "藝文與閱讀",
+            "支持活動"
+          ],
+          "level": "official-announcements-list",
+          "usage": "在中心官方公告頁查找課程、團體與展演。頁面包含115年7至12月及歷史年度公告，每一篇日期、報名期限與費用需另行確認。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "列表不是持續招生承諾",
+            "115年7-12月公告不可延用為2027近期活動",
+            "2026年有部分需繳費課程"
+          ]
+        },
+        {
+          "id": "yl-family-education-window",
+          "name": "雲林縣家庭教育中心業務聯絡與學習領域",
+          "url": "https://family.yunlin.gov.tw/cp.aspx?n=962",
+          "agency": "雲林縣家庭教育中心",
+          "types": [
+            "家庭教育服務",
+            "樂齡學習",
+            "親職教育與婚姻教育"
+          ],
+          "level": "official-service-contact-and-remit",
+          "usage": "了解家庭教育中心包含親職、樂齡、性別教育及資源推廣的業務分工；這是正式服務窗口資料，不是課程報名入口。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "2026-08-04業務名單可隨人員調動變更",
+            "當期課程需從中心公告另查"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "chiayi-city",
+      "countyName": "嘉義市",
+      "entries": [
+        {
+          "id": "cycity-women-center",
+          "name": "嘉義市婦女福利服務中心服務與場地資訊",
+          "url": "https://social.chiayi.gov.tw/cp.aspx?n=418",
+          "agency": "嘉義市政府社會處",
+          "types": [
+            "婦女服務據點",
+            "法律諮詢資源",
+            "場地使用"
+          ],
+          "level": "specific-center-official-page",
+          "usage": "查詢嘉義市婦女福利服務中心公開的諮詢說明與場地申請表等資料；個別服務與收費條件以中心當期資訊為準。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "附件表單個別版本未逐份驗證",
+            "不能將存在申請表等同所有服務免收費"
+          ]
+        },
+        {
+          "id": "cycity-immigrant-center",
+          "name": "嘉義市新住民家庭服務中心官方網站",
+          "url": "https://social.chiayi.gov.tw/imm/",
+          "agency": "嘉義市政府社會處",
+          "types": [
+            "新住民家庭支持",
+            "多語簡介",
+            "在地學習活動"
+          ],
+          "level": "specific-center-official-site",
+          "usage": "瀏覽嘉義市新住民家庭服務中心的服務內容、活動與中文／英文／越南文／印尼文中心介紹選單。各語言資料需確認其實際內容及更新日期。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "2026-10-07首頁可見活動與多語選單",
+            "語言選單不代表所有子頁均完整翻譯",
+            "個別活動報名是否仍開放不明"
+          ]
+        },
+        {
+          "id": "cycity-immigrant-service-detail",
+          "name": "嘉義市新住民中心服務項目專頁",
+          "url": "https://social.chiayi.gov.tw/imm/cp.aspx?n=4194",
+          "agency": "嘉義市政府社會處",
+          "types": [
+            "新住民家庭生活服務",
+            "社福資源轉介",
+            "活動與生活培力"
+          ],
+          "level": "same-center-service-detail",
+          "usage": "由中心的服務項目頁了解新住民家庭服務範圍，作為官方主站的補充閱讀；同一中心不需為此另建第二張大型機構卡。",
+          "sourceMethod": "official-direct-open",
+          "timeBound": false,
+          "limits": [
+            "與同中心官方首頁不同URL、相同服務機構",
+            "若前台收錄則作主入口下的用途文字連結"
+          ]
+        },
+        {
+          "id": "cycity-immigrant-vietnamese-intro",
+          "name": "嘉義市新住民中心越語服務介紹",
+          "url": "https://social.chiayi.gov.tw/imm/cp.aspx?n=4836",
+          "agency": "嘉義市政府社會處",
+          "types": [
+            "越南語生活資訊",
+            "新住民服務介紹"
+          ],
+          "level": "same-center-language-subpage",
+          "usage": "官方頁實際具備越文段落與中文對照，包含諮詢、轉介、通譯及活動形式；只能標示『中心越語簡介』，不宣稱全站全功能越文。",
+          "sourceMethod": "official-direct-open-full-vietnamese-body",
+          "timeBound": false,
+          "limits": [
+            "同一機構的輔助語言頁非新中心卡",
+            "內文列出的補助額度與社區據點可能為舊資料，未按2026法規逐條驗證",
+            "不要將其中援助資格與金額作為本站現行法規資訊"
+          ]
+        }
+      ]
+    },
+    {
+      "county": "chiayi-county",
+      "countyName": "嘉義縣",
+      "entries": [
+        {
+          "id": "cycounty-women-center",
+          "name": "嘉義縣婦女福利服務中心",
+          "url": "https://sabcc.cyhg.gov.tw/cp.aspx?n=7778",
+          "agency": "嘉義縣社會局",
+          "types": [
+            "婦女服務據點",
+            "女性培力活動",
+            "婦女社會參與"
+          ],
+          "level": "specific-center-official-page",
+          "usage": "查詢嘉義縣社會局婦女福利服務中心的服務介紹與所在地；搜尋來源指出設籍縣民服務對象，適用條件須以官網現行公告為準。",
+          "sourceMethod": "official-search-index-direct-open-timeout",
+          "timeBound": false,
+          "limits": [
+            "政府原頁直接開啟在本輪工具逾時",
+            "條件與開館日期不能當作現行已實地確認",
+            "後續須CI／Safari實開"
+          ]
+        },
+        {
+          "id": "cycounty-immigrant-center",
+          "name": "嘉義縣新住民家庭服務中心（山區／海區）",
+          "url": "https://sabcc.cyhg.gov.tw/cp.aspx?n=10881",
+          "agency": "嘉義縣社會局",
+          "types": [
+            "新住民家庭服務",
+            "分區社區資源"
+          ],
+          "level": "official-center-directory",
+          "usage": "從嘉義縣社會局入口了解山線及海線的新住民家庭服務分區；兩區在同一官方名錄之下，不複製成兩張同網址機構卡。",
+          "sourceMethod": "official-search-index-plus-nia-crosscheck",
+          "crossCheckUrl": "https://servicestation.immigration.gov.tw/5878/5884/6113/6205/112133/",
+          "timeBound": false,
+          "limits": [
+            "政府主頁直接開啟在本輪工具逾時",
+            "移民署交叉資料頁更新於2024-12-18，中心時段不能直接視為2026現況",
+            "需再次驗證地方中心承辦單位及服務時段"
+          ]
+        },
+        {
+          "id": "cycounty-dayan-social-center",
+          "name": "嘉義縣日安社會福利服務中心",
+          "url": "https://sabcc.cyhg.gov.tw/cp.aspx?n=7777",
+          "agency": "嘉義縣社會局",
+          "types": [
+            "家庭與社福服務據點",
+            "社會福利轉介"
+          ],
+          "level": "specific-social-welfare-center-official-page",
+          "usage": "嘉義縣民雄、大林、溪口及新港等地可使用日安社福中心的官方介紹查找服務資訊；不可誤稱此為婦女專門中心。",
+          "sourceMethod": "official-search-index-direct-open-timeout",
+          "timeBound": false,
+          "limits": [
+            "原頁在研究工具逾時",
+            "服務轄區與開放時間須重新確認",
+            "與此前衛福部嘉義縣社福中心單一名錄是不同網址但相關用途"
+          ]
+        },
+        {
+          "id": "cycounty-family-education",
+          "name": "嘉義縣家庭教育中心",
+          "url": "https://cic.familyedu.moe.gov.tw/",
+          "agency": "嘉義縣家庭教育中心",
+          "types": [
+            "家庭教育",
+            "成人親職與婚姻教育",
+            "地方學習資源"
+          ],
+          "level": "official-local-family-education-site",
+          "usage": "使用嘉義縣家庭教育中心官網找親職、婚姻、家庭互動與學習資源，並區分教材、課程及個別化服務申請。",
+          "sourceMethod": "official-url-confirmed-by-gov-family-doc-and-school",
+          "timeBound": false,
+          "limits": [
+            "地方家教網站可能在海外連線逾時",
+            "目前課程與報名名額未實驗",
+            "不保證外站申請無須個資"
+          ]
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "newCounties": 4,
+    "rawNewDistinctUrls": 14,
+    "priorCountiesWithPartialDepth": 10,
+    "newCountiesWithPartialDepth": 14,
+    "priorRawUrls": 27,
+    "totalRawResearchUrls": 41,
+    "fullyAuditedCounties": 0,
+    "countiesStillWithoutAnyDepthWork": 8
+  },
+  "editorialNotes": [
+    "14筆是原始不同網址，不等於14個新機構，也不等於可直接新增14張前台卡；同一新住民中心不同用途或語言子頁應掛在單一服務入口下。",
+    "嘉義縣社會局部分原頁直開逾時，僅政府搜尋索引和移民署部分交叉支持，需保持研究狀態。",
+    "雲林115年7–12月等屬期限性課程，長期公告列表本身可以保留，但不能假設其單次活動目前仍受理。",
+    "嘉義市越文中心介紹實際可讀；其中個別福利額度、服務資格及社區據點時效需重新逐項核對，不得直接刊載當期福利金額。",
+    "未核對外部語言PDF、附檔細項、報名條件、所有電話和開放時間；所有候選都不得啟用QA、production。"
+  ]
+}
