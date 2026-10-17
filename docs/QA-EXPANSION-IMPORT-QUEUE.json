@@ -33,10 +33,10 @@
       "directory": "readli",
       "firstQaBatch": "EXP-QA-01-20261017",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
     },
     {
       "id": "exp-02",
@@ -136,10 +136,10 @@
       "directory": "readli",
       "firstQaBatch": "EXP-QA-01-20261017",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
     },
     {
       "id": "exp-09",
@@ -181,10 +181,10 @@
       "directory": "toward",
       "firstQaBatch": "EXP-QA-01-20261017",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
     },
     {
       "id": "exp-12",
@@ -198,10 +198,10 @@
       "directory": "toward",
       "firstQaBatch": "EXP-QA-01-20261017",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "importToQa": true
     },
     {
       "id": "A1",
@@ -212,10 +212,10 @@
       "heading": "01",
       "directory": "toward",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false,
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "importToQa": true,
       "editorNote": "第三輪版本優先（覆蓋第二輪）；先前兩項待修理由已由 2026-10-17 獨立原始來源複核撤銷（見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md）。正式佇列仍未開啟。",
       "secondQaBatch": "EXP-QA-02-20261017"
     },
@@ -228,10 +228,10 @@
       "heading": "02",
       "directory": "toward",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false,
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "importToQa": true,
       "editorNote": "第三輪版本優先（覆蓋第二輪）",
       "secondQaBatch": "EXP-QA-02-20261017"
     },
@@ -259,10 +259,10 @@
       "heading": "04",
       "directory": "toward",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false,
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "importToQa": true,
       "editorNote": "第二輪已完成文化部網址去重（docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md），不重做",
       "secondQaBatch": "EXP-QA-02-20261017"
     },
@@ -318,10 +318,10 @@
       "heading": "04",
       "directory": "readli",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false,
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "importToQa": true,
       "secondQaBatch": "EXP-QA-02-20261017"
     },
     {
@@ -333,10 +333,10 @@
       "heading": "05",
       "directory": "toward",
       "related": [],
-      "sourceCheck": "pending",
-      "sourceCheckedOn": null,
-      "sourceCheckRecord": null,
-      "importToQa": false,
+      "sourceCheck": "source-checked",
+      "sourceCheckedOn": "2026-10-17",
+      "sourceCheckRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "importToQa": true,
       "secondQaBatch": "EXP-QA-02-20261017",
       "editorNote": "先前 1 句待修理由已由 2026-10-17 獨立原始來源複核撤銷（見 docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md）。正式佇列仍未開啟。"
     },
