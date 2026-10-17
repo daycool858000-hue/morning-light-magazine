@@ -116,9 +116,14 @@
       "review": {
         "date": "2026-10-17",
         "by": "ChatGPT（AI）",
-        "scope": "國健署孕媽咪健康手冊官方頁可見中文 115 年 6 月、英／越／印／柬／泰文 114 年 9 月；尚未逐份開啟 PDF",
+        "scope": "2026-10-17 回查國健署同頁搜尋索引，中文115年6月版，英文／越南／印尼／柬埔寨／泰語114年9月版；URL官方搜尋索引可見，但研究工具直接讀取EBook頁遭遇錯誤，尚未逐本下載PDF。不得推論所有語言更新同步、完整閱讀成功或課程免費。",
         "source": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
-        "status": "official-language-index-verified-file-unopened"
+        "status": "official-government-index-visible-deep-page-tool-blocked-pdf-not-opened",
+        "evidence": [
+          "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+          "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=4842"
+        ],
+        "still": "國健署原深層頁及每個語種PDF實際下載／Safari開啟仍待確認"
       }
     },
     {
@@ -137,9 +142,14 @@
       "review": {
         "date": "2026-10-17",
         "by": "ChatGPT（AI）",
-        "scope": "國健署孕媽咪衛教手冊直接 EBook 原頁在工具擷取逾時，但官方 TopicList 子頁及搜尋結果顯示114年外語版；需再逐語瀏覽及實機核對",
+        "scope": "2026-10-17 回查國健署同頁搜尋索引，中文115年6月版，英文／越南／印尼／柬埔寨／泰語114年9月版；URL官方搜尋索引可見，但研究工具直接讀取EBook頁遭遇錯誤，尚未逐本下載PDF。不得推論所有語言更新同步、完整閱讀成功或課程免費。",
         "source": "https://www.hpa.gov.tw/Pages/TopicList.aspx?nodeid=4840",
-        "status": "official-list-visible-deep-page-unverified"
+        "status": "official-government-index-visible-deep-page-tool-blocked-pdf-not-opened",
+        "evidence": [
+          "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4839",
+          "https://www.hpa.gov.tw/Pages/List.aspx?nodeid=4839"
+        ],
+        "still": "國健署原深層頁及每個語種PDF實際下載／Safari開啟仍待確認"
       }
     },
     {
