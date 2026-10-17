@@ -172,11 +172,11 @@ try {
   refreshFingerprints();
   assert.ok(checkReadiness().includes('正式部署硬閘通過'),'備妥44篇及全部功能時應准許正式發布');
   delete template.approvedFeatures.calendar;
-  await writeFile(file,JSON.stringify(template,null,2)+'\\n');
+  await writeFile(file,JSON.stringify(template,null,2)+'\n');
   refreshFingerprints();
   assert.throws(checkReadiness,/./,'少一項功能批准就應停止正式部署');
   template.approvedFeatures.calendar=sign(snapshotHash(inputs.calendar));
-  await writeFile(file,JSON.stringify(template,null,2)+'\\n');
+  await writeFile(file,JSON.stringify(template,null,2)+'\n');
 
   template.approvedFeatures = {};
   template.approvedArticles = {'batch2-01':sign(chosen.sha256)};
