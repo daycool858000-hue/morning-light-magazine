@@ -38,12 +38,12 @@
 | `content/` | 正式資料：資源、專線、分類、縣市、照片；`release-approvals.json` 為正式核准快照，**不得修改** |
 | `docs/` | 規格、報告、ChatGPT 撰寫的候選文章與資料（QA 載入器只讀指定檔案） |
 | `scripts/build.mjs` | 建置主程式（所有頁面樣板） |
-| `scripts/lib/qa-*.mjs` | 各批 QA 候選內容載入器：batch2、batch3、batch45、batch6、english、activities（`loadQaNotices` 具體活動＋`loadQaActivities` 12 個長期入口） |
+| `scripts/lib/qa-*.mjs` | 各批 QA 候選內容載入器：batch2、batch3、batch45、batch6、english、activities（`loadQaNotices` 具體活動＋`loadQaActivities` 12 個長期入口）、expansion（六大主題擴充分批匯入，只讀 `docs/QA-EXPANSION-IMPORT-QUEUE.json`，說明見 `docs/QA-EXPANSION-IMPORT-GUIDE-2026-10-16.md`） |
 | `src/qa-assets/js/` | **只複製到 dist-qa** 的腳本：`qa-calendar.js`（全站小日曆）、`qa-activities.js`（活動依臺灣日期隱藏） |
 | `scripts/lib/toward-light-editorial.mjs` | 向光八索引與延伸閱讀的文章對應 |
 | `scripts/check-links-browser.mjs` | Chromium 外站連結檢查（`--set=batch45`、`batch6`、`activities`） |
 | `src/assets/css/main.css` | 全站樣式；`src/icons/` 圖示 |
-| `tests/` | `site.test.mjs`（正式版 44 項）、`release-gate.test.mjs`、`qa-batch2.test.mjs`（QA 全部檢查）、`mobile-webkit.test.mjs`、`qa-webkit.test.mjs` |
+| `tests/` | `site.test.mjs`（正式版 44 項）、`release-gate.test.mjs`、`qa-batch2.test.mjs`（QA 全部檢查，只核對原 36 篇）、`qa-expansion.test.mjs`（擴充匯入機制，用 `tests/fixtures/qa-expansion/` 範例佇列）、`mobile-webkit.test.mjs`、`qa-webkit.test.mjs` |
 
 ### 常用指令
 - 全部測試：`npm test`（WebKit 本機沒有安裝，由 CI 執行）
@@ -98,6 +98,8 @@
 2. 已完成十二個長期官方查詢入口的初步分組、原始網址盤點及去重提案（詳見 `docs/ACTIVITIES-PORTALS-12-SIX-TOPICS-EDITORIAL-MAPPING-2026-10-16.md`）；**下一步等站主核對這個方案，再開始 QA-only 實作／測試**，不增加重複卡或改動已驗收的版面。
 3. 再依序考慮 2027 新活動已發布的官方公告補充、新住民多語官方資源，以及每月官方連結檢查報告；候選文章仍獨立查核。
 4. 若下一輪要改網站，維持 GitHub Pages 公開 QA 與 production 發布閘門的分離，功能驗收不能替代文章／來源及著作權核准。
+5. **PR #11 工程第一階段（分支 `claude/qa-expansion-import-20261016`，未部署、未合併）**：已完成 QA 分批匯入機制。佇列 `docs/QA-EXPANSION-IMPORT-QUEUE.json` 列出 22 篇文章（exp-01～12、A1～A4、B1～B6）與 NI-01～13，**全部 `importToQa: false`**，網站輸出與 main 相同（只多 CSS）。之後每批文章完成來源查核，只在佇列開啟該批（填 `sourceCheck`、日期、查核紀錄）即可，不需再改程式。slug 與讀利／向光歸屬（`directory`）待站主確認。
+6. **PR #11 V2 佇列校正（分支 `claude/qa-expansion-v2-reconcile-20261017`，自上一項開出，草稿 PR、未部署、未合併）**：依 `docs/CLAUDE-V2-QUEUE-RECONCILIATION-2026-10-17.md`，exp-01～12 改讀兩份 2026-10-17 V2（02／03／04／09／10／11 → `…SIX-REVISED-ARTICLES-V2…`，stopAt `**QA 編輯狀態：`；01／05／06／07／08／12 → `…REMAINING-SIX-ARTICLES-V2…`，stopAt `## 本批編輯校核門檻`），7 篇改題並以 `originalDraftTitle` 保留 V1 標題。來源標題改為固定名稱白名單 `SOURCE_LABELS`，「用公開官方入口延伸探索」等正文小標不再被截斷。為讓 CI 用真實原稿回歸測試，從 PR #11 編輯分支逐位元組複製兩份 V2、manifest 及原有十篇的三份原稿到 docs/（與 PR #11 內容相同，合併時不會衝突）。22 篇與 13 項資源**仍全部 `importToQa: false`／pending**；slug 沿用暫定值（exp-11、exp-12 改題後 slug 字面意義已不完全貼合，開啟前請站主決定是否改名）。
 
 ### 已過時的原待辦（歷史保留，勿照做）
 
