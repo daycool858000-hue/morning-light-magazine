@@ -52,3 +52,11 @@
 - **下一個真實缺口**：站主指出「城市與福利」現在主要是各縣市社會局／處入口。QA 已有22縣市至少一筆官方入口／地方候選共23筆，另有6篇福利導讀、9個城市服務主題，但不等於22縣市每種具體服務都查完。
 - `docs/CITY-22-COUNTIES-SERVICE-DEPTH-TRACKER-2026-10-16.md` 已研究6縣市共17筆不同具體用途URL（臺北、新北、桃園、臺中、臺南、彰化），**只完成六縣市局部原站用途初核，五層全面完成仍0/22，17筆尚未公開QA**。不得聲稱城市內容已全面完成或須站主重驗已確認54主題。
 - 待辦：先逐筆評估上述17筆原站是否仍可用，整理成按「縣市＋服務種類」查詢的文字入口；再補另外16縣市的婦女中心/培力、地方社福中心、家庭教育、就業勞動、醫衛長照及新住民專門入口，避免把社會局總頁冒稱直接服務頁。同URL不重複卡，制度導讀與具體機構分開呈現。
+
+## 2026-10-18｜完整62篇獨立子目錄部署成功；待站主iPhone試讀
+
+- **實際網址已部署（獨立未核准QA）**：https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/ 。站主在對話中**明確同意**62篇含13篇來源待複核草稿可公開做noindex測試。來源正式站分支 `review/youji-full-launch-integration-20261018` SHA `4ca3fd5`，`dist-qa-all62-city-review`；目標倉庫 `youji-topic54-preview` main `2886c20`（只新增 `full-launch-62/`，共190檔）。
+- **部署成功**：[GitHub Pages run 39106678864](https://github.com/daycool858000-hue/youji-topic54-preview/actions/runs/39106678864) success；由原始倉庫GitHub Actions外部實際檢查 [run 39106785306](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39106785306) success（Chromium／WebKit各21項）。62篇、6類、讀利38／向望24、54主題、活動9＋長期入口14、小日曆、六縣市15筆服務入口。13篇仍標來源待複核；撤稿exp-12不復活；每頁未核准+noindex；noindex不等於保密。
+- **原54主題首頁未更動：已獨立核驗** 原始根目錄備份 `16068fbe42b70c002d55fbff96e83aaedd5b8ec4` 與新提交的Git tree，原有所有根層檔案及各資源子樹blob SHA完全相同，只多 `full-launch-62/`。備份分支 `backup/topic54-before-full-launch-62-20261018` 已存在。
+- **未完成**：站主尚未親自驗收62篇新增閱讀體驗、AI尚須正式來源複核原13篇（不能將QA原稿的 pending 偷改已核准）、城市和福利22縣市五層資料尚未補足、完整首發需正式核准後才允許合併／部署。正式主站 main、公開QA、發布核准檔和 PR#24～28 Draft 全不動。
+- Claude工作紀錄：`claude/youji-full-launch-preview-deploy-a224k1` 的 `docs/FULL-LAUNCH-62-SUBPATH-DEPLOY-2026-10-18.md`。這一輪完整首發隔離版工程自動化驗證成功，等待站主**只試讀新增文章及城市服務差異**，不用重新驗收54主題。
