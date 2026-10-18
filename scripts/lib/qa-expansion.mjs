@@ -132,6 +132,13 @@ export async function loadQaExpansion(root, ctx) {
   if (queue.approvalStatus !== 'not-approved') problems.push(`${queueFile} approvalStatus 必須維持 not-approved（QA 匯入不是正式發布核准）`);
   if (!Array.isArray(queue.articles) || !Array.isArray(queue.resources)) problems.push(`${queueFile} 需要 articles 與 resources 兩個陣列`);
   const sourceFiles = queue.sourceFiles || {};
+  // 僅「完整首發62篇閱讀檢查」能在隔離目錄顯示13篇待複核草稿。
+  // 嚴格保留 sourceCheck=pending，不能在一般 QA 或正式版偽稱AI已查核。
+  const REVIEW_FILE = 'docs/QA-FULL-LAUNCH-ALL-62-REVIEW-2026-10-18.json';
+  const reviewPending = queueFile === REVIEW_FILE &&
+    queue.stagingOnly === true && queue.reviewPendingDrafts === true &&
+    process.env.QA_PENDING_REVIEW_MODE === '1';
+
 
   // 共用檢查：佇列中的每一筆（不論是否匯入）都要有唯一 id，且不能自行標成已核准
   const seenIds = new Set();
@@ -152,6 +159,10 @@ export async function loadQaExpansion(root, ctx) {
   const ready = (x) => {
     if (x.importToQa !== true) return false;
     const where = `${x.id}`;
+    // 僅保留在獨立staging並且有明確review flag時才能開啟來源未完成的純閱讀草稿。
+    // 本分支不改正式佇列，也不向網站擁有人宣稱這13篇通過來源查核。
+    if (reviewPending && queue.articles.includes(x) &&
+      x.sourceCheck === 'pending' && !x.sourceCheckedOn && !x.sourceCheckRecord) return true;
     if (x.sourceCheck !== SOURCE_CHECKED) { problems.push(`${where} 尚未完成來源查核（sourceCheck=${x.sourceCheck}），不可匯入 QA`); return false; }
     if (!isDate(x.sourceCheckedOn)) { problems.push(`${where} 缺少來源查核日期 sourceCheckedOn`); return false; }
     if (typeof x.sourceCheckRecord !== 'string' || !x.sourceCheckRecord.startsWith(fileRoot) || !existsSync(path.join(root, x.sourceCheckRecord))) {
@@ -192,10 +203,14 @@ export async function loadQaExpansion(root, ctx) {
     if (a.body.length < 400) problems.push(`${label} 正文過短，可能解析錯誤`);
     existingSlugs.add(x.slug);
     existingTitles.add(title);
+    const pendingEditorial = x.sourceCheck !== SOURCE_CHECKED;
+    const displayDate = x.sourceCheckedOn || queue.updatedOn;
     articles.push({
       qa: true, expansion: true, expansionId: x.id, directory: x.directory,
       slug: x.slug, title, category: x.category, summary: a.summary,
-      published: x.sourceCheckedOn.slice(0, 7), updated: x.sourceCheckedOn, checkedOn: x.sourceCheckedOn,
+      published: displayDate.slice(0, 7), updated: displayDate,
+      checkedOn: pendingEditorial ? null : x.sourceCheckedOn,
+      editorialReviewPending: pendingEditorial,
       status: '待確認', visibility: 'public', publishApproval: 'not-approved', ownerApproved: false,
       body: a.body, sourcesList: a.sources, ...(x.related?.length ? { related: x.related } : {}),
     });
