@@ -11,7 +11,7 @@
 //       A1 第三輪、B4 第二輪的最新用字（非政府網域標示、自行訂製服裝）確實出現。
 //   三、舊的未上線 slug 不出現在任何頁面、搜尋索引或網站地圖；正式版與公開 QA 建置不含九篇。
 //   四、讀利 23→26、向光 13→19 且八索引不變；原 36 篇與未受影響頁面和 dist-qa 完全相同。
-//   五、PR #10 的 11 筆文字入口與 act-09 同網址沿用在整合後仍正確，沒有重複建卡。
+//   五、原11筆官方文字入口＋新2個場館文字入口，與 act-09 既有文化部卡去重。
 //   六、320／375／390／1280px（Chromium，及 CI 中的 WebKit）無水平溢位、來源不超出畫面、搜尋可開啟。
 // 設定 NINE_SCREENSHOTS=<資料夾> 時，另存 390／1280px 截圖供站主驗收（CI 不設定）。
 import http from 'node:http';
@@ -268,8 +268,8 @@ for (const it of portals.items) {
   const hits = page.split(`"${href}"`).length - 1;
   if (hits > 1) portalProblems.push(`${it.id} 網址在 ${cat} 主題頁出現 ${hits} 次`);
 }
-if (primaryCount !== 11) portalProblems.push(`文字入口應為 11 筆，實得 ${primaryCount}`);
-check('PR #10 整合：11 筆不同網址的官方查詢入口在對應主題頁以文字列呈現、act-09 沿用既有文化部卡不另建卡，同一網址不重複，與新增文章並存不衝突',
+if (primaryCount !== 13) portalProblems.push(`原11筆與新2筆場館文字入口應為13筆，實得 ${primaryCount}`);
+check('PR #10＋新場館整合：13 筆不同網址的官方查詢入口在對應主題頁以文字列呈現、act-09 沿用既有文化部卡不另建卡，同一網址不重複，與新增文章並存不衝突',
   portalProblems.length === 0, portalProblems.slice(0, 5).join('；'));
 
 // ---------- 六、手機與電腦 ----------

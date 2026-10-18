@@ -1,15 +1,19 @@
 {
   "status": "candidate-not-approved",
   "ownerPublicationApproval": false,
-  "checkedAt": "2026-10-16",
-  "window": { "from": "2026-11-01", "to": "2027-12-31" },
+  "checkedAt": "2026-10-18",
+  "window": {
+    "from": "2026-11-01",
+    "to": "2027-12-31"
+  },
   "sourceDoc": "editorial/batch7-9-source-review-20261016:docs/ACTIVITIES-2026Q4-2027-REAL-NOTICES-EDITORIAL-CANDIDATES-2026-10-16.json（ChatGPT 依官方原頁查核；欄位依 docs/CANONICAL-CORRECTION-TIMED-CALENDAR-2026Q4-2027-ANNOUNCEMENTS-2026-10-16.md 第三、四節）",
   "notes": [
     "QA 限定：只在 build.mjs --mode=qa 讀取；一般預覽與正式版不會載入。",
     "只收官方已公告的具體活動、講座、展覽或計畫；未公布的日期留空（null），不推測。",
     "不轉載即時名額、報名狀態、截止倒數或付款狀態。",
     "visibleUntil＝訪客瀏覽時（臺灣日期）超過此日即自動隱藏；建置時也會先剔除已過期的項目。",
-    "12 個長期官方查詢入口另存於 docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json，不混入本檔。"
+    "12 個長期官方查詢入口另存於 docs/QA-ACTIVITIES-OFFICIAL-PORTALS-2026-10-16.json，不混入本檔。",
+    "2026-10-18 依站主完整首發要求，新增有正式場館公告的手作市集、大型藝術展覽與藝術／特色市集三筆；每筆依結束日自動隱藏，不預測2027未公告場次。"
   ],
   "items": [
     {
@@ -114,6 +118,57 @@
       "sourceUrl": "https://www.wdasec.gov.tw/News_Content.aspx?n=BD34663BD4EC9F4C&s=AEBA0907E929B76D&sms=535E01AC52EFB5A7",
       "summary": "政府已公布競賽實施計畫；實際時間、參賽資格與報名方式須等後續正式簡章。",
       "eligibilityCaution": "目前只是預定計畫，詳情待公告；這是技能競賽，不是職業訓練班。"
+    },
+    {
+      "id": "notice-popupasia-2026",
+      "title": "2026 POPUPASIA® 亞洲手創暨生活展",
+      "category": "手作市集與文創展覽",
+      "organizer": "POPUPASIA®／松山文創園區展演公告",
+      "region": "臺北市，松山文創園區4、5號倉庫",
+      "startDate": "2026-11-12",
+      "endDate": "2026-11-15",
+      "visibleUntil": "2026-11-15",
+      "datePrecision": "exact",
+      "dateLabel": "2026年11月12日至15日",
+      "announcementType": "event",
+      "publishedAt": null,
+      "sourceUrl": "https://www.songshanculturalpark.org/exhibition/activity/d644fa48-df46-452e-bfd6-2678ddeb4a7c",
+      "summary": "大型手作與文創交流展，包含創作者展售、手作工作坊與交流活動。",
+      "eligibilityCaution": "有票券及可能需預約的工作坊；不是所有區域免費，場次與入場規定依主辦或正式場館公告。"
+    },
+    {
+      "id": "notice-new-art-taipei-2026",
+      "title": "台北新藝術博覽會《居然・藝境》",
+      "category": "大型藝術展覽",
+      "organizer": "台北新藝術博覽會主辦單位／松山文創園區展演公告",
+      "region": "臺北市，松山文創園區2、3、4號倉庫",
+      "startDate": "2026-11-20",
+      "endDate": "2026-11-22",
+      "visibleUntil": "2026-11-22",
+      "datePrecision": "exact",
+      "dateLabel": "2026年11月20日至22日",
+      "announcementType": "event",
+      "publishedAt": null,
+      "sourceUrl": "https://www.songshanculturalpark.org/exhibition/activity/98ffd4b1-9b28-4398-a964-dadde97d2b8a",
+      "summary": "藝術家作品展覽及交流活動，於松山文創園區倉庫展出。",
+      "eligibilityCaution": "是否收費、展區與入場方式依原主辦和園區正式公告；本站不代收票款。"
+    },
+    {
+      "id": "notice-furever-art-2026",
+      "title": "毛孩藝術生活節 FURever Art Festival",
+      "category": "藝術與特色市集",
+      "organizer": "活動主辦單位／松山文創園區展演公告",
+      "region": "臺北市，松山文創園區2號倉庫",
+      "startDate": "2026-12-18",
+      "endDate": "2026-12-20",
+      "visibleUntil": "2026-12-20",
+      "datePrecision": "exact",
+      "dateLabel": "2026年12月18日至20日",
+      "announcementType": "event",
+      "publishedAt": null,
+      "sourceUrl": "https://www.songshanculturalpark.org/exhibition/activity/c738025c-425f-4fdb-b7f0-79fcf49c7dc1",
+      "summary": "以毛孩為主題的插畫、藝術、生活品牌與特色市集複合展會。",
+      "eligibilityCaution": "「毛孩家庭」不代表已確認適合所有年齡兒童；兒童、寵物是否能入場及費用須查主辦／場館當期規則。"
     }
   ]
 }

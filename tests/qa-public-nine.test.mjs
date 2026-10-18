@@ -115,7 +115,7 @@ for(const page of ['life-family','career','health','law','learning']) {
  portalCount+=(h.match(/id="portal-act-/g)||[]).length;
 }
 const learning=await read('dist-qa/learning.html');
-check('11筆官方文字入口與文化部既有卡去重',portalCount===11&&learning.includes('res-open-culture-events')&&!learning.includes('id="portal-act-09"'));
+check('原11筆＋松菸／華山2筆官方文字入口與文化部既有卡去重',portalCount===13&&learning.includes('res-open-culture-events')&&!learning.includes('id="portal-act-09"'));
 
 const hOld=await read('dist-qa-closed-legacy/health.html'),hNew=await read('dist-qa/health.html');
 check('身心健康頁差異是新增的合法 exp-08 文章，原支援頁保持不變',hOld!==hNew&&hNew.includes('exp-personal-boundaries')&&!hOld.includes('exp-personal-boundaries')&&

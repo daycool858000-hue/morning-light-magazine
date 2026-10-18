@@ -229,14 +229,14 @@ if (/報名中|可報名|開放報名|尚有名額|即將截止|額滿/.test(act
 if (notices.all.some((n) => n.visibleUntil < notices.window.from)) actProblems.push('資料含 2026-11-01 前已結束的活動');
 if (!actHtml.includes('<script src="assets/js/qa-activities.js" defer></script>') || !actHtml.includes('id="notices-empty"')) actProblems.push('活動頁缺依日期隱藏的腳本或「目前沒有」說明');
 if (!/MLM_SEARCH_INDEX\.filter\(function \(x\) \{ return !x\.until/.test(idx)) actProblems.push('搜尋索引沒有依日期剔除已結束活動');
-// 六大主題「學習與活動」的近期活動必須直接顯示，與全站小日曆的六筆共用來源。
+// 六大主題「學習與活動」的近期活動必須直接顯示，與全站小日曆的全部已公告活動共用來源。
 // 同步使用 UTC+8 到期隱藏腳本，不得只顯示空白事件格或另外手動維護資料。
 const learningQa = await read(QA, 'learning.html');
 const learningNotices = [...learningQa.matchAll(/<li class="notice" id="([^"]+)" data-act-until="(\d{4}-\d{2}-\d{2})">/g)];
 if (learningNotices.length !== notices.items.length ||
     JSON.stringify(learningNotices.map(m => m[1])) !== JSON.stringify(notices.items.map(n => n.id)) ||
     learningNotices.some((m, i) => m[2] !== notices.items[i].visibleUntil)) {
-  actProblems.push('學習與活動沒有完整共用小日曆六筆活動與相同過期日期');
+  actProblems.push('學習與活動沒有完整共用小日曆全部活動與相同過期日期');
 }
 for (const n of notices.items) {
   if (!learningQa.includes(n.title) || !learningQa.includes(n.sourceUrl.replace(/&/g, '&amp;')) ||
@@ -247,14 +247,15 @@ if (!learningQa.includes('id="events-title"') || !learningQa.includes('id="notic
     !learningQa.includes('href="activities.html"')) {
   actProblems.push('學習與活動缺活動列表、到期處理、空狀態說明或日曆完整頁入口');
 }
-// 次要參考：12 個長期官方查詢入口（資料與連結不變）
+// 次要參考：原有12筆長期官方入口保留，另增松菸／華山2筆（合計14筆）
 const actItems = [...actHtml.matchAll(/<li class="act-item" id="([^"]+)">\s*<a class="act-name" href="([^"]+)" target="_blank" rel="noopener noreferrer">/g)];
-if (acts.items.length !== 12 || acts.items.some((it) => it.type !== 'portal') || actItems.length !== 12) actProblems.push(`長期官方查詢入口應維持 12 筆（資料 ${acts.items.length}／頁面 ${actItems.length}）`);
+if (acts.items.length !== 14 || acts.items.some((it) => it.type !== 'portal') || actItems.length !== 14) actProblems.push(`長期官方查詢入口應維持原12筆並增加2筆（資料 ${acts.items.length}／頁面 ${actItems.length}）`);
 const portalCategory = {
   'act-01': 'career', 'act-02': 'career', 'act-03': 'career',
   'act-04': 'life-family', 'act-05': 'law', 'act-06': 'health',
   'act-07': 'health', 'act-08': 'life-family', 'act-09': 'learning',
   'act-10': 'learning', 'act-11': 'learning', 'act-12': 'learning',
+  'act-13': 'learning', 'act-14': 'learning',
 };
 for (const it of acts.items) {
   if (!actItems.some((m) => m[1] === it.id && m[2] === it.url.replace(/&/g, '&amp;'))) actProblems.push(`${it.id} 缺少或連結錯誤`);
@@ -262,7 +263,7 @@ for (const it of acts.items) {
   if (!idx.includes(`"url":"${routed}"`)) actProblems.push(`${it.id} 搜尋沒有連到所屬主題`);
 }
 if ((actHtml.match(/<h3 id="act-group-\d">/g) || []).length !== acts.groups.length) actProblems.push('查詢入口主題標題數不符');
-// 站主的去重原則：網址完全相同沿用原卡補一句，其他 11 筆不同網址各自是文字入口。
+// 站主的去重原則：網址完全相同沿用原卡補一句，原11筆及新2筆不同網址各自是文字入口。
 for (const it of acts.items) {
   const category = portalCategory[it.id];
   const html = await read(QA, category + '.html');
@@ -300,7 +301,7 @@ if (/<form|<input|<iframe/.test(actHtml)) actProblems.push('活動頁不應有�
 if (!/"url":"activities.html"[^}]*activities events lectures/.test(idx)) actProblems.push('搜尋索引缺活動頁或英文主題字');
 // 正式版與一般預覽：沒有活動頁、沒有小日曆與 QA 腳本
 for (const dir of ['dist', 'dist-production']) for (const f of ['activities.html', 'assets/js/qa-calendar.js', 'assets/js/qa-activities.js']) if (existsSync(path.join(ROOT, dir, f))) actProblems.push(`${dir} 出現 ${f}`);
-check('近期活動與講座（QA）：每個 QA 頁面恰有一個頁尾後的小日曆與腳本，首頁不再有靜態活動卡；活動頁先列官方已公告的具體活動（名稱、日期、地區、主辦、說明、官方公告連結、隱藏日期），預定計畫標「詳情待公告」，無報名狀態文字；12 個長期查詢入口保留為次要參考；搜尋索引會剔除已結束活動；QA 提示列原文、報名提醒、回首頁；正式版與一般預覽沒有活動頁、小日曆與 QA 腳本', actProblems.length === 0, actProblems.slice(0, 5).join('；'));
+check('近期活動與講座（QA）：每個 QA 頁面恰有一個頁尾後的小日曆與腳本，首頁不再有靜態活動卡；活動頁先列官方已公告的具體活動（名稱、日期、地區、主辦、說明、官方公告連結、隱藏日期），預定計畫標「詳情待公告」，無報名狀態文字；原12個長期查詢入口與新2個官方館舍入口保留為次要參考；搜尋索引會剔除已結束活動；QA 提示列原文、報名提醒、回首頁；正式版與一般預覽沒有活動頁、小日曆與 QA 腳本', actProblems.length === 0, actProblems.slice(0, 5).join('；'));
 // 2026-10-16 目錄頁首文案（QA 限定）：讀利主說明＋補充說明、向光主說明；舊說明不再出現，向光不加回第二段
 const QA_COPY = {
   qpLead: '從家庭、職場、身心健康到法律與權益，整理生活中值得了解的知識、制度與公共資源。',
