@@ -1,0 +1,6 @@
+{
+  "_說明": "未來正式發布文章與新功能的獨立核准紀錄；只有站主明確決定的版本可以填入。此檔目前沒有文章或新功能獲准，不能用來部署新文章。原有 content/release-approvals.json 已核准 21 個官方入口／專線與 9 張圖片保持原樣。",
+  "version": 1,
+  "approvedArticles": {},
+  "approvedFeatures": {}
+}
