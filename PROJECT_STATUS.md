@@ -31,6 +31,12 @@
 - **新建可供精準交接的13篇逐筆證據表**：[`docs/13-ARTICLE-SOURCE-AND-VERSION-HANDOFF-2026-10-18.json`](https://github.com/daycool858000-hue/morning-light-magazine/blob/review/youji-13-final-copy-isolated-20261018/docs/13-ARTICLE-SOURCE-AND-VERSION-HANDOFF-2026-10-18.json)，隔離分支 commit `9efbcec`，包含13篇原稿slug、已核核心事實、原頁限制、5篇變動ID `exp-02/04/07/10/B6`、3份實際修改MD、原62篇基準、CI與待簽核要求；**13篇 sourceCheck仍pending，0篇正式簽核**，沒有更動原QA佇列或任何核准檔。
 - **下一個真正有效的工作**：先以本清單做13篇的最終逐篇文字／引用版次複核，A3/B3待一般JS瀏覽器網址測試（若不能驗再用有證據的官方目錄備援）；再以既有隔離分支整理修訂後62篇版本、重新產生文章指紋並進行必要的最小範圍QA。Claude前一份發布安全鎖工程已結案，**尚未發出新Claude任務**。正式發布仍須62篇與6組功能明確核准及單獨部署授權，不合併、不部署、不改main網站程式。
 
+## 2026-10-18｜原62篇中的13篇正式審稿板已整理完成
+- **本輪實際成果**：ChatGPT 對照13篇最終隔離原稿、三輪歷史核查與第4輪重點，逐項以官方／機構原始頁再確認行政院消保會申訴流程、衛福部長照喘息／聘外看、勞動部部分工時、智財局第12條與肖像權、跟騷法3至5條、Apple安全檢查、衛福部性影像受理、經濟部女性創業人物、食物銀行自述數字，以及A3/B3歷史資料。建立 **13篇逐篇「可以送站主內容試讀，但未獲正式核准」對照表**：[`docs/FINAL-62-ARTICLE-EDITORIAL-REVIEW-BOARD-2026-10-18.md`](https://github.com/daycool858000-hue/morning-light-magazine/blob/review/youji-13-final-copy-isolated-20261018/docs/FINAL-62-ARTICLE-EDITORIAL-REVIEW-BOARD-2026-10-18.md)，commit `89692ef`。
+- **剩下的真實邊界**：A3教育部歷史教材官網全文可由搜尋索引確認但直接抓頁逾時、附件未逐件開；B3兩廳院歷史職人大講堂有官網索引而直接抓頁要JavaScript，**兩網址尚未經一般JS瀏覽器實測**；exp-04勞動部法規原頁本輪逾時但前輪有原始法規及行政院公報佐證，正式刊登日需再核日期。B2約220家是協會當期自述；B1人物經營狀況為官方網站刊載的專訪非獨立審計。
+- **不可越權**：即使13篇均可開始編輯試讀，13個 `sourceCheck` 仍是pending；正式文章及6組功能版本簽核仍為零；不合併main、不部署、不改已有62篇獨立預覽。已通過修稿隔離版本 `e485a42` 的 [CI run 39125290962](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39125290962) 不需要重新跑。最近只新增檔案所產生的CI若仍執行，勿聲稱已通過。
+- **下一步**：13篇最終試讀、必要時實際JS瀏覽器驗證A3/B3，再提交最終文章精確版本簽核；如需工程只操作 `review/youji-13-final-copy-isolated-20261018` 與已完成發布安全鎖分支，控制範圍為新指紋與最小回歸，**Claude目前沒有未回報的新指令**。
+
 ## 新工作階段優先讀取｜2026-10-18 快速現況
 1. 專案為 **daycool858000-hue/morning-light-magazine**，唯一網站為**由己 SELF-AUTHORED**；不要混用其他專案。先看本節，再按任務讀下文、`PROJECT_HISTORY.md` 與原 `CLAUDE.md`；既有細節不要每次全倉庫重掃。
 2. **已完成且站主已驗收**：62 篇獨立 QA 預覽 [full-launch-62](https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/) 功能及手機抽測、54 主題；Pages run `39106678864` success、外部 Chromium/WebKit run `39106785306` success；獨立預覽來源 `4ca3fd5`，部署 `2886c20`。**絕不等於正式發布核准。** 既有小日曆、讀利、向望不因換視窗重做。
