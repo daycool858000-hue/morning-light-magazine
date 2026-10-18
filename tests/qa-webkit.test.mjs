@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // QA 測試版（dist-qa）的 WebKit 模擬 Safari 檢查：只測 QA 才有的新功能。不是在真正 iPhone 上執行。
 // 需先執行 npm test（會建置 dist-qa）。
+// 完整首發隔離版：--dist=dist-qa-all62-city-review --queue=<該版佇列>；本機無 WebKit 時可加 --browser=chromium 試跑。
 import http from 'node:http';
 import path from 'node:path';
 import { readFile, stat } from 'node:fs/promises';
@@ -10,11 +11,12 @@ import { createRequire } from 'node:module';
 import { TOWARD_TOPICS } from '../scripts/lib/toward-light-editorial.mjs';
 import { QA_EXPANSION_QUEUE } from '../scripts/lib/qa-expansion.mjs';
 const require = createRequire(import.meta.url);
-const { webkit } = require('playwright');
+const playwright = require('playwright');
+const args = Object.fromEntries(process.argv.slice(2).map((a) => a.replace(/^--/, '').split('=')));
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIST = path.join(ROOT, 'dist-qa');
+const DIST = path.resolve(ROOT, args.dist || 'dist-qa');
 // 六大主題擴充佇列明確指定讀利／向望的文章，會接在原 23／13 篇之後
-const expansionQueue = JSON.parse(await readFile(path.join(ROOT, QA_EXPANSION_QUEUE), 'utf8'));
+const expansionQueue = JSON.parse(await readFile(path.join(ROOT, args.queue || QA_EXPANSION_QUEUE), 'utf8'));
 const extraIn = (dir) => expansionQueue.articles.filter((a) => a.importToQa && a.directory === dir).length;
 const TOWARD_COUNT = 13 + extraIn('toward');
 const READLI_COUNT = 23 + extraIn('readli');
@@ -36,7 +38,7 @@ const check = (name, ok, detail = '') => { checks.push({ name, ok }); console.lo
 let browser;
 try {
   if (!existsSync(path.join(DIST, 'quiet-power.html'))) throw new Error('找不到 dist-qa，請先執行 npm test');
-  browser = await webkit.launch({ headless: true });
+  browser = await playwright[args.browser === 'chromium' ? 'chromium' : 'webkit'].launch({ headless: true });
   for (const width of [320, 375, 390]) {
     const ctx = await browser.newContext({ viewport: { width, height: 760 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
     const page = await ctx.newPage();

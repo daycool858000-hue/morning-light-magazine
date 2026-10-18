@@ -65,3 +65,38 @@ jobs:
           path: test-results/calendar-*/
           if-no-files-found: ignore
           retention-days: 14
+
+  full-launch:
+    # 完整首發隔離版（dist-qa-all62-city-review，不公開、不部署）：62篇＋54主題＋9活動＋14長期入口＋15縣市入口，以 WebKit 模擬 Safari 驗收。
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝建置工具與測試用瀏覽器（不會打包進網站）
+        run: |
+          npm ci
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps webkit
+      - name: 建置公開 QA 對照組與完整首發隔離版
+        run: |
+          node scripts/build.mjs --mode=qa --out=dist-qa
+          node tests/qa-full-launch-city-services.test.mjs
+      - name: WebKit 手機功能：讀利、向望、學習與活動、官方入口、主題捷徑、小日曆、城市福利
+        run: node tests/qa-webkit.test.mjs --dist=dist-qa-all62-city-review --queue=docs/QA-FULL-LAUNCH-ALL-62-WITH-CITY-SERVICES-2026-10-18.json
+      - name: WebKit 62篇閱讀版面、圖片、noindex 與活動依臺灣日期隱藏
+        run: node tests/qa-full-launch-browser.test.mjs --browser=webkit
+      - name: WebKit 小日曆不遮擋內容（320／375／390／1280px）
+        run: node tests/qa-calendar-avoid.test.mjs --browser=webkit --dist=dist-qa-all62-city-review --shots=test-results/calendar-full-launch-webkit
+      - name: 保存完整首發隔離版小日曆截圖（14 天，只供驗收）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-full-launch-calendar-screenshots
+          path: test-results/calendar-full-launch-webkit/
+          if-no-files-found: ignore
+          retention-days: 14
