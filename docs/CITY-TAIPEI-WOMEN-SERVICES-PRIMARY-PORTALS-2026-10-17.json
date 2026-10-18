@@ -1,0 +1,78 @@
+{
+  "title": "《由己》臺北市婦女／地方學習官方來源深度候選",
+  "county": "taipei",
+  "reviewedOn": "2026-10-17",
+  "reviewedBy": "ChatGPT（AI）",
+  "status": "official-source-purpose-initial-review",
+  "ownerApproved": false,
+  "published": false,
+  "qaImported": false,
+  "notes": [
+    "同一官方網址只用一個入口；不同 URL 可依用途保留各自簡潔文字連結",
+    "不是逐場活動或電話核准檢查，不代表全部服務都免費或可立即使用",
+    "當期或日期性活動須有明確失效日期，不和長期名錄混在一起"
+  ],
+  "items": [
+    {
+      "id": "tp-women-support-centers-directory",
+      "name": "臺北市婦女支持培力中心｜十處中心地址與電話名錄",
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=91F35523B74F69AC&s=98B35313083A645F&sms=87415A8B9CE81B16",
+      "type": "婦女中心官方名錄",
+      "serviceTypes": [
+        "婦女福利"
+      ],
+      "purpose": "臺北市政府社會局列出大直、文山、松山南港、萬華、大同士林、大安、內湖、信義、北投及中正十處婦女支持培力中心的地址與電話；透過一個縣市級名錄查所在地服務。",
+      "evidence": "原官方 FAQ 更新日期115-08-03；同一網址涵蓋十個地點，不應重複做十張相同連結卡。",
+      "remaining": "各中心最新活動及現場開放狀態仍需依各館公告。",
+      "regions": [
+        "taipei"
+      ],
+      "sourceAgency": "臺北市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    },
+    {
+      "id": "tp-women-center-hours",
+      "name": "臺北市婦女支持培力中心｜開放時間與空間服務",
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=630D5097D05EB317&s=E9A8512594C64D8C",
+      "type": "婦女中心使用資訊",
+      "serviceTypes": [
+        "婦女福利"
+      ],
+      "purpose": "政府整理各婦女支持培力中心開放時間及場地介紹，並提供交通路線圖及 115 年 2 月更新的開放時間附件。",
+      "evidence": "直接核對社會局官方頁，附件未逐份下載驗證；與中心地址名錄為不同 URL、不同內容。",
+      "remaining": "個別場地時段及活動是否需預約，依中心最新公告。",
+      "regions": [
+        "taipei"
+      ],
+      "sourceAgency": "臺北市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    },
+    {
+      "id": "tp-women-center-activities",
+      "name": "臺北市婦女福利服務機構｜活動方案資訊",
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=630D5097D05EB317&s=4E989AC312681257&sms=12009A93B2FA491B",
+      "type": "地方課程與活動官方查詢",
+      "serviceTypes": [
+        "婦女福利",
+        "教育與學習"
+      ],
+      "purpose": "臺北市政府社會局提供婦女福利機構活動方案資訊，供查詢講座、支持及培力等不同方案，不在《由己》代為報名。",
+      "evidence": "官方頁更新115-06-16；不因有方案一覽就推定每個活動現仍接受報名。",
+      "remaining": "當期場次費用、資格與截止日期需由主辦單位逐筆確認。",
+      "regions": [
+        "taipei"
+      ],
+      "sourceAgency": "臺北市政府",
+      "sourceReviewStatus": "官方原頁／頁面用途初查、待逐項及 Safari 驗收",
+      "checkedAt": "2026-10-17",
+      "ownerApproved": false,
+      "importToQa": false
+    }
+  ]
+}

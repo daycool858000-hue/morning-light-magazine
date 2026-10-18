@@ -5,4 +5,7 @@ test-results/
 .DS_Store
 dist-production/
 dist-qa/
+dist-qa-expansion/
 qa-preview-url.txt
+dist-qa-staging-first-four/
+dist-qa-staging-nine/
