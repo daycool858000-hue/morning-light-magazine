@@ -39,3 +39,10 @@
 `docs/FORMAL-LAUNCH-2026-10-18-RECONCILIATION.md`、
 `docs/QA-TOPIC54-CHILDCARE-ORIGINAL-ENTRY-2026-10-18.md`（PR #24）；
 舊文件涉及「向光」、舊 HEAD 和舊部署方式的敘述均僅具歷史意義，**不可當最新狀態或重新部署依據**。
+
+## 2026-10-18 直接實作的後續成果（全量首發草稿，仍未部署）
+- 站主已確認**44+13+2+3篇完整首發**，54主題＋35新增正式來源入口、活動及既有功能不得縮減。發布工程正式模式最低62篇檢查：PR #19 `e31a785`，測試用44篇fixture保留。**只有完成逐原稿核准才正式發布**。
+- [PR #11](https://github.com/daycool858000-hue/morning-light-magazine/pull/11) 新增完整原創初稿 `docs/EDITORIAL-FULL-LAUNCH-THREE-NEW-READINGS-2026-10-18.md`：創意市集、經期觀察、更年期生活3篇；提交 `e7cf074`，隔離候選未上QA、待查核/手機。
+- [PR #11](https://github.com/daycool858000-hue/morning-light-magazine/pull/11) 的校園霸凌與校園性騷擾2篇稿在 `docs/EDITORIAL-CAMPUS-BULLYING-AND-GENDER-EVENTS-TWO-DRAFTS-2026-10-18.md`；13篇舊稿都在編輯檔待QA，與62篇總數不能重複計。
+- [PR #25](https://github.com/daycool858000-hue/morning-light-magazine/pull/25) 新建**活動隔離草稿**，基於PR#24最新的向望+54主題，新增 2026-11-12 POPUPASIA、11-20 台北新藝術博覽會、12-18 毛孩藝術生活節共3場正式來源公告；從6場→9場。館所永久查詢從12→14，加入松菸、華山；2026-11-01～2027-12-31逾期隱藏自動測試；目前仍有更多市集、親子、攝影、音樂類別須找已正式公告來源。
+- PR #25與PR #19的GitHub CI須看各最新SHA最終結果，不可依草稿建立就宣稱全數通過；PR #11新的三篇稿 commit `e7cf074` CI已 success（工程檢查≠文章已刊登）。
