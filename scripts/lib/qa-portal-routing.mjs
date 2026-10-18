@@ -1,4 +1,4 @@
-// QA-only：原始十二筆活動查詢入口的主題定位（不改原始來源，也不推定外站報名狀態）。
+// QA-only：原始12筆＋2筆新核實場館活動入口的主題定位（不改原始來源，也不推定外站報名狀態）。
 // 站主規則：URL 完全相同 → 不加一張卡，在現有卡補用途文字；URL 不同 → 獨立的精簡文字連結。
 export const QA_PORTAL_CATEGORY = Object.freeze({
   'act-01': 'career',
@@ -13,6 +13,8 @@ export const QA_PORTAL_CATEGORY = Object.freeze({
   'act-10': 'learning',
   'act-11': 'learning',
   'act-12': 'learning',
+  'act-13': 'learning',
+  'act-14': 'learning',
 });
 
 export function resolveQaPortalRouting(items, existingResources) {
@@ -30,8 +32,8 @@ export function resolveQaPortalRouting(items, existingResources) {
     if (old) reused.push({ ...item, category, existingResourceId: old.id });
     else primary.push({ ...item, category });
   }
-  if (items.length !== 12 || Object.keys(QA_PORTAL_CATEGORY).length !== items.length) {
-    throw new Error('12 筆長期官方入口清單不完整，須先編輯確認');
+  if (items.length !== 14 || Object.keys(QA_PORTAL_CATEGORY).length !== items.length) {
+    throw new Error('14 筆長期官方入口清單不完整，須先編輯確認');
   }
   if (reused.length !== 1 || reused[0].id !== 'act-09' || reused[0].existingResourceId !== 'open-culture-events') {
     throw new Error('同網址去重結果與目前來源不同，請先確認資料，不要新增重複卡片');
