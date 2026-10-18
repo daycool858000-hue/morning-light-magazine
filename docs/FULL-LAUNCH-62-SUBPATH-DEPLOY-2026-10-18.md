@@ -22,7 +22,7 @@
 
 ## 檢查
 
-`scripts/check-full-launch-62-live.mjs`（只讀取網頁）；部署前以本機相同子路徑 Chromium 21 項全過，部署後由 `.github/workflows/full-launch-62-live-check.yml` 以 Chromium 與 WebKit 實際開啟公開網址。項目：站內 78 頁全部 200 且無連結跳出子資料夾、62 篇文章、exp-12 未恢復、13 篇「編輯草稿：來源與資料尚待複核」、每頁 noindex 與「未核准測試內容」、CSS 與圖片、375px 無左右溢位、六大分類、讀利 38／向望 24、活動頁 9 場＋小日曆、搜尋結果可開啟、原 54 主題首頁正常。另以建置檔確認 14 個長期查詢入口與六縣市 15 筆服務入口。
+`scripts/check-full-launch-62-live.mjs`（只讀取網頁）；部署前以本機相同子路徑 Chromium 21 項全過，部署後由 `.github/workflows/full-launch-62-live-check.yml` 以 Chromium 與 WebKit 實際開啟公開網址（run `39106785306` success，兩種瀏覽器各 21 項全過）。項目：站內 78 頁全部 200 且無連結跳出子資料夾、62 篇文章、exp-12 未恢復、13 篇「編輯草稿：來源與資料尚待複核」、每頁 noindex 與「未核准測試內容」、CSS 與圖片、375px 無左右溢位、六大分類、讀利 38／向望 24、活動頁 9 場＋小日曆、搜尋結果可開啟、原 54 主題首頁正常。另以建置檔確認 14 個長期查詢入口與六縣市 15 筆服務入口。
 
 ## 視覺規範符合程度
 
