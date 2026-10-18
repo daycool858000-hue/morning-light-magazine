@@ -10,6 +10,13 @@
 - **下一步分工**：ChatGPT優先完成13篇正式來源查核及四篇修正的內容版次核對，並保留另11篇新草稿及NI多語資源為獨立擴充；**目前 Claude 此輪工程已回報結案，勿重派相同工作**。要進下一個 Claude 新階段時先讀 main 本檔與該隔離分支 `CLAUDE.md` 的最新節及專門報告，按當次任務需要讀特定檔案，不重掃 repo。建立 Draft PR 可留作工程審閱選項，非當下正式發布必要條件。
 - **文件位置糾正**：Claude 所稱「`PROJECT_STATUS.md`、`PROJECT_HISTORY.md` 只在 PR #19 分支，main沒有」是其工作階段取得的**過時狀態**；兩檔先前已由 ChatGPT 單純新增到 `main`（`b60a108`、`ca94602`），此次持續增量更新。本次只更新根目錄紀錄，不修改任何網站程式或已有驗收頁面。
 
+
+## 2026-10-18｜13篇來源第4輪實做：11篇核心來源原頁可核、2篇官方索引與瀏覽器限制
+- **執行成果（ChatGPT，非Claude交辦）**：本輪確實讀取13篇原稿所對應4份V2／Round2/3文稿及前三輪來源報告、13對44篇內容重疊矩陣，重開／搜尋官方原始來源，補做原稿權利界線。第四輪報告已建立在 `audit/youji-13-primary-source-20261018`：[`docs/FULL-LAUNCH-13-ROUND4-PRIMARY-SOURCE-AND-COPY-DECISION-2026-10-18.md`](https://github.com/daycool858000-hue/morning-light-magazine/blob/audit/youji-13-primary-source-20261018/docs/FULL-LAUNCH-13-ROUND4-PRIMARY-SOURCE-AND-COPY-DECISION-2026-10-18.md)，commit `a9ee317`。
+- **第4輪證據分類，絕不可誤作內容發布核准**：13篇中11篇主要可核事實有可讀原始機關／機構頁，另2篇 `A3` 教育部2024分齡教材、`B3` 兩廳院2025已結束的學校專用職人講堂有**官方搜尋索引**支持，但工具直接打開分別逾時／需JavaScript；`exp-07` 臺中醫院舊頁仍403，已保留可讀衛福部／臺大醫院替代資料。**13篇仍全是 `sourceCheck:pending`、正式核准0篇**，不能把核心事實查核說成逐句全審或13篇正式驗收。
+- **實際修稿**：本輪在上述審稿分支的 B6 日常創作稿補上「肖像權不等於著作權」的警示與智財局官方問答，commit `53f15d1`。截至本輪，**相對已驗收預覽來源 `4ca3fd5`，審稿分支只有3份既有原稿MD發生文字差異**：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`（exp-02/04/10）、`docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`（exp-07）、`docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md`（B6）；`exp-05`精準官方URL修正已在舊版本，不能重複算新差異。比對使用 GitHub compare `4ca3fd5...audit/youji-13-primary-source-20261018`，不需要整倉重新讀。
+- **下一步明確工作項目**：A3/B3做一次有JS的瀏覽器／台灣端實際連結驗證（不能以海外爬取失敗當404）；對13篇形成逐篇最終來源版次證據，再由人工完成編輯發布核准決策；之後由Claude只處理3份差異稿件的**隔離QA整合**、佇列源查狀態變動的有證據核准及新版本指紋／必要測試；目前 **不派Claude、不改62篇部署網址、不簽核、不中途發布**。審稿分支13篇源查與內容修改已在GitHub保存，待最後關卡決定。
+
 ## 新工作階段優先讀取｜2026-10-18 快速現況
 1. 專案為 **daycool858000-hue/morning-light-magazine**，唯一網站為**由己 SELF-AUTHORED**；不要混用其他專案。先看本節，再按任務讀下文、`PROJECT_HISTORY.md` 與原 `CLAUDE.md`；既有細節不要每次全倉庫重掃。
 2. **已完成且站主已驗收**：62 篇獨立 QA 預覽 [full-launch-62](https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/) 功能及手機抽測、54 主題；Pages run `39106678864` success、外部 Chromium/WebKit run `39106785306` success；獨立預覽來源 `4ca3fd5`，部署 `2886c20`。**絕不等於正式發布核准。** 既有小日曆、讀利、向望不因換視窗重做。
