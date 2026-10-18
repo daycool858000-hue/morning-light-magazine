@@ -50,6 +50,12 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 最新工作｜2026-10-18 完整首發 62 篇獨立測試子網址已部署（本節最新）
+
+- 站主同意後，將 `review/youji-full-launch-integration-20261018`（`4ca3fd5`）的 `dist-qa-all62-city-review` 部署到 `youji-topic54-preview` 的 `full-launch-62/`：https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/ 。部署提交 `2886c20`，Pages run `39106678864` success；回復點分支 `backup/topic54-before-full-launch-62-20261018`（`16068fb`）。
+- 只新增子資料夾、只改子資料夾 `404.html` 絕對路徑；原 54 主題網站、本專案 main、公開 QA、release-approvals 都未動。紀錄：`docs/FULL-LAUNCH-62-SUBPATH-DEPLOY-2026-10-18.md`；部署後檢查：`scripts/check-full-launch-62-live.mjs`＋`.github/workflows/full-launch-62-live-check.yml`（只在本分支觸發）。
+- 待辦：站主 iPhone 實機視覺驗收；13 篇來源複核。
+
 ## 最新權威狀態｜2026-10-16（優先於下方歷史工作紀錄）
 
 **本輪手機與電腦功能已驗收通過，公開 QA 部署完成，工程已合併 main。不要因下方舊紀錄的「尚未部署／等待驗收」而重做或撤回已完成工作。**
