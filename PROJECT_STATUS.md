@@ -17,6 +17,13 @@
 - **實際修稿**：本輪在上述審稿分支的 B6 日常創作稿補上「肖像權不等於著作權」的警示與智財局官方問答，commit `53f15d1`。截至本輪，**相對已驗收預覽來源 `4ca3fd5`，審稿分支只有3份既有原稿MD發生文字差異**：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`（exp-02/04/10）、`docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`（exp-07）、`docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md`（B6）；`exp-05`精準官方URL修正已在舊版本，不能重複算新差異。比對使用 GitHub compare `4ca3fd5...audit/youji-13-primary-source-20261018`，不需要整倉重新讀。
 - **下一步明確工作項目**：A3/B3做一次有JS的瀏覽器／台灣端實際連結驗證（不能以海外爬取失敗當404）；對13篇形成逐篇最終來源版次證據，再由人工完成編輯發布核准決策；之後由Claude只處理3份差異稿件的**隔離QA整合**、佇列源查狀態變動的有證據核准及新版本指紋／必要測試；目前 **不派Claude、不改62篇部署網址、不簽核、不中途發布**。審稿分支13篇源查與內容修改已在GitHub保存，待最後關卡決定。
 
+
+## 2026-10-18｜第四輪後已建立3檔差異的62篇隔離修稿分支（不發布）
+- **實作完成／已儲存**：從站主已驗收的62篇原始來源提交 `4ca3fd5450fbe7b041a5a9752223039c45aeedda` 新建 `review/youji-13-final-copy-isolated-20261018`，只把 `audit/youji-13-primary-source-20261018` 中**真正有差異的3份原稿MD**逐檔搬入、保留前面三輪與第四輪的核對修訂。依序提交 `57663df`、`038bb25`、`e485a42`。
+- **精準差異實證**：GitHub compare `4ca3fd5...review/youji-13-final-copy-isolated-20261018` 狀態 `ahead 3, behind 0`，**僅3檔 modified**：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`（exp-02／04／10）、`docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`（exp-07）、`docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md`（B6）；沒有搬入額外城市資料或改網站JS/CSS、正式／QA部署工作流程。
+- **狀態區分**：目前是**已整理修正原稿並建立隔離分支**，不是來源13篇全審完成、不是13篇 sourceCheck變更、不是逐頁測試／站主驗收，更不是將已驗收的正式公開預覽或production覆蓋。13篇保持`pending`，62篇文章與6功能的正式發佈核准仍空。GitHub CI 若因這3次文字提交自動啟動，須等其結果才可稱自動測試通過。
+- **下一步**：查核 A3 教育部／B3 兩廳院實際瀏覽器原頁後，定稿逐篇來源證據和文章修正版；再讓 Claude 僅針對此隔離分支做 QA 與版本指紋生成工作，不重做已驗收版面。站主未明確授權前不部署、不合併main、不修改核准。
+
 ## 新工作階段優先讀取｜2026-10-18 快速現況
 1. 專案為 **daycool858000-hue/morning-light-magazine**，唯一網站為**由己 SELF-AUTHORED**；不要混用其他專案。先看本節，再按任務讀下文、`PROJECT_HISTORY.md` 與原 `CLAUDE.md`；既有細節不要每次全倉庫重掃。
 2. **已完成且站主已驗收**：62 篇獨立 QA 預覽 [full-launch-62](https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/) 功能及手機抽測、54 主題；Pages run `39106678864` success、外部 Chromium/WebKit run `39106785306` success；獨立預覽來源 `4ca3fd5`，部署 `2886c20`。**絕不等於正式發布核准。** 既有小日曆、讀利、向望不因換視窗重做。
