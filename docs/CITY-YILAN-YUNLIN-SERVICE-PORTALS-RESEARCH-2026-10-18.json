@@ -1,0 +1,59 @@
+{
+  "documentType": "city-service-research-not-approved",
+  "asOf": "2026-10-18",
+  "scope": "Only 2 previously under-researched counties, 3 URLs, not a complete inventory",
+  "ownerApproved": false,
+  "importToQa": false,
+  "productionApproved": false,
+  "entries": [
+    {
+      "id": "yl-social-five-centers",
+      "county": "宜蘭縣",
+      "name": "宜蘭縣政府社會處｜社會福利服務中心與婦女暨新住民家庭服務",
+      "url": "https://sntroot.e-land.gov.tw/cp.aspx?n=10392",
+      "serviceType": "社福中心名錄／福利諮詢／家庭支持與新住民服務",
+      "level": "地方政府直接服務說明頁",
+      "purpose": "列出礁溪、宜蘭、羅東、蘇澳、三星等服務中心與轄區，另在同頁載有婦女暨新住民家庭服務內容",
+      "verifiedOn": "2026-10-18",
+      "sourceType": "Government page directly inspected",
+      "caution": "同一URL涵蓋多個中心，僅使用一筆入口；中心資訊最新更新顯示115-08-24，個別電話及服務時段未實際致電驗證；不將它標成課程報名頁",
+      "status": "editorial-review"
+    },
+    {
+      "id": "yun-women-center",
+      "county": "雲林縣",
+      "name": "雲林縣婦女福利服務中心｜服務內容、地址與聯絡",
+      "url": "https://social.yunlin.gov.tw/News_Content.aspx?n=16861&s=416680",
+      "serviceType": "婦女中心／福利諮詢／學習活動／心理支持",
+      "level": "地方政府直接中心介紹",
+      "purpose": "介紹女子館、成長課程、婦女福利諮詢、中心聯絡資料；官方頁已查，個別服務須按當期公告與資格確認",
+      "verifiedOn": "2026-10-18",
+      "sourceType": "Government page directly inspected",
+      "caution": "中心說明包括心理諮商，但不能保證所有人即時免費獲服務或有空額",
+      "status": "editorial-review",
+      "qaApproved": false
+    },
+    {
+      "id": "yun-women-activities",
+      "county": "雲林縣",
+      "name": "雲林縣婦女福利服務中心｜活動公告列表",
+      "url": "https://social.yunlin.gov.tw/News.aspx?n=16861&sms=19151",
+      "serviceType": "地方課程與活動動態查詢",
+      "level": "官方活動索引",
+      "purpose": "可查當期公布之課程與婦女培力活動；部分2026年下半年課程報名期已過，不能寫成現在可以報名",
+      "verifiedOn": "2026-10-18",
+      "sourceType": "Government list directly inspected",
+      "caution": "僅作長期查詢入口，不轉錄歷史報名日期為現行活動；活動是否收費須依各則公告",
+      "status": "editorial-review",
+      "qaApproved": false
+    }
+  ],
+  "distinctUsefulUrls": 3,
+  "newCountiesWithPartialDepth": 2,
+  "fullyAuditedCountyCount": 0,
+  "notes": [
+    "本檔為研究候選，不代表新增至62篇測試站，亦不代表2縣市5層服務完成。",
+    "相同URL在本文件中僅一個可公開候選入口；其餘同頁記錄為編輯用途。",
+    "下一批逐縣市深查，需增加公立就業服務、家庭教育、醫衛長照、新住民專門中心。"
+  ]
+}
