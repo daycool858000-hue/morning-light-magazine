@@ -1,0 +1,34 @@
+# 完整首發 62 篇隔離預覽部署後檢查：只用瀏覽器開啟 youji-topic54-preview/full-launch-62/ 與原 54 主題首頁，不建置、不部署。
+name: 完整首發 62 篇子網址部署後檢查
+
+on:
+  push:
+    branches: [claude/youji-full-launch-preview-deploy-a224k1]
+    paths:
+      - scripts/check-full-launch-62-live.mjs
+      - .github/workflows/full-launch-62-live-check.yml
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝測試用瀏覽器
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps ${{ matrix.browser }}
+      - name: 開啟公開子網址檢查（${{ matrix.browser }}）
+        run: node scripts/check-full-launch-62-live.mjs https://daycool858000-hue.github.io ${{ matrix.browser }}
