@@ -80,15 +80,15 @@ try {
         noHorizontalScroll: document.documentElement.scrollWidth <= innerWidth,
       };
     });
-    check(`WebKit ${width}px 學習與活動：先看到八篇閱讀文章，再顯示六筆真實活動及官方來源`,
-      learningState.activities === 6 && learningState.sources === 6 &&
+    check(`WebKit ${width}px 學習與活動：先看到八篇閱讀文章，再顯示九筆已公告活動及官方來源`,
+      learningState.activities === 9 && learningState.sources === 9 &&
       learningState.firstArticleBeforeActivities && learningState.noHorizontalScroll,
       JSON.stringify(learningState));
-    // 新階段：12 筆長期查詢入口中，同網址 act-09 不建立第二張卡；
-    // 其餘 11 筆各在自己主題的最下方以容易點擊的文字列呈現。
+    // 新階段：14 筆長期查詢入口中，同網址 act-09 不建立第二張卡；
+    // 原11筆＋松菸／華山2筆（共13）在各自主題以容易點擊的文字列呈現。
     const portalResult = [];
     for (const [file, expected] of [['life-family.html', 2], ['career.html', 3],
-      ['health.html', 2], ['law.html', 1], ['learning.html', 3]]) {
+      ['health.html', 2], ['law.html', 1], ['learning.html', 5]]) {
       await page.goto(`${origin}${base}${file}`);
       const state = await page.locator('.qa-portal-list > li').evaluateAll(rows =>
         rows.map(row => { const a=row.querySelector('a'), rect=a.getBoundingClientRect(); return {
@@ -99,7 +99,7 @@ try {
       if (state.length !== expected || state.some(x => x.h < 44 || !x.href?.startsWith('https://') ||
           x.target !== '_blank' || !x.rel.includes('noopener') || x.overflow)) portalResult.push(file + ' ' + JSON.stringify(state));
     }
-    check(`WebKit ${width}px 官方入口：11 筆不同網址以輕量文字列在五個主題顯示，44px 可點、HTTPS、無橫向溢位`,
+    check(`WebKit ${width}px 官方入口：13 筆不同網址以輕量文字列在五個主題顯示，44px 可點、HTTPS、無橫向溢位`,
       portalResult.length === 0, portalResult.join('；'));
     // 網站內容增加後，五個主題可以直接跳到需求／索引，無須把整頁滑到底。
     const jumpFailures = [];
@@ -174,7 +174,7 @@ try {
     await p.waitForURL('**/activities.html');
     const n = await p.locator('.notice:not([hidden]) a.notice-link[target="_blank"][rel="noopener noreferrer"]').count();
     const portals = await p.locator('.act-item a[target="_blank"][rel="noopener noreferrer"]').count();
-    check('WebKit 390px 全站小日曆：首次進站第 2 秒看不到、第 3.5 秒浮現並常駐（≥ 44px、在畫面內、不蓋住切換畫面）；換到讀利、向望、文章直接顯示；點進活動頁列出具體活動官方公告（另開新分頁＋noopener）與 12 個長期入口', s2.vis === 'hidden' && s35.vis === 'visible' && s45.op === 1 && s45.h >= 44 && s45.inView && s45.clearOfSwitch && later.length === 0 && n >= 4 && portals === 12, JSON.stringify({ s2, s35, s45, later, n, portals }));
+    check('WebKit 390px 全站小日曆：首次進站第 2 秒看不到、第 3.5 秒浮現並常駐（≥ 44px、在畫面內、不蓋住切換畫面）；換到讀利、向望、文章直接顯示；點進活動頁列出具體活動官方公告（另開新分頁＋noopener）與 14 個長期入口', s2.vis === 'hidden' && s35.vis === 'visible' && s45.op === 1 && s45.h >= 44 && s45.inView && s45.clearOfSwitch && later.length === 0 && n >= 4 && portals === 14, JSON.stringify({ s2, s35, s45, later, n, portals }));
     await c2.close();
   }
   await page.goto(`${origin}${base}city.html`);
