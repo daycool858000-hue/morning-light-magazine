@@ -1,0 +1,207 @@
+{
+  "documentType": "youji-editorial-evidence-and-version-handoff",
+  "site": "由己 SELF-AUTHORED",
+  "asOf": "2026-10-18",
+  "branch": "review/youji-13-final-copy-isolated-20261018",
+  "previewBaseCommit": "4ca3fd5450fbe7b041a5a9752223039c45aeedda",
+  "latestCopyCommit": "e485a42c89011d744ce8d92edc514dd6dfc139f6",
+  "status": "AI_CORE_FACTS_REVIEWED_NOT_PUBLICATION_APPROVED",
+  "approvalStatus": "NOT_APPROVED",
+  "sourceCheckStatusInQaManifest": "pending",
+  "ownerApproved": false,
+  "stagingOnly": true,
+  "noDeploy": true,
+  "unchangedApprovedPreview": true,
+  "qaManifest": "docs/QA-FULL-LAUNCH-ALL-62-WITH-CITY-SERVICES-2026-10-18.json",
+  "auditReport": "audit/youji-13-primary-source-20261018:docs/FULL-LAUNCH-13-ROUND4-PRIMARY-SOURCE-AND-COPY-DECISION-2026-10-18.md",
+  "changedArticleIDs": [
+    "exp-02",
+    "exp-04",
+    "exp-07",
+    "exp-10",
+    "B6"
+  ],
+  "changedSourceFiles": [
+    "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+    "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+    "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md"
+  ],
+  "baselineComparison": "GitHub compare 4ca3fd5...review/youji-13-final-copy-isolated-20261018: only these 3 MD source files changed; manifest, site code and release approvals unchanged.",
+  "latestCi": {
+    "run": 39125290962,
+    "conclusion": "success",
+    "jobs": [
+      "test",
+      "full-launch",
+      "calendar"
+    ],
+    "note": "Earlier intermediate commit CI failed; the latest final copy commit e485a42 has success."
+  },
+  "finalReviewChecks": [
+    "核對每篇實際生成版本的全文、官方標示與文稿版本是否一致",
+    "確認已修改5篇的最終頁面、來源格式、搜尋與分類不退化",
+    "A3教育部2024歷史教材原頁瀏覽器可用性與實際附件待驗",
+    "B3兩廳院2025歷史活動JS瀏覽器直接連結可用性待驗",
+    "法律、醫療與時效性內容在正式簽核時核對來源日期",
+    "只用最終同一版全文重新計算62篇精確發布版本指紋",
+    "站主分別核准62篇文章及6組功能；需額外授權正式部署"
+  ],
+  "items": [
+    {
+      "id": "exp-02",
+      "slug": "exp-consumer-dispute-records",
+      "changedFromOwnerTestedPreview": true,
+      "coreFactEvidence": "original-page-readable",
+      "coreFactSourceUrl": "https://appeal.cpc.ey.gov.tw/www/step_explanation.aspx",
+      "coreFactScope": "消保會第一、二次申訴與調解程序；不宣稱所有網路訂單一定能七日無條件退款",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "exp-03",
+      "slug": "exp-family-care-handover",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "original-page-readable",
+      "coreFactSourceUrl": "https://1966.gov.tw/LTC/cp-6454-70075-207.html",
+      "coreFactScope": "長照1966與喘息模式；評估資格、聘僱家庭看護的部分服務條件不能一概而論",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "exp-04",
+      "slug": "exp-career-gap-resume",
+      "changedFromOwnerTestedPreview": true,
+      "coreFactEvidence": "original-page-readable",
+      "coreFactSourceUrl": "https://laws.mol.gov.tw/FLAW/FLAWDAT01.aspx?id=FL102139",
+      "coreFactScope": "婦女再就業獎勵115-04-07修正；履歷真實描述與獎勵申請是不同議題",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "exp-05",
+      "slug": "exp-first-interview-questions",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "original-page-readable",
+      "coreFactSourceUrl": "https://www.mol.gov.tw/1607/28690/87756/",
+      "coreFactScope": "部分工時與工讀生勞動條件；歷史審稿已有更精準URL，和62篇基準無新的文字差異",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "exp-06",
+      "slug": "exp-freelance-agreements",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "original-page-readable",
+      "coreFactSourceUrl": "https://www.tipo.gov.tw/tw/copyright/694-17729.html",
+      "coreFactScope": "著作權法第11條職務著作與第12條出資聘人著作的預設歸屬不同",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "exp-07",
+      "slug": "exp-sleep-habits-health",
+      "changedFromOwnerTestedPreview": true,
+      "coreFactEvidence": "alternative-official-page-readable",
+      "coreFactSourceUrl": "https://www.mohw.gov.tw/cp-16-55275-1.html",
+      "coreFactScope": "臺中醫院舊衛教頁工具讀取403；臺大醫院與衛福部可直接參考；不得以衛教取代診斷",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "exp-09",
+      "slug": "exp-stalking-legal-info",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "official-law-page-readable",
+      "coreFactSourceUrl": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0080211",
+      "coreFactScope": "跟蹤騷擾防制法第3～5條與家暴法交錯適用；不得替個案保證成立要件",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "exp-10",
+      "slug": "exp-digital-safety-three-risks",
+      "changedFromOwnerTestedPreview": true,
+      "coreFactEvidence": "original-page-readable",
+      "coreFactSourceUrl": "https://support.apple.com/zh-tw/guide/personal-safety/ips2aad835e1/web",
+      "coreFactScope": "Apple安全檢查有系統與帳號條件且不涵蓋第三方全部分享；性影像中心有獨立申訴流程",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "A3",
+      "slug": "exp-parenting-courses-by-age",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "official-search-index-full-article-readable-direct-timeout",
+      "coreFactSourceUrl": "https://familyedu.moe.gov.tw/docDetail.aspx?docid=307524&pid=27&uid=3159",
+      "coreFactScope": "2024-09-02教育部家庭教育網113學年分齡手冊與AI正向教養公告；官方直接擷取仍逾時，附件未逐個開啟；是歷史教材非招生",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "B1",
+      "slug": "exp-woman-founder-client-trust",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "official-program-page-readable",
+      "coreFactSourceUrl": "https://www.sme.gov.tw/women/article-women-3271-20536",
+      "coreFactScope": "2025女性創業菁英獎得獎名單與2026人物介紹；創業者營運說法為官方計畫所載自述，不當成獨立業績驗證",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "B2",
+      "slug": "exp-food-bank-logistics",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "organization-first-party-page-readable",
+      "coreFactSourceUrl": "https://www.foodbank-taiwan.org.tw/wheres-the-food",
+      "coreFactScope": "食物銀行物流管理流程可讀；約220合作機構數為協會自述，非外部獨立認證",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "B3",
+      "slug": "exp-performing-arts-first-time",
+      "changedFromOwnerTestedPreview": false,
+      "coreFactEvidence": "official-search-index-full-article-readable-direct-requires-js",
+      "coreFactSourceUrl": "https://npac-ntch.org/events/9984?lang=zh-TW",
+      "coreFactScope": "兩廳院2025職人大講堂為已結束的國高中職學校申請活動；官方搜尋索引全文可讀、直接擷取需要JavaScript",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    },
+    {
+      "id": "B6",
+      "slug": "exp-everyday-creative-works",
+      "changedFromOwnerTestedPreview": true,
+      "coreFactEvidence": "official-ip-rights-page-readable",
+      "coreFactSourceUrl": "https://www.tipo.gov.tw/tw/copyright/774-5048.html",
+      "coreFactScope": "攝影著作權不等於人物肖像權；增加智財局肖像權問答，自己拍攝亦不能忽略隱私與人物權益",
+      "sourceCheck": "pending",
+      "readyForFinalEditorialAndOwnerReview": true,
+      "readyForProduction": false,
+      "ownerSignedOff": false
+    }
+  ]
+}
