@@ -50,6 +50,13 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 最新工作｜2026-10-18 完整首發隔離預覽整合測試（本節最新，優先於下方各節）
+
+- 基準：PR #28（d0f08e8，已承接 #24～#27）。整合分支 `review/youji-full-launch-integration-20261018`，只加測試、未改內容與審查狀態；**未開 PR、未合併、未部署**。
+- 隔離版：`QA_EXPANSION_QUEUE=docs/QA-FULL-LAUNCH-ALL-62-WITH-CITY-SERVICES-2026-10-18.json QA_TOPIC_GUIDES_STAGING=1 QA_PENDING_REVIEW_MODE=1 node scripts/build.mjs --mode=qa --out=dist-qa-all62-city-review`（79 頁、62 篇，13 篇標「編輯草稿：來源與資料尚待複核」）。
+- CI 新增 `full-launch` 工作（WebKit）：`qa-webkit.test.mjs --dist/--queue`、新 `tests/qa-full-launch-browser.test.mjs`（62 篇閱讀版面、圖片、noindex、活動依臺灣日期隱藏）、小日曆避讓。CI run `39099700630` 三個工作全部 success。
+- 尚未完成：站主實機視覺驗收；13 篇來源複核；獨立測試版的部署目標（GitHub Pages 只有一個網址，會覆蓋公開 QA）待站主決定。
+
 ## 最新工作｜2026-10-17 第一輪 QA 試讀回饋整合（本節最新，優先於下方各節）
 
 **分支 `claude/morning-light-qa-integration-kd06lm`（以 PR #15 `7c921a5` 為基礎，含懷孕與生育入口），草稿 PR 的 base 是 `qa/public-nine-articles-20261017`。未部署公開 QA、未合併 main、未修改 `content/release-approvals.json`、未動 PR #11、未匯入其他 13 篇或 60 筆城市候選。不要回頭使用 PR #13、#14。** 報告：`docs/QA-INTEGRATION-ROUND1-FEEDBACK-REPORT-2026-10-17.md`。
