@@ -1,0 +1,48 @@
+{
+  "name": "新北市婦女中心、婦女大學、在地社福據點官方入口（3 筆）",
+  "county": "new-taipei",
+  "reviewedOn": "2026-10-17",
+  "reviewedBy": "ChatGPT AI",
+  "approval": false,
+  "qa": false,
+  "scope": "僅官方原頁用途核對，不是活動現場、電話接通或手機 Safari 驗收；既有 NI-08 新北新住民中心已在 13 項獨立名單，不在此重複新增。",
+  "items": [
+    {
+      "id": "ntpc-women-center",
+      "name": "新北市婦女服務中心",
+      "url": "https://wedid.ntpc.gov.tw/Governance/Detail/7RApPkVDve64",
+      "county": "new-taipei",
+      "type": "婦女中心",
+      "purpose": "新北市政府施政成果官方頁說明中心提供閱覽、主題藝文、婦女成長、性別議題與培力活動；位於板橋區。",
+      "caution": "此為官方介紹頁，非當期活動報名系統；館舍電話、服務時間及新年度課程仍須按最新公告確認。",
+      "verification": "新北市政府施政成果網官方頁直接可讀，記載 2026 年起由委辦單位營運；可與社會局 2026-03 新聞交叉確認。",
+      "additionalOfficialEvidence": "https://www.sw.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=30067af987173c6f58671cb7bc2b762a&id=107",
+      "status": "官方來源用途已初核、待人工／QA 驗證",
+      "ownerApproved": false
+    },
+    {
+      "id": "ntpc-women-university",
+      "name": "新北市婦女大學｜市府課程與報名說明",
+      "url": "https://www.sw.ntpc.gov.tw/home.jsp?dataserno=201802050029&id=193&mcustomize=multimessages_view.jsp&mserno=201711200013&parentpath=0%2C4&t=null",
+      "county": "new-taipei",
+      "type": "地方學習課程",
+      "purpose": "社會局正式頁介紹婦女大學課程型態、選修與共同課程及透過新北數位樂學網查詢報名。",
+      "caution": "頁面主要發布 2025-11-19 的 115 年度計畫資訊，不能推定今天正招生，更不能把計畫申請截止日錯當學員報名截止日；參加資格與費用依當期課程公告。",
+      "verification": "新北市政府社會局官方婦女福利頁可讀；相關連結為新北數位樂學網。",
+      "status": "官方來源用途已初核、待人工／QA 驗證",
+      "ownerApproved": false
+    },
+    {
+      "id": "ntpc-social-welfare-centers",
+      "name": "新北市社會福利服務中心名錄",
+      "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=dcb8a590a4a5dad6",
+      "county": "new-taipei",
+      "type": "在地社福據點名錄",
+      "purpose": "新北市政府社會局依轄區列出板橋、三重、新莊、永和等社福服務中心及官方聯絡資訊，可依所在區找適合的服務中心。",
+      "caution": "縣市級名錄只設一張官方入口，不因同一名錄列十餘處中心就創造十餘張重複連結格；當日中心接聽或預約情況尚未實測。",
+      "verification": "原頁可讀且具中心名稱、服務地區、電話等；是社福中心，不能標為婦女中心。",
+      "status": "官方來源用途已初核、待人工／QA 驗證",
+      "ownerApproved": false
+    }
+  ]
+}

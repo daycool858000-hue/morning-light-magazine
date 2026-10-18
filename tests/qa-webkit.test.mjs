@@ -8,10 +8,16 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { TOWARD_TOPICS } from '../scripts/lib/toward-light-editorial.mjs';
+import { QA_EXPANSION_QUEUE } from '../scripts/lib/qa-expansion.mjs';
 const require = createRequire(import.meta.url);
 const { webkit } = require('playwright');
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist-qa');
+// 六大主題擴充佇列明確指定讀利／向光的文章，會接在原 23／13 篇之後
+const expansionQueue = JSON.parse(await readFile(path.join(ROOT, QA_EXPANSION_QUEUE), 'utf8'));
+const extraIn = (dir) => expansionQueue.articles.filter((a) => a.importToQa && a.directory === dir).length;
+const TOWARD_COUNT = 13 + extraIn('toward');
+const READLI_COUNT = 23 + extraIn('readli');
 const base = JSON.parse(await readFile(path.join(ROOT, 'config/site.json'), 'utf8')).basePath;
 const port = 4371;
 const origin = `http://127.0.0.1:${port}`;
@@ -54,14 +60,14 @@ try {
       cards.map(c => ({ x: Math.round(c.getBoundingClientRect().left), y: Math.round(c.getBoundingClientRect().top), w: Math.round(c.getBoundingClientRect().width), h: Math.round(c.getBoundingClientRect().height) }))
     );
     check(`WebKit ${width}px 向光：13 篇採單欄上下滑動、寬度一致且文字可閱讀`,
-      vertical.length === 13 && vertical.every((v,i) => v.w >= width - 56 && v.w < width && v.h >= 106 && v.h < 230 &&
+      vertical.length === TOWARD_COUNT && vertical.every((v,i) => v.w >= width - 56 && v.w < width && v.h >= 106 && v.h < 230 &&
         (i === 0 || (v.x === vertical[i-1].x && v.y > vertical[i-1].y))), JSON.stringify(vertical.slice(0, 3)));
     await page.goto(`${origin}${base}quiet-power.html`);
     const compact = await page.locator('.readli-reading .story-grid .story').evaluateAll(cards =>
       cards.map(c => { const h = c.querySelector('h3 a').getBoundingClientRect(); return { h: Math.round(c.getBoundingClientRect().height), linkH: Math.round(h.height), cardW: Math.round(c.getBoundingClientRect().width), media: c.querySelector('.story-media') ? getComputedStyle(c.querySelector('.story-media')).display : 'none' }; })
     );
     check(`WebKit ${width}px 讀利：23 篇為精簡單欄清單，標題可觸控、沒有大型圖片`,
-      compact.length === 23 && compact.every(c => c.h >= 75 && c.h < 240 && c.linkH >= 44 && c.cardW < width && c.media !== 'block'), JSON.stringify(compact.slice(0, 3)));
+      compact.length === READLI_COUNT && compact.every(c => c.h >= 75 && c.h < 240 && c.linkH >= 44 && c.cardW < width && c.media !== 'block'), JSON.stringify(compact.slice(0, 3)));
     await page.goto(`${origin}${base}learning.html`);
     const learningState = await page.evaluate(() => {
       const list = [...document.querySelectorAll('#events-title + .notice-list .notice, [data-act-list] > .notice')];
@@ -78,6 +84,23 @@ try {
       learningState.activities === 6 && learningState.sources === 6 &&
       learningState.firstArticleBeforeActivities && learningState.noHorizontalScroll,
       JSON.stringify(learningState));
+    // 新階段：12 筆長期查詢入口中，同網址 act-09 不建立第二張卡；
+    // 其餘 11 筆各在自己主題的最下方以容易點擊的文字列呈現。
+    const portalResult = [];
+    for (const [file, expected] of [['life-family.html', 2], ['career.html', 3],
+      ['health.html', 2], ['law.html', 1], ['learning.html', 3]]) {
+      await page.goto(`${origin}${base}${file}`);
+      const state = await page.locator('.qa-portal-list > li').evaluateAll(rows =>
+        rows.map(row => { const a=row.querySelector('a'), rect=a.getBoundingClientRect(); return {
+          href:a.getAttribute('href'), h:Math.round(rect.height),
+          target:a.target, rel:a.rel, overflow:document.documentElement.scrollWidth > innerWidth
+        }; })
+      );
+      if (state.length !== expected || state.some(x => x.h < 44 || !x.href?.startsWith('https://') ||
+          x.target !== '_blank' || !x.rel.includes('noopener') || x.overflow)) portalResult.push(file + ' ' + JSON.stringify(state));
+    }
+    check(`WebKit ${width}px 官方入口：11 筆不同網址以輕量文字列在五個主題顯示，44px 可點、HTTPS、無橫向溢位`,
+      portalResult.length === 0, portalResult.join('；'));
     // 網站內容增加後，五個主題可以直接跳到需求／索引，無須把整頁滑到底。
     const jumpFailures = [];
     for (const [file, target] of [
@@ -123,7 +146,7 @@ try {
   );
   const cardLinks = await page.locator('.toward-reading-card a[href^="articles/"]').count();
   check('WebKit 向光：13 篇文章直接展示為單欄可點擊閱讀卡，390px 上下滑動',
-    gallery === 13 && cardLinks === 13 && readingLayout.length === 3 &&
+    gallery === TOWARD_COUNT && cardLinks === TOWARD_COUNT && readingLayout.length === 3 &&
     readingLayout[0].y < readingLayout[1].y && readingLayout[1].y < readingLayout[2].y &&
     readingLayout[0].x === readingLayout[1].x && readingLayout[1].x === readingLayout[2].x &&
     readingLayout.every(c => c.w >= 300 && c.w <= 390),
