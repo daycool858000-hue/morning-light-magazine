@@ -57,7 +57,7 @@
 
 
 **正式來源（2026-10-17 查閱）：**
-- [勞動部｜部分工時與工讀生勞動條件基準](https://www.mol.gov.tw/1607/28690/87756/87780/nodelist)
+- [勞動部｜部分工時與工讀生勞動條件基準](https://www.mol.gov.tw/1607/28690/87756/)
 - [勞動部台灣就業通｜求職防騙教戰守則](https://job.taiwanjobs.gov.tw/Internet/special2/freshman2/docDetail.aspx?docid=141&uk=1922)
 - [勞動部｜全球資訊網](https://www.mol.gov.tw/)
 
