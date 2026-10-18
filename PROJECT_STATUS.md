@@ -24,6 +24,13 @@
 - **狀態區分**：目前是**已整理修正原稿並建立隔離分支**，不是來源13篇全審完成、不是13篇 sourceCheck變更、不是逐頁測試／站主驗收，更不是將已驗收的正式公開預覽或production覆蓋。13篇保持`pending`，62篇文章與6功能的正式發佈核准仍空。GitHub CI 若因這3次文字提交自動啟動，須等其結果才可稱自動測試通過。
 - **下一步**：查核 A3 教育部／B3 兩廳院實際瀏覽器原頁後，定稿逐篇來源證據和文章修正版；再讓 Claude 僅針對此隔離分支做 QA 與版本指紋生成工作，不重做已驗收版面。站主未明確授權前不部署、不合併main、不修改核准。
 
+## 2026-10-18 晚間續辦｜A3/B3官方頁內容核對與13篇可審稿交接完成
+- **正式首發維持至少62篇、未正式部署**。站主原62篇獨立預覽的手機功能抽測通過，不重新做 UI／小日曆。
+- **本輪最新自動測試證據**：修稿隔離分支 `review/youji-13-final-copy-isolated-20261018` 最終3份原稿修改提交 `e485a42` 的 [完整 CI run 39125290962](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39125290962) **success**（`test`、`full-launch`、`calendar` 都成功）。前一中途提交 `57663df` 的 CI 失敗不代表最後版本失敗；不要重跑已成功的最終版本。同分支較晚僅增一份文件的提交需獨立核對CI狀態，不冒稱已通過。
+- **兩筆官方來源疑點補查**：A3教育部2024-09-02「113學年家長日宣導手冊」官網索引**確有原文及分齡附件清單**，但直接讀頁工具逾時、附件未逐份下載；B3國家兩廳院2025「職人大講堂」官網索引**確有原文、學校申請資格及活動結束標籤**，直接讀頁回傳需要JavaScript。可核對事實、**不宣稱完成實際Safari或JS瀏覽器開頁驗證**，不視為404；沒有因此刪掉歷史來源或謊稱當期招生。補充紀錄 [第4輪查核檔](https://github.com/daycool858000-hue/morning-light-magazine/blob/audit/youji-13-primary-source-20261018/docs/FULL-LAUNCH-13-ROUND4-PRIMARY-SOURCE-AND-COPY-DECISION-2026-10-18.md)，commit `2bd3ec9`。
+- **新建可供精準交接的13篇逐筆證據表**：[`docs/13-ARTICLE-SOURCE-AND-VERSION-HANDOFF-2026-10-18.json`](https://github.com/daycool858000-hue/morning-light-magazine/blob/review/youji-13-final-copy-isolated-20261018/docs/13-ARTICLE-SOURCE-AND-VERSION-HANDOFF-2026-10-18.json)，隔離分支 commit `9efbcec`，包含13篇原稿slug、已核核心事實、原頁限制、5篇變動ID `exp-02/04/07/10/B6`、3份實際修改MD、原62篇基準、CI與待簽核要求；**13篇 sourceCheck仍pending，0篇正式簽核**，沒有更動原QA佇列或任何核准檔。
+- **下一個真正有效的工作**：先以本清單做13篇的最終逐篇文字／引用版次複核，A3/B3待一般JS瀏覽器網址測試（若不能驗再用有證據的官方目錄備援）；再以既有隔離分支整理修訂後62篇版本、重新產生文章指紋並進行必要的最小範圍QA。Claude前一份發布安全鎖工程已結案，**尚未發出新Claude任務**。正式發布仍須62篇與6組功能明確核准及單獨部署授權，不合併、不部署、不改main網站程式。
+
 ## 新工作階段優先讀取｜2026-10-18 快速現況
 1. 專案為 **daycool858000-hue/morning-light-magazine**，唯一網站為**由己 SELF-AUTHORED**；不要混用其他專案。先看本節，再按任務讀下文、`PROJECT_HISTORY.md` 與原 `CLAUDE.md`；既有細節不要每次全倉庫重掃。
 2. **已完成且站主已驗收**：62 篇獨立 QA 預覽 [full-launch-62](https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/) 功能及手機抽測、54 主題；Pages run `39106678864` success、外部 Chromium/WebKit run `39106785306` success；獨立預覽來源 `4ca3fd5`，部署 `2886c20`。**絕不等於正式發布核准。** 既有小日曆、讀利、向望不因換視窗重做。
