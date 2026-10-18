@@ -38,6 +38,14 @@ const OUT = path.resolve(ROOT, args.out || (IS_QA ? 'dist-qa' : 'dist'));
 const IS_PREVIEW = MODE === 'preview' || IS_QA;
 // 站主尚未核准54個新入口進公開 QA：只能建置到獨立staging資料夾。
 const IS_TOPIC_GUIDES_STAGING = IS_QA && process.env.QA_TOPIC_GUIDES_STAGING === '1';
+const IS_PENDING_EDITORIAL_STAGING = IS_QA && process.env.QA_PENDING_REVIEW_MODE === '1';
+// 未完成正式來源查核的13篇只准在單一獨立目錄做手機閱讀／排版檢查。
+if (IS_PENDING_EDITORIAL_STAGING &&
+    (path.basename(OUT) !== 'dist-qa-all62-review' ||
+      process.env.QA_EXPANSION_QUEUE !== 'docs/QA-FULL-LAUNCH-ALL-62-REVIEW-2026-10-18.json' ||
+      !IS_TOPIC_GUIDES_STAGING)) {
+  throw new Error('13篇待查原稿僅允許完整首發隔離閱讀目錄，不能輸出公開QA／正式版');
+}
 if (IS_TOPIC_GUIDES_STAGING && ['dist', 'dist-qa', 'dist-production'].includes(path.relative(ROOT, OUT))) {
   throw new Error('54入口尚未核准公開QA，必須指定獨立staging輸出資料夾');
 }
@@ -1246,7 +1254,9 @@ for (const a of articles) {
       <h1>${esc(a.title)}</h1>
       ${a.qa ? '' /* 第二批文章的摘要取自正文第一段，頁首不重複顯示 */ : `<p class="lead">${esc(a.summary)}</p>`}
       <p class="article-meta">${a.qa
-        ? `<span>來源查核：${esc(a.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</span>${qaBadge(a)}`
+        ? (a.editorialReviewPending
+          ? `<span>編輯草稿：來源與資料尚待複核，不作為已查核資訊</span>${qaBadge(a)}`
+          : `<span>來源查核：${esc(a.checkedOn)}（AI 編輯查核，尚未經網站擁有人核准）</span>${qaBadge(a)}`)
         : `<span>發布：${esc(a.published)}</span><span>最後實質更新：${esc(a.updated)}</span>${statusBadge(a.status)}`}</p>
     </div>
   </header>
