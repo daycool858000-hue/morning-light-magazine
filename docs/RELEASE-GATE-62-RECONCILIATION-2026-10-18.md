@@ -43,3 +43,12 @@
 2. 62 篇文章與 6 組功能尚無站主逐項版本簽核（`content/launch-approvals.json` 為空）。
 3. 正式版與 62 篇預覽唯一刻意的差異：原有 18 筆入口中，未在 `release-approvals.json` 核准的 2 筆不進正式版（保持原有核准）。
 4. 正式版 sitemap／robots／404／備份還原、GitHub Pages 由 QA 切換為正式版，均需站主另行明確同意。
+
+## CI 結果（commit `42af69f`）
+
+- 不部署的版本檢查 run `39121971621`：success（無簽核時硬閘正確擋下；隔離模擬通過；核准檔 diff 為空）。
+- 完整 CI run `39121971624`：test、full-launch success。calendar 第一次失敗 1 處（WebKit 320px，公開 QA 版 `articles/exp-choosing-open-courses.html` 一個捲動停點），該 `dist-qa` 與 `4ca3fd5` 逐位元組相同且基準 run `39100866169` 通過；依規則只重跑一次（attempt 2）→ success。此停點偶發，日後若再出現應另案處理小日曆避讓時序，本分支不改已驗收的日曆。
+
+## 另需注意
+
+- 查核分支 `audit/youji-13-primary-source-20261018` 已修改 exp-02、exp-04、exp-07、exp-10，尚未進入 62 篇預覽；併入後這幾篇指紋會改變，站主應簽核併入後的新版本。

@@ -54,6 +54,7 @@
 
 - 分支 `release/youji-launch-gate-62-reconcile-20261018`（基於 62 篇預覽 `4ca3fd5`）：把 PR #19 的文章／功能精確指紋核准與正式部署硬閘移植到 62 篇資料（讀利38／向望24、9 公告＋14 長期入口、54 主題、六縣市 15 筆城市服務）。詳見 `docs/RELEASE-GATE-62-RECONCILIATION-2026-10-18.md`。
 - 核准檔為空時四種輸出與 `4ca3fd5` 逐位元組相同；13 篇待複核草稿不能被簽核，正式建置遇到即中止。`content/launch-approvals.json` 仍為空、`release-approvals.json` 未動、未合併 main、未部署。
+- CI：preflight `39121971621` success；完整 CI `39121971624` test／full-launch success，calendar WebKit 320px 偶發 1 處，重跑一次 success（輸出與基準逐位元組相同）。
 - 下一步需站主決定：13 篇來源複核完成後，對 62 篇與 6 組功能逐項簽核；再另行同意正式部署。
 
 ## 最新工作｜2026-10-18 完整首發隔離預覽整合測試（本節最新，優先於下方各節）
