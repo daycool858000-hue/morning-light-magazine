@@ -50,6 +50,12 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 2026-10-18｜62 篇獨立測試版：站主 iPhone 閱讀／功能驗收通過（最新）
+- **站主本輪原話**：「檢查完成 全部功能都正常」。此回報承接 62 篇測試網址（`https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/`）的 iPhone 試讀與功能檢查，狀態由「等待手機驗收」更新為**站主抽樣閱讀與功能驗收通過**；未回報功能異常。
+- 本輪站主原先被要求檢查首頁與六大分類、讀利／向望、抽樣新文章、城市與福利入口、小日曆遮擋；**不能延伸為 62 篇逐篇全文與每條外部網址人工驗證完成**。此前已驗收的 54 主題不重新要求測試。
+- **尚未核准／未完成**：13 篇來源待複核文章的事實與原始來源、城市福利 22 縣市更深資料盤點，以及完整首發文章／功能版本簽核與正式部署獨立授權；`content/release-approvals.json` 與所有 production 閘門不變。
+- **下一階段**：由 ChatGPT 先核對 13 篇待複核原稿的官方來源、時效與重複內容，產出逐篇證據／待修清單；接著處理城市與福利服務入口覆蓋度。Claude 僅在需要實際工程修正時才派工，避免重做已驗收內容。
+
 ## 最新工作｜2026-10-18 完整首發 62 篇獨立測試子網址已部署（本節最新）
 
 - 站主同意後，將 `review/youji-full-launch-integration-20261018`（`4ca3fd5`）的 `dist-qa-all62-city-review` 部署到 `youji-topic54-preview` 的 `full-launch-62/`：https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/ 。部署提交 `2886c20`，Pages run `39106678864` success；回復點分支 `backup/topic54-before-full-launch-62-20261018`（`16068fb`）。
