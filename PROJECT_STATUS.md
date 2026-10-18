@@ -2,6 +2,14 @@
 
 > 更新：2026-10-18（臺灣）。**本檔為預設 main 分支的專案長期狀態紀錄**，首次由 `release/youji-production-promotion-prep-20261017` 已有版本完整承接、只補充最新交辦與交接說明；**不是 PR #19 已合併、文章獲核准或網站已正式部署**。技術發生衝突時，以 GitHub 實際 PR、提交、Actions 和站主驗收紀錄為準。
 
+## 2026-10-18 晚間最新｜Claude 62 篇正式發布安全鎖工程完成、已核對（僅工程，不發布）
+- **已修改／已測試／已驗收工程階段**：Claude 隔離分支 `release/youji-launch-gate-62-reconcile-20261018`，工程 commit [`42af69f`](https://github.com/daycool858000-hue/morning-light-magazine/commit/42af69fe8f5af400e681679e8b2dc451074883a6)，紀錄 commit [`3e04586`](https://github.com/daycool858000-hue/morning-light-magazine/commit/3e04586b23edbd5fb9a3b10ddd8f75155119647d)（只改該分支 `CLAUDE.md`、`docs/RELEASE-GATE-62-RECONCILIATION-2026-10-18.md`）；ChatGPT 已核對 GitHub 提交及 CI，**判定此單工程任務驗收通過／已結案**。沒有合併 main、沒有部署、沒有簽核文章／功能。
+- **驗證證據**：不部署的預檢 [run 39121971621](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39121971621) success；完整 [run 39121971624](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39121971624) attempt 2 整體 success，`test`、`full-launch`、`calendar` 全部成功。calendar 第一次 WebKit 320px `exp-choosing-open-courses` 單一捲動遮擋失敗，基準輸出由 Claude 比對宣稱逐位元組相同，重跑一次通過；**標註可能偶發、不將其當成已證實根因**，此輪不重做日曆。紀錄 commit `3e04586` 推送後引發的新例行 CI run `39124235565` 當前正在執行（純文件變更，不假稱已通過）。
+- **工程結果**：以已驗收62篇預覽原始提交 `4ca3fd5` 為基底，對齊讀利38／向望24、54主題、9活動公告＋14長期查詢入口、15城市直接服務入口；正式發布包含精確文章及6組功能指紋核准和手動部署硬閘，空白核准與13篇 pending 皆正確擋住正式發布；隔離模擬已通過，核准資料仍全空。
+- **最後待辦而非 Claude 待回報**：13篇仍要來源全文最終複核；其中 `exp-02`、`exp-04`、`exp-07`、`exp-10` 的審稿修正只在 `audit/youji-13-primary-source-20261018`，**尚未進已驗收62篇測試版**，未來採用修正版需重新計算並核准指紋（不可提前套用舊版指紋）。62篇文章和6組功能的發布版本簽核尚未取得；2筆未核准舊官方入口依現有核准制度不進正式版。最後仍需備份／還原、sitemap／robots／404／noindex 確認及站主另行授權正式部署。
+- **下一步分工**：ChatGPT優先完成13篇正式來源查核及四篇修正的內容版次核對，並保留另11篇新草稿及NI多語資源為獨立擴充；**目前 Claude 此輪工程已回報結案，勿重派相同工作**。要進下一個 Claude 新階段時先讀 main 本檔與該隔離分支 `CLAUDE.md` 的最新節及專門報告，按當次任務需要讀特定檔案，不重掃 repo。建立 Draft PR 可留作工程審閱選項，非當下正式發布必要條件。
+- **文件位置糾正**：Claude 所稱「`PROJECT_STATUS.md`、`PROJECT_HISTORY.md` 只在 PR #19 分支，main沒有」是其工作階段取得的**過時狀態**；兩檔先前已由 ChatGPT 單純新增到 `main`（`b60a108`、`ca94602`），此次持續增量更新。本次只更新根目錄紀錄，不修改任何網站程式或已有驗收頁面。
+
 ## 新工作階段優先讀取｜2026-10-18 快速現況
 1. 專案為 **daycool858000-hue/morning-light-magazine**，唯一網站為**由己 SELF-AUTHORED**；不要混用其他專案。先看本節，再按任務讀下文、`PROJECT_HISTORY.md` 與原 `CLAUDE.md`；既有細節不要每次全倉庫重掃。
 2. **已完成且站主已驗收**：62 篇獨立 QA 預覽 [full-launch-62](https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/) 功能及手機抽測、54 主題；Pages run `39106678864` success、外部 Chromium/WebKit run `39106785306` success；獨立預覽來源 `4ca3fd5`，部署 `2886c20`。**絕不等於正式發布核准。** 既有小日曆、讀利、向望不因換視窗重做。
