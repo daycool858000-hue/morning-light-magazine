@@ -1,0 +1,147 @@
+{
+  "documentType": "multilingual-official-entry-plan",
+  "site": "由己 SELF-AUTHORED",
+  "updatedOn": "2026-10-18",
+  "status": "research-and-QA-candidate-only",
+  "sourceCheckedBy": "ChatGPT AI editor, primary-source-first",
+  "ownerPublicationApproval": false,
+  "importToQa": false,
+  "existingQaArchitecture": {
+    "originalChineseAuthoritative": true,
+    "englishOverlayFile": "docs/QA-ENGLISH-RESOURCE-DISCOVERY-2026-10-16.json",
+    "currentEnglishResourceCards": 3,
+    "currentEnglishOverrides": 8,
+    "translationOfAllArticles": false,
+    "mandatorySevenTopicCategoryAddition": false
+  },
+  "existingNotImported": "docs/QA-FULL-LAUNCH-ALL-62-WITH-CITY-SERVICES-2026-10-18.json has NI-01 through NI-13 all sourceCheck:pending and importToQa:false. Do not conflate with 3 already separate English QA cards.",
+  "recommendedNextEntries": [
+    {
+      "id": "NI-03",
+      "name": "勞動部勞動力發展署｜新住民多國語就業資源簡介",
+      "url": "https://www.wda.gov.tw/News_Content.aspx?n=156&s=18648&sms=10365",
+      "category": "career",
+      "region": "national",
+      "languages": [
+        "zh-Hant",
+        "en",
+        "vi",
+        "id",
+        "th"
+      ],
+      "originalPublication": "2025-12-29",
+      "officialCheckDate": "2026-05-12",
+      "role": "Official downloadable multi-language employment and training resource",
+      "isGovernmentTranslation": true,
+      "englishHelper": {
+        "nameEn": "Employment information for new residents",
+        "summaryEn": "Official Chinese, English, Vietnamese, Indonesian and Thai employment resources",
+        "keywordsEn": [
+          "new resident",
+          "employment",
+          "job training"
+        ]
+      },
+      "qaApproved": false,
+      "notes": "Exists as NI-03 candidate; update its source URL query params when promoting; do not duplicate."
+    },
+    {
+      "id": "NI-05",
+      "name": "國民健康署｜孕媽咪健康手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4842",
+      "category": "health",
+      "region": "national",
+      "languages": [
+        "zh-Hant",
+        "en",
+        "vi",
+        "id",
+        "th",
+        "km"
+      ],
+      "chineseEdition": "2026-06",
+      "otherLanguageEdition": "2025-09",
+      "role": "Official maternity handbook",
+      "isGovernmentTranslation": true,
+      "englishHelper": {
+        "nameEn": "Maternal health handbook",
+        "summaryEn": "Read the official handbook in Chinese or several other languages; publication years vary",
+        "keywordsEn": [
+          "pregnancy",
+          "maternity",
+          "handbook"
+        ]
+      },
+      "qaApproved": false,
+      "notes": "Edition years differ; do not assert languages are synchronized or every benefit remains identical."
+    },
+    {
+      "id": "NI-06",
+      "name": "國民健康署｜孕媽咪衛教手冊",
+      "url": "https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=4839",
+      "category": "health",
+      "region": "national",
+      "languages": [
+        "zh-Hant",
+        "en",
+        "vi",
+        "id",
+        "th",
+        "km"
+      ],
+      "chineseEdition": "2026-06",
+      "otherLanguageEdition": "2025-09",
+      "role": "Official prenatal and postnatal educational reading",
+      "isGovernmentTranslation": true,
+      "englishHelper": {
+        "nameEn": "Maternal health education",
+        "summaryEn": "Official multilingual prenatal and postnatal education, with publication dates shown",
+        "keywordsEn": [
+          "prenatal",
+          "postnatal",
+          "pregnancy"
+        ]
+      },
+      "qaApproved": false,
+      "notes": "NI-05 and NI-06 are distinct handbook types but same agency; can group into one resource cluster rather than two large cards."
+    },
+    {
+      "id": "qa-en-1990",
+      "name": "內政部移民署｜1990外來人士生活諮詢服務",
+      "url": "https://www.immigration.gov.tw/5385/7445/7910/204893/",
+      "category": "city",
+      "region": "national",
+      "languages": [
+        "zh-Hant",
+        "en",
+        "ja",
+        "vi",
+        "id",
+        "th",
+        "km"
+      ],
+      "role": "Government information hotline including personal safety information",
+      "englishHelper": {
+        "nameEn": "Foreigners In Taiwan Hotline 1990",
+        "summaryEn": "Information on residence, work, welfare, family and personal safety; language service hours differ",
+        "keywordsEn": [
+          "immigrant",
+          "foreigners hotline",
+          "personal safety",
+          "1990"
+        ]
+      },
+      "qaApproved": false,
+      "notes": "Already one of three QA English cards; update the description on existing card rather than creating an extra card. Chinese, English and Japanese 24/7; Vietnamese, Indonesian, Thai, Khmer 09:00-17:00 weekdays excluding holidays. Not an emergency 110 substitute."
+    }
+  ],
+  "renderRules": [
+    "Chinese original texts remain authoritative; any English sentence authored by Youji must identify as site editorial guidance, not official agency translation.",
+    "Use officialEnglishUrl only for confirmed official-language pages; do not point an English button to an all-Chinese document and claim it is English.",
+    "Show supported languages with 2-to-5-character native labels or ISO language codes, and year if translation edition differs.",
+    "Stay within existing six major topics; multilingual is a language and discoverability layer, not a new seventh or eighth subject.",
+    "Do not force automatic machine translation or collect users' nationality, language preferences, address, medical history or other personal information.",
+    "Before activating QA candidate, verify official page content and right edition in browser, check responsive text and whether keyword search returns correct topic. No changes to main or release approvals.",
+    "Keep 1990 non-emergency; immediate danger 110. Do not claim all multilingual services operate around the clock."
+  ]
+}
