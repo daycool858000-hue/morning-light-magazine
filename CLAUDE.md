@@ -50,6 +50,13 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 54 主題獨立手機測試網址｜2026-10-18
+
+- 站主同意並自行建立公開儲存庫 `daycool858000-hue/youji-topic54-preview`（Pages：main / root）。內容＝PR #24（Draft，未合併）`c0194e3` 以 `QA_TOPIC_GUIDES_STAGING=1 node scripts/build.mjs --mode=qa --out=dist-qa-topic54` 建置；只把 `404.html` 絕對路徑改成 `/youji-topic54-preview/`，加 `.nojekyll`。
+- 網址：https://daycool858000-hue.github.io/youji-topic54-preview/ ；推送提交 `16068fb`，Pages 部署 run `39091324335` success。保留未核准標示、noindex、robots Disallow。
+- 原《由己》公開 QA、main、正式版、`content/release-approvals.json` 都未變動。雲端容器網路擋 `*.github.io`，線上頁面由站主 iPhone 實機確認；部署檔已在本機以同路徑完整檢查（61 頁、44 篇、54 主題、404）。
+- 若要更新：在 `c0194e3`（或站主指定的新提交）重建，同樣只改 404 路徑，覆蓋新儲存庫 main；**不得**改用原儲存庫的 Pages。
+
 ## 最新權威狀態｜2026-10-16（優先於下方歷史工作紀錄）
 
 **本輪手機與電腦功能已驗收通過，公開 QA 部署完成，工程已合併 main。不要因下方舊紀錄的「尚未部署／等待驗收」而重做或撤回已完成工作。**
