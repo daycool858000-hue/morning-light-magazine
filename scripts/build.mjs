@@ -41,8 +41,8 @@ const IS_TOPIC_GUIDES_STAGING = IS_QA && process.env.QA_TOPIC_GUIDES_STAGING ===
 const IS_PENDING_EDITORIAL_STAGING = IS_QA && process.env.QA_PENDING_REVIEW_MODE === '1';
 // 未完成正式來源查核的13篇只准在單一獨立目錄做手機閱讀／排版檢查。
 if (IS_PENDING_EDITORIAL_STAGING &&
-    (path.basename(OUT) !== 'dist-qa-all62-review' ||
-      process.env.QA_EXPANSION_QUEUE !== 'docs/QA-FULL-LAUNCH-ALL-62-REVIEW-2026-10-18.json' ||
+    (!['dist-qa-all62-review','dist-qa-all62-city-review'].includes(path.basename(OUT)) ||
+      !['docs/QA-FULL-LAUNCH-ALL-62-REVIEW-2026-10-18.json','docs/QA-FULL-LAUNCH-ALL-62-WITH-CITY-SERVICES-2026-10-18.json'].includes(process.env.QA_EXPANSION_QUEUE) ||
       !IS_TOPIC_GUIDES_STAGING)) {
   throw new Error('13篇待查原稿僅允許完整首發隔離閱讀目錄，不能輸出公開QA／正式版');
 }

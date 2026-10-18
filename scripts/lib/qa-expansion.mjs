@@ -135,7 +135,7 @@ export async function loadQaExpansion(root, ctx) {
   // 僅「完整首發62篇閱讀檢查」能在隔離目錄顯示13篇待複核草稿。
   // 嚴格保留 sourceCheck=pending，不能在一般 QA 或正式版偽稱AI已查核。
   const REVIEW_FILE = 'docs/QA-FULL-LAUNCH-ALL-62-REVIEW-2026-10-18.json';
-  const reviewPending = queueFile === REVIEW_FILE &&
+  const reviewPending = [REVIEW_FILE, 'docs/QA-FULL-LAUNCH-ALL-62-WITH-CITY-SERVICES-2026-10-18.json'].includes(queueFile) &&
     queue.stagingOnly === true && queue.reviewPendingDrafts === true &&
     process.env.QA_PENDING_REVIEW_MODE === '1';
 
