@@ -37,6 +37,12 @@
 - **不可越權**：即使13篇均可開始編輯試讀，13個 `sourceCheck` 仍是pending；正式文章及6組功能版本簽核仍為零；不合併main、不部署、不改已有62篇獨立預覽。已通過修稿隔離版本 `e485a42` 的 [CI run 39125290962](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39125290962) 不需要重新跑。最近只新增檔案所產生的CI若仍執行，勿聲稱已通過。
 - **下一步**：13篇最終試讀、必要時實際JS瀏覽器驗證A3/B3，再提交最終文章精確版本簽核；如需工程只操作 `review/youji-13-final-copy-isolated-20261018` 與已完成發布安全鎖分支，控制範圍為新指紋與最小回歸，**Claude目前沒有未回報的新指令**。
 
+## 2026-10-18｜下一輪 Claude 隔離整合任務準備完成（尚未交辦）
+- **上一輪工程已結案**：`release/youji-launch-gate-62-reconcile-20261018` commit `3e04586` 的例行 CI run `39124235565` 為success，先前工程 `42af69f` 與隔離預檢／WebKit也已核對通過；不得再派 Claude 重做發布安全鎖或已驗收小日曆。
+- **新輸入成果**：`review/youji-13-final-copy-isolated-20261018` 已修訂5篇（exp-02/04/07/10、B6），**實際只有3份既有MD發生文字差異**；`e485a42` 源碼版CI run `39125290962`成功；後來13篇證據JSON與審稿板依序為 `9efbcec`、`89692ef`。證據清單：`docs/13-ARTICLE-SOURCE-AND-VERSION-HANDOFF-2026-10-18.json`、`docs/FINAL-62-ARTICLE-EDITORIAL-REVIEW-BOARD-2026-10-18.md`。最後純文件CI是否完成應以實時run為準。
+- **下輪建議交Claude，但目前僅準備好指令／待使用者實際貼給Claude**：以已完成發布安全鎖 `release/youji-launch-gate-62-reconcile-20261018` 為基準**新建隔離工作分支**，只從上述修稿分支挑3份MD文字差異，保持13篇 `sourceCheck:pending`、62篇原定範圍、6組功能、`content/launch-approvals.json`空白，建置私有QA隔離輸出，針對5篇全文差異及其餘57篇不變、小日曆／54主題／9活動＋14長期入口／15城市服務無退化做必要測試；生成**僅供審稿的候選版本指紋／diff**，不得寫入核准檔或解除安全鎖。若既有瀏覽器工具可使用，順帶限縮檢查A3教育部與B3兩廳院2個官方原頁可用性，不重查全站網址。
+- **驗收與權限**：要看Claude推送的精確commit、差異與CI，未回報前不另發第二道指令。不得改 `main`、公開QA、已驗收的62篇預覽網址或 GitHub Pages；不得合併、正式部署、改`release-approvals.json`、`launch-approvals.json`、把13篇自動升級source-checked。13篇最終稿件與62篇6功能的正式核准、備份與正式部署是獨立的後續關卡。
+
 ## 新工作階段優先讀取｜2026-10-18 快速現況
 1. 專案為 **daycool858000-hue/morning-light-magazine**，唯一網站為**由己 SELF-AUTHORED**；不要混用其他專案。先看本節，再按任務讀下文、`PROJECT_HISTORY.md` 與原 `CLAUDE.md`；既有細節不要每次全倉庫重掃。
 2. **已完成且站主已驗收**：62 篇獨立 QA 預覽 [full-launch-62](https://daycool858000-hue.github.io/youji-topic54-preview/full-launch-62/) 功能及手機抽測、54 主題；Pages run `39106678864` success、外部 Chromium/WebKit run `39106785306` success；獨立預覽來源 `4ca3fd5`，部署 `2886c20`。**絕不等於正式發布核准。** 既有小日曆、讀利、向望不因換視窗重做。
