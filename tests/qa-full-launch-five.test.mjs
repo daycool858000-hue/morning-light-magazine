@@ -23,7 +23,7 @@ for(const d of drafts){
  assert.ok(html.includes(d.title),d.id+' title');
  assert.ok(html.includes('noindex')&&html.includes('未核准測試內容'),d.id+' QA markers');
  assert.ok(cat.includes('articles/'+d.slug+'.html'),d.id+' category link');
- assert.ok((await file('assets/js/search-index.js')).includes(d.slug) || (await file('index.html')).includes(d.slug) || (await file('search.html')).includes('搜尋'),'Search artifact must exist');
+ assert.ok((await file('assets/data/search-index.js')).includes(d.slug) || (await file('index.html')).includes(d.slug) || (await file('search.html')).includes('搜尋'),'Search artifact must exist');
 }
 const qh=await file('quiet-power.html'),tw=await file('toward-light.html'),city=await file('city.html'),cal=await file('activities.html');
 assert.ok(drafts.filter(x=>x.directory==='readli').every(x=>qh.includes('articles/'+x.slug+'.html')),'readli missing');
