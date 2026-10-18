@@ -115,3 +115,10 @@
 - **正式版阻塞**：PR #19 仍Draft，原 `content/launch-approvals.json` 沒有本輪62篇精確核准登記，正式版來源分支及 gate 要與「向望」最新實測版整合；仍需備份復原、robots/sitemap/404、noindex移除及權限確認。GitHub此輪共14個開啟PR且皆Draft，**不是14項待Claude重做的任務**。
 - **對Claude建議順序（未派工，僅排程）**：A. 先由ChatGPT完成13篇來源最終核對及新11篇來源、NI-01～NI-13多語版次查核，整理「可進QA」清單；B. Claude才在既有62篇功能基礎上**只建立新的隔離QA建置分支與預覽檔**，優先將核對通過的11篇與新住民英文資源分批匯入並測試重複、搜尋、六分類、英文語言、noindex、Chromium/WebKit與已驗收功能無退化；不自行覆蓋現有GitHub Pages。C. 完成整批正式首發核准與工程安全門檻，站主明確允許後，Claude再做正式合併／部署。**本次沒有授權Claude推送任何正式部署或發布新未核准內容**。
 - **上線範圍仍以既定至少62篇完整首發決策為準**；額外11篇若要同次納入，必須由站主另定具體範圍，不可自行改成73篇首發。
+
+## 2026-10-18｜Claude 正式發布工程 CI：日曆 WebKit 320px 重跑中
+- **最新 Claude 交付執行中／待回報**：GitHub 分支 `release/youji-launch-gate-62-reconcile-20261018`、提交 `42af69fe8f5af400e681679e8b2dc451074883a6`，處理62篇正式發布安全閘工程；並非已獲正式發布許可。前次「省額度 CLAUDE.md 設定」是否已由 Claude 明確完工回報，仍以 Claude 最終回報核對，不可由其他工程推定。
+- [正式發布文章版本預檢 run 39121971621](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39121971621) **success**，僅表示該項檢查通過。
+- [完整 CI run 39121971624](https://github.com/daycool858000-hue/morning-light-magazine/actions/runs/39121971624) 第一次執行有**唯一一處 calendar WebKit 320px：QA 文章 exp-choosing-open-courses 捲動停點遮擋失敗**。Claude 比對宣稱輸出與基準 `4ca3fd5` 逐位元組相同，暫懷疑不穩定時序，**不能自行當成已證實或已通過**。
+- ChatGPT 即時核對 run 39121971624 第二次嘗試（`run_attempt=2`）狀態：`test` 與 `full-launch` jobs success，`calendar` job **in_progress**。Claude 已啟動唯一一次重跑，**不得重複派工或重新測試已通過的舊功能**。等待該次重跑結果與 Claude 寫入分支紀錄／提交的最終回報，核對後再更新本檔。
+- 目前不修改日曆程式、不合併PR、不部署正式版／公開QA、不改內容核准檔。若重跑失敗，再依同一分支既有故障證據限縮至 WebKit 320px 捲動定位穩定性。
