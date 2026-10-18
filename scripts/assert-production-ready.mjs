@@ -31,9 +31,17 @@ if (process.env.LAUNCH_TEST_ONLY !== '1') {
 }
 
 const articleFiles=(await readdir(path.join(OUT,'articles'))).filter(x=>x.endsWith('.html'));
-assert.equal(articleFiles.length,44,'正式版文章不足44篇：停止發布，不允許覆蓋目前網站');
+// 2026-10-18 站主決定：44原有＋13待QA＋2校園安全＋3新生活文章完整首發（目標62篇）。
+// 舊 CI 使用 LAUNCH_TEST_ONLY=1 的44篇模擬資料仍可測試快照簽核，但不得拿測試例外去正式部署。
+const IS_FIXTURE = process.env.LAUNCH_TEST_ONLY === '1';
+const MIN_LAUNCH_ARTICLES = IS_FIXTURE ? 44 : 62;
+assert.ok(articleFiles.length >= MIN_LAUNCH_ARTICLES,
+  '正式版至少須有'+MIN_LAUNCH_ARTICLES+'篇完整核准文章，否則禁止以縮水網站覆蓋已驗收QA');
 const candidate=JSON.parse(await str('artifacts/launch-article-batch.json'));
-assert.equal(candidate.articles.length,44);
+assert.ok(candidate.articles.length >= MIN_LAUNCH_ARTICLES,
+  '正式發布原稿候選清單尚未涵蓋站主確認的全部首發文章');
+assert.equal(candidate.articles.length,articleFiles.length,
+  '正式發布原稿與輸出文章數量不一致，禁止發布');
 assert.ok(candidate.articles.every(x=>x.currentlyApprovedForProduction),'文章尚未全部具備對應版本紀錄，停止正式發布');
 const catalog=await json('artifacts/launch-feature-batch.json');
 for(const name of ['calendar','activities','pregnancy','topic54','resourceCatalog']){
@@ -49,10 +57,10 @@ const events=await out('activities.html');
 const sitemap=await out('sitemap.xml');
 const robots=await out('robots.txt');
 const search=await out('assets/data/search-index.js');
-assert.equal((readli.match(/<h3><a href="articles\//g)||[]).length,26,'讀利必須26篇');
-assert.equal((toward.match(/class="toward-reading-card"/g)||[]).length,18,'向光必須18篇');
-assert.equal((toward.match(/class="toward-toggle"/g)||[]).length,8,'向光必須有8個索引');
-assert.equal((city.match(/class="res-card"/g)||[]).length,51,'原本16筆＋新增35筆官方機構必須完整');
+assert.ok((readli.match(/<h3><a href="articles\//g)||[]).length >= 26,'正式版讀利不能少於原有26篇');
+assert.ok((toward.match(/class="toward-reading-card"/g)||[]).length >= 18,'正式版向望不能少於原有18篇');
+assert.equal((toward.match(/class="toward-toggle"/g)||[]).length,8,'向望必須有8個索引');
+assert.ok((city.match(/class="res-card"/g)||[]).length >= 51,'原本16筆＋新增35筆官方機構必須完整');
 assert.equal((events.match(/class="notice" id="notice-/g)||[]).length,6,'活動公告必須6筆');
 assert.equal((events.match(/class="act-item" id="act-/g)||[]).length,12,'活動長期查詢入口必須12筆');
 assert.equal((family.match(/class="preg-step"/g)||[]).length,4,'孕產閱讀必須4段');
@@ -81,4 +89,4 @@ for(const p of [index,city,family,learning,readli,toward,events]){
 assert.ok(sitemap.includes('activities.html')&&!sitemap.includes('exp-compare-everyday-experiments'));
 assert.ok(!search.includes('exp-compare-everyday-experiments'));
 assert.ok(!articleFiles.includes('exp-compare-everyday-experiments.html'));
-console.log('正式部署硬閘通過：原稿44、讀利26／向光18、官方資源51、小日曆、公告6、活動查詢12、孕期4、54主題、Google sitemap。可以由站主執行最後的正式部署步驟。');
+console.log('正式部署硬閘通過：原稿'+articleFiles.length+'篇（首發最低'+MIN_LAUNCH_ARTICLES+'）、讀利≥26／向望≥18、官方資源≥51、小日曆、原已驗收公告與長期入口、孕期4、54主題、sitemap。此訊息不等於站主已批准正式部署。');
