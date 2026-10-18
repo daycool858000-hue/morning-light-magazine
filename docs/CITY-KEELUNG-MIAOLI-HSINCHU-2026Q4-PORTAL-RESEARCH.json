@@ -1,0 +1,119 @@
+{
+  "title": "由己｜基隆、苗栗、新竹縣地方具體服務入口來源初核",
+  "asOf": "2026-10-18",
+  "reviewer": "ChatGPT (AI editorial)",
+  "documentType": "city-service-candidates",
+  "siteStatus": "research-only-not-approved",
+  "ownerApproved": false,
+  "importToQa": false,
+  "productionApproved": false,
+  "countyCoverage": "3 newly researched counties, partial research, not five-layer completed",
+  "entries": [
+    {
+      "id": "kl-social-service-centers",
+      "county": "基隆市",
+      "name": "基隆市政府社會處｜社會福利服務中心名錄",
+      "url": "https://www.klcg.gov.tw/tw/social/3609.html",
+      "category": "社福據點",
+      "type": "current-direct-government-roster",
+      "verification": "official-page-read",
+      "reviewedOn": "2026-10-18",
+      "purpose": "按中正、七堵、中山、安樂查四處社福中心的地址與電話；同一名錄只放一筆連結",
+      "note": "網頁2026-10-14更新；四處名錄不拆四張重複卡。"
+    },
+    {
+      "id": "kl-women-family-service",
+      "county": "基隆市",
+      "name": "基隆市婦幼福利服務中心｜場所及服務介紹",
+      "url": "https://www.klcg.gov.tw/tw/social/3604.html",
+      "category": "婦女家庭與親職",
+      "type": "government-service-center-detail",
+      "verification": "official-page-read-but-historical-update",
+      "reviewedOn": "2026-10-18",
+      "purpose": "介紹婦女活動、親子空間及相關社福單位的實體場所與位置",
+      "note": "細節原頁更新於2022-08-11，電話、開放時間及在館單位未確認2026現況；須再找新公告或實際服務聯絡方式才正式刊登。"
+    },
+    {
+      "id": "kl-legal-advice-2026",
+      "county": "基隆市",
+      "name": "基隆市政府｜法律諮詢服務與新增三區據點",
+      "url": "https://www.klcg.gov.tw/tw/klcg1/4980-319950.html",
+      "category": "法律與權益／在地服務",
+      "type": "dated-current-government-service-notice",
+      "verification": "official-page-read",
+      "reviewedOn": "2026-10-18",
+      "purpose": "市府聯合服務中心及自2026年8月新增的安樂、暖暖、七堵區法律諮詢據點",
+      "note": "2026-08-03更新；各時段與當面詢答說明清楚。不是法律扶助申請核准，不保證未來時段永遠不變。"
+    },
+    {
+      "id": "ml-women-growth",
+      "county": "苗栗縣",
+      "name": "苗栗縣婦女福利服務中心｜婦女成長、場地與活動資訊",
+      "url": "https://www.miaoli.gov.tw/News_Content.aspx?n=5615&s=260664",
+      "category": "婦女中心／培力",
+      "type": "government-center-service-detail",
+      "verification": "official-page-read",
+      "reviewedOn": "2026-10-18",
+      "purpose": "婦女成長課程、婦嗑電影院、空間使用、最新活動查詢方法與聯繫",
+      "note": "政府頁115年8月31日／9月6日左右更新；具體課程以當期中心公告為準，不宣稱都免費。"
+    },
+    {
+      "id": "ml-women-center-services",
+      "county": "苗栗縣",
+      "name": "苗栗縣婦女福利服務中心｜諮詢、成長與婦女團體培力",
+      "url": "https://www.miaoli.gov.tw/News_Content.aspx?n=5615&s=698494",
+      "category": "婦女諮詢／生活支持",
+      "type": "government-service-scope",
+      "verification": "official-page-read",
+      "reviewedOn": "2026-10-18",
+      "purpose": "明列心理、法律、理財、健康諮詢等方向及婦女成長活動；與上筆同機構不同政府頁，採文字延伸不重複大卡",
+      "note": "部分服務是否免費、可預約及現有名額皆須以機關公告為準。"
+    },
+    {
+      "id": "ml-family-education",
+      "county": "苗栗縣",
+      "name": "苗栗縣政府｜家庭教育中心服務內容",
+      "url": "https://www.miaoli.gov.tw/News_Content.aspx?n=5615&s=260784",
+      "category": "家庭教育／親職與生活",
+      "type": "government-service-content",
+      "verification": "official-page-read",
+      "reviewedOn": "2026-10-18",
+      "purpose": "家庭教育中心親職、婚姻、代間與女性社區教育服務、諮詢管道",
+      "note": "政府頁115-09-01更新；文中時段非各場活動時間，具體場次回該中心官網。"
+    },
+    {
+      "id": "hc-women-centers-directory",
+      "county": "新竹縣",
+      "name": "新竹縣政府｜南北區婦女福利服務中心聯絡資訊開放資料",
+      "url": "https://www.hsinchu.gov.tw/OpenDataDetail.aspx?n=902&s=512",
+      "category": "婦女中心名錄",
+      "type": "government-open-data-roster",
+      "verification": "official-search-index-only",
+      "reviewedOn": "2026-10-18",
+      "purpose": "2025-05的政府名錄列竹北北區及竹東南區兩中心與聯絡方式",
+      "note": "2025公開資料，直達頁本輪擷取逾時；可由2026縣府公告證實仍存在南北區中心，但地址與承辦單位2026年可能變動，正式用前逐筆核對。"
+    },
+    {
+      "id": "hc-women-groups-2026",
+      "county": "新竹縣",
+      "name": "新竹縣政府社會處｜115年婦女福利及婦女團體培力計畫",
+      "url": "https://social.hsinchu.gov.tw/News_Content.aspx?n=2407&s=249851",
+      "category": "婦女培力／團體方案",
+      "type": "government-2026-grant-program",
+      "verification": "official-page-read",
+      "reviewedOn": "2026-10-18",
+      "purpose": "介紹115年度婦女團體培力與相關服務方向，並列南北婦女中心聯絡資訊",
+      "note": "計畫申請主體是符合條件的大專校院及立案團體，截止2026-06-30；不能宣稱一般女性現在可以報名此補助，僅作服務制度背景及中心連絡旁證。"
+    }
+  ],
+  "uniqueUrlCount": 8,
+  "distinctCountyCount": 3,
+  "comparableWithExistingQA": "These eight URLs do not exactly match any resource url in the isolated 62-article staging queue at time of audit.",
+  "requiredBeforeQA": [
+    "逐項評估是否適合展示為永久服務頁，排除期限已過的團體補助",
+    "如同一機構多頁合適，優先以主要入口+同格文字延伸，避免巨型卡片",
+    "2022和2025舊資料需2026年電話與官方公告交叉查驗",
+    "網站無會員，不收任何諮詢或申請資料",
+    "所有候選保留未核准狀態，不修改已部署版本"
+  ]
+}
