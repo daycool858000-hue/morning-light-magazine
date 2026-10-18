@@ -28,8 +28,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: 禁止帶入隔離測試設定
+        run: |
+          test -z "${LAUNCH_TEST_ONLY:-}" && test -z "${LAUNCH_EXPANSION_QUEUE:-}" && test -z "${QA_EXPANSION_QUEUE:-}"
+          test -z "${QA_PENDING_REVIEW_MODE:-}" && test -z "${QA_TOPIC_GUIDES_STAGING:-}"
+      - name: 從 62 篇首發原稿製作發布驗收清單（不可當作自行簽核）
+        run: |
+          node scripts/prepare-launch-article-batch.mjs
+          node scripts/prepare-launch-feature-batch.mjs
       - name: 建置正式版
         run: node scripts/build.mjs --mode=production --out=dist-production
+      - name: 正式版完整保留門檻（缺篇、缺功能、來源待複核或版本不符就中止，不得覆蓋現有網站）
+        run: node scripts/assert-production-ready.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

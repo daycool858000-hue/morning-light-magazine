@@ -23,3 +23,7 @@ artifacts/
 dist-qa-full-launch/
 dist-qa-all62-review/
 dist-qa-all62-city-review/
+
+# 正式發布閘門隔離模擬（不部署）
+dist-launch-*/
+docs/.launch-fixture-*.generated.json

@@ -1,0 +1,68 @@
+# 只盤點 62 篇首發範圍的精確版本並模擬正式發布閘門；不部署任何網站、不寫入核准檔。
+name: 由己｜正式上線文章版本檢查（不發布）
+
+on:
+  push:
+    branches: [release/youji-launch-gate-62-reconcile-20261018]
+    paths:
+      - 'content/launch-approvals.json'
+      - 'scripts/lib/launch-approval.mjs'
+      - 'scripts/lib/launch-inputs.mjs'
+      - 'scripts/prepare-launch-article-batch.mjs'
+      - 'scripts/prepare-launch-feature-batch.mjs'
+      - 'scripts/assert-production-ready.mjs'
+      - 'scripts/build.mjs'
+      - 'tests/launch-approval.test.mjs'
+      - 'tests/launch-approval-integration.test.mjs'
+      - '.github/workflows/launch-article-batch-preflight.yml'
+      - '.github/workflows/deploy-pages.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安裝建置工具（sharp）
+        run: npm ci
+      - name: 發布核准防呆測試
+        run: node tests/launch-approval.test.mjs
+      - name: 從 62 篇預覽原稿產生文章與功能精確版本清單
+        run: |
+          node scripts/prepare-launch-article-batch.mjs
+          node scripts/prepare-launch-feature-batch.mjs
+      - name: 現況必須被硬閘擋下（13 篇來源待複核、尚無任何簽核）
+        run: |
+          node scripts/build.mjs --mode=production --out=dist-production
+          if node scripts/assert-production-ready.mjs; then echo '硬閘意外放行'; exit 1; fi
+      - name: 隔離模擬：單篇、全文章、全功能簽核及缺項阻擋（測後還原）
+        run: node tests/launch-approval-integration.test.mjs
+      - name: 檢查清單未冒充站主核准、核准檔仍為空
+        run: |
+          git diff --exit-code -- content/launch-approvals.json content/release-approvals.json
+          node --input-type=module - <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const j=JSON.parse(readFileSync('artifacts/launch-article-batch.json','utf8'));
+          const f=JSON.parse(readFileSync('artifacts/launch-feature-batch.json','utf8'));
+          if(j.qaArticleCount!==62||j.readliCount!==38||j.towardCount!==24||j.sourcePendingCount!==13||
+             j.ownerPublicationApproved!==false||j.articles.some(x=>x.currentlyApprovedForProduction)||
+             Object.values(f.features).some(x=>x.currentlyApprovedForProduction)||
+             j.articles.some(x=>x.slug==='exp-compare-everyday-experiments'))process.exit(1);
+          console.log('62篇完整、38／24目錄正確、13篇待複核列為阻塞、無任何文章或功能被自動正式核准。');
+          NODE
+      - name: 留存候選清單（不公開部署）
+        uses: actions/upload-artifact@v4
+        with:
+          name: youji-launch-62-candidate-fingerprints
+          path: |
+            artifacts/launch-article-batch.json
+            artifacts/launch-feature-batch.json
+          retention-days: 14
