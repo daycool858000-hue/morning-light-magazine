@@ -57,7 +57,7 @@
 
 
 **正式來源（2026-10-17 查閱）：**
-- [勞動部｜部分工時與工讀生勞動條件基準](https://www.mol.gov.tw/1607/28690/87756/87780/nodelist)
+- [勞動部｜部分工時與工讀生勞動條件基準](https://www.mol.gov.tw/1607/28690/87756/)
 - [勞動部台灣就業通｜求職防騙教戰守則](https://job.taiwanjobs.gov.tw/Internet/special2/freshman2/docDetail.aspx?docid=141&uk=1922)
 - [勞動部｜全球資訊網](https://www.mol.gov.tw/)
 
@@ -116,6 +116,7 @@
 **正式衛教來源（2026-10-17 查閱）：**
 - [臺大醫院健康電子報｜淺談睡眠障礙與睡眠認知行為方法](https://epaper.ntuh.gov.tw/health/202006/health_2.html)
 - [衛福部臺中醫院｜衛教：如何正確使用鎮靜安眠藥](https://www.taic.mohw.gov.tw/?aid=504&iid=3428&page_name=detail&pid=88)
+- [衛生福利部／食藥署｜夜夜好眠：鎮靜安眠藥應遵照醫囑使用](https://www.mohw.gov.tw/cp-16-55275-1.html)
 
 ---
 

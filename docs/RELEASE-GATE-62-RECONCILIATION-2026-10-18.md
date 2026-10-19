@@ -52,3 +52,52 @@
 ## 另需注意
 
 - 查核分支 `audit/youji-13-primary-source-20261018` 已修改 exp-02、exp-04、exp-07、exp-10，尚未進入 62 篇預覽；併入後這幾篇指紋會改變，站主應簽核併入後的新版本。
+
+## 2026-10-19 修正版隔離整合（分支 `claude/62-article-reconcile-isolated-tigh4j`，未部署、未合併）
+
+- 基底：本安全鎖分支 `3e04586`。只從 `review/youji-13-final-copy-isolated-20261018`（`89692ef`）逐檔取入 3 份原稿 MD，其內容與修稿分支完全相同：
+  `docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`、`docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`、`docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md`。
+- 程式、佇列（`QA-FULL-LAUNCH-ALL-62-WITH-CITY-SERVICES`）、`content/`（含 `launch-approvals.json`、`release-approvals.json`）、CSS／JS、workflow 都沒有改。13 篇 `sourceCheck: pending` 不變。
+
+### 修正前後建置比對（`3e04586` vs 本分支，同一指令建置）
+
+- `dist`、`dist-production`、`dist-qa`、`dist-qa-topic54`：**逐位元組相同**。
+- `dist-qa-all62-city-review`、`dist-qa-all62-review`：只有 6 個文章頁不同，其餘 56 篇、分類頁、讀利／向望目錄、搜尋索引、活動、小日曆、54 主題、城市服務檔案全部逐位元組相同。
+- **與交接文件不一致之處**：交接 JSON／審稿板寫「5 篇變動、exp-05 與基準無新差異」，但實際建置顯示 **exp-05 也有變動**：來源連結「勞動部｜部分工時與工讀生勞動條件基準」由 `https://www.mol.gov.tw/1607/28690/87756/87780/nodelist` 改為 `https://www.mol.gov.tw/1607/28690/87756/`（`EXPANSION-BATCH10-REMAINING-SIX` 第 60 行；正文不變）。新網址與交接 JSON 的 exp-05 `coreFactSourceUrl` 一致，判斷為審稿刻意修正，故保留修稿分支原檔；若不採用，只需還原這一行。
+
+| 文章 | 實際差異 |
+|---|---|
+| exp-02 | 「消費之前」段改為「發生爭議後，先確認當初約定了什麼」兩段，加連往既有下單前檢查文章的說明 |
+| exp-04 | 「怎麼看求職與再就業資源」改為「履歷寫法與再就業獎勵分開處理」兩段 |
+| exp-05 | 只改上述 1 個勞動部來源網址 |
+| exp-07 | 來源清單新增衛福部／食藥署「夜夜好眠」1 筆 |
+| exp-10 | Apple 安全檢查補 iOS 16、雙重認證條件，並說明不涵蓋非 Apple 帳號與部分社群平台 |
+| B6 | 補肖像權與著作權分屬不同權利的提醒，來源新增智財局官方問答 1 筆 |
+
+### 候選版本指紋（僅供後續審稿紀錄，**未寫入任何核准檔、不解除安全鎖**）
+
+由 `scripts/prepare-launch-article-batch.mjs` 產生（輸出在不入版控的 `artifacts/`）：62 篇、讀利 38／向望 24、待複核 13、已核准 0。56 篇指紋與 `3e04586` 相同；變動 6 篇：
+
+| 文章 | slug | 修正前 sha256 | 修正後候選 sha256 |
+|---|---|---|---|
+| exp-02 | `exp-consumer-dispute-records` | `20dac52b7c569ff8cde3c99caee3f70003d6c207c003ea93cdb16aa976021f4d` | `2af8960c703cb59b4e0490cfd3d7566a882ec16310de9878e0299a696bb20421` |
+| exp-04 | `exp-career-gap-resume` | `b942818caa18642dafb42c371b9a73cc53dd37d3cf01d5ee2378e646471ae736` | `210b5d55b488318131384e6f3ff80a099f28461cff367e2966efc35cf515a187` |
+| exp-05 | `exp-first-interview-questions` | `e76917e4e8b89729cefa549068eacd280e8e93750558bce035c5cb3c99244cb3` | `8a1a3f9fd8e83d0db63b75c23d44eedf474ee697b0c2d6cf87e6b315493ff7c1` |
+| exp-07 | `exp-sleep-habits-health` | `29eaeca01a393c73ef19758ff5aa44585b469343c87561ea16fa17e1af86f6c5` | `d73a3d1b028006d710797fb600f3fdc391710504c54bd93d643468ad18e90929` |
+| exp-10 | `exp-digital-safety-three-risks` | `bb67490f298da7d2fa57591c4e996c7513c1a8ae65d2be0d9c0e0893fdc78e8b` | `24470b57736a8b003d4cda6620eeba110ca59d4357210d1363a66ba4b96d1e33` |
+| B6 | `exp-everyday-creative-works` | `70747fad185b6c0ea77df72067efe88937113de4a907ced52f475b681f4b9000` | `b6269231d9fc781c93e5ec6cc5005b4e2a7fc406dc592c4931f3e36a9255cedf` |
+
+這 6 篇仍是 `pending`，指紋只會在來源複核完成、佇列更新後由同一腳本重算，屆時應以重算值為準。
+
+### 本機測試（沿用既有測試，未新增）
+
+- `npm test`：全部通過（含 62 篇隔離版、13 篇待複核標示、54 主題、9 公告＋14 長期入口、15 城市服務、讀利／向望、搜尋索引）。
+- `tests/launch-approval.test.mjs` 20 項通過；`tests/launch-approval-integration.test.mjs` 通過（真實佇列中止、模擬全簽 62 篇與預覽逐字相同）。
+- `scripts/assert-production-ready.mjs`（無簽核）：exit 1，「仍有來源待複核的文章，禁止正式發布」——安全鎖仍有效。
+- Chromium：`qa-full-launch-browser` 8／8、`qa-calendar-avoid`（62 篇隔離版）16／16。WebKit 由 CI 執行。
+
+### A3／B3 官方原頁（Playwright Chromium 各試一次）
+
+- A3 教育部 `https://familyedu.moe.gov.tw/docDetail.aspx?docid=307524&pid=27&uid=3159`：**待驗證**。
+- B3 兩廳院 `https://npac-ntch.org/events/9984?lang=zh-TW`：**待驗證**。
+- 原因：本雲端工作環境的網路政策拒絕連到這兩個網域（proxy CONNECT 403），瀏覽器根本沒連上網站；這不代表網頁失效或 404，需在臺灣一般瀏覽器實測。未重試。

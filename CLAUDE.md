@@ -50,7 +50,14 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
-## 最新工作｜2026-10-18 正式發布安全鎖 × 62 篇相容修正（本節最新，未部署）
+## 最新工作｜2026-10-19 修正版隔離整合（本節最新，未部署、未合併）
+
+- 分支 `claude/62-article-reconcile-isolated-tigh4j`（基於安全鎖分支 `3e04586`）：只取入修稿分支 `review/youji-13-final-copy-isolated-20261018` 的 3 份原稿 MD。詳見 `docs/RELEASE-GATE-62-RECONCILIATION-2026-10-18.md` 最末節。
+- 建置比對：正式版、一般預覽、公開 QA、54 主題輸出逐位元組不變；62 篇隔離版只有 **6 篇**文章頁改變（exp-02／04／05／07／10、B6），其餘 56 篇與所有功能頁不變。**exp-05 的勞動部來源網址修正是交接文件漏列的第 6 篇**，待 ChatGPT／站主確認是否採用。
+- 13 篇仍 `pending`、核准 0；候選指紋只記在報告，未寫入 `launch-approvals.json`；無簽核時硬閘仍擋下。A3／B3 官方頁因本環境網路政策封鎖網域無法開啟，標「待驗證」。
+- 下一步：等 ChatGPT 核對與站主驗收，Claude 不自行開始下一項工作。
+
+## 2026-10-18 正式發布安全鎖 × 62 篇相容修正（未部署）
 
 - 分支 `release/youji-launch-gate-62-reconcile-20261018`（基於 62 篇預覽 `4ca3fd5`）：把 PR #19 的文章／功能精確指紋核准與正式部署硬閘移植到 62 篇資料（讀利38／向望24、9 公告＋14 長期入口、54 主題、六縣市 15 筆城市服務）。詳見 `docs/RELEASE-GATE-62-RECONCILIATION-2026-10-18.md`。
 - 核准檔為空時四種輸出與 `4ca3fd5` 逐位元組相同；13 篇待複核草稿不能被簽核，正式建置遇到即中止。`content/launch-approvals.json` 仍為空、`release-approvals.json` 未動、未合併 main、未部署。
