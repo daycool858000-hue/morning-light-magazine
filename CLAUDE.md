@@ -55,6 +55,7 @@
 - 分支 `claude/62-article-reconcile-isolated-tigh4j`（基於安全鎖分支 `3e04586`）：只取入修稿分支 `review/youji-13-final-copy-isolated-20261018` 的 3 份原稿 MD。詳見 `docs/RELEASE-GATE-62-RECONCILIATION-2026-10-18.md` 最末節。
 - 建置比對：正式版、一般預覽、公開 QA、54 主題輸出逐位元組不變；62 篇隔離版只有 **6 篇**文章頁改變（exp-02／04／05／07／10、B6），其餘 56 篇與所有功能頁不變。**exp-05 的勞動部來源網址修正是交接文件漏列的第 6 篇**，待 ChatGPT／站主確認是否採用。
 - 13 篇仍 `pending`、核准 0；候選指紋只記在報告，未寫入 `launch-approvals.json`；無簽核時硬閘仍擋下。A3／B3 官方頁因本環境網路政策封鎖網域無法開啟，標「待驗證」。
+- CI：`afe07bb` 完整 CI run `39188395331` test／full-launch／calendar 一次 success。
 - 下一步：等 ChatGPT 核對與站主驗收，Claude 不自行開始下一項工作。
 
 ## 2026-10-18 正式發布安全鎖 × 62 篇相容修正（未部署）

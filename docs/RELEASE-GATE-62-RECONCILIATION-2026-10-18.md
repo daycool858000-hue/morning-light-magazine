@@ -101,3 +101,7 @@
 - A3 教育部 `https://familyedu.moe.gov.tw/docDetail.aspx?docid=307524&pid=27&uid=3159`：**待驗證**。
 - B3 兩廳院 `https://npac-ntch.org/events/9984?lang=zh-TW`：**待驗證**。
 - 原因：本雲端工作環境的網路政策拒絕連到這兩個網域（proxy CONNECT 403），瀏覽器根本沒連上網站；這不代表網頁失效或 404，需在臺灣一般瀏覽器實測。未重試。
+
+### CI（commit `afe07bb`）
+
+- 完整 CI run `39188395331`：`test`、`full-launch`（WebKit 62 篇隔離版）、`calendar` 第一次執行即全部 success，未重跑。
