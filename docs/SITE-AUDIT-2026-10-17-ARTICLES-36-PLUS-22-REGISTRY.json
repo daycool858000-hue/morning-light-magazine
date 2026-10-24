@@ -1,0 +1,764 @@
+{
+  "asOf": "2026-10-17 Taiwan",
+  "qaBranch": "qa/public-nine-articles-20261017",
+  "scope": "已發布QA36原有文章及22擴充佇列／九篇已啟用清單；來源摘要只是原稿內文字網址抽取，不能當逐句事實查核",
+  "count": {
+    "original": 36,
+    "expansionCandidates": 22,
+    "expansionActive": 9,
+    "expansionNotActive": 13,
+    "siteQA": 45
+  },
+  "original36": [
+    {
+      "id": "batch2-01",
+      "title": "離婚或單親就能申請特殊境遇家庭扶助嗎？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050075",
+        "https://www.gov.tw/News_Content_26_694361"
+      ]
+    },
+    {
+      "id": "batch2-02",
+      "title": "育兒津貼、托育補助和地方加碼，應該先查哪一種？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 1,
+      "urlsSample": [
+        "https://www.gov.tw/News_Content_26_635581"
+      ]
+    },
+    {
+      "id": "batch2-03",
+      "title": "離開職場一段時間，重新找工作可以從哪裡開始？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 4,
+      "urlsSample": [
+        "https://www.taiwanjobs.gov.tw/",
+        "https://www.mol.gov.tw/1607/1632/1633/89893/",
+        "https://www.wda.gov.tw/News_Content.aspx?n=66&s=16340"
+      ]
+    },
+    {
+      "id": "batch2-04",
+      "title": "想報名職業訓練，怎麼知道課程適不適合自己？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://course.taiwanjobs.gov.tw/course/area",
+        "https://course.taiwanjobs.gov.tw/learningMap"
+      ]
+    },
+    {
+      "id": "batch2-05",
+      "title": "心裡很難受時，心理支持專線、諮商和看醫師有何不同？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://dep.mohw.gov.tw/DOMHAOH/fp-4906-54077-107.html",
+        "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html"
+      ]
+    },
+    {
+      "id": "batch2-06",
+      "title": "網路上的女性健康資訊，怎麼判斷哪些比較可靠？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://www.hpa.gov.tw/Home/Index.aspx",
+        "https://www.mohw.gov.tw/fp-189-210-1.html"
+      ]
+    },
+    {
+      "id": "batch2-07",
+      "title": "在職場遇到性騷擾，先到哪裡看正式申訴管道？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://eeweb.mol.gov.tw/genderZone/harassment_14.html",
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030014",
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030029"
+      ]
+    },
+    {
+      "id": "batch2-08",
+      "title": "私密性影像被散布或遭威脅公開，可以找哪些正式協助？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://siarc.mohw.gov.tw/",
+        "https://siarc.mohw.gov.tw/appeal.php",
+        "https://siarc.mohw.gov.tw/service.php"
+      ]
+    },
+    {
+      "id": "batch2-09",
+      "title": "我住的縣市，有哪些政府社福窗口？為什麼先找主管機關？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://www.gov.tw/News_Content_26_694361",
+        "https://topics.mohw.gov.tw/SS/cp-4528-48218-204.html"
+      ]
+    },
+    {
+      "id": "batch2-10",
+      "title": "社福中心、婦女中心和全國性機關有什麼差別？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://www.mohw.gov.tw/cp-190-225-1.html",
+        "https://dep.mohw.gov.tw/DOMHAOH/cp-4558-69568-107.html"
+      ]
+    },
+    {
+      "id": "batch2-11",
+      "title": "政府的職訓課程都免費嗎？補助和報名資格怎麼看？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://course.taiwanjobs.gov.tw/",
+        "https://course.taiwanjobs.gov.tw/course/area"
+      ]
+    },
+    {
+      "id": "batch2-12",
+      "title": "想找所在縣市的課程、講座或家庭教育活動，怎麼查不會白跑？",
+      "sourceFile": "docs/BATCH2-12-ARTICLES-EDITORIAL-2026-10-15.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 6,
+      "urlsSample": [
+        "https://familyedu.moe.gov.tw/front.aspx/index.aspx",
+        "https://course.taiwanjobs.gov.tw/",
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050075"
+      ]
+    },
+    {
+      "id": "batch4-01",
+      "title": "在家也能逛故宮？從線上典藏開始看一件文物",
+      "sourceFile": "docs/BATCH4-ART-CULTURE-INSURANCE-CASHFLOW-DRAFTS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://digitalarchive.npm.gov.tw/Collection",
+        "https://digitalarchive.npm.gov.tw/opendata/",
+        "https://www.npm.gov.tw/"
+      ]
+    },
+    {
+      "id": "batch4-02",
+      "title": "保險到底在保障什麼？先分清壽險、醫療險、意外險與儲蓄型商品",
+      "sourceFile": "docs/BATCH4-ART-CULTURE-INSURANCE-CASHFLOW-DRAFTS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 4,
+      "urlsSample": [
+        "https://www.tii.org.tw/tii/comsumer/what/index.html",
+        "https://www.tii.org.tw/tii/insurance/insurance7/index.html",
+        "https://insprod.tii.org.tw/"
+      ]
+    },
+    {
+      "id": "batch4-03",
+      "title": "生意有營業額，為什麼還會缺現金？從帳款、庫存與週轉理解",
+      "sourceFile": "docs/BATCH4-ART-CULTURE-INSURANCE-CASHFLOW-DRAFTS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=198",
+        "https://startup.sme.gov.tw/home/modules/news/detial.php?sId=1343",
+        "https://startup.sme.gov.tw/home/modules/faq/detial.php?sId=243"
+      ]
+    },
+    {
+      "id": "batch4-04",
+      "title": "第一次逛美術館，可以從哪些展覽與典藏開始看？",
+      "sourceFile": "docs/BATCH4-SIX-GUIDES-ART-FINANCE-BUSINESS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://www.ntmofa.gov.tw/",
+        "https://www.tfam.museum/",
+        "https://cloud.culture.tw/"
+      ]
+    },
+    {
+      "id": "batch4-05",
+      "title": "公共圖書館除了借紙本書，還有哪些可以使用的數位資源？",
+      "sourceFile": "docs/BATCH4-SIX-GUIDES-ART-FINANCE-BUSINESS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://www.nlpi.edu.tw/StaticPage/resources-intro",
+        "https://www.nlpi.edu.tw/StaticPage/one-pass-digital"
+      ]
+    },
+    {
+      "id": "batch4-06",
+      "title": "存錢、緊急預備金與未來目標，可以怎麼分開安排？",
+      "sourceFile": "docs/BATCH4-SIX-GUIDES-ART-FINANCE-BUSINESS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 1,
+      "urlsSample": [
+        "https://moneywise.fsc.gov.tw/"
+      ]
+    },
+    {
+      "id": "batch4-07",
+      "title": "勞保、勞退與國民年金有什麼不同？離開職場後去哪裡查？",
+      "sourceFile": "docs/BATCH4-SIX-GUIDES-ART-FINANCE-BUSINESS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://www.bli.gov.tw/0017387.html",
+        "https://www.gov.tw/News_Content_26_524819",
+        "https://www.bli.gov.tw/0019436.htm"
+      ]
+    },
+    {
+      "id": "batch4-08",
+      "title": "自己開店、做工作室或網路賣東西，需要先認識哪些登記？",
+      "sourceFile": "docs/BATCH4-SIX-GUIDES-ART-FINANCE-BUSINESS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://findbiz.nat.gov.tw/",
+        "https://www.etax.nat.gov.tw/etwmain/tax-info/network-transaction-taxtation-area/q-and-a",
+        "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-knowledge/QVRxbL5"
+      ]
+    },
+    {
+      "id": "batch4-09",
+      "title": "創業以後遇到問題，可以去哪裡查政府的課程、諮詢與融資資源？",
+      "sourceFile": "docs/BATCH4-SIX-GUIDES-ART-FINANCE-BUSINESS-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 4,
+      "urlsSample": [
+        "https://startup.sme.gov.tw/home/",
+        "https://www.gov.tw/News_Content_2_376930",
+        "https://www.sme.gov.tw/article-tw-2891-13903"
+      ]
+    },
+    {
+      "id": "batch5-01",
+      "title": "遇到性騷擾，為什麼有三部法律？先從適用情況與正式窗口找起",
+      "sourceFile": "docs/BATCH5-FOUR-ARTICLES-RIGHTS-HEALTH-SAFETY-LEARNING-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 4,
+      "urlsSample": [
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030014",
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=H0080067",
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050074"
+      ]
+    },
+    {
+      "id": "batch5-02",
+      "title": "公費健康檢查和癌症篩檢，從哪裡查自己是否符合資格？",
+      "sourceFile": "docs/BATCH5-FOUR-ARTICLES-RIGHTS-HEALTH-SAFETY-LEARNING-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 6,
+      "urlsSample": [
+        "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=127&pid=19970",
+        "https://www.mohw.gov.tw/cp-2704-80948-1.html",
+        "https://www.mohw.gov.tw/cp-7183-81302-1.html"
+      ]
+    },
+    {
+      "id": "batch5-03",
+      "title": "手機有緊急求助功能嗎？先認識 iPhone 與 Android 的設定",
+      "sourceFile": "docs/BATCH5-FOUR-ARTICLES-RIGHTS-HEALTH-SAFETY-LEARNING-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 4,
+      "urlsSample": [
+        "https://support.apple.com/zh-tw/guide/iphone/iph3c99374c/27/ios/27",
+        "https://support.apple.com/zh-tw/guide/iphone/iph08022b192/27/ios/27",
+        "https://support.apple.com/zh-tw/105072"
+      ]
+    },
+    {
+      "id": "batch5-04",
+      "title": "想免費聽大學課，先分清楚開放式課程、磨課師和正式修課",
+      "sourceFile": "docs/BATCH5-FOUR-ARTICLES-RIGHTS-HEALTH-SAFETY-LEARNING-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 6,
+      "urlsSample": [
+        "https://ocw.nycu.edu.tw/?openedu=copyright-declaration",
+        "https://ocw.nycu.edu.tw/?faq=common-faq",
+        "https://ocw.aca.ntu.edu.tw/"
+      ]
+    },
+    {
+      "id": "batch6-01",
+      "title": "我可能有哪些福利？先從六種生活情況認識政府資源",
+      "sourceFile": "docs/BATCH6-CITY-WELFARE-BENEFIT-FIRST-GUIDES-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 6,
+      "urlsSample": [
+        "https://www.mohw.gov.tw/cp-88-79005-1.html",
+        "https://www.mohw.gov.tw/cp-7183-81286-1.html",
+        "https://www.gov.tw/News_Content_26_586833"
+      ]
+    },
+    {
+      "id": "batch6-02",
+      "title": "收入減少或突然遇到困難，低收入戶、中低收入戶與急難救助有什麼差別？",
+      "sourceFile": "docs/BATCH6-CITY-WELFARE-BENEFIT-FIRST-GUIDES-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 4,
+      "urlsSample": [
+        "https://www.mohw.gov.tw/cp-88-79005-1.html",
+        "https://dep.mohw.gov.tw/DOSAASW/cp-572-5035-103.html",
+        "https://www.mohw.gov.tw/cp-190-226-1.html"
+      ]
+    },
+    {
+      "id": "batch6-03",
+      "title": "租屋也有政府資源？租金補貼、社會住宅和包租代管先分清楚",
+      "sourceFile": "docs/BATCH6-CITY-WELFARE-BENEFIT-FIRST-GUIDES-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 4,
+      "urlsSample": [
+        "https://www.gov.tw/News_Content_26_586833",
+        "https://pip.moi.gov.tw/Publicize/Info/B1020?n=34813&sms=0",
+        "https://pip.moi.gov.tw/Publicize/Info/B5020?mode=P4"
+      ]
+    },
+    {
+      "id": "batch6-04",
+      "title": "家人需要長期照顧，居家服務、日間照顧、輔具和喘息有哪些差別？",
+      "sourceFile": "docs/BATCH6-CITY-WELFARE-BENEFIT-FIRST-GUIDES-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://1966.gov.tw/LTC/cp-6533-70777-207.html",
+        "https://1966.gov.tw/LTC/cp-6454-70075-207.html",
+        "https://1966.gov.tw/LTC/cp-6460-69943-207.html"
+      ]
+    },
+    {
+      "id": "batch6-05",
+      "title": "家中有人需要身心障礙支持，證明、生活補助與照顧服務怎麼查？",
+      "sourceFile": "docs/BATCH6-CITY-WELFARE-BENEFIT-FIRST-GUIDES-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 3,
+      "urlsSample": [
+        "https://www.gov.tw/News_Content_26_677435",
+        "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0050050",
+        "https://1966.gov.tw/LTC/cp-6533-70777-207.html"
+      ]
+    },
+    {
+      "id": "batch6-06",
+      "title": "婦女中心只能求助嗎？生活課程、培力與福利諮詢也可以先認識",
+      "sourceFile": "docs/BATCH6-CITY-WELFARE-BENEFIT-FIRST-GUIDES-2026-10-16.md",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": 2,
+      "urlsSample": [
+        "https://www.mohw.gov.tw/cp-190-225-1.html",
+        "https://familyedu.moe.gov.tw/front.aspx/index.aspx"
+      ]
+    },
+    {
+      "id": "learn-free",
+      "title": "想學新東西，可以從哪些免登入資源開始？",
+      "sourceFile": "docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": null
+    },
+    {
+      "id": "culture-nearby",
+      "title": "週末想看展、聽講座或逛博物館，如何開始找？",
+      "sourceFile": "docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": null
+    },
+    {
+      "id": "mind-reading",
+      "title": "想理解自己的壓力與關係，可以先讀哪些資料？",
+      "sourceFile": "docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": null
+    },
+    {
+      "id": "consumer-knowledge",
+      "title": "網路購物、預付課程或訂閱服務，先弄清楚哪些事？",
+      "sourceFile": "docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": null
+    },
+    {
+      "id": "home-safety",
+      "title": "居家安全可以先認識什麼？從防火與求助開始",
+      "sourceFile": "docs/BATCH3-OPEN-ACCESS-CONTENT-2026-10-15.json",
+      "kind": "QA: original 36",
+      "provenance": "已部署於公開QA、非正式逐篇核准",
+      "sourceUrlsFoundInSection": null
+    }
+  ],
+  "expansion22": [
+    {
+      "id": "exp-01",
+      "title": "一起生活，家庭共同費用與自己的錢怎麼分開記？",
+      "category": "life-family",
+      "slug": "exp-household-shared-budget",
+      "qaEnabled": true,
+      "readDirectory": "readli",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-02",
+      "title": "預付課程、訂閱服務或網購發生爭議，先留下哪些資料？",
+      "category": "life-family",
+      "slug": "exp-consumer-dispute-records",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-03",
+      "title": "照顧家人時，如果要請別人幫忙，事情怎麼交接？",
+      "category": "life-family",
+      "slug": "exp-family-care-handover",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-04",
+      "title": "離開職場幾年，履歷上的空白可以怎麼介紹？",
+      "category": "career",
+      "slug": "exp-career-gap-resume",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-05",
+      "title": "面試時除了問薪水，還有哪幾個工作條件值得確認？",
+      "category": "career",
+      "slug": "exp-first-interview-questions",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-06",
+      "title": "接案前把交付內容寫清楚，可以少掉哪些誤會？",
+      "category": "career",
+      "slug": "exp-freelance-agreements",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-07",
+      "title": "常常睡不好，生活情境能提供哪些觀察線索？",
+      "category": "health",
+      "slug": "exp-sleep-habits-health",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-08",
+      "title": "朋友、家人和工作夥伴之間，界線可以怎麼說清楚？",
+      "category": "health",
+      "slug": "exp-personal-boundaries",
+      "qaEnabled": true,
+      "readDirectory": "readli",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-09",
+      "title": "被反覆跟蹤、傳訊或監看時，正式法律資訊可以怎麼找？",
+      "category": "law",
+      "slug": "exp-stalking-legal-info",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-10",
+      "title": "手機帳號、定位分享和照片外流，是三種不同的數位安全問題",
+      "category": "law",
+      "slug": "exp-digital-safety-three-risks",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-11",
+      "title": "一門免費課程適不適合自己？可以先試學一小段",
+      "category": "learning",
+      "slug": "exp-choosing-open-courses",
+      "qaEnabled": true,
+      "readDirectory": "toward",
+      "sourceFile": "docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "exp-12",
+      "title": "同一個生活實驗，換了條件，結果還能直接比較嗎？",
+      "category": "learning",
+      "slug": "exp-compare-everyday-experiments",
+      "qaEnabled": true,
+      "readDirectory": "toward",
+      "sourceFile": "docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": "站主明確要求從公開QA撤下；目前QA資料尚未執行"
+    },
+    {
+      "id": "A1",
+      "title": "婦女中心有什麼課可以學？體驗、講座與培力的差別",
+      "category": "learning",
+      "slug": "exp-women-center-courses",
+      "qaEnabled": true,
+      "readDirectory": "toward",
+      "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "A2",
+      "title": "家庭教育只談教養孩子嗎？成年家人之間也有要學的事",
+      "category": "life-family",
+      "slug": "exp-family-education-adults",
+      "qaEnabled": true,
+      "readDirectory": "toward",
+      "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "A3",
+      "title": "孩子慢慢長大，親職課程也要換題目嗎？",
+      "category": "life-family",
+      "slug": "exp-parenting-courses-by-age",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/BATCH9-PRIORITY-THREE-ROUND3-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "A4",
+      "title": "地方活動不只有節慶：走進展覽、講座與工作坊，各能帶回什麼？",
+      "category": "learning",
+      "slug": "exp-local-events-formats",
+      "qaEnabled": true,
+      "readDirectory": "toward",
+      "sourceFile": "docs/BATCH9-FIRST-FOUR-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "B1",
+      "title": "一家公司如何讓客戶願意長期合作？從女性創業者蔡娟娟的經營歷程談起",
+      "category": "career",
+      "slug": "exp-woman-founder-client-trust",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "B2",
+      "title": "一箱物資捐出去以後，誰負責讓它安全抵達？食物銀行的物流與管理",
+      "category": "learning",
+      "slug": "exp-food-bank-logistics",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "B3",
+      "title": "音樂會、舞蹈與戲劇，第一次怎麼挑？從幕後的工作看一場演出",
+      "category": "learning",
+      "slug": "exp-performing-arts-first-time",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "B4",
+      "title": "「棉 100%」就一定好穿嗎？看懂衣物成分與洗標的兩種用途",
+      "category": "life-family",
+      "slug": "exp-clothing-labels",
+      "qaEnabled": true,
+      "readDirectory": "readli",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "B5",
+      "title": "AI 回答得很完整，為什麼來源仍要自己打開？從一則生活資訊談查證",
+      "category": "learning",
+      "slug": "exp-ai-answer-verification",
+      "qaEnabled": true,
+      "readDirectory": "toward",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "source-checked",
+      "sourceRecord": "docs/NINE-ARTICLE-QA-STAGING-SOURCE-REVIEW-2026-10-17.md",
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    },
+    {
+      "id": "B6",
+      "title": "把日常留成自己的作品：照片、文字與聲音，從哪裡開始？",
+      "category": "learning",
+      "slug": "exp-everyday-creative-works",
+      "qaEnabled": false,
+      "readDirectory": "none",
+      "sourceFile": "docs/BATCH7-9-REMAINING-SIX-ARTICLES-ROUND2-EDITORIAL-DRAFT-2026-10-16.md",
+      "sourceCheck": "pending",
+      "sourceRecord": null,
+      "finalOwnerPublicationApproved": false,
+      "formalPublicationApproved": false,
+      "ownerEditorialDecision": null
+    }
+  ],
+  "authority": {
+    "original26plus19ReadliToward": "QA 部署 run 38995630481及CI",
+    "expansionManifest": "docs/CONTENT-EXPANSION-22-ARTICLE-MANIFEST-2026-10-16.json",
+    "qaQueue": "docs/QA-EXPANSION-IMPORT-QUEUE.json"
+  },
+  "critical": [
+    "exp-12有站主撤稿決定，不可因其來源查核通過而保留公開QA",
+    "其餘13篇各有AI編輯原頁查核記錄但尚未獲QA匯入授權",
+    "新9篇原稿已在QA並保留未核准標示；正式發布仍須另行授權"
+  ]
+}

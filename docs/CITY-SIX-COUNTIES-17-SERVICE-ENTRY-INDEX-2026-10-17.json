@@ -1,0 +1,171 @@
+{
+  "title": "《由己》六縣市婦女服務增量：17 筆官方原頁初核索引",
+  "asOf": "2026-10-17",
+  "status": "editorial-candidate-unpublished",
+  "reviewer": "ChatGPT (AI)",
+  "ownerApproved": false,
+  "importToQa": false,
+  "qaDeployed": false,
+  "countyInventoryCoverage": "6/22 有局部新資料，22/22 仍須逐層驗收",
+  "siteProductionApproval": false,
+  "countyGroups": [
+    {
+      "county": "changhua",
+      "file": "docs/CITY-CHANGHUA-WOMEN-IMMIGRANT-FOUR-PRIMARY-PORTALS-2026-10-17.json",
+      "count": 4,
+      "entries": [
+        {
+          "id": "cg-women-dream-center",
+          "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2412&data_id=20193&topsn=2390",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "cg-women-tianzhong-center",
+          "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2412&data_id=11396&topsn=2390",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "cg-women-passport",
+          "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=8133&data_id=28418&topsn=2390",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "cg-immigrant-family-center",
+          "url": "https://www.chcg.gov.tw/DTO/social/07other/other01_con.aspx?cate_id=2414&data_id=11305&topsn=2390",
+          "timeBound": false,
+          "validThrough": null
+        }
+      ]
+    },
+    {
+      "county": "new-taipei",
+      "file": "docs/CITY-NEW-TAIPEI-WOMEN-LEARNING-SOCIAL-PRIMARY-PORTALS-2026-10-17.json",
+      "count": 3,
+      "entries": [
+        {
+          "id": "ntpc-women-center",
+          "url": "https://wedid.ntpc.gov.tw/Governance/Detail/7RApPkVDve64",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "ntpc-women-university",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?dataserno=201802050029&id=193&mcustomize=multimessages_view.jsp&mserno=201711200013&parentpath=0%2C4&t=null",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "ntpc-social-welfare-centers",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=dcb8a590a4a5dad6",
+          "timeBound": false,
+          "validThrough": null
+        }
+      ]
+    },
+    {
+      "county": "taipei",
+      "file": "docs/CITY-TAIPEI-WOMEN-SERVICES-PRIMARY-PORTALS-2026-10-17.json",
+      "count": 3,
+      "entries": [
+        {
+          "id": "tp-women-support-centers-directory",
+          "url": "https://dosw.gov.taipei/News_Content.aspx?n=91F35523B74F69AC&s=98B35313083A645F&sms=87415A8B9CE81B16",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "tp-women-center-hours",
+          "url": "https://dosw.gov.taipei/News_Content.aspx?n=630D5097D05EB317&s=E9A8512594C64D8C",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "tp-women-center-activities",
+          "url": "https://dosw.gov.taipei/News_Content.aspx?n=630D5097D05EB317&s=4E989AC312681257&sms=12009A93B2FA491B",
+          "timeBound": false,
+          "validThrough": null
+        }
+      ]
+    },
+    {
+      "county": "taoyuan",
+      "file": "docs/CITY-TAOYUAN-WOMEN-SERVICES-PRIMARY-PORTALS-2026-10-17.json",
+      "count": 2,
+      "entries": [
+        {
+          "id": "ty-women-empowerment-center",
+          "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16357&s=1177886&sms=18011",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "ty-women-north-south-oct-dec-2026",
+          "url": "https://dowcd.tycg.gov.tw/News_Content.aspx?n=16342&s=1890721",
+          "timeBound": true,
+          "validThrough": "2026-12-31"
+        }
+      ]
+    },
+    {
+      "county": "taichung",
+      "file": "docs/CITY-TAICHUNG-WOMEN-SERVICES-PRIMARY-PORTALS-2026-10-17.json",
+      "count": 2,
+      "entries": [
+        {
+          "id": "tc-women-newimmigrant-centers",
+          "url": "https://www.society.taichung.gov.tw/1224394/post",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "tc-women-services-directory",
+          "url": "https://www.society.taichung.gov.tw/13710/13735/13762/13768?PageSize=30&type=%E7%A6%8F%E5%88%A9%E6%9C%8D%E5%8B%99%E6%A9%9F%E6%A7%8B",
+          "timeBound": false,
+          "validThrough": null
+        }
+      ]
+    },
+    {
+      "county": "tainan",
+      "file": "docs/CITY-TAINAN-WOMEN-SERVICES-PRIMARY-PORTALS-2026-10-17.json",
+      "count": 3,
+      "entries": [
+        {
+          "id": "tn-women-centers-services",
+          "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21219&s=4780899",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "tn-women-centers-directory",
+          "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=21219&s=4780903",
+          "timeBound": false,
+          "validThrough": null
+        },
+        {
+          "id": "tn-women-centers-four-modes",
+          "url": "https://sab.tainan.gov.tw/News_Content.aspx?n=17856&s=8727057",
+          "timeBound": false,
+          "validThrough": null
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "countiesWithNewDepth": 6,
+    "distinctUrls": 17,
+    "fullyAuditedCounties": 0,
+    "remainingCountyDepthWork": 16,
+    "datedNotices": 1
+  },
+  "restrictions": [
+    "即使政府原頁可讀也不等同當期服務、電話或所有 PDF 都已驗收。",
+    "臺北 10 處、臺中 8 處同屬各自官方單一名錄 URL，應只用一個入口，不重複數量膨脹。",
+    "桃園 TY 115年10–12月活動公告有效至 2026-12-31，不可當作 2027 活動或永久正在招生。",
+    "屬單獨城市資料，不會覆寫 NI-08～NI-13，也不自動加入 Claude QA 佇列。",
+    "目前未由站主試讀或核准，所有 entries 保持 research 狀態。"
+  ]
+}

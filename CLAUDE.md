@@ -50,6 +50,50 @@
 - 本機看 QA：`npm run qa-preview`
 - CI 狀態：`curl -s "https://api.github.com/repos/daycool858000-hue/morning-light-magazine/actions/runs?branch=<分支名稱>&per_page=5"`
 
+## 2026-10-17 PR #12 驗收與第一批 QA 編輯決策（本節最新）
+
+- PR #12 `claude/qa-expansion-v2-reconcile-20261017` 的提交 `8dce66c` 已核對 push CI `38975868799` 和 pull_request CI `38975900065` success；PR 仍開放草稿、`mergeable_state=clean`，沒有合併、沒有部署，22 篇／13 項佇列仍全部關閉且 pending。
+- 第一批先選 **exp-01／08／11／12 四篇**，且僅為來源審查後供獨立 QA 暫存試讀。讀利 `readli`：exp-01、exp-08；向光 `toward`：exp-11、exp-12。其他 18 篇暫維持 `directory:none`。
+- 第 11 篇 slug **`exp-choosing-open-courses`**（原 `exp-open-course-certificates` 停用）；第 12 篇 slug **`exp-compare-everyday-experiments`**（原 `exp-reading-popular-science` 停用）。尚未公開 QA，現在改名無既有網址相容問題。
+- 官方原頁與逐段查核證據、與原 36 篇的不同閱讀目的及開發詳細限制：`docs/FIRST-FOUR-EXPANSION-ARTICLES-EDITORIAL-QA-DECISION-2026-10-17.md`；22 篇 manifest 的 `firstQaBatchEditorial` 已標記上述四篇。
+- **重要版本同步**：exp-11 2026-10-17 修正文句，避免未經證實「教育部平台一定能以主題篩選」；exp-12 新增科教館 2022 年科學教育原始資料連結。Claude 工程分支中的兩份 V2 複本曾取自較舊編輯 commit，真正準備 QA 暫存前需從 PR #11 最新檔同步、重跑 22 篇解析與全文回歸測試。
+- 目前已做的是 AI 來源與逐段編輯審查，**不能等同站主審閱**。Claude 不得據此自行開真實 `importToQa`、自行合併 PR #10／#11／#12 或觸發 GitHub Pages，待獨立 QA 暫存驗收報告及站主明確同意才有下一步。
+
+## 2026-10-17 城市研究與 Claude 接軌工作更新（本節優先於下方舊版 2/22）
+
+- 站主已把「V2 文章佇列與解析器修復」指令交給 Claude；工程分支 `claude/qa-expansion-import-20261016` 舊 CI `38967525534` success，但仍待 Claude 將 12 篇 V2 真正接入、校正 7 篇改名與來源解析負向測試。**不要代替 Claude 在此編輯分支更新 build.mjs 或把任何佇列開關打開。**
+- 供 Claude 的最新工程修正文件：`docs/CLAUDE-V2-QUEUE-RECONCILIATION-2026-10-17.md`；正式原稿是兩個 V2 檔，V1 只保留歷史。PR #10／#11 不可自行合併、不可觸發 GitHub Pages 部署。
+- 22 縣市深度工作：**6／22 縣市有部分新增官方服務／中心／學習資料**，合計 **17 筆不同 URL**（彰化4、新北3、臺北3、桃園2、臺中2、臺南3），索引 `docs/CITY-SIX-COUNTIES-17-SERVICE-ENTRY-INDEX-2026-10-17.json`。這不是 6 縣已完整驗收（五層完整驗收仍 0/22），其餘 16 縣待深入。已有候選皆未公開 QA。
+- 資源分類：同一官網名錄列出多個中心時只保留**一個該 URL 的查詢入口**；同機關的其他不同網址用途可保留簡潔文字連結。桃園 2026 Q4 北南婦女中心活動 `validThrough: 2026-12-31`，不可永久顯示為「近期活動」。臺南歷史服務新聞不作 2026 當期時刻。
+- 文章內容仍由 ChatGPT 負責逐篇校核和地方資料；Claude 只需完成 V2 解析、佇列及技術回歸驗收，除非收到站主新指示，不新增尚未查核的服務卡或任何正式版內容。
+
+## 2026-10-17 第二輪內容編輯最新進度（此節優先於下方第一輪六篇／七項進度）
+
+- **新增 12 篇均已完成 V2 正文**，分為兩檔：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`（02／03／04／09／10／11）及 `docs/EXPANSION-BATCH10-REMAINING-SIX-ARTICLES-V2-2026-10-17.md`（01／05／06／07／08／12），舊 V1 永久保留。
+- 第一輪與第二輪官方來源及原 36 篇主題重疊追蹤皆在 `docs/EXPANSION-BATCH10-12-ARTICLE-SOURCE-AND-OVERLAP-AUDIT-2026-10-17.md`；法規／醫療／求職／金融資訊仍須依 2026 年發布時點再審，完整 36 篇正文逐段比對及 Safari 外站測試尚未完成。**V2 不是已核准／已公開。**
+- **NI-01～NI-13 全部 13 項已完成至少一輪官方來源用途初核**，更新 `docs/NEW-IMMIGRANT-13-OFFICIAL-RESOURCE-CANDIDATES-2026-10-16.json`；其中 NI-11 臺中主頁工具讀取出錯，已有臺中市民政局原始官網及官方搜尋索引佐證。各外語文件逐份驗證仍待；所有資源不予自動上 QA。
+- **地方服務深度新增兩縣**：彰化 `docs/CITY-CHANGHUA-WOMEN-IMMIGRANT-FOUR-PRIMARY-PORTALS-2026-10-17.json` 4 筆、新北 `docs/CITY-NEW-TAIPEI-WOMEN-LEARNING-SOCIAL-PRIMARY-PORTALS-2026-10-17.json` 3 筆；新北新住民 NI-08 與社會局來源已交叉核對，只有一個對應入口，勿另做同址卡。其他 20 縣市仍需補深度，**不是 2 縣已全部完工**。
+- 舊十篇 A4 地方活動／B6 日常創作第二輪稿原本已處理主要問題，詳 `docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md`；待站主審閱、QA 實開即可評估入站。
+- **當前須由 Claude 處理的是 QA-only 分批匯入機制與前台驗收**，內容來源只使用最新 V2 快照和 manifest；**不要自行合併 PR #11／PR #10、修改 `release-approvals.json`、觸發公開 QA 部署**。編輯稿件核對與新縣市來源繼續由 ChatGPT 負責。
+
+## 2026-10-17 編輯工作實際進度（最新，優先於 10/16 舊未完成敘述）
+
+- 新 12 篇已做原 36 篇標題／閱讀定位重疊排查，核對紀錄在 `docs/EXPANSION-BATCH10-12-ARTICLE-SOURCE-AND-OVERLAP-AUDIT-2026-10-17.md`；其中 02／03／04／09／10／11 **六篇已重寫 V2 完整正文並核對主要官方來源**：`docs/EXPANSION-BATCH10-SIX-REVISED-ARTICLES-V2-2026-10-17.md`。第 11 篇因原稿和既有第五批 MOOC 幾乎同題，已改成「如何試學與選課」。
+- 原十篇中 A4「地方活動」、B6「日常創作」曾列為問題稿，2026-10-17 實讀較新的第二輪全文與官方原頁後，發現「同網址重複、著作權／肖像未區分」**此前已在第二輪正文修正**；詳 `docs/BATCH7-9-A4-B6-FOLLOWUP-SOURCE-CHECK-2026-10-17.md`。目前剩 QA 真實瀏覽器外連與站主全文審稿，別重改舊已修部分。
+- 新住民 13 項候選中，**NI-01～NI-07 七筆**已追加 2026-10-17 官方網頁用途或語種清單查核欄；其中 NI-03、NI-05、NI-06 還未逐一開啟全部 PDF／深層頁。NI-08～13 尚待新一輪個別實查，所有 13 筆皆未核准。
+- 22 縣市深度補查已有**彰化縣**第一批 4 筆具體官方不同 URL：彰化夢想館、田中區婦女中心、Women 學習護照、彰化新住民家庭服務中心，文件 `docs/CITY-CHANGHUA-WOMEN-IMMIGRANT-FOUR-PRIMARY-PORTALS-2026-10-17.json`。其餘縣市尚待相同深度，不可宣稱全台已完成。
+- **這些工作只在編輯分支 PR #11 的 docs／manifest／CLAUDE.md 中進行，未加入 QA 前台、未部署、未取得文章正式發布核准，也沒有覆寫 release-approvals。** PR #10 的工程仍須獨立處理。
+
+## 最新編輯分支狀態｜2026-10-16 六大主題內容擴充
+
+- 站主已明確要求：生活與家庭／職涯與創業／身心健康／法律與權益／城市與福利／學習與活動的所有指定方向都增加，並保留 13 項新住民多語資料、原 10 篇成人候選，以及繼續擴充 22 縣市。原來 QA 的 36 篇文章保留，不要把 36 篇分散至六類誤當完成內容深度。
+- **本編輯分支** `editorial/youji-full-six-topics-expansion-20261016`：已建立 30 個主題工作包總表、撰寫新增 12 篇原創完整候選稿、移入並保留較新版本原十篇候選及審查紀錄、整理 22 篇文章未核准 manifest、13 項多語新住民官方連結候選 JSON、22 縣市服務深度追蹤表、2027 活動研究資料。**目前只做候選稿與來源追蹤，尚未把新稿加入 QA 前台、未測試新稿頁面、未公開部署、未經站主逐篇發布核准。**
+- 詳細檔案及開發驗收程序先讀：`docs/FULL-SIX-TOPICS-CONTENT-EXPANSION-PLAN-2026-10-16.md`、`docs/CLAUDE-ALL-SIX-TOPICS-EXPANSION-IMPLEMENTATION-2026-10-16.md`，只再讀當次工程會碰到的檔案。
+- **去重規則**：網址完全相同才沿用既有格子並補一句用途；網址不同，即使是同品牌／同機構也不用硬併，可以各自保留精簡文字入口。13 項來源都是不同 URL，現有 3 筆移民署類 QA 卡需一同檢查不要重複。
+- 原第九批 A4 地方活動、B6 日常創作需要根據稽核完成修訂；保留方向、不在未查前直接匯入。
+- 其他工程分支 PR #10 的 12 個長期官方查詢入口單獨進行，**不可推定它已合併**；本編輯 PR #11 也仍為草稿。
+- 下一步：從這 22 篇與 13 個來源做逐句事實核對與去重，逐批 QA-only 匯入、CI、手機／桌機驗收；城市 22 縣市持續按層補婦女中心／地方課程／社福據點。QA 不等於 production 核准，`release-approvals.json` 不動。
+
 ## 最新權威狀態｜2026-10-16（優先於下方歷史工作紀錄）
 
 **本輪手機與電腦功能已驗收通過，公開 QA 部署完成，工程已合併 main。不要因下方舊紀錄的「尚未部署／等待驗收」而重做或撤回已完成工作。**
